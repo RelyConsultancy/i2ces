@@ -1,0 +1,22 @@
+<VirtualHost *:80>
+    ServerName i2ces.dev
+
+    DocumentRoot /home/vagrant/sync/backend/web/
+    <Directory /home/vagrant/sync/backend/web/>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Require all granted
+
+        <IfModule mod_rewrite.c>
+            Options -MultiViews
+            RewriteEngine On
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteRule ^(.*)$ app.php [QSA,L]
+        </IfModule>
+
+    </Directory>
+    ErrorLog /var/log/httpd/i2ces-oro_error.log
+
+    LogLevel warn
+    CustomLog /var/log/httpd/i2ces-oro_access.log combined
+</VirtualHost>

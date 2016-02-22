@@ -1,0 +1,25 @@
+
+  - name: Ensure NTP is installed
+    yum: name=ntp state=installed
+  - name: Ensure NTP is running
+    service: name=ntpd state=started enabled=yes
+
+  # basics
+  - name: Install basic tools
+    yum: pkg={{ item }} state=installed
+    with_items:
+      - nano
+      - vim
+      - man
+      - tree
+      - curl
+      - wget
+      - unzip
+      - mlocate
+      - gcc
+      - git
+
+  - name: Updatedb
+    shell: >
+      updatedb
+    when: mlocate_updatedb

@@ -1,0 +1,13 @@
+---
+- hosts: all
+
+  vars_files:
+    - vars/main.yml
+
+  roles:
+    - init
+    - geerlingguy.mysql
+    - geerlingguy.apache
+    - geerlingguy.php
+    - geerlingguy.composer
+    - oro
