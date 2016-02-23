@@ -22,20 +22,15 @@
 #  - name: Start Apache and configure it to run at boot
 #    service: name=httpd state=started enabled=yes
 
+- name: set SELinux to permissive
+  action: selinux policy=targeted state=permissive
+
 - name: Check if Oro Platform is installed.
   stat: "path=/home/vagrant/sync/backend/composer.lock"
   register: composer_locked
 
 - name: Debug composer_locked
   debug: msg="Variable 'composer_locked' is set to {{ composer_locked }}"
-
-- name: Install Oro Platform
-  shell: >
-    cd /home/vagrant/sync/backend
-    composer install
-    creates=/home/vagrant/sync/backend/composer.lock
-
-  when: not composer_locked.stat.exists
 
 - name: Upgrade dependencies
   shell: >
@@ -45,3 +40,14 @@
 - name: Copy vhost
   template: src=i2ces.conf.j2 dest=/etc/httpd/conf.d/i2ces.conf mode=0644
   notify: restart apache
+
+
+- name: Install Oro Platform
+  command: " {{item}} "
+  with_items:
+    - /usr/local/bin/composer install -d /var/www/html -n
+    - mkdir /var/www/html/web/uploads
+    - chmod 777 /var/www/html/web/uploads
+    - sudo chmod 777 /var/www/html/app/logs
+    - sudo chmod 777 /var/www/html/app/attachment
+    - sudo chmod 777 /var/www/html/app/config/parameters.yml

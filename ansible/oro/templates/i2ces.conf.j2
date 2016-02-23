@@ -1,8 +1,10 @@
 <VirtualHost *:80>
     ServerName i2ces.dev
 
-    DocumentRoot /home/vagrant/sync/backend/web/
-    <Directory /home/vagrant/sync/backend/web/>
+#    DocumentRoot /home/vagrant/sync/backend/web/
+     DocumentRoot /var/www/html/web/
+#    <Directory /home/vagrant/sync/backend/web/>
+     <Directory /var/www/html/web/>
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Require all granted

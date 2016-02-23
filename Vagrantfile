@@ -34,11 +34,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.hostname = "i2ces.dev"
 
-  config.vm.synced_folder "./backend", "/var/www/html",
-    mount_options: ['dmode=777','fmode=755'],
+  config.vm.synced_folder "./backend", "/var/www/html/",
+    mount_options: ['dmode=775','fmode=664'],
     type: "rsync",
     rsync__exclude: ".git/",
-    owner: "root", group: "root"
+    owner: "vagrant", group: "vagrant"
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "ansible/playbook.yml"

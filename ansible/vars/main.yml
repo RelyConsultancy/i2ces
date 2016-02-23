@@ -13,6 +13,10 @@ php_packages:
   - php-xml
   - php-intl
   - php-soap
+  - php-mcrypt
+  - php-posix
+  - php-pecl-apc
+  - php-mysql
 
 mysql_packages:
   - mariadb
