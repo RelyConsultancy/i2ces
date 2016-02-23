@@ -19,7 +19,6 @@
       - gcc
       - git
       - epel-release
-      - npm
 
   - name: Updatedb
     shell: >
