@@ -42,16 +42,22 @@
   notify: restart apache
 
 - name: Install node
-  command: " {{item}} "
-  with_items:
-      - sudo yum -y install npm
+  shell: >
+    sudo yum -y install npm
+    creates: /usr/bin/node
 
+- name: Check if uploads folder exists.
+  stat: "path=/var/www/html/web/uploads"
+  register: uploads_exists
+
+- name: Create uploads folder.
+  command: "mkdir /var/www/html/web/uploads"
+  when: not uploads_exists.stat.exists
 
 - name: Fetch Oro Platform
   command: " {{item}} "
   with_items:
     - /usr/local/bin/composer install -d /var/www/html -n
-    - mkdir /var/www/html/web/uploads
     - chmod 777 /var/www/html/web/uploads
     - sudo chmod 777 /var/www/html/app/logs
     - sudo chmod 777 /var/www/html/app/attachment
