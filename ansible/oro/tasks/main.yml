@@ -11,7 +11,7 @@
 
 - name: Upgrade dependencies
   shell: >
-    cd /var/www/html/backend && composer update
+    cd /var/www/html && /usr/local/bin/composer update
   when: composer_locked.stat.exists
 
 - name: Copy vhost
