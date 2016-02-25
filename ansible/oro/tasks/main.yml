@@ -46,13 +46,21 @@
     sudo yum -y install npm
     creates: /usr/bin/node
 
-- name: Check if uploads folder exists.
+- name: Check if web/uploads folder exists.
   stat: "path=/var/www/html/web/uploads"
   register: uploads_exists
 
-- name: Create uploads folder.
+- name: Create web/uploads folder.
   command: "mkdir /var/www/html/web/uploads"
   when: not uploads_exists.stat.exists
+
+- name: Check if web/bundles folder exists.
+  stat: "path=/var/www/html/web/bundles"
+  register: bundles_exists
+
+- name: Create web/bundles folder.
+  command: "mkdir /var/www/html/web/bundles"
+  when: not bundles_exists.stat.exists
 
 - name: Fetch Oro Platform
   command: " {{item}} "
