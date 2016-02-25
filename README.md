@@ -24,3 +24,10 @@
 $ cd /var/www/html
 $ composer install
 ```
+
+## Deploy to DigitalOcean
+
+```bash
+vagrant plugin install vagrant-digitalocean
+vagrant up --provider=digital_ocean
+```
