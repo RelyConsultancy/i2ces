@@ -1,0 +1,28 @@
+oro_menu_config:
+    items:
+        activities_tab:
+            display: false
+            displayChildren: false
+        reports_tab:
+            display: false
+            displayChildren: false
+        dashboard_tab:
+            display: false
+            displayChildren: false
+        oro_notification_emailnotification_list:
+            display: false
+            displayChildren: false
+        oro_business_unit_list:
+            label: 'oro.organization.businessunit.entity_plural_label'
+            route: 'oro_business_unit_index'
+            extras:
+                description: 'oro.business_unit.menu.list.description'
+        system_tab:
+            display: false
+            displayChildren: false
+
+    tree:
+        application_menu:
+            children:
+                user_list: ~
+                oro_business_unit_list: ~
