@@ -1,3 +1,7 @@
+  - name: Disable yum fastestmirror
+    command: " {{item}} "
+    with_items:
+      - yum --disableplugin=fastestmirror version
 
   - name: Ensure NTP is installed
     yum: name=ntp state=installed
@@ -6,7 +10,7 @@
 
   # basics
   - name: Install basic tools
-    yum: pkg={{ item }} state=installed
+    yum: pkg={{ item }} state=present
     with_items:
       - nano
       - vim
@@ -19,6 +23,8 @@
       - gcc
       - git
       - epel-release
+      - bind-utils
+      - traceroute
 
   - name: Updatedb
     shell: >
