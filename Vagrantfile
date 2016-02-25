@@ -33,6 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.network "public_network"
 
   config.vm.hostname = "i2ces.dev"
+  config.vm.boot_timeout = 2000
 
   config.vm.synced_folder "./backend", "/var/www/html/",
     mount_options: ['dmode=775','fmode=664'],
