@@ -20,9 +20,13 @@ oro_menu_config:
         system_tab:
             display: false
             displayChildren: false
+        dashboard_view:
+            label: 'oro.dashboard.menu.dashboards_tab.label'
+            uri: '/'
 
     tree:
         application_menu:
             children:
+                dashboard_view: ~
                 user_list: ~
                 oro_business_unit_list: ~
