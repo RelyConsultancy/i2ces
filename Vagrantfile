@@ -16,6 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--memory", "3072"]
+#    v.gui = true
   end
 
   # Create a forwarded port mapping which allows access to a specific port

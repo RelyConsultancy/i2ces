@@ -1,26 +1,3 @@
-#
-#  - name: Install Apache
-##    command: yum install --quiet -y httpd httpd-devel
-#    yum: name={{ item }} state=present
-#    with_items:
-#    - httpd
-#    - httpd-devel
-#
-##  - name: Copy Oro config file
-##    copy:
-##      src: "{{ item.src }}"
-##      dest: "{{ item.dest }}"
-##      owner: root
-##      group: root
-##      mode: 644
-##    with_items:
-##    - {
-##      src: "/path/to/config/httpd.conf"
-##      dest: "/etc/httpd/conf/httpd.conf"
-##    }
-#
-#  - name: Start Apache and configure it to run at boot
-#    service: name=httpd state=started enabled=yes
 
 - name: set SELinux to permissive
   action: selinux policy=targeted state=permissive

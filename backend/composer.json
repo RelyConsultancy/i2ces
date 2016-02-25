@@ -1,7 +1,7 @@
 {
   "name": "i2c/oro-platform-application",
   "description": "Oro Platform Application",
-  "homepage": "https://github.com/RelyConsultancy/i2c-evaluation-suite.git",
+  "homepage": "https://github.com/RelyConsultancy/i2ces.git",
   "license": "MIT",
   "autoload": {
     "psr-0": {
@@ -21,7 +21,8 @@
     "sensio/generator-bundle": "2.5.3"
   },
   "config": {
-    "component-dir": "web/bundles/components"
+    "component-dir": "web/bundles/components",
+    "secure-http": false
   },
   "scripts": {
     "post-install-cmd": [
