@@ -19,6 +19,7 @@
       - gcc
       - git
       - epel-release
+      - bind-utils
 
   - name: Updatedb
     shell: >
