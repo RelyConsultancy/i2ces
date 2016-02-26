@@ -28,6 +28,9 @@
       - bind-utils
       - traceroute
 
+  - name: Install Vagrant
+    yum: name=https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.rpm state=present
+
   - name: Grab i2c repo
     git: repo=git@github.com:RelyConsultancy/i2ces.git
       dest=/root/i2ces
