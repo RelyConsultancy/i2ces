@@ -13,7 +13,17 @@
     with_items:
       - jenkins
 
-  - name: Install Java
+  - name: Install dependencies
     yum: pkg={{ item }} state=present
     with_items:
       - java
+      - vim
+      - man
+      - tree
+      - curl
+      - wget
+      - unzip
+      - mlocate
+      - git
+      - bind-utils
+      - traceroute
