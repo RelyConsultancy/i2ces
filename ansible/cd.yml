@@ -27,3 +27,8 @@
       - git
       - bind-utils
       - traceroute
+
+  - name: Grab i2c repo
+    git: repo=git@github.com:RelyConsultancy/i2ces.git
+      dest=/root/i2ces
+      accept_hostkey=true
