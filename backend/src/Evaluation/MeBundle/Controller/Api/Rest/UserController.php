@@ -18,7 +18,7 @@ class UserController extends RestApiController
      *
      * @return View
      */
-    public function getAction()
+    public function getMeAction()
     {
         $usr = $this->getUser();
         $data = array(
