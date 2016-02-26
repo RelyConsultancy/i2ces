@@ -35,3 +35,6 @@
     git: repo=git@github.com:RelyConsultancy/i2ces.git
       dest=/root/i2ces
       accept_hostkey=true
+
+  - name: Ensure Jenkins is started
+    service: name=jenkins state=started
