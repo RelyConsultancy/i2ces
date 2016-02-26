@@ -1,0 +1,4 @@
+services:
+#    evaluation_me.example:
+#        class: Evaluation\MeBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
