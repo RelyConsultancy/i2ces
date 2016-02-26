@@ -1,0 +1,19 @@
+---
+- hosts: jenkins
+
+  tasks:
+  - name: Fetch Jenkins repo
+    command: "wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo"
+
+  - name: Import Jenkins repo
+    command: "rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key"
+
+  - name: Install Jenkins
+    yum: pkg={{ item }} state=present
+    with_items:
+      - jenkins
+
+  - name: Install Java
+    yum: pkg={{ item }} state=present
+    with_items:
+      - java
