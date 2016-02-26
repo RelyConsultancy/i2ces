@@ -6,8 +6,20 @@
 
   roles:
     - init
+    - geerlingguy.repo-remi
     - geerlingguy.mysql
     - geerlingguy.apache
     - geerlingguy.php
     - geerlingguy.composer
     - oro
+
+- hosts: staging
+
+  tasks:
+    digital_ocean: >
+      state=present
+      command=ssh
+      name=i2c-staging
+      image_id=11422458
+      api_token=0700281c55c0d95e9d0c52ca93077d1268d46ae14bda34b8bb44b62c9d7f52f8
+      ssh_pub_key='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCiKTdyhLTlBzUDkk2vHKTUEa23L/Ho+2Z9cJd1AGQD0bQFqwnKJo6Tl6/u58WdG32VGNwo/rJ5X+7BRw32P/wjvPzWZ5ZBXBTFUoSmK9Sjf0YA0WEqbi24qkXJ5iEQ9L9nwHa6EdpzONyVnur5a2/f3DvOZbDbDIEf+Du5dJbb6qaC5YAk6FfTTDYJ9HPYVFhOwe5haQvIO1LlRhxHFuverGPlDqABqGNctKEeTY01yJgIYgiKfKv+efXIj+0UEUFNKfcp39aMOODJDGTkVi6YucR+iPZNVS2fnXnXSZQEIawfRzd0AGpiLHGmwIYv+42CxCu5RMgZoVa0yJBblzh9 georgiana.gligor@gmail.com'

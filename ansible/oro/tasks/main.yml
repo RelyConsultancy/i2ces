@@ -3,16 +3,16 @@
   action: selinux policy=targeted state=permissive
 
 - name: Check if Oro Platform is installed.
-  stat: "path=/home/vagrant/sync/backend/composer.lock"
+  stat: "path=/var/www/html/composer.lock"
   register: composer_locked
 
 - name: Debug composer_locked
   debug: msg="Variable 'composer_locked' is set to {{ composer_locked }}"
 
-- name: Upgrade dependencies
-  shell: >
-    cd /var/www/html && /usr/local/bin/composer update
-  when: composer_locked.stat.exists
+# - name: Upgrade dependencies
+#   shell: >
+#     cd /var/www/html && /usr/local/bin/composer update
+#   when: composer_locked.stat.exists
 
 - name: Copy vhost
   template: src=i2ces.conf.j2 dest=/etc/httpd/conf.d/i2ces.conf mode=0644
