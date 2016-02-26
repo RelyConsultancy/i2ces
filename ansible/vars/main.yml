@@ -24,7 +24,7 @@ mysql_packages:
   - mysql-libs
   - MySQL-python
   - perl-DBD-MySQL
-mysql_root_password: ""
+mysql_root_password: root
 mysql_root_password_update: yes
 mysql_enabled_on_startup: yes
 mysql_daemon: mysqld
