@@ -27,7 +27,18 @@ $ composer install
 
 ```bash
 vagrant plugin install vagrant-digitalocean
-vagrant up --provider=digital_ocean
+
+# raise machine
+vagrant up qa
+vagrant up staging
+
+# recreate with same IP
+vagrant rebuild qa
+vagrant rebuild staging
+
+# reapply provisioning
+vagrant provision qa
+vagrant provision staging
 ```
 
 Execute `ansible/playbook.yml` tasks.

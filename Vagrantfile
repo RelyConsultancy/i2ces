@@ -62,7 +62,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "./backend", "/var/www/html/",
     mount_options: ['dmode=775','fmode=664'],
     type: "rsync",
-    rsync__exclude: ".git/",
+    rsync__exclude: [".git/", "vendor/"],
     owner: "vagrant", group: "vagrant"
 
   config.vm.provision "ansible" do |ansible|
