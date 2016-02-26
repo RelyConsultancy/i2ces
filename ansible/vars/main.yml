@@ -28,7 +28,7 @@ mysql_daemon: mariadb
 mysql_socket: /var/lib/mysql/mysql.sock
 mysql_log_error: /var/log/mariadb/mariadb.log
 mysql_syslog_tag: mariadb
-mysql_pid_file: /var/run/mysql/mysql.pid
+mysql_pid_file: /var/run/mariadb/mariadb.pid
 
 composer_path: /usr/local/bin/composer
 composer_keep_updated: true
