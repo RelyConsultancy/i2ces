@@ -8,7 +8,7 @@
 ```bash
 ➤ sudo ansible-galaxy install geerlingguy.apache
     geerlingguy.mysql geerlingguy.php geerlingguy.git
-    geerlingguy.composer --force
+    geerlingguy.composer geerlingguy.ruby --force
 ```
 
 ### Start VM

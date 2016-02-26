@@ -1,6 +1,9 @@
 ---
 - hosts: jenkins
 
+  roles:
+    - geerlingguy.ruby
+
   tasks:
   - name: Fetch Jenkins repo
     command: "wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo"
@@ -27,6 +30,10 @@
       - git
       - bind-utils
       - traceroute
+      - screen
+      - gcc
+      - ruby-devel
+      - rubygems
 
   - name: Install Vagrant
     yum: name=https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.rpm state=present
@@ -38,3 +45,9 @@
 
   - name: Ensure Jenkins is started
     service: name=jenkins state=started
+
+  - name: Vagrant dependency json gem
+    gem: name=json version=1.8.3 state=present
+
+  - name: Enable DigitalOcean provider for Vagrant
+    command: "vagrant plugin install vagrant-digitalocean"
