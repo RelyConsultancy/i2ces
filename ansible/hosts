@@ -7,6 +7,9 @@
 [staging]
 46.101.89.191
 
+[jenkins]
+188.166.157.215
+
 [multi:children]
 dev
 

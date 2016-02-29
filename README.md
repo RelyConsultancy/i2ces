@@ -6,7 +6,7 @@
 ### Prepare provisioner for usage
 
 ```bash
-➤ sudo ansible-galaxy install geerlingguy.repo-remi geerlingguy.apache geerlingguy.mysql geerlingguy.php geerlingguy.git geerlingguy.composer --force
+➤ sudo ansible-galaxy install geerlingguy.repo-remi geerlingguy.apache geerlingguy.mysql geerlingguy.php geerlingguy.git geerlingguy.composer geerlingguy.ruby --force
 ```
 
 ### Start VM
@@ -45,3 +45,11 @@ Execute `ansible/playbook.yml` tasks.
 ```bash
 ➤ ansible-playbook ansible/playbook.yml -i ansible/hosts -vvvv -u root
 ```
+
+## Update Continuous Integration Environment
+
+```bash
+➤ ansible-playbook ansible/cd.yml -i ansible/hosts -vvv -u root
+```
+
+You can validate it is running by loading http://ci.i2ces.info:8080/ in your browser.
