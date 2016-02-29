@@ -1,6 +1,9 @@
 [app]
 192.168.56.101
 
+[jenkins]
+188.166.157.215
+
 [multi:children]
 app
 

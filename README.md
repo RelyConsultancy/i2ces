@@ -8,7 +8,7 @@
 ```bash
 ➤ sudo ansible-galaxy install geerlingguy.apache
     geerlingguy.mysql geerlingguy.php geerlingguy.git
-    geerlingguy.composer --force
+    geerlingguy.composer geerlingguy.ruby --force
 ```
 
 ### Start VM
@@ -31,3 +31,11 @@ $ composer install
 vagrant plugin install vagrant-digitalocean
 vagrant up --provider=digital_ocean
 ```
+
+## Update Continuous Integration Environment
+
+```bash
+➤ ansible-playbook ansible/cd.yml -i ansible/hosts -vvv -u root
+```
+
+You can validate it is running by loading http://ci.i2ces.info:8080/ in your browser.
