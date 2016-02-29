@@ -1,0 +1,58 @@
+---
+- hosts: jenkins
+
+  roles:
+    - geerlingguy.ruby
+
+  tasks:
+  - name: Fetch Jenkins repo
+    command: "wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo"
+
+  - name: Import Jenkins repo
+    command: "rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key"
+
+  - name: Install Jenkins
+    yum: pkg={{ item }} state=present
+    with_items:
+      - jenkins
+
+  - name: Install dependencies
+    yum: pkg={{ item }} state=present
+    with_items:
+      - java
+      - vim
+      - man
+      - tree
+      - curl
+      - wget
+      - unzip
+      - mlocate
+      - git
+      - bind-utils
+      - traceroute
+      - screen
+      - gcc
+      - ruby-devel
+      - rubygems
+
+  - name: Install Vagrant
+    yum: name=https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.rpm state=present
+
+  - name: Grab i2c repo
+    git: repo=git@github.com:RelyConsultancy/i2ces.git
+      dest=/root/i2ces
+      accept_hostkey=true
+
+  - name: Grab i2c repo for staging
+    git: repo=git@github.com:RelyConsultancy/i2ces.git
+      dest=/root/i2ces-staging
+      accept_hostkey=true
+
+  - name: Ensure Jenkins is started
+    service: name=jenkins state=started
+
+  - name: Vagrant dependency json gem
+    gem: name=json version=1.8.3 state=present
+
+  - name: Enable DigitalOcean provider for Vagrant
+    command: "vagrant plugin install vagrant-digitalocean"
