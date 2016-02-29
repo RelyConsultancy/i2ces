@@ -1,0 +1,13 @@
+services:
+    evaluation_setup.schema_update_command:
+        class: Evaluation\SetupBundle\Command\DatabaseSchemaUpdateCommand
+        arguments: [@evaluation_setup.schema_update_container]
+        tags:
+          - { name: console.command }
+
+    evaluation_setup.schema_update_container:
+        class: Evaluation\SetupBundle\Services\SchemaUpdateContainer
+        calls:
+          - [ addSchemaUpdateService, [@evaluation_evaluation.evaluation_schema_update] ]
+          - [ addSchemaUpdateService, [@evaluation_evaluation.medium_schema_update] ]
+          - [ addSchemaUpdateService, [@evaluation_evaluation.evaluation_mediums_schema_update] ]

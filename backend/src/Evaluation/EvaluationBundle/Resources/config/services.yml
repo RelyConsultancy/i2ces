@@ -1,0 +1,44 @@
+parameters:
+    evaluation_evaluation.evaluation_table_name: "evaluation"
+    evaluation_evaluation.evaluation_command_name: "evaluation:schema:update"
+    evaluation_evaluation.medium_table_name: "medium"
+    evaluation_evaluation.medium_command_name: "medium:schema:update"
+    evaluation_evaluation.evaluation_mediums_table_name: "evaluation_mediums"
+    evaluation_evaluation.evaluation_mediums_command_name: "evaluation-mediums:schema:update"
+
+services:
+    evaluation_evaluation.evaluation_schema_update_command:
+        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        arguments:
+            - @evaluation_evaluation.evaluation_schema_update
+            - %evaluation_evaluation.evaluation_command_name%
+        tags:
+          - { name: console.command }
+
+    evaluation_evaluation.medium_schema_update_command:
+        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        arguments:
+            - @evaluation_evaluation.medium_schema_update
+            - %evaluation_evaluation.medium_command_name%
+        tags:
+          - { name: console.command }
+
+    evaluation_evaluation.evaluation_mediums_schema_update_command:
+        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        arguments:
+            - @evaluation_evaluation.evaluation_mediums_schema_update
+            - %evaluation_evaluation.evaluation_mediums_command_name%
+        tags:
+          - { name: console.command }
+
+    evaluation_evaluation.evaluation_schema_update:
+        class: Evaluation\EvaluationBundle\Services\EvaluationSchemaUpdateService
+        arguments: [@doctrine, %evaluation_evaluation.evaluation_table_name% ]
+
+    evaluation_evaluation.medium_schema_update:
+        class: Evaluation\EvaluationBundle\Services\MediumSchemaUpdateService
+        arguments: [@doctrine, %evaluation_evaluation.medium_table_name% ]
+
+    evaluation_evaluation.evaluation_mediums_schema_update:
+        class: Evaluation\EvaluationBundle\Services\EvaluationMediumsSchemaUpdateService
+        arguments: [@doctrine, %evaluation_evaluation.evaluation_mediums_table_name% ]

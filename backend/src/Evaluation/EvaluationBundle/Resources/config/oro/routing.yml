@@ -1,0 +1,4 @@
+evaluation_evaluation.get_by_ids:
+    path: /api/evaluations
+    methods: [GET]
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getByIds }
