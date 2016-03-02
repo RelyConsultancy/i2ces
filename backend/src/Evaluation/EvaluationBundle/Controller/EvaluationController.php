@@ -64,7 +64,7 @@ class EvaluationController extends AbstractEvaluationController
         $evaluation = $this->getEvaluationsRepository()->getByUid($evaluationId, $aclHelper, ['VIEW']);
 
         if (is_null($evaluation)) {
-            return new Response("Evaluation not found", Response::HTTP_NOT_FOUND);
+            return $this->getNotFoundResponse("Evaluation was not found");
         }
 
         return $this->getJsonResponse($evaluation, Response::HTTP_OK, ["list"]);
@@ -90,7 +90,7 @@ class EvaluationController extends AbstractEvaluationController
         $evaluation = $this->getEvaluationsRepository()->getByUid($evaluationId, $aclHelper, ['VIEW']);
 
         if (is_null($evaluation)) {
-            return new Response("Evaluation not found", Response::HTTP_NOT_FOUND);
+            return $this->getNotFoundResponse("Evaluation was not found");
         }
 
         foreach ($evaluation->getChapters() as $chapter) {
@@ -122,7 +122,7 @@ class EvaluationController extends AbstractEvaluationController
         $evaluation = $this->getEvaluationsRepository()->getByUid($evaluationId, $aclHelper, ['VIEW']);
 
         if (is_null($evaluation)) {
-            return new Response("Evaluation not found", Response::HTTP_NOT_FOUND);
+            return $this->getNotFoundResponse("Evaluation was not found");
         }
 
         $foundChapter = null;
@@ -136,7 +136,7 @@ class EvaluationController extends AbstractEvaluationController
         }
 
         if (is_null($foundChapter)) {
-            return $this->getJsonResponse("Chapter was not found", Response::HTTP_NOT_FOUND);
+            return $this->getNotFoundResponse("Chapter was not found");
         }
 
         /** @var Chapter $sentChapter */

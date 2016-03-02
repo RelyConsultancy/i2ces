@@ -48,6 +48,21 @@ class AbstractEvaluationController extends RestApiController
     }
 
     /**
+     * @param string $message
+     *
+     * @return Response
+     */
+    public function getNotFoundResponse($message)
+    {
+        return $this->getJsonResponse(
+            [
+                "error" => $message,
+            ],
+            Response::HTTP_NOT_FOUND
+        );
+    }
+
+    /**
      * Deserialized the entity fromt the request using a json format
      *
      * @param string $class full class name including namespace
