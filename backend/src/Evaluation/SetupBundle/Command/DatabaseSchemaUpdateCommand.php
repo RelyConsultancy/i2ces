@@ -36,12 +36,12 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
     public function configure()
     {
         $this
-            ->setName("i2c:schema:update")
-            ->setDescription("This command will update the database structure across all i2c entities");
+            ->setName('i2c:schema:update')
+            ->setDescription('This command will update the database structure across all i2c entities');
     }
 
     /**
-     * Update the schmas for all the tables defined in the schema update container
+     * Update the schemas for all the tables defined in the schema update container
      *
      * @param InputInterface  $input
      * @param OutputInterface $output
@@ -58,11 +58,11 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
             foreach ($schemaUpdateServices as $schemaUpdateService) {
                 $currentProcessedTable = $schemaUpdateService->getTableName();
                 $schemaUpdateService->updateSchema();
-                $output->writeln("Updated schema for table: ".$schemaUpdateService->getTableName());
+                $output->writeln('Updated schema for table: '.$schemaUpdateService->getTableName());
             }
-            $output->writeln("Schemas were updated successfully!");
+            $output->writeln('Schemas were updated successfully!');
         } catch (\Exception $ex) {
-            $output->writeln("There was an error while updating the schema for the table: ".$currentProcessedTable);
+            $output->writeln('There was an error while updating the schema for the table: '.$currentProcessedTable);
             $output->writeln($ex->getMessage());
         }
 

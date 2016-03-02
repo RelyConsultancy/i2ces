@@ -1,4 +1,19 @@
-evaluation_evaluation.get_by_ids:
+evaluation_evaluation.get_evaluations_by_id_minimal:
     path: /api/evaluations
     methods: [GET]
-    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getByIds }
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationsByIdMinimal }
+
+evaluation_evaluation.get_evaluation_by_id:
+    path: /api/evaluations/{evaluationId}
+    methods: [GET]
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationById }
+
+evaluation_evaluation.get_evaluation_chapter_by_id:
+    path: /api/evaluations/{evaluationId}/chapters/{chapterId}
+    methods: [GET]
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getChapterById }
+
+evaluation_evaluation.update_evaluation_chapter:
+    path: /api/evaluations/{evaluationId}/chapters/{chapterId}
+    methods: [POST]
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:updateChapter }

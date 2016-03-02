@@ -21,34 +21,19 @@ class Medium
      * @ORM\Column(type="integer", name="id")
      *
      * @JMS\Exclude()
-     * @JMS\Groups({"_id"})
-     * @JMS\SerializedName("id")
-     * @JMS\Type("integer")
      */
     protected $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="guid", name="uid")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="string", name="label")
      *
-     * @JMS\Groups({"general"})
-     * @JMS\SerializedName("uid")
+     * @JMS\Groups({"list"})
+     * @JMS\SerializedName("label")
      * @JMS\Type("string")
      */
-    protected $uid;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", name="medium_name")
-     *
-     * @JMS\Groups({"general"})
-     * @JMS\SerializedName("medium_name")
-     * @JMS\Type("string")
-     */
-    protected $mediumName;
+    protected $label;
 
     /**
      * @return int
@@ -69,16 +54,16 @@ class Medium
     /**
      * @return string
      */
-    public function getMediumName()
+    public function getLabel()
     {
-        return $this->mediumName;
+        return $this->label;
     }
 
     /**
-     * @param string $mediumName
+     * @param string $label
      */
-    public function setMediumName($mediumName)
+    public function setLabel($label)
     {
-        $this->mediumName = $mediumName;
+        $this->label = $label;
     }
 }

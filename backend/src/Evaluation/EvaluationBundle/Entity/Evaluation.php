@@ -3,7 +3,9 @@
 namespace Evaluation\EvaluationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Evaluation\UtilBundle\Helpers\BusinessUnitHelper;
 use JMS\Serializer\Annotation as JMS;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 
 /**
@@ -12,6 +14,25 @@ use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
  * @ORM\Entity(repositoryClass="Evaluation\EvaluationBundle\Repository\EvaluationRepository")
  *
  * @package Evaluation\EvaluationBundle\Entity
+ *
+ * @Config(
+ *   defaultValues={
+ *     "ownership"={
+ *         "owner_type"="BUSINESS_UNIT",
+ *         "owner_field_name"="businessUnit",
+ *         "owner_column_name"="business_unit_id"
+ *     },
+ *     "security"={
+ *       "type"="ACL",
+ *       "permissions"="VIEW;EDIT"
+ *     },
+ *     "entity"={
+ *        "label"="Evaluation",
+ *        "plural_label"="Evaluations",
+ *        "description"="A generated evaluation"
+ *     }
+ *   }
+ * )
  */
 class Evaluation
 {
@@ -23,9 +44,6 @@ class Evaluation
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @JMS\Exclude()
-     * @JMS\Groups({"general"})
-     * @JMS\SerializedName("id")
-     * @JMS\Type("integer")
      */
     protected $id;
 
@@ -35,8 +53,8 @@ class Evaluation
      * @ORM\Column(type="guid", name="uid")
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @JMS\Groups({"general"})
-     * @JMS\SerializedName("uid")
+     * @JMS\Groups({"list", "minimal"})
+     * @JMS\SerializedName("id")
      * @JMS\Type("string")
      */
     protected $uid;
@@ -44,22 +62,55 @@ class Evaluation
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, name="display_name")
+     * @ORM\Column(type="string", length=255, name="title")
      *
-     * @JMS\Groups({"general"})
-     * @JMS\SerializedName("display_name")
+     * @JMS\Groups({"list"})
+     * @JMS\SerializedName("title")
      * @JMS\Type("string")
      */
-    protected $displayName;
+    protected $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, name="state")
+     *
+     * @JMS\Groups({"list"})
+     * @JMS\SerializedName("state")
+     * @JMS\Type("string")
+     */
+    protected $state;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, name="brand")
+     *
+     * @JMS\Groups({"list"})
+     * @JMS\SerializedName("brand")
+     * @JMS\Type("string")
+     */
+    protected $brand;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, name="category")
+     *
+     * @JMS\Groups({"list"})
+     * @JMS\SerializedName("category")
+     * @JMS\Type("string")
+     */
+    protected $category;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", name="start_date")
      *
-     * @JMS\Groups({"general"})
+     * @JMS\Groups({"list"})
      * @JMS\SerializedName("start_date")
-     * @JMS\Type("DateTime<'Y-m-d\TH:i:s'>")
+     * @JMS\Type("DateTime<'Y-m-d'>")
      */
     protected $startDate;
 
@@ -68,22 +119,22 @@ class Evaluation
      *
      * @ORM\Column(type="datetime", name="end_date")
      *
-     * @JMS\Groups({"general"})
+     * @JMS\Groups({"list"})
      * @JMS\SerializedName("end_date")
-     * @JMS\Type("DateTime<'Y-m-d\TH:i:s'>")
+     * @JMS\Type("DateTime<'Y-m-d'>")
      */
     protected $endDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", name="evaluation_generation_date")
+     * @ORM\Column(type="datetime", name="generated_at")
      *
-     * @JMS\Groups({"general"})
-     * @JMS\SerializedName("evaluation_generation_date")
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("generated_at")
      * @JMS\Type("DateTime<'Y-m-d\TH:i:s'>")
      */
-    protected $evaluationGenerationDate;
+    protected $generatedAt;
 
     /**
      * @var Medium[]
@@ -95,7 +146,7 @@ class Evaluation
      *     inverseJoinColumns={@ORM\JoinColumn(name="medium_id", referencedColumnName="id")}
      * )
      *
-     * @JMS\Groups({"general"})
+     * @JMS\Groups({"list"})
      * @JMS\SerializedName("mediums")
      * @JMS\Type("array<'Evaluation\EvaluationBundle\Entity\Medium'>")
      */
@@ -107,12 +158,34 @@ class Evaluation
      * @ORM\OneToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
      * @ORM\JoinColumn(name="business_unit_id", referencedColumnName="id")
      *
-     * @JMS\Groups({"general"})
-     * @JMS\MaxDepth(1)
-     * @JMS\SerializedName("business_unit")
-     * @JMS\Type("Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
+     * @JMS\Exclude()
      */
     protected $businessUnit;
+
+    /**
+     * @var Chapter[]
+     *
+     * @ORM\ManyToMany(targetEntity="Evaluation\EvaluationBundle\Entity\Chapter")
+     * @ORM\JoinTable(
+     *     name="evaluation_chapters",
+     *     joinColumns={@ORM\JoinColumn(name="evaluation_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="chapter_id", referencedColumnName="id")}
+     * )
+     *
+     * @JMS\Groups({"list"})
+     * @JMS\SerializedName("chapters")
+     * @JMS\Type("array<'Evaluation\EvaluationBundle\Entity\Chapter'>")
+     */
+    protected $chapters;
+
+    /**
+     * @JMS\VirtualProperty()
+     * @JMS\Groups({"list"})
+     */
+    public function getSupplier()
+    {
+        return BusinessUnitHelper::getBusinessUnitAsArray($this->getBusinessUnit());
+    }
 
     /**
      * @return mixed
@@ -131,19 +204,83 @@ class Evaluation
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDisplayName()
+    public function getUid()
     {
-        return $this->displayName;
+        return $this->uid;
     }
 
     /**
-     * @param mixed $displayName
+     * @param string $uid
      */
-    public function setDisplayName($displayName)
+    public function setUid($uid)
     {
-        $this->displayName = $displayName;
+        $this->uid = $uid;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBrand()
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @param string $brand
+     */
+    public function setBrand($brand)
+    {
+        $this->brand = $brand;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param string $category
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 
     /**
@@ -179,19 +316,19 @@ class Evaluation
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
-    public function getEvaluationGenerationDate()
+    public function getGeneratedAt()
     {
-        return $this->evaluationGenerationDate;
+        return $this->generatedAt;
     }
 
     /**
-     * @param mixed $evaluationGenerationDate
+     * @param \DateTime $generatedAt
      */
-    public function setEvaluationGenerationDate($evaluationGenerationDate)
+    public function setGeneratedAt($generatedAt)
     {
-        $this->evaluationGenerationDate = $evaluationGenerationDate;
+        $this->generatedAt = $generatedAt;
     }
 
     /**
@@ -224,5 +361,41 @@ class Evaluation
     public function setBusinessUnit($businessUnit)
     {
         $this->businessUnit = $businessUnit;
+    }
+
+    /**
+     * @return Chapter[]
+     */
+    public function getChapters()
+    {
+        return $this->chapters;
+    }
+
+    /**
+     * @param Chapter[] $chapters
+     */
+    public function setChapters($chapters)
+    {
+        $this->chapters = $chapters;
+    }
+
+    /**
+     * @param BusinessUnit $owner
+     */
+    public function setOwner($owner)
+    {
+        if ($owner instanceof BusinessUnit) {
+            $this->businessUnit = $owner;
+        } else {
+            throw new \InvalidArgumentException('Owner needs to be a supplier');
+        }
+    }
+
+    /**
+     * @return BusinessUnit
+     */
+    public function getOwner()
+    {
+        return $this->businessUnit;
     }
 }

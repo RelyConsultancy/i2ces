@@ -3,8 +3,12 @@ parameters:
     evaluation_evaluation.evaluation_command_name: "evaluation:schema:update"
     evaluation_evaluation.medium_table_name: "medium"
     evaluation_evaluation.medium_command_name: "medium:schema:update"
+    evaluation_evaluation.chapter_table_name: "chapter"
+    evaluation_evaluation.chapter_command_name: "chapter:schema:update"
     evaluation_evaluation.evaluation_mediums_table_name: "evaluation_mediums"
     evaluation_evaluation.evaluation_mediums_command_name: "evaluation-mediums:schema:update"
+    evaluation_evaluation.evaluation_chapters_table_name: "evaluation_chapters"
+    evaluation_evaluation.evaluation_chapters_command_name: "evaluation-chapters:schema:update"
 
 services:
     evaluation_evaluation.evaluation_schema_update_command:
@@ -23,11 +27,27 @@ services:
         tags:
           - { name: console.command }
 
+    evaluation_evaluation.chapter_schema_update_command:
+        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        arguments:
+            - @evaluation_evaluation.chapter_schema_update
+            - %evaluation_evaluation.chapter_command_name%
+        tags:
+          - { name: console.command }
+
     evaluation_evaluation.evaluation_mediums_schema_update_command:
         class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
         arguments:
             - @evaluation_evaluation.evaluation_mediums_schema_update
             - %evaluation_evaluation.evaluation_mediums_command_name%
+        tags:
+          - { name: console.command }
+
+    evaluation_evaluation.evaluation_chapters_schema_update_command:
+        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        arguments:
+            - @evaluation_evaluation.evaluation_chapters_schema_update
+            - %evaluation_evaluation.evaluation_chapters_command_name%
         tags:
           - { name: console.command }
 
@@ -39,6 +59,14 @@ services:
         class: Evaluation\EvaluationBundle\Services\MediumSchemaUpdateService
         arguments: [@doctrine, %evaluation_evaluation.medium_table_name% ]
 
+    evaluation_evaluation.chapter_schema_update:
+        class: Evaluation\EvaluationBundle\Services\ChapterSchemaUpdateService
+        arguments: [@doctrine, %evaluation_evaluation.chapter_table_name% ]
+
     evaluation_evaluation.evaluation_mediums_schema_update:
         class: Evaluation\EvaluationBundle\Services\EvaluationMediumsSchemaUpdateService
         arguments: [@doctrine, %evaluation_evaluation.evaluation_mediums_table_name% ]
+
+    evaluation_evaluation.evaluation_chapters_schema_update:
+        class: Evaluation\EvaluationBundle\Services\EvaluationChaptersSchemaUpdateService
+        arguments: [@doctrine, %evaluation_evaluation.evaluation_chapters_table_name% ]

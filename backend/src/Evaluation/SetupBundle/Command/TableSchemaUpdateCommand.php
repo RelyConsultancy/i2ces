@@ -41,7 +41,7 @@ class TableSchemaUpdateCommand extends ContainerAwareCommand
         $this
             ->setName($this->commandName)
             ->setDescription(
-                "This command will update the database structure for the table: "
+                'This command will update the database structure for the table: '
                 .$this->schemaUpdateService->getTableName()
             );
     }
@@ -58,9 +58,9 @@ class TableSchemaUpdateCommand extends ContainerAwareCommand
     {
         try {
             $this->schemaUpdateService->updateSchema();
-            $output->writeln($this->schemaUpdateService->getTableName()." schema was updated successfully!");
+            $output->writeln($this->schemaUpdateService->getTableName().' schema was updated successfully!');
         } catch (\Exception $ex) {
-            $output->writeln("There was an error while updating the schema");
+            $output->writeln('There was an error while updating the schema');
 
             return -1;
         }

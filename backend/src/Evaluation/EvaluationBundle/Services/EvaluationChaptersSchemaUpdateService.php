@@ -5,11 +5,11 @@ namespace Evaluation\EvaluationBundle\Services;
 use Evaluation\SetupBundle\Services\AbstractSchemaUpdateService;
 
 /**
- * Class EvaluationMediumsSchemaUpdateService
+ * Class EvaluationChaptersSchemaUpdateService
  *
  * @package Evaluation\EvaluationBundle\Services
  */
-class EvaluationMediumsSchemaUpdateService extends AbstractSchemaUpdateService
+class EvaluationChaptersSchemaUpdateService extends AbstractSchemaUpdateService
 {
     /**
      * Creates the table if it does not exist
@@ -19,10 +19,10 @@ class EvaluationMediumsSchemaUpdateService extends AbstractSchemaUpdateService
         $query = sprintf(
             'CREATE TABLE IF NOT EXISTS `%s` (
                 evaluation_id INT(11) NOT NULL,
-                medium_id INT(11) NOT NULL,
+                chapter_id INT(11) NOT NULL,
                 FOREIGN KEY (evaluation_id) REFERENCES evaluation(id),
-                FOREIGN KEY (medium_id) REFERENCES medium(id),
-                PRIMARY KEY (evaluation_id, medium_id)
+                FOREIGN KEY (chapter_id) REFERENCES chapter(id),
+                PRIMARY KEY (evaluation_id, chapter_id)
             )',
             $this->tableName
         );

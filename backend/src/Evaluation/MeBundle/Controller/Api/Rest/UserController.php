@@ -2,16 +2,17 @@
 
 namespace Evaluation\MeBundle\Controller\Api\Rest;
 
+use Evaluation\UtilBundle\Controller\AbstractEvaluationController;
+use Evaluation\UtilBundle\Helpers\BusinessUnitHelper;
 use FOS\RestBundle\View\View;
-use Oro\Bundle\ApiBundle\Controller\RestApiController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class UserController
  *
  * @package Evaluation\MeBundle\Controller
  */
-class UserController extends RestApiController
+class UserController extends AbstractEvaluationController
 {
     /**
      * Returns a json with the current user data.
@@ -20,13 +21,14 @@ class UserController extends RestApiController
      */
     public function getMeAction()
     {
-        $usr = $this->getUser();
+        $user = $this->getUser();
+
         $data = array(
-            'id'             => $usr->getId(),
-            'username'       => $usr->getUsername(),
-            'business_units' => $usr->getBusinessUnits(),
+            'id'             => $user->getId(),
+            'username'       => $user->getUsername(),
+            'business_units' => BusinessUnitHelper::getBusinessUnitCollectionAsArray($user->getBusinessUnits()),
         );
 
-        return new JsonResponse($data);
+        return $this->getJsonResponse($data, Response::HTTP_OK);
     }
 }

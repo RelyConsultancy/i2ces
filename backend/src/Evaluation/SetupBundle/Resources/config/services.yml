@@ -11,3 +11,5 @@ services:
           - [ addSchemaUpdateService, [@evaluation_evaluation.evaluation_schema_update] ]
           - [ addSchemaUpdateService, [@evaluation_evaluation.medium_schema_update] ]
           - [ addSchemaUpdateService, [@evaluation_evaluation.evaluation_mediums_schema_update] ]
+          - [ addSchemaUpdateService, [@evaluation_evaluation.chapter_schema_update] ]
+          - [ addSchemaUpdateService, [@evaluation_evaluation.evaluation_chapters_schema_update] ]
