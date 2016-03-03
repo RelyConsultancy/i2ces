@@ -1,0 +1,5 @@
+evaluation_api:
+    path: /api/me
+    methods: [GET]
+    defaults:
+        _controller: EvaluationMeBundle:Api/Rest/User:getMe
