@@ -13,6 +13,9 @@ parameters:
     mailer_user:            ~
     mailer_password:        ~
 
+    web_dir_path: '%kernel.root_dir%/../web'
+    evaluation_frontend_image_path: '/images/evaluations/'
+
     # WebSocket server config
     websocket_bind_address:  "0.0.0.0"  # The host IP the socket server will bind to
     websocket_bind_port:     8080       # The port the socket server will listen on
