@@ -14,11 +14,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.box = "centos/7"
 
     dev.vm.provider "virtualbox" do |v|
-      v.customize ["modifyvm", :id, "--memory", "3072"]
+      v.customize ["modifyvm", :id, "--memory", "4096"]
   #    v.gui = true
     end
 
-    dev.vm.network "private_network", ip: "192.168.56.101"
+    dev.vm.network "private_network", ip: "192.168.56.101", hostsupdater: "skip"
 
     dev.vm.hostname = "i2ces.dev"
     dev.vm.boot_timeout = 2000
