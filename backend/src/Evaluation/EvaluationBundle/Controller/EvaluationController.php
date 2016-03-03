@@ -2,10 +2,10 @@
 
 namespace Evaluation\EvaluationBundle\Controller;
 
-use Evaluation\EvaluationBundle\Entity\Chapter;
-use Evaluation\EvaluationBundle\Entity\Evaluation;
-use Evaluation\EvaluationBundle\Repository\EvaluationRepository;
+use Evaluation\EvaluationBundle\Services\ChapterService;
+use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService;
 use Evaluation\UtilBundle\Controller\AbstractEvaluationController;
+use Evaluation\UtilBundle\Exception\FormException;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +23,7 @@ class EvaluationController extends AbstractEvaluationController
      * @return Response
      *
      * @Acl(
-     *     id="evaluation_evaluation_view",
+     *     id="evaluation_evaluations_view",
      *     type="entity",
      *     class="EvaluationEvaluationBundle:Evaluation",
      *     permission="VIEW"
@@ -33,9 +33,7 @@ class EvaluationController extends AbstractEvaluationController
     {
         $ids = $request->get("ids");
 
-        $aclHelper = $this->get('oro_security.acl_helper');
-
-        $evaluations = $this->getEvaluationsRepository()->getByUids($ids, $aclHelper, ['VIEW']);
+        $evaluations = $this->getEvaluationDatabaseManagerService()->getByUids($ids);
 
         $data = [
             'count' => count($evaluations),
@@ -59,9 +57,7 @@ class EvaluationController extends AbstractEvaluationController
      */
     public function getEvaluationByIdAction($evaluationId)
     {
-        $aclHelper = $this->get('oro_security.acl_helper');
-
-        $evaluation = $this->getEvaluationsRepository()->getByUid($evaluationId, $aclHelper, ['VIEW']);
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUid($evaluationId);
 
         if (is_null($evaluation)) {
             return $this->getNotFoundResponse("Evaluation was not found");
@@ -77,7 +73,7 @@ class EvaluationController extends AbstractEvaluationController
      * @return Response
      *
      * @Acl(
-     *     id="evaluation_evaluation_view",
+     *     id="evaluation_chapter_view",
      *     type="entity",
      *     class="EvaluationEvaluationBundle:Evaluation",
      *     permission="VIEW"
@@ -85,21 +81,20 @@ class EvaluationController extends AbstractEvaluationController
      */
     public function getChapterByIdAction($evaluationId, $chapterId)
     {
-        $aclHelper = $this->get('oro_security.acl_helper');
-
-        $evaluation = $this->getEvaluationsRepository()->getByUid($evaluationId, $aclHelper, ['VIEW']);
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUid($evaluationId);
 
         if (is_null($evaluation)) {
             return $this->getNotFoundResponse("Evaluation was not found");
         }
 
-        foreach ($evaluation->getChapters() as $chapter) {
-            if ($chapterId == $chapter->getId()) {
-                return $this->getJsonResponse($chapter, Response::HTTP_OK, ["full"]);
-            }
+        $chapter = $evaluation->getChapter($chapterId);
+
+        if (is_null($chapter)) {
+            return $this->getJsonResponse("Chapter was not found", Response::HTTP_NOT_FOUND);
         }
 
-        return $this->getJsonResponse("Chapter was not found", Response::HTTP_NOT_FOUND);
+        return $this->getJsonResponse($chapter, Response::HTTP_OK, ['full']);
+
     }
 
     /**
@@ -109,7 +104,7 @@ class EvaluationController extends AbstractEvaluationController
      * @return Response
      *
      * @Acl(
-     *     id="evaluation_evaluation_view",
+     *     id="evaluation_chapter_edit",
      *     type="entity",
      *     class="EvaluationEvaluationBundle:Evaluation",
      *     permission="EDIT"
@@ -117,51 +112,40 @@ class EvaluationController extends AbstractEvaluationController
      */
     public function updateChapterAction($evaluationId, $chapterId)
     {
-        $aclHelper = $this->get('oro_security.acl_helper');
-
-        $evaluation = $this->getEvaluationsRepository()->getByUid($evaluationId, $aclHelper, ['VIEW']);
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUidForEditing($evaluationId);
 
         if (is_null($evaluation)) {
             return $this->getNotFoundResponse("Evaluation was not found");
         }
 
-        $foundChapter = null;
+        $chapter = $evaluation->getChapter($chapterId);
 
-        /** @var Chapter $chapter */
-        foreach ($evaluation->getChapters() as $chapter) {
-            if ($chapterId == $chapter->getId()) {
-                $foundChapter = $chapter;
-                break;
-            }
-        }
-
-        if (is_null($foundChapter)) {
+        if (is_null($chapter)) {
             return $this->getNotFoundResponse("Chapter was not found");
         }
 
-        /** @var Chapter $sentChapter */
-        $sentChapter = $this->getDeserializedEntityFromRequest('Evaluation\EvaluationBundle\Entity\Chapter');
+        try {
+            $chapter = $this->getChapterService()->updateChapter($chapter, $this->getRequest()->getContent());
 
-        $foundChapter->setContent(json_encode($sentChapter->getContent()));
-
-        $foundChapter->setLastModifiedAt(new \DateTime('now'));
-        $foundChapter->setTitle($sentChapter->getTitle());
-        $foundChapter->setState($sentChapter->getState());
-
-        $this->getEntityManager()->persist($foundChapter);
-
-        $this->getEntityManager()->flush();
-
-        $this->getEntityManager()->refresh($foundChapter);
-
-        return $this->getJsonResponse($chapter, Response::HTTP_OK, ["full"]);
+            return $this->getJsonResponse($chapter, Response::HTTP_OK, ["full"]);
+        } catch (FormException $ex) {
+            return $this->getJsonResponse($ex->getErrors(), Response::HTTP_CONFLICT);
+        }
     }
 
     /**
-     * @return EvaluationRepository
+     * @return ChapterService
      */
-    protected function getEvaluationsRepository()
+    public function getChapterService()
     {
-        return $this->getDoctrine()->getRepository("EvaluationEvaluationBundle:Evaluation");
+        return $this->get('evaluation_evaluation.chapters_service');
+    }
+
+    /**
+     * @return EvaluationDataBaseManagerService
+     */
+    public function getEvaluationDatabaseManagerService()
+    {
+        return $this->get('evaluation_evaluation.evaluation_database_manager_service');
     }
 }

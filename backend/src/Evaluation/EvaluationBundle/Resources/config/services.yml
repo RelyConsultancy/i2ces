@@ -70,3 +70,12 @@ services:
     evaluation_evaluation.evaluation_chapters_schema_update:
         class: Evaluation\EvaluationBundle\Services\EvaluationChaptersSchemaUpdateService
         arguments: [@doctrine, %evaluation_evaluation.evaluation_chapters_table_name% ]
+
+    evaluation_evaluation.chapters_service:
+        class: Evaluation\EvaluationBundle\Services\ChapterService
+        arguments: [@serializer, @doctrine]
+
+
+    evaluation_evaluation.evaluation_database_manager_service:
+        class: Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService
+        arguments: [@oro_security.acl_helper, @doctrine]

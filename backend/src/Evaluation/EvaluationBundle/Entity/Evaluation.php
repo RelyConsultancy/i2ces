@@ -398,4 +398,20 @@ class Evaluation
     {
         return $this->businessUnit;
     }
+
+    /**
+     * @param string $uid
+     *
+     * @return Chapter|null
+     */
+    public function getChapter($uid)
+    {
+        foreach ($this->chapters as $chapter) {
+            if ($chapter->getUid() == $uid) {
+                return $chapter;
+            }
+        }
+
+        return null;
+    }
 }
