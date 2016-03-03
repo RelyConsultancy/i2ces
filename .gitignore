@@ -36,3 +36,6 @@
 
 # Build data
 /backend/build/
+
+# Frontend
+/frontend/node_modules
