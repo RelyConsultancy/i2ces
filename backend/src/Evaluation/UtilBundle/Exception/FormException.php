@@ -24,7 +24,7 @@ class FormException extends \Exception
     public function __construct($errors, $code = 409, \Exception $previous = null)
     {
         $this->errors = $errors;
-        parent::__construct("There were some errors", $code, $previous);
+        parent::__construct('There were some errors', $code, $previous);
     }
 
     /**

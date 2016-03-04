@@ -43,7 +43,9 @@ class Evaluation
      * @ORM\Column(type="integer", name="id")
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @JMS\Exclude()
+     * @JMS\Groups({"list", "minimal"})
+     * @JMS\SerializedName("id")
+     * @JMS\Type("string")
      */
     protected $id;
 
@@ -54,10 +56,21 @@ class Evaluation
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @JMS\Groups({"list", "minimal"})
-     * @JMS\SerializedName("id")
+     * @JMS\SerializedName("uid")
      * @JMS\Type("string")
      */
     protected $uid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", name="cid")
+     *
+     * @JMS\Groups({"list", "minimal"})
+     * @JMS\SerializedName("cid")
+     * @JMS\Type("string")
+     */
+    protected $cid;
 
     /**
      * @var string
@@ -217,6 +230,22 @@ class Evaluation
     public function setUid($uid)
     {
         $this->uid = $uid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCid()
+    {
+        return $this->cid;
+    }
+
+    /**
+     * @param string $cid
+     */
+    public function setCid($cid)
+    {
+        $this->cid = $cid;
     }
 
     /**
@@ -406,6 +435,7 @@ class Evaluation
      */
     public function getChapter($uid)
     {
+        /** @var Chapter $chapter */
         foreach ($this->chapters as $chapter) {
             if ($chapter->getUid() == $uid) {
                 return $chapter;

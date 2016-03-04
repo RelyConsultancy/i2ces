@@ -68,6 +68,7 @@ class TableSchemaUpdateCommand extends ContainerAwareCommand
             );
         } catch (\Exception $ex) {
             $output->writeln('There was an error while updating the schema');
+            $output->writeln($ex->getMessage());
 
             return -1;
         }

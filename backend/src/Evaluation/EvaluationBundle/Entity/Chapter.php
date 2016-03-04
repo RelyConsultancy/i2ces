@@ -32,7 +32,7 @@ class Chapter
      * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @JMS\Groups({"list", "full"})
-     * @JMS\SerializedName("id")
+     * @JMS\SerializedName("uid")
      * @JMS\Type("string")
      */
     protected $uid;
