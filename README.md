@@ -6,9 +6,7 @@
 ### Prepare provisioner for usage
 
 ```bash
-➤ sudo ansible-galaxy install geerlingguy.apache
-    geerlingguy.mysql geerlingguy.php geerlingguy.git
-    geerlingguy.composer geerlingguy.ruby --force
+➤ sudo ansible-galaxy install geerlingguy.repo-remi geerlingguy.apache geerlingguy.mysql geerlingguy.php geerlingguy.git geerlingguy.composer geerlingguy.ruby --force
 ```
 
 ### Start VM
@@ -29,7 +27,23 @@ $ composer install
 
 ```bash
 vagrant plugin install vagrant-digitalocean
-vagrant up --provider=digital_ocean
+
+# raise machine
+vagrant up qa
+vagrant up staging
+
+# recreate with same IP
+vagrant rebuild qa
+vagrant rebuild staging
+
+# reapply provisioning
+vagrant provision qa
+vagrant provision staging
+```
+
+Execute `ansible/playbook.yml` tasks.
+```bash
+➤ ansible-playbook ansible/playbook.yml -i ansible/hosts -vvvv -u root
 ```
 
 ## Update Continuous Integration Environment
