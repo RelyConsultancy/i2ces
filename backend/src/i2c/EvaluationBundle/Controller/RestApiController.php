@@ -48,65 +48,63 @@ class RestApiController extends BaseController
 
     /**
      * @param mixed $data
+     * @param int   $statusCode
      *
      * @return Response
      */
-    public function getSuccessResponse($data)
+    public function success($data, $statusCode = Response::HTTP_OK)
     {
         return $this->getJsonResponse(
             [
                 'error' => null,
                 'data'  => $data,
             ],
-            Response::HTTP_OK
+            $statusCode
         );
     }
 
     /**
      * @param string|array $message
+     * @param int          $statusCode
      *
      * @return Response
      */
-    public function getNotFoundResponse($message)
+    public function notFound($message, $statusCode = Response::HTTP_NOT_FOUND)
     {
-        return $this->getJsonResponse(
-            [
-                'error' => $message,
-                'data'  => null,
-            ],
-            Response::HTTP_NOT_FOUND
-        );
+        return $this->clientFailure($message, $statusCode);
     }
 
     /**
      * @param string|array $errors
+     * @param int          $statusCode
      *
      * @return Response
      */
-    public function getClientFailureResponse($errors)
+    public function clientFailure($errors, $statusCode = Response::HTTP_CONFLICT)
     {
         return $this->getJsonResponse(
             [
                 'error' => $errors,
                 'data'  => null,
             ],
-            Response::HTTP_CONFLICT
+            $statusCode
         );
     }
 
     /**
      * @param string|array $message
+     * @param int          $statusCode
      *
      * @return Response
      */
-    public function getServerFailureResponse($message)
+    public function serverFailure($message, $statusCode = Response::HTTP_SERVICE_UNAVAILABLE)
     {
         return $this->getJsonResponse(
             [
                 'error' => $message,
                 'data'  => null,
             ],
-            Response::HTTP_SERVICE_UNAVAILABLE
+            $statusCode
         );
     }
 }
