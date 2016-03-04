@@ -49,17 +49,19 @@ class RestApiController extends BaseController
     /**
      * @param mixed $data
      * @param int   $statusCode
+     * @param array $serializationGroups
      *
      * @return Response
      */
-    public function success($data, $statusCode = Response::HTTP_OK)
+    public function success($data, $statusCode = Response::HTTP_OK, $serializationGroups = [])
     {
         return $this->getJsonResponse(
             [
                 'error' => null,
                 'data'  => $data,
             ],
-            $statusCode
+            $statusCode,
+            $serializationGroups
         );
     }
 
