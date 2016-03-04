@@ -59,6 +59,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  # skip syncing all code to vagrant user home by default
+  config.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
+
   config.vm.synced_folder "./backend", "/var/www/html/",
     mount_options: ['dmode=775','fmode=664'],
     type: "rsync",
