@@ -9,10 +9,11 @@
 - name: Debug composer_locked
   debug: msg="Variable 'composer_locked' is set to {{ composer_locked }}"
 
-# - name: Upgrade dependencies
-#   shell: >
-#     cd /var/www/html && /usr/local/bin/composer update
-#   when: composer_locked.stat.exists
+- name: Upgrade dependencies
+  command: " {{ item }} "
+  with_items:
+    - /usr/local/bin/composer update -d /var/www/html -n --prefer-dist --no-scripts
+  when: composer_locked.stat.exists
 
 - name: Copy vhost
   template: src=i2ces.conf.j2 dest=/etc/httpd/conf.d/i2ces.conf mode=0644
