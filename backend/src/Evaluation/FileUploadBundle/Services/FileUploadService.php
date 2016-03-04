@@ -2,8 +2,9 @@
 
 namespace Evaluation\FileUploadBundle\Services;
 
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class FileUploadService
@@ -15,23 +16,23 @@ class FileUploadService
     /**
      * @var string
      */
-    protected $webDirPath;
+    protected $uploadPath;
 
     /**
      * @var string
      */
-    protected $frontendPath;
+    protected $frontendUrl;
 
     /**
      * FileUploadService constructor.
      *
-     * @param string $webDirPath
-     * @param string $frontendPath
+     * @param string $uploadPath
+     * @param string $frontendUrl
      */
-    public function __construct($webDirPath, $frontendPath)
+    public function __construct($uploadPath, $frontendUrl)
     {
-        $this->webDirPath = $webDirPath;
-        $this->frontendPath = $frontendPath;
+        $this->uploadPath = $uploadPath;
+        $this->frontendUrl = $frontendUrl;
     }
 
     /**
@@ -45,29 +46,23 @@ class FileUploadService
     public function process($file, $evaluationId)
     {
         $result = false;
-        $path = $this->webDirPath.$this->frontendPath;
+        $fs = new Filesystem();
 
         if (!is_object($file)) {
-            return $result;
-        }
-
-        if (!is_dir($path)) {
-            mkdir($path, 0755, true);
-        }
-
-        if (!is_writeable($path)) {
-            throw new AccessDeniedException('Upload directory is not writable.');
+            throw new UploadException('No valid file found.');
         }
 
         if (!$file->getError()) {
-            $dirPath = $path.$evaluationId;
-            if (!is_dir($dirPath)) {
-                mkdir($dirPath, 0755, true);
+            $uploadDir = $this->uploadPath.$evaluationId;
+            if (!$fs->exists($uploadDir)) {
+                $fs->mkdir($uploadDir, 0755);
             }
 
-            if ($file->move($dirPath, $file->getClientOriginalName())) {
-                $result = $this->frontendPath.$evaluationId.'/'.$file->getClientOriginalName();
+            if ($file->move($uploadDir, $file->getClientOriginalName())) {
+                $result = $this->frontendUrl.$evaluationId.'/'.$file->getClientOriginalName();
             }
+        } else {
+            throw new UploadException($file->getErrorMessage());
         }
 
         return $result;

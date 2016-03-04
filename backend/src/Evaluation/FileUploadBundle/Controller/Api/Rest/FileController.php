@@ -3,9 +3,10 @@
 namespace Evaluation\FileUploadBundle\Controller\Api\Rest;
 
 use FOS\RestBundle\View\View;
-use Oro\Bundle\ApiBundle\Controller\RestApiController;
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use i2c\EvaluationBundle\Controller\RestApiController;
+use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 
 /**
  * Class FileController
@@ -23,17 +24,19 @@ class FileController extends RestApiController
      */
     public function uploadImageAction($evaluationId)
     {
-        $request = $this->getRequest();
-        $fileUploader = $this->get('evaluation_file_upload.file_upload');
-
         try {
-            $imagePath = $fileUploader->process($request->files->get('file'), $evaluationId);
-        } catch (AccessDeniedException $e) {
-            $imagePath = false;
+            $request = $this->getRequest();
+            $fileUploader = $this->get('evaluation_file_upload.file_upload');
+            $image = $fileUploader->process($request->files->get('file'), $evaluationId);
+            $imageUrl = $request->getUriForPath($image);
+        } catch (UploadException $e) {
+            return $this->clientFailure($e->getMessage());
+        } catch (IOException $e) {
+            return $this->serverFailure($e->getMessage());
+        } catch (FileException $e) {
+            return $this->serverFailure($e->getMessage());
         }
 
-        //@TODO Change after the merge of IES-55 branch.
-
-        return new JsonResponse($imagePath);
+        return $this->success($imageUrl);
     }
 }
