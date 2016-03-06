@@ -45,17 +45,17 @@ class FileUploadService
             throw new UploadException('No valid file found.');
         }
 
-        if (!$file->getError()) {
-            $uploadDir = $this->uploadPath.$evaluationId;
-            if (!$fs->exists($uploadDir)) {
-                $fs->mkdir($uploadDir, 0755);
-            }
-
-            if ($file->move($uploadDir, $file->getClientOriginalName())) {
-                $result = $evaluationId.'/'.$file->getClientOriginalName();
-            }
-        } else {
+        if ($file->getError()) {
             throw new UploadException($file->getErrorMessage());
+        }
+
+        $uploadDir = $this->uploadPath.$evaluationId;
+        if (!$fs->exists($uploadDir)) {
+            $fs->mkdir($uploadDir, 0755);
+        }
+
+        if ($file->move($uploadDir, $file->getClientOriginalName())) {
+            $result = $evaluationId.'/'.$file->getClientOriginalName();
         }
 
         return $result;
