@@ -13,7 +13,7 @@ oro_menu_config:
             display: false
             displayChildren: false
         oro_business_unit_list:
-            label: 'oro.organization.businessunit.entity_plural_label'
+            label: 'Suppliers'
             route: 'oro_business_unit_index'
             extras:
                 description: 'oro.business_unit.menu.list.description'

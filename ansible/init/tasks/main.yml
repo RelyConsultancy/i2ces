@@ -30,3 +30,15 @@
     shell: >
       updatedb
     when: mlocate_updatedb
+
+  - name: Check if phpunit is installed.
+    stat: "path=/usr/local/bin/phpunit"
+    register: phpunit_present
+
+  - name: Install phpunit 4.8.0 globally
+    command: " {{ item }} "
+    with_items:
+      - wget https://phar.phpunit.de/phpunit-4.8.0.phar
+      - chmod +x phpunit-4.8.0.phar
+      - mv phpunit-4.8.0.phar /usr/local/bin/phpunit
+    when: not phpunit_present.stat.exists

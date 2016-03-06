@@ -2,9 +2,9 @@
 
 namespace Evaluation\MeBundle\Controller\Api\Rest;
 
+use Evaluation\UtilBundle\Helpers\BusinessUnitHelper;
 use FOS\RestBundle\View\View;
-use Oro\Bundle\ApiBundle\Controller\RestApiController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use i2c\EvaluationBundle\Controller\RestApiController;
 
 /**
  * Class UserController
@@ -20,13 +20,14 @@ class UserController extends RestApiController
      */
     public function getMeAction()
     {
-        $usr = $this->getUser();
+        $user = $this->getUser();
+
         $data = array(
-            'id'             => $usr->getId(),
-            'username'       => $usr->getUsername(),
-            'business_units' => $usr->getBusinessUnits(),
+            'id'             => $user->getId(),
+            'username'       => $user->getUsername(),
+            'business_units' => BusinessUnitHelper::getBusinessUnitCollectionAsArray($user->getBusinessUnits()),
         );
 
-        return new JsonResponse($data);
+        return $this->success($data);
     }
 }
