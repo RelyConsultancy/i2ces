@@ -1,7 +1,7 @@
 import Koa from 'koa'
 import send from 'koa-send'
-import apiMe from './samples/me.js'
-import apiEvaluations from './samples/evaluations.js'
+import apiMe from './samples/me.json'
+import apiEvaluations from './samples/evaluations.json'
 
 
 const root = __dirname + '/public'

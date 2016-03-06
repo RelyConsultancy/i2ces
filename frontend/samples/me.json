@@ -1,6 +1,6 @@
-export default {
-  error: null,
-  data: {
+{
+  "error": null,
+  "data": {
     "id": 1,
     "username": "user",
     "business_units": [{
@@ -8,13 +8,13 @@ export default {
       "name": "Supplier1",
       "email": "no@email.one",
       "phone": "XxXxXXxXxXXxxXX",
-      "website": "noweb.com",
+      "website": "noweb.com"
     }, {
       "id": 3,
       "name": "Supplier2",
       "email": "no@email.two",
       "phone": "NOPHONE",
-      "website": "noewebsite.ll",
-    }],
-  },
+      "website": "noewebsite.ll"
+    }]
+  }
 }
