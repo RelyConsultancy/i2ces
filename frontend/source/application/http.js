@@ -52,6 +52,8 @@ const get = (url, options, callback) => {
 
   const config = {
     method: 'GET',
+    // set to send cookies
+    credentials: 'same-origin',
   }
 
   if (options.query) {
@@ -75,6 +77,8 @@ const post = (url, options, callback) => {
 
   const config = {
     method: 'POST',
+    // set to send cookies
+    credentials: 'same-origin',
   }
 
   if (options.data) {
