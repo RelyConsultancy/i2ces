@@ -31135,7 +31135,9 @@ var get = function get(url, options, callback) {
   }
 
   var config = {
-    method: 'GET'
+    method: 'GET',
+    // set to send cookies
+    credentials: 'same-origin'
   };
 
   if (options.query) {
@@ -31154,7 +31156,9 @@ var post = function post(url, options, callback) {
   }
 
   var config = {
-    method: 'POST'
+    method: 'POST',
+    // set to send cookies
+    credentials: 'same-origin'
   };
 
   if (options.data) {
@@ -31257,7 +31261,7 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = (0, _react.createElement)(_reactRouter.Router, {
-  history: _reactRouter.browserHistory,
+  history: _reactRouter.hashHistory,
   routes: _routes2.default
 });
 
