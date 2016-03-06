@@ -1,8 +1,8 @@
 <?php
 
-namespace Evaluation\SetupBundle\Command;
+namespace i2c\SetupBundle\Command;
 
-use Evaluation\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Class TableSchemaUpdateCommand
  *
- * @package Evaluation\SetupBundle\Command
+ * @package i2c\SetupBundle\Command
  */
 class TableSchemaUpdateCommand extends ContainerAwareCommand
 {

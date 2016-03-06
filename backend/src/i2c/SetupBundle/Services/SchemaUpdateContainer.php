@@ -1,13 +1,13 @@
 <?php
 
-namespace Evaluation\SetupBundle\Services;
+namespace i2c\SetupBundle\Services;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class SchemaUpdateContainer
  *
- * @package Evaluation\SetupBundle\Services
+ * @package i2c\SetupBundle\Services
  */
 class SchemaUpdateContainer
 {

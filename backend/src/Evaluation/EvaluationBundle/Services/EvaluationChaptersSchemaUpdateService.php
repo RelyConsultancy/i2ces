@@ -2,7 +2,7 @@
 
 namespace Evaluation\EvaluationBundle\Services;
 
-use Evaluation\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
 
 /**
  * Class EvaluationChaptersSchemaUpdateService
