@@ -12,7 +12,7 @@ parameters:
 
 services:
     evaluation_evaluation.evaluation_schema_update_command:
-        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        class: i2c\SetupBundle\Command\TableSchemaUpdateCommand
         arguments:
             - @evaluation_evaluation.evaluation_schema_update
             - %evaluation_evaluation.evaluation_command_name%
@@ -20,7 +20,7 @@ services:
           - { name: console.command }
 
     evaluation_evaluation.medium_schema_update_command:
-        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        class: i2c\SetupBundle\Command\TableSchemaUpdateCommand
         arguments:
             - @evaluation_evaluation.medium_schema_update
             - %evaluation_evaluation.medium_command_name%
@@ -28,7 +28,7 @@ services:
           - { name: console.command }
 
     evaluation_evaluation.chapter_schema_update_command:
-        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        class: i2c\SetupBundle\Command\TableSchemaUpdateCommand
         arguments:
             - @evaluation_evaluation.chapter_schema_update
             - %evaluation_evaluation.chapter_command_name%
@@ -36,7 +36,7 @@ services:
           - { name: console.command }
 
     evaluation_evaluation.evaluation_mediums_schema_update_command:
-        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        class: i2c\SetupBundle\Command\TableSchemaUpdateCommand
         arguments:
             - @evaluation_evaluation.evaluation_mediums_schema_update
             - %evaluation_evaluation.evaluation_mediums_command_name%
@@ -44,7 +44,7 @@ services:
           - { name: console.command }
 
     evaluation_evaluation.evaluation_chapters_schema_update_command:
-        class: Evaluation\SetupBundle\Command\TableSchemaUpdateCommand
+        class: i2c\SetupBundle\Command\TableSchemaUpdateCommand
         arguments:
             - @evaluation_evaluation.evaluation_chapters_schema_update
             - %evaluation_evaluation.evaluation_chapters_command_name%
