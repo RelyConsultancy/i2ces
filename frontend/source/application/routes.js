@@ -7,6 +7,9 @@ import FAQ from '/component/FAQ'
 const routes = {
   path: '/',
   component: Dashboard,
+  indexRoute: {
+    component: Evaluations,
+  },
   childRoutes: [{
     path: 'evaluations',
     component: Evaluations,

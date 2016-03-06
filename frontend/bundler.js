@@ -58,7 +58,7 @@ const bundleJS = (options, callback) => {
   const debug = options.debug === false ? false : true
 
   const onBundle = (error, bundle) => {
-    if (error) return console.log(error.stack)
+    if (error) return console.log(error.stack || error)
 
     if (!debug) {
       bundle = minifyJS(bundle.toString())
@@ -73,7 +73,7 @@ const bundleJS = (options, callback) => {
 
   bundler.transform(cssify(options.css))
   bundler.transform(babelify.configure({
-    presets: ['carrd'],
+    presets: ['es2015'],
     babelrc: false,
     resolveModuleSource: (source, filename) => (
       source = (source[0] == '/' ? root + source : source)
