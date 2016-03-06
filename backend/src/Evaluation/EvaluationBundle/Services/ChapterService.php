@@ -42,29 +42,41 @@ class ChapterService
      */
     public function getUpdateChapter(Chapter $chapter, Chapter $sentChapter)
     {
-        $errors = [];
-
         $chapter->setContent(json_encode($sentChapter->getContent()));
 
         $chapter->setLastModifiedAt(new \DateTime('now'));
 
-        if (!is_null($sentChapter->getTitle())) {
-            $chapter->setTitle($sentChapter->getTitle());
-        } else {
-            $errors['chapter.title'] = "Title must not be null";
-        }
+        $chapter->setTitle($sentChapter->getTitle());
 
-        if (isset(ChapterHelper::$states[$sentChapter->getState()])) {
-            $chapter->setState($sentChapter->getState());
-        } else {
-            $errors['chapter.state'] = "Invalid chapter state";
-        }
+        $chapter->setState($sentChapter->getState());
+
+        $errors = $this->getChapterErrors($chapter);
 
         if (count($errors) > 0) {
             throw new FormException($errors);
         }
 
         return $chapter;
+    }
+
+    /**
+     * @param Chapter $chapter
+     *
+     * @return array
+     */
+    protected function getChapterErrors(Chapter $chapter)
+    {
+        $errors = [];
+
+        if (is_null($chapter->getTitle())) {
+            $errors['chapter.title'] = 'Title must not be null';
+        }
+
+        if (!isset(ChapterHelper::$states[$chapter->getState()])) {
+            $errors['chapter.state'] = 'Invalid chapter state';
+        }
+
+        return $errors;
     }
 
     /**

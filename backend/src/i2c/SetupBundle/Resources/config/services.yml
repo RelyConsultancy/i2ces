@@ -40,8 +40,8 @@ services:
         tags:
           - { name: console.command }
 
-    evaluation_setup.schema_update_container:
-        class: Evaluation\SetupBundle\Services\SchemaUpdateContainer
+    i2c_setup.schema_update_container:
+        class: i2c\SetupBundle\Services\SchemaUpdateContainer
         calls:
           - [ addSchemaUpdateService, [@evaluation_evaluation.evaluation_schema_update] ]
           - [ addSchemaUpdateService, [@evaluation_evaluation.medium_schema_update] ]

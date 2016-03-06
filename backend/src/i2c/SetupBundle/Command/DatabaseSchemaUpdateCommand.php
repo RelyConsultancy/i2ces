@@ -1,9 +1,9 @@
 <?php
 
-namespace Evaluation\SetupBundle\Command;
+namespace i2c\SetupBundle\Command;
 
-use Evaluation\SetupBundle\Services\AbstractSchemaUpdateService;
-use Evaluation\SetupBundle\Services\SchemaUpdateContainer;
+use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\SchemaUpdateContainer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Class DatabaseSchemaUpdateCommand
  *
- * @package Evaluation\SetupBundle\Command
+ * @package i2c\SetupBundle\Command
  */
 class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
 {
@@ -58,11 +58,21 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
             foreach ($schemaUpdateServices as $schemaUpdateService) {
                 $currentProcessedTable = $schemaUpdateService->getTableName();
                 $schemaUpdateService->updateSchema();
-                $output->writeln('Updated schema for table: '.$schemaUpdateService->getTableName());
+                $output->writeln(
+                    sprintf(
+                        'Updated schema for table: %s',
+                        $schemaUpdateService->getTableName()
+                    )
+                );
             }
             $output->writeln('Schemas were updated successfully!');
         } catch (\Exception $ex) {
-            $output->writeln('There was an error while updating the schema for the table: '.$currentProcessedTable);
+            $output->writeln(
+                sprintf(
+                    'There was an error while updating the schema for the table: %s',
+                    $currentProcessedTable
+                )
+            );
             $output->writeln($ex->getMessage());
         }
 

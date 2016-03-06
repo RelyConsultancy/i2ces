@@ -4,8 +4,8 @@ namespace Evaluation\EvaluationBundle\Controller;
 
 use Evaluation\EvaluationBundle\Services\ChapterService;
 use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService;
-use Evaluation\UtilBundle\Controller\AbstractEvaluationController;
 use Evaluation\UtilBundle\Exception\FormException;
+use i2c\EvaluationBundle\Controller\RestApiController;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @package Evaluation\EvaluationBundle\Controller
  */
-class EvaluationController extends AbstractEvaluationController
+class EvaluationController extends RestApiController
 {
     /**
      * @param Request $request
@@ -31,7 +31,7 @@ class EvaluationController extends AbstractEvaluationController
      */
     public function getEvaluationsByIdMinimalAction(Request $request)
     {
-        $ids = $request->get("ids");
+        $ids = $request->get('ids');
 
         $evaluations = $this->getEvaluationDatabaseManagerService()->getByUids($ids);
 
@@ -40,7 +40,7 @@ class EvaluationController extends AbstractEvaluationController
             'items' => $evaluations,
         ];
 
-        return $this->getJsonResponse($data, Response::HTTP_OK, ["minimal"]);
+        return $this->success($data, Response::HTTP_OK, ['list']);
     }
 
     /**
@@ -60,10 +60,10 @@ class EvaluationController extends AbstractEvaluationController
         $evaluation = $this->getEvaluationDatabaseManagerService()->getByUid($evaluationId);
 
         if (is_null($evaluation)) {
-            return $this->getNotFoundResponse("Evaluation was not found");
+            return $this->notFound('Evaluation was not found');
         }
 
-        return $this->getJsonResponse($evaluation, Response::HTTP_OK, ["list"]);
+        return $this->success($evaluation, Response::HTTP_OK, ['list']);
     }
 
     /**
@@ -84,17 +84,16 @@ class EvaluationController extends AbstractEvaluationController
         $evaluation = $this->getEvaluationDatabaseManagerService()->getByUid($evaluationId);
 
         if (is_null($evaluation)) {
-            return $this->getNotFoundResponse("Evaluation was not found");
+            return $this->notFound('Evaluation was not found');
         }
 
         $chapter = $evaluation->getChapter($chapterId);
 
         if (is_null($chapter)) {
-            return $this->getJsonResponse("Chapter was not found", Response::HTTP_NOT_FOUND);
+            return $this->notFound('Chapter was not found');
         }
 
-        return $this->getJsonResponse($chapter, Response::HTTP_OK, ['full']);
-
+        return $this->success($chapter, Response::HTTP_OK, ['full']);
     }
 
     /**
@@ -112,24 +111,24 @@ class EvaluationController extends AbstractEvaluationController
      */
     public function updateChapterAction($evaluationId, $chapterId)
     {
-        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUidForEditing($evaluationId);
-
-        if (is_null($evaluation)) {
-            return $this->getNotFoundResponse("Evaluation was not found");
-        }
-
-        $chapter = $evaluation->getChapter($chapterId);
-
-        if (is_null($chapter)) {
-            return $this->getNotFoundResponse("Chapter was not found");
-        }
-
         try {
+            $evaluation = $this->getEvaluationDatabaseManagerService()->getByUidForEditing($evaluationId);
+
+            if (is_null($evaluation)) {
+                return $this->notFound('Evaluation was not found');
+            }
+
+            $chapter = $evaluation->getChapter($chapterId);
+
+            if (is_null($chapter)) {
+                return $this->notFound('Chapter was not found');
+            }
+
             $chapter = $this->getChapterService()->updateChapter($chapter, $this->getRequest()->getContent());
 
-            return $this->getJsonResponse($chapter, Response::HTTP_OK, ["full"]);
+            return $this->success($chapter, Response::HTTP_OK, ['full']);
         } catch (FormException $ex) {
-            return $this->getJsonResponse($ex->getErrors(), Response::HTTP_CONFLICT);
+            return $this->clientFailure($ex->getErrors());
         }
     }
 

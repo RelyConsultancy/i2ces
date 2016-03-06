@@ -6,6 +6,7 @@
 
   roles:
     - init
+    - geerlingguy.repo-remi
     - geerlingguy.mysql
     - geerlingguy.apache
     - geerlingguy.php

@@ -2,8 +2,9 @@
 
 namespace Evaluation\EvaluationBundle\Services;
 
+use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\DBAL\Exception\InvalidFieldNameException;
-use Evaluation\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
 
 /**
  * Class EvaluationSchemaUpdateService
@@ -21,6 +22,7 @@ class EvaluationSchemaUpdateService extends AbstractSchemaUpdateService
             'CREATE TABLE IF NOT EXISTS `%s` (
                 id INT(11) NOT NULL AUTO_INCREMENT,
                 uid VARCHAR(255) NOT NULL,
+                cid VARCHAR(255) NOT NULL,
                 title VARCHAR(255) NOT NULL,
                 category VARCHAR(255) NOT NULL,
                 brand VARCHAR(255) NOT NULL,
@@ -70,7 +72,7 @@ class EvaluationSchemaUpdateService extends AbstractSchemaUpdateService
             );
 
             $connection->exec($query);
-        } catch (InvalidFieldNameException $ex) {
+        } catch (DriverException $ex) {
         }
         try {
             $query = sprintf(
@@ -79,7 +81,7 @@ class EvaluationSchemaUpdateService extends AbstractSchemaUpdateService
             );
 
             $connection->exec($query);
-        } catch (InvalidFieldNameException $ex) {
+        } catch (DriverException $ex) {
         }
         try {
             $query = sprintf(
@@ -88,7 +90,16 @@ class EvaluationSchemaUpdateService extends AbstractSchemaUpdateService
             );
 
             $connection->exec($query);
-        } catch (InvalidFieldNameException $ex) {
+        } catch (DriverException $ex) {
+        }
+        try {
+            $query = sprintf(
+                'ALTER TABLE `%s` ADD COLUMN cid VARCHAR(255) NOT NULL',
+                $this->tableName
+            );
+
+            $connection->exec($query);
+        } catch (DriverException $ex) {
         }
     }
 }
