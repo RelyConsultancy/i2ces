@@ -15,6 +15,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     dev.vm.provider "virtualbox" do |v|
       v.customize ["modifyvm", :id, "--memory", "4096"]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   #    v.gui = true
     end
 
@@ -58,6 +60,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       provider.size = '8gb'
     end
   end
+
+  # skip syncing all code to vagrant user home by default
+  config.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
 
   config.vm.synced_folder "./backend", "/var/www/html/",
     mount_options: ['dmode=775','fmode=664'],
