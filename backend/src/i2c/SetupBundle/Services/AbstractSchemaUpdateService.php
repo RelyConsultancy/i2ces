@@ -1,6 +1,6 @@
 <?php
 
-namespace Evaluation\SetupBundle\Services;
+namespace i2c\SetupBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
  *
  * Abstract schema update service for manual schema control
  *
- * @package Evaluation\SetupBundle\Services
+ * @package i2c\SetupBundle\Services
  */
 abstract class AbstractSchemaUpdateService
 {

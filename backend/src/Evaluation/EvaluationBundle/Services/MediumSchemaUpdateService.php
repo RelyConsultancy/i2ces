@@ -4,7 +4,7 @@ namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\DBAL\Exception\InvalidFieldNameException;
-use Evaluation\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
 
 class MediumSchemaUpdateService extends AbstractSchemaUpdateService
 {
