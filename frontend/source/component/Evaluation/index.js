@@ -5,6 +5,9 @@ import style from './style.css'
 
 const Evaluation = Component({
   class: true,
+  componentDidMount () {
+    // fetchEvaluation()
+  },
   render () {
     const { store, children } = this.props
 

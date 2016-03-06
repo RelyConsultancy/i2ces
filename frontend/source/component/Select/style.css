@@ -1,20 +1,7 @@
-/**
- * React Select
- * ============
- * Created by Jed Watson and Joss Mackison for KeystoneJS, http://www.keystonejs.com/
- * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs
- * MIT License: https://github.com/keystonejs/react-select
-*/
-.Select {
+.Select, .__hack {
   position: relative;
-}
-.Select,
-.Select div,
-.Select input,
-.Select span {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  width: 100%;
+  font-size: .875em;
 }
 .Select.is-disabled > .Select-control {
   background-color: #f9f9f9;
@@ -27,14 +14,14 @@
   pointer-events: none;
 }
 .Select-control {
-  background-color: #fff;
-  border-color: #d9d9d9 #ccc #b3b3b3;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  background-color: #FFFFFF;
+  border-color: #BBBBBB;
+  /*border-radius: 4px;*/
+  border: 1px solid #BBBBBB;
   color: #333;
   cursor: default;
   display: table;
-  height: 36px;
+  height: 2em;
   outline: none;
   overflow: hidden;
   position: relative;
@@ -49,26 +36,26 @@
 .is-open > .Select-control {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-  background: #fff;
-  border-color: #b3b3b3 #ccc #d9d9d9;
+  background: #FFFFFF;
+  border-color: #BBBBBB;
 }
 .is-open > .Select-control > .Select-arrow {
-  border-color: transparent transparent #999;
+  border-color: transparent transparent #BBBBBB;
   border-width: 0 5px 5px;
 }
 .is-searchable.is-focused:not(.is-open) > .Select-control {
   cursor: text;
 }
 .is-focused:not(.is-open) > .Select-control {
-  border-color: #007eff;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(0, 126, 255, 0.1);
+  /*border-color: #007eff;*/
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px rgba(0, 126, 255, 0.1);*/
 }
 .Select-placeholder,
 :not(.Select--multi) > .Select-control .Select-value {
   bottom: 0;
   color: #aaa;
   left: 0;
-  line-height: 34px;
+  line-height: 2em;
   padding-left: 10px;
   padding-right: 10px;
   position: absolute;
@@ -97,7 +84,7 @@
   text-decoration: underline;
 }
 .Select-input {
-  height: 34px;
+  line-height: 1.5em;
   padding-left: 10px;
   padding-right: 10px;
   vertical-align: middle;
@@ -110,7 +97,7 @@
   display: inline-block;
   font-family: inherit;
   font-size: inherit;
-  height: 34px;
+  line-height: 1.5em;
   margin: 0;
   outline: none;
   padding: 0;
@@ -140,7 +127,7 @@
   width: 16px;
   height: 16px;
   box-sizing: border-box;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
   border: 2px solid #ccc;
   border-right-color: #333;
   display: inline-block;
@@ -157,30 +144,29 @@
   position: relative;
   text-align: center;
   vertical-align: middle;
-  width: 17px;
+  width: 1.75em;
 }
 .Select-clear-zone:hover {
   color: #D0021B;
 }
 .Select-clear {
   display: inline-block;
-  font-size: 18px;
-  line-height: 1;
 }
 .Select--multi .Select-clear-zone {
-  width: 17px;
+  width: 1.5em;
 }
 .Select-arrow-zone {
+  background-color: #BBBBBB;
   cursor: pointer;
   display: table-cell;
   position: relative;
   text-align: center;
   vertical-align: middle;
-  width: 25px;
-  padding-right: 5px;
+  width: 1.75em;
+  padding-top: 2px;
 }
 .Select-arrow {
-  border-color: #999 transparent transparent;
+  border-color: #FFFFFF transparent transparent;
   border-style: solid;
   border-width: 5px 5px 2.5px;
   display: inline-block;
@@ -189,7 +175,7 @@
 }
 .is-open .Select-arrow,
 .Select-arrow-zone:hover > .Select-arrow {
-  border-top-color: #666;
+  border-top-color: #FFFFFF;
 }
 @-webkit-keyframes Select-animation-fadeIn {
   from {
@@ -208,39 +194,38 @@
   }
 }
 .Select-menu-outer {
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-top-color: #e6e6e6;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
-  box-sizing: border-box;
+  /*border-bottom-right-radius: 4px;*/
+  /*border-bottom-left-radius: 4px;*/
+  background-color: #FFFFFF;
+  border: 1px solid #BBBBBB;
+  /*box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);*/
   margin-top: -1px;
   max-height: 200px;
   position: absolute;
   top: 100%;
-  width: 100%;
+  left: 0;
+  right: 0;
   z-index: 1;
   -webkit-overflow-scrolling: touch;
 }
 .Select-menu {
-  max-height: 198px;
+  max-height: 12em;
   overflow-y: auto;
 }
 .Select-option {
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: #FFFFFF;
   color: #666666;
   cursor: pointer;
   display: block;
   padding: 8px 10px;
 }
 .Select-option:last-child {
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  /*border-bottom-right-radius: 4px;*/
+  /*border-bottom-left-radius: 4px;*/
 }
 .Select-option.is-focused {
-  background-color: rgba(0, 126, 255, 0.08);
+  background-color: #F6F6F6;
   color: #333;
 }
 .Select-option.is-disabled {
@@ -264,7 +249,7 @@
 }
 .Select--multi .Select-value {
   background-color: rgba(0, 126, 255, 0.08);
-  border-radius: 2px;
+  /*border-radius: 2px;*/
   border: 1px solid rgba(0, 126, 255, 0.24);
   color: #007eff;
   display: inline-block;

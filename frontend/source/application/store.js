@@ -1,16 +1,13 @@
 import { createElement } from 'react'
-import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { Provider, connect } from 'react-redux'
 import thunk from 'redux-thunk'
-import dashboard from '/component/Dashboard/reducer.js'
+import reducers from './reducers.js'
 
 
-const reducers = combineReducers({
-  dashboard,
-})
-
-const thunkify = applyMiddleware(thunk)
-const store = thunkify(createStore)(reducers)
+const middleware = applyMiddleware(thunk)
+const setStore = middleware(createStore)
+const store = setStore(reducers)
 
 store.connect = (component) => (
   createElement(Provider, { store }, component)

@@ -1,8 +1,8 @@
 import { Component, B, Image, Link } from '/component/component.js'
 import Loader from '/component/Loader'
 import store from '/application/store.js'
+import { setNetworkIndicator } from '/application/actions.js'
 import style from './style.css'
-import { setNetworkIndicator } from './actions.js'
 
 
 const Logo = ({ image }) => (
@@ -17,29 +17,17 @@ const Navigation = ({ links }) => (
 )
 
 
-const renderTopbar = (state, dispatch) => {
-  const attrs = {
-    className: style.topbar,
-  }
-
+const Topbar = ({ store }) => {
   // network indicator
-  const network = state.network ? Loader({ className: style.loader }) : null
+  const network = store.network ? Loader({ className: style.loader }) : null
+  const attrs = { className: style.topbar }
 
   return B(
     attrs,
     network,
     Logo({ image: '/images/logo.png' }),
-    Navigation({ links: state.navigation })
+    Navigation({ links: store.navigation })
   )
-}
-
-
-const renderContent = (content) => {
-  const attrs = {
-    className: style.content,
-  }
-
-  return B(attrs, content)
 }
 
 
@@ -55,8 +43,8 @@ const Dashboard = Component({
 
     return B(
       attrs,
-      renderTopbar(store),
-      renderContent(children)
+      Topbar({ store }),
+      B({ className: style.content}, children)
     )
   }
 })
