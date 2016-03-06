@@ -1,10 +1,12 @@
 <?php
 
-namespace Evaluation\SetupBundle\Command;
+namespace i2c\SetupBundle\Command;
 
 use Doctrine\ORM\EntityManager;
 use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Oro\Bundle\UserBundle\Entity\Role;
+use Oro\Bundle\UserBundle\Entity\User;
+use Oro\Bundle\UserBundle\Entity\UserManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,11 +21,16 @@ class InitialSetupCommand extends ContainerAwareCommand
     /** @var  EntityManager */
     protected $entityManager;
 
+    /** @var array */
     protected $initialSetupConfig;
 
-    public function __construct($initialSetupConfig)
+    /** @var UserManager */
+    protected $userManager;
+
+    public function __construct($initialSetupConfig, UserManager $userManager)
     {
         $this->initialSetupConfig = $initialSetupConfig;
+        $this->userManager = $userManager;
 
         parent::__construct();
     }
@@ -53,11 +60,11 @@ class InitialSetupCommand extends ContainerAwareCommand
 
         $this->entityManager = $container->get('doctrine')->getEntityManager();
 
-        $this->createDummySuppliers();
-
         $this->createRoles();
 
+        $this->createDummySuppliers();
 
+        $output->writeln("Initial setup completed successfully");
     }
 
     /**
@@ -67,7 +74,7 @@ class InitialSetupCommand extends ContainerAwareCommand
     {
         if ($this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')->getBusinessUnitsCount() > 1) {
             // this means that the tables are already populated
-            return;
+//            return;
         }
 
         // at this point there is only the 'Main' business unit that is generated during the oro setup
@@ -75,18 +82,67 @@ class InitialSetupCommand extends ContainerAwareCommand
 
         /** @var array $supplierConfig */
         foreach ($this->initialSetupConfig['suppliers'] as $supplierConfig) {
-            $businessUnitOne = new BusinessUnit();
-            $businessUnitOne->setName($supplierConfig['name']);
-            $businessUnitOne->setEmail($supplierConfig['email']);
-            $businessUnitOne->setOwner($i2cBusinessUnit);
-            $businessUnitOne->setFax($supplierConfig['fax']);
-            $businessUnitOne->setPhone($supplierConfig['phone']);
-            $businessUnitOne->setWebsite($supplierConfig['website']);
-            $businessUnitOne->setOrganization($i2cBusinessUnit->getOrganization());
-            $this->entityManager->persist($businessUnitOne);
+            $dummyBusinessUnit = new BusinessUnit();
+            $dummyBusinessUnit->setName($supplierConfig['name']);
+            $dummyBusinessUnit->setEmail($supplierConfig['email']);
+            $dummyBusinessUnit->setOwner($i2cBusinessUnit);
+            $dummyBusinessUnit->setFax($supplierConfig['fax']);
+            $dummyBusinessUnit->setPhone($supplierConfig['phone']);
+            $dummyBusinessUnit->setWebsite($supplierConfig['website']);
+            $dummyBusinessUnit->setOrganization($i2cBusinessUnit->getOrganization());
+
+            // for now the user creation doesn't work properly
+            // todo update this
+//            $userForBusinessUnit = $this->createUser($supplierConfig['user']);
+//
+//            $userForBusinessUnit->setOrganization($i2cBusinessUnit->getOrganization());
+//
+//            $userForBusinessUnit->addBusinessUnit($dummyBusinessUnit);
+//
+//            $dummyBusinessUnit->addUser($userForBusinessUnit);
+//            $this->entityManager->persist($userForBusinessUnit);
+
+            $this->entityManager->persist($dummyBusinessUnit);
         }
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * @param array        $userConfig
+     *
+     * @return User
+     */
+    public function createUser($userConfig)
+    {
+        /** @var User $user */
+        $user = $this->entityManager->getRepository('OroUserBundle:User')
+            ->findOneBy(['username' => $userConfig['username']]);
+        if (is_null($user)) {
+            $user = $this->userManager->createUser();
+            $user->setEnabled(true);
+        }
+
+        $role = $this->entityManager->getRepository('OroUserBundle:Role')->findOneBy(['label' => $userConfig['role']]);
+
+        if (!is_null($role)) {
+            $user->addRole($role);
+        }
+
+        $user->setFirstName($userConfig['first_name']);
+        $user->setLastName($userConfig['last_name']);
+        $user->setMiddleName($userConfig['middle_name']);
+        $user->setUsername($userConfig['username']);
+        $user->setPlainPassword($userConfig['password']);
+        $user->setEmail($userConfig['email']);
+        $this->userManager->updatePassword($user);
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        $this->entityManager->refresh($user);
+
+        return $user;
     }
 
     /**
