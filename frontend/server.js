@@ -8,7 +8,7 @@ const root = __dirname + '/public'
 const koa = Koa()
 
 koa.use(function * () {
-  const { path } = this
+  const { path, headers } = this
 
   switch (path) {
     case '/api/me':
