@@ -28,7 +28,7 @@ class FileController extends RestApiController
             $request = $this->getRequest();
             $fileUploader = $this->get('evaluation_file_upload.file_upload');
             $image = $fileUploader->process($request->files->get('file'), $evaluationId);
-            $imageUrl = $request->getUriForPath($image);
+            $imageUrl = $request->getUriForPath($this->getParameter('evaluation_frontend_image_path').$image);
         } catch (UploadException $e) {
             return $this->clientFailure($e->getMessage());
         } catch (IOException $e) {

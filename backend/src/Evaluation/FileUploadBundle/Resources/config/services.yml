@@ -1,4 +1,4 @@
 services:
     evaluation_file_upload.file_upload:
         class: Evaluation\FileUploadBundle\Services\FileUploadService
-        arguments: [%evaluation_upload_image_path%, %evaluation_frontend_image_path%]
+        arguments: [%evaluation_upload_image_path%]

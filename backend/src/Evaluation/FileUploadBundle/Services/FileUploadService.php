@@ -19,20 +19,13 @@ class FileUploadService
     protected $uploadPath;
 
     /**
-     * @var string
-     */
-    protected $frontendUrl;
-
-    /**
      * FileUploadService constructor.
      *
      * @param string $uploadPath
-     * @param string $frontendUrl
      */
-    public function __construct($uploadPath, $frontendUrl)
+    public function __construct($uploadPath)
     {
         $this->uploadPath = $uploadPath;
-        $this->frontendUrl = $frontendUrl;
     }
 
     /**
@@ -59,7 +52,7 @@ class FileUploadService
             }
 
             if ($file->move($uploadDir, $file->getClientOriginalName())) {
-                $result = $this->frontendUrl.$evaluationId.'/'.$file->getClientOriginalName();
+                $result = $evaluationId.'/'.$file->getClientOriginalName();
             }
         } else {
             throw new UploadException($file->getErrorMessage());
