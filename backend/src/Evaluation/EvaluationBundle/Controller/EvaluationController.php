@@ -31,7 +31,7 @@ class EvaluationController extends RestApiController
      */
     public function getEvaluationsByIdMinimalAction(Request $request)
     {
-        $ids = $request->get('ids');
+        $ids = $request->get('uids');
 
         $evaluations = $this->getEvaluationDatabaseManagerService()->getByUids($ids);
 

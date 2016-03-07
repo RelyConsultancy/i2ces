@@ -32,6 +32,38 @@ class EvaluationDataBaseManagerService
     }
 
     /**
+     * @return mixed
+     */
+    public function getAllForViewing()
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('e')
+            ->from('EvaluationEvaluationBundle:Evaluation', 'e');
+
+        $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllForEditing()
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('e')
+            ->from('EvaluationEvaluationBundle:Evaluation', 'e');
+
+        $query = $this->aclHelper->apply($queryBuilder, 'EDIT');
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+    /**
      * @param array $uids
      *
      * @return mixed

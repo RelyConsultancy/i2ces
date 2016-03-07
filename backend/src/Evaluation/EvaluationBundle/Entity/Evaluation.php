@@ -12,6 +12,7 @@ use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
  * Class Evaluation
  *
  * @ORM\Entity(repositoryClass="Evaluation\EvaluationBundle\Repository\EvaluationRepository")
+ * @ORM\Table(name="evaluation")
  *
  * @package Evaluation\EvaluationBundle\Entity
  *

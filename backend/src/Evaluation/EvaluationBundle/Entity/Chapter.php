@@ -9,6 +9,7 @@ use JMS\Serializer\Annotation as JMS;
  * Class Chapter
  *
  * @ORM\Entity(repositoryClass="Evaluation\EvaluationBundle\Repository\ChapterRepository")
+ * @ORM\Table(name="chapter")
  *
  * @package Evaluation\EvaluationBundle\Entity
  */
