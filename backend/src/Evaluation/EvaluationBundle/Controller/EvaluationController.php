@@ -2,8 +2,10 @@
 
 namespace Evaluation\EvaluationBundle\Controller;
 
+use Evaluation\EvaluationBundle\Entity\Evaluation;
 use Evaluation\EvaluationBundle\Services\ChapterService;
 use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService;
+use Evaluation\EvaluationBundle\Services\EvaluationService;
 use Evaluation\UtilBundle\Exception\FormException;
 use i2c\EvaluationBundle\Controller\RestApiController;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
@@ -44,7 +46,7 @@ class EvaluationController extends RestApiController
     }
 
     /**
-     * @param string $evaluationId
+     * @param string $evaluationUid
      *
      * @return Response
      *
@@ -55,9 +57,9 @@ class EvaluationController extends RestApiController
      *     permission="VIEW"
      * )
      */
-    public function getEvaluationByIdAction($evaluationId)
+    public function getEvaluationByIdAction($evaluationUid)
     {
-        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUid($evaluationId);
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUid($evaluationUid);
 
         if (is_null($evaluation)) {
             return $this->notFound('Evaluation was not found');
@@ -67,8 +69,8 @@ class EvaluationController extends RestApiController
     }
 
     /**
-     * @param string $evaluationId
-     * @param string $chapterId
+     * @param string $evaluationUid
+     * @param string $chapterUid
      *
      * @return Response
      *
@@ -79,15 +81,15 @@ class EvaluationController extends RestApiController
      *     permission="VIEW"
      * )
      */
-    public function getChapterByIdAction($evaluationId, $chapterId)
+    public function getChapterByIdAction($evaluationUid, $chapterUid)
     {
-        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUid($evaluationId);
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUid($evaluationUid);
 
         if (is_null($evaluation)) {
             return $this->notFound('Evaluation was not found');
         }
 
-        $chapter = $evaluation->getChapter($chapterId);
+        $chapter = $evaluation->getChapter($chapterUid);
 
         if (is_null($chapter)) {
             return $this->notFound('Chapter was not found');
@@ -97,8 +99,8 @@ class EvaluationController extends RestApiController
     }
 
     /**
-     * @param string $evaluationId
-     * @param string $chapterId
+     * @param string $evaluationUid
+     * @param string $chapterUid
      *
      * @return Response
      *
@@ -109,16 +111,16 @@ class EvaluationController extends RestApiController
      *     permission="EDIT"
      * )
      */
-    public function updateChapterAction($evaluationId, $chapterId)
+    public function updateChapterAction($evaluationUid, $chapterUid)
     {
         try {
-            $evaluation = $this->getEvaluationDatabaseManagerService()->getByUidForEditing($evaluationId);
+            $evaluation = $this->getEvaluationDatabaseManagerService()->getByUidForEditing($evaluationUid);
 
             if (is_null($evaluation)) {
                 return $this->notFound('Evaluation was not found');
             }
 
-            $chapter = $evaluation->getChapter($chapterId);
+            $chapter = $evaluation->getChapter($chapterUid);
 
             if (is_null($chapter)) {
                 return $this->notFound('Chapter was not found');
@@ -133,11 +135,61 @@ class EvaluationController extends RestApiController
     }
 
     /**
+     * @param string $evaluationUid
+     *
+     * @return Response
+     */
+    public function markEvaluationAsPublishedAction($evaluationUid)
+    {
+        /** @var Evaluation $evaluation */
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUidForEditing($evaluationUid);
+
+        if (is_null($evaluation)) {
+            return $this->notFound('Evaluation was not found');
+        }
+
+        $evaluation->publish();
+
+        $evaluation = $this->getEvaluationService()->updateEvaluation($evaluation);
+
+        return $this->success($evaluation, Response::HTTP_OK, ['list']);
+    }
+
+    /**
+     * @param string $evaluationUid
+     *
+     * @return Response
+     */
+    public function markEvaluationAsDraftAction($evaluationUid)
+    {
+        /** @var Evaluation $evaluation */
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByUidForEditing($evaluationUid);
+
+        if (is_null($evaluation)) {
+            return $this->notFound('Evaluation was not found');
+        }
+
+        $evaluation->unpublish();
+
+        $evaluation = $this->getEvaluationService()->updateEvaluation($evaluation);
+
+        return $this->success($evaluation, Response::HTTP_OK, ['list']);
+    }
+
+    /**
      * @return ChapterService
      */
     public function getChapterService()
     {
         return $this->get('evaluation_evaluation.chapters_service');
+    }
+
+    /**
+     * @return EvaluationService
+     */
+    public function getEvaluationService()
+    {
+        return $this->get('evaluation_evaluation.evaluation_service');
     }
 
     /**

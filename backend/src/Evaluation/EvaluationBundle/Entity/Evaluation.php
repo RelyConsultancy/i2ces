@@ -37,6 +37,9 @@ use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
  */
 class Evaluation
 {
+    const STATE_DRAFT = 'draft';
+    const STATE_PUBLISHED = 'published';
+
     /**
      * @var int
      *
@@ -444,5 +447,33 @@ class Evaluation
         }
 
         return null;
+    }
+
+    /**
+     * Marks an evaluation as published
+     */
+    public function publish()
+    {
+        $this->state = self::STATE_PUBLISHED;
+    }
+
+    /**
+     * Marks an evaluation as unpublished
+     */
+    public function unpublish()
+    {
+        $this->state = self::STATE_DRAFT;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        if ($this->state == self::STATE_PUBLISHED) {
+            return true;
+        }
+
+        return false;
     }
 }

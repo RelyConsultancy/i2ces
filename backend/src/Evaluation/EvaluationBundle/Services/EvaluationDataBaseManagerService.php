@@ -4,6 +4,7 @@ namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
+use Evaluation\EvaluationBundle\Entity\Evaluation;
 use Oro\Bundle\SecurityBundle\ORM\Walker\AclHelper;
 
 /**
@@ -54,7 +55,9 @@ class EvaluationDataBaseManagerService
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-            ->from('EvaluationEvaluationBundle:Evaluation', 'e');
+            ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+            ->where($queryBuilder->expr()->neq('e.state', '?1'))
+            ->setParameter(1, Evaluation::STATE_PUBLISHED);
 
         $query = $this->aclHelper->apply($queryBuilder, 'EDIT');
 
