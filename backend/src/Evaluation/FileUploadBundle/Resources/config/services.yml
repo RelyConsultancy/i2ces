@@ -1,0 +1,4 @@
+services:
+    evaluation_file_upload.file_upload:
+        class: Evaluation\FileUploadBundle\Services\FileUploadService
+        arguments: [%evaluation_upload_image_path%]
