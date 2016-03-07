@@ -1,0 +1,5 @@
+evaluation_file_upload:
+    path: /api/images/{evaluationId}
+    methods: [POST]
+    defaults:
+        _controller: EvaluationFileUploadBundle:Api/Rest/File:uploadImage

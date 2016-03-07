@@ -25,6 +25,8 @@ mysql_packages:
   - MySQL-python
   - perl-DBD-MySQL
 mysql_daemon: mariadb
+mysql_root_password: root
+mysql_root_password_update: yes
 mysql_socket: /var/lib/mysql/mysql.sock
 mysql_log_error: /var/log/mariadb/mariadb.log
 mysql_syslog_tag: mariadb
