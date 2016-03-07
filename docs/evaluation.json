@@ -1,0 +1,84 @@
+{
+  "error": null,
+  "data": {
+    "supplier": {
+      "id": 3,
+      "name": "Some Supplier Name",
+      "email": "some@email.com",
+      "phone": "00000000000",
+      "website": "http://somewebsite.com"
+    },
+    "id": "7",
+    "uid": "248bf0d7-7d47-4330-acac-ff763a61d73e",
+    "cid": "i2c1509134a",
+    "state": "published",
+    "title": "Quinoa Evaluation",
+    "brand": "Uncle Bens",
+    "displayTitle": "Uncle Bens: Quinoa Evaluation",
+    "category": "Impulse Food",
+    "start_date": "2015-11-14",
+    "end_date": "2016-01-30",
+    "media": [
+      "TV Wall",
+      "Six Sheets",
+      "JS Magazine",
+      "Instore Sampling"
+    ],
+    "campaignObjectives": [
+      {
+        "label": "Total Sales Uplift",
+        "value": "38315.15",
+        "unit": "GBP",
+        "unitPosition": "pre-value"
+      },
+      {
+        "label": "Uplift in New Customers",
+        "value": 11637.557
+      },
+      {
+        "label": "Share of Category Uplift",
+        "value": 1.8,
+        "unit": "ppts",
+        "unitPosition": "post-value"
+      }
+    ],
+    "chapters": [
+      {
+        "id": 531,
+        "state": "visible",
+        "location": "/api/evaluations/i2c1509134a/chapters/531",
+        "title": "Category Context",
+      },
+      {
+        "id": 532,
+        "location": "/api/evaluations/i2c1509134a/chapters/532",
+        "state": "visible",
+        "title": "Campaign Background",
+      },
+      {
+        "id": 534,
+        "location": "/api/evaluations/i2c1509134a/chapters/534",
+        "state": "visible",
+        "title": "Objective Review",
+      },
+      {
+        "id": 5123,
+        "location": "/api/evaluations/i2c1509134a/chapters/5123",
+        "state": "visible",
+        "title": "Sampling Performance",
+      },
+      {
+        "id": 535,
+        "location": "/api/evaluations/i2c1509134a/chapters/535",
+        "state": "visible",
+        "title": "Summary",
+      },
+      {
+        "id": 536,
+        "location": "/api/evaluations/i2c1509134a/chapters/536",
+        "state": "visible",
+        "title": "Appendix",
+      }
+    ]
+  }
+}

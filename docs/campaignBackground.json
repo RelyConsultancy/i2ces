@@ -1,0 +1,117 @@
+{
+  "error": null,
+  "data": {
+    "id": 532,
+    "location": "/api/evaluations/i2c1509134a/chapters/532",
+    "state": "visible",
+    "title": "Campaign Background",
+    "content": [
+      {
+        "type": "section",
+        "title": "Background",
+        "access": "editable",
+        "content": [
+          {
+            "type": "text",
+            "value": "Mars Food ran a campaign in cycle 6 and 7 by using Six Sheets, Sainsbury’s Magazine, Entrance Gates and CAT as a channels to drive awareness of Uncle Ben’s R&G Quinoa NPD. The objectives of the campaign were to launch the new products, grow total units and grow share of category"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Campaign Objectives",
+        "access": "editable",
+        "content": [
+          {
+            "type": "list",
+            "value": [
+              "Launch New Product",
+              "Grow Total Units",
+              "Grow Share of Category"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Timings",
+        "access": "readonly",
+        "content": [
+          {
+            "type": "list",
+            "value": [
+              "Pre: 01/04/2015 - 23/06/2015",
+              "During: 24/06/2015 - 11/08/2015",
+              "Post: 12/08/2015 - 03/11/2015"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Evaluated Channels",
+        "access": "readonly",
+        "content": [
+          {
+            "type": "list",
+            "value": [
+              "Six Sheets",
+              "Entrance Gates",
+              "JS Magazine",
+              "Coupon at Till"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Evaluated Cost",
+        "access": "readonly",
+        "content": [
+          {
+            "type": "list",
+            "value": [
+              "GBP 10,132"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Offer SKUs",
+        "access": "readonly",
+        "content": [
+          {
+            "type": "text",
+            "value": "Please see Product Definitions"
+          }
+        ]
+      },
+      {
+        "type": "section",
+        "title": "Media Laydown",
+        "access": "readonly",
+        "content": [
+          {
+            "type": "table",
+            "header": ["", "24 Jun", "01 Jul", "08 Jul"],
+            "value": [
+              ["Six Sheets", "", {"type": "colorFillStart", "color": "#ccc"}, {"type": "colorFillEnd", "color": "#ccc"}],
+              ["JS Magazine", {"type": "colorFillStart", "color": "#555"}, "", {"type": "colorFillEnd", "color": "#555"}]
+            ],
+            "legend": [
+              {
+                "label": "Evaluated media",
+                "color": "#ccc"
+              },
+              {
+                "label": "In-store promotions",
+                "color": "#555"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
