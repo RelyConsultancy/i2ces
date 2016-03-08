@@ -1,5 +1,13 @@
 parameters:
     raw_tables_config:
+        ie_cat_context_data:
+            columns:
+                master_campaign_id: 'VARCHAR(255) NOT NULL'
+                product: 'VARCHAR(255)'
+                metric: 'VARCHAR(255)'
+                pp_results: 'DECIMAL(18,6)'
+            primary_key: 'master_campaign_id'
+            file_name: 'ie_cat_context_data.csv'
         ie_campaign_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
@@ -10,19 +18,14 @@ parameters:
                 npd: 'TINYINT'
                 media_cost: 'INT(15)'
             primary_key: 'master_campaign_id'
-        ie_cat_context_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                product: 'VARCHAR(255)'
-                metric: 'VARCHAR(255)'
-                pp_results: 'DECIMAL(18,6)'
-            primary_key: 'master_campaign_id'
+            file_name: 'ie_campaign_data.csv'
         ie_exposed_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
                 media_type: 'VARCHAR(255)'
                 exposed: 'INT(15)'
             primary_key: 'master_campaign_id'
+            file_name: 'ie_exposed_data.csv'
         ie_media_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
@@ -31,11 +34,13 @@ parameters:
                 end_date: 'DATE'
                 evaluate: 'TINYINT'
             primary_key: 'master_campaign_id'
+            file_name: 'ie_media_data.csv'
         ie_offer_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
                 sku_name: 'VARCHAR(255)'
             primary_key: 'master_campaign_id'
+            file_name: 'ie_offer_data.csv'
         ie_ots_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
@@ -47,6 +52,7 @@ parameters:
                 timeperiod: 'INT'
                 exposed: 'INT(15)'
             primary_key: 'master_campaign_id'
+            file_name: 'ie_ots_data.csv'
         ie_promo_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
@@ -54,6 +60,7 @@ parameters:
                 product: 'VARCHAR(255)'
                 pr_results: 'DECIMAL(18,6)'
             primary_key: 'master_campaign_id'
+            file_name: 'ie_promo_data.csv'
         ie_results_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
@@ -68,12 +75,14 @@ parameters:
                 uplift: 'DECIMAL(18,6)'
                 pct_uplift: 'DECIMAL(18,6)'
             primary_key: 'master_campaign_id'
+            file_name: 'ie_results_data.csv'
         ie_timings_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
                 period: 'INT'
                 period_date: 'DATE'
             primary_key: 'master_campaign_id'
+            file_name: 'ie_timings_data.csv'
         ie_weekly_results_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
@@ -83,11 +92,11 @@ parameters:
                 exposed: 'INT(15)'
                 control: 'DECIMAL(18,6)'
             primary_key: 'master_campaign_id'
-
+            file_name: 'ie_weekly_results_data.csv'
 
 services:
     i2c_evaluation.raw_import:
         class: i2c\EvaluationBundle\Command\RawImportCommand
         arguments: [%raw_tables_config%]
         tags:
-          - { name: console.command }
+            - { name: console.command }

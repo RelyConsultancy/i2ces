@@ -28,7 +28,7 @@ class RawImportCommand extends ContainerAwareCommand
     {
         $this->rawTablesConfig = $rawTablesConfig;
 
-        parent::__construct();
+        parent::__construct("i2c:data-import");
     }
     /**
      * @inheritdoc
@@ -36,12 +36,26 @@ class RawImportCommand extends ContainerAwareCommand
     public function configure()
     {
         $this
-            ->setName("i2c:data-import")
+            ->setName('i2c:data-import')
             ->addOption(
-                "import-folder-path",
+                'import-folder-path',
                 null,
                 InputOption::VALUE_REQUIRED,
-                "The absolute path of the directory containing the csv files"
+                'The absolute path of the directory containing the csv files'
+            )
+            ->addOption(
+                'field-separator',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'The character(s) that separate the fields in the csv file',
+                ','
+            )
+            ->addOption(
+                'line-endings',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'The characters that separate lines in the csv file, defaults to "\n"',
+                '\n'
             )
             ->setDescription('This command will import the i2c data from a csv to a table');
     }
@@ -54,43 +68,98 @@ class RawImportCommand extends ContainerAwareCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->createTables();
-    }
+        $doctrine = $this->getContainer()->get('doctrine');
 
-    protected function createTables()
-    {
-        $entityManager = $this->getContainer()->get('doctrine')->getEntityManager();
+        $entityManager = $doctrine->getEntityManager();
+
+        $dbhost = $this->getContainer()->getParameter('database_host');
+        $dbuser = $this->getContainer()->getParameter('database_user');
+        $dbpass = $this->getContainer()->getParameter('database_password');
+        $connParams = $entityManager->getConnection()->getParams();
+
+        $pdoConn = new \PDO('mysql:host=' . $dbhost . ';dbname=' . $connParams['dbname'], $dbuser, $dbpass, array(
+            \PDO::MYSQL_ATTR_LOCAL_INFILE => true
+        ));
 
         foreach ($this->rawTablesConfig as $key => $value) {
-            $connection = $entityManager->getConnection();
-            $this->createTable($key, $value, $connection);
+            $this->createTable($key, $value, $pdoConn);
+            $output->writeln(
+                sprintf(
+                    'Table "%s" was created successfully',
+                    $key
+                )
+            );
         }
+
+        $importFolderPath = $input->getOption('import-folder-path');
+
+        $lineEndings = $input->getOption('line-endings');
+        $fieldSeparator = $input->getOption('field-separator');
+
+        foreach ($this->rawTablesConfig as $key => $value) {
+            $rows = $this->loadDataFromFile(
+                $key,
+                sprintf('%s/%s', $importFolderPath, $value['file_name']),
+                $fieldSeparator,
+                $lineEndings,
+                $pdoConn
+            );
+
+            $output->writeln(sprintf('Imported "%s" lines into table %s', $rows, $key));
+        }
+    }
+
+
+    /**
+     * @param string $tableName
+     * @param string $filePath
+     * @param string $fieldSeparator
+     * @param string $lineEndings
+     * @param \PDO   $connection
+     *
+     * @return int
+     */
+    protected function loadDataFromFile($tableName, $filePath, $fieldSeparator, $lineEndings, $connection)
+    {
+        $query = sprintf(
+            "LOAD DATA LOCAL INFILE '%s' INTO TABLE `%s`
+            FIELDS TERMINATED BY '%s' ENCLOSED BY ''
+            LINES TERMINATED BY '%s'
+            IGNORE 1 lines
+            ",
+            $filePath,
+            $tableName,
+            $fieldSeparator,
+            $lineEndings
+        );
+
+        return $connection->exec($query);
     }
 
     /**
      * @param string     $tableName
      * @param array      $config
-     * @param Connection $connection
+     * @param \PDO       $connection
      */
     protected function createTable($tableName, $config, $connection)
     {
         $query = sprintf(
-            'CREATE TABLE IF NOT EXISTS `%s` (',
+            'CREATE TABLE IF NOT EXISTS `%s` (`id` INT(11) NOT NULL AUTO_INCREMENT, ',
             $tableName
         );
 
+        $tableColumns = [];
         foreach ($config['columns'] as $fieldName => $fieldConfig) {
-            $query = sprintf(
-                '%s %s %s',
-                $query,
+            $tableColumns[] = sprintf(
+                '`%s` %s',
                 $fieldName,
                 $fieldConfig
             );
         }
         $query = sprintf(
-            '`%s` PRIMARY KEY(%s))',
+            '%s %s, PRIMARY KEY(`id`))',
             $query,
-            $config['primary_key']
+            implode(',', $tableColumns)
         );
 
         $connection->exec($query);
