@@ -4,16 +4,26 @@ evaluation_evaluation.get_evaluations_by_id_minimal:
     defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationsByIdMinimal }
 
 evaluation_evaluation.get_evaluation_by_id:
-    path: /api/evaluations/{evaluationId}
+    path: /api/evaluations/{evaluationCid}
     methods: [GET]
     defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationById }
 
+evaluation_evaluation.publish_evaluation:
+    path: /api/evaluations/{evaluationCid}/publish
+    methods: [POST]
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:markEvaluationAsPublished }
+
+evaluation_evaluation.unpublish_evaluation:
+    path: /api/evaluations/{evaluationCid}/unpublish
+    methods: [POST]
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:markEvaluationAsDraft }
+
 evaluation_evaluation.get_evaluation_chapter_by_id:
-    path: /api/evaluations/{evaluationId}/chapters/{chapterId}
+    path: /api/evaluations/{evaluationCid}/chapters/{chapterId}
     methods: [GET]
     defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getChapterById }
 
 evaluation_evaluation.update_evaluation_chapter:
-    path: /api/evaluations/{evaluationId}/chapters/{chapterId}
+    path: /api/evaluations/{evaluationCid}/chapters/{chapterId}
     methods: [POST]
     defaults: { _controller: EvaluationEvaluationBundle:Evaluation:updateChapter }

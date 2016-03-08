@@ -75,6 +75,10 @@ services:
         class: Evaluation\EvaluationBundle\Services\ChapterService
         arguments: [@serializer, @doctrine]
 
+    evaluation_evaluation.evaluation_service:
+        class: Evaluation\EvaluationBundle\Services\EvaluationService
+        arguments: [@serializer, @doctrine]
+
 
     evaluation_evaluation.evaluation_database_manager_service:
         class: Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService

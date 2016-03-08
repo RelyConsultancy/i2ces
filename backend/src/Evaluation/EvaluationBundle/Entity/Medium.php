@@ -9,6 +9,7 @@ use JMS\Serializer\Annotation as JMS;
  * Class Medium
  *
  * @ORM\Entity(repositoryClass="Evaluation\EvaluationBundle\Repository\MediumRepository")
+ * @ORM\Table(name="medium")
  *
  * @package Evaluation\EvaluationBundle\Entity
  */
