@@ -1,12 +1,12 @@
-evaluation_evaluation.get_evaluations_by_id_minimal:
+evaluation_evaluation.get_evaluations_by_cid_minimal:
     path: /api/evaluations
-    methods: [GET]
-    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationsByIdMinimal }
+    methods: [POST]
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationsByCidMinimal }
 
-evaluation_evaluation.get_evaluation_by_id:
+evaluation_evaluation.get_evaluation_by_cid:
     path: /api/evaluations/{evaluationCid}
     methods: [GET]
-    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationById }
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationByCid }
 
 evaluation_evaluation.publish_evaluation:
     path: /api/evaluations/{evaluationCid}/publish

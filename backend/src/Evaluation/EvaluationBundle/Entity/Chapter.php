@@ -22,7 +22,9 @@ class Chapter
      * @ORM\Column(type="integer", name="id")
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @JMS\Exclude()
+     * @JMS\Groups({"list", "full"})
+     * @JMS\SerializedName("id")
+     * @JMS\Type("integer")
      */
     protected $id;
 

@@ -31,11 +31,12 @@ class EvaluationController extends RestApiController
      *     permission="VIEW"
      * )
      */
-    public function getEvaluationsByIdMinimalAction(Request $request)
+    public function getEvaluationsByCidMinimalAction(Request $request)
     {
-        $ids = $request->get('cids');
+        // todo refactor into a form or something
+        $cids = json_decode($request->getContent(), true)['cids'];
 
-        $evaluations = $this->getEvaluationDatabaseManagerService()->getByCids($ids);
+        $evaluations = $this->getEvaluationDatabaseManagerService()->getByCids($cids);
 
         $data = [
             'count' => count($evaluations),
@@ -57,7 +58,7 @@ class EvaluationController extends RestApiController
      *     permission="VIEW"
      * )
      */
-    public function getEvaluationByIdAction($evaluationCid)
+    public function getEvaluationByCidAction($evaluationCid)
     {
         $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
 
