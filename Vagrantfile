@@ -32,7 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     qa.vm.provider :digital_ocean do |provider, override|
       provider.image = '11483404'
-      provider.ssh_key_name = 'Georgiana'
+      # provider.ssh_key_name = 'Georgiana'
       override.ssh.private_key_path = '~/.ssh/id_rsa'
       override.vm.box = 'digital_ocean'
       override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
@@ -49,7 +49,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     staging.vm.provider :digital_ocean do |provider, override|
       provider.image = '11478463'
-      provider.ssh_key_name = 'Georgiana'
+      # provider.ssh_key_name = 'Georgiana'
       override.ssh.private_key_path = '~/.ssh/id_rsa'
       override.vm.box = 'digital_ocean'
       override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
