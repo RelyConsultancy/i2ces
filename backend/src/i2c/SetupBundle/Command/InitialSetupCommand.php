@@ -60,7 +60,8 @@ class InitialSetupCommand extends ContainerAwareCommand
 
         $this->entityManager = $container->get('doctrine')->getEntityManager();
 
-        $this->createRoles();
+        // for now we create the roles and the users manually
+//        $this->createRoles();
 
         $this->createDummySuppliers();
 
