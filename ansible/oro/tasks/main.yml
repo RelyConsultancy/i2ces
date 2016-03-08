@@ -71,3 +71,47 @@
 
 - name: Install Oro Platform
   command: chdir=/var/www/html php ./app/console oro:install --application-url i2ces.dev --organization-name i2c --user-name user --user-email gb@tekkie.us --user-firstname first --user-lastname last --user-password pass --drop-database --sample-data no --force -n
+
+- name: Clear cache
+  command: chdir=/var/www/html php app/console cache:clear --env=prod
+
+- name: Check if src/Evaluation/DashboardBundle/Resources/public folder exists.
+  stat: "path=/var/www/html/src/Evaluation/DashboardBundle/Resources/public"
+  register: dashboard_public_exists
+
+- name: Create backend dirs for frontend integration
+  command: chdir=/var/www/html mkdir ./src/Evaluation/DashboardBundle/Resources/public && mkdir ./src/Evaluation/DashboardBundle/Resources/public/js && mkdir ./src/Evaluation/DashboardBundle/Resources/public/css
+  when: not dashboard_public_exists
+
+- name: Integrate bundles.js from frontend to backend
+  command: chdir=/var/www/html ln ./frontend/public/assets/bundle.js ./src/Evaluation/DashboardBundle/Resources/public/js/index.js
+
+- name: Integrate bundles.js from frontend to backend
+  command: chdir=/var/www/html ln ./frontend/public/assets/bundle.css ./src/Evaluation/DashboardBundle/Resources/public/css/index.css
+
+- name: Integrate bundles.js from frontend to backend
+  command: chdir=/var/www/html ln ./frontend/public/assets/bundle.css ./src/Evaluation/DashboardBundle/Resources/public/css/index.css
+
+- name: Integrate fonts from frontend to backend
+  command: chdir=/var/www/html cp -r ./frontend/public/fonts ./web/fonts
+
+- name: Integrate images from frontend to backend
+  command: chdir=/var/www/html cp -r ./frontend/public/images ./web/images
+
+- name: Install assetse
+  command: chdir=/var/www/html php app/console asset:install --env=prod
+
+- name: Dump assets
+  command: chdir=/var/www/html php app/console assetic:dump --env=prod
+
+- name: Update the database
+  command: chdir=/var/www/html php app/console i2c:schema:update
+
+- name: Load custom entities into oro-crm
+  command: chdir=/var/www/html php app/console oro:entity-config:update -f
+
+- name: Create initial data
+  command: chdir=/var/www/html php app/console i2c:initial-setup
+
+- name: Import demo data to mysql
+  command: chdir=/var/www/html mysql -uroot -proot --database=i2c < ./src/Evaluation/EvaluationBundle/Resources/data/demo.sql;
