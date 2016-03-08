@@ -91,6 +91,20 @@
     - /var/www/html/src/Evaluation/DashboardBundle/Resources/public/css
   when: not dashboard_public_exists.stat.exists
 
+- name: Check if web/fonts folder exists.
+  stat: "path=/var/www/html/web/fonts"
+  register: web_fonts_exists
+
+- name: Debug web_fonts_exists
+  debug: msg="Variable 'web_fonts_exists' is set to {{ web_fonts_exists }}"
+
+- name: Create web dirs for frontend integration
+  command: " mkdir {{ item }} "
+  with_items:
+    - /var/www/html/web/fonts
+    - /var/www/html/web/images
+  when: not web_fonts_exists.stat.exists
+
 - name: Integrate bundles.js from frontend to backend
   copy: src=../frontend/public/assets/bundle.js dest=/var/www/html/src/Evaluation/DashboardBundle/Resources/public/js/index.js force=yes
 
@@ -98,10 +112,10 @@
   copy: src=../frontend/public/assets/bundle.css dest=/var/www/html/src/Evaluation/DashboardBundle/Resources/public/css/index.css force=yes
 
 - name: Integrate fonts from frontend to backend
-  command: chdir=/var/www/html cp -r ./frontend/public/fonts ./web/fonts
+  copy: src=../frontend/public/fonts dest=/var/www/html/web/fonts force=yes
 
 - name: Integrate images from frontend to backend
-  command: chdir=/var/www/html cp -r ./frontend/public/images ./web/images
+  copy: src=../frontend/public/images dest=/var/www/ht§ml/web/images force=yes
 
 - name: Install assets
   command: chdir=/var/www/html php app/console asset:install --env=prod
