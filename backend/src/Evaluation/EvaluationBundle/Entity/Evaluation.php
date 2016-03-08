@@ -433,15 +433,15 @@ class Evaluation
     }
 
     /**
-     * @param string $uid
+     * @param string $id
      *
      * @return Chapter|null
      */
-    public function getChapter($uid)
+    public function getChapter($id)
     {
         /** @var Chapter $chapter */
         foreach ($this->chapters as $chapter) {
-            if ($chapter->getUid() == $uid) {
+            if ($chapter->getId() == $id) {
                 return $chapter;
             }
         }
