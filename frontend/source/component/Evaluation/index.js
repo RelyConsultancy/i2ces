@@ -1,4 +1,5 @@
 import { Component, B } from '/component/component.js'
+import { fetchEvaluation } from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
 
@@ -6,7 +7,7 @@ import style from './style.css'
 const Evaluation = Component({
   class: true,
   componentDidMount () {
-    // fetchEvaluation()
+    fetchEvaluation()
   },
   render () {
     const { store, children } = this.props

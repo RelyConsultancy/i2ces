@@ -14,7 +14,7 @@ const routes = {
     path: 'evaluations',
     component: Evaluations,
   }, {
-    path: 'evaluation/:id',
+    path: 'evaluations/:id',
     component: Evaluation,
   }, {
     path: 'faqs',
