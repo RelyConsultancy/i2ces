@@ -101,5 +101,15 @@ class EvaluationSchemaUpdateService extends AbstractSchemaUpdateService
             $connection->exec($query);
         } catch (DriverException $ex) {
         }
+        try {
+            $query = ('DROP TABLE IF EXISTS `medium`');
+            $connection->exec($query);
+        } catch (DriverException $ex) {
+        }
+        try {
+            $query = ('DROP TABLE IF EXISTS `evaluation_mediums`');
+            $connection->exec($query);
+        } catch (DriverException $ex) {
+        }
     }
 }
