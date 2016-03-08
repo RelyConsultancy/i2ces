@@ -86,7 +86,7 @@ const Item = (item, index) => {
   )
 
   const view = Link({
-    to: '/',
+    to: `/evaluations/${item.id}`,
     className: style.item_view,
   }, 'View')
 

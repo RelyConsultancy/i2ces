@@ -3,7 +3,7 @@
   "data": {
     "count": 3,
     "items": [{
-      "id": "248bf0d7-7d47-4330-acac-ff763a61d73e",
+      "id": "id",
       "state": "published",
       "campaign_id": "i2c1510047a",
       "title": "Lindt - Christmas 2015",
@@ -20,7 +20,7 @@
         "website": ""
       }
     }, {
-      "id": "248bf0d7-7d47-4330-acac-ff763a61d75e",
+      "id": "id",
       "state": "published",
       "campaign_id": "i2c1509134a",
       "title": "SCA Plenty Genius Award",
@@ -37,7 +37,7 @@
         "website": ""
       }
     }, {
-      "id": "248bf0d7-7d47-4330-acac-ff763a61d74e",
+      "id": "id",
       "state": "published",
       "campaign_id": "i2c1507187a",
       "title": "Colgate Palmolive - CSPR",

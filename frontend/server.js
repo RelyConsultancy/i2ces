@@ -2,6 +2,7 @@ import Koa from 'koa'
 import send from 'koa-send'
 import apiMe from './samples/me.json'
 import apiEvaluations from './samples/evaluations.json'
+import apiEvaluation from './samples/evaluation.json'
 
 
 const root = __dirname + '/public'
@@ -16,6 +17,10 @@ koa.use(function * () {
     break
 
     case '/api/evaluations':
+      this.body = apiEvaluations
+    break
+
+    case '/api/evaluations/id':
       this.body = apiEvaluations
     break
 

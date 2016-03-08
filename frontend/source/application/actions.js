@@ -1,5 +1,5 @@
 import store from './store.js'
-import { get, post } from './http.js'
+import http from './http.js'
 
 
 const { dispatch } = store
@@ -13,8 +13,16 @@ export const setNetworkIndicator = (isVisible) => {
 }
 
 
+export const setFilter = (filter, value) => {
+  dispatch({
+    type: 'evaluations.filter',
+    data: { filter, value },
+  })
+}
+
+
 export const fetchEvaluations = () => {
-  get('/api/evaluations', (reply) => {
+  http('get', '/api/evaluations', (reply) => {
     dispatch({
       type: 'evaluations.list',
       data: reply.data.items,
@@ -23,9 +31,11 @@ export const fetchEvaluations = () => {
 }
 
 
-export const setFilter = (filter, value) => {
-  dispatch({
-    type: 'evaluations.filter',
-    data: { filter, value },
+export const fetchEvaluation = (id) => {
+  http('get', `/api/evaluations/${id}`, (reply) => {
+    dispatch({
+      type: 'evaluation.document',
+      data: reply.data,
+    })
   })
 }

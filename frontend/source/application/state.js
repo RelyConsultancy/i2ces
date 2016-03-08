@@ -9,6 +9,7 @@ export default {
     }],
     network: false,
   },
+
   evaluations: {
     list: [],
     list_empty: 'No records found',
@@ -18,4 +19,9 @@ export default {
       supplier: null,
     },
   },
+
+  evaluation: {
+    document: null,
+    chapter: {},
+  }
 }

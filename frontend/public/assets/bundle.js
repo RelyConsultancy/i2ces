@@ -31034,13 +31034,15 @@ exports.isBuffer = function (obj) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setFilter = exports.fetchEvaluations = exports.setNetworkIndicator = undefined;
+exports.fetchEvaluation = exports.fetchEvaluations = exports.setFilter = exports.setNetworkIndicator = undefined;
 
 var _store = require('./store.js');
 
 var _store2 = _interopRequireDefault(_store);
 
 var _http = require('./http.js');
+
+var _http2 = _interopRequireDefault(_http);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31052,8 +31054,15 @@ var setNetworkIndicator = exports.setNetworkIndicator = function setNetworkIndic
   });
 };
 
+var setFilter = exports.setFilter = function setFilter(filter, value) {
+  dispatch({
+    type: 'evaluations.filter',
+    data: { filter: filter, value: value }
+  });
+};
+
 var fetchEvaluations = exports.fetchEvaluations = function fetchEvaluations() {
-  (0, _http.get)('/api/evaluations', function (reply) {
+  (0, _http2.default)('get', '/api/evaluations', function (reply) {
     dispatch({
       type: 'evaluations.list',
       data: reply.data.items
@@ -31061,10 +31070,12 @@ var fetchEvaluations = exports.fetchEvaluations = function fetchEvaluations() {
   });
 };
 
-var setFilter = exports.setFilter = function setFilter(filter, value) {
-  dispatch({
-    type: 'evaluations.filter',
-    data: { filter: filter, value: value }
+var fetchEvaluation = exports.fetchEvaluation = function fetchEvaluation(id) {
+  (0, _http2.default)('get', '/api/evaluations/' + id, function (reply) {
+    dispatch({
+      type: 'evaluation.document',
+      data: reply.data
+    });
   });
 };
 
@@ -31074,7 +31085,6 @@ var setFilter = exports.setFilter = function setFilter(filter, value) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.post = exports.get = undefined;
 
 require('whatwg-fetch');
 
@@ -31117,57 +31127,32 @@ var fmtQuery = function fmtQuery(data) {
 };
 
 var fmtJSON = function fmtJSON(reply) {
-  try {
-    reply = reply.json();
-  } catch (error) {
-    console.error(error, reply);
-  }
-
   hideNetworkIndicator();
 
-  return reply;
+  return reply.json();
 };
 
-var get = function get(url, options, callback) {
-  if ((0, _utils.isFunction)(options)) {
-    callback = options;
-    options = {};
+var defaults = {
+  // set to send cookies
+  credentials: 'same-origin',
+  headers: {
+    // ORO header required
+    'X-CSRF-Header': 1
   }
-
-  var config = {
-    method: 'GET',
-    // set to send cookies
-    credentials: 'same-origin'
-  };
-
-  if (options.query) {
-    url += fmtQuery(options.query);
-  }
-
-  showNetworkIndicator();
-
-  fetch(url, config).then(fmtJSON).then(callback).catch(onError);
 };
 
-var post = function post(url, options, callback) {
+exports.default = function (method, url, options, callback) {
+  // make `options` an optional argument
   if ((0, _utils.isFunction)(options)) {
-    callback = options;
-    options = {};
+    callback = options;options = {};
   }
 
-  var config = {
-    method: 'POST',
-    // set to send cookies
-    credentials: 'same-origin'
-  };
+  var config = Object.assign({}, defaults, { method: method });
 
   if (options.data) {
     config.body = JSON.stringify(options.data);
-
-    config.headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    };
+    config.headers['Accept'] = 'application/json';
+    config.headers['Content-Type'] = 'application/json';
   }
 
   if (options.query) {
@@ -31178,9 +31163,6 @@ var post = function post(url, options, callback) {
 
   fetch(url, config).then(fmtJSON).then(callback).catch(onError);
 };
-
-exports.get = get;
-exports.post = post;
 
 },{"./actions.js":248,"./utils.js":255,"qs":243,"whatwg-fetch":247}],250:[function(require,module,exports){
 'use strict';
@@ -31207,9 +31189,10 @@ var dashboard = function dashboard() {
   var type = _ref.type;
   var data = _ref.data;
 
+  state = (0, _objectAssign2.default)({}, state);
+
   switch (type) {
     case 'dashboard.network':
-      state = (0, _objectAssign2.default)({}, state);
       state.network = data;
       break;
   }
@@ -31223,15 +31206,19 @@ var evaluations = function evaluations() {
   var type = _ref2.type;
   var data = _ref2.data;
 
+  state = (0, _objectAssign2.default)({}, state);
+
   switch (type) {
     case 'evaluations.list':
-      state = (0, _objectAssign2.default)({}, state);
       state.list = data;
       break;
 
     case 'evaluations.filter':
-      state = (0, _objectAssign2.default)({}, state);
       state.filter[data.filter] = data.value;
+      break;
+
+    case 'evaluation.document':
+      state.document = data;
       break;
   }
 
@@ -31302,7 +31289,7 @@ var routes = {
     path: 'evaluations',
     component: _Evaluations2.default
   }, {
-    path: 'evaluation/:id',
+    path: 'evaluations/:id',
     component: _Evaluation2.default
   }, {
     path: 'faqs',
@@ -31332,6 +31319,7 @@ exports.default = {
     }],
     network: false
   },
+
   evaluations: {
     list: [],
     list_empty: 'No records found',
@@ -31340,6 +31328,11 @@ exports.default = {
       brand: null,
       supplier: null
     }
+  },
+
+  evaluation: {
+    document: null,
+    chapter: {}
   }
 };
 
@@ -31469,6 +31462,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js');
 
+var _actions = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js');
+
 var _store = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js');
 
 var _store2 = _interopRequireDefault(_store);
@@ -31482,7 +31477,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Evaluation = (0, _component.Component)({
   class: true,
   componentDidMount: function componentDidMount() {
-    // fetchEvaluation()
+    (0, _actions.fetchEvaluation)();
   },
   render: function render() {
     var _props = this.props;
@@ -31500,7 +31495,7 @@ var Evaluation = (0, _component.Component)({
 
 exports.default = _store2.default.sync('evaluation', Evaluation);
 
-},{"./style.css":259,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":269}],259:[function(require,module,exports){
+},{"./style.css":259,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":269}],259:[function(require,module,exports){
 module.exports = {"component":"_Evaluation_style_component"}
 },{}],260:[function(require,module,exports){
 'use strict';
@@ -31616,7 +31611,7 @@ var Item = function Item(item, index) {
   var date = (0, _component.B)({ className: _style2.default.item_date }, fmtDate(item.start_date) + ' - ' + fmtDate(item.end_date));
 
   var view = (0, _component.Link)({
-    to: '/',
+    to: '/evaluations/' + item.id,
     className: _style2.default.item_view
   }, 'View');
 

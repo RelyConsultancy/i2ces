@@ -4,9 +4,10 @@ import defaults from './state.js'
 
 
 const dashboard = (state = defaults.dashboard, { type, data }) => {
+  state = assign({}, state)
+
   switch (type) {
     case 'dashboard.network':
-      state = assign({}, state)
       state.network = data
     break
   }
@@ -16,15 +17,19 @@ const dashboard = (state = defaults.dashboard, { type, data }) => {
 
 
 const evaluations = (state = defaults.evaluations, { type, data }) => {
+  state = assign({}, state)
+
   switch (type) {
     case 'evaluations.list':
-      state = assign({}, state)
       state.list = data
     break
 
     case 'evaluations.filter':
-      state = assign({}, state)
       state.filter[data.filter] = data.value
+    break
+
+    case 'evaluation.document':
+      state.document = data
     break
   }
 

@@ -32,62 +32,34 @@ const fmtQuery = (data) => (
 )
 
 const fmtJSON = (reply) => {
-  try { reply = reply.json() }
-  catch (error) {
-    console.error(error, reply)
-  }
-
   hideNetworkIndicator()
 
-  return reply
+  return reply.json()
 }
 
 
-
-const get = (url, options, callback) => {
-  if (isFunction(options)) {
-    callback = options
-    options = {}
-  }
-
-  const config = {
-    method: 'GET',
-    // set to send cookies
-    credentials: 'same-origin',
-  }
-
-  if (options.query) {
-    url += fmtQuery(options.query)
-  }
-
-  showNetworkIndicator()
-
-  fetch(url, config)
-    .then(fmtJSON)
-    .then(callback)
-    .catch(onError)
+const defaults = {
+  // set to send cookies
+  credentials: 'same-origin',
+  headers: {
+    // ORO header required
+    'X-CSRF-Header': 1,
+  },
 }
 
 
-const post = (url, options, callback) => {
+export default (method, url, options, callback) => {
+  // make `options` an optional argument
   if (isFunction(options)) {
-    callback = options
-    options = {}
+    callback = options; options = {}
   }
 
-  const config = {
-    method: 'POST',
-    // set to send cookies
-    credentials: 'same-origin',
-  }
+  const config = Object.assign({}, defaults, { method })
 
   if (options.data) {
     config.body = JSON.stringify(options.data)
-
-    config.headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
+    config.headers['Accept'] = 'application/json'
+    config.headers['Content-Type'] = 'application/json'
   }
 
   if (options.query) {
@@ -100,10 +72,4 @@ const post = (url, options, callback) => {
     .then(fmtJSON)
     .then(callback)
     .catch(onError)
-}
-
-
-export {
-  get,
-  post,
 }
