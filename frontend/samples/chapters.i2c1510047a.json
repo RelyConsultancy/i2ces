@@ -1,0 +1,123 @@
+[{
+  "id": "1",
+  "state": "visible",
+  "location": "/api/evaluations/i2c1510047a/chapters/1",
+  "title": "Category Context"
+}, {
+  "id": "2",
+  "location": "/api/evaluations/i2c1510047a/chapters/2",
+  "state": "visible",
+  "title": "Campaign Background",
+  "content": [{
+    "type": "section",
+    "title": "Background",
+    "content": [{
+      "type": "html",
+      "value": "<p>Mars Food ran a campaign in cycle 6 and 7 by using Six Sheets, Sainsbury’s Magazine, Entrance Gates and CAT as a channels to drive awareness of Uncle Ben’s R&G Quinoa NPD. The objectives of the campaign were to launch the new products, grow total units and grow share of category</p>"
+    }]
+  }, {
+    "type": "section",
+    "title": "Campaign Objectives",
+    "content": [{
+      "type": "blocks",
+      "items": [{
+        "label": "Launch New Product",
+        "content": "..."
+      }, {
+        "label": "Grow Total Units",
+        "content": "..."
+      }, {
+        "label": "Grow Share of Category",
+        "content": "..."
+      }]
+    }]
+  }, {
+    "type": "section",
+    "title": "Timings",
+    "content": [{
+      "type": "list",
+      "items": [
+        "Pre: 01/04/2015 - 23/06/2015",
+        "During: 24/06/2015 - 11/08/2015",
+        "Post: 12/08/2015 - 03/11/2015"
+      ]
+    }]
+  }, {
+    "type": "section",
+    "title": "Evaluated Channels",
+    "content": [{
+      "type": "list",
+      "items": [
+        "Six Sheets",
+        "Entrance Gates",
+        "JS Magazine",
+        "Coupon at Till"
+      ]
+    }]
+  }, {
+    "type": "section",
+    "title": "Evaluated Cost",
+    "content": [{
+      "type": "list",
+      "items": [
+        "GBP 10,132"
+      ]
+    }]
+  }, {
+    "type": "section",
+    "title": "Offer SKUs",
+    "content": [{
+      "type": "text",
+      "content": "Please see Product Definitions"
+    }]
+  }, {
+    "type": "section",
+    "title": "Media Laydown",
+    "content": [{
+      "type": "chart_time_range",
+      "items": [{
+        "label": "Entrance Gates",
+        "start": "07/10/2015",
+        "end": "27/10/2015",
+        "marker": "#ccc"
+      }, {
+        "label": "TV Wall",
+        "start": "28/10/2015",
+        "end": "17/11/2015",
+        "marker": "#ccc"
+      }, {
+        "label": "Instore Sampling",
+        "start": "06/10/2015",
+        "end": "06/10/2015",
+        "marker": "#555"
+      }],
+      "legend": [{
+        "label": "Evaluated media",
+        "color": "#ccc"
+      }, {
+        "label": "In-store promotions",
+        "color": "#555"
+      }]
+    }]
+  }]
+}, {
+  "id": "3",
+  "location": "/api/evaluations/i2c1510047a/chapters/3",
+  "state": "visible",
+  "title": "Sampling Performance"
+}, {
+  "id": "4",
+  "location": "/api/evaluations/i2c1510047a/chapters/4",
+  "state": "visible",
+  "title": "Objective Review"
+}, {
+  "id": "5",
+  "location": "/api/evaluations/i2c1510047a/chapters/5",
+  "state": "visible",
+  "title": "Summary"
+}, {
+  "id": "6",
+  "location": "/api/evaluations/i2c1510047a/chapters/6",
+  "state": "visible",
+  "title": "Appendix"
+}]

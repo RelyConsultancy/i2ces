@@ -9,12 +9,16 @@
       "email": "no@email.one",
       "phone": "XxXxXXxXxXXxxXX",
       "website": "noweb.com"
-    }, {
-      "id": 3,
-      "name": "Supplier2",
-      "email": "no@email.two",
-      "phone": "NOPHONE",
-      "website": "noewebsite.ll"
-    }]
+    }],
+    "view": [
+      { "cid": "i2c1507187a", "id": 1 },
+      { "cid": "i2c1509134a", "id": 2 },
+      { "cid": "i2c1510047a", "id": 3 }
+    ],
+    "edit": [
+      { "cid": "i2c1507187a", "id": 1 },
+      { "cid": "i2c1509134a", "id": 2 },
+      { "cid": "i2c1510047a", "id": 3 }
+    ]
   }
 }

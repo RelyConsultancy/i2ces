@@ -1,0 +1,75 @@
+{
+  "id": "1",
+  "cid": "i2c1510047a",
+
+  "state": "published",
+
+  "title": "Lindt - Christmas 2015",
+  "brand": "Lindor",
+  "display_title": "Lindor: Lindt - Christmas 2015",
+
+  "category": "IMPULSE FOOD",
+
+  "start_date": "2015-02-01",
+  "end_date": "2015-04-15",
+
+  "channels": [
+    "TV Wall",
+    "Six Sheets",
+    "JS Magazine",
+    "Instore Sampling"
+  ],
+
+  "supplier": {
+    "id": 1,
+    "name": "Lindt & Sprungli (UK) Ltd",
+    "email": "",
+    "phone": "",
+    "website": ""
+  },
+
+  "campaign_objectives": [{
+    "label": "Total Sales Uplift",
+    "value": "38315.15",
+    "unit": "GBP"
+  }, {
+    "label": "Uplift in New Customers",
+    "value": "11637.557"
+  }, {
+    "label": "Share of Category Uplift",
+    "value": "1.8",
+    "unit": "ppts"
+  }],
+
+  "chapters": [{
+    "id": "1",
+    "state": "visible",
+    "location": "/api/evaluations/i2c1510047a/chapters/1",
+    "title": "Category Context"
+  }, {
+    "id": "2",
+    "location": "/api/evaluations/i2c1510047a/chapters/2",
+    "state": "visible",
+    "title": "Campaign Background"
+  }, {
+    "id": "3",
+    "location": "/api/evaluations/i2c1510047a/chapters/3",
+    "state": "visible",
+    "title": "Sampling Performance"
+  }, {
+    "id": "4",
+    "location": "/api/evaluations/i2c1510047a/chapters/4",
+    "state": "visible",
+    "title": "Objective Review"
+  }, {
+    "id": "5",
+    "location": "/api/evaluations/i2c1510047a/chapters/5",
+    "state": "visible",
+    "title": "Summary"
+  }, {
+    "id": "6",
+    "location": "/api/evaluations/i2c1510047a/chapters/6",
+    "state": "visible",
+    "title": "Appendix"
+  }]
+}
