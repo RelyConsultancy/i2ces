@@ -99,6 +99,7 @@ class RawImportCommand extends ContainerAwareCommand
         foreach ($this->rawTablesConfig as $key => $value) {
             $rows = $this->loadDataFromFile(
                 $key,
+                array_keys($value['columns']),
                 sprintf('%s/%s', $importFolderPath, $value['file_name']),
                 $fieldSeparator,
                 $lineEndings,
@@ -113,24 +114,27 @@ class RawImportCommand extends ContainerAwareCommand
     /**
      * @param string $tableName
      * @param string $filePath
+     * @param array  $columns
      * @param string $fieldSeparator
      * @param string $lineEndings
      * @param \PDO   $connection
      *
      * @return int
      */
-    protected function loadDataFromFile($tableName, $filePath, $fieldSeparator, $lineEndings, $connection)
+    protected function loadDataFromFile($tableName, $columns, $filePath, $fieldSeparator, $lineEndings, $connection)
     {
         $query = sprintf(
             "LOAD DATA LOCAL INFILE '%s' INTO TABLE `%s`
             FIELDS TERMINATED BY '%s' ENCLOSED BY ''
             LINES TERMINATED BY '%s'
             IGNORE 1 lines
+            (%s)
             ",
             $filePath,
             $tableName,
             $fieldSeparator,
-            $lineEndings
+            $lineEndings,
+            implode(',', $columns)
         );
 
         return $connection->exec($query);

@@ -30,8 +30,10 @@ parameters:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
                 media: 'VARCHAR(255)'
-                start_date: 'DATE'
-                end_date: 'DATE'
+                # todo refactor this to mysql DATE type
+                start_date: 'VARCHAR(10)'
+                # todo refactor this to mysql DATE type
+                end_date: 'VARCHAR(10)'
                 evaluate: 'TINYINT'
             primary_key: 'master_campaign_id'
             file_name: 'ie_media_data.csv'
@@ -56,7 +58,8 @@ parameters:
         ie_promo_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
-                week_commencing: 'DATE'
+                # todo refactor this to mysql DATE type
+                week_commencing: 'VARCHAR(10)'
                 product: 'VARCHAR(255)'
                 pr_results: 'DECIMAL(18,6)'
             primary_key: 'master_campaign_id'
@@ -80,13 +83,15 @@ parameters:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
                 period: 'INT'
-                period_date: 'DATE'
+                # todo refactor this to mysql DATE type
+                period_date: 'VARCHAR(10)'
             primary_key: 'master_campaign_id'
             file_name: 'ie_timings_data.csv'
         ie_weekly_results_data:
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
-                week_commencing: 'DATE'
+                # todo refactor this to mysql DATE type
+                week_commencing: 'VARCHAR(10)'
                 product: 'VARCHAR(255)'
                 metric: 'VARCHAR(255)'
                 exposed: 'INT(15)'
