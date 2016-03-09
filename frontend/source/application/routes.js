@@ -1,0 +1,29 @@
+import Dashboard from '/component/Dashboard'
+import Evaluations from '/component/Evaluations'
+import Evaluation from '/component/Evaluation'
+import FAQ from '/component/FAQ'
+
+
+const routes = {
+  path: '/',
+  component: Dashboard,
+  indexRoute: {
+    component: Evaluations,
+  },
+  childRoutes: [{
+    path: 'evaluations',
+    component: Evaluations,
+  }, {
+    path: 'evaluations/:id',
+    component: Evaluation,
+  }, {
+    path: 'faqs',
+    component: FAQ,
+  }, {
+    path: 'logout',
+    component: FAQ,
+  }]
+}
+
+
+export default routes

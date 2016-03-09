@@ -53,3 +53,18 @@ Execute `ansible/playbook.yml` tasks.
 ```
 
 You can validate it is running by loading http://ci.i2ces.info:8080/ in your browser.
+
+## Frontend Integrated Development Environment
+
+```bash
+git clone git@github.com:RelyConsultancy/i2ces.git i2ces-frontend
+cd i2ces-frontend
+
+cd frontend
+npm install
+cd ../
+
+vagrant up dev
+
+./frontend-dev.sh
+```

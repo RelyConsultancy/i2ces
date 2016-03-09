@@ -25,6 +25,7 @@
       - epel-release
       - bind-utils
       - traceroute
+      - links
 
   - name: Updatedb
     shell: >
