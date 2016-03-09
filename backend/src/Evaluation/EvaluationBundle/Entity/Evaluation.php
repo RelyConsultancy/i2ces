@@ -154,22 +154,6 @@ class Evaluation
     protected $generatedAt;
 
     /**
-     * @var Medium[]
-     *
-     * @ORM\ManyToMany(targetEntity="Evaluation\EvaluationBundle\Entity\Medium")
-     * @ORM\JoinTable(
-     *     name="evaluation_mediums",
-     *     joinColumns={@ORM\JoinColumn(name="evaluation_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="medium_id", referencedColumnName="id")}
-     * )
-     *
-     * @JMS\Groups({"list"})
-     * @JMS\SerializedName("mediums")
-     * @JMS\Type("array<'Evaluation\EvaluationBundle\Entity\Medium'>")
-     */
-    protected $mediums;
-
-    /**
      * @var BusinessUnit
      *
      * @ORM\OneToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
@@ -189,6 +173,7 @@ class Evaluation
      *     inverseJoinColumns={@ORM\JoinColumn(name="chapter_id", referencedColumnName="id")}
      * )
      *
+     * @JMS\Accessor(getter="getChapters")
      * @JMS\Groups({"list"})
      * @JMS\SerializedName("chapters")
      * @JMS\Type("array<'Evaluation\EvaluationBundle\Entity\Chapter'>")
@@ -198,6 +183,8 @@ class Evaluation
     /**
      * @JMS\VirtualProperty()
      * @JMS\Groups({"list"})
+     *
+     * @return array
      */
     public function getSupplier()
     {
@@ -365,22 +352,6 @@ class Evaluation
     }
 
     /**
-     * @return mixed
-     */
-    public function getMediums()
-    {
-        return $this->mediums;
-    }
-
-    /**
-     * @param mixed $mediums
-     */
-    public function setMediums($mediums)
-    {
-        $this->mediums = $mediums;
-    }
-
-    /**
      * @return BusinessUnit
      */
     public function getBusinessUnit()
@@ -397,11 +368,33 @@ class Evaluation
     }
 
     /**
+     * @return array
+     */
+    public function getCustomEntities()
+    {
+        $result = array();
+        foreach ($this->chapters as $chapter) {
+            if ($chapter->getIsAdditionalData()) {
+                $result[$chapter->getSerializedName()] = $chapter->getContentAsArray();
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @return Chapter[]
      */
     public function getChapters()
     {
-        return $this->chapters;
+        $result = array();
+        foreach ($this->chapters as $chapter) {
+            if (!$chapter->getIsAdditionalData()) {
+                $result[] = $chapter;
+            }
+        }
+
+        return $result;
     }
 
     /**
