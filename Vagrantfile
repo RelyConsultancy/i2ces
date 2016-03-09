@@ -28,7 +28,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.hostname = "i2ces.dev"
     dev.vm.boot_timeout = 2000
 
+    dev.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
+
     dev.vm.synced_folder "./backend", "/var/www/html/",
+      type: "nfs"
+    dev.vm.synced_folder "./frontend/public/fonts", "/var/www/html/web/fonts",
+      type: "nfs"
+    dev.vm.synced_folder "./frontend/public/images", "/var/www/html/web/images",
       type: "nfs"
   end # end |dev|
 
@@ -58,11 +64,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       rsync__exclude: [".git/", "vendor/", "app/config/parameters.yml", "app/bootstrap.php.cache", "app/cache/sessions/", "composer.lock"],
       owner: "vagrant", group: "vagrant"
 
-#     qa.vm.synced_folder "./frontend", "/var/www/html/frontend",
-#       mount_options: ['dmode=775','fmode=664'],
-#       type: "rsync",
-#       rsync__exclude: [".git/", "node_modules/"],
-#       owner: "vagrant", group: "vagrant"
+    qa.vm.synced_folder "./frontend", "/var/www/html/frontend",
+      mount_options: ['dmode=775','fmode=664'],
+      type: "rsync",
+      rsync__exclude: [".git/", "node_modules/"],
+      owner: "vagrant", group: "vagrant"
   end
 
   ######################################################################
@@ -90,11 +96,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       rsync__exclude: [".git/", "vendor/", "app/config/parameters.yml", "app/bootstrap.php.cache", "app/cache/sessions/", "composer.lock"],
       owner: "vagrant", group: "vagrant"
 
-#     staging.vm.synced_folder "./frontend", "/var/www/html/frontend",
-#       mount_options: ['dmode=775','fmode=664'],
-#       type: "rsync",
-#       rsync__exclude: [".git/", "node_modules/"],
-#       owner: "vagrant", group: "vagrant"
+    staging.vm.synced_folder "./frontend", "/var/www/html/frontend",
+      mount_options: ['dmode=775','fmode=664'],
+      type: "rsync",
+      rsync__exclude: [".git/", "node_modules/"],
+      owner: "vagrant", group: "vagrant"
   end
 
   config.vm.provision "ansible" do |ansible|

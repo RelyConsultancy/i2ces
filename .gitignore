@@ -44,3 +44,8 @@ backend/src/Evaluation/DashboardBundle/Resources/public/
 /backend/build/
 
 backend/app/check.php
+
+# Frontend
+/frontend/node_modules
+
+/.idea
