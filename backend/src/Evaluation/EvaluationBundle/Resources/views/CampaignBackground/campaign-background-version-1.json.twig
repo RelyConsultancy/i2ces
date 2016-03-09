@@ -1,0 +1,96 @@
+[
+    {
+        "type": "section",
+        "title": "Background",
+        "access": "editable",
+        "content": [
+            {
+                "type": "text",
+                "value": ""
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Campaign Objectives",
+        "access": "editable",
+        "content": [
+            {
+                "type": "list",
+                "value": [
+                    "{{ campaignObjectives | join('","') | raw }}"
+                ]
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Timings",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "list",
+                "value": [
+                    "{{ timings | join('","') | raw }}"
+                ]
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Evaluated Channels",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "list",
+                "value": [
+                    "{{ evaluatedChannels | join('","') | raw }}"
+                ]
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Evaluated Cost",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "list",
+                "value": [
+                    "{{ evaluatedCost | join('","') | raw }}"
+                ]
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Offer SKUs",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "text",
+                "value": "Please see Product Definitions"
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Media Laydown",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "table",
+                "header": ["", "{{ mediaLaydownHeaders | join('","') | raw }}"],
+                "value": [
+                    {% for row in mediaLaydownTableData %}
+                        {{ row['mediaName'] }},
+                        {{ row['rowData'] | join ('","') | raw }}
+                    {% endfor %}
+                ]
+                "legend": [
+                    {"label": "Evaluated media","color": "{{ mediaLaydownColors | join('"},{"label": "Evaluated media","color": "') | raw }}"}
+                ]
+            }
+        ]
+    }
+]

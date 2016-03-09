@@ -1,6 +1,6 @@
 <?php
 
-namespace i2c\EvaluationBundle\Command;
+namespace i2c\GenerateEvaluationBundle\Command;
 
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;

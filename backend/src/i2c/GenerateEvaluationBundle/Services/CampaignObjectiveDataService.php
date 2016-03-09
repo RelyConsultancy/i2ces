@@ -3,6 +3,7 @@
 namespace i2c\GenerateEvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -27,16 +28,15 @@ class CampaignObjectiveDataService
 
     public function getMediaLaydownHeaderPeriods($cid)
     {
+        /** @var Connection $connection */
         $connection = $this->entityManager->getConnection();
         $query = sprintf(
-            'SELECT `period_date`
-            FROM `ie_timings_data`
-            WHERE `master_campaign_id` = %s
-            ORDER BY `period` ASC',
-            $cid
+            'SELECT period_date, period FROM ie_timings_data ORDER BY period ASC'
         );
 
-        return $connection->exec($query);
+        $response = $connection->query($query)->fetchAll();
+
+        return $response;
     }
 
     public function getMediaLaydownChartPeriods($cid)
