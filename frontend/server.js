@@ -1,36 +1,68 @@
 import Koa from 'koa'
 import send from 'koa-send'
-import apiMe from './samples/me.json'
-import apiEvaluations from './samples/evaluations.json'
-import apiEvaluation from './samples/evaluation.json'
+import route from 'koa-route'
+
+import me from './samples/me.json'
+import i2c1507187a from './samples/evaluation.i2c1507187a.json'
+import i2c1509134a from './samples/evaluation.i2c1509134a.json'
+import i2c1510047a from './samples/evaluation.i2c1510047a.json'
+import i2c1510047a_chapters from './samples/chapters.i2c1510047a.json'
+
+
+const db = {
+  evaluations: {
+    i2c1507187a,
+    i2c1509134a,
+    i2c1510047a,
+  }
+, chapters: {
+    i2c1507187a: i2c1510047a_chapters,
+    i2c1509134a: i2c1510047a_chapters,
+    i2c1510047a: i2c1510047a_chapters,
+  }
+}
 
 
 const root = __dirname + '/public'
 const koa = Koa()
+const $ = (method, path, handler) => {
+  koa.use(route[method](path, handler))
+}
+const fmtReply = (data) => ({ data, error: null })
 
-koa.use(function * () {
-  const { path, headers } = this
 
-  switch (path) {
-    case '/api/me':
-      this.body = apiMe
-    break
+$('get', '/api/me', function * () {
+  this.body = fmtReply(me)
+})
 
-    case '/api/evaluations':
-      this.body = apiEvaluations
-    break
 
-    case '/api/evaluations/id':
-      this.body = apiEvaluations
-    break
+$('get', '/api/evaluations', function * (id) {
+  const items = Object.keys(db.evaluations).map(id => db.evaluations[id])
 
-    default:
-      const isSent = yield send(this, path, { root })
+  this.body = fmtReply({
+    count: items.length,
+    items,
+  })
+})
 
-      if (!isSent) {
-        yield send(this, 'index.html', { root })
-      }
+
+$('get', '/api/evaluations/:id', function * (id) {
+  this.body = fmtReply(db.evaluations[id])
+})
+
+
+$('get', '/api/evaluations/:id/chapters/:cid', function * (id, cid) {
+  this.body = fmtReply(db.chapters[id].filter(c => c.id == cid))
+})
+
+
+$('get', '/*', function * () {
+  const isSent = yield send(this, this.path, { root })
+
+  if (!isSent) {
+    yield send(this, 'index.html', { root })
   }
 })
+
 
 koa.listen(3000)
