@@ -53,10 +53,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     qa.vm.synced_folder "./backend", "/var/www/html/",
-      mount_options: ['dmode=775','fmode=664']
-      , type: "rsync"
-      , rsync__exclude: [".git/", "vendor/", "app/config/parameters.yml", "app/bootstrap.php.cache", "app/cache/sessions/", "composer.lock"]
-      , owner: "vagrant", group: "vagrant"
+      mount_options: ['dmode=775','fmode=664'],
+      type: "rsync",
+      rsync__exclude: [".git/", "vendor/", "app/config/parameters.yml", "app/bootstrap.php.cache", "app/cache/sessions/", "composer.lock"],
+      owner: "vagrant", group: "vagrant"
 
     qa.vm.synced_folder "./frontend", "/var/www/html/frontend",
       mount_options: ['dmode=775','fmode=664'],
@@ -85,10 +85,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     staging.vm.synced_folder "./backend", "/var/www/html/",
-      mount_options: ['dmode=775','fmode=664']
-      , type: "rsync"
-      , rsync__exclude: [".git/", "vendor/", "app/config/parameters.yml", "app/bootstrap.php.cache", "app/cache/sessions/", "composer.lock"]
-      , owner: "vagrant", group: "vagrant"
+      mount_options: ['dmode=775','fmode=664'],
+      type: "rsync",
+      rsync__exclude: [".git/", "vendor/", "app/config/parameters.yml", "app/bootstrap.php.cache", "app/cache/sessions/", "composer.lock"],
+      owner: "vagrant", group: "vagrant"
 
     staging.vm.synced_folder "./frontend", "/var/www/html/frontend",
       mount_options: ['dmode=775','fmode=664'],
