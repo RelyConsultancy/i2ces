@@ -30,9 +30,17 @@
 /backend/web/bundles/
 /backend/web/uploads/
 
+## Frontend with NFS
+/backend/frontend/
+/backend/web/
+backend/src/Evaluation/DashboardBundle/Resources/public/
+/backend/app/check.php
+
 # PHPUnit
 /backend/app/phpunit.xml
 /phpunit.xml
 
 # Build data
 /backend/build/
+
+backend/app/check.php
