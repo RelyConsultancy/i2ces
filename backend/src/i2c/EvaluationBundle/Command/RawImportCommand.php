@@ -125,7 +125,8 @@ class RawImportCommand extends ContainerAwareCommand
     {
         $query = sprintf(
             "LOAD DATA LOCAL INFILE '%s' INTO TABLE `%s`
-            FIELDS TERMINATED BY '%s' ENCLOSED BY ''
+            FIELDS TERMINATED BY '%s'
+            ENCLOSED BY '\"'
             LINES TERMINATED BY '%s'
             IGNORE 1 lines
             (%s)
