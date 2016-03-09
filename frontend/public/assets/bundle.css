@@ -434,7 +434,7 @@ input::-moz-focus-inner {
 */
 
 [class*=grid-blocks-],
-._style_grid_grid-gutter,
+.grid-gutter,
 .grid {
   position: relative;
   display: block;
@@ -471,11 +471,11 @@ input::-moz-focus-inner {
   /* 2 */
 }
 
-._style_grid_grid-gutter {
+.grid-gutter {
   margin: 0 calc(-.5 * 1rem);
 }
 
-._style_grid_grid-gutter > [class*=grid-cell-] {
+.grid-gutter > [class*=grid-cell-] {
   padding: 0 calc(.5 * 1rem);
 }
 
@@ -507,51 +507,51 @@ input::-moz-focus-inner {
   margin-right: 0;
 }
 
-._style_grid_grid-cell-1 {
+.grid-cell-1 {
   width: 8.33333333333333333333%;
 }
 
-._style_grid_grid-cell-2 {
+.grid-cell-2 {
   width: 16.66666666666666666666%;
 }
 
-._style_grid_grid-cell-3 {
+.grid-cell-3 {
   width: 25%;
 }
 
-._style_grid_grid-cell-4 {
+.grid-cell-4 {
   width: 33.33333333333333333333%;
 }
 
-._style_grid_grid-cell-5 {
+.grid-cell-5 {
   width: 41.66666666666666666666%;
 }
 
-._style_grid_grid-cell-6 {
+.grid-cell-6 {
   width: 50%;
 }
 
-._style_grid_grid-cell-7 {
+.grid-cell-7 {
   width: 58.33333333333333333333%;
 }
 
-._style_grid_grid-cell-8 {
+.grid-cell-8 {
   width: 66.66666666666666666666%;
 }
 
-._style_grid_grid-cell-9 {
+.grid-cell-9 {
   width: 75%;
 }
 
-._style_grid_grid-cell-10 {
+.grid-cell-10 {
   width: 83.33333333333333333333%;
 }
 
-._style_grid_grid-cell-11 {
+.grid-cell-11 {
   width: 91.66666666666666666666%;
 }
 
-._style_grid_grid-cell-12 {
+.grid-cell-12 {
   width: 100%;
 }
 
