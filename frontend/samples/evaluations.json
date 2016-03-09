@@ -1,0 +1,58 @@
+{
+  "error": null,
+  "data": {
+    "count": 3,
+    "items": [{
+      "id": "id",
+      "state": "published",
+      "campaign_id": "i2c1510047a",
+      "title": "Lindt - Christmas 2015",
+      "brand": "Lindor",
+      "category": "IMPULSE FOOD",
+      "start_date": "2015-02-01",
+      "end_date": "2015-04-15",
+      "channels": ["email", "paper"],
+      "supplier": {
+        "id": 1,
+        "name": "Lindt & Sprungli (UK) Ltd",
+        "email": "",
+        "phone": "",
+        "website": ""
+      }
+    }, {
+      "id": "id",
+      "state": "published",
+      "campaign_id": "i2c1509134a",
+      "title": "SCA Plenty Genius Award",
+      "brand": "Plenty",
+      "category": "HOUSEHOLD & PETCARE",
+      "start_date": "2015-06-01",
+      "end_date": "2015-07-15",
+      "channels": ["email", "paper"],
+      "supplier": {
+        "id": 1,
+        "name": "SCA Plenty Genius Award",
+        "email": "",
+        "phone": "",
+        "website": ""
+      }
+    }, {
+      "id": "id",
+      "state": "published",
+      "campaign_id": "i2c1507187a",
+      "title": "Colgate Palmolive - CSPR",
+      "brand": "Colgate",
+      "category": "BABY & BEAUTY",
+      "start_date": "2015-04-01",
+      "end_date": "2015-04-15",
+      "channels": ["email", "paper"],
+      "supplier": {
+        "id": 1,
+        "name": "Colgate Palmolive Uk Ltd",
+        "email": "",
+        "phone": "",
+        "website": ""
+      }
+    }]
+  }
+}

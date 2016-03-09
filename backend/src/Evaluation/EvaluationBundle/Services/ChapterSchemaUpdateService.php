@@ -2,6 +2,7 @@
 
 namespace Evaluation\EvaluationBundle\Services;
 
+use Doctrine\DBAL\Exception\DriverException;
 use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
 
 /**
@@ -40,5 +41,24 @@ class ChapterSchemaUpdateService extends AbstractSchemaUpdateService
      */
     protected function updateTable()
     {
+        $connection = $this->entityManager->getConnection();
+        try {
+            $query = sprintf(
+                'ALTER TABLE `%s` ADD COLUMN is_additional_data TINYINT(1) NOT NULL',
+                $this->tableName
+            );
+
+            $connection->exec($query);
+        } catch (DriverException $ex) {
+        }
+        try {
+            $query = sprintf(
+                'ALTER TABLE `%s` ADD COLUMN serialized_name VARCHAR(255) NOT NULL',
+                $this->tableName
+            );
+
+            $connection->exec($query);
+        } catch (DriverException $ex) {
+        }
     }
 }

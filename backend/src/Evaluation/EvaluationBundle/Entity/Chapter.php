@@ -9,6 +9,7 @@ use JMS\Serializer\Annotation as JMS;
  * Class Chapter
  *
  * @ORM\Entity(repositoryClass="Evaluation\EvaluationBundle\Repository\ChapterRepository")
+ * @ORM\Table(name="chapter")
  *
  * @package Evaluation\EvaluationBundle\Entity
  */
@@ -21,7 +22,9 @@ class Chapter
      * @ORM\Column(type="integer", name="id")
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @JMS\Exclude()
+     * @JMS\Groups({"list", "full"})
+     * @JMS\SerializedName("id")
+     * @JMS\Type("integer")
      */
     protected $id;
 
@@ -80,6 +83,24 @@ class Chapter
      * @JMS\Type("array")
      */
     protected $content;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_additional_data", options={"default":false})
+     *
+     * @JMS\Exclude()
+     */
+    protected $isAdditionalData;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", name="serialized_name")
+     *
+     * @JMS\Exclude()
+     */
+    protected $serializedName;
 
     /**
      * @var \DateTime
@@ -212,6 +233,38 @@ class Chapter
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsAdditionalData()
+    {
+        return $this->isAdditionalData;
+    }
+
+    /**
+     * @param boolean $isAdditionalData
+     */
+    public function setIsAdditionalData($isAdditionalData)
+    {
+        $this->isAdditionalData = $isAdditionalData;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSerializedName()
+    {
+        return $this->serializedName;
+    }
+
+    /**
+     * @param string $serializedName
+     */
+    public function setSerializedName($serializedName)
+    {
+        $this->serializedName = $serializedName;
     }
 
     /**

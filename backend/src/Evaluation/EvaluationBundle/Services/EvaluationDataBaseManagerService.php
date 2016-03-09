@@ -4,6 +4,7 @@ namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
+use Evaluation\EvaluationBundle\Entity\Evaluation;
 use Oro\Bundle\SecurityBundle\ORM\Walker\AclHelper;
 
 /**
@@ -32,16 +33,50 @@ class EvaluationDataBaseManagerService
     }
 
     /**
-     * @param array $uids
-     *
      * @return mixed
      */
-    public function getByUids($uids)
+    public function getAllForViewing()
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('e')
+            ->from('EvaluationEvaluationBundle:Evaluation', 'e');
+
+        $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllForEditing()
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
             ->from('EvaluationEvaluationBundle:Evaluation', 'e')
-            ->where($queryBuilder->expr()->in('e.uid', '?1'))
+            ->where($queryBuilder->expr()->neq('e.state', '?1'))
+            ->setParameter(1, Evaluation::STATE_PUBLISHED);
+
+        $query = $this->aclHelper->apply($queryBuilder, 'EDIT');
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+    /**
+     * @param array $uids
+     *
+     * @return mixed
+     */
+    public function getByCids($uids)
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('e')
+            ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+            ->where($queryBuilder->expr()->in('e.cid', '?1'))
             ->setParameter(1, $uids);
 
 
@@ -57,12 +92,12 @@ class EvaluationDataBaseManagerService
      *
      * @return mixed
      */
-    public function getByUid($uid)
+    public function getByCid($uid)
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
             ->from('EvaluationEvaluationBundle:Evaluation', 'e')
-            ->where($queryBuilder->expr()->eq('e.uid', '?1'))
+            ->where($queryBuilder->expr()->eq('e.cid', '?1'))
             ->setParameter(1, $uid);
 
         $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
@@ -77,12 +112,12 @@ class EvaluationDataBaseManagerService
      *
      * @return mixed
      */
-    public function getByUidForEditing($uid)
+    public function getByCidForEditing($uid)
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
             ->from('EvaluationEvaluationBundle:Evaluation', 'e')
-            ->where($queryBuilder->expr()->eq('e.uid', '?1'))
+            ->where($queryBuilder->expr()->eq('e.cid', '?1'))
             ->setParameter(1, $uid);
 
         $query = $this->aclHelper->apply($queryBuilder, 'EDIT');

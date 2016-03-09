@@ -1,12 +1,81 @@
 ---
 - hosts: jenkins
-
+  remote_user: root
   roles:
     - geerlingguy.ruby
 
   tasks:
+
+  - name: test
+    shell: echo "{{ ansible_ssh_host | default(inventory_hostname) }}"
+
+  - stat: path=/root/updated.txt
+    register: osupdate
+
+  - name: Make sure Centos is up to date
+    yum: name=* state=latest
+    when: not osupdate.stat.exists
+    ignore_errors: true
+
+  - name: restart machine to make sure it uses the latest kernel installed
+    command: shutdown -r now "Ansible updates triggered"
+    async: 0
+    poll: 0
+    ignore_errors: true
+    when: osupdate.stat.exists == False
+    register: vmrestarted
+    ignore_errors: true
+
+#  - name: waiting for server to come back  - not working for some reason... will use pause for now
+#    local_action: wait_for port=22 host="{{ ansible_ssh_host }}" search_regex=OpenSSH delay=10
+#                  timeout=300 connect_timeout=5
+#    sudo: false
+
+  - pause: minutes=1
+    when: vmrestarted | failed
+
+  - name: Make sure upgrade and reboot are not run again until server reinstall
+    shell: touch /root/updated.txt
+
+  - name: Download virtualbox repo
+    get_url: url=http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo dest=/etc/yum.repos.d/virtualbox.repo
+
+  - name: Install epel repo
+    shell: rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+    sudo: yes
+    args:    
+      creates: /etc/yum.repos.d/epel.repo
+
+  - name: Install virtualbox dependencies
+    yum: name="{{ item }}" state=present
+    with_items:
+      - "@Development tools"
+      - kernel-devel
+      - dkms
+
+  - name: Install virtualbox and pip
+    yum: name="{{ item }}" state=installed
+    with_items:
+      - VirtualBox-5.*
+      - python-pip
+
+  - name: Install ansible
+    pip: name=ansible state=latest
+
+  - name: Check if virtualbox is working
+    shell: virtualbox
+    register: vboxstatus
+    ignore_errors: yes
+
+  - name: Make sure virtualbox headers are compiled
+    shell: /usr/lib/virtualbox/vboxdrv.sh setup
+    sudo: yes
+    when: vboxstatus.stdout.find('X server') == -1
+
   - name: Fetch Jenkins repo
     command: "wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo"
+    args:
+      creates: /etc/yum.repos.d/jenkins.repo
 
   - name: Import Jenkins repo
     command: "rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key"
@@ -38,21 +107,25 @@
   - name: Install Vagrant
     yum: name=https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.rpm state=present
 
-  - name: Grab i2c repo
-    git: repo=git@github.com:RelyConsultancy/i2ces.git
-      dest=/root/i2ces
-      accept_hostkey=true
-
-  - name: Grab i2c repo for staging
-    git: repo=git@github.com:RelyConsultancy/i2ces.git
-      dest=/root/i2ces-staging
-      accept_hostkey=true
-
   - name: Ensure Jenkins is started
     service: name=jenkins state=started
+
+  - name: Make sure .ssh folder exists for jenkins
+    file: state=directory owner="jenkins" group="jenkins"  path="/var/lib/jenkins/.ssh" mode=0700
+    sudo: yes
+ 
+  - name: ensure private key and public one are present
+    copy: src={{ item }} dest="/var/lib/jenkins/.ssh/{{ item }}" mode=0600
+    with_items:
+      - id_rsa.pub
+      - id_rsa
 
   - name: Vagrant dependency json gem
     gem: name=json version=1.8.3 state=present
 
   - name: Enable DigitalOcean provider for Vagrant
-    command: "vagrant plugin install vagrant-digitalocean"
+    shell: "vagrant plugin install vagrant-digitalocean"
+
+  - name: Install ansible dependecies
+    shell: ansible-galaxy install geerlingguy.repo-remi geerlingguy.apache geerlingguy.mysql geerlingguy.php geerlingguy.git geerlingguy.composer geerlingguy.ruby --force
+    sudo: yes
