@@ -3,8 +3,8 @@
 @import from './style/avenir.css';
 @import from './style/archer.css';
 @import from './style/loader.css';
+@import raw './component/Select/style.css';
 @import from './component/Loader/style.css';
-@import from './component/Select/style.css';
 @import from './component/PaneTitle/style.css';
 @import from './component/Dashboard/style.css';
 @import from './component/Evaluation/style.css';
