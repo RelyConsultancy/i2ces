@@ -83,6 +83,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       provider.region = 'lon1'
       provider.size = '8gb'
     end
+  end
 
     staging.vm.synced_folder "./backend", "/var/www/html/",
       mount_options: ['dmode=775','fmode=664'],
