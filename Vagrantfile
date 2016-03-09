@@ -32,9 +32,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     dev.vm.synced_folder "./backend", "/var/www/html/",
       type: "nfs"
-    dev.vm.synced_folder "./frontend/fonts", "/var/www/html/web/fonts",
+    dev.vm.synced_folder "./frontend/public/fonts", "/var/www/html/web/fonts",
       type: "nfs"
-    dev.vm.synced_folder "./frontend/images", "/var/www/html/web/images",
+    dev.vm.synced_folder "./frontend/public/images", "/var/www/html/web/images",
       type: "nfs"
   end # end |dev|
 
