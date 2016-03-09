@@ -85,6 +85,24 @@ class Chapter
     protected $content;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean", name="is_additional_data", options={"default":false})
+     *
+     * @JMS\Exclude()
+     */
+    protected $isAdditionalData;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", name="serialized_name")
+     *
+     * @JMS\Exclude()
+     */
+    protected $serializedName;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", name="created_at")
@@ -215,6 +233,38 @@ class Chapter
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsAdditionalData()
+    {
+        return $this->isAdditionalData;
+    }
+
+    /**
+     * @param boolean $isAdditionalData
+     */
+    public function setIsAdditionalData($isAdditionalData)
+    {
+        $this->isAdditionalData = $isAdditionalData;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSerializedName()
+    {
+        return $this->serializedName;
+    }
+
+    /**
+     * @param string $serializedName
+     */
+    public function setSerializedName($serializedName)
+    {
+        $this->serializedName = $serializedName;
     }
 
     /**
