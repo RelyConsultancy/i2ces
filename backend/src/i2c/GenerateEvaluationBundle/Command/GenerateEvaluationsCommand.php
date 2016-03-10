@@ -130,6 +130,9 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
                 "mediaLaydownColorsConfig" => $this->campaignColorsConfig,
             ]
         );
+        $campaignObjectivesChapterContent = str_replace(' ', '', $campaignObjectivesChapterContent);
+        $campaignObjectivesChapterContent = str_replace("\r", '', $campaignObjectivesChapterContent);
+        $campaignObjectivesChapterContent = str_replace("\n", '', $campaignObjectivesChapterContent);
 
         $chapters = [];
 

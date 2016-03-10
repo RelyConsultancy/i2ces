@@ -27,6 +27,7 @@
                             "label": "{{ objective }}",
                             "content": "..."
                         }
+                        {% set prepend_comma = true %}
                     {% endfor %}
                 ]
             }
@@ -133,6 +134,7 @@
                             "label": "{{ legend_item.label }}",
                             "color": "#{{ legend_item.color }}"
                         }
+                        {% set prepend_comma = true %}
                     {% endfor %}
                 ]
             }

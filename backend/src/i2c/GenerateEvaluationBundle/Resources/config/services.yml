@@ -110,7 +110,7 @@ parameters:
 
     colors_config:
         - { color: ccc, media: ['Instore Sampling', 'Entrance Gates', 'Six Sheets'], label: 'Evaluated media' }
-        - { color: 555, media: ['TV Wall'], label: 'In-Store Promotions' }
+        - { color: 555, media: ['TV Wall', 'JS Magazine'], label: 'In-Store Promotions' }
 
 services:
     i2c_generate_evaluation.raw_import:
