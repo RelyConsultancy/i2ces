@@ -137,8 +137,8 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $campaignObjectivesArray->setContent(json_encode($campaignObjectives));
         $campaignObjectivesArray->setIsAdditionalData(true);
         $campaignObjectivesArray->setSerializedName("campaign_objectives");
-        $campaignObjectivesArray->setTitle("campaign_bjective");
-        $campaignObjectivesArray->setState("campaign_bjective");
+        $campaignObjectivesArray->setTitle("campaign_objective");
+        $campaignObjectivesArray->setState("campaign_objective");
         $this->entityManager->persist($campaignObjectivesArray);
 
         $chapters[] = $campaignObjectivesArray;
