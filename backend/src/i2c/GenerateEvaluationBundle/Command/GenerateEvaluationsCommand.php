@@ -301,6 +301,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $this->entityManager->persist($categoryContext);
         $this->entityManager->persist($objectiveReview);
 
+        $chapters[] = $appendix;
         $chapters[] = $campaignObjectivesChapter;
         $chapters[] = $summary;
         $chapters[] = $samplingPerformance;
