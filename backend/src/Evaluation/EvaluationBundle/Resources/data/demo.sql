@@ -39,9 +39,9 @@ LIMIT 0, 1000
 
 -- Date: 2016-03-10 20:24
 */
-INSERT INTO `evaluation` (`id`,`cid`,`title`,`category`,`brand`,`state`,`start_date`,`end_date`,`generated_at`,`business_unit_id`,`uid`) VALUES (103,'i2c1510047a','Lindt - Christmas 2015','IMPULSE FOOD','Lindor','draft','2015-08-04 00:00:00','2016-01-21 00:00:00','2016-03-10 18:22:35',2,'');
-INSERT INTO `evaluation` (`id`,`cid`,`title`,`category`,`brand`,`state`,`start_date`,`end_date`,`generated_at`,`business_unit_id`,`uid`) VALUES (104,'i2c1509134a','SCA Plenty Genius Award','HOUSEHOLD & PETCARE','Plenty','draft','2015-08-04 00:00:00','2016-01-12 00:00:00','2016-03-10 18:22:35',2,'');
-INSERT INTO `evaluation` (`id`,`cid`,`title`,`category`,`brand`,`state`,`start_date`,`end_date`,`generated_at`,`business_unit_id`,`uid`) VALUES (105,'i2c1507187a','Colgate Palmolive - CSPR','BABY & BEAUTY','Colgate','draft','2015-07-13 00:00:00','2015-12-08 00:00:00','2016-03-10 18:22:35',3,'');
+INSERT INTO `evaluation` (`id`,`cid`,`title`,`category`,`brand`,`state`,`start_date`,`end_date`,`generated_at`,`business_unit_id`) VALUES (103,'i2c1510047a','Lindt - Christmas 2015','IMPULSE FOOD','Lindor','draft','2015-08-04 00:00:00','2016-01-21 00:00:00','2016-03-10 18:22:35',2);
+INSERT INTO `evaluation` (`id`,`cid`,`title`,`category`,`brand`,`state`,`start_date`,`end_date`,`generated_at`,`business_unit_id`) VALUES (104,'i2c1509134a','SCA Plenty Genius Award','HOUSEHOLD & PETCARE','Plenty','draft','2015-08-04 00:00:00','2016-01-12 00:00:00','2016-03-10 18:22:35',2);
+INSERT INTO `evaluation` (`id`,`cid`,`title`,`category`,`brand`,`state`,`start_date`,`end_date`,`generated_at`,`business_unit_id`) VALUES (105,'i2c1507187a','Colgate Palmolive - CSPR','BABY & BEAUTY','Colgate','draft','2015-07-13 00:00:00','2015-12-08 00:00:00','2016-03-10 18:22:35',3);
 /*
 -- Query: SELECT * FROM new_i2c.evaluation_chapters
 LIMIT 0, 1000
