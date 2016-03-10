@@ -4,6 +4,7 @@ namespace Evaluation\EvaluationBundle\EventListener;
 
 use JMS\DiExtraBundle\Annotation\Service;
 use JMS\DiExtraBundle\Annotation\Tag;
+use JMS\Serializer\Context;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 
@@ -35,9 +36,28 @@ class EvaluationPostSerializeListener implements EventSubscriberInterface
      */
     public function onPostSerialize(ObjectEvent $event)
     {
-        $customEntities = $event->getObject()->getCustomEntities();
-        foreach ($customEntities as $key => $customEntity) {
-            $event->getVisitor()->addData($key, $customEntity);
+        if ($this->canAddAdditionalData($event->getContext(), 'list')) {
+            $event->getVisitor();
+            $customEntities = $event->getObject()->getCustomEntities();
+
+            foreach ($customEntities as $key => $customEntity) {
+                $event->getVisitor()->addData($key, $customEntity);
+            }
         }
+    }
+
+    /**
+     * Check if the context contains a given jms group.
+     *
+     * @param Context $context
+     * @param string  $group
+     *
+     * @return bool
+     */
+    protected function canAddAdditionalData(Context $context, $group)
+    {
+        $contextGroups = $context->attributes->get('groups')->get();
+
+        return (in_array($group, $contextGroups));
     }
 }

@@ -56,18 +56,6 @@ class Evaluation
     /**
      * @var string
      *
-     * @ORM\Column(type="guid", name="uid")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     *
-     * @JMS\Groups({"list", "minimal"})
-     * @JMS\SerializedName("uid")
-     * @JMS\Type("string")
-     */
-    protected $uid;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string", name="cid")
      *
      * @JMS\Groups({"list", "minimal"})
@@ -183,6 +171,22 @@ class Evaluation
     /**
      * @JMS\VirtualProperty()
      * @JMS\Groups({"list"})
+     * @JMS\SerializedName("display_title")
+     *
+     * @return array
+     */
+    public function getDisplayName()
+    {
+        return sprintf(
+            '%s: %s',
+            $this->brand,
+            $this->title
+        );
+    }
+
+    /**
+     * @JMS\VirtualProperty()
+     * @JMS\Groups({"list"})
      *
      * @return array
      */
@@ -205,22 +209,6 @@ class Evaluation
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUid()
-    {
-        return $this->uid;
-    }
-
-    /**
-     * @param string $uid
-     */
-    public function setUid($uid)
-    {
-        $this->uid = $uid;
     }
 
     /**

@@ -31,18 +31,6 @@ class Chapter
     /**
      * @var string
      *
-     * @ORM\Column(type="guid", name="uid")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     *
-     * @JMS\Groups({"list", "full"})
-     * @JMS\SerializedName("uid")
-     * @JMS\Type("string")
-     */
-    protected $uid;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=255, name="title")
      *
      * @JMS\Groups({"list", "full"})
@@ -153,22 +141,6 @@ class Chapter
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUid()
-    {
-        return $this->uid;
-    }
-
-    /**
-     * @param string $uid
-     */
-    public function setUid($uid)
-    {
-        $this->uid = $uid;
     }
 
     /**
