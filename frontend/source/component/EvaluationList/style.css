@@ -1,4 +1,12 @@
-.component {}
+.content {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  overflow-y: auto;
+}
 
 .filters {
   width: 800px;
@@ -16,6 +24,7 @@
 .list {
   width: 800px;
   margin: 0 auto;
+  overflow-y: auto;
 }
 
 .list_empty {

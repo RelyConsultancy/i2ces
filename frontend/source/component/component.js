@@ -1,14 +1,6 @@
 import { createClass, createElement, PropTypes } from 'react'
 import { Link as link } from 'react-router'
-
-
-const isElement = (value) => (
-  typeof value === 'object' && value !== null && value.$$typeof
-)
-
-const isString = (value) => (
-  typeof el == 'string'
-)
+import { isElement, isString } from '/application/utils.js'
 
 
 export const Element = (type) => (

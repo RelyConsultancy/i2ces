@@ -1,40 +1,47 @@
 import 'whatwg-fetch' // window.fetch polyfill
 import qs from 'qs'
 import { isFunction } from './utils.js'
-import { setNetworkIndicator } from './actions.js'
+import { setFlagNetwork } from './actions.js'
 
 
 let inFlight = 0
 
-const showNetworkIndicator = () => {
+const showLoader = () => {
   if (!inFlight) {
-    setNetworkIndicator(true)
+    setFlagNetwork(true)
   }
 
   inFlight += 1
 }
 
-const hideNetworkIndicator = () => {
+const hideLoader = () => {
   inFlight -= 1
 
   if (!inFlight) {
     // allow a timeout to visually notice the indicator
-    setTimeout(setNetworkIndicator, 300, false)
+    setTimeout(setFlagNetwork, 300, false)
   }
 }
 
 const onError = (error) => {
-  console.error(error)
+  console.error(error.stack)
 }
 
 const fmtQuery = (data) => (
   '?' + qs.stringify(data)
 )
 
-const fmtJSON = (reply) => {
-  hideNetworkIndicator()
+const onReply = (reply) => {
+  hideLoader()
 
-  return reply.json()
+  try {
+    reply = reply.json()
+  }
+  catch (error) {
+    throw error
+  }
+
+  return reply
 }
 
 
@@ -48,10 +55,10 @@ const defaults = {
 }
 
 
-export default (method, url, options, callback) => {
+export default (method, url, options, handler) => {
   // make `options` an optional argument
   if (isFunction(options)) {
-    callback = options; options = {}
+    handler = options; options = {}
   }
 
   const config = Object.assign({}, defaults, { method })
@@ -66,10 +73,10 @@ export default (method, url, options, callback) => {
     url += fmtQuery(options.query)
   }
 
-  showNetworkIndicator()
+  showLoader()
 
   fetch(url, config)
-    .then(fmtJSON)
-    .then(callback)
+    .then(onReply)
+    .then(handler)
     .catch(onError)
 }

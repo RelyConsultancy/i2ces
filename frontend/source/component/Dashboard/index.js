@@ -1,7 +1,6 @@
 import { Component, B, Image, Link } from '/component/component.js'
 import Loader from '/component/Loader'
 import store from '/application/store.js'
-import { setNetworkIndicator } from '/application/actions.js'
 import style from './style.css'
 
 
@@ -18,15 +17,17 @@ const Navigation = ({ links }) => (
 
 
 const Topbar = ({ store }) => {
+  const { flag, navigation } = store
+
   // network indicator
-  const network = store.network ? Loader({ className: style.loader }) : null
+  const loader = flag.network && Loader({ className: style.loader })
   const attrs = { className: style.topbar }
 
   return B(
     attrs,
-    network,
+    loader,
     Logo({ image: '/images/logo.png' }),
-    Navigation({ links: store.navigation })
+    Navigation({ links: navigation })
   )
 }
 

@@ -1,10 +1,12 @@
 .component {
-  padding: .625em;
-  font-size: 1.2em;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 1.1em;
   font-family: 'Archer Bold', serif;
   border-top: 1px solid #E6E6E6;
   border-bottom: 1px solid #E6E6E6;
-  color: #454545;
+  color: #656565;
+  z-index: 10;
 }
 
 .wrap {

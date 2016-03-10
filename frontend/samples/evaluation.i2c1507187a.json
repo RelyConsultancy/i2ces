@@ -1,0 +1,81 @@
+{
+  "id": "1",
+  "cid": "i2c1507187a",
+
+  "state": "published",
+
+  "title": "Colgate Palmolive - CSPR",
+  "brand": "Colgate",
+  "display_title": "Colgate: Colgate Palmolive - CSPR",
+
+  "category": "BABY & BEAUTY",
+
+  "start_date": "2015-04-01",
+  "end_date": "2015-04-15",
+
+  "channels": [
+    "TV Wall",
+    "Six Sheets",
+    "JS Magazine",
+    "Instore Sampling"
+  ],
+
+  "supplier": {
+    "id": 1,
+    "name": "Colgate Palmolive Uk Ltd",
+    "email": "",
+    "phone": "",
+    "website": ""
+  },
+
+  "campaign_objectives": [{
+    "label": "Total Sales Uplift",
+    "value": "38315.15",
+    "unit": "GBP"
+  }, {
+    "label": "Uplift in New Customers",
+    "value": "11637.557"
+  }, {
+    "label": "Share of Category Uplift",
+    "value": "1.8",
+    "unit": "ppts"
+  }],
+
+  "chapters": [{
+    "id": "1",
+    "order": 1,
+    "state": "visible",
+    "location": "/api/evaluations/i2c1507187a/chapters/1",
+    "title": "Category Context"
+  }, {
+    "id": "2",
+    "order": 2,
+    "location": "/api/evaluations/i2c1507187a/chapters/2",
+    "state": "visible",
+    "title": "Campaign Background"
+  }, {
+    "id": "3",
+    "order": 3,
+    "location": "/api/evaluations/i2c1507187a/chapters/3",
+    "state": "visible",
+    "title": "Sampling Performance"
+  }, {
+    "id": "4",
+    "order": 4,
+    "location": "/api/evaluations/i2c1507187a/chapters/4",
+    "state": "visible",
+    "title": "Objective Review"
+  }, {
+    "id": "5",
+    "order": 5,
+    "location": "/api/evaluations/i2c1507187a/chapters/5",
+    "state": "visible",
+    "title": "Summary"
+  }, {
+    "id": "6",
+    "order": 6,
+    "location": "/api/evaluations/i2c1507187a/chapters/6",
+    "state": "visible",
+    "title": "Appendix"
+  }]
+}
