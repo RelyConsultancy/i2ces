@@ -1,5 +1,11 @@
 export default {
   dashboard: {
+    user: null,
+
+    flag: {
+      network: false,
+    },
+
     navigation: [{
       label: 'FAQs',
       path: '/faqs',
@@ -7,21 +13,28 @@ export default {
       label: 'Logout',
       path: '/logout',
     }],
-    network: false,
   },
 
-  evaluations: {
-    list: [],
-    list_empty: 'No records found',
+  evaluation: {
     filter: {
       category: null,
       brand: null,
       supplier: null,
     },
-  },
 
-  evaluation: {
-    document: null,
+    list_empty: 'No records found',
+    list: [],
+
+    data_empty: 'No data to display',
+    data: null,
     chapter: {},
+    chapter_palette: [
+      '#3778C1',
+      '#E58700',
+      '#7D3184',
+      '#DE0000',
+      '#87B900',
+      '#A4A4A4',
+    ],
   }
 }

@@ -7,8 +7,12 @@ const dashboard = (state = defaults.dashboard, { type, data }) => {
   state = assign({}, state)
 
   switch (type) {
-    case 'dashboard.network':
-      state.network = data
+    case 'dashboard.user':
+      state.user = data
+    break
+
+    case 'dashboard.flag.network':
+      state.flag.network = data
     break
   }
 
@@ -16,20 +20,24 @@ const dashboard = (state = defaults.dashboard, { type, data }) => {
 }
 
 
-const evaluations = (state = defaults.evaluations, { type, data }) => {
+const evaluation = (state = defaults.evaluation, { type, data }) => {
   state = assign({}, state)
 
   switch (type) {
-    case 'evaluations.list':
+    case 'evaluation.list':
       state.list = data
     break
 
-    case 'evaluations.filter':
+    case 'evaluation.filter':
       state.filter[data.filter] = data.value
     break
 
-    case 'evaluation.document':
-      state.document = data
+    case 'evaluation.data':
+      state.data = data
+    break
+
+    case 'evaluation.chapter':
+      state.chapter[data.id] = data
     break
   }
 
@@ -39,5 +47,5 @@ const evaluations = (state = defaults.evaluations, { type, data }) => {
 
 export default combineReducers({
   dashboard,
-  evaluations,
+  evaluation,
 })

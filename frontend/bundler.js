@@ -20,7 +20,7 @@ const browserReload = (path) => {
   livereload.changed({
     body: { files: [path] }
   })
-  console.log(`LiveReloaded ${path}`)
+  console.log(`Reload: ${path}`)
 }
 
 
@@ -53,9 +53,10 @@ const minifyJS = (code) => {
     root: '',
   }
 */
-const bundleJS = (options, callback) => {
+const bundleJS = (options) => {
   const root = options.root || dirname(options.input)
   const debug = options.debug === false ? false : true
+  const { input, output } = options
 
   const onBundle = (error, bundle) => {
     if (error) return console.log(error.stack || error)
@@ -64,9 +65,8 @@ const bundleJS = (options, callback) => {
       bundle = minifyJS(bundle.toString())
     }
 
-    if (callback) callback(options.output)
-
-    writeFileSync(options.output, bundle)
+    writeFileSync(output, bundle.toString())
+    browserReload(output.replace(__dirname, ''))
   }
 
   const bundler = watchify(browserify(watchify.args))
@@ -81,18 +81,14 @@ const bundleJS = (options, callback) => {
   }))
 
   bundler.on('time', (time) => {
-    console.log(`JS bundle: ${time}`)
+    console.log(`JS bundled: ${output.replace(__dirname, '')} ${time}ms`)
   })
 
   bundler.on('update', () => {
     bundler.bundle(onBundle)
   })
 
-  bundler.add(options.input, {
-    basedir: root,
-    debug,
-  })
-
+  bundler.add(input, { debug, basedir: root })
   bundler.bundle(onBundle)
 }
 
@@ -105,24 +101,25 @@ const bundleJS = (options, callback) => {
     root: '',
   }
 */
-const bundleCSS = (options, callback) => {
+const bundleCSS = (options) => {
   const root = options.root || dirname(options.input)
   const debug = options.debug === false ? false : true
-  const modules = CSSModules()
+  const { input, output } = options
+  const css = CSSModules()
   const watcher = watch(`${root}/**/*.css`)
 
   const save = () => {
-    modules.load(options.input)
-    const css = modules.stringify()
+    css.load(input)
+    writeFileSync(output, css.stringify())
+    css.cache.clear()
 
-    writeFileSync(options.output, css)
-    console.log(`CSS bundled ${options.output}`)
-
-    if (callback) callback(options.output)
+    const path = output.replace(__dirname, '')
+    console.log(`CSS bundled: ${path}`)
+    browserReload(path)
   }
 
   watcher.on('add', (file) => {
-    console.log(`CSS file ${file} added.`)
+    console.log(`CSS watch: ${file.replace(root, '')}`)
   })
   watcher.on('change', save)
   watcher.on('ready', save)
@@ -135,9 +132,9 @@ const bundleCSS = (options, callback) => {
 bundleJS({
   input: `${__dirname}/source/index.js`,
   output: `${__dirname}/public/assets/bundle.js`,
-}, browserReload)
+})
 
 bundleCSS({
   input: `${__dirname}/source/index.css`,
   output: `${__dirname}/public/assets/bundle.css`,
-}, browserReload)
+})

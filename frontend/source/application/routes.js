@@ -1,6 +1,6 @@
 import Dashboard from '/component/Dashboard'
-import Evaluations from '/component/Evaluations'
-import Evaluation from '/component/Evaluation'
+import EvaluationList from '/component/EvaluationList'
+import EvaluationDashboard from '/component/EvaluationDashboard'
 import FAQ from '/component/FAQ'
 
 
@@ -8,14 +8,14 @@ const routes = {
   path: '/',
   component: Dashboard,
   indexRoute: {
-    component: Evaluations,
+    component: EvaluationList,
   },
   childRoutes: [{
     path: 'evaluations',
-    component: Evaluations,
+    component: EvaluationList,
   }, {
     path: 'evaluations/:id',
-    component: Evaluation,
+    component: EvaluationDashboard,
   }, {
     path: 'faqs',
     component: FAQ,

@@ -31034,7 +31034,7 @@ exports.isBuffer = function (obj) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchEvaluation = exports.fetchEvaluations = exports.setFilter = exports.setNetworkIndicator = undefined;
+exports.fetchEvaluation = exports.fetchEvaluations = exports.setEvaluation = exports.setFilter = exports.setFlagNetwork = exports.setUser = undefined;
 
 var _store = require('./store.js');
 
@@ -31044,42 +31044,63 @@ var _http = require('./http.js');
 
 var _http2 = _interopRequireDefault(_http);
 
+var _utils = require('./utils.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var dispatch = _store2.default.dispatch;
-var setNetworkIndicator = exports.setNetworkIndicator = function setNetworkIndicator(isVisible) {
-  dispatch({
-    type: 'dashboard.network',
-    data: isVisible
-  });
+var cmd = function cmd(type, data) {
+  _store2.default.dispatch({ type: type, data: data });
 };
 
+/*
+    dashboard
+*/
+var setUser = exports.setUser = function setUser(data) {
+  cmd('dashboard.user', data);
+};
+
+var setFlagNetwork = exports.setFlagNetwork = function setFlagNetwork(isVisible) {
+  cmd('dashboard.flag.network', isVisible);
+};
+
+/*
+    evaluation
+*/
 var setFilter = exports.setFilter = function setFilter(filter, value) {
-  dispatch({
-    type: 'evaluations.filter',
-    data: { filter: filter, value: value }
-  });
+  cmd('evaluation.filter', { filter: filter, value: value });
+};
+
+var setEvaluation = exports.setEvaluation = function setEvaluation(data) {
+  cmd('evaluation.data', data);
 };
 
 var fetchEvaluations = exports.fetchEvaluations = function fetchEvaluations() {
-  (0, _http2.default)('get', '/api/evaluations', function (reply) {
-    dispatch({
-      type: 'evaluations.list',
-      data: reply.data.items
-    });
+  var _store$getState = _store2.default.getState();
+
+  var dashboard = _store$getState.dashboard;
+  var _dashboard$user = dashboard.user;
+  var view = _dashboard$user.view;
+  var edit = _dashboard$user.edit;
+
+  var cids = (0, _utils.getUnique)([].concat(view.map(function (i) {
+    return i.cid;
+  }), edit.map(function (i) {
+    return i.cid;
+  })));
+  var data = { cids: cids };
+
+  (0, _http2.default)('post', '/api/evaluations', { data: data }, function (reply) {
+    cmd('evaluation.list', reply.data.items);
   });
 };
 
 var fetchEvaluation = exports.fetchEvaluation = function fetchEvaluation(id) {
   (0, _http2.default)('get', '/api/evaluations/' + id, function (reply) {
-    dispatch({
-      type: 'evaluation.document',
-      data: reply.data
-    });
+    setEvaluation(reply.data);
   });
 };
 
-},{"./http.js":249,"./store.js":254}],249:[function(require,module,exports){
+},{"./http.js":249,"./store.js":254,"./utils.js":255}],249:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31101,35 +31122,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var inFlight = 0; // window.fetch polyfill
 
 
-var showNetworkIndicator = function showNetworkIndicator() {
+var showLoader = function showLoader() {
   if (!inFlight) {
-    (0, _actions.setNetworkIndicator)(true);
+    (0, _actions.setFlagNetwork)(true);
   }
 
   inFlight += 1;
 };
 
-var hideNetworkIndicator = function hideNetworkIndicator() {
+var hideLoader = function hideLoader() {
   inFlight -= 1;
 
   if (!inFlight) {
     // allow a timeout to visually notice the indicator
-    setTimeout(_actions.setNetworkIndicator, 300, false);
+    setTimeout(_actions.setFlagNetwork, 300, false);
   }
 };
 
 var onError = function onError(error) {
-  console.error(error);
+  console.error(error.stack);
 };
 
 var fmtQuery = function fmtQuery(data) {
   return '?' + _qs2.default.stringify(data);
 };
 
-var fmtJSON = function fmtJSON(reply) {
-  hideNetworkIndicator();
+var onReply = function onReply(reply) {
+  hideLoader();
 
-  return reply.json();
+  try {
+    reply = reply.json();
+  } catch (error) {
+    throw error;
+  }
+
+  return reply;
 };
 
 var defaults = {
@@ -31141,10 +31168,10 @@ var defaults = {
   }
 };
 
-exports.default = function (method, url, options, callback) {
+exports.default = function (method, url, options, handler) {
   // make `options` an optional argument
   if ((0, _utils.isFunction)(options)) {
-    callback = options;options = {};
+    handler = options;options = {};
   }
 
   var config = Object.assign({}, defaults, { method: method });
@@ -31159,9 +31186,9 @@ exports.default = function (method, url, options, callback) {
     url += fmtQuery(options.query);
   }
 
-  showNetworkIndicator();
+  showLoader();
 
-  fetch(url, config).then(fmtJSON).then(callback).catch(onError);
+  fetch(url, config).then(onReply).then(handler).catch(onError);
 };
 
 },{"./actions.js":248,"./utils.js":255,"qs":243,"whatwg-fetch":247}],250:[function(require,module,exports){
@@ -31192,16 +31219,20 @@ var dashboard = function dashboard() {
   state = (0, _objectAssign2.default)({}, state);
 
   switch (type) {
-    case 'dashboard.network':
-      state.network = data;
+    case 'dashboard.user':
+      state.user = data;
+      break;
+
+    case 'dashboard.flag.network':
+      state.flag.network = data;
       break;
   }
 
   return state;
 };
 
-var evaluations = function evaluations() {
-  var state = arguments.length <= 0 || arguments[0] === undefined ? _state2.default.evaluations : arguments[0];
+var evaluation = function evaluation() {
+  var state = arguments.length <= 0 || arguments[0] === undefined ? _state2.default.evaluation : arguments[0];
   var _ref2 = arguments[1];
   var type = _ref2.type;
   var data = _ref2.data;
@@ -31209,16 +31240,20 @@ var evaluations = function evaluations() {
   state = (0, _objectAssign2.default)({}, state);
 
   switch (type) {
-    case 'evaluations.list':
+    case 'evaluation.list':
       state.list = data;
       break;
 
-    case 'evaluations.filter':
+    case 'evaluation.filter':
       state.filter[data.filter] = data.value;
       break;
 
-    case 'evaluation.document':
-      state.document = data;
+    case 'evaluation.data':
+      state.data = data;
+      break;
+
+    case 'evaluation.chapter':
+      state.chapter[data.id] = data;
       break;
   }
 
@@ -31227,7 +31262,7 @@ var evaluations = function evaluations() {
 
 exports.default = (0, _redux.combineReducers)({
   dashboard: dashboard,
-  evaluations: evaluations
+  evaluation: evaluation
 });
 
 },{"./state.js":253,"object-assign":54,"redux":239}],251:[function(require,module,exports){
@@ -31265,13 +31300,13 @@ var _Dashboard = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/compo
 
 var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
-var _Evaluations = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Evaluations');
+var _EvaluationList = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationList');
 
-var _Evaluations2 = _interopRequireDefault(_Evaluations);
+var _EvaluationList2 = _interopRequireDefault(_EvaluationList);
 
-var _Evaluation = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Evaluation');
+var _EvaluationDashboard = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationDashboard');
 
-var _Evaluation2 = _interopRequireDefault(_Evaluation);
+var _EvaluationDashboard2 = _interopRequireDefault(_EvaluationDashboard);
 
 var _FAQ = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/FAQ');
 
@@ -31283,14 +31318,14 @@ var routes = {
   path: '/',
   component: _Dashboard2.default,
   indexRoute: {
-    component: _Evaluations2.default
+    component: _EvaluationList2.default
   },
   childRoutes: [{
     path: 'evaluations',
-    component: _Evaluations2.default
+    component: _EvaluationList2.default
   }, {
     path: 'evaluations/:id',
-    component: _Evaluation2.default
+    component: _EvaluationDashboard2.default
   }, {
     path: 'faqs',
     component: _FAQ2.default
@@ -31302,7 +31337,7 @@ var routes = {
 
 exports.default = routes;
 
-},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Dashboard":256,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Evaluation":258,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Evaluations":260,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/FAQ":262}],253:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Dashboard":256,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationDashboard":258,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationList":261,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/FAQ":263}],253:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31310,29 +31345,35 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
   dashboard: {
+    user: null,
+
+    flag: {
+      network: false
+    },
+
     navigation: [{
       label: 'FAQs',
       path: '/faqs'
     }, {
       label: 'Logout',
       path: '/logout'
-    }],
-    network: false
+    }]
   },
 
-  evaluations: {
-    list: [],
-    list_empty: 'No records found',
+  evaluation: {
     filter: {
       category: null,
       brand: null,
       supplier: null
-    }
-  },
+    },
 
-  evaluation: {
-    document: null,
-    chapter: {}
+    list_empty: 'No records found',
+    list: [],
+
+    data_empty: 'No data to display',
+    data: null,
+    chapter: {},
+    chapter_palette: ['#3778C1', '#E58700', '#7D3184', '#DE0000', '#87B900', '#A4A4A4']
   }
 };
 
@@ -31381,11 +31422,53 @@ exports.default = store;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.fmtUnit = exports.getInitials = exports.fmtDate = exports.getUnique = exports.isString = exports.isFunction = undefined;
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var isFunction = exports.isFunction = function isFunction(value) {
   return typeof value == 'function';
 };
 
-},{}],256:[function(require,module,exports){
+var isString = exports.isString = function isString(value) {
+  return typeof value == 'string';
+};
+
+var getUnique = exports.getUnique = function getUnique(array) {
+  return array.filter(function (value, index, array) {
+    return array.indexOf(value) === index;
+  });
+};
+
+var fmtDate = exports.fmtDate = function fmtDate(date) {
+  return (0, _moment2.default)(date, 'YYYY-MM-DD').format('DD.MM.YYYY');
+};
+
+var getInitials = exports.getInitials = function getInitials(string) {
+  return string.split(/\s+/).map(function (s) {
+    return s.charAt(0).toUpperCase();
+  }).join('');
+};
+
+var fmtUnit = exports.fmtUnit = function fmtUnit(value, unit) {
+  switch (unit) {
+    case 'GBP':
+      value = '£' + value;
+      break;
+
+    case 'ppts':
+      value = value + 'ppts';
+      break;
+  }
+
+  return value;
+};
+
+},{"moment":53}],256:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31401,8 +31484,6 @@ var _Loader2 = _interopRequireDefault(_Loader);
 var _store = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js');
 
 var _store2 = _interopRequireDefault(_store);
-
-var _actions = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js');
 
 var _style = require('./style.css');
 
@@ -31424,12 +31505,15 @@ var Navigation = function Navigation(_ref2) {
 
 var Topbar = function Topbar(_ref3) {
   var store = _ref3.store;
+  var flag = store.flag;
+  var navigation = store.navigation;
 
   // network indicator
-  var network = store.network ? (0, _Loader2.default)({ className: _style2.default.loader }) : null;
+
+  var loader = flag.network && (0, _Loader2.default)({ className: _style2.default.loader });
   var attrs = { className: _style2.default.topbar };
 
-  return (0, _component.B)(attrs, network, Logo({ image: '/images/logo.png' }), Navigation({ links: store.navigation }));
+  return (0, _component.B)(attrs, loader, Logo({ image: '/images/logo.png' }), Navigation({ links: navigation }));
 };
 
 var Dashboard = (0, _component.Component)({
@@ -31451,8 +31535,8 @@ var Dashboard = (0, _component.Component)({
 
 exports.default = _store2.default.sync('dashboard', Dashboard);
 
-},{"./style.css":257,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Loader":264,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":269}],257:[function(require,module,exports){
-module.exports = {"component":"_Dashboard_style_component","topbar":"_Dashboard_style_topbar","content":"_Dashboard_style_content","logo":"_Dashboard_style_logo","loader":"_Dashboard_style_loader","links":"_Dashboard_style_links"}
+},{"./style.css":257,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Loader":266,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],257:[function(require,module,exports){
+module.exports = {"component":"_Dashboard_style_component","content":"_Dashboard_style_content","topbar":"_Dashboard_style_topbar","logo":"_Dashboard_style_logo","loader":"_Dashboard_style_loader","links":"_Dashboard_style_links"}
 },{}],258:[function(require,module,exports){
 'use strict';
 
@@ -31462,7 +31546,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js');
 
+var _PaneTitle = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle');
+
+var _PaneTitle2 = _interopRequireDefault(_PaneTitle);
+
+var _Grid = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid');
+
+var _Grid2 = _interopRequireDefault(_Grid);
+
 var _actions = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js');
+
+var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
 
 var _store = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js');
 
@@ -31474,29 +31568,105 @@ var _style2 = _interopRequireDefault(_style);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var Date = function Date(_ref) {
+  var data = _ref.data;
+  return (0, _component.B)({ className: _style2.default.date }, (0, _component.B)({ className: _style2.default.date_value }, 'Start: ' + (0, _utils.fmtDate)(data.start_date)), (0, _component.B)({ className: _style2.default.date_value }, 'End: ' + (0, _utils.fmtDate)(data.end_date)));
+};
+
+var Channels = function Channels(_ref2) {
+  var items = _ref2.items;
+
+  var title = (0, _component.B)({ className: _style2.default.list_title }, 'Channels');
+
+  items = items.map(function (item) {
+    return (0, _component.B)({ className: _style2.default.list_item }, item);
+  });
+
+  items = (0, _Grid2.default)({ blocks: 2, items: items });
+
+  return (0, _component.B)({ className: _style2.default.list }, title, items);
+};
+
+var Chapters = function Chapters(_ref3) {
+  var evaluation = _ref3.evaluation;
+  var colors = _ref3.colors;
+  return (0, _component.B)({ className: _style2.default.chapters }, (0, _Grid2.default)({
+    blocks: 2,
+    items: evaluation.chapters.map(function (chapter) {
+      var color = colors[chapter.id - 1];
+      var title = (0, _component.B)({ className: _style2.default.chapter_title }, chapter.title);
+
+      var arrow = (0, _component.B)({
+        className: _style2.default.chapter_arrow,
+        style: { borderLeftColor: color }
+      });
+
+      var initials = (0, _component.B)({
+        className: _style2.default.chapter_initials,
+        style: { backgroundColor: color }
+      }, (0, _utils.getInitials)(chapter.title));
+
+      var attrs = {
+        to: '/evaluations/' + evaluation.cid + '/chapters/' + chapter.id,
+        className: _style2.default.chapter,
+        style: { color: color }
+      };
+      return (0, _component.Link)(attrs, initials, title, arrow);
+    })
+  }));
+};
+
+var Objectives = function Objectives(_ref4) {
+  var items = _ref4.items;
+
+  var title = (0, _component.B)({ className: _style2.default.list_title }, 'Campaign Objectives');
+
+  items = items.map(function (_ref5, index) {
+    var label = _ref5.label;
+    var value = _ref5.value;
+    var unit = _ref5.unit;
+
+    value = (0, _component.B)({ className: _style2.default.objective_value }, (0, _utils.fmtUnit)(value, unit));
+
+    return (0, _component.B)({ className: _style2.default.list_item, key: index }, label, value);
+  });
+
+  return (0, _component.B)({ className: _style2.default.list }, title, items);
+};
+
 var Evaluation = (0, _component.Component)({
   class: true,
   componentDidMount: function componentDidMount() {
-    (0, _actions.fetchEvaluation)();
-  },
-  render: function render() {
     var _props = this.props;
     var store = _props.store;
-    var children = _props.children;
+    var params = _props.params;
 
 
-    var attrs = {
-      className: _style2.default.component
-    };
+    if (!store.data) {
+      (0, _actions.fetchEvaluation)(params.id);
+    }
+  },
+  render: function render() {
+    var store = this.props.store;
+    var data = store.data;
+    var data_empty = store.data_empty;
+    var chapter_palette = store.chapter_palette;
 
-    return (0, _component.B)(attrs, 'evaluation');
+
+    var content = (0, _component.B)({ className: _style2.default.no_data }, data_empty);
+
+    if (data) {
+      content = (0, _component.B)((0, _PaneTitle2.default)({ text: data.display_title }), (0, _component.B)({ className: _style2.default.content }, (0, _component.B)({ className: _style2.default.info }, Date({ data: data }), Channels({ items: data.channels }), Chapters({ evaluation: data, colors: chapter_palette }), Objectives({ items: data.campaign_objectives }))));
+    }
+
+    return content;
   }
 });
 
 exports.default = _store2.default.sync('evaluation', Evaluation);
 
-},{"./style.css":259,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":269}],259:[function(require,module,exports){
-module.exports = {"component":"_Evaluation_style_component"}
+},{"./style.css":259,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid":265,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":268,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],259:[function(require,module,exports){
+module.exports = {"no_data":"_EvaluationDashboard_style_no_data","content":"_EvaluationDashboard_style_content","info":"_EvaluationDashboard_style_info","date":"_EvaluationDashboard_style_date","date_value":"_EvaluationDashboard_style_date_value","list":"_EvaluationDashboard_style_list","list_title":"_EvaluationDashboard_style_list_title","list_item":"_EvaluationDashboard_style_list_item","chapters":"_EvaluationDashboard_style_chapters","chapter":"_EvaluationDashboard_style_chapter","chapter_arrow":"_EvaluationDashboard_style_chapter_arrow","chapter_initials":"_EvaluationDashboard_style_chapter_initials","objective_value":"_EvaluationDashboard_style_objective_value"}
 },{}],260:[function(require,module,exports){
 'use strict';
 
@@ -31504,23 +31674,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
-
 var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js');
 
-var _PaneTitle = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle');
+var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
 
-var _PaneTitle2 = _interopRequireDefault(_PaneTitle);
+var _Grid = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid');
+
+var _Grid2 = _interopRequireDefault(_Grid);
 
 var _Select = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Select');
 
 var _Select2 = _interopRequireDefault(_Select);
-
-var _store = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js');
-
-var _store2 = _interopRequireDefault(_store);
 
 var _actions = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js');
 
@@ -31529,20 +31693,6 @@ var _style = require('./style.css');
 var _style2 = _interopRequireDefault(_style);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var fmtDate = function fmtDate(date) {
-  return (0, _moment2.default)(date, 'YYYY-MM-DD').format('DD.MM.YYYY');
-};
-
-var Grid3 = function Grid3() {
-  for (var _len = arguments.length, items = Array(_len), _key = 0; _key < _len; _key++) {
-    items[_key] = arguments[_key];
-  }
-
-  return (0, _component.B)({ className: 'grid-blocks-3' }, items.map(function (item, key) {
-    return (0, _component.B)({ key: key }, item);
-  }));
-};
 
 var getBrand = function getBrand(item) {
   return item.brand;
@@ -31553,14 +31703,11 @@ var getSupplier = function getSupplier(item) {
 var getCategory = function getCategory(item) {
   return item.category;
 };
-var getUnique = function getUnique(value, index, array) {
-  return array.indexOf(value) === index;
-};
 var setOption = function setOption(value) {
   return { value: value, label: value };
 };
 
-var Filters = function Filters(_ref) {
+exports.default = function (_ref) {
   var store = _ref.store;
 
   if (!store.list.length) return null;
@@ -31568,7 +31715,7 @@ var Filters = function Filters(_ref) {
   var categories = (0, _Select2.default)({
     placeholder: 'Category',
     searchable: false,
-    options: store.list.map(getCategory).filter(getUnique).map(setOption),
+    options: (0, _utils.getUnique)(store.list.map(getCategory)).map(setOption),
     value: store.filter.category,
     onChange: function onChange(option) {
       (0, _actions.setFilter)('category', option ? option.value : null);
@@ -31578,7 +31725,7 @@ var Filters = function Filters(_ref) {
   var brands = (0, _Select2.default)({
     placeholder: 'Brand',
     searchable: false,
-    options: store.list.map(getBrand).filter(getUnique).map(setOption),
+    options: (0, _utils.getUnique)(store.list.map(getBrand)).map(setOption),
     value: store.filter.brand,
     onChange: function onChange(option) {
       (0, _actions.setFilter)('brand', option ? option.value : null);
@@ -31588,7 +31735,7 @@ var Filters = function Filters(_ref) {
   var suppliers = (0, _Select2.default)({
     placeholder: 'Supplier',
     searchable: false,
-    options: store.list.map(getSupplier).filter(getUnique).map(setOption),
+    options: (0, _utils.getUnique)(store.list.map(getSupplier)).map(setOption),
     value: store.filter.supplier,
     onChange: function onChange(option) {
       (0, _actions.setFilter)('supplier', option ? option.value : null);
@@ -31597,7 +31744,10 @@ var Filters = function Filters(_ref) {
 
   var label = (0, _component.B)({ className: _style2.default.filters_label }, 'Filter by');
 
-  var filters = Grid3(brands, suppliers, categories);
+  var filters = (0, _Grid2.default)({
+    blocks: 3,
+    items: [brands, suppliers, categories]
+  });
 
   var attrs = {
     className: _style2.default.filters
@@ -31605,31 +31755,44 @@ var Filters = function Filters(_ref) {
   return (0, _component.B)(attrs, label, filters);
 };
 
-var Item = function Item(item, index) {
-  var title = (0, _component.B)({ className: _style2.default.item_title }, item.brand + ': ' + item.title);
+},{"./style.css":262,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid":265,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Select":270,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],261:[function(require,module,exports){
+'use strict';
 
-  var date = (0, _component.B)({ className: _style2.default.item_date }, fmtDate(item.start_date) + ' - ' + fmtDate(item.end_date));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-  var view = (0, _component.Link)({
-    to: '/evaluations/' + item.id,
-    className: _style2.default.item_view
-  }, 'View');
+var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js');
 
-  var attrs = {
-    key: index,
-    className: _style2.default.item
-  };
-  return (0, _component.B)(attrs, title, date, view);
-};
+var _PaneTitle = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle');
 
-var List = function List(_ref2) {
-  var store = _ref2.store;
+var _PaneTitle2 = _interopRequireDefault(_PaneTitle);
+
+var _store = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js');
+
+var _store2 = _interopRequireDefault(_store);
+
+var _actions = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js');
+
+var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
+
+var _style = require('./style.css');
+
+var _style2 = _interopRequireDefault(_style);
+
+var _filters = require('./filters.js');
+
+var _filters2 = _interopRequireDefault(_filters);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var applyFilters = function applyFilters(store) {
   var _store$filter = store.filter;
   var category = _store$filter.category;
   var brand = _store$filter.brand;
   var supplier = _store$filter.supplier;
 
-  var setFilters = function setFilters(item) {
+  var isVisible = function isVisible(item) {
     if (category && category != item.category) return false;
     if (brand && brand != item.brand) return false;
     if (supplier && supplier != item.supplier.name) return false;
@@ -31637,10 +31800,40 @@ var List = function List(_ref2) {
     return true;
   };
 
-  var content = store.list.filter(setFilters).map(Item);
+  return store.list.filter(isVisible);
+};
 
-  if (!content.length) {
-    content = (0, _component.B)({ className: _style2.default.list_empty }, store.list_empty);
+var Item = function Item(_ref) {
+  var data = _ref.data;
+
+  var title = (0, _component.B)({ className: _style2.default.item_title }, data.display_title);
+
+  var date = (0, _component.B)({ className: _style2.default.item_date }, (0, _utils.fmtDate)(data.start_date) + ' - ' + (0, _utils.fmtDate)(data.end_date));
+
+  var view = (0, _component.Link)({
+    to: '/evaluations/' + data.cid,
+    className: _style2.default.item_view,
+    onClick: function onClick() {
+      (0, _actions.setEvaluation)(data);
+    }
+  }, 'View');
+
+  var attrs = {
+    key: data.cid,
+    className: _style2.default.item
+  };
+  return (0, _component.B)(attrs, title, date, view);
+};
+
+var List = function List(_ref2) {
+  var store = _ref2.store;
+
+  var content = (0, _component.B)({ className: _style2.default.list_empty }, store.list_empty);
+
+  if (store.list.length) {
+    content = applyFilters(store).map(function (data) {
+      return Item({ data: data });
+    });
   }
 
   return (0, _component.B)({ className: _style2.default.list }, content);
@@ -31652,20 +31845,18 @@ var Evaluations = (0, _component.Component)({
     (0, _actions.fetchEvaluations)();
   },
   render: function render() {
-    var _props = this.props;
-    var store = _props.store;
-    var children = _props.children;
+    var store = this.props.store;
 
 
-    return (0, _component.B)((0, _PaneTitle2.default)({ text: 'Campaign Evaluation Index' }), Filters({ store: store }), List({ store: store }));
+    return (0, _component.B)((0, _PaneTitle2.default)({ text: 'Campaign Evaluation Index' }), (0, _component.B)({ className: _style2.default.content }, (0, _filters2.default)({ store: store }), List({ store: store })));
   }
 });
 
-exports.default = _store2.default.sync('evaluations', Evaluations);
+exports.default = _store2.default.sync('evaluation', Evaluations);
 
-},{"./style.css":261,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":266,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Select":268,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":269,"moment":53}],261:[function(require,module,exports){
-module.exports = {"component":"_Evaluations_style_component","filters":"_Evaluations_style_filters","filters_label":"_Evaluations_style_filters_label","list":"_Evaluations_style_list","list_empty":"_Evaluations_style_list_empty","item":"_Evaluations_style_item","item_title":"_Evaluations_style_item_title","item_date":"_Evaluations_style_item_date","item_view":"_Evaluations_style_item_view"}
-},{}],262:[function(require,module,exports){
+},{"./filters.js":260,"./style.css":262,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":268,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],262:[function(require,module,exports){
+module.exports = {"content":"_EvaluationList_style_content","filters":"_EvaluationList_style_filters","filters_label":"_EvaluationList_style_filters_label","list":"_EvaluationList_style_list","list_empty":"_EvaluationList_style_list_empty","item":"_EvaluationList_style_item","item_title":"_EvaluationList_style_item_title","item_date":"_EvaluationList_style_item_date","item_view":"_EvaluationList_style_item_view"}
+},{}],263:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31707,9 +31898,41 @@ var FAQ = (0, _component.Component)({
 
 exports.default = _store2.default.sync('faq', FAQ);
 
-},{"./style.css":263,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":266,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":269}],263:[function(require,module,exports){
+},{"./style.css":264,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":268,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],264:[function(require,module,exports){
 module.exports = {"component":"_FAQ_style_component"}
-},{}],264:[function(require,module,exports){
+},{}],265:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js');
+
+/*
+  props: {
+    blocks: 1,
+    items: [],
+  }
+*/
+var Grid = (0, _component.Component)({
+  render: function render() {
+    var _props = this.props;
+    var blocks = _props.blocks;
+    var items = _props.items;
+
+
+    items = items.map(function (item, index) {
+      return (0, _component.B)({ key: index }, item);
+    });
+
+    return (0, _component.B)({ className: 'grid-blocks-' + blocks }, items);
+  }
+});
+
+exports.default = Grid;
+
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],266:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31735,9 +31958,9 @@ var Loader = (0, _component.Component)({
 
 exports.default = Loader;
 
-},{"./style.css":265,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":269}],265:[function(require,module,exports){
+},{"./style.css":267,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],267:[function(require,module,exports){
 module.exports = {"loader":"_Loader_style_loader","line1":"_Loader_style_line1","line2":"_Loader_style_line2","line3":"_Loader_style_line3","line4":"_Loader_style_line4","line5":"_Loader_style_line5"}
-},{}],266:[function(require,module,exports){
+},{}],268:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31763,9 +31986,9 @@ var Title = (0, _component.Component)({
 
 exports.default = Title;
 
-},{"./style.css":267,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":269}],267:[function(require,module,exports){
+},{"./style.css":269,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],269:[function(require,module,exports){
 module.exports = {"component":"_PaneTitle_style_component","wrap":"_PaneTitle_style_wrap"}
-},{}],268:[function(require,module,exports){
+},{}],270:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31782,7 +32005,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _component.Element)(_reactSelect2.default);
 
-},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":269,"react-select":101}],269:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271,"react-select":101}],271:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31838,7 +32061,7 @@ var Button = exports.Button = Element('button');
 var Image = exports.Image = Element('img');
 var Link = exports.Link = Element(_reactRouter.Link);
 
-},{"react":232,"react-router":92}],270:[function(require,module,exports){
+},{"react":232,"react-router":92}],272:[function(require,module,exports){
 'use strict';
 
 var _reactDom = require('react-dom');
@@ -31851,8 +32074,22 @@ var _store = require('./application/store.js');
 
 var _store2 = _interopRequireDefault(_store);
 
+var _http = require('./application/http.js');
+
+var _http2 = _interopRequireDefault(_http);
+
+var _actions = require('./application/actions.js');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _reactDom.render)(_store2.default.connect(_router2.default), document.getElementById('application'));
+(0, _http2.default)('get', '/api/me', function (reply) {
+  if (reply.error) {
+    alert('Server error: ' + reply.error);
+  } else {
+    (0, _actions.setUser)(reply.data);
 
-},{"./application/router.js":251,"./application/store.js":254,"react-dom":57}]},{},[270]);
+    (0, _reactDom.render)(_store2.default.connect(_router2.default), document.getElementById('application'));
+  }
+});
+
+},{"./application/actions.js":248,"./application/http.js":249,"./application/router.js":251,"./application/store.js":254,"react-dom":57}]},{},[272]);

@@ -1,3 +1,37 @@
+import moment from 'moment'
+
 export const isFunction = (value) => (
   typeof value == 'function'
 )
+
+export const isString = (value) => (
+  typeof value == 'string'
+)
+
+export const getUnique = (array) => (
+  array.filter((value, index, array) => (
+    array.indexOf(value) === index
+  ))
+)
+
+export const fmtDate = (date) => (
+  moment(date, 'YYYY-MM-DD').format('DD.MM.YYYY')
+)
+
+export const getInitials = (string) => (
+  string.split(/\s+/).map(s => s.charAt(0).toUpperCase()).join('')
+)
+
+export const fmtUnit = (value, unit) => {
+  switch (unit) {
+    case 'GBP':
+      value = '£' + value
+    break
+
+    case 'ppts':
+      value = value + 'ppts'
+    break
+  }
+
+  return value
+}

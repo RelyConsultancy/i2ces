@@ -428,133 +428,6 @@ input::-moz-focus-inner {
   padding: 0;
 }
 
-/*
-  1. Ensure consistent defaults
-  2. Remove inter-cell whitespace that appears between `inline-block` elements
-*/
-
-[class*=grid-blocks-],
-.grid-gutter,
-.grid {
-  position: relative;
-  display: block;
-  margin: 0;
-  /* 1 */
-  padding: 0;
-  /* 1 */
-  text-align: left;
-  /* 1 */
-  font-size: 0;
-  /* 2 */
-}
-
-[class*=grid-blocks-] > * {
-  display: inline-table;
-  margin-right: 1em;
-  vertical-align: top;
-  font-size: 1rem;
-}
-
-/*
-  1. Make cells full-width by default
-  2. Reset the font-size change made in .grid
-*/
-
-[class*=grid-cell-] {
-  display: inline-table;
-  width: 100%;
-  /* 1 */
-  margin: 0;
-  padding: 0;
-  vertical-align: top;
-  font-size: 1rem;
-  /* 2 */
-}
-
-.grid-gutter {
-  margin: 0 calc(-.5 * 1rem);
-}
-
-.grid-gutter > [class*=grid-cell-] {
-  padding: 0 calc(.5 * 1rem);
-}
-
-.grid-blocks-2 > * {
-  width: calc(50% - .5em);
-}
-
-.grid-blocks-3 > * {
-  width: calc(33.3333333333333333% - .6666666666666666em);
-}
-
-.grid-blocks-4 > * {
-  width: calc(25% - .75em);
-}
-
-.grid-blocks-5 > * {
-  width: calc(20% - .8em);
-}
-
-.grid-blocks-6 > * {
-  width: calc(16.6666666666666666% - .8444444444444444em);
-}
-
-.grid-blocks-6 > *:nth-child(6n),
-.grid-blocks-5 > *:nth-child(5n),
-.grid-blocks-4 > *:nth-child(4n),
-.grid-blocks-3 > *:nth-child(3n),
-.grid-blocks-2 > *:nth-child(2n) {
-  margin-right: 0;
-}
-
-.grid-cell-1 {
-  width: 8.33333333333333333333%;
-}
-
-.grid-cell-2 {
-  width: 16.66666666666666666666%;
-}
-
-.grid-cell-3 {
-  width: 25%;
-}
-
-.grid-cell-4 {
-  width: 33.33333333333333333333%;
-}
-
-.grid-cell-5 {
-  width: 41.66666666666666666666%;
-}
-
-.grid-cell-6 {
-  width: 50%;
-}
-
-.grid-cell-7 {
-  width: 58.33333333333333333333%;
-}
-
-.grid-cell-8 {
-  width: 66.66666666666666666666%;
-}
-
-.grid-cell-9 {
-  width: 75%;
-}
-
-.grid-cell-10 {
-  width: 83.33333333333333333333%;
-}
-
-.grid-cell-11 {
-  width: 91.66666666666666666666%;
-}
-
-.grid-cell-12 {
-  width: 100%;
-}
-
 @font-face {
   font-family: 'Avenir LT Std 95 Black';
   font-style: normal;
@@ -1289,6 +1162,133 @@ input::-moz-focus-inner {
   }
 }
 
+/*
+  1. Ensure consistent defaults
+  2. Remove inter-cell whitespace that appears between `inline-block` elements
+*/
+
+[class*=grid-blocks-],
+.grid-gutter,
+.grid {
+  position: relative;
+  display: block;
+  margin: 0;
+  /* 1 */
+  padding: 0;
+  /* 1 */
+  text-align: left;
+  /* 1 */
+  font-size: 0;
+  /* 2 */
+}
+
+[class*=grid-blocks-] > * {
+  display: inline-table;
+  margin-right: 1em;
+  vertical-align: top;
+  font-size: 1rem;
+}
+
+/*
+  1. Make cells full-width by default
+  2. Reset the font-size change made in .grid
+*/
+
+[class*=grid-cell-] {
+  display: inline-table;
+  width: 100%;
+  /* 1 */
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+  font-size: 1rem;
+  /* 2 */
+}
+
+.grid-gutter {
+  margin: 0 calc(-.5 * 1rem);
+}
+
+.grid-gutter > [class*=grid-cell-] {
+  padding: 0 calc(.5 * 1rem);
+}
+
+.grid-blocks-2 > * {
+  width: calc(50% - .5em);
+}
+
+.grid-blocks-3 > * {
+  width: calc(33.3333333333333333% - .6666666666666666em);
+}
+
+.grid-blocks-4 > * {
+  width: calc(25% - .75em);
+}
+
+.grid-blocks-5 > * {
+  width: calc(20% - .8em);
+}
+
+.grid-blocks-6 > * {
+  width: calc(16.6666666666666666% - .8444444444444444em);
+}
+
+.grid-blocks-6 > *:nth-child(6n),
+.grid-blocks-5 > *:nth-child(5n),
+.grid-blocks-4 > *:nth-child(4n),
+.grid-blocks-3 > *:nth-child(3n),
+.grid-blocks-2 > *:nth-child(2n) {
+  margin-right: 0;
+}
+
+.grid-cell-1 {
+  width: 8.33333333333333333333%;
+}
+
+.grid-cell-2 {
+  width: 16.66666666666666666666%;
+}
+
+.grid-cell-3 {
+  width: 25%;
+}
+
+.grid-cell-4 {
+  width: 33.33333333333333333333%;
+}
+
+.grid-cell-5 {
+  width: 41.66666666666666666666%;
+}
+
+.grid-cell-6 {
+  width: 50%;
+}
+
+.grid-cell-7 {
+  width: 58.33333333333333333333%;
+}
+
+.grid-cell-8 {
+  width: 66.66666666666666666666%;
+}
+
+.grid-cell-9 {
+  width: 75%;
+}
+
+.grid-cell-10 {
+  width: 83.33333333333333333333%;
+}
+
+.grid-cell-11 {
+  width: 91.66666666666666666666%;
+}
+
+.grid-cell-12 {
+  width: 100%;
+}
+
 ._Loader_style_loader {
   width: 40px;
   height: 20px;
@@ -1354,12 +1354,14 @@ input::-moz-focus-inner {
 }
 
 ._PaneTitle_style_component {
-  padding: .625em;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-family: 'Archer Bold', serif;
   border-top: 1px solid #E6E6E6;
   border-bottom: 1px solid #E6E6E6;
-  color: #454545;
+  line-height: 3rem;
+  height: 3rem;
+  color: #656565;
+  z-index: 10;
 }
 
 ._PaneTitle_style_wrap {
@@ -1375,8 +1377,17 @@ input::-moz-focus-inner {
   right: 0;
   bottom: 0;
   left: 0;
-  background: #FFFFFF;
-  z-index: 9999;
+  background: #FFF;
+  z-index: 100;
+}
+
+._Dashboard_style_content {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
 }
 
 ._Dashboard_style_topbar {
@@ -1387,14 +1398,6 @@ input::-moz-focus-inner {
   margin-left: -400px;
   width: 800px;
   height: 100px;
-}
-
-._Dashboard_style_content {
-  position: absolute;
-  top: 100px;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 ._Dashboard_style_logo {
@@ -1418,20 +1421,26 @@ input::-moz-focus-inner {
   display: inline-block;
   font-size: .75em;
   margin-left: 1em;
-  color: #999999;
+  color: #999;
   text-decoration: none;
 }
 
+._EvaluationList_style_content {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  overflow-y: auto;
+}
 
-
-
-
-._Evaluations_style_filters {
+._EvaluationList_style_filters {
   width: 800px;
   margin: 1em auto 3em;
 }
 
-._Evaluations_style_filters_label {
+._EvaluationList_style_filters_label {
   padding: 1em 0;
   margin-bottom: 1.5em;
   font-size: .75em;
@@ -1439,39 +1448,40 @@ input::-moz-focus-inner {
   border-bottom: 1px solid #E6E6E6;
 }
 
-._Evaluations_style_list {
+._EvaluationList_style_list {
   width: 800px;
   margin: 0 auto;
+  overflow-y: auto;
 }
 
-._Evaluations_style_list_empty {
+._EvaluationList_style_list_empty {
   text-align: center;
   padding: 1em;
 }
 
-._Evaluations_style_item {
+._EvaluationList_style_item {
   position: relative;
   margin: 1em 0;
   border-bottom: 1px solid #E6E6E6;
   padding-bottom: 1em;
 }
 
-._Evaluations_style_item:last-child {
+._EvaluationList_style_item:last-child {
   border-bottom: 0;
 }
 
-._Evaluations_style_item_title {
+._EvaluationList_style_item_title {
   color: #6D6D6D;
   font-family: 'Archer Bold', serif;
 }
 
-._Evaluations_style_item_date {
+._EvaluationList_style_item_date {
   margin-top: 1em;
   font-size: .675em;
   color: #999999;
 }
 
-._Evaluations_style_item_view {
+._EvaluationList_style_item_view {
   position: absolute;
   top: 0;
   right: 0;
@@ -1483,8 +1493,122 @@ input::-moz-focus-inner {
   text-decoration: none;
 }
 
-._Evaluations_style_item_view:focus {
+._EvaluationList_style_item_view:focus {
   color: #FFFFFF;
+}
+
+._EvaluationDashboard_style_no_data {
+  text-align: center;
+  padding: 1em;
+}
+
+._EvaluationDashboard_style_content {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  overflow-y: auto;
+  background-color: #F9F9F9;
+}
+
+._EvaluationDashboard_style_info {
+  width: 800px;
+  margin: 0 auto;
+  padding-bottom: 3em;
+}
+
+._EvaluationDashboard_style_date {
+  padding: 1rem 0;
+  font-size: .75em;
+  text-align: right;
+  color: #858585;
+}
+
+._EvaluationDashboard_style_date_value {
+  display: inline-block;
+  margin-left: 1.5rem;
+}
+
+
+
+._EvaluationDashboard_style_list_title {
+  padding: 0 1.5em;
+  margin-bottom: .5em;
+  line-height: 3em;
+  font-size: .75em;
+  border: 1px solid #E6E6E6;
+  background-color: #FCFDFC;
+  color: #858585;
+}
+
+._EvaluationDashboard_style_list_item {
+  position: relative;
+  padding: 0 1.5em;
+  font-size: .75em;
+  line-height: 2rem;
+  border-bottom: 1px solid #E6E6E6;
+  color: #555;
+}
+
+._EvaluationDashboard_style_chapters {
+  margin: 2em 0;
+}
+
+._EvaluationDashboard_style_chapter {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  margin-bottom: .5em;
+  padding-left: 5em;
+  line-height: 3.4rem;
+  font-family: 'Archer Bold', serif;
+  border: 1px solid #E6E6E6;
+  background-color: #FCFDFC;
+}
+
+._EvaluationDashboard_style_chapter::before {
+  content: '';
+  position: absolute;
+  left: 4rem;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid #E6E6E6;
+}
+
+._EvaluationDashboard_style_chapter_arrow {
+  position: absolute;
+  top: 50%;
+  margin-top: -2px;
+  right: 1.5rem;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4.5px 0 4.5px 7.8px;
+  border-color: transparent transparent transparent #255385;
+}
+
+._EvaluationDashboard_style_chapter_initials {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  margin-top: -1rem;
+  width: 2rem;
+  line-height: 2rem;
+  border-radius: 100%;
+  font-family: 'Archer Medium', serif;
+  font-size: .9em;
+  text-align: center;
+  color: #FCFDFC;
+}
+
+._EvaluationDashboard_style_objective_value {
+  position: absolute;
+  top: 0;
+  right: 1.5em;
+  bottom: 0;
+  font-family: 'Avenir LT Std 65 Medium';
 }
 
 ._FAQ_style_component {
