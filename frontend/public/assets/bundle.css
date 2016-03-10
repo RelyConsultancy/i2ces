@@ -6,6 +6,10 @@
   https://github.com/suitcss/base/blob/master/lib/base.css                0.8.0
 */
 
+body {
+  font-size: 16px !important;
+}
+
 b {
   display: block;
   font-weight: inherit;
@@ -328,6 +332,7 @@ a {
   background-color: transparent;
   /* I feel like this should be a default behavior  */
   display: inline-block;
+  font-size: 1rem;
 }
 
 a:focus {
@@ -336,6 +341,7 @@ a:focus {
 
 a:active,
 a:hover {
+  color: inherit;
   outline: 0;
 }
 
@@ -4923,9 +4929,29 @@ body.prevent-scroll.fr-mobile {
   cursor: pointer;
 }
 
+._ListSection_style_list {
+  position: relative;
+  margin-top: -1em;
+}
+
+._ListSection_style_list_item {
+  position: relative;
+  font-size: .875em;
+  line-height: 1.5rem;
+  color: #333;
+}
+
+._ListSection_style_list_item::before {
+  content: '•';
+  color: #757575;
+  margin-right: .5em;
+}
+
 ._FAQ_style_component {
   position: relative;
 }
 
-
+body {
+  font-size: 16px !important;
+}
 

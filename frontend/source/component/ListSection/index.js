@@ -9,9 +9,13 @@ const ListSection = Component({
   render () {
     const { component } = this.props
     const { isEditable } = this.state
-    const html = component.value
 
-    return B(component.type)
+    const list = component.items.map((item, key) => (
+      B({ className: style.list_item, key }, item)
+    ))
+
+
+    return B({ className: style.list }, list)
   }
 })
 

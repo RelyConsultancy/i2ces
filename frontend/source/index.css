@@ -1,3 +1,7 @@
+body {
+  font-size: 16px !important;
+}
+
 @import raw './style/defaults.css';
 @import raw './style/avenir.css';
 @import raw './style/archer.css';
@@ -12,4 +16,5 @@
 @import from './component/EvaluationDashboard/style.css';
 @import from './component/EvaluationChapters/style.css';
 @import from './component/HTMLSection/style.css';
+@import from './component/ListSection/style.css';
 @import from './component/FAQ/style.css';

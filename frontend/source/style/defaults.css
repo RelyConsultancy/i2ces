@@ -6,6 +6,9 @@
   https://github.com/suitcss/base/blob/master/lib/base.css                0.8.0
 */
 
+body {
+  font-size: 16px !important;
+}
 
 b {
   display: block;
@@ -322,12 +325,14 @@ a {
   background-color: transparent;
   /* I feel like this should be a default behavior  */
   display: inline-block;
+  font-size: 1rem;
 }
 a:focus {
   color: inherit;
 }
 a:active,
 a:hover {
+  color: inherit;
   outline: 0;
 }
 
