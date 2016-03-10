@@ -1,7 +1,3 @@
-body {
-  font-size: 16px !important;
-}
-
 @import raw './style/defaults.css';
 @import raw './style/avenir.css';
 @import raw './style/archer.css';

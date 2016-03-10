@@ -8,6 +8,7 @@
 
 body {
   font-size: 16px !important;
+  line-height: inherit !important;
 }
 
 b {
@@ -333,15 +334,11 @@ a {
   /* I feel like this should be a default behavior  */
   display: inline-block;
   font-size: 1rem;
-}
-
-a:focus {
   color: inherit;
 }
 
 a:active,
 a:hover {
-  color: inherit;
   outline: 0;
 }
 
@@ -4924,7 +4921,7 @@ body.prevent-scroll.fr-mobile {
   top: -5em;
   padding: .5em 1em;
   color: #FFF;
-  font-size: .75rem;
+  font-size: .875em;
   background-color: #43B5DB;
   cursor: pointer;
 }
@@ -4951,7 +4948,5 @@ body.prevent-scroll.fr-mobile {
   position: relative;
 }
 
-body {
-  font-size: 16px !important;
-}
+
 
