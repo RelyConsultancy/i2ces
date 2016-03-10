@@ -157,12 +157,69 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $campaignObjectivesChapter = new Chapter();
         $campaignObjectivesChapter->setContent($campaignObjectivesChapterContent);
         $campaignObjectivesChapter->setIsAdditionalData(false);
-        $campaignObjectivesChapter->setTitle("Campaign Objectives");
+        $campaignObjectivesChapter->setTitle("Campaign Background");
         $campaignObjectivesChapter->setState("visible");
 
         $this->entityManager->persist($campaignObjectivesChapter);
+
+        $appendixContent = $templateRenderer->render(
+            'EvaluationEvaluationBundle:Appendix:appendix-version-1.json.twig'
+        );
+        $appendix = new Chapter();
+        $appendix->setContent($appendixContent);
+        $appendix->setIsAdditionalData(false);
+        $appendix->setTitle('Appendix');
+        $appendix->setState('visible');
+        $this->entityManager->persist($appendix);
+
+        $categoryContextContent = $templateRenderer->render(
+            'EvaluationEvaluationBundle:CategoryContext:category-context-version-1.json.twig'
+        );
+        $categoryContext = new Chapter();
+        $categoryContext->setContent($categoryContextContent);
+        $categoryContext->setIsAdditionalData(false);
+        $categoryContext->setTitle('Category Context');
+        $categoryContext->setState('visible');
+        $this->entityManager->persist($categoryContext);
+
+        $summaryContent = $templateRenderer->render(
+            'EvaluationEvaluationBundle:Summary:summary-version-1.json.twig'
+        );
+        $summary = new Chapter();
+        $summary->setContent($summaryContent);
+        $summary->setIsAdditionalData(false);
+        $summary->setTitle('Summary');
+        $summary->setState('visible');
+        $this->entityManager->persist($summary);
+
+        $objectiveReviewContent = $templateRenderer->render(
+            'EvaluationEvaluationBundle:ObjectiveReview:objective-review-version-1.json.twig'
+        );
+        $objectiveReview = new Chapter();
+        $objectiveReview->setContent($objectiveReviewContent);
+        $objectiveReview->setIsAdditionalData(false);
+        $objectiveReview->setTitle('Objective Review');
+        $objectiveReview->setState('visible');
+        $this->entityManager->persist($objectiveReview);
+
+        $samplingPerformanceContent = $templateRenderer->render(
+            'EvaluationEvaluationBundle:SamplingPerformance:sampling-performance-version-1.json.twig'
+        );
+        $samplingPerformance = new Chapter();
+        $samplingPerformance->setContent($samplingPerformanceContent);
+        $samplingPerformance->setIsAdditionalData(false);
+        $samplingPerformance->setTitle('Sampling Performance');
+        $samplingPerformance->setState('visible');
+        $this->entityManager->persist($samplingPerformance);
+
+
         $this->entityManager->flush();
         $this->entityManager->refresh($campaignObjectivesChapter);
+        $this->entityManager->refresh($appendix);
+        $this->entityManager->refresh($summary);
+        $this->entityManager->refresh($samplingPerformance);
+        $this->entityManager->refresh($categoryContext);
+        $this->entityManager->refresh($objectiveReview);
 
         $campaignObjectivesChapter->setLocation(
             sprintf(
@@ -171,9 +228,58 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
                 $campaignObjectivesChapter->getId()
             )
         );
+
+        $appendix->setLocation(
+            sprintf(
+                '/api/evaluations/%s/chapters/%s',
+                $evaluation->getCid(),
+                $appendix->getId()
+            )
+        );
+
+        $summary->setLocation(
+            sprintf(
+                '/api/evaluations/%s/chapters/%s',
+                $evaluation->getCid(),
+                $summary->getId()
+            )
+        );
+
+        $samplingPerformance->setLocation(
+            sprintf(
+                '/api/evaluations/%s/chapters/%s',
+                $evaluation->getCid(),
+                $samplingPerformance->getId()
+            )
+        );
+
+        $categoryContext->setLocation(
+            sprintf(
+                '/api/evaluations/%s/chapters/%s',
+                $evaluation->getCid(),
+                $categoryContext->getId()
+            )
+        );
+
+        $objectiveReview->setLocation(
+            sprintf(
+                '/api/evaluations/%s/chapters/%s',
+                $evaluation->getCid(),
+                $objectiveReview->getId()
+            )
+        );
+
         $this->entityManager->persist($campaignObjectivesChapter);
+        $this->entityManager->persist($summary);
+        $this->entityManager->persist($samplingPerformance);
+        $this->entityManager->persist($categoryContext);
+        $this->entityManager->persist($objectiveReview);
 
         $chapters[] = $campaignObjectivesChapter;
+        $chapters[] = $summary;
+        $chapters[] = $samplingPerformance;
+        $chapters[] = $categoryContext;
+        $chapters[] = $objectiveReview;
 
         $evaluation->setChapters($chapters);
 
@@ -213,19 +319,19 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
                     $timingPeriods['Pre'] = $timing['period_date'];
                     break;
                 case 2:
-                    $timingPeriods['Pre'] = sprintf('%s-%s', $timingPeriods['Pre'], $timing['period_date']);
+                    $timingPeriods['Pre'] = sprintf('%s - %s', $timingPeriods['Pre'], $timing['period_date']);
                     break;
                 case 3:
                     $timingPeriods['During'] = $timing['period_date'];
                     break;
                 case 4:
-                    $timingPeriods['During'] = sprintf('%s-%s', $timingPeriods['During'], $timing['period_date']);
+                    $timingPeriods['During'] = sprintf('%s - %s', $timingPeriods['During'], $timing['period_date']);
                     break;
                 case 5:
                     $timingPeriods['Post'] = $timing['period_date'];
                     break;
                 case 6:
-                    $timingPeriods['Post'] = sprintf('%s-%s', $timingPeriods['Post'], $timing['period_date']);
+                    $timingPeriods['Post'] = sprintf('%s - %s', $timingPeriods['Post'], $timing['period_date']);
                     break;
                 default:
             }

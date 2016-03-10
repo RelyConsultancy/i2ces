@@ -39,7 +39,7 @@
         "content": [
             {
                 "type": "list",
-                "value": [
+                "items": [
                     "{{ timings | join('","') | raw }}"
                 ]
             }
@@ -52,7 +52,7 @@
         "content": [
             {
                 "type": "list",
-                "value": [
+                "items": [
                     "{{ evaluatedChannels | join('","') | raw }}"
                 ]
             }
@@ -65,7 +65,7 @@
         "content": [
             {
                 "type": "list",
-                "value": [
+                "items": [
                     "{{ evaluatedCost | join('","') | raw }}"
                 ]
             }
@@ -131,7 +131,7 @@
                         {% endif %}
                         {
                             "label": "{{ legend_item.label }}",
-                            "color": "{{ legend_item.color }}"
+                            "color": "#{{ legend_item.color }}"
                         }
                     {% endfor %}
                 ]
