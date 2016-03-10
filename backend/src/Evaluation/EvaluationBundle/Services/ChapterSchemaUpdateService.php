@@ -26,6 +26,7 @@ class ChapterSchemaUpdateService extends AbstractSchemaUpdateService
                 content BLOB,
                 created_at DATETIME,
                 last_modified_at DATETIME,
+                chapter_order INT,
                 PRIMARY KEY (id)
             )',
             $this->tableName
@@ -41,6 +42,15 @@ class ChapterSchemaUpdateService extends AbstractSchemaUpdateService
     protected function updateTable()
     {
         $connection = $this->entityManager->getConnection();
+        try {
+            $query = sprintf(
+                'ALTER TABLE `%s` ADD COLUMN chapter_order INT',
+                $this->tableName
+            );
+
+            $connection->exec($query);
+        } catch (DriverException $ex) {
+        }
         try {
             $query = sprintf(
                 'ALTER TABLE `%s` ADD COLUMN is_additional_data TINYINT(1) NOT NULL',

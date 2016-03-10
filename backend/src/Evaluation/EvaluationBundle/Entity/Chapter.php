@@ -113,6 +113,17 @@ class Chapter
     protected $lastModifiedAt;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", name="chapter_order")
+     *
+     * @JMS\Groups({"list", "full"})
+     * @JMS\SerializedName("order")
+     * @JMS\Type("integer")
+     */
+    protected $order;
+
+    /**
      * @JMS\VirtualProperty()
      * @JMS\Groups({"full"})
      * @JMS\SerializedName("content")
@@ -269,5 +280,21 @@ class Chapter
     public function setLastModifiedAt($lastModifiedAt)
     {
         $this->lastModifiedAt = $lastModifiedAt;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param int $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
     }
 }

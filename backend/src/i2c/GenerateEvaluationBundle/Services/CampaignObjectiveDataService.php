@@ -59,12 +59,40 @@ class CampaignObjectiveDataService
         /** @var Connection $connection */
         $connection = $this->entityManager->getConnection();
         $query = sprintf(
-            'SELECT DISTINCT objective
+            'SELECT objective
               FROM ie_results_data
-              WHERE master_campaign_id = \'%s\'',
+              WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND product = \'Offer\' AND obj_priority <> 0
+              AND timeperiod = 2',
             $cid
         );
         $response = $connection->query($query)->fetchAll(PDO::FETCH_COLUMN);
+
+        return $response;
+    }
+
+    /**
+     * Returns an array of objective titles.
+     *
+     * @param string $cid
+     *
+     * @return array
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getObjectivesComplete($cid)
+    {
+        /** @var Connection $connection */
+        $connection = $this->entityManager->getConnection();
+        $query = sprintf(
+            'SELECT objective, uplift
+              FROM ie_results_data
+              WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND product = \'Offer\' AND obj_priority <> 0
+              AND timeperiod = 2
+              ORDER BY obj_priority ASC
+            ',
+            $cid
+        );
+        $response = $connection->query($query)->fetchAll();
 
         return $response;
     }
