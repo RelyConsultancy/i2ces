@@ -333,8 +333,6 @@ a {
   background-color: transparent;
   /* I feel like this should be a default behavior  */
   display: inline-block;
-  font-size: 1rem;
-  color: inherit;
 }
 
 a:active,
@@ -4647,6 +4645,7 @@ body.prevent-scroll.fr-mobile {
   text-decoration: none;
 }
 
+._EvaluationList_style_item_view:hover,
 ._EvaluationList_style_item_view:focus {
   color: #FFFFFF;
 }
@@ -4874,6 +4873,11 @@ body.prevent-scroll.fr-mobile {
   margin: 1rem .75rem;
   font-size: .75em;
   cursor: pointer;
+  color: inherit;
+}
+
+._EvaluationChapters_style_sections_link:hover {
+  color: inherit;
 }
 
 ._EvaluationChapters_style_sections_link::before {
@@ -4882,6 +4886,10 @@ body.prevent-scroll.fr-mobile {
 }
 
 ._EvaluationChapters_style_sections_active {
+  color: #444;
+}
+
+._EvaluationChapters_style_sections_active:hover {
   color: #444;
 }
 

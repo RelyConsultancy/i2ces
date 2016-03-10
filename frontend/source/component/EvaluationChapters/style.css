@@ -99,6 +99,10 @@
   margin: 1rem .75rem;
   font-size: .75em;
   cursor: pointer;
+  color: inherit;
+}
+.sections_link:hover {
+  color: inherit;
 }
 .sections_link::before {
   content: '•';
@@ -106,6 +110,9 @@
 }
 .sections_active {
   compose: sections_link;
+  color: #444;
+}
+.sections_active:hover {
   color: #444;
 }
 

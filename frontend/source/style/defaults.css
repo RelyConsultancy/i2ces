@@ -326,8 +326,6 @@ a {
   background-color: transparent;
   /* I feel like this should be a default behavior  */
   display: inline-block;
-  font-size: 1rem;
-  color: inherit;
 }
 a:active,
 a:hover {
