@@ -28,7 +28,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.hostname = "i2ces.dev"
     dev.vm.boot_timeout = 2000
 
+    dev.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
+
     dev.vm.synced_folder "./backend", "/var/www/html/",
+      type: "nfs"
+    dev.vm.synced_folder "./frontend/public/fonts", "/var/www/html/web/fonts",
+      type: "nfs"
+    dev.vm.synced_folder "./frontend/public/images", "/var/www/html/web/images",
       type: "nfs"
   end # end |dev|
 

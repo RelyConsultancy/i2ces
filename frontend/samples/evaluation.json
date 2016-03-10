@@ -1,0 +1,37 @@
+{
+  "error": null,
+  "data": {
+    "id": "248bf0d7-7d47-4330-acac-ff763a61d73e",
+    "state": "published",
+    "campaign_id": "i2c1510047a",
+    "title": "Lindt - Christmas 2015",
+    "brand": "Lindor",
+    "category": "IMPULSE FOOD",
+    "start_date": "2015-02-01",
+    "end_date": "2015-04-15",
+    "channels": ["email", "paper"],
+    "supplier": {
+      "id": 1,
+      "name": "Lindt & Sprungli (UK) Ltd",
+      "email": "",
+      "phone": "",
+      "website": ""
+    },
+    "chapters": [{
+      "id": "da272b47-6966-4880-b8ad-9ddad624e223",
+      "title": "First",
+      "state": "visible",
+      "location": "/api/evaluations/248bf0d7-7d47-4330-acac-ff763a61d73e/chapters/da272b47-6966-4880-b8ad-9ddad624e223"
+    }, {
+      "id": "d2d1f3a9-3e5f-448f-b394-87aebc85092e",
+      "title": "Second",
+      "state": "visible",
+      "location": "/api/evaluations/248bf0d7-7d47-4330-acac-ff763a61d73e/chapters/d2d1f3a9-3e5f-448f-b394-87aebc85092e"
+    }, {
+      "id": "56ce5bd2-49ed-4e91-b4f7-43b44d225edb",
+      "title": "Third",
+      "state": "hidden",
+      "location": "/api/evaluations/248bf0d7-7d47-4330-acac-ff763a61d73e/chapters/56ce5bd2-49ed-4e91-b4f7-43b44d225edb"
+    }]
+  }
+}

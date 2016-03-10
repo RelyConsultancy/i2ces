@@ -1,0 +1,12 @@
+@import from './style/defaults.css';
+@import from './style/grid.css';
+@import from './style/avenir.css';
+@import from './style/archer.css';
+@import from './style/loader.css';
+@import from './component/Loader/style.css';
+@import from './component/Select/style.css';
+@import from './component/PaneTitle/style.css';
+@import from './component/Dashboard/style.css';
+@import from './component/Evaluation/style.css';
+@import from './component/Evaluations/style.css';
+@import from './component/FAQ/style.css';
