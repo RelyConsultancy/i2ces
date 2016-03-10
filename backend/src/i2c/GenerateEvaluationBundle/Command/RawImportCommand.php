@@ -103,6 +103,7 @@ class RawImportCommand extends ContainerAwareCommand
                 sprintf('%s/%s', $importFolderPath, $value['file_name']),
                 $fieldSeparator,
                 $lineEndings,
+                (!empty($value['additional_setters'])) ? $value['additional_setters'] : '',
                 $pdoConn
             );
 
@@ -112,17 +113,32 @@ class RawImportCommand extends ContainerAwareCommand
 
 
     /**
-     * @param string $tableName
-     * @param string $filePath
-     * @param array  $columns
-     * @param string $fieldSeparator
-     * @param string $lineEndings
-     * @param \PDO   $connection
+     * @param string       $tableName
+     * @param string       $filePath
+     * @param array        $columns
+     * @param string       $fieldSeparator
+     * @param string       $lineEndings
+     * @param string|array $additionalSetters
+     * @param \PDO         $connection
      *
      * @return int
      */
-    protected function loadDataFromFile($tableName, $columns, $filePath, $fieldSeparator, $lineEndings, $connection)
-    {
+    protected function loadDataFromFile(
+        $tableName,
+        $columns,
+        $filePath,
+        $fieldSeparator,
+        $lineEndings,
+        $additionalSetters,
+        $connection
+    ) {
+        if ($additionalSetters) {
+            $additionalSetters = sprintf(
+                'SET %s',
+                implode(',', $additionalSetters)
+            );
+        }
+
         $query = sprintf(
             "LOAD DATA LOCAL INFILE '%s' INTO TABLE `%s`
             FIELDS TERMINATED BY '%s'
@@ -130,12 +146,13 @@ class RawImportCommand extends ContainerAwareCommand
             LINES TERMINATED BY '%s'
             IGNORE 1 lines
             (%s)
-            ",
+            %s",
             $filePath,
             $tableName,
             $fieldSeparator,
             $lineEndings,
-            implode(',', $columns)
+            implode(',', $columns),
+            $additionalSetters
         );
 
         return $connection->exec($query);
@@ -157,7 +174,7 @@ class RawImportCommand extends ContainerAwareCommand
         foreach ($config['columns'] as $fieldName => $fieldConfig) {
             $tableColumns[] = sprintf(
                 '`%s` %s',
-                $fieldName,
+                str_replace('@', '', $fieldName),
                 $fieldConfig
             );
         }
