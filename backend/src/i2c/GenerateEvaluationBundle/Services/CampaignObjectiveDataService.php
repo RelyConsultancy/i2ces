@@ -38,7 +38,7 @@ class CampaignObjectiveDataService
     {
         /** @var Connection $connection */
         $connection = $this->entityManager->getConnection();
-        $query = 'SELECT master_campaign_id, campaign_name, supplier, brand, npd, media_cost
+        $query = 'SELECT master_campaign_id, category, campaign_name, supplier, brand, npd, media_cost
                   FROM ie_campaign_data ';
         $response = $connection->query($query)->fetchAll();
 

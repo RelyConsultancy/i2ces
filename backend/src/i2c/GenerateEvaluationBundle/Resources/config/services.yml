@@ -108,6 +108,10 @@ parameters:
             additional_setters:
                 - "week_commencing = STR_TO_DATE(@week_commencing, '%%d/%%m/%%Y')"
 
+    colors_config:
+        - { color: ccc, media: ['Instore Sampling', 'Entrance Gates', 'Six Sheets'], label: 'Evaluated media' }
+        - { color: 555, media: ['TV Wall'], label: 'In-Store Promotions' }
+
 services:
     i2c_generate_evaluation.raw_import:
         class: i2c\GenerateEvaluationBundle\Command\RawImportCommand
@@ -117,6 +121,7 @@ services:
 
     i2c_generate_evaluation.evaluation_generate:
         class: i2c\GenerateEvaluationBundle\Command\GenerateEvaluationsCommand
+        arguments: [%colors_config%]
         tags:
             - { name: console.command }
 

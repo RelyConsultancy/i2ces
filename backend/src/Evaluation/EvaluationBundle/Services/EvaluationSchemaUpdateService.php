@@ -21,7 +21,6 @@ class EvaluationSchemaUpdateService extends AbstractSchemaUpdateService
         $query = sprintf(
             'CREATE TABLE IF NOT EXISTS `%s` (
                 id INT(11) NOT NULL AUTO_INCREMENT,
-                uid VARCHAR(255) NOT NULL,
                 cid VARCHAR(255) NOT NULL,
                 title VARCHAR(255) NOT NULL,
                 category VARCHAR(255) NOT NULL,
@@ -108,6 +107,15 @@ class EvaluationSchemaUpdateService extends AbstractSchemaUpdateService
         }
         try {
             $query = ('DROP TABLE IF EXISTS `evaluation_mediums`');
+            $connection->exec($query);
+        } catch (DriverException $ex) {
+        }
+        try {
+            $query = sprintf(
+                'ALTER TABLE `%s` DROP COLUMN uid',
+                $this->tableName
+            );
+
             $connection->exec($query);
         } catch (DriverException $ex) {
         }

@@ -20,10 +20,9 @@ class ChapterSchemaUpdateService extends AbstractSchemaUpdateService
         $query = sprintf(
             'CREATE TABLE IF NOT EXISTS `%s` (
                 id INT(11) NOT NULL,
-                uid VARCHAR(255) NOT NULL,
-                title VARCHAR(255) NOT NULL,
-                state VARCHAR(255) NOT NULL,
-                location VARCHAR(255) NOT NULL,
+                title VARCHAR(255),
+                state VARCHAR(255),
+                location VARCHAR(255),
                 content BLOB,
                 created_at DATETIME,
                 last_modified_at DATETIME,
@@ -54,6 +53,15 @@ class ChapterSchemaUpdateService extends AbstractSchemaUpdateService
         try {
             $query = sprintf(
                 'ALTER TABLE `%s` ADD COLUMN serialized_name VARCHAR(255) NOT NULL',
+                $this->tableName
+            );
+
+            $connection->exec($query);
+        } catch (DriverException $ex) {
+        }
+        try {
+            $query = sprintf(
+                'ALTER TABLE `%s` DROP COLUMN uid',
                 $this->tableName
             );
 
