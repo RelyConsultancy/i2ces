@@ -32,12 +32,20 @@ const evaluation = (state = defaults.evaluation, { type, data }) => {
       state.filter[data.filter] = data.value
     break
 
-    case 'evaluation.data':
-      state.data = data
+    case 'evaluation.evaluation':
+      state.evaluation = data
+      // clear cache
+      state.chapters_cache = {}
+      state.chapter_section = null
     break
 
-    case 'evaluation.chapter':
-      state.chapter[data.id] = data
+    case 'evaluation.chapters_cache':
+      state.chapters_cache[data.id] = data
+      state.chapter_section = data.content ? data.content[0] : null
+    break
+
+    case 'evaluation.chapter_section':
+      state.chapter_section = data
     break
   }
 

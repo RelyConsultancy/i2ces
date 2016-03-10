@@ -109,13 +109,18 @@ const bundleCSS = (options) => {
   const watcher = watch(`${root}/**/*.css`)
 
   const save = () => {
-    css.load(input)
-    writeFileSync(output, css.stringify())
-    css.cache.clear()
+    try {
+      css.load(input)
+      writeFileSync(output, css.stringify())
+      css.cache.clear()
 
-    const path = output.replace(__dirname, '')
-    console.log(`CSS bundled: ${path}`)
-    browserReload(path)
+      const path = output.replace(__dirname, '')
+      console.log(`CSS bundled: ${path}`)
+      browserReload(path)
+    }
+    catch (error) {
+      console.log(error.stack)
+    }
   }
 
   watcher.on('add', (file) => {

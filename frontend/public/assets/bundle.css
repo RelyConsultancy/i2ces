@@ -1354,12 +1354,12 @@ input::-moz-focus-inner {
 }
 
 ._PaneTitle_style_component {
+  height: 3rem;
+  line-height: 3rem;
   font-size: 1.1em;
   font-family: 'Archer Bold', serif;
   border-top: 1px solid #E6E6E6;
   border-bottom: 1px solid #E6E6E6;
-  line-height: 3rem;
-  height: 3rem;
   color: #656565;
   z-index: 10;
 }
@@ -1387,7 +1387,6 @@ input::-moz-focus-inner {
   left: 0;
   right: 0;
   bottom: 0;
-  overflow: hidden;
 }
 
 ._Dashboard_style_topbar {
@@ -1505,18 +1504,18 @@ input::-moz-focus-inner {
 ._EvaluationDashboard_style_content {
   position: absolute;
   top: 3rem;
+  bottom: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  padding-bottom: 3em;
   overflow: hidden;
   overflow-y: auto;
   background-color: #F9F9F9;
 }
 
-._EvaluationDashboard_style_info {
-  width: 800px;
+._EvaluationDashboard_style_content_wrap {
   margin: 0 auto;
-  padding-bottom: 3em;
+  width: 800px;
 }
 
 ._EvaluationDashboard_style_date {
@@ -1595,6 +1594,7 @@ input::-moz-focus-inner {
   top: 50%;
   margin-top: -1rem;
   width: 2rem;
+  height: 2rem;
   line-height: 2rem;
   border-radius: 100%;
   font-family: 'Archer Medium', serif;
@@ -1609,6 +1609,147 @@ input::-moz-focus-inner {
   right: 1.5em;
   bottom: 0;
   font-family: 'Avenir LT Std 65 Medium';
+}
+
+._EvaluationChapters_style_no_data {
+  text-align: center;
+  padding: 1em;
+}
+
+._EvaluationChapters_style_content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #F9F9F9;
+  border-top: 1px solid #E6E6E6;
+}
+
+._EvaluationChapters_style_links {
+  position: absolute;
+  width: 800px;
+  right: 50%;
+  margin-right: -400px;
+  top: -2em;
+  z-index: 10;
+  text-align: right;
+}
+
+._EvaluationChapters_style_link {
+  display: inline-block;
+  color: #43B5DB;
+  font-size: .75em;
+  text-decoration: none;
+}
+
+._EvaluationChapters_style_chapter_links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3.5rem;
+  border-right: 1px solid #E6E6E6;
+}
+
+._EvaluationChapters_style_chapter_link {
+  width: 3.5rem;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+}
+
+._EvaluationChapters_style_chapter_link:active,
+._EvaluationChapters_style_chapter_link:focus {
+  color: #FFF;
+}
+
+._EvaluationChapters_style_chapter_link_active {
+  background-color: #FCFDFC;
+  line-height: calc(3rem - 2px);
+  border: 1px solid #E6E6E6;
+  border-left: 0;
+}
+
+._EvaluationChapters_style_chapter_link_active:first-child {
+  line-height: 3rem;
+  border-top: 0;
+}
+
+._EvaluationChapters_style_chapter_initials {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  border-radius: 100%;
+  font-family: 'Archer Medium', serif;
+  font-size: .9em;
+  text-align: center;
+  color: #FCFDFC;
+  text-decoration: none;
+}
+
+._EvaluationChapters_style_sections {
+  position: absolute;
+  top: 0;
+  left: 3.5rem;
+  bottom: 0;
+  width: 12rem;
+  border-right: 1px solid #E6E6E6;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+._EvaluationChapters_style_ellipses {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+._EvaluationChapters_style_sections_title {
+  padding: 0 .75rem;
+  height: 3rem;
+  line-height: 3rem;
+  font-family: 'Archer Bold', serif;
+  border-bottom: 1px solid #E6E6E6;
+  color: inherit;
+}
+
+._EvaluationChapters_style_sections_link {
+  margin: 1rem .75rem;
+  font-size: .75em;
+  cursor: pointer;
+}
+
+._EvaluationChapters_style_sections_link::before {
+  content: '•';
+  margin-right: .5em;
+}
+
+._EvaluationChapters_style_sections_active {
+  color: #444;
+}
+
+._EvaluationChapters_style_sections_content {
+  position: absolute;
+  top: 0;
+  left: 15.5rem;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  background-color: #FFF;
+}
+
+._EvaluationChapters_style_section {
+  padding: 2rem;
+  border-bottom: 1px solid #E6E6E6;
+}
+
+._EvaluationChapters_style_section_title {
+  margin-bottom: 2rem;
+  font-size: 1.1em;
+  font-family: 'Archer Bold', serif;
+  color: #6D6D6D;
 }
 
 ._FAQ_style_component {

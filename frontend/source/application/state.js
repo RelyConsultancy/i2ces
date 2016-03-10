@@ -25,9 +25,12 @@ export default {
     list_empty: 'No records found',
     list: [],
 
-    data_empty: 'No data to display',
-    data: null,
-    chapter: {},
+    evaluation_empty: 'No data to display',
+    evaluation: null,
+
+    chapters_cache: {},
+    chapter_section: null,
+    chapter_empty: 'Loading evaluation data',
     chapter_palette: [
       '#3778C1',
       '#E58700',

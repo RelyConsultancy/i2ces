@@ -43,31 +43,37 @@
 
   "chapters": [{
     "id": "1",
+    "order": 1,
     "state": "visible",
     "location": "/api/evaluations/i2c1509134a/chapters/1",
     "title": "Category Context"
   }, {
     "id": "2",
+    "order": 2,
     "location": "/api/evaluations/i2c1509134a/chapters/2",
     "state": "visible",
     "title": "Campaign Background"
   }, {
     "id": "3",
+    "order": 3,
     "location": "/api/evaluations/i2c1509134a/chapters/3",
     "state": "visible",
     "title": "Sampling Performance"
   }, {
     "id": "4",
+    "order": 4,
     "location": "/api/evaluations/i2c1509134a/chapters/4",
     "state": "visible",
     "title": "Objective Review"
   }, {
     "id": "5",
+    "order": 5,
     "location": "/api/evaluations/i2c1509134a/chapters/5",
     "state": "visible",
     "title": "Summary"
   }, {
     "id": "6",
+    "order": 6,
     "location": "/api/evaluations/i2c1509134a/chapters/6",
     "state": "visible",
     "title": "Appendix"

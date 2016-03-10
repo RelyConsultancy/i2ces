@@ -56,7 +56,7 @@ $('get', '/api/evaluations/:id', function * (id) {
 
 
 $('get', '/api/evaluations/:id/chapters/:cid', function * (id, cid) {
-  this.body = fmtReply(db.chapters[id].filter(c => c.id == cid))
+  this.body = fmtReply(db.chapters[id].filter(c => c.id == cid).shift())
 })
 
 

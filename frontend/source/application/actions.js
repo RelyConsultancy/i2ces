@@ -28,11 +28,17 @@ export const setFilter = (filter, value) => {
   cmd('evaluation.filter', { filter, value })
 }
 
-
 export const setEvaluation = (data) => {
-  cmd('evaluation.data', data)
+  cmd('evaluation.evaluation', data)
 }
 
+export const setChapter = (data) => {
+  cmd('evaluation.chapters_cache', data)
+}
+
+export const setChapterSection = (data) => {
+  cmd('evaluation.chapter_section', data)
+}
 
 export const fetchEvaluations = () => {
   const { dashboard } = store.getState()
@@ -48,11 +54,14 @@ export const fetchEvaluations = () => {
   })
 }
 
-
 export const fetchEvaluation = (id) => {
   http('get', `/api/evaluations/${id}`, (reply) => {
     setEvaluation(reply.data)
   })
 }
 
-
+export const fetchChapter = ({ cid, id }) => {
+  http('get', `/api/evaluations/${cid}/chapters/${id}`, (reply) => {
+    setChapter(reply.data)
+  })
+}

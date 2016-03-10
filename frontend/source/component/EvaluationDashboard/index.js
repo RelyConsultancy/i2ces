@@ -7,10 +7,10 @@ import store from '/application/store.js'
 import style from './style.css'
 
 
-const Date = ({ data }) => B(
+const Date = ({ evaluation }) => B(
   { className: style.date },
-  B({ className: style.date_value }, `Start: ${fmtDate(data.start_date)}`),
-  B({ className: style.date_value }, `End: ${fmtDate(data.end_date)}`)
+  B({ className: style.date_value }, `Start: ${fmtDate(evaluation.start_date)}`),
+  B({ className: style.date_value }, `End: ${fmtDate(evaluation.end_date)}`)
 )
 
 
@@ -31,7 +31,7 @@ const Chapters = ({ evaluation, colors }) => (
   B({ className: style.chapters }, Grid({
     blocks: 2,
     items: evaluation.chapters.map((chapter) => {
-      const color = colors[chapter.id - 1]
+      const color = colors[chapter.order - 1]
       const title = B({ className: style.chapter_title }, chapter.title)
 
       const arrow = B({
@@ -70,28 +70,31 @@ const Objectives = ({ items }) => {
 
 const Evaluation = Component({
   class: true,
-  componentDidMount () {
+  load () {
     const { store, params } = this.props
 
-    if (!store.data) {
-      fetchEvaluation(params.id)
+    if (!store.evaluation) {
+      fetchEvaluation(params.cid)
     }
+  },
+  componentDidMount () {
+    this.load()
   },
   render () {
     const { store } = this.props
-    const { data, data_empty, chapter_palette } = store
+    const { evaluation, evaluation_empty, chapter_palette } = store
 
-    let content = B({ className: style.no_data }, data_empty)
+    let content = B({ className: style.no_evaluation }, evaluation_empty)
 
-    if (data) {
+    if (evaluation) {
       content = B(
-        Title({ text: data.display_title }),
+        Title({ text: evaluation.display_title }),
         B({ className: style.content }, B(
-          { className: style.info },
-          Date({ data }),
-          Channels({ items: data.channels }),
-          Chapters({ evaluation: data, colors: chapter_palette }),
-          Objectives({ items: data.campaign_objectives })
+          { className: style.content_wrap },
+          Date({ evaluation }),
+          Channels({ items: evaluation.channels }),
+          Chapters({ evaluation: evaluation, colors: chapter_palette }),
+          Objectives({ items: evaluation.campaign_objectives })
         ))
       )
     }

@@ -1,5 +1,9 @@
 import moment from 'moment'
 
+export const isElement = (value) => (
+  typeof value === 'object' && value !== null && value.$$typeof
+)
+
 export const isFunction = (value) => (
   typeof value == 'function'
 )
@@ -15,7 +19,7 @@ export const getUnique = (array) => (
 )
 
 export const fmtDate = (date) => (
-  moment(date, 'YYYY-MM-DD').format('DD.MM.YYYY')
+  moment(date, 'YYYY-MM-DD').format('DD MMM YYYY')
 )
 
 export const getInitials = (string) => (

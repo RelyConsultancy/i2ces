@@ -31034,7 +31034,7 @@ exports.isBuffer = function (obj) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchEvaluation = exports.fetchEvaluations = exports.setEvaluation = exports.setFilter = exports.setFlagNetwork = exports.setUser = undefined;
+exports.fetchChapter = exports.fetchEvaluation = exports.fetchEvaluations = exports.setChapterSection = exports.setChapter = exports.setEvaluation = exports.setFilter = exports.setFlagNetwork = exports.setUser = undefined;
 
 var _store = require('./store.js');
 
@@ -31071,7 +31071,15 @@ var setFilter = exports.setFilter = function setFilter(filter, value) {
 };
 
 var setEvaluation = exports.setEvaluation = function setEvaluation(data) {
-  cmd('evaluation.data', data);
+  cmd('evaluation.evaluation', data);
+};
+
+var setChapter = exports.setChapter = function setChapter(data) {
+  cmd('evaluation.chapters_cache', data);
+};
+
+var setChapterSection = exports.setChapterSection = function setChapterSection(data) {
+  cmd('evaluation.chapter_section', data);
 };
 
 var fetchEvaluations = exports.fetchEvaluations = function fetchEvaluations() {
@@ -31097,6 +31105,15 @@ var fetchEvaluations = exports.fetchEvaluations = function fetchEvaluations() {
 var fetchEvaluation = exports.fetchEvaluation = function fetchEvaluation(id) {
   (0, _http2.default)('get', '/api/evaluations/' + id, function (reply) {
     setEvaluation(reply.data);
+  });
+};
+
+var fetchChapter = exports.fetchChapter = function fetchChapter(_ref) {
+  var cid = _ref.cid;
+  var id = _ref.id;
+
+  (0, _http2.default)('get', '/api/evaluations/' + cid + '/chapters/' + id, function (reply) {
+    setChapter(reply.data);
   });
 };
 
@@ -31248,12 +31265,20 @@ var evaluation = function evaluation() {
       state.filter[data.filter] = data.value;
       break;
 
-    case 'evaluation.data':
-      state.data = data;
+    case 'evaluation.evaluation':
+      state.evaluation = data;
+      // clear cache
+      state.chapters_cache = {};
+      state.chapter_section = null;
       break;
 
-    case 'evaluation.chapter':
-      state.chapter[data.id] = data;
+    case 'evaluation.chapters_cache':
+      state.chapters_cache[data.id] = data;
+      state.chapter_section = data.content ? data.content[0] : null;
+      break;
+
+    case 'evaluation.chapter_section':
+      state.chapter_section = data;
       break;
   }
 
@@ -31308,6 +31333,10 @@ var _EvaluationDashboard = require('/Users/eugen/GitHub/matter/i2ces/frontend/so
 
 var _EvaluationDashboard2 = _interopRequireDefault(_EvaluationDashboard);
 
+var _EvaluationChapters = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationChapters');
+
+var _EvaluationChapters2 = _interopRequireDefault(_EvaluationChapters);
+
 var _FAQ = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/FAQ');
 
 var _FAQ2 = _interopRequireDefault(_FAQ);
@@ -31324,8 +31353,11 @@ var routes = {
     path: 'evaluations',
     component: _EvaluationList2.default
   }, {
-    path: 'evaluations/:id',
+    path: 'evaluations/:cid',
     component: _EvaluationDashboard2.default
+  }, {
+    path: 'evaluations/:cid/chapters/:id',
+    component: _EvaluationChapters2.default
   }, {
     path: 'faqs',
     component: _FAQ2.default
@@ -31337,7 +31369,7 @@ var routes = {
 
 exports.default = routes;
 
-},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Dashboard":256,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationDashboard":258,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationList":261,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/FAQ":263}],253:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Dashboard":256,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationChapters":258,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationDashboard":260,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/EvaluationList":263,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/FAQ":265}],253:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31370,9 +31402,12 @@ exports.default = {
     list_empty: 'No records found',
     list: [],
 
-    data_empty: 'No data to display',
-    data: null,
-    chapter: {},
+    evaluation_empty: 'No data to display',
+    evaluation: null,
+
+    chapters_cache: {},
+    chapter_section: null,
+    chapter_empty: 'Loading evaluation data',
     chapter_palette: ['#3778C1', '#E58700', '#7D3184', '#DE0000', '#87B900', '#A4A4A4']
   }
 };
@@ -31422,13 +31457,19 @@ exports.default = store;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fmtUnit = exports.getInitials = exports.fmtDate = exports.getUnique = exports.isString = exports.isFunction = undefined;
+exports.fmtUnit = exports.getInitials = exports.fmtDate = exports.getUnique = exports.isString = exports.isFunction = exports.isElement = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var isElement = exports.isElement = function isElement(value) {
+  return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && value !== null && value.$$typeof;
+};
 
 var isFunction = exports.isFunction = function isFunction(value) {
   return typeof value == 'function';
@@ -31445,7 +31486,7 @@ var getUnique = exports.getUnique = function getUnique(array) {
 };
 
 var fmtDate = exports.fmtDate = function fmtDate(date) {
-  return (0, _moment2.default)(date, 'YYYY-MM-DD').format('DD.MM.YYYY');
+  return (0, _moment2.default)(date, 'YYYY-MM-DD').format('DD MMM YYYY');
 };
 
 var getInitials = exports.getInitials = function getInitials(string) {
@@ -31535,9 +31576,175 @@ var Dashboard = (0, _component.Component)({
 
 exports.default = _store2.default.sync('dashboard', Dashboard);
 
-},{"./style.css":257,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Loader":266,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],257:[function(require,module,exports){
+},{"./style.css":257,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Loader":268,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273}],257:[function(require,module,exports){
 module.exports = {"component":"_Dashboard_style_component","content":"_Dashboard_style_content","topbar":"_Dashboard_style_topbar","logo":"_Dashboard_style_logo","loader":"_Dashboard_style_loader","links":"_Dashboard_style_links"}
 },{}],258:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js');
+
+var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
+
+var _store = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js');
+
+var _store2 = _interopRequireDefault(_store);
+
+var _style = require('./style.css');
+
+var _style2 = _interopRequireDefault(_style);
+
+var _actions = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var Navigation = function Navigation(_ref) {
+  var store = _ref.store;
+  var params = _ref.params;
+  return (0, _component.B)({ className: _style2.default.links }, (0, _component.Link)({ to: '/evaluations/' + params.cid, className: _style2.default.link }, 'Back to Evaluation Dashboard'));
+};
+
+var Chapters = function Chapters(_ref2) {
+  var store = _ref2.store;
+  var chapter = _ref2.chapter;
+  var evaluation = store.evaluation;
+  var chapter_palette = store.chapter_palette;
+
+  var selected = chapter;
+
+  var links = evaluation.chapters.map(function (chapter, index) {
+    var color = chapter_palette[chapter.order - 1];
+    var isActive = chapter.id == selected.id;
+
+    var initials = (0, _component.B)({
+      className: _style2.default.chapter_initials,
+      style: { backgroundColor: color }
+    }, (0, _utils.getInitials)(chapter.title));
+
+    var attrs = {
+      to: '/evaluations/' + evaluation.cid + '/chapters/' + chapter.id,
+      className: isActive ? _style2.default.chapter_link_active : _style2.default.chapter_link,
+      key: index
+    };
+    return (0, _component.Link)(attrs, initials);
+  });
+
+  return (0, _component.B)({ className: _style2.default.chapter_links }, links);
+};
+
+var getSections = function getSections(chapter) {
+  return chapter.content.filter(function (item) {
+    return item.type == 'section';
+  });
+};
+
+var Sections = function Sections(_ref3) {
+  var store = _ref3.store;
+  var chapter = _ref3.chapter;
+  var ctx = _ref3.ctx;
+  var evaluation = store.evaluation;
+  var chapter_palette = store.chapter_palette;
+
+  var color = chapter_palette[chapter.order - 1];
+  var sections = getSections(chapter);
+  var isActive = function isActive(section) {
+    return section.title == ctx.state.section.title;
+  };
+
+  var title = (0, _component.B)({ className: _style2.default.sections_title }, chapter.title);
+  var links = sections.map(function (section, index) {
+    return (0, _component.B)({
+      className: isActive(section) ? _style2.default.sections_active : _style2.default.sections_link,
+      key: index,
+      onClick: function onClick(event) {
+        ctx.setState({ section: section });
+      }
+    }, section.title);
+  });
+
+  var content = sections.map(function (section, index) {
+    var title = (0, _component.B)({ className: _style2.default.section_title }, section.title);
+
+    var components = section.content.map(function (component) {
+      switch (component.type) {
+        default:
+          return component.type;
+      }
+    });
+
+    return _component.B.apply(undefined, [{ className: _style2.default.section, key: index }, title].concat(_toConsumableArray(components)));
+  });
+
+  return (0, _component.B)((0, _component.B)({ className: _style2.default.sections, style: { color: color } }, title, links), (0, _component.B)({ className: _style2.default.sections_content }, content));
+};
+
+var EvaluationChapters = (0, _component.Component)({
+  class: true,
+  load: function load() {
+    var _props = this.props;
+    var store = _props.store;
+    var params = _props.params;
+    var cid = params.cid;
+    var id = params.id;
+
+    var chapter = store.chapters_cache[id];
+
+    if (!store.evaluation) {
+      (0, _actions.fetchEvaluation)(cid);
+      (0, _actions.fetchChapter)({ cid: cid, id: id });
+    } else if (!chapter) {
+      (0, _actions.fetchChapter)({ cid: cid, id: id });
+    } else {
+      (0, _actions.setChapter)(chapter);
+    }
+  },
+  getInitialState: function getInitialState() {
+    return {
+      section: {}
+    };
+  },
+  componentDidMount: function componentDidMount() {
+    this.load();
+  },
+  componentDidUpdate: function componentDidUpdate(_ref4) {
+    var params = _ref4.params;
+
+    // when channel ID changes
+    if (this.props.params.id != params.id) {
+      this.load();
+    }
+  },
+  render: function render() {
+    var setState = this.setState;
+    var _props2 = this.props;
+    var store = _props2.store;
+    var params = _props2.params;
+    var section = this.state.section;
+    var evaluation = store.evaluation;
+
+
+    var chapter = store.chapters_cache[params.id];
+
+    var content = (0, _component.B)({ className: _style2.default.no_data }, store.chapter_empty);
+
+    if (chapter) {
+      content = (0, _component.B)(Navigation({ store: store, params: params }), Chapters({ store: store, chapter: chapter }), Sections({ store: store, chapter: chapter, ctx: this }));
+    }
+
+    return (0, _component.B)({ className: _style2.default.content }, content);
+  }
+});
+
+exports.default = _store2.default.sync('evaluation', EvaluationChapters);
+
+},{"./style.css":259,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273}],259:[function(require,module,exports){
+module.exports = {"no_data":"_EvaluationChapters_style_no_data","content":"_EvaluationChapters_style_content","links":"_EvaluationChapters_style_links","link":"_EvaluationChapters_style_link","chapter_links":"_EvaluationChapters_style_chapter_links","chapter_link":"_EvaluationChapters_style_chapter_link","chapter_link_active":"_EvaluationChapters_style_chapter_link_active _EvaluationChapters_style_chapter_link","chapter_initials":"_EvaluationChapters_style_chapter_initials","sections":"_EvaluationChapters_style_sections","ellipses":"_EvaluationChapters_style_ellipses","sections_title":"_EvaluationChapters_style_sections_title _EvaluationChapters_style_ellipses","sections_link":"_EvaluationChapters_style_sections_link","sections_active":"_EvaluationChapters_style_sections_active _EvaluationChapters_style_sections_link","sections_content":"_EvaluationChapters_style_sections_content","section":"_EvaluationChapters_style_section","section_title":"_EvaluationChapters_style_section_title"}
+},{}],260:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31569,8 +31776,8 @@ var _style2 = _interopRequireDefault(_style);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Date = function Date(_ref) {
-  var data = _ref.data;
-  return (0, _component.B)({ className: _style2.default.date }, (0, _component.B)({ className: _style2.default.date_value }, 'Start: ' + (0, _utils.fmtDate)(data.start_date)), (0, _component.B)({ className: _style2.default.date_value }, 'End: ' + (0, _utils.fmtDate)(data.end_date)));
+  var evaluation = _ref.evaluation;
+  return (0, _component.B)({ className: _style2.default.date }, (0, _component.B)({ className: _style2.default.date_value }, 'Start: ' + (0, _utils.fmtDate)(evaluation.start_date)), (0, _component.B)({ className: _style2.default.date_value }, 'End: ' + (0, _utils.fmtDate)(evaluation.end_date)));
 };
 
 var Channels = function Channels(_ref2) {
@@ -31593,7 +31800,7 @@ var Chapters = function Chapters(_ref3) {
   return (0, _component.B)({ className: _style2.default.chapters }, (0, _Grid2.default)({
     blocks: 2,
     items: evaluation.chapters.map(function (chapter) {
-      var color = colors[chapter.id - 1];
+      var color = colors[chapter.order - 1];
       var title = (0, _component.B)({ className: _style2.default.chapter_title }, chapter.title);
 
       var arrow = (0, _component.B)({
@@ -31636,27 +31843,30 @@ var Objectives = function Objectives(_ref4) {
 
 var Evaluation = (0, _component.Component)({
   class: true,
-  componentDidMount: function componentDidMount() {
+  load: function load() {
     var _props = this.props;
     var store = _props.store;
     var params = _props.params;
 
 
-    if (!store.data) {
-      (0, _actions.fetchEvaluation)(params.id);
+    if (!store.evaluation) {
+      (0, _actions.fetchEvaluation)(params.cid);
     }
+  },
+  componentDidMount: function componentDidMount() {
+    this.load();
   },
   render: function render() {
     var store = this.props.store;
-    var data = store.data;
-    var data_empty = store.data_empty;
+    var evaluation = store.evaluation;
+    var evaluation_empty = store.evaluation_empty;
     var chapter_palette = store.chapter_palette;
 
 
-    var content = (0, _component.B)({ className: _style2.default.no_data }, data_empty);
+    var content = (0, _component.B)({ className: _style2.default.no_evaluation }, evaluation_empty);
 
-    if (data) {
-      content = (0, _component.B)((0, _PaneTitle2.default)({ text: data.display_title }), (0, _component.B)({ className: _style2.default.content }, (0, _component.B)({ className: _style2.default.info }, Date({ data: data }), Channels({ items: data.channels }), Chapters({ evaluation: data, colors: chapter_palette }), Objectives({ items: data.campaign_objectives }))));
+    if (evaluation) {
+      content = (0, _component.B)((0, _PaneTitle2.default)({ text: evaluation.display_title }), (0, _component.B)({ className: _style2.default.content }, (0, _component.B)({ className: _style2.default.content_wrap }, Date({ evaluation: evaluation }), Channels({ items: evaluation.channels }), Chapters({ evaluation: evaluation, colors: chapter_palette }), Objectives({ items: evaluation.campaign_objectives }))));
     }
 
     return content;
@@ -31665,9 +31875,9 @@ var Evaluation = (0, _component.Component)({
 
 exports.default = _store2.default.sync('evaluation', Evaluation);
 
-},{"./style.css":259,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid":265,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":268,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],259:[function(require,module,exports){
-module.exports = {"no_data":"_EvaluationDashboard_style_no_data","content":"_EvaluationDashboard_style_content","info":"_EvaluationDashboard_style_info","date":"_EvaluationDashboard_style_date","date_value":"_EvaluationDashboard_style_date_value","list":"_EvaluationDashboard_style_list","list_title":"_EvaluationDashboard_style_list_title","list_item":"_EvaluationDashboard_style_list_item","chapters":"_EvaluationDashboard_style_chapters","chapter":"_EvaluationDashboard_style_chapter","chapter_arrow":"_EvaluationDashboard_style_chapter_arrow","chapter_initials":"_EvaluationDashboard_style_chapter_initials","objective_value":"_EvaluationDashboard_style_objective_value"}
-},{}],260:[function(require,module,exports){
+},{"./style.css":261,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid":267,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":270,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273}],261:[function(require,module,exports){
+module.exports = {"no_data":"_EvaluationDashboard_style_no_data","content":"_EvaluationDashboard_style_content","content_wrap":"_EvaluationDashboard_style_content_wrap","date":"_EvaluationDashboard_style_date","date_value":"_EvaluationDashboard_style_date_value","list":"_EvaluationDashboard_style_list","list_title":"_EvaluationDashboard_style_list_title","list_item":"_EvaluationDashboard_style_list_item","chapters":"_EvaluationDashboard_style_chapters","chapter":"_EvaluationDashboard_style_chapter","chapter_arrow":"_EvaluationDashboard_style_chapter_arrow","chapter_initials":"_EvaluationDashboard_style_chapter_initials","objective_value":"_EvaluationDashboard_style_objective_value"}
+},{}],262:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31755,7 +31965,7 @@ exports.default = function (_ref) {
   return (0, _component.B)(attrs, label, filters);
 };
 
-},{"./style.css":262,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid":265,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Select":270,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],261:[function(require,module,exports){
+},{"./style.css":264,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid":267,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Select":272,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273}],263:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31854,9 +32064,9 @@ var Evaluations = (0, _component.Component)({
 
 exports.default = _store2.default.sync('evaluation', Evaluations);
 
-},{"./filters.js":260,"./style.css":262,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":268,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],262:[function(require,module,exports){
+},{"./filters.js":262,"./style.css":264,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":248,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":270,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273}],264:[function(require,module,exports){
 module.exports = {"content":"_EvaluationList_style_content","filters":"_EvaluationList_style_filters","filters_label":"_EvaluationList_style_filters_label","list":"_EvaluationList_style_list","list_empty":"_EvaluationList_style_list_empty","item":"_EvaluationList_style_item","item_title":"_EvaluationList_style_item_title","item_date":"_EvaluationList_style_item_date","item_view":"_EvaluationList_style_item_view"}
-},{}],263:[function(require,module,exports){
+},{}],265:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31898,9 +32108,9 @@ var FAQ = (0, _component.Component)({
 
 exports.default = _store2.default.sync('faq', FAQ);
 
-},{"./style.css":264,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":268,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],264:[function(require,module,exports){
+},{"./style.css":266,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":254,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/PaneTitle":270,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273}],266:[function(require,module,exports){
 module.exports = {"component":"_FAQ_style_component"}
-},{}],265:[function(require,module,exports){
+},{}],267:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31932,7 +32142,7 @@ var Grid = (0, _component.Component)({
 
 exports.default = Grid;
 
-},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],266:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273}],268:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31958,9 +32168,9 @@ var Loader = (0, _component.Component)({
 
 exports.default = Loader;
 
-},{"./style.css":267,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],267:[function(require,module,exports){
+},{"./style.css":269,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273}],269:[function(require,module,exports){
 module.exports = {"loader":"_Loader_style_loader","line1":"_Loader_style_line1","line2":"_Loader_style_line2","line3":"_Loader_style_line3","line4":"_Loader_style_line4","line5":"_Loader_style_line5"}
-},{}],268:[function(require,module,exports){
+},{}],270:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -31986,9 +32196,9 @@ var Title = (0, _component.Component)({
 
 exports.default = Title;
 
-},{"./style.css":269,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271}],269:[function(require,module,exports){
+},{"./style.css":271,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273}],271:[function(require,module,exports){
 module.exports = {"component":"_PaneTitle_style_component","wrap":"_PaneTitle_style_wrap"}
-},{}],270:[function(require,module,exports){
+},{}],272:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32005,7 +32215,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _component.Element)(_reactSelect2.default);
 
-},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":271,"react-select":101}],271:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":273,"react-select":101}],273:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -32013,19 +32223,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Link = exports.Image = exports.Button = exports.Input = exports.A = exports.B = exports.Component = exports.Element = undefined;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 var _react = require('react');
 
 var _reactRouter = require('react-router');
 
-var isElement = function isElement(value) {
-  return (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && value !== null && value.$$typeof;
-};
-
-var isString = function isString(value) {
-  return typeof el == 'string';
-};
+var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
 
 var Element = exports.Element = function Element(type) {
   return function (el) {
@@ -32033,7 +32235,7 @@ var Element = exports.Element = function Element(type) {
       children[_key - 1] = arguments[_key];
     }
 
-    var args = isElement(el) || isString(el) ? [type, null, el] : [type, el];
+    var args = (0, _utils.isElement)(el) || (0, _utils.isString)(el) ? [type, null, el] : [type, el];
 
     return _react.createElement.apply(null, args.concat(children));
   };
@@ -32061,7 +32263,7 @@ var Button = exports.Button = Element('button');
 var Image = exports.Image = Element('img');
 var Link = exports.Link = Element(_reactRouter.Link);
 
-},{"react":232,"react-router":92}],272:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":255,"react":232,"react-router":92}],274:[function(require,module,exports){
 'use strict';
 
 var _reactDom = require('react-dom');
@@ -32092,4 +32294,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   }
 });
 
-},{"./application/actions.js":248,"./application/http.js":249,"./application/router.js":251,"./application/store.js":254,"react-dom":57}]},{},[272]);
+},{"./application/actions.js":248,"./application/http.js":249,"./application/router.js":251,"./application/store.js":254,"react-dom":57}]},{},[274]);

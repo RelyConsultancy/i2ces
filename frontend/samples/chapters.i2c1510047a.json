@@ -1,10 +1,13 @@
 [{
   "id": "1",
+  "order": 1,
   "state": "visible",
   "location": "/api/evaluations/i2c1510047a/chapters/1",
-  "title": "Category Context"
+  "title": "Category Context",
+  "content": []
 }, {
   "id": "2",
+  "order": 2,
   "location": "/api/evaluations/i2c1510047a/chapters/2",
   "state": "visible",
   "title": "Campaign Background",
@@ -102,22 +105,30 @@
   }]
 }, {
   "id": "3",
+  "order": 3,
   "location": "/api/evaluations/i2c1510047a/chapters/3",
   "state": "visible",
-  "title": "Sampling Performance"
+  "title": "Sampling Performance",
+  "content": []
 }, {
   "id": "4",
+  "order": 4,
   "location": "/api/evaluations/i2c1510047a/chapters/4",
   "state": "visible",
-  "title": "Objective Review"
+  "title": "Objective Review",
+  "content": []
 }, {
   "id": "5",
+  "order": 5,
   "location": "/api/evaluations/i2c1510047a/chapters/5",
   "state": "visible",
-  "title": "Summary"
+  "title": "Summary",
+  "content": []
 }, {
   "id": "6",
+  "order": 6,
   "location": "/api/evaluations/i2c1510047a/chapters/6",
   "state": "visible",
-  "title": "Appendix"
+  "title": "Appendix",
+  "content": []
 }]
