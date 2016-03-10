@@ -1,6 +1,7 @@
 import { createClass, createElement, PropTypes } from 'react'
 import { Link as link } from 'react-router'
 import { isElement, isString } from '/application/utils.js'
+import textarea from 'react-textarea-autosize'
 
 
 export const Element = (type) => (
@@ -32,7 +33,8 @@ export const Component = (source) => {
 // DOM react elements
 export const B = Element('b')
 export const A = Element('a')
-export const Input = Element('input')
 export const Button = Element('button')
+export const Input = Element('input')
+export const Textarea = Element(textarea)
 export const Image = Element('img')
 export const Link = Element(link)

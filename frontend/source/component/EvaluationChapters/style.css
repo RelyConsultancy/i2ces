@@ -118,16 +118,18 @@
   overflow-y: auto;
   background-color: #FFF;
 }
-.section {
+.section  {
+  position: relative;
   padding: 2rem;
+  max-width: 840px;
+  border-right: 1px solid #E6E6E6;
   border-bottom: 1px solid #E6E6E6;
+  font-size: .875em;
 }
 .section_title {
   margin-bottom: 2rem;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-family: 'Archer Bold', serif;
   color: #6D6D6D;
 }
-
-
 

@@ -1,4 +1,6 @@
 import { Component, B, Link } from '/component/component.js'
+import HTMLSection from '/component/HTMLSection'
+import ListSection from '/component/ListSection'
 import { getInitials } from '/application/utils.js'
 import store from '/application/store.js'
 import style from './style.css'
@@ -8,6 +10,22 @@ import {
   setChapterSection,
   setChapter,
 } from '/application/actions.js'
+
+
+const setComponent = ({ component }) => {
+  switch (component.type) {
+    case 'html':
+      return HTMLSection({ component })
+    break
+
+    case 'list':
+      return ListSection({ component })
+    break
+
+    default:
+      return component.type
+  }
+}
 
 
 const Navigation = ({ store, params }) => B(
@@ -64,12 +82,9 @@ const Sections = ({ store, chapter, ctx }) => {
   const content = sections.map((section, index) => {
     const title = B({ className: style.section_title }, section.title)
 
-    const components = section.content.map((component) => {
-      switch (component.type) {
-        default:
-          return component.type
-      }
-    })
+    const components = section.content.map((component) => (
+      setComponent({ component })
+    ))
 
     return B({ className: style.section, key: index }, title, ...components)
   })
