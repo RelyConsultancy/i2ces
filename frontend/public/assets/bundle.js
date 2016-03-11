@@ -44490,6 +44490,10 @@ var Links = function Links(_ref4) {
   return (0, _component.B)({ className: _style2.default.links }, back);
 };
 
+var byOrder = function byOrder(a, b) {
+  return a.order > b.order ? 1 : -1;
+};
+
 var Chapters = function Chapters(_ref5) {
   var store = _ref5.store;
   var chapter = _ref5.chapter;
@@ -44498,7 +44502,7 @@ var Chapters = function Chapters(_ref5) {
 
   var selected = chapter;
 
-  var links = evaluation.chapters.map(function (chapter, index) {
+  var links = evaluation.chapters.sort(byOrder).map(function (chapter, index) {
     var color = chapter_palette[chapter.order - 1];
     var isActive = chapter.id == selected.id;
 
@@ -44678,12 +44682,16 @@ var Channels = function Channels(_ref2) {
   return (0, _component.B)({ className: _style2.default.list }, title, items);
 };
 
+var byOrder = function byOrder(a, b) {
+  return a.order > b.order ? 1 : -1;
+};
+
 var Chapters = function Chapters(_ref3) {
   var evaluation = _ref3.evaluation;
   var colors = _ref3.colors;
   return (0, _component.B)({ className: _style2.default.chapters }, (0, _Grid2.default)({
     blocks: 2,
-    items: evaluation.chapters.map(function (chapter) {
+    items: evaluation.chapters.sort(byOrder).map(function (chapter) {
       var color = colors[chapter.order - 1];
       var title = (0, _component.B)({ className: _style2.default.chapter_title }, chapter.title);
 

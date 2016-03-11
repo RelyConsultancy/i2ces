@@ -27,10 +27,15 @@ const Channels = ({ items }) => {
 }
 
 
+const byOrder = (a, b) => (
+  a.order > b.order ? 1 : -1
+)
+
+
 const Chapters = ({ evaluation, colors }) => (
   B({ className: style.chapters }, Grid({
     blocks: 2,
-    items: evaluation.chapters.map((chapter) => {
+    items: evaluation.chapters.sort(byOrder).map((chapter) => {
       const color = colors[chapter.order - 1]
       const title = B({ className: style.chapter_title }, chapter.title)
 

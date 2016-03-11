@@ -66,11 +66,16 @@ const Links = ({ store, params }) => {
 }
 
 
+const byOrder = (a, b) => (
+  a.order > b.order ? 1 : -1
+)
+
+
 const Chapters = ({ store, chapter }) => {
   const { evaluation, chapter_palette } = store
   const selected = chapter
 
-  const links = evaluation.chapters.map((chapter, index) => {
+  const links = evaluation.chapters.sort(byOrder).map((chapter, index) => {
     const color = chapter_palette[chapter.order - 1]
     const isActive = chapter.id == selected.id
 
