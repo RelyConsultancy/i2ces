@@ -1,6 +1,11 @@
 import { createElement } from 'react'
-import { Router, hashHistory } from 'react-router'
+import { Router, useRouterHistory } from 'react-router'
+import { createHashHistory } from 'history'
 import routes from './routes.js'
 
 
-export default createElement(Router, { routes, history: hashHistory })
+const history = useRouterHistory(createHashHistory)({ queryKey: false })
+const router = createElement(Router, { history, routes })
+
+
+export default router
