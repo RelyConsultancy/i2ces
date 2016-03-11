@@ -4990,7 +4990,7 @@ body.prevent-scroll.fr-mobile {
 
 ._BlocksSection_style_block_title {
   font-family: 'Avenir LT Std 65 Medium';
-  color: #75757;
+  color: #555;
 }
 
 ._BlocksSection_style_block_content {
@@ -5001,9 +5001,13 @@ body.prevent-scroll.fr-mobile {
   display: block;
   border: 1px solid #EAEAEA;
   background-color: #F9F9F9;
-  box-shadow: none;
+  box-shadow: none !important;
   border-radius: 2px;
-  width: 100%;
+  width: calc(100% - 1em);
+}
+
+._BlocksSection_style_block_edit:focus {
+  border-color: inherit;
 }
 
 
