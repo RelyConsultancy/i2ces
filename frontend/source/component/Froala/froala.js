@@ -1,4 +1,4 @@
-import $ from './jquery-2.2.1.js'
+import $ from 'jquery'
 import Froala from './js/froala_editor.min.js'
 import align from './js/plugins/align.min.js'
 import colors from './js/plugins/colors.min.js'
