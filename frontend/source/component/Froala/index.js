@@ -1,4 +1,4 @@
-import $ from 'jquery'
+import $ from './jquery-2.2.1.js'
 import { Component, B } from '/component/component.js'
 import { findDOMNode } from 'react-dom'
 import froala from './froala.js'
