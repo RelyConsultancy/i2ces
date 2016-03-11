@@ -4977,6 +4977,7 @@ body.prevent-scroll.fr-mobile {
 }
 
 ._BlocksSection_style_block {
+  position: relative;
   padding: 1em;
   border: 1px solid #EAEAEA;
   background-color: #FCFDFC;
@@ -4997,8 +4998,12 @@ body.prevent-scroll.fr-mobile {
 }
 
 ._BlocksSection_style_block_edit {
+  display: block;
   border: 1px solid #EAEAEA;
   background-color: #F9F9F9;
+  box-shadow: none;
+  border-radius: 2px;
+  width: 100%;
 }
 
 

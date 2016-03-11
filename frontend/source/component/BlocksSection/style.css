@@ -14,6 +14,7 @@
 }
 
 .block {
+  position: relative;
   padding: 1em;
   border: 1px solid #EAEAEA;
   background-color: #FCFDFC;
@@ -30,8 +31,12 @@
   margin-top: 1em;
 }
 .block_edit {
+  display: block;
   compose: block_content;
   border: 1px solid #EAEAEA;
   background-color: #F9F9F9;
+  box-shadow: none;
+  border-radius: 2px;
+  width: 100%;
 }
 
