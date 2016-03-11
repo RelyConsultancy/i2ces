@@ -4442,6 +4442,10 @@ body.prevent-scroll.fr-mobile {
   width: 100%;
 }
 
+._FAQ_style_component {
+  position: relative;
+}
+
 ._Loader_style_loader {
   width: 40px;
   height: 20px;
@@ -4776,7 +4780,7 @@ body.prevent-scroll.fr-mobile {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #F9F9F9;
+  background-color: #FCFDFC;
   border-top: 1px solid #E6E6E6;
 }
 
@@ -4919,6 +4923,29 @@ body.prevent-scroll.fr-mobile {
   color: #6D6D6D;
 }
 
+._EvaluationChapters_style_section_text {
+  font-size: .875rem;
+  line-height: 1.4em;
+}
+
+._EvaluationChapters_style_section_list {
+  position: relative;
+  margin-top: -1em;
+}
+
+._EvaluationChapters_style_section_list_item {
+  position: relative;
+  font-size: .875em;
+  line-height: 1.5rem;
+  color: #333;
+}
+
+._EvaluationChapters_style_section_list_item::before {
+  content: '•';
+  color: #757575;
+  margin-right: .5em;
+}
+
 ._HTMLSection_style_component {
   position: relative;
 }
@@ -4934,26 +4961,44 @@ body.prevent-scroll.fr-mobile {
   cursor: pointer;
 }
 
-._ListSection_style_list {
+._BlocksSection_style_blocks {
   position: relative;
-  margin-top: -1em;
 }
 
-._ListSection_style_list_item {
-  position: relative;
+._BlocksSection_style_toggle {
+  position: absolute;
+  right: 0;
+  top: -5em;
+  padding: .5em 1em;
+  color: #FFF;
   font-size: .875em;
-  line-height: 1.5rem;
-  color: #333;
+  background-color: #43B5DB;
+  cursor: pointer;
 }
 
-._ListSection_style_list_item::before {
-  content: '•';
-  color: #757575;
-  margin-right: .5em;
+._BlocksSection_style_block {
+  padding: 1em;
+  border: 1px solid #EAEAEA;
+  background-color: #FCFDFC;
+  margin-bottom: 1em;
 }
 
-._FAQ_style_component {
-  position: relative;
+._BlocksSection_style_block:last-child {
+  margin: 0;
+}
+
+._BlocksSection_style_block_title {
+  font-family: 'Avenir LT Std 65 Medium';
+  color: #75757;
+}
+
+._BlocksSection_style_block_content {
+  margin-top: 1em;
+}
+
+._BlocksSection_style_block_edit {
+  border: 1px solid #EAEAEA;
+  background-color: #F9F9F9;
 }
 
 

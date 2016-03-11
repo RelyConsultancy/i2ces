@@ -6,6 +6,13 @@
   "title": "Category Context",
   "content": []
 }, {
+  "id": "6",
+  "order": 6,
+  "location": "/api/evaluations/i2c1510047a/chapters/6",
+  "state": "visible",
+  "title": "Appendix",
+  "content": []
+}, {
   "id": "2",
   "order": 2,
   "location": "/api/evaluations/i2c1510047a/chapters/2",
@@ -123,12 +130,5 @@
   "location": "/api/evaluations/i2c1510047a/chapters/5",
   "state": "visible",
   "title": "Summary",
-  "content": []
-}, {
-  "id": "6",
-  "order": 6,
-  "location": "/api/evaluations/i2c1510047a/chapters/6",
-  "state": "visible",
-  "title": "Appendix",
   "content": []
 }]

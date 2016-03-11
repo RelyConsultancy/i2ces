@@ -9,7 +9,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #F9F9F9;
+  background-color: #FCFDFC;
   border-top: 1px solid #E6E6E6;
 }
 
@@ -140,3 +140,24 @@
   color: #6D6D6D;
 }
 
+.section_text {
+  font-size: .875rem;
+  line-height: 1.4em;
+}
+
+
+.section_list {
+  position: relative;
+  margin-top: -1em;
+}
+.section_list_item {
+  position: relative;
+  font-size: .875em;
+  line-height: 1.5rem;
+  color: #333;
+}
+.section_list_item::before {
+  content: '•';
+  color: #757575;
+  margin-right: .5em;
+}

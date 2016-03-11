@@ -5,6 +5,7 @@
 @import raw './component/Select/style.css';
 @import raw './component/Froala/style.css';
 @import raw './component/Grid/style.css';
+@import from './component/FAQ/style.css';
 @import from './component/Loader/style.css';
 @import from './component/PaneTitle/style.css';
 @import from './component/Dashboard/style.css';
@@ -12,5 +13,4 @@
 @import from './component/EvaluationDashboard/style.css';
 @import from './component/EvaluationChapters/style.css';
 @import from './component/HTMLSection/style.css';
-@import from './component/ListSection/style.css';
-@import from './component/FAQ/style.css';
+@import from './component/BlocksSection/style.css';

@@ -8,7 +8,7 @@ const HTMLSection = Component({
     return { isEditable: false }
   },
   render () {
-    const { component } = this.props
+    const { component, editable } = this.props
     const { isEditable } = this.state
     const html = component.value
 
@@ -31,7 +31,7 @@ const HTMLSection = Component({
       })
     }
 
-    return B({ className: style.component }, toggle, content)
+    return B({ className: style.component }, content, editable ? toggle : null)
   }
 })
 

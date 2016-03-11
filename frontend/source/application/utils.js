@@ -26,6 +26,12 @@ export const getInitials = (string) => (
   string.split(/\s+/).map(s => s.charAt(0).toUpperCase()).join('')
 )
 
+export const slugify = (string) => (
+  string.toLowerCase().trim()
+    .replace(/&/g, '-and-')      // Replace & with 'and'
+    .replace(/[\s\W-]+/g, '-')   // Replace spaces, non-word characters and dashes with a single dash (-)
+)
+
 export const fmtUnit = (value, unit) => {
   switch (unit) {
     case 'GBP':

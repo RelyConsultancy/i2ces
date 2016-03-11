@@ -12,6 +12,7 @@
   },
   "author": "Navaru",
   "dependencies": {
+    "element-scroll-to": "^1.1.0",
     "history": "^2.0.1",
     "jquery": "^2.2.1",
     "moment": "^2.11.2",

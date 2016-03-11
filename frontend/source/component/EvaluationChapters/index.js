@@ -1,7 +1,8 @@
+import scrollTo from 'element-scroll-to'
 import { Component, B, Link } from '/component/component.js'
 import HTMLSection from '/component/HTMLSection'
-import ListSection from '/component/ListSection'
-import { getInitials } from '/application/utils.js'
+import BlocksSection from '/component/BlocksSection'
+import { getInitials, slugify } from '/application/utils.js'
 import store from '/application/store.js'
 import style from './style.css'
 import {
@@ -12,14 +13,41 @@ import {
 } from '/application/actions.js'
 
 
-const setComponent = ({ component }) => {
+const List = ({ component }) => (
+  B({ className: style.section_list }, component.items.map((item, key) => (
+    B({ className: style.section_list_item, key }, item)
+  )))
+)
+
+
+const Text = ({ component }) => (
+  B({ className: style.text }, component.content)
+)
+
+
+const isEditable = (cid) => {
+  const { user } = store.getState().dashboard
+  const cids = user.edit.map(i => i.cid)
+
+  return ~cids.indexOf(cid)
+}
+
+const setComponent = ({ component, cid }) => {
   switch (component.type) {
     case 'html':
-      return HTMLSection({ component })
+      return HTMLSection({ component, editable: isEditable(cid) })
+    break
+
+    case 'blocks':
+      return BlocksSection({ component, editable: isEditable(cid) })
     break
 
     case 'list':
-      return ListSection({ component })
+      return List({ component })
+    break
+
+    case 'text':
+      return Text({ component })
     break
 
     default:
@@ -28,10 +56,14 @@ const setComponent = ({ component }) => {
 }
 
 
-const Navigation = ({ store, params }) => B(
-  { className: style.links },
-  Link({ to: `/evaluations/${params.cid}`, className: style.link }, 'Back to Evaluation Dashboard')
-)
+const Links = ({ store, params }) => {
+  const back = Link({
+    to: `/evaluations/${params.cid}`,
+    className: style.link,
+  }, 'Back to Evaluation Dashboard')
+
+  return B({ className: style.links }, back)
+}
 
 
 const Chapters = ({ store, chapter }) => {
@@ -76,6 +108,7 @@ const Sections = ({ store, chapter, ctx }) => {
     key: index,
     onClick: (event) => {
       ctx.setState({ section })
+      scrollTo(document.getElementById(slugify(section.title)))
     },
   }, section.title))
 
@@ -83,10 +116,15 @@ const Sections = ({ store, chapter, ctx }) => {
     const title = B({ className: style.section_title }, section.title)
 
     const components = section.content.map((component) => (
-      setComponent({ component })
+      setComponent({ component, cid: evaluation.cid })
     ))
 
-    return B({ className: style.section, key: index }, title, ...components)
+    const attrs = {
+      className: style.section,
+      id: slugify(section.title),
+      key: index,
+    }
+    return B(attrs, title, ...components)
   })
 
   return B(
@@ -140,7 +178,7 @@ const EvaluationChapters = Component({
 
     if (chapter) {
       content = B(
-        Navigation({ store, params }),
+        Links({ store, params }),
         Chapters({ store, chapter }),
         Sections({ store, chapter, ctx: this })
       )
