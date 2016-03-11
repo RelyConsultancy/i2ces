@@ -95,6 +95,21 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
 
         $campaignObjectives = $this->campaignDataService->getObjectives($cid);
 
+        $evaluationObjectives = $this->campaignDataService->getObjectivesComplete($cid);
+
+        $objectivesArray =[];
+        foreach ($evaluationObjectives as $objective) {
+            $objectivesArray[] = sprintf(
+                '{"label": "%s","value": "%s"}',
+                $objective['objective'],
+                $objective['uplift']
+            );
+        }
+        $evaluationObjectives = sprintf(
+            '[%s]',
+            implode(',', $objectivesArray)
+        );
+
         $evaluationCost = $this->campaignDataService->getEvaluationCost($cid);
 
         $evaluationChannels = $this->campaignDataService->getEvaluationChannels($cid);
@@ -108,7 +123,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $evaluation->setGeneratedAt(new \DateTime('now'));
         $evaluation->setState(Evaluation::STATE_DRAFT);
         $evaluation->setStartDate($this->getStartDate($timings));
-        $evaluation->setStartDate($this->getEndDate($timings));
+        $evaluation->setEndDate($this->getEndDate($timings));
 
 
         $this->entityManager->persist($evaluation);
@@ -130,14 +145,16 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
                 "mediaLaydownColorsConfig" => $this->campaignColorsConfig,
             ]
         );
-        $campaignObjectivesChapterContent = str_replace(' ', '', $campaignObjectivesChapterContent);
+        $campaignObjectivesChapterContent = str_replace('  ', '', $campaignObjectivesChapterContent);
         $campaignObjectivesChapterContent = str_replace("\r", '', $campaignObjectivesChapterContent);
         $campaignObjectivesChapterContent = str_replace("\n", '', $campaignObjectivesChapterContent);
+        $json = json_decode($campaignObjectivesChapterContent);
+        $campaignObjectivesChapterContent = json_encode($json);
 
         $chapters = [];
 
         $campaignObjectivesArray = new Chapter();
-        $campaignObjectivesArray->setContent(json_encode($campaignObjectives));
+        $campaignObjectivesArray->setContent($evaluationObjectives);
         $campaignObjectivesArray->setIsAdditionalData(true);
         $campaignObjectivesArray->setSerializedName("campaign_objectives");
         $campaignObjectivesArray->setTitle("campaign_objective");
@@ -162,6 +179,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $campaignObjectivesChapter->setIsAdditionalData(false);
         $campaignObjectivesChapter->setTitle("Campaign Background");
         $campaignObjectivesChapter->setState("visible");
+        $campaignObjectivesChapter->setOrder(2);
 
         $this->entityManager->persist($campaignObjectivesChapter);
 
@@ -173,6 +191,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $appendix->setIsAdditionalData(false);
         $appendix->setTitle('Appendix');
         $appendix->setState('visible');
+        $appendix->setOrder(6);
         $this->entityManager->persist($appendix);
 
         $categoryContextContent = $templateRenderer->render(
@@ -183,6 +202,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $categoryContext->setIsAdditionalData(false);
         $categoryContext->setTitle('Category Context');
         $categoryContext->setState('visible');
+        $categoryContext->setOrder(1);
         $this->entityManager->persist($categoryContext);
 
         $summaryContent = $templateRenderer->render(
@@ -193,6 +213,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $summary->setIsAdditionalData(false);
         $summary->setTitle('Summary');
         $summary->setState('visible');
+        $summary->setOrder(5);
         $this->entityManager->persist($summary);
 
         $objectiveReviewContent = $templateRenderer->render(
@@ -203,6 +224,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $objectiveReview->setIsAdditionalData(false);
         $objectiveReview->setTitle('Objective Review');
         $objectiveReview->setState('visible');
+        $objectiveReview->setOrder(4);
         $this->entityManager->persist($objectiveReview);
 
         $samplingPerformanceContent = $templateRenderer->render(
@@ -213,6 +235,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $samplingPerformance->setIsAdditionalData(false);
         $samplingPerformance->setTitle('Sampling Performance');
         $samplingPerformance->setState('visible');
+        $samplingPerformance->setOrder(3);
         $this->entityManager->persist($samplingPerformance);
 
 
@@ -278,6 +301,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $this->entityManager->persist($categoryContext);
         $this->entityManager->persist($objectiveReview);
 
+        $chapters[] = $appendix;
         $chapters[] = $campaignObjectivesChapter;
         $chapters[] = $summary;
         $chapters[] = $samplingPerformance;
