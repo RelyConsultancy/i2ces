@@ -128,3 +128,9 @@ services:
     i2c_generate_evaluation.campaign_objective_data:
         class: i2c\GenerateEvaluationBundle\Services\CampaignObjectiveDataService
         arguments: [@doctrine]
+
+    i2c_generate_evaluation.import_date:
+        class: i2c\GenerateEvaluationBundle\Services\ImportData
+        arguments: [@doctrine]
+        calls:
+            - [buildPdoConnection, [%database_host%, %database_user%, %database_password%, %database_name%]]
