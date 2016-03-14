@@ -128,3 +128,7 @@ services:
     i2c_generate_evaluation.campaign_objective_data:
         class: i2c\GenerateEvaluationBundle\Services\CampaignObjectiveDataService
         arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_cids:
+        class: i2c\GenerateEvaluationBundle\Services\ExtractCids
+        arguments: [@doctrine]
