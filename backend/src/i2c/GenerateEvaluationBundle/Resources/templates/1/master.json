@@ -1,0 +1,34 @@
+{
+  "data_service": "extract_evaluation",
+  "chapters":
+  [
+    {
+      "twig_name": "campaign_background.json.twig",
+      "data_service": "extract_campaign_background",
+      "additional_data": {
+        "title": "Campaign Background",
+        "state": "visible",
+        "colors_config": [
+          {
+            "color": "ccc",
+            "media": [
+              "Instore Sampling",
+              "Entrance Gates",
+              "Six Sheets"
+            ],
+            "label": "Evaluated media"
+          },
+          {
+            "color": "555",
+            "media": [
+              "TV Wall",
+              "JS Magazine"
+            ],
+            "label": "In-Store Promotions"
+          }
+        ],
+        "order": 2
+      }
+    }
+  ]
+}

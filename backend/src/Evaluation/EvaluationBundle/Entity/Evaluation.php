@@ -147,7 +147,9 @@ class Evaluation
      * @ORM\OneToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
      * @ORM\JoinColumn(name="business_unit_id", referencedColumnName="id")
      *
-     * @JMS\Exclude()
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("businessUnit")
+     * @JMS\Type("Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
      */
     protected $businessUnit;
 

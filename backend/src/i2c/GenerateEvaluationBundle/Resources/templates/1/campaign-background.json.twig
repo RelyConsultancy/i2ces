@@ -1,0 +1,152 @@
+{
+    "content":
+    [
+        {
+            "type": "section",
+            "title": "Background",
+            "access": "editable",
+            "content": [
+                {
+                    "type": "html",
+                    "value": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Campaign Objectives",
+            "access": "editable",
+            "content": [
+                {
+                    "type": "blocks",
+                    "items": [
+                        {% set prepend_comma = false %}
+                        {% for objective in campaignObjectives %}
+                            {% if prepend_comma == true %}
+                                ,
+                            {% endif %}
+                            {
+                                "label": "{{ objective }}",
+                                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                            }
+                            {% set prepend_comma = true %}
+                        {% endfor %}
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Timings",
+            "access": "readonly",
+            "content":
+            [
+                {
+                    "type": "list",
+                    "items":
+                    [
+                        "{{ timings | join('","') | raw }}"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Evaluated Channels",
+            "access": "readonly",
+            "content":
+            [
+                {
+                    "type": "list",
+                    "items":
+                    [
+                        "{{ evaluatedChannels | join('","') | raw }}"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Evaluated Cost",
+            "access": "readonly",
+            "content":
+            [
+                {
+                    "type": "list",
+                    "items":
+                    [
+                        "GBP {{ evaluatedCost | join('","') | raw }}"
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Offer SKUs",
+            "access": "readonly",
+            "content":
+            [
+                {
+                    "type": "text",
+                    "value": "Please see Product Definitions"
+                }
+            ]
+        },
+        {
+            {% set legend = [] %}
+            {% set usedColors = [] %}
+            "type": "section",
+            "title": "Media Laydown",
+            "access": "readonly",
+            "content":
+            [
+                {
+                    "type": "chart_time_range",
+                    "items":
+                    [
+                        {% set prepend_comma = false %}
+
+                        {% for item in mediaLaydownItems %}
+                            {% if prepend_comma == true %}
+                                ,
+                            {% endif %}
+                            {
+                                "label": "{{ item.media }}",
+                                "start": "{{ item.start_date }}",
+                                "end": "{{ item.end_date }}",
+                                {% for color_config in mediaLaydownColorsConfig %}
+                                    {% if item.media in color_config.media %}
+                                        "marker": "#{{ color_config.color }}"
+                                        {% if color_config.color not in usedColors %}
+                                            {% set legend = legend|merge([{color: color_config.color,label: color_config.label}]) %}
+                                            {% set usedColors = usedColors|merge([color_config.color]) %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% set prepend_comma = true %}
+                            }
+                        {% endfor %}
+                    ],
+                    "legend":
+                    [
+                        {% set prepend_comma = false %}
+                        {% for legend_item in legend %}
+                            {% if prepend_comma == true %}
+                                ,
+                            {% endif %}
+                            {
+                            "label": "{{ legend_item.label }}",
+                            "color": "#{{ legend_item.color }}"
+                            }
+                            {% set prepend_comma = true %}
+                        {% endfor %}
+                    ]
+                }
+            ]
+        }
+    ],
+    "title": {{ additional_data['title'] }}
+    "state": {{ additional_data['state'] }}
+    "order": {{ additional_data['order'] }}
+}
