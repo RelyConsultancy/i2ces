@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'Avenir LT Std 35 Light';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Avenir LT Std 35 Light'), url('/fonts/Avenir/AvenirLTStd-Light.woff') format('woff');
+}
+@font-face {
+  font-family: 'Archer Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Archer Bold'), url('/fonts/Archer/Archer-Bold-Pro.woff') format('woff');
+}
+
+#login-form .title-box {
+  position: absolute;
+  top: 6rem;
+  left: 0;
+  right: 0;
+  padding: .6rem 0;
+  background: transparent;
+  border-top: 1px solid #E6E6E6;
+  border-bottom: 1px solid #E6E6E6;
+  overflow: visible;
+}
+#login-form .title {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  text-shadow: none;
+  font-family: 'Archer Bold';
+  color: #454543;
+  font-size: 1.4rem;
+}
+#login-form .title::before {
+  content: '';
+  position: absolute;
+  top: -95px;
+  left: -5px;
+  width: 90px;
+  height: 70px;
+  background-image: url(/images/logo.png);
+  background-size: cover;
+}
+
+#login-form fieldset {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  padding: 0;
+  width: 380px;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  font-family: 'Avenir LT Std 35 Light';
+  z-index: 100;
+}
+.form-signin {
+  box-shadow: none;
+  border-radius: 0;
+}
+.form-signin .input-prepend {
+  margin-bottom: 0;
+}
+.login-page {
+  background: #fff;
+}
+.login-page #page {
+    top: 0;
+}
+.login-page #page #top-page {
+  margin: 0 !important;
+}
+.form-signin .add-on {
+  border: 0;
+  font-family: 'Avenir LT Std 35 Light';
+  background: transparent;
+  color: #9A9A9A;
+  font-weight: normal;
+  font-size: 13px;
+}
+.form-signin .add-on + input[type="text"],
+.form-signin .add-on + input[type="password"] {
+  padding: .6em .8em .4em;
+  font-family: 'Avenir LT Std 35 Light';
+  border: 1px solid #D2D2D2;
+  border-radius: 0;
+  box-shadow: none;
+  width: 255px;
+}
+.form-signin .add-on + input[type="text"]:focus,
+.form-signin .add-on + input[type="password"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+.form-signin .oro-remember-me {
+  margin-bottom: 10px;
+  width: 215px;
+  float: right;
+}
+
+.form-signin .form-row {
+  clear: both;
+}
+.form-signin .btn-primary {
+  color: #FFFFFF;
+  background: #43B5DB;
+  font-size: 14px;
+  height: 2.2em;
+  line-height: 2.2em;
+  font-family: 'Archer Bold';
+  box-shadow: none;
+  border: none;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 0;
+}
+
+.form-signin .form-row > a {
+  position: absolute;
+  right: 0;
+  bottom: -3em;
+  color: #43B5DB;
+  font-size: 12px;
+}
