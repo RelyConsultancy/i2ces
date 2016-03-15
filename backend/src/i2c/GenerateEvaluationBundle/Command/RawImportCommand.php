@@ -98,7 +98,7 @@ class RawImportCommand extends ContainerAwareCommand
 
         foreach ($this->rawTablesConfig as $key => $value) {
             $rows = $this->loadDataFromFile(
-                $key,
+                $value['table_name'],
                 array_keys($value['columns']),
                 sprintf('%s/%s', $importFolderPath, $value['file_name']),
                 $fieldSeparator,

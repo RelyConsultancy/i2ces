@@ -22,11 +22,11 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
     protected $campaignDataService;
     /** @var  EntityManager */
     protected $entityManager;
-    protected $campaignColorsConfig;
+    protected $mediaLaydownConfig;
 
-    public function __construct($campaignColorsConfig)
+    public function __construct($mediaLaydownConfig)
     {
-        $this->campaignColorsConfig = $campaignColorsConfig;
+        $this->mediaLaydownConfig = $mediaLaydownConfig;
         parent::__construct();
     }
 
@@ -142,7 +142,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
                 "evaluatedChannels"        => $evaluationChannels,
                 "evaluatedCost"            => $evaluationCost,
                 "mediaLaydownItems"        => $mediaLaydownItems,
-                "mediaLaydownColorsConfig" => $this->campaignColorsConfig,
+                "mediaLaydownConfigs"       => $this->mediaLaydownConfig,
             ]
         );
         $campaignObjectivesChapterContent = str_replace('  ', '', $campaignObjectivesChapterContent);
