@@ -9,7 +9,7 @@ services:
 
     i2c_generate_evaluation.evaluation_generate:
         class: i2c\GenerateEvaluationBundle\Command\GenerateEvaluationsCommand
-        arguments: [%media_laydown_colors%]
+        arguments: [%media_laydown_config%]
         tags:
             - { name: console.command }
 
