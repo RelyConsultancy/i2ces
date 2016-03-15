@@ -65,7 +65,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
             }
 
             //todo inject the service that handles cids and add the cids array input option
-            $cids = [];
+            $cids = ["i2c1510047a","i2c1509134a","i2c1507187a"];
 
             $configFilePath = sprintf(
                 '%s/%s/master.json',
@@ -74,7 +74,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
             );
             $configData = $this->generateEvaluationsService->loadConfigData($configFilePath);
 
-            $this->generateEvaluationsService->generate($configData, $cids);
+            $this->generateEvaluationsService->generate($configData, $cids, $versionNumber);
 
             return 0;
         } catch (\Exception $ex) {

@@ -137,7 +137,7 @@ class Evaluation
      *
      * @JMS\Groups({"never_serialize"})
      * @JMS\SerializedName("generated_at")
-     * @JMS\Type("DateTime<'Y-m-d\TH:i:s'>")
+     * @JMS\Type("DateTime<'Y-m-d H:i:s'>")
      */
     protected $generatedAt;
 

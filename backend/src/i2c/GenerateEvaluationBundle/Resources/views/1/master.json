@@ -1,16 +1,17 @@
 {
   "data_service": "extract_evaluation",
+  "twig_name": "evaluation.json.twig",
   "chapters":
   [
     {
-      "twig_name": "campaign_background.json.twig",
+      "twig_name": "campaign-background.json.twig",
       "data_service": "extract_campaign_background",
       "additional_data": {
         "title": "Campaign Background",
         "state": "visible",
         "colors_config": [
           {
-            "color": "ccc",
+            "color": "#ccc",
             "media": [
               "Instore Sampling",
               "Entrance Gates",
@@ -19,7 +20,7 @@
             "label": "Evaluated media"
           },
           {
-            "color": "555",
+            "color": "#555",
             "media": [
               "TV Wall",
               "JS Magazine"

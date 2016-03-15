@@ -16,15 +16,16 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class GenerateEvaluations
 {
+    /** @var  ExtractInterface[] */
     protected $extractServicesContainer;
 
     /** @var  EngineInterface */
     protected $templateRenderer;
 
-    /** @var string  */
+    /** @var string */
     protected $templatesPrefix;
 
-    /** @var EntityManager  */
+    /** @var EntityManager */
     protected $entityManager;
 
     /** @var  Serializer */
@@ -58,10 +59,15 @@ class GenerateEvaluations
         $this->extractServicesContainer[$serviceName] = $extractInterface;
     }
 
-    public function generate($evaluationConfigs, $cids)
+    public function generate($evaluationConfigs, $cids, $versionNumber)
     {
         foreach ($cids as $cid) {
-            $evaluationJson = $this->getJsonEntity($evaluationConfigs['twig_name'], $evaluationConfigs['data_service']);
+            $evaluationJson = $this->getJsonEntity(
+                $cid,
+                $evaluationConfigs['twig_name'],
+                $evaluationConfigs['data_service'],
+                $versionNumber
+            );
             /** @var Evaluation $evaluation */
             $evaluation = $this->serializer->deserialize(
                 $evaluationJson,
@@ -71,17 +77,22 @@ class GenerateEvaluations
             $evaluation->setCid($cid);
             $evaluation->setState("generating");
 
-            $chapters =[];
+            $chapters = [];
 
             foreach ($evaluationConfigs['chapters'] as $chapterConfig) {
                 $additionalData = [
-                    'additional_data' => $chapterConfig['additional_data']
+                    'additional_data' => $chapterConfig['additional_data'],
                 ];
                 $chapterJson = $this->getJsonEntity(
+                    $cid,
                     $chapterConfig['twig_name'],
                     $chapterConfig['data_service'],
+                    $versionNumber,
                     $additionalData
                 );
+                // todo research how to better generate a json string with a twig file so we don't have tabs filled
+                // lines
+                $chapterJson = str_replace("    ", "", $chapterJson);
 
                 /** @var Chapter $chapter */
                 $chapter = $this->serializer->deserialize(
@@ -93,6 +104,9 @@ class GenerateEvaluations
                 $chapters[] = $chapter;
             }
 
+            $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
+                ->findOneBy(['id' => $evaluation->getBusinessUnit()->getId()]);
+            $evaluation->setOwner($businessUnit);
             $evaluation->setChapters($chapters);
             $this->entityManager->persist($evaluation);
             $this->entityManager->flush();
@@ -136,28 +150,31 @@ class GenerateEvaluations
     }
 
     /**
-     * @param $serviceName
+     * @param string $serviceName
+     * @param string $cid
      *
      * @return array
      */
-    protected function getData($serviceName)
+    protected function getData($serviceName, $cid)
     {
-        return $this->extractServicesContainer[$serviceName]->fetchAll();
+        return $this->extractServicesContainer[$serviceName]->fetchAll($cid);
     }
 
     /**
-     * @param string $twigName
-     * @param string $serviceName
-     * @param array  $additionalData
+     * @param string  $cid
+     * @param string  $twigName
+     * @param string  $serviceName
+     * @param integer $versionNumber
+     * @param array   $additionalData
      *
      * @return string
      */
-    protected function getJsonEntity($twigName, $serviceName, $additionalData = [])
+    protected function getJsonEntity($cid, $twigName, $serviceName, $versionNumber, $additionalData = [])
     {
-        $data = array_merge($this->getData($serviceName), $additionalData);
+        $data = array_merge($this->getData($serviceName, $cid), $additionalData);
 
         return $this->templateRenderer->render(
-            sprintf('%s/%s', $this->templatesPrefix, $twigName),
+            sprintf('%s:%s:%s', $this->templatesPrefix, $versionNumber, $twigName),
             $data
         );
     }

@@ -135,7 +135,7 @@ class CampaignBackground implements ExtractInterface
      *
      * @return string
      */
-    public function getEvaluationCost($cid)
+    public function getEvaluatedCost($cid)
     {
         return sprintf(
             'SELECT media_cost as cost

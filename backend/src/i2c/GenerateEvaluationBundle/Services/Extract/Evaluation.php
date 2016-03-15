@@ -20,6 +20,7 @@ class Evaluation implements ExtractInterface
     {
         $this->connection = $registry->getEntityManager()->getConnection();
     }
+
     /**
      * Calls all the function in the class that begin with "get"
      *
@@ -53,6 +54,31 @@ class Evaluation implements ExtractInterface
              where master_campaign_id = \'%s\'
             ',
             $cid
+        );
+    }
+
+    public function getStartDate($cid)
+    {
+        return sprintf(
+            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' and period = 1',
+            $cid
+        );
+    }
+
+    public function getEndDate($cid)
+    {
+        return sprintf(
+            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' and period = 2',
+            $cid
+        );
+    }
+
+    //todo refactor this to follow the matching algorith that will be provided by i2c for suppliers and campaigns
+    public function getSupplier($cid)
+    {
+        return sprintf(
+            'SELECT id as id from oro_business_unit
+            '
         );
     }
 }

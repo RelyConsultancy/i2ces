@@ -1,5 +1,6 @@
 imports:
     - { resource: 'config.yml' }
+
 services:
     i2c_generate_evaluation.raw_import:
         class: i2c\GenerateEvaluationBundle\Command\RawImportCommand
@@ -7,12 +8,43 @@ services:
         tags:
             - { name: console.command }
 
-    i2c_generate_evaluation.evaluation_generate:
+    i2c_generate_evaluation.evaluation_generate_command:
         class: i2c\GenerateEvaluationBundle\Command\GenerateEvaluationsCommand
-        arguments: [%media_laydown_config%]
+        arguments: [@i2c_generate_evaluation.evaluation_generate_service, %evaluation_templates_folder_path%]
         tags:
             - { name: console.command }
 
-    i2c_generate_evaluation.campaign_objective_data:
-        class: i2c\GenerateEvaluationBundle\Services\CampaignObjectiveDataService
+    i2c_generate_evaluation.evaluation_generate_service:
+        class: i2c\GenerateEvaluationBundle\Services\GenerateEvaluations
+        arguments: [@templating.engine.twig, @doctrine, @serializer, "i2cGenerateEvaluationBundle"]
+        calls:
+          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation, "extract_evaluation"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_campaign_background, "extract_campaign_background"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_category_context, "extract_category_context"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_objective_review, "extract_objective_review"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_sampling_performance, "extract_sampling_performance"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_summary, "extract_summary"]]
+
+    i2c_generate_evaluation.extract_evaluation:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\Evaluation
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_campaign_background:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\CampaignBackground
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_category_context:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\CategoryContext
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_objective_review:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ObjectiveReview
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_sampling_performance:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\SamplingPerformance
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_summary:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\Summary
         arguments: [@doctrine]
