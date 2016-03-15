@@ -16,6 +16,11 @@ class CampaignBackground implements ExtractInterface
     /** @var Connection */
     protected $connection;
 
+    /**
+     * CampaignBackground constructor.
+     *
+     * @param Registry $registry
+     */
     public function __construct(Registry $registry)
     {
         $this->connection = $registry->getEntityManager()->getConnection();
@@ -57,7 +62,7 @@ class CampaignBackground implements ExtractInterface
     public function getObjectives($cid)
     {
         return sprintf(
-            'SELECT objective
+            'SELECT objective as label
              FROM ie_results_data
              WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND product = \'Offer\' AND obj_priority <> 0
              AND timeperiod = 2
@@ -67,43 +72,65 @@ class CampaignBackground implements ExtractInterface
     }
 
     /**
+     * Returns an array with start and end dates for pre timings.
+     *
      * @param $cid
      *
      * @return string
      */
-    public function getObjectivesComplete($cid)
+    public function getTimingPre($cid)
     {
         return sprintf(
-            'SELECT objective, uplift
-             FROM ie_results_data
-             WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND product = \'Offer\' AND obj_priority <> 0
-             AND timeperiod = 2
-             ORDER BY obj_priority ASC
+            'SELECT t1.period_date AS start_date, t2.period_date AS end_date
+             FROM ie_timings_data AS t1
+             JOIN ie_timings_data AS t2 ON (t1.master_campaign_id = t2.master_campaign_id)
+             WHERE t1.master_campaign_id = \'%s\' AND t1.period = 1 AND t2.period = 2
             ',
             $cid
         );
     }
 
     /**
+     * Returns an array with start and end dates for during timings.
+     *
      * @param $cid
      *
      * @return string
      */
-    public function getTiming($cid)
+    public function getTimingDuring($cid)
     {
         return sprintf(
-            'SELECT period, period_date
-             FROM ie_timings_data
-             WHERE master_campaign_id = \'%s\'
-             ORDER BY period,
-             STR_TO_DATE(period_date, \'%s\')
+            'SELECT t1.period_date AS start_date, t2.period_date AS end_date
+             FROM ie_timings_data AS t1
+             JOIN ie_timings_data AS t2 ON (t1.master_campaign_id = t2.master_campaign_id)
+             WHERE t1.master_campaign_id = \'%s\' AND t1.period = 3 AND t2.period = 4
             ',
-            $cid,
-            '%d/%m/%Y'
+            $cid
         );
     }
 
     /**
+     * Returns an array with start and end dates for post timings.
+     *
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getTimingPost($cid)
+    {
+        return sprintf(
+            'SELECT t1.period_date AS start_date, t2.period_date AS end_date
+             FROM ie_timings_data AS t1
+             JOIN ie_timings_data AS t2 ON (t1.master_campaign_id = t2.master_campaign_id)
+             WHERE t1.master_campaign_id = \'%s\' AND t1.period = 5 AND t2.period = 6
+            ',
+            $cid
+        );
+    }
+
+    /**
+     * Returns an array with evaluation cost.
+     *
      * @param $cid
      *
      * @return string
@@ -111,7 +138,7 @@ class CampaignBackground implements ExtractInterface
     public function getEvaluationCost($cid)
     {
         return sprintf(
-            'SELECT media_cost
+            'SELECT media_cost as cost
              FROM ie_campaign_data
              WHERE master_campaign_id = \'%s\'
             ',
@@ -128,13 +155,12 @@ class CampaignBackground implements ExtractInterface
      *
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getMediaLaydownRows($cid)
+    public function getMediaLaydown($cid)
     {
         return sprintf(
-            'SELECT CONCAT(LEFT(media, CHAR_LENGTH(media) - 1), IF(RIGHT(media, 1) REGEXP \'[0-9]\' = 0,
-             RIGHT(media, 1), \'\')) AS media,
-             start_date,
-             end_date
+            'SELECT media_label AS media_label,
+             start_date AS start_date,
+             end_date AS end_date
              FROM ie_media_data
              WHERE master_campaign_id = \'%s\'
             ',
@@ -151,11 +177,10 @@ class CampaignBackground implements ExtractInterface
      *
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function getEvaluationChannels($cid)
+    public function getChannels($cid)
     {
         return sprintf(
-            'SELECT DISTINCT CONCAT(LEFT(media, CHAR_LENGTH(media) - 1),
-             IF(RIGHT(media, 1) REGEXP \'[0-9]\' = 0, RIGHT(media, 1), \'\')) AS media
+            'SELECT DISTINCT media_label AS channel
              FROM ie_media_data
              WHERE master_campaign_id = \'%s\'
             ',
