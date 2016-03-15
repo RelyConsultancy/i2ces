@@ -100,22 +100,22 @@
                         ,
                         {% endif %}
                         {
-                        "label": "{{ item.media }}",
+                        "label": "{{ item.media_label }}",
                         "start": "{{ item.start_date }}",
                         "end": "{{ item.end_date }}",
 
-                        {% for color_config in mediaLaydownColorsConfig %}
-                            {% if item.media in color_config.media %}
-                                "marker": "#{{ color_config.color }}"
-                                {% if color_config.color not in usedColors %}
+                        {% for media_laydown_config in mediaLaydownConfigs %}
+                            {% if item.media_label in media_laydown_config.media %}
+                                "marker": "{{ media_laydown_config.color }}"
+                                {% if media_laydown_config.color not in usedColors %}
                                     {% set legend = legend|merge([
                                         {
 
-                                            color: color_config.color,
-                                            label: color_config.label
+                                            color: media_laydown_config.color,
+                                            label: media_laydown_config.label
                                         }
                                     ]) %}
-                                    {% set usedColors = usedColors|merge([color_config.color]) %}
+                                    {% set usedColors = usedColors|merge([media_laydown_config.color]) %}
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
@@ -132,7 +132,7 @@
                         {% endif %}
                         {
                             "label": "{{ legend_item.label }}",
-                            "color": "#{{ legend_item.color }}"
+                            "color": "{{ legend_item.color }}"
                         }
                         {% set prepend_comma = true %}
                     {% endfor %}
