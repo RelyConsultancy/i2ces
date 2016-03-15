@@ -1,40 +1,18 @@
-#
-#  - name: Install Apache
-##    command: yum install --quiet -y httpd httpd-devel
-#    yum: name={{ item }} state=present
-#    with_items:
-#    - httpd
-#    - httpd-devel
-#
-##  - name: Copy Oro config file
-##    copy:
-##      src: "{{ item.src }}"
-##      dest: "{{ item.dest }}"
-##      owner: root
-##      group: root
-##      mode: 644
-##    with_items:
-##    - {
-##      src: "/path/to/config/httpd.conf"
-##      dest: "/etc/httpd/conf/httpd.conf"
-##    }
-#
-#  - name: Start Apache and configure it to run at boot
-#    service: name=httpd state=started enabled=yes
 
 - name: set SELinux to permissive
   action: selinux policy=targeted state=permissive
 
 - name: Check if Oro Platform is installed.
-  stat: "path=/home/vagrant/sync/backend/composer.lock"
+  stat: "path=/var/www/html/composer.lock"
   register: composer_locked
 
 - name: Debug composer_locked
   debug: msg="Variable 'composer_locked' is set to {{ composer_locked }}"
 
 - name: Upgrade dependencies
-  shell: >
-    cd /var/www/html/backend && composer update
+  command: " {{ item }} "
+  with_items:
+    - /usr/local/bin/composer update -d /var/www/html -n --prefer-dist --no-scripts
   when: composer_locked.stat.exists
 
 - name: Copy vhost
@@ -46,18 +24,38 @@
     sudo yum -y install npm
     creates: /usr/bin/node
 
-- name: Check if uploads folder exists.
+- name: Check if web/uploads folder exists.
   stat: "path=/var/www/html/web/uploads"
   register: uploads_exists
 
-- name: Create uploads folder.
+- name: Create web/uploads folder.
   command: "mkdir /var/www/html/web/uploads"
   when: not uploads_exists.stat.exists
+
+- name: Check if web/bundles folder exists.
+  stat: "path=/var/www/html/web/bundles"
+  register: bundles_exists
+
+- name: Create web/bundles folder.
+  command: "mkdir /var/www/html/web/bundles"
+  when: not bundles_exists.stat.exists
+
+- name: Maxxed out composer timeout
+  shell: >
+    export COMPOSER_PROCESS_TIMEOUT=3000
 
 - name: Fetch Oro Platform
   command: " {{item}} "
   with_items:
-    - /usr/local/bin/composer install -d /var/www/html -n
+    - /usr/local/bin/composer install -d /var/www/html -n --prefer-dist --no-scripts
+
+- name: New Parameters.yml
+  template: src=parameters.yml dest=/var/www/html/app/config/parameters.yml
+
+- name: Install and set permissions
+  command: " {{item}} "
+  with_items:
+    - /usr/local/bin/composer install -d /var/www/html -n --prefer-dist
     - chmod 777 /var/www/html/web/uploads
     - sudo chmod 777 /var/www/html/app/logs
     - sudo chmod 777 /var/www/html/app/attachment
@@ -65,7 +63,7 @@
     - sudo chmod -R 777 /var/www/html/app/cache
     - sudo chmod -R 777 /var/www/html/app/logs
     - sudo chmod -R 777 /var/www/html/web/bundles/
-    - mysql -uroot -proot -e "create database IF NOT EXISTS bap_standard"
+    - mysql -uroot -proot -e "create database IF NOT EXISTS i2c"
 - set_fact: colon=":"
 
 - name: Update ORO db pass
@@ -73,3 +71,68 @@
 
 - name: Install Oro Platform
   command: chdir=/var/www/html php ./app/console oro:install --application-url i2ces.dev --organization-name i2c --user-name user --user-email gb@tekkie.us --user-firstname first --user-lastname last --user-password pass --drop-database --sample-data no --force -n
+  # when: not composer_locked.stat.exists
+
+- name: Clear cache
+  command: chdir=/var/www/html php app/console cache:clear --env=prod
+
+- name: Check if src/Evaluation/DashboardBundle/Resources/public folder exists.
+  stat: "path=/var/www/html/src/Evaluation/DashboardBundle/Resources/public"
+  register: dashboard_public_exists
+
+- name: Debug dashboard_public_exists
+  debug: msg="Variable 'dashboard_public_exists' is set to {{ dashboard_public_exists }}"
+
+- name: Create backend dirs for frontend integration
+  command: " mkdir {{ item }} "
+  with_items:
+    - /var/www/html/src/Evaluation/DashboardBundle/Resources/public
+    - /var/www/html/src/Evaluation/DashboardBundle/Resources/public/js
+    - /var/www/html/src/Evaluation/DashboardBundle/Resources/public/css
+  when: not dashboard_public_exists.stat.exists
+
+- name: Check if web/fonts folder exists.
+  stat: "path=/var/www/html/web/fonts"
+  register: web_fonts_exists
+
+- name: Debug web_fonts_exists
+  debug: msg="Variable 'web_fonts_exists' is set to {{ web_fonts_exists }}"
+
+- name: Create web dirs for frontend integration
+  command: " mkdir {{ item }} "
+  with_items:
+    - /var/www/html/web/fonts
+    - /var/www/html/web/images
+  when: not web_fonts_exists.stat.exists
+
+- name: Integrate bundles.js from frontend to backend
+  copy: src=../frontend/public/assets/bundle.js dest=/var/www/html/src/Evaluation/DashboardBundle/Resources/public/js/index.js force=yes
+
+- name: Integrate bundles.css from frontend to backend
+  copy: src=../frontend/public/assets/bundle.css dest=/var/www/html/src/Evaluation/DashboardBundle/Resources/public/css/index.css force=yes
+
+- name: Integrate fonts from frontend to backend
+  copy: src=../frontend/public/fonts dest=/var/www/html/web/fonts force=yes
+
+- name: Integrate images from frontend to backend
+  copy: src=../frontend/public/images dest=/var/www/ht§ml/web/images force=yes
+
+- name: Install assets
+  command: chdir=/var/www/html php app/console asset:install --env=prod
+
+- name: Dump assets
+  command: chdir=/var/www/html php app/console assetic:dump --env=prod
+
+- name: Update the database
+  command: chdir=/var/www/html php app/console i2c:schema:update
+  become_user: root
+
+- name: Load custom entities into oro-crm
+  command: chdir=/var/www/html php app/console oro:entity-config:update -f
+
+- name: Create initial data
+  command: chdir=/var/www/html php app/console i2c:initial-setup
+  become_user: root
+
+- name: Import demo data to mysql
+  mysql_db: state=import name=i2c target=/var/www/html/src/Evaluation/EvaluationBundle/Resources/data/demo.sql login_user=root login_password=root

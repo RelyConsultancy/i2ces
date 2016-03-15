@@ -1,0 +1,27 @@
+{% extends bap.layout %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% oro_title_set({params : {"%name%": dashboard.getLabel() }}) %}
+{% block breadcrumb %}
+{% endblock breadcrumb %}
+{% block content %}
+    {% stylesheets 'bundles/evaluationdashboard/css/index.css' filter='cssrewrite' output='css/index.css' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}">
+    {% endstylesheets %}
+
+    <div id="application">
+        <div id="application-loader"></div>
+    </div>
+
+    <script src="{{ asset('bundles/evaluationdashboard/js/index.js') }}"></script>
+
+    {% block title %}
+    {% endblock title %}
+    {% block titleNavButtons %}
+        {% block navButtons %}
+        {% endblock navButtons %}
+    {% endblock titleNavButtons %}
+    {% block widgets_content %}
+        {% block widgets %}
+        {% endblock widgets %}
+    {% endblock widgets_content %}
+{% endblock content %}

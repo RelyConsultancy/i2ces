@@ -1,7 +1,7 @@
 {
   "name": "i2c/oro-platform-application",
   "description": "Oro Platform Application",
-  "homepage": "https://github.com/RelyConsultancy/i2c-evaluation-suite.git",
+  "homepage": "https://github.com/RelyConsultancy/i2ces.git",
   "license": "MIT",
   "autoload": {
     "psr-0": {
@@ -15,13 +15,19 @@
     }
   ],
   "require": {
-    "oro/platform": "1.x-dev"
+    "oro/platform": "1.9.0"
   },
   "require-dev": {
-    "sensio/generator-bundle": "2.5.3"
+    "sensio/generator-bundle": "2.5.3",
+    "behat/behat": "~3.0.4",
+    "behat/symfony2-extension": "^2.1",
+    "behat/mink": "^1.7",
+    "behat/mink-extension": "^2.2",
+    "behat/mink-browserkit-driver": "^1.3"
   },
   "config": {
-    "component-dir": "web/bundles/components"
+    "component-dir": "web/bundles/components",
+    "secure-http": false
   },
   "scripts": {
     "post-install-cmd": [

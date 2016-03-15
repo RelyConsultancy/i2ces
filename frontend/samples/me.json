@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "username": "user",
+  "business_units": [{
+    "id": 2,
+    "name": "Supplier1",
+    "email": "no@email.one",
+    "phone": "XxXxXXxXxXXxxXX",
+    "website": "noweb.com"
+  }],
+  "view": [
+    { "cid": "i2c1507187a", "id": 1 },
+    { "cid": "i2c1509134a", "id": 2 },
+    { "cid": "i2c1510047a", "id": 3 }
+  ],
+  "edit": [
+    { "cid": "i2c1510047a", "id": 3 }
+  ]
+}

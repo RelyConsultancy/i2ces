@@ -1,0 +1,64 @@
+parameters:
+    initial_setup_config:
+        roles:
+            supplier:
+                name: Supplier
+                identifier: ROLE_SUPPLIER
+                access:
+                    oid: 'Entity:EvaluationEvaluationBundle:Evaluation'
+                    permissions: [64] # EntityMaskBuilder::MASK_VIEW_LOCAL
+            employee:
+                name: i2c Employee
+                identifier: ROLE_EMPLOYEE
+                access:
+                    oid: 'Entity:EvaluationEvaluationBundle:Evaluation'
+                    permissions: [64, 256] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+        suppliers:
+            dummy_one:
+                name: Dummy Supplier One
+                email: dummy-one@email.none
+                fax: some fax
+                phone: XXXXXXXXXXXXXXXX
+                website: http://dummy-one.none
+                user:
+                    first_name: User
+                    middle_name: for
+                    last_name: Dummy Supplier One
+                    username: user_sup_one
+                    password: pass
+                    email: user@sup.one
+                    role: Supplier
+            dummy_two:
+                name: Dummy Supplier Two
+                email: dummy-two@email.none
+                fax: some other fax
+                phone: XXXXXXXXXXXXXXXX
+                website: http://dummy-two.none
+                user:
+                    first_name: User
+                    middle_name: for
+                    last_name: Dummy Supplier Two
+                    username: user_sup_two
+                    password: pass
+                    email: user@sup.two
+                    role: Supplier
+
+services:
+    i2c_setup.initial_setup_command:
+        class: i2c\SetupBundle\Command\InitialSetupCommand
+        arguments: [%initial_setup_config%, @oro_user.manager]
+        tags:
+          - { name: console.command }
+
+    i2c_setup.schema_update_command:
+        class: i2c\SetupBundle\Command\DatabaseSchemaUpdateCommand
+        arguments: [@i2c_setup.schema_update_container]
+        tags:
+          - { name: console.command }
+
+    i2c_setup.schema_update_container:
+        class: i2c\SetupBundle\Services\SchemaUpdateContainer
+        calls:
+          - [ addSchemaUpdateService, [@evaluation_evaluation.evaluation_schema_update] ]
+          - [ addSchemaUpdateService, [@evaluation_evaluation.chapter_schema_update] ]
+          - [ addSchemaUpdateService, [@evaluation_evaluation.evaluation_chapters_schema_update] ]

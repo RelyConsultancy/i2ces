@@ -1,0 +1,16 @@
+@import raw './css/froala_editor.css';
+@import raw './css/froala_style.css';
+
+@import raw './css/plugins/char_counter.min.css';
+@import raw './css/plugins/code_view.min.css';
+@import raw './css/plugins/colors.min.css';
+@import raw './css/plugins/draggable.min.css';
+@import raw './css/plugins/emoticons.min.css';
+@import raw './css/plugins/file.min.css';
+@import raw './css/plugins/fullscreen.min.css';
+@import raw './css/plugins/image.min.css';
+@import raw './css/plugins/image_manager.min.css';
+@import raw './css/plugins/line_breaker.min.css';
+@import raw './css/plugins/quick_insert.min.css';
+@import raw './css/plugins/table.min.css';
+@import raw './css/plugins/video.min.css';

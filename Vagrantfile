@@ -10,35 +10,98 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "centos/7"
+  ######################################################################
+  # Development environment
+  ######################################################################
+  config.vm.define "dev" do |dev|
+    dev.vm.box = "centos/7"
 
-  config.vm.provider "virtualbox" do |v|
-    v.customize ["modifyvm", :id, "--memory", "3072"]
+    dev.vm.provider "virtualbox" do |v|
+      v.customize ["modifyvm", :id, "--memory", "4096"]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  #    v.gui = true
+    end
+
+    dev.vm.network "private_network", ip: "192.168.56.101", hostsupdater: "skip"
+
+    dev.vm.hostname = "i2ces.dev"
+    dev.vm.boot_timeout = 2000
+
+    dev.vm.synced_folder ".", "/home/vagrant/sync", disabled: true
+
+    dev.vm.synced_folder "./backend", "/var/www/html/",
+      type: "nfs"
+    dev.vm.synced_folder "./frontend/public/fonts", "/var/www/html/web/fonts",
+      type: "nfs"
+    dev.vm.synced_folder "./frontend/public/images", "/var/www/html/web/images",
+      type: "nfs"
+  end # end |dev|
+
+  ######################################################################
+  # QA
+  ######################################################################
+  config.vm.define "qa", autostart: false do |qa|
+    qa.vm.hostname = 'test.i2ces.info'
+    # Alternatively, use provider.name below to set the Droplet name. qa.vm.hostname takes precedence.
+
+    qa.vm.provider :digital_ocean do |provider, override|
+      provider.image = '11483404'
+      # provider.ssh_key_name = 'Georgiana'
+      override.ssh.private_key_path = '~/.ssh/id_rsa'
+      override.vm.box = 'digital_ocean'
+      override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
+
+      provider.token = '0700281c55c0d95e9d0c52ca93077d1268d46ae14bda34b8bb44b62c9d7f52f8'
+      provider.image = 'centos-7-0-x64'
+      provider.region = 'lon1'
+      provider.size = '8gb'
+    end
+
+    qa.vm.synced_folder "./backend", "/var/www/html/",
+      mount_options: ['dmode=775','fmode=664'],
+      type: "rsync",
+      rsync__exclude: [".git/", "vendor/", "app/config/parameters.yml", "app/bootstrap.php.cache", "app/cache/sessions/", "composer.lock"],
+      owner: "vagrant", group: "vagrant"
+
+    qa.vm.synced_folder "./frontend", "/var/www/html/frontend",
+      mount_options: ['dmode=775','fmode=664'],
+      type: "rsync",
+      rsync__exclude: [".git/", "node_modules/"],
+      owner: "vagrant", group: "vagrant"
   end
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  ######################################################################
+  # Staging
+  ######################################################################
+  config.vm.define "staging", autostart: false do |staging|
+    staging.vm.hostname = 'staging.i2ces.info'
 
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.56.101"
+    staging.vm.provider :digital_ocean do |provider, override|
+      provider.image = '11478463'
+      # provider.ssh_key_name = 'Georgiana'
+      override.ssh.private_key_path = '~/.ssh/id_rsa'
+      override.vm.box = 'digital_ocean'
+      override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
 
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
+      provider.token = '0700281c55c0d95e9d0c52ca93077d1268d46ae14bda34b8bb44b62c9d7f52f8'
+      provider.image = 'centos-7-0-x64'
+      provider.region = 'lon1'
+      provider.size = '8gb'
+    end
 
-  config.vm.hostname = "i2ces.dev"
+    staging.vm.synced_folder "./backend", "/var/www/html/",
+      mount_options: ['dmode=775','fmode=664'],
+      type: "rsync",
+      rsync__exclude: [".git/", "vendor/", "app/config/parameters.yml", "app/bootstrap.php.cache", "app/cache/sessions/", "composer.lock"],
+      owner: "vagrant", group: "vagrant"
 
-  config.vm.synced_folder "./backend", "/var/www/html/",
-    mount_options: ['dmode=775','fmode=664'],
-    type: "rsync",
-    rsync__exclude: ".git/",
-    owner: "vagrant", group: "vagrant"
+    staging.vm.synced_folder "./frontend", "/var/www/html/frontend",
+      mount_options: ['dmode=775','fmode=664'],
+      type: "rsync",
+      rsync__exclude: [".git/", "node_modules/"],
+      owner: "vagrant", group: "vagrant"
+  end
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "ansible/playbook.yml"

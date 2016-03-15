@@ -1,9 +1,18 @@
-[app]
+[dev]
 192.168.56.101
 
+[qa]
+46.101.91.85
+
+[staging]
+46.101.89.191
+
+[jenkins]
+188.166.157.215
+
 [multi:children]
-app
+dev
 
 [multi:vars]
 ansible_ssh_user=vagrant
-ansible_ssh_private_key_file=~/Sites/demo/i2ces/.vagrant/machines/default/virtualbox/private_key
+ansible_ssh_private_key_file=~/.ssh/id_rsa
