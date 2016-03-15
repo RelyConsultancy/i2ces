@@ -4,14 +4,32 @@
   "state": "visible",
   "location": "/api/evaluations/i2c1510047a/chapters/1",
   "title": "Category Context",
-  "content": []
-}, {
-  "id": "6",
-  "order": 6,
-  "location": "/api/evaluations/i2c1510047a/chapters/6",
-  "state": "visible",
-  "title": "Appendix",
-  "content": []
+  "content": [{
+    "type": "section",
+    "title": "Period on period sales performance",
+    "content": [{
+      "type": "discrete_bar_chart",
+      "source": "/api/evaluations/i2c1510047a/dataset/1.json",
+      "comment": "... long string of text ...",
+      "info": "... long string of text ..."
+    }]
+  }, {
+    "type": "section",
+    "title": "Promotional activity during campaign",
+    "content": [{
+      "type": "multi_bar_chart",
+      "source": "/api/evaluations/i2c1510047a/dataset/2.json",
+      "comment": "... long string of text ...",
+      "info": "... long string of text ..."
+    }]
+  }, {
+    "type": "section",
+    "title": "Product definitions",
+    "content": [{
+      "type": "html",
+      "content": "<p>... long string of text ...</p>"
+    }]
+  }]
 }, {
   "id": "2",
   "order": 2,
@@ -23,7 +41,7 @@
     "title": "Background",
     "content": [{
       "type": "html",
-      "value": "<p>Mars Food ran a campaign in cycle 6 and 7 by using Six Sheets, Sainsbury’s Magazine, Entrance Gates and CAT as a channels to drive awareness of Uncle Ben’s R&G Quinoa NPD. The objectives of the campaign were to launch the new products, grow total units and grow share of category</p>"
+      "content": "<p>... long string of text ...</p>"
     }]
   }, {
     "type": "section",
@@ -116,7 +134,35 @@
   "location": "/api/evaluations/i2c1510047a/chapters/3",
   "state": "visible",
   "title": "Sampling Performance",
-  "content": []
+  "content": [{
+    "type": "section",
+    "title": "Booking",
+    "content": [{
+      "type": "html",
+      "content": "<p>... long string of text ...</p>"
+    }]
+  }, {
+    "type": "section",
+    "title": "Performance",
+    "content": [{
+      "type": "sku_table",
+      "source": "/api/evaluations/i2c1510047a/dataset/3.json"
+    }, {
+      "type": "barchart",
+      "source": "/api/evaluations/i2c1510047a/dataset/4.json"
+    }]
+  }, {
+    "type": "section",
+    "title": "Gallery",
+    "content": [{
+      "type": "gallery",
+      "content": [
+        "/path/to/image_1.jpg",
+        "/path/to/image_2.jpg",
+        "/path/to/image_3.jpg"
+      ]
+    }]
+  }]
 }, {
   "id": "4",
   "order": 4,
@@ -130,5 +176,45 @@
   "location": "/api/evaluations/i2c1510047a/chapters/5",
   "state": "visible",
   "title": "Summary",
+  "content": [{
+    "type": "section",
+    "title": "Performance",
+    "content": [{
+      "type": "list_value",
+      "label": "Campaign Objectives",
+      "items": [{
+        "label": "Total Sales Uplift",
+        "value": "38315.15",
+        "unit": "GBP"
+      }, {
+        "label": "Uplift in New Customers",
+        "value": "11637.557"
+      }, {
+        "label": "Share of Category Uplift",
+        "value": "1.8",
+        "unit": "ppts"
+      }]
+    }]
+  }, {
+    "type": "section",
+    "title": "Objectives",
+    "content": [{
+      "type": "html",
+      "content": "<p>... long string of text ...</p>"
+    }]
+  }, {
+    "type": "section",
+    "title": "Insight",
+    "content": [{
+      "type": "info",
+      "content": "<p>... long string of text ...</p>"
+    }]
+  }]
+}, {
+  "id": "6",
+  "order": 6,
+  "location": "/api/evaluations/i2c1510047a/chapters/6",
+  "state": "visible",
+  "title": "Appendix",
   "content": []
 }]
