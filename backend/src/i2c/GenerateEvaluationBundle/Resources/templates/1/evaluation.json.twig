@@ -1,12 +1,12 @@
 {
-    "title": {{ title }},
-    "category": {{ category }},
-    "brand": {{ brand }},
-    "start_date": {{ date(start_date) }}
-    "end_date": {{ date(end_date) }}
+    "title": {{ general_data['title'] }},
+    "category": {{ general_data['category'] }},
+    "brand": {{ general_data['brand'] }},
+    "start_date": {{ date(evaluation_dates['start_date']) }}
+    "end_date": {{ date(evaluation_dates['end_date']) }}
     "generated_at": {{ date('now') }},
     "businessUnit": {
-        "id": {{ business_unit_id }}
+        "id": {{ supplier['id'] }}
     },
     "chapters": []
 }

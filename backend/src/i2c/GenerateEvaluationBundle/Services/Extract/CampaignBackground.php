@@ -13,7 +13,7 @@ use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
  */
 class CampaignBackground implements ExtractInterface
 {
-    /** @var Connection  */
+    /** @var Connection */
     protected $connection;
 
     public function __construct(Registry $registry)
@@ -36,10 +36,12 @@ class CampaignBackground implements ExtractInterface
             if ('get' !== substr($method, 0, 3)) {
                 continue;
             }
-            $sql = call_user_func_array(array($this, $method), $cid);
+            $sql = call_user_func_array(array($this, $method), [$cid]);
             $methodName = substr($method, 3);
 
-            $result[$methodName] = $this->connection->fetchAll($sql);
+            $underscoreMethodName = $string = preg_replace('/(?<=\\w)(?=[A-Z])/', "_$1", $methodName);
+            $underscoreMethodName = strtolower($underscoreMethodName);
+            $result[$underscoreMethodName] = $this->connection->fetchAll($sql);
         }
 
         return $result;
@@ -153,7 +155,7 @@ class CampaignBackground implements ExtractInterface
     {
         return sprintf(
             'SELECT DISTINCT CONCAT(LEFT(media, CHAR_LENGTH(media) - 1),
-             IF(RIGHT(media, 1) REGEXP \'[0-9]\' = 0, RIGHT(media, 1), \'\')) as media
+             IF(RIGHT(media, 1) REGEXP \'[0-9]\' = 0, RIGHT(media, 1), \'\')) AS media
              FROM ie_media_data
              WHERE master_campaign_id = \'%s\'
             ',

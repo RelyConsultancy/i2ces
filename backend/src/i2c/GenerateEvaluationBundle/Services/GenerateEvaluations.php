@@ -106,6 +106,15 @@ class GenerateEvaluations
         }
     }
 
+    public function loadConfigData($jsonPath)
+    {
+        $jsonContent = file_get_contents($jsonPath);
+
+        $config = json_decode($jsonContent, true);
+
+        return $config;
+    }
+
     /**
      * @param Evaluation $evaluation
      */

@@ -2,6 +2,7 @@
 
 namespace i2c\GenerateEvaluationBundle\Command;
 
+use i2c\GenerateEvaluationBundle\Services\GenerateEvaluations;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,10 +15,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GenerateEvaluationsCommand extends ContainerAwareCommand
 {
+    /** @var GenerateEvaluations  */
     protected $generateEvaluationsService;
+    /** @var  string */
     protected $versionsFolderPath;
 
-    public function __construct($generateEvaluations, $versionsFolderPath)
+    public function __construct(GenerateEvaluations $generateEvaluations, $versionsFolderPath)
     {
         $this->versionsFolderPath = $versionsFolderPath;
         $this->generateEvaluationsService = $generateEvaluations;
@@ -61,9 +64,17 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
                 return -1;
             }
 
-            $configData = $this->generateEvaluationsService->loadConfigData();
+            //todo inject the service that handles cids and add the cids array input option
+            $cids = [];
 
-            $this->generateEvaluationsService->generate($configData);
+            $configFilePath = sprintf(
+                '%s/%s/master.json',
+                $this->versionsFolderPath,
+                $versionNumber
+            );
+            $configData = $this->generateEvaluationsService->loadConfigData($configFilePath);
+
+            $this->generateEvaluationsService->generate($configData, $cids);
 
             return 0;
         } catch (\Exception $ex) {
