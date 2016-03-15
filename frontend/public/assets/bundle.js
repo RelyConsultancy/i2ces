@@ -44013,6 +44013,10 @@ var evaluation = function evaluation() {
       break;
 
     case 'evaluation.filter':
+      // reset other filters
+      for (var name in state.filter) {
+        state.filter[name] = null;
+      }
       state.filter[data.filter] = data.value;
       break;
 
@@ -44796,65 +44800,106 @@ var _style2 = _interopRequireDefault(_style);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var getBrand = function getBrand(item) {
-  return item.brand;
-};
-var getSupplier = function getSupplier(item) {
-  return item.supplier.name;
-};
-var getCategory = function getCategory(item) {
-  return item.category;
-};
-var setOption = function setOption(value) {
-  return { value: value, label: value };
+var fmtOptions = function fmtOptions(items) {
+  return items.map(function (item) {
+    return { value: item, label: item };
+  });
 };
 
-exports.default = function (_ref) {
+var Categories = function Categories(_ref) {
   var store = _ref.store;
+  var _store$filter = store.filter;
+  var brand = _store$filter.brand;
+  var supplier = _store$filter.supplier;
 
-  if (!store.list.length) return null;
+  var items = store.list.filter(function (item) {
+    return true;
+    if (brand && brand != item.brand) return false;
+    if (supplier && supplier != item.supplier.name) return false;
+  });
 
-  var categories = (0, _Select2.default)({
+  var options = {
     placeholder: 'Category',
-    searchable: false,
-    options: (0, _utils.getUnique)(store.list.map(getCategory)).map(setOption),
     value: store.filter.category,
+    options: fmtOptions((0, _utils.getUnique)(items.map(function (i) {
+      return i.category;
+    }))),
+    searchable: false,
     onChange: function onChange(option) {
       (0, _actions.setFilter)('category', option ? option.value : null);
     }
+  };
+
+  return (0, _Select2.default)(options);
+};
+
+var Brands = function Brands(_ref2) {
+  var store = _ref2.store;
+  var _store$filter2 = store.filter;
+  var category = _store$filter2.category;
+  var supplier = _store$filter2.supplier;
+
+  var items = store.list.filter(function (item) {
+    return true;
+    if (category && category != item.category) return false;
+    if (supplier && supplier != item.supplier.name) return false;
   });
 
-  var brands = (0, _Select2.default)({
+  var options = {
     placeholder: 'Brand',
-    searchable: false,
-    options: (0, _utils.getUnique)(store.list.map(getBrand)).map(setOption),
     value: store.filter.brand,
+    options: fmtOptions((0, _utils.getUnique)(items.map(function (i) {
+      return i.brand;
+    }))),
+    searchable: false,
     onChange: function onChange(option) {
       (0, _actions.setFilter)('brand', option ? option.value : null);
     }
+  };
+
+  return (0, _Select2.default)(options);
+};
+
+var Suppliers = function Suppliers(_ref3) {
+  var store = _ref3.store;
+  var _store$filter3 = store.filter;
+  var category = _store$filter3.category;
+  var brand = _store$filter3.brand;
+
+  var items = store.list.filter(function (item) {
+    return true;
+    if (category && category != item.category) return false;
+    if (brand && brand != item.brand) return false;
   });
 
-  var suppliers = (0, _Select2.default)({
+  var options = {
     placeholder: 'Supplier',
-    searchable: false,
-    options: (0, _utils.getUnique)(store.list.map(getSupplier)).map(setOption),
     value: store.filter.supplier,
+    options: fmtOptions((0, _utils.getUnique)(items.map(function (i) {
+      return i.supplier.name;
+    }))),
+    searchable: false,
     onChange: function onChange(option) {
       (0, _actions.setFilter)('supplier', option ? option.value : null);
     }
-  });
+  };
+
+  return (0, _Select2.default)(options);
+};
+
+exports.default = function (_ref4) {
+  var store = _ref4.store;
+
+  if (!store.list.length) return null;
 
   var label = (0, _component.B)({ className: _style2.default.filters_label }, 'Filter by');
 
   var filters = (0, _Grid2.default)({
     blocks: 3,
-    items: [brands, suppliers, categories]
+    items: [Brands({ store: store }), Suppliers({ store: store }), Categories({ store: store })]
   });
 
-  var attrs = {
-    className: _style2.default.filters
-  };
-  return (0, _component.B)(attrs, label, filters);
+  return (0, _component.B)({ className: _style2.default.filters }, label, filters);
 };
 
 },{"./style.css":298,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":280,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":287,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid":320,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Select":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":328}],297:[function(require,module,exports){
@@ -47736,6 +47781,8 @@ var _http2 = _interopRequireDefault(_http);
 var _actions = require('./application/actions.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import xxx from 'react-faux-dom'
 
 (0, _http2.default)('get', '/api/me', function (reply) {
   if (reply.error) {
