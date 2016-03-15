@@ -162,16 +162,13 @@ class CampaignObjectiveDataService
     {
         $connection = $this->entityManager->getConnection();
 
-        $queryExpression = "CONCAT(LEFT(media, CHAR_LENGTH(media) - 1),
-        IF(RIGHT(media, 1) REGEXP '[0-9]' = 0, RIGHT(media, 1), ''))";
-
         $query = sprintf(
-            'SELECT %s AS media,
+            'SELECT media_label,
+             media,
              start_date,
              end_date
             FROM ie_media_data
             WHERE master_campaign_id = \'%s\'',
-            $queryExpression,
             $cid
         );
         $response = $connection->query($query)->fetchAll();

@@ -100,13 +100,13 @@
                         ,
                         {% endif %}
                         {
-                        "label": "{{ item.media }}",
+                        "label": "{{ item.media_label }}",
                         "start": "{{ item.start_date }}",
                         "end": "{{ item.end_date }}",
 
                         {% for color_config in mediaLaydownColorsConfig %}
-                            {% if item.media in color_config.media %}
-                                "marker": "#{{ color_config.color }}"
+                            {% if item.media_label in color_config.media %}
+                                "marker": "{{ color_config.color }}"
                                 {% if color_config.color not in usedColors %}
                                     {% set legend = legend|merge([
                                         {
@@ -132,7 +132,7 @@
                         {% endif %}
                         {
                             "label": "{{ legend_item.label }}",
-                            "color": "#{{ legend_item.color }}"
+                            "color": "{{ legend_item.color }}"
                         }
                         {% set prepend_comma = true %}
                     {% endfor %}

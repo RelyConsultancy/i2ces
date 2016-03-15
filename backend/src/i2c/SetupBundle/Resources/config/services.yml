@@ -1,5 +1,5 @@
 imports:
-    - { resource: 'initial_setup_config.yml' }
+    - { resource: 'initial_dummy_data.yml' }
 services:
     i2c_setup.initial_setup_command:
         class: i2c\SetupBundle\Command\InitialSetupCommand

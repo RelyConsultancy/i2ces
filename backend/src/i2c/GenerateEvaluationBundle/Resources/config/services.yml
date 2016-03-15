@@ -1,5 +1,5 @@
 imports:
-    - { resource: 'table_config.yml' }
+    - { resource: 'config.yml' }
 services:
     i2c_generate_evaluation.raw_import:
         class: i2c\GenerateEvaluationBundle\Command\RawImportCommand
@@ -9,7 +9,7 @@ services:
 
     i2c_generate_evaluation.evaluation_generate:
         class: i2c\GenerateEvaluationBundle\Command\GenerateEvaluationsCommand
-        arguments: [%colors_config%]
+        arguments: [%media_laydown_colors%]
         tags:
             - { name: console.command }
 

@@ -39,11 +39,13 @@ parameters:
                 @start_date: 'DATE'
                 @end_date: 'DATE'
                 evaluate: 'TINYINT'
+                @media_label: 'VARCHAR(255)'
             primary_key: 'master_campaign_id'
             file_name: 'ie_media_data.csv'
             additional_setters:
                 - "start_date = STR_TO_DATE(@start_date, '%%d/%%m/%%Y')"
                 - "end_date = STR_TO_DATE(@end_date, '%%d/%%m/%%Y')"
+                - "media_label = CONCAT(LEFT(media, CHAR_LENGTH(media) - 1), IF(RIGHT(media, 1) REGEXP '[0-9]' = 0, RIGHT(media, 1), ''))"
         ie_offer_data:
             table_name: 'ie_offer_data'
             columns:
@@ -118,6 +120,6 @@ parameters:
             additional_setters:
                 - "week_commencing = STR_TO_DATE(@week_commencing, '%%d/%%m/%%Y')"
 
-    colors_config:
-        - { color: ccc, media: ['Instore Sampling', 'Entrance Gates', 'Six Sheets'], label: 'Evaluated media' }
-        - { color: 555, media: ['TV Wall', 'JS Magazine'], label: 'In-Store Promotions' }
+    media_laydown_colors:
+        - { color: "#ccc", media: ['Instore Sampling', 'Entrance Gates', 'Six Sheets'], label: 'Evaluated media' }
+        - { color: "#555", media: ['TV Wall', 'JS Magazine'], label: 'In-Store Promotions' }
