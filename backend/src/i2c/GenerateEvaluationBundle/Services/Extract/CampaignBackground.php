@@ -33,12 +33,13 @@ class CampaignBackground implements ExtractInterface
         $result = [];
         $methods = get_class_methods($this);
         foreach ($methods as $method) {
-            if (substr($method, 0, 3) === 'get') {
-                $sql = call_user_func_array(array($this, $method), $cid);
-                $methodName = substr($method, 3);
-
-                $result[$methodName] = $this->connection->fetchAll($sql);
+            if ('get' !== substr($method, 0, 3)) {
+                continue;
             }
+            $sql = call_user_func_array(array($this, $method), $cid);
+            $methodName = substr($method, 3);
+
+            $result[$methodName] = $this->connection->fetchAll($sql);
         }
 
         return $result;
