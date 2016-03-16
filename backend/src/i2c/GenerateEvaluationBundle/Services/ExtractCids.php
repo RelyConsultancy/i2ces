@@ -53,7 +53,6 @@ class ExtractCids
 
     /**
      * Check if there is incomplete campaign data.
-     * @TODO define this method.
      *
      * @param array $cids
      *
@@ -61,20 +60,39 @@ class ExtractCids
      */
     public function validateCids($cids)
     {
+        if (count($cids) > 0) {
+            /** @var Connection $connection */
+            $connection = $this->entityManager->getConnection();
+            $query = sprintf(
+                'SELECT DISTINCT cd.master_campaign_id
+                 FROM ie_campaign_data AS cd
+                 JOIN ie_results_data AS rd ON (cd.master_campaign_id = rd.master_campaign_id)
+                  WHERE cd.master_campaign_id IN (%s)
+                   AND cd.master_campaign_id NOT IN (
+                    SELECT cid FROM evaluation
+                  )',
+                implode(',', $cids)
+            );
+            $cids = $connection->query($query)->fetchAll(PDO::FETCH_COLUMN);
+        }
+
         return $cids;
     }
 
     /**
      * Returns an array of campaign ids that can be generated.
      *
+     * @param array $cids
+     *
      * @return array
      */
-    public function getCampaignCidsToBeGenerated()
+    public function getCampaignCidsToBeGenerated($cids = array())
     {
-        $cids = $this->getAvailableCampaignCids();
-        if (count($cids) > 0) {
-            $cids = $this->validateCids($cids);
+        if (empty($cids)) {
+            $cids = $this->getAvailableCampaignCids();
         }
+
+        $cids = $this->validateCids($cids);
 
         return $cids;
     }
