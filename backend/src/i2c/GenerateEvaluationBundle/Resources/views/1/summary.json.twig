@@ -1,0 +1,55 @@
+{
+    "order": "{{ additional_data.order }}",
+    "state": "{{ additional_data.state }}",
+    "title": "{{ additional_data.title }}",
+    "content":
+    [
+        {
+            "type": "section",
+            "title": "Performance",
+            "content":
+            [
+                {
+                    "type": "list_value",
+                    "label": "Campaign Objectives",
+                    "items":
+                    [
+                        {% set prepend_comma = false %}
+                        {% for objective in objectives %}
+                            {% if prepend_comma == true %}
+                                ,
+                            {% endif %}
+                            {
+                                "label": "{{ objective.label }}",
+                                "value": "{{ objective.value }}"
+                            }
+                            {% set prepend_comma = true %}
+                        {% endfor %}
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Objectives",
+            "content":
+            [
+                {
+                    "type": "html",
+                    "content": "<p>... long string of text ...</p>"
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Insight",
+            "content":
+            [
+                {
+                    "type": "info",
+                    "content": "<p>... long string of text ...</p>"
+                }
+            ]
+        }
+    ]
+}
