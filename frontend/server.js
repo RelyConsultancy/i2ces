@@ -50,13 +50,23 @@ $('post', '/api/evaluations', function * () {
 })
 
 
-$('get', '/api/evaluations/:id', function * (id) {
-  this.body = fmtReply(db.evaluations[id])
+$('get', '/api/evaluations/:cid', function * (cid) {
+  this.body = fmtReply(db.evaluations[cid])
 })
 
 
-$('get', '/api/evaluations/:id/chapters/:cid', function * (id, cid) {
-  this.body = fmtReply(db.chapters[id].filter(c => c.id == cid).shift())
+$('get', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
+  this.body = fmtReply(db.chapters[cid].filter(c => c.id == id).shift())
+})
+
+
+$('post', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
+  this.request.body.content.forEach((section) => {
+    console.log('------------------------------------------------------------')
+    section.content.forEach(component => console.log(component))
+  })
+
+  this.body = fmtReply({ ok: 1 })
 })
 
 

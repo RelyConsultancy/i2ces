@@ -43785,7 +43785,7 @@ module.exports = exports['default'];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchChapter = exports.fetchEvaluation = exports.fetchEvaluations = exports.setChapterSection = exports.setChapter = exports.setEvaluation = exports.setFilter = exports.setFlagNetwork = exports.setUser = undefined;
+exports.updateChapter = exports.fetchChapter = exports.fetchEvaluation = exports.fetchEvaluations = exports.setChapterSection = exports.setChapter = exports.setEvaluation = exports.setFilter = exports.setFlagNetwork = exports.setUser = undefined;
 
 var _store = require('./store.js');
 
@@ -43853,18 +43853,33 @@ var fetchEvaluations = exports.fetchEvaluations = function fetchEvaluations() {
   });
 };
 
-var fetchEvaluation = exports.fetchEvaluation = function fetchEvaluation(id) {
-  (0, _http2.default)('get', '/api/evaluations/' + id, function (reply) {
+var fetchEvaluation = exports.fetchEvaluation = function fetchEvaluation(_ref) {
+  var cid = _ref.cid;
+
+  (0, _http2.default)('get', '/api/evaluations/' + cid, function (reply) {
     setEvaluation(reply.data);
   });
 };
 
-var fetchChapter = exports.fetchChapter = function fetchChapter(_ref) {
-  var cid = _ref.cid;
-  var id = _ref.id;
+var fetchChapter = exports.fetchChapter = function fetchChapter(_ref2) {
+  var cid = _ref2.cid;
+  var id = _ref2.id;
 
   (0, _http2.default)('get', '/api/evaluations/' + cid + '/chapters/' + id, function (reply) {
     setChapter(reply.data);
+  });
+};
+
+var updateChapter = exports.updateChapter = function updateChapter(_ref3) {
+  var cid = _ref3.cid;
+  var chapter = _ref3.chapter;
+  var id = chapter.id;
+
+  var data = chapter;
+
+  (0, _http2.default)('post', '/api/evaluations/' + cid + '/chapters/' + id, { data: data }, function (reply) {
+    console.info('Evaluation ' + cid + ' chapter ' + id + ' updated');
+    console.log(reply);
   });
 };
 
@@ -44292,6 +44307,7 @@ var BlocksSection = (0, _component.Component)({
     var _props = this.props;
     var component = _props.component;
     var editable = _props.editable;
+    var onSave = _props.onSave;
     var isEditable = this.state.isEditable;
 
 
@@ -44299,6 +44315,10 @@ var BlocksSection = (0, _component.Component)({
     var toggle = (0, _component.B)({
       className: _style2.default.toggle,
       onClick: function onClick() {
+        if (isEditable) {
+          onSave && onSave();
+        }
+
         _this.setState({ isEditable: !isEditable });
       }
     }, label);
@@ -44446,7 +44466,9 @@ var Text = function Text(_ref2) {
   return (0, _component.B)({ className: _style2.default.text }, component.content);
 };
 
-var isEditable = function isEditable(cid) {
+var isEditable = function isEditable(_ref3) {
+  var cid = _ref3.cid;
+
   var user = _store2.default.getState().dashboard.user;
 
   var cids = user.edit.map(function (i) {
@@ -44454,32 +44476,6 @@ var isEditable = function isEditable(cid) {
   });
 
   return ~cids.indexOf(cid);
-};
-
-var setComponent = function setComponent(_ref3) {
-  var component = _ref3.component;
-  var cid = _ref3.cid;
-
-  switch (component.type) {
-    case 'html':
-      return (0, _HTMLSection2.default)({ component: component, editable: isEditable(cid) });
-      break;
-
-    case 'blocks':
-      return (0, _BlocksSection2.default)({ component: component, editable: isEditable(cid) });
-      break;
-
-    case 'list':
-      return List({ component: component });
-      break;
-
-    case 'text':
-      return Text({ component: component });
-      break;
-
-    default:
-      return component.type;
-  }
 };
 
 var Links = function Links(_ref4) {
@@ -44557,11 +44553,45 @@ var Sections = function Sections(_ref6) {
     }, section.title);
   });
 
+  var onSave = function onSave() {
+    (0, _actions.updateChapter)({
+      chapter: chapter,
+      cid: evaluation.cid
+    });
+  };
+
   var content = sections.map(function (section, index) {
     var title = (0, _component.B)({ className: _style2.default.section_title }, section.title);
 
     var components = section.content.map(function (component) {
-      return setComponent({ component: component, cid: evaluation.cid });
+      switch (component.type) {
+        case 'html':
+          return (0, _HTMLSection2.default)({
+            onSave: onSave,
+            component: component,
+            editable: isEditable(evaluation)
+          });
+          break;
+
+        case 'blocks':
+          return (0, _BlocksSection2.default)({
+            onSave: onSave,
+            component: component,
+            editable: isEditable(evaluation)
+          });
+          break;
+
+        case 'list':
+          return List({ component: component });
+          break;
+
+        case 'text':
+          return Text({ component: component });
+          break;
+
+        default:
+          return component.type;
+      }
     });
 
     var attrs = {
@@ -44587,7 +44617,7 @@ var EvaluationChapters = (0, _component.Component)({
     var chapter = store.chapters_cache[id];
 
     if (!store.evaluation) {
-      (0, _actions.fetchEvaluation)(cid);
+      (0, _actions.fetchEvaluation)({ cid: cid });
       (0, _actions.fetchChapter)({ cid: cid, id: id });
     } else if (!chapter) {
       (0, _actions.fetchChapter)({ cid: cid, id: id });
@@ -44746,7 +44776,7 @@ var Evaluation = (0, _component.Component)({
 
 
     if (!store.evaluation) {
-      (0, _actions.fetchEvaluation)(params.cid);
+      (0, _actions.fetchEvaluation)({ cid: params.cid });
     }
   },
   componentDidMount: function componentDidMount() {
@@ -47602,14 +47632,19 @@ var HTMLSection = (0, _component.Component)({
     var _props = this.props;
     var component = _props.component;
     var editable = _props.editable;
+    var onSave = _props.onSave;
     var isEditable = this.state.isEditable;
 
-    var html = component.value;
+    var html = component.content;
 
     var label = isEditable ? 'Save' : 'Edit';
     var toggle = (0, _component.B)({
       className: _style2.default.toggle,
       onClick: function onClick() {
+        if (isEditable) {
+          onSave && onSave();
+        }
+
         _this.setState({ isEditable: !isEditable });
       }
     }, label);
@@ -47620,7 +47655,7 @@ var HTMLSection = (0, _component.Component)({
       content = (0, _Froala2.default)({
         content: html,
         onChange: function onChange(e, editor, data) {
-          component.value = editor.html.get();
+          component.content = editor.html.get();
         }
       });
     }
@@ -47781,8 +47816,6 @@ var _http2 = _interopRequireDefault(_http);
 var _actions = require('./application/actions.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import xxx from 'react-faux-dom'
 
 (0, _http2.default)('get', '/api/me', function (reply) {
   if (reply.error) {

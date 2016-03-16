@@ -54,8 +54,8 @@ export const fetchEvaluations = () => {
   })
 }
 
-export const fetchEvaluation = (id) => {
-  http('get', `/api/evaluations/${id}`, (reply) => {
+export const fetchEvaluation = ({ cid }) => {
+  http('get', `/api/evaluations/${cid}`, (reply) => {
     setEvaluation(reply.data)
   })
 }
@@ -63,5 +63,15 @@ export const fetchEvaluation = (id) => {
 export const fetchChapter = ({ cid, id }) => {
   http('get', `/api/evaluations/${cid}/chapters/${id}`, (reply) => {
     setChapter(reply.data)
+  })
+}
+
+export const updateChapter = ({ cid, chapter }) => {
+  const { id } = chapter
+  const data = chapter
+
+  http('post', `/api/evaluations/${cid}/chapters/${id}`, { data }, (reply) => {
+    console.info(`Evaluation ${cid} chapter ${id} updated`)
+    console.log(reply)
   })
 }

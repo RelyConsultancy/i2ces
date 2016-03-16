@@ -10,6 +10,7 @@ import {
   fetchChapter,
   setChapterSection,
   setChapter,
+  updateChapter,
 } from '/application/actions.js'
 
 
@@ -25,34 +26,11 @@ const Text = ({ component }) => (
 )
 
 
-const isEditable = (cid) => {
+const isEditable = ({ cid }) => {
   const { user } = store.getState().dashboard
   const cids = user.edit.map(i => i.cid)
 
   return ~cids.indexOf(cid)
-}
-
-const setComponent = ({ component, cid }) => {
-  switch (component.type) {
-    case 'html':
-      return HTMLSection({ component, editable: isEditable(cid) })
-    break
-
-    case 'blocks':
-      return BlocksSection({ component, editable: isEditable(cid) })
-    break
-
-    case 'list':
-      return List({ component })
-    break
-
-    case 'text':
-      return Text({ component })
-    break
-
-    default:
-      return component.type
-  }
 }
 
 
@@ -117,12 +95,47 @@ const Sections = ({ store, chapter, ctx }) => {
     },
   }, section.title))
 
+
+  const onSave = () => {
+    updateChapter({
+      chapter,
+      cid: evaluation.cid,
+    })
+  }
+
   const content = sections.map((section, index) => {
     const title = B({ className: style.section_title }, section.title)
 
-    const components = section.content.map((component) => (
-      setComponent({ component, cid: evaluation.cid })
-    ))
+    const components = section.content.map((component) => {
+      switch (component.type) {
+        case 'html':
+          return HTMLSection({
+            onSave,
+            component,
+            editable: isEditable(evaluation),
+          })
+        break
+
+        case 'blocks':
+          return BlocksSection({
+            onSave,
+            component,
+            editable: isEditable(evaluation),
+          })
+        break
+
+        case 'list':
+          return List({ component })
+        break
+
+        case 'text':
+          return Text({ component })
+        break
+
+        default:
+          return component.type
+      }
+    })
 
     const attrs = {
       className: style.section,
@@ -147,7 +160,7 @@ const EvaluationChapters = Component({
     const chapter = store.chapters_cache[id]
 
     if (!store.evaluation) {
-      fetchEvaluation(cid)
+      fetchEvaluation({ cid })
       fetchChapter({ cid, id })
     }
     else if (!chapter) {

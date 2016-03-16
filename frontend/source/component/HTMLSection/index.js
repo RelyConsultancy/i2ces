@@ -8,14 +8,18 @@ const HTMLSection = Component({
     return { isEditable: false }
   },
   render () {
-    const { component, editable } = this.props
+    const { component, editable, onSave } = this.props
     const { isEditable } = this.state
-    const html = component.value
+    const html = component.content
 
     const label = isEditable ? 'Save' : 'Edit'
     const toggle = B({
       className: style.toggle,
       onClick: () => {
+        if (isEditable) {
+          onSave && onSave()
+        }
+
         this.setState({ isEditable: !isEditable })
       }
     }, label)
@@ -26,7 +30,7 @@ const HTMLSection = Component({
       content = Froala({
         content: html,
         onChange: (e, editor, data) => {
-          component.value = editor.html.get()
+          component.content = editor.html.get()
         },
       })
     }
