@@ -1,0 +1,45 @@
+{
+    "order": "{{ additional_data.order }}",
+    "state": "{{ additional_data.state }}",
+    "title": "{{ additional_data.title }}",
+    "content":
+    [
+        {
+            "type": "section",
+            "title": "Period on period sales performance",
+            "content":
+            [
+                {
+                    "type": "discrete_bar_chart",
+                    "source": "{{ sales_performance_source[0].path }}",
+                    "comment": "... long string of text ...",
+                    "info": "... long string of text ..."
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Promotional activity during campaign",
+            "content":
+            [
+                {
+                    "type": "multi_bar_chart",
+                    "source": "{{ promotional_activity_source[0].path }}",
+                    "comment": "... long string of text ...",
+                    "info": "... long string of text ..."
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Product definitions",
+            "content":
+            [
+                {
+                    "type": "html",
+                    "content": "<p>... long string of text ...</p>"
+                }
+            ]
+        }
+    ]
+}
