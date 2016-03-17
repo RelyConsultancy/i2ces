@@ -1,6 +1,6 @@
 <?php
 
-namespace i2c\EvaluationBundle\Controller;
+namespace i2c\EvaluationBundle\Controller\Api;
 
 use FOS\RestBundle\View\View;
 use JMS\Serializer\SerializationContext;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class RestApiController
  *
- * @package i2c\EvaluationBundle\Controller
+ * @package i2c\EvaluationBundle\Controller\Api
  */
 class RestApiController extends BaseController
 {

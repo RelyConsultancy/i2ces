@@ -1,29 +1,29 @@
 evaluation_evaluation.get_evaluations_by_cid_minimal:
     path: /api/evaluations
     methods: [POST]
-    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationsByCidMinimal }
+    defaults: { _controller: EvaluationEvaluationBundle:Api/Evaluation:getEvaluationsByCidMinimal }
 
 evaluation_evaluation.get_evaluation_by_cid:
     path: /api/evaluations/{evaluationCid}
     methods: [GET]
-    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationByCid }
+    defaults: { _controller: EvaluationEvaluationBundle:Api/Evaluation:getEvaluationByCid }
 
 evaluation_evaluation.publish_evaluation:
     path: /api/evaluations/{evaluationCid}/publish
     methods: [POST]
-    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:markEvaluationAsPublished }
+    defaults: { _controller: EvaluationEvaluationBundle:Api/Evaluation:markEvaluationAsPublished }
 
 evaluation_evaluation.unpublish_evaluation:
     path: /api/evaluations/{evaluationCid}/unpublish
     methods: [POST]
-    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:markEvaluationAsDraft }
+    defaults: { _controller: EvaluationEvaluationBundle:Api/Evaluation:markEvaluationAsDraft }
 
 evaluation_evaluation.get_evaluation_chapter_by_id:
     path: /api/evaluations/{evaluationCid}/chapters/{chapterId}
     methods: [GET]
-    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getChapterById }
+    defaults: { _controller: EvaluationEvaluationBundle:Api/Evaluation:getChapterById }
 
 evaluation_evaluation.update_evaluation_chapter:
     path: /api/evaluations/{evaluationCid}/chapters/{chapterId}
     methods: [POST]
-    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:updateChapter }
+    defaults: { _controller: EvaluationEvaluationBundle:Api/Evaluation:updateChapter }

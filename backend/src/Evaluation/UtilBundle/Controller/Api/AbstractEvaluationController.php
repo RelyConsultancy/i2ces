@@ -1,6 +1,6 @@
 <?php
 
-namespace Evaluation\UtilBundle\Controller;
+namespace Evaluation\UtilBundle\Controller\Api;
 
 use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\View\View;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class AbstractEvaluationController
  *
- * @package Evaluation\UtilBundle\Controller
+ * @package Evaluation\UtilBundle\Controller\Api
  */
 class AbstractEvaluationController extends RestApiController
 {
@@ -63,7 +63,7 @@ class AbstractEvaluationController extends RestApiController
     }
 
     /**
-     * Deserialized the entity fromt the request using a json format
+     * Deserialized the entity from the request using a json format
      *
      * @param string $class full class name including namespace
      *

@@ -1,17 +1,17 @@
 <?php
 
-namespace Evaluation\MeBundle\Controller\Api\Rest;
+namespace Evaluation\MeBundle\Controller\Api;
 
 use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService;
 use Evaluation\UtilBundle\Helpers\BusinessUnitHelper;
 use FOS\RestBundle\View\View;
-use i2c\EvaluationBundle\Controller\RestApiController;
+use i2c\EvaluationBundle\Controller\Api\RestApiController;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class UserController
  *
- * @package Evaluation\MeBundle\Controller
+ * @package Evaluation\MeBundle\Controller\Api
  */
 class UserController extends RestApiController
 {
