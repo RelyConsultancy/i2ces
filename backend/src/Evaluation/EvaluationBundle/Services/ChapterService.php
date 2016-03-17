@@ -4,8 +4,7 @@ namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Evaluation\EvaluationBundle\Entity\Chapter;
-use Evaluation\UtilBundle\Exception\FormException;
-use Evaluation\UtilBundle\Helpers\ChapterHelper;
+use Evaluation\EvaluationBundle\Exception\FormException;
 use JMS\Serializer\Serializer;
 
 /**
@@ -15,6 +14,9 @@ use JMS\Serializer\Serializer;
  */
 class ChapterService
 {
+    const STATE_VISIBLE = 'visible';
+    const STATE_HIDDEN = 'hidden';
+
     /** @var Serializer  */
     protected $serializer;
 
@@ -72,7 +74,7 @@ class ChapterService
             $errors['chapter.title'] = 'Title must not be null';
         }
 
-        if (!isset(ChapterHelper::$states[$chapter->getState()])) {
+        if (self::STATE_VISIBLE !== $chapter->getState() && self::STATE_HIDDEN !== $chapter->getState()) {
             $errors['chapter.state'] = 'Invalid chapter state';
         }
 

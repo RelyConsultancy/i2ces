@@ -6,7 +6,7 @@ use Evaluation\EvaluationBundle\Entity\Evaluation;
 use Evaluation\EvaluationBundle\Services\ChapterService;
 use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService;
 use Evaluation\EvaluationBundle\Services\EvaluationService;
-use Evaluation\UtilBundle\Exception\FormException;
+use Evaluation\EvaluationBundle\Exception\FormException;
 use i2c\EvaluationBundle\Controller\RestApiController;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Symfony\Component\HttpFoundation\Request;
