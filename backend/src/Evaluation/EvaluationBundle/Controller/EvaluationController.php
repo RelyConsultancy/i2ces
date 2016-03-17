@@ -6,6 +6,7 @@ use Evaluation\EvaluationBundle\Entity\Evaluation;
 use Evaluation\EvaluationBundle\Services\ChapterService;
 use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService;
 use Evaluation\EvaluationBundle\Services\EvaluationService;
+use Evaluation\EvaluationBundle\Services\TableDataDatabaseManager;
 use Evaluation\UtilBundle\Exception\FormException;
 use i2c\EvaluationBundle\Controller\RestApiController;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
@@ -179,6 +180,32 @@ class EvaluationController extends RestApiController
     }
 
     /**
+     * @param string $evaluationCid
+     * @param string $tableDataId
+     *
+     * @return Response
+     */
+    public function getTableDataAction($evaluationCid, $tableDataId)
+    {
+        /** @var Evaluation $evaluation */
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+
+        if (is_null($evaluation)) {
+            return $this->notFound('Evaluation was not found');
+        }
+
+        $tableData = $this->getTableDataDatabaseManagerService()->getTableData($evaluationCid, $tableDataId);
+
+        $response = [];
+
+        if (!is_null($tableData)) {
+            $response = $tableData->getContentAsArray();
+        }
+
+        return $this->success($response);
+    }
+
+    /**
      * @return ChapterService
      */
     public function getChapterService()
@@ -200,5 +227,13 @@ class EvaluationController extends RestApiController
     public function getEvaluationDatabaseManagerService()
     {
         return $this->get('evaluation_evaluation.evaluation_database_manager_service');
+    }
+
+    /**
+     * @return TableDataDatabaseManager
+     */
+    public function getTableDataDatabaseManagerService()
+    {
+        return $this->get('evaluation_evaluation.table_data_database_manager_service');
     }
 }
