@@ -21,7 +21,7 @@ class Chapter
     protected $entityManager;
 
     /**
-     * ChapterService constructor.
+     * Chapter constructor.
      *
      * @param Serializer $serializer
      * @param Registry   $registry

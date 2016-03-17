@@ -21,7 +21,7 @@ class EvaluationDataBaseManager
     protected $entityManager;
 
     /**
-     * EvaluationDataBaseManagerService constructor.
+     * EvaluationDataBaseManager constructor.
      *
      * @param AclHelper $aclHelper
      * @param Registry  $registry

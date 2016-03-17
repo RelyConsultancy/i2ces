@@ -3,9 +3,9 @@
 namespace Evaluation\EvaluationBundle\Controller;
 
 use Evaluation\EvaluationBundle\Entity\Evaluation;
-use Evaluation\EvaluationBundle\Services\ChapterService;
-use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService;
-use Evaluation\EvaluationBundle\Services\EvaluationService;
+use Evaluation\EvaluationBundle\Services\Chapter as ChapterService;
+use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManager;
+use Evaluation\EvaluationBundle\Services\Evaluation as EvaluationService;
 use Evaluation\UtilBundle\Exception\FormException;
 use i2c\EvaluationBundle\Controller\RestApiController;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
@@ -195,7 +195,7 @@ class EvaluationController extends RestApiController
     }
 
     /**
-     * @return EvaluationDataBaseManagerService
+     * @return EvaluationDataBaseManager
      */
     public function getEvaluationDatabaseManagerService()
     {

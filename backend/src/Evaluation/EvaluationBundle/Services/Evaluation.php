@@ -19,7 +19,7 @@ class Evaluation
     protected $entityManager;
 
     /**
-     * ChapterService constructor.
+     * Evaluation constructor.
      *
      * @param Serializer $serializer
      * @param Registry   $registry

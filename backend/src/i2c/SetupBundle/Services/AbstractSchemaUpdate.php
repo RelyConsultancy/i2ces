@@ -21,7 +21,7 @@ abstract class AbstractSchemaUpdate
     protected $tableName;
 
     /**
-     * AbstractSchemaUpdateService constructor.
+     * AbstractSchemaUpdate constructor.
      *
      * @param Registry $doctrine
      * @param string   $tableName

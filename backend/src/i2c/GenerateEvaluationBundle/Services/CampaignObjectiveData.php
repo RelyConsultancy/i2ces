@@ -18,7 +18,7 @@ class CampaignObjectiveData
     protected $entityManager;
 
     /**
-     * CampaignObjectiveDataService constructor.
+     * CampaignObjectiveData constructor.
      *
      * @param Registry $doctrine
      */

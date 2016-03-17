@@ -5,7 +5,7 @@ namespace i2c\GenerateEvaluationBundle\Command;
 use Doctrine\ORM\EntityManager;
 use Evaluation\EvaluationBundle\Entity\Chapter;
 use Evaluation\EvaluationBundle\Entity\Evaluation;
-use i2c\GenerateEvaluationBundle\Services\CampaignObjectiveDataService;
+use i2c\GenerateEvaluationBundle\Services\CampaignObjectiveData;
 use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GenerateEvaluationsCommand extends ContainerAwareCommand
 {
-    /** @var  CampaignObjectiveDataService */
+    /** @var  CampaignObjectiveData */
     protected $campaignDataService;
     /** @var  EntityManager */
     protected $entityManager;

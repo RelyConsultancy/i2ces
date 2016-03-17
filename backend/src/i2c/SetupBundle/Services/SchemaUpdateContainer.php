@@ -33,9 +33,9 @@ class SchemaUpdateContainer
     /**
      * Adds a SchemaUpdateService to the container
      *
-     * @param AbstractSchemaUpdateService $schemaUpdateService
+     * @param AbstractSchemaUpdate $schemaUpdateService
      */
-    public function addSchemaUpdateService(AbstractSchemaUpdateService $schemaUpdateService)
+    public function addSchemaUpdateService(AbstractSchemaUpdate $schemaUpdateService)
     {
         if (!$this->schemaUpdateServices->contains($schemaUpdateService)) {
             $this->schemaUpdateServices->add($schemaUpdateService);
