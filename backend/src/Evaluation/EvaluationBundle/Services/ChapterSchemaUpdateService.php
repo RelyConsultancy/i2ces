@@ -53,7 +53,7 @@ class ChapterSchemaUpdateService extends AbstractSchemaUpdateService
         }
         try {
             $query = sprintf(
-                'ALTER TABLE `%s` ADD COLUMN is_additional_data TINYINT(1) NOT NULL',
+                'ALTER TABLE `%s` ADD COLUMN is_additional_data TINYINT(1) NOT NULL DEFAULT 0',
                 $this->tableName
             );
 
