@@ -82,11 +82,10 @@ class GenerateTableData
             $tableJson = str_replace("    ", "", $tableJson);
 
             /** @var TableData $tableDataEntity */
-            $tableDataEntity = $this->serializer->deserialize(
-                $tableJson,
-                'Evaluation\EvaluationBundle\Entity\TableData',
-                'json'
-            );
+            $tableDataEntity = new TableData();
+            $tableDataEntity->setContent($tableJson);
+            $tableDataEntity->setCid($cid);
+
             $this->entityManager->persist($tableDataEntity);
 
             $this->entityManager->flush();
@@ -95,7 +94,7 @@ class GenerateTableData
 
             $result[$tableName] = sprintf(
                 '/api/evaluations/%s/dataset/%s',
-                $cid,
+                $tableDataEntity->getCid(),
                 $tableDataEntity->getId()
             );
         }
@@ -126,7 +125,7 @@ class GenerateTableData
     protected function getJsonEntity($twigName, $versionNumber, $templatesPrefix, $tableData = [])
     {
         return $this->templateRenderer->render(
-            sprintf('%s:%s:TableData:%s', $templatesPrefix, $versionNumber, $twigName),
+            sprintf('%s:%s/TableData:%s', $templatesPrefix, $versionNumber, $twigName),
             $tableData
         );
     }

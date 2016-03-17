@@ -56,7 +56,7 @@ class SalesPerformance implements ExtractInterface
     {
         return sprintf(
             'SELECT week_commencing as start_date, product as product, pr_results as results from
-             ie_cat_context_data where master_campaign_id = \'%s\'
+             ie_promo_data where master_campaign_id = \'%s\'
             ',
             $cid
         );

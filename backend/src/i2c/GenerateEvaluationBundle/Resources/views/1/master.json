@@ -6,6 +6,7 @@
     {
       "twig_name": "campaign-background.json.twig",
       "data_service": "extract_campaign_background",
+      "table_config": [],
       "additional_data": {
         "title": "Campaign Background",
         "state": "visible",
@@ -29,6 +30,55 @@
           }
         ],
         "order": 2
+      }
+    },
+    {
+      "twig_name": "evaluation-campaign-objectives.json.twig",
+      "data_service": "extract_evaluation_campaign_objectives",
+      "table_config": [],
+      "additional_data": {
+        "title": "campaign_objectives",
+        "state": "visible",
+        "serialized_name": "campaign_objectives"
+      }
+    },
+    {
+      "twig_name": "evaluation-channels.json.twig",
+      "data_service": "extract_evaluation_channels",
+      "table_config": [],
+      "additional_data": {
+        "title": "channels",
+        "state": "visible",
+        "serialized_name": "channels"
+      }
+    },
+    {
+      "twig_name": "summary.json.twig",
+      "data_service": "extract_summary",
+      "table_config": [],
+      "additional_data": {
+        "title": "Summary",
+        "state": "visible",
+        "order": 5
+      }
+    },
+    {
+      "twig_name": "category-context.json.twig",
+      "data_service": "extract_category_context",
+      "table_config": {
+        "promotional_activity": {
+          "twig_name": "promotional-activity.json.twig",
+          "data_service": "extract_table_data_promotional_activity"
+        },
+        "sales_performance": {
+          "twig_name": "sales-performance.json.twig",
+          "data_service": "extract_table_data_sales_performance"
+        }
+      },
+      "additional_data": {
+        "title": "Category Context",
+        "state": "visible",
+        "order": 1
       }
     }
   ]

@@ -16,7 +16,7 @@ services:
 
     i2c_generate_evaluation.evaluation_generate_service:
         class: i2c\GenerateEvaluationBundle\Services\GenerateEvaluations
-        arguments: [@templating.engine.twig, @doctrine, @serializer, "i2cGenerateEvaluationBundle"]
+        arguments: [@templating.engine.twig, @doctrine, @serializer, "i2cGenerateEvaluationBundle", @i2c_generate_evaluation.table_data_generate_service]
         calls:
           - [addExtractService, [@i2c_generate_evaluation.extract_evaluation, "extract_evaluation"]]
           - [addExtractService, [@i2c_generate_evaluation.extract_campaign_background, "extract_campaign_background"]]

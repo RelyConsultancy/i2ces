@@ -1,5 +1,5 @@
 parameters:
-    evaluation_evaluation.table_data_table_name: 'table_data'
+    evaluation_evaluation.table_data_table_name: 'i2c_table_data'
     evaluation_evaluation.table_data_command_name: 'table-data:schema:update'
     evaluation_evaluation.evaluation_table_name: 'evaluation'
     evaluation_evaluation.evaluation_command_name: 'evaluation:schema:update'

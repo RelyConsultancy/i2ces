@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as JMS;
  * Class Chapter
  *
  * @ORM\Entity()
- * @ORM\Table(name="table_data")
+ * @ORM\Table(name="i2c_table_data")
  *
  * @package Evaluation\EvaluationBundle\Entity
  */
