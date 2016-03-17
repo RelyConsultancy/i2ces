@@ -7,13 +7,17 @@ const BlocksSection = Component({
     return { isEditable: false }
   },
   render () {
-    const { component, editable } = this.props
+    const { component, editable, onSave } = this.props
     const { isEditable } = this.state
 
     const label = isEditable ? 'Save' : 'Edit'
     const toggle = B({
       className: style.toggle,
       onClick: () => {
+        if (isEditable) {
+          onSave && onSave()
+        }
+
         this.setState({ isEditable: !isEditable })
       }
     }, label)

@@ -43785,7 +43785,7 @@ module.exports = exports['default'];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchChapter = exports.fetchEvaluation = exports.fetchEvaluations = exports.setChapterSection = exports.setChapter = exports.setEvaluation = exports.setFilter = exports.setFlagNetwork = exports.setUser = undefined;
+exports.updateChapter = exports.fetchChapter = exports.fetchEvaluation = exports.fetchEvaluations = exports.setChapterSection = exports.setChapter = exports.setEvaluation = exports.setFilter = exports.setFlagNetwork = exports.setUser = undefined;
 
 var _store = require('./store.js');
 
@@ -43853,18 +43853,33 @@ var fetchEvaluations = exports.fetchEvaluations = function fetchEvaluations() {
   });
 };
 
-var fetchEvaluation = exports.fetchEvaluation = function fetchEvaluation(id) {
-  (0, _http2.default)('get', '/api/evaluations/' + id, function (reply) {
+var fetchEvaluation = exports.fetchEvaluation = function fetchEvaluation(_ref) {
+  var cid = _ref.cid;
+
+  (0, _http2.default)('get', '/api/evaluations/' + cid, function (reply) {
     setEvaluation(reply.data);
   });
 };
 
-var fetchChapter = exports.fetchChapter = function fetchChapter(_ref) {
-  var cid = _ref.cid;
-  var id = _ref.id;
+var fetchChapter = exports.fetchChapter = function fetchChapter(_ref2) {
+  var cid = _ref2.cid;
+  var id = _ref2.id;
 
   (0, _http2.default)('get', '/api/evaluations/' + cid + '/chapters/' + id, function (reply) {
     setChapter(reply.data);
+  });
+};
+
+var updateChapter = exports.updateChapter = function updateChapter(_ref3) {
+  var cid = _ref3.cid;
+  var chapter = _ref3.chapter;
+  var id = chapter.id;
+
+  var data = chapter;
+
+  (0, _http2.default)('post', '/api/evaluations/' + cid + '/chapters/' + id, { data: data }, function (reply) {
+    console.info('Evaluation ' + cid + ' chapter ' + id + ' updated');
+    console.log(reply);
   });
 };
 
@@ -44013,6 +44028,10 @@ var evaluation = function evaluation() {
       break;
 
     case 'evaluation.filter':
+      // reset other filters
+      for (var name in state.filter) {
+        state.filter[name] = null;
+      }
       state.filter[data.filter] = data.value;
       break;
 
@@ -44288,6 +44307,7 @@ var BlocksSection = (0, _component.Component)({
     var _props = this.props;
     var component = _props.component;
     var editable = _props.editable;
+    var onSave = _props.onSave;
     var isEditable = this.state.isEditable;
 
 
@@ -44295,6 +44315,10 @@ var BlocksSection = (0, _component.Component)({
     var toggle = (0, _component.B)({
       className: _style2.default.toggle,
       onClick: function onClick() {
+        if (isEditable) {
+          onSave && onSave();
+        }
+
         _this.setState({ isEditable: !isEditable });
       }
     }, label);
@@ -44442,7 +44466,9 @@ var Text = function Text(_ref2) {
   return (0, _component.B)({ className: _style2.default.text }, component.content);
 };
 
-var isEditable = function isEditable(cid) {
+var isEditable = function isEditable(_ref3) {
+  var cid = _ref3.cid;
+
   var user = _store2.default.getState().dashboard.user;
 
   var cids = user.edit.map(function (i) {
@@ -44450,32 +44476,6 @@ var isEditable = function isEditable(cid) {
   });
 
   return ~cids.indexOf(cid);
-};
-
-var setComponent = function setComponent(_ref3) {
-  var component = _ref3.component;
-  var cid = _ref3.cid;
-
-  switch (component.type) {
-    case 'html':
-      return (0, _HTMLSection2.default)({ component: component, editable: isEditable(cid) });
-      break;
-
-    case 'blocks':
-      return (0, _BlocksSection2.default)({ component: component, editable: isEditable(cid) });
-      break;
-
-    case 'list':
-      return List({ component: component });
-      break;
-
-    case 'text':
-      return Text({ component: component });
-      break;
-
-    default:
-      return component.type;
-  }
 };
 
 var Links = function Links(_ref4) {
@@ -44553,11 +44553,45 @@ var Sections = function Sections(_ref6) {
     }, section.title);
   });
 
+  var onSave = function onSave() {
+    (0, _actions.updateChapter)({
+      chapter: chapter,
+      cid: evaluation.cid
+    });
+  };
+
   var content = sections.map(function (section, index) {
     var title = (0, _component.B)({ className: _style2.default.section_title }, section.title);
 
     var components = section.content.map(function (component) {
-      return setComponent({ component: component, cid: evaluation.cid });
+      switch (component.type) {
+        case 'html':
+          return (0, _HTMLSection2.default)({
+            onSave: onSave,
+            component: component,
+            editable: isEditable(evaluation)
+          });
+          break;
+
+        case 'blocks':
+          return (0, _BlocksSection2.default)({
+            onSave: onSave,
+            component: component,
+            editable: isEditable(evaluation)
+          });
+          break;
+
+        case 'list':
+          return List({ component: component });
+          break;
+
+        case 'text':
+          return Text({ component: component });
+          break;
+
+        default:
+          return component.type;
+      }
     });
 
     var attrs = {
@@ -44583,7 +44617,7 @@ var EvaluationChapters = (0, _component.Component)({
     var chapter = store.chapters_cache[id];
 
     if (!store.evaluation) {
-      (0, _actions.fetchEvaluation)(cid);
+      (0, _actions.fetchEvaluation)({ cid: cid });
       (0, _actions.fetchChapter)({ cid: cid, id: id });
     } else if (!chapter) {
       (0, _actions.fetchChapter)({ cid: cid, id: id });
@@ -44742,7 +44776,7 @@ var Evaluation = (0, _component.Component)({
 
 
     if (!store.evaluation) {
-      (0, _actions.fetchEvaluation)(params.cid);
+      (0, _actions.fetchEvaluation)({ cid: params.cid });
     }
   },
   componentDidMount: function componentDidMount() {
@@ -44796,65 +44830,106 @@ var _style2 = _interopRequireDefault(_style);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var getBrand = function getBrand(item) {
-  return item.brand;
-};
-var getSupplier = function getSupplier(item) {
-  return item.supplier.name;
-};
-var getCategory = function getCategory(item) {
-  return item.category;
-};
-var setOption = function setOption(value) {
-  return { value: value, label: value };
+var fmtOptions = function fmtOptions(items) {
+  return items.map(function (item) {
+    return { value: item, label: item };
+  });
 };
 
-exports.default = function (_ref) {
+var Categories = function Categories(_ref) {
   var store = _ref.store;
+  var _store$filter = store.filter;
+  var brand = _store$filter.brand;
+  var supplier = _store$filter.supplier;
 
-  if (!store.list.length) return null;
+  var items = store.list.filter(function (item) {
+    return true;
+    if (brand && brand != item.brand) return false;
+    if (supplier && supplier != item.supplier.name) return false;
+  });
 
-  var categories = (0, _Select2.default)({
+  var options = {
     placeholder: 'Category',
-    searchable: false,
-    options: (0, _utils.getUnique)(store.list.map(getCategory)).map(setOption),
     value: store.filter.category,
+    options: fmtOptions((0, _utils.getUnique)(items.map(function (i) {
+      return i.category;
+    }))),
+    searchable: false,
     onChange: function onChange(option) {
       (0, _actions.setFilter)('category', option ? option.value : null);
     }
+  };
+
+  return (0, _Select2.default)(options);
+};
+
+var Brands = function Brands(_ref2) {
+  var store = _ref2.store;
+  var _store$filter2 = store.filter;
+  var category = _store$filter2.category;
+  var supplier = _store$filter2.supplier;
+
+  var items = store.list.filter(function (item) {
+    return true;
+    if (category && category != item.category) return false;
+    if (supplier && supplier != item.supplier.name) return false;
   });
 
-  var brands = (0, _Select2.default)({
+  var options = {
     placeholder: 'Brand',
-    searchable: false,
-    options: (0, _utils.getUnique)(store.list.map(getBrand)).map(setOption),
     value: store.filter.brand,
+    options: fmtOptions((0, _utils.getUnique)(items.map(function (i) {
+      return i.brand;
+    }))),
+    searchable: false,
     onChange: function onChange(option) {
       (0, _actions.setFilter)('brand', option ? option.value : null);
     }
+  };
+
+  return (0, _Select2.default)(options);
+};
+
+var Suppliers = function Suppliers(_ref3) {
+  var store = _ref3.store;
+  var _store$filter3 = store.filter;
+  var category = _store$filter3.category;
+  var brand = _store$filter3.brand;
+
+  var items = store.list.filter(function (item) {
+    return true;
+    if (category && category != item.category) return false;
+    if (brand && brand != item.brand) return false;
   });
 
-  var suppliers = (0, _Select2.default)({
+  var options = {
     placeholder: 'Supplier',
-    searchable: false,
-    options: (0, _utils.getUnique)(store.list.map(getSupplier)).map(setOption),
     value: store.filter.supplier,
+    options: fmtOptions((0, _utils.getUnique)(items.map(function (i) {
+      return i.supplier.name;
+    }))),
+    searchable: false,
     onChange: function onChange(option) {
       (0, _actions.setFilter)('supplier', option ? option.value : null);
     }
-  });
+  };
+
+  return (0, _Select2.default)(options);
+};
+
+exports.default = function (_ref4) {
+  var store = _ref4.store;
+
+  if (!store.list.length) return null;
 
   var label = (0, _component.B)({ className: _style2.default.filters_label }, 'Filter by');
 
   var filters = (0, _Grid2.default)({
     blocks: 3,
-    items: [brands, suppliers, categories]
+    items: [Brands({ store: store }), Suppliers({ store: store }), Categories({ store: store })]
   });
 
-  var attrs = {
-    className: _style2.default.filters
-  };
-  return (0, _component.B)(attrs, label, filters);
+  return (0, _component.B)({ className: _style2.default.filters }, label, filters);
 };
 
 },{"./style.css":298,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":280,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":287,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Grid":320,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/Select":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/component/component.js":328}],297:[function(require,module,exports){
@@ -47557,14 +47632,19 @@ var HTMLSection = (0, _component.Component)({
     var _props = this.props;
     var component = _props.component;
     var editable = _props.editable;
+    var onSave = _props.onSave;
     var isEditable = this.state.isEditable;
 
-    var html = component.value;
+    var html = component.content;
 
     var label = isEditable ? 'Save' : 'Edit';
     var toggle = (0, _component.B)({
       className: _style2.default.toggle,
       onClick: function onClick() {
+        if (isEditable) {
+          onSave && onSave();
+        }
+
         _this.setState({ isEditable: !isEditable });
       }
     }, label);
@@ -47575,7 +47655,7 @@ var HTMLSection = (0, _component.Component)({
       content = (0, _Froala2.default)({
         content: html,
         onChange: function onChange(e, editor, data) {
-          component.value = editor.html.get();
+          component.content = editor.html.get();
         }
       });
     }

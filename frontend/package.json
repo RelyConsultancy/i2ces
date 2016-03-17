@@ -12,10 +12,12 @@
   },
   "author": "Navaru",
   "dependencies": {
+    "d3": "^3.5.16",
     "element-scroll-to": "^1.1.0",
     "history": "^2.0.1",
     "jquery": "^2.2.1",
     "moment": "^2.11.2",
+    "nvd3": "^1.8.2",
     "object-assign": "^4.0.1",
     "qs": "^6.1.0",
     "react": "^0.14.7",

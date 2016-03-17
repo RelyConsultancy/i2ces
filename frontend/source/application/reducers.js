@@ -29,6 +29,10 @@ const evaluation = (state = defaults.evaluation, { type, data }) => {
     break
 
     case 'evaluation.filter':
+      // reset other filters
+      for (let name in state.filter) {
+        state.filter[name] = null
+      }
       state.filter[data.filter] = data.value
     break
 

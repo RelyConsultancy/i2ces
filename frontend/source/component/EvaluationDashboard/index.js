@@ -79,7 +79,7 @@ const Evaluation = Component({
     const { store, params } = this.props
 
     if (!store.evaluation) {
-      fetchEvaluation(params.cid)
+      fetchEvaluation({ cid: params.cid })
     }
   },
   componentDidMount () {
