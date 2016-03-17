@@ -1,0 +1,14 @@
+[
+    {% set prepend_comma = false %}
+    {% for data in table_data %}
+        {% if prepend_comma = true %}
+            ,
+        {% endif %}
+        {
+            "metrict": "{{ data.metric }}",
+            "product": "{{ data.product }}",
+            "resuts": "{{ data.results }}"
+        }
+        {% set prepend_comma true %}
+    {% endfor %}
+]

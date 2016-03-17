@@ -1,4 +1,6 @@
 parameters:
+    evaluation_evaluation.table_data_table_name: 'table_data'
+    evaluation_evaluation.table_data_command_name: 'table-data:schema:update'
     evaluation_evaluation.evaluation_table_name: 'evaluation'
     evaluation_evaluation.evaluation_command_name: 'evaluation:schema:update'
     evaluation_evaluation.chapter_table_name: 'chapter'
@@ -12,6 +14,14 @@ services:
         arguments:
             - @evaluation_evaluation.evaluation_schema_update
             - %evaluation_evaluation.evaluation_command_name%
+        tags:
+          - { name: console.command }
+
+    evaluation_evaluation.table_data_schema_update_command:
+        class: i2c\SetupBundle\Command\TableSchemaUpdateCommand
+        arguments:
+            - @evaluation_evaluation.table_data_schema_update
+            - %evaluation_evaluation.table_data_command_name%
         tags:
           - { name: console.command }
 
@@ -35,6 +45,10 @@ services:
         class: Evaluation\EvaluationBundle\Services\EvaluationSchemaUpdateService
         arguments: [@doctrine, %evaluation_evaluation.evaluation_table_name% ]
 
+    evaluation_evaluation.table_data_schema_update:
+        class: Evaluation\EvaluationBundle\Services\TableDataSchemaUpdateService
+        arguments: [@doctrine, %evaluation_evaluation.table_data_table_name% ]
+
     evaluation_evaluation.chapter_schema_update:
         class: Evaluation\EvaluationBundle\Services\ChapterSchemaUpdateService
         arguments: [@doctrine, %evaluation_evaluation.chapter_table_name% ]
@@ -54,6 +68,10 @@ services:
     evaluation_evaluation.evaluation_database_manager_service:
         class: Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService
         arguments: [@oro_security.acl_helper, @doctrine]
+
+    evaluation_evaluation.table_data_database_manager_service:
+        class: Evaluation\EvaluationBundle\Services\TableDataDatabaseManager
+        arguments: [@doctrine]
 
     evaluation_evaluation.evaluation_jms_post_serializer:
         class: Evaluation\EvaluationBundle\EventListener\EvaluationPostSerializeListener

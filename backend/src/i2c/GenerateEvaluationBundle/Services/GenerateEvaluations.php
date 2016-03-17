@@ -31,16 +31,25 @@ class GenerateEvaluations
     /** @var  Serializer */
     protected $serializer;
 
+    /** @var  GenerateTableData */
+    protected $generateTableDataService;
+
     /**
      * GenerateEvaluations constructor.
      *
-     * @param EngineInterface $templateRenderer
-     * @param Registry        $registry
-     * @param Serializer      $serializer
-     * @param string          $templatesPrefix
+     * @param EngineInterface   $templateRenderer
+     * @param Registry          $registry
+     * @param Serializer        $serializer
+     * @param string            $templatesPrefix
+     * @param GenerateTableData $generateTableDataService
      */
-    public function __construct($templateRenderer, Registry $registry, Serializer $serializer, $templatesPrefix)
-    {
+    public function __construct(
+        $templateRenderer,
+        Registry $registry,
+        Serializer $serializer,
+        $templatesPrefix,
+        GenerateTableData $generateTableDataService
+    ) {
         $this->templateRenderer = $templateRenderer;
 
         $this->templatesPrefix = $templatesPrefix;
@@ -48,6 +57,8 @@ class GenerateEvaluations
         $this->entityManager = $registry->getEntityManager();
 
         $this->serializer = $serializer;
+
+        $this->generateTableDataService = $generateTableDataService;
     }
 
     /**
@@ -80,9 +91,18 @@ class GenerateEvaluations
             $chapters = [];
 
             foreach ($evaluationConfigs['chapters'] as $chapterConfig) {
+                $tableData = $this->generateTableDataService->generate(
+                    $cid,
+                    $chapterConfig['table_config'],
+                    $versionNumber,
+                    $this->templatesPrefix
+                );
+
                 $additionalData = [
                     'additional_data' => $chapterConfig['additional_data'],
+                    'table_data'      => $tableData,
                 ];
+
                 $chapterJson = $this->getJsonEntity(
                     $cid,
                     $chapterConfig['twig_name'],
@@ -91,7 +111,7 @@ class GenerateEvaluations
                     $additionalData
                 );
                 // todo research how to better generate a json string with a twig file so we don't have tabs filled
-                // lines
+                // todo lines
                 $chapterJson = str_replace("    ", "", $chapterJson);
 
                 /** @var Chapter $chapter */
@@ -105,7 +125,7 @@ class GenerateEvaluations
             }
 
             $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
-                ->findOneBy(['id' => $evaluation->getBusinessUnit()->getId()]);
+                                                ->findOneBy(['id' => $evaluation->getBusinessUnit()->getId()]);
             $evaluation->setOwner($businessUnit);
             $evaluation->setChapters($chapters);
             $this->entityManager->persist($evaluation);
