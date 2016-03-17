@@ -1,0 +1,18 @@
+.gallery {
+  position: relative;
+}
+
+.gallery a {
+  display: inline;
+}
+#react-images-container button:hover {
+  background: transparent;
+}
+
+.loading {
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  font-size: .75em;
+  color: #43B5DB;
+}

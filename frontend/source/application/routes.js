@@ -1,8 +1,8 @@
-import Dashboard from '/component/Dashboard'
-import EvaluationList from '/component/EvaluationList'
-import EvaluationDashboard from '/component/EvaluationDashboard'
-import EvaluationChapters from '/component/EvaluationChapters'
-import FAQ from '/component/FAQ'
+import Dashboard from '/components/Dashboard'
+import EvaluationList from '/components/EvaluationList'
+import EvaluationDashboard from '/components/EvaluationDashboard'
+import EvaluationChapters from '/components/EvaluationChapters'
+import FAQ from '/components/FAQ'
 
 
 const routes = {

@@ -1,7 +1,9 @@
+import fs from 'fs'
 import Koa from 'koa'
 import send from 'koa-send'
 import route from 'koa-route'
 import bodyparser from 'koa-bodyparser'
+import csvParser from 'csv-parser'
 
 import me from './samples/me.json'
 import i2c1507187a from './samples/evaluation.i2c1507187a.json'
@@ -20,17 +22,33 @@ const db = {
     i2c1507187a: i2c1510047a_chapters,
     i2c1509134a: i2c1510047a_chapters,
     i2c1510047a: i2c1510047a_chapters,
+  },
+  csv: {
+    1: 'ie_cat_context_data.csv',
+    2: 'ie_promo_data.csv',
   }
 }
 
 
+const csv = (file) => ((done) => {
+  const rows = []
+
+  fs.createReadStream(`./samples/csv/${file}`)
+    .pipe(csvParser())
+    .on('data', row => rows.push(row))
+    .on('end', () => {
+      done(null, rows)
+    })
+})
+
+
 const fmtReply = (data) => ({ data, error: null })
-const root = __dirname + '/public'
+
+
 const koa = Koa()
 const $ = (method, path, handler) => {
   koa.use(route[method](path, handler))
 }
-
 koa.use(bodyparser())
 
 
@@ -47,6 +65,13 @@ $('post', '/api/evaluations', function * () {
     count: items.length,
     items,
   })
+})
+
+
+$('get', '/api/evaluations/:cid/dataset/:id', function * (cid, id) {
+  const data = yield csv(db.csv[id])
+
+  this.body = fmtReply(data.filter(i => i.campaign_id == cid))
 })
 
 
@@ -71,10 +96,11 @@ $('post', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
 
 
 $('get', '/*', function * () {
-  const isSent = yield send(this, this.path, { root })
+  const options = { root: `${__dirname}/public` }
+  const isSent = yield send(this, this.path, options)
 
   if (!isSent) {
-    yield send(this, 'index.html', { root })
+    yield send(this, 'index.html', options)
   }
 })
 

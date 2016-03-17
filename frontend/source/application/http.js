@@ -23,27 +23,19 @@ const hideLoader = () => {
   }
 }
 
-const onError = (error) => {
-  console.error(error.stack)
+const toJSON = (reply) => {
+  try {
+    return reply.json()
+  }
+  catch (error) {
+    console.warn('HTTP: error while parsing JSON')
+    throw error
+  }
 }
 
 const fmtQuery = (data) => (
   '?' + qs.stringify(data)
 )
-
-const onReply = (reply) => {
-  hideLoader()
-
-  try {
-    reply = reply.json()
-  }
-  catch (error) {
-    throw error
-  }
-
-  return reply
-}
-
 
 const defaults = {
   // set to send cookies
@@ -76,7 +68,20 @@ export default (method, url, options, handler) => {
   showLoader()
 
   fetch(url, config)
-    .then(onReply)
-    .then(handler)
-    .catch(onError)
+    .then(toJSON)
+    .then((reply) => {
+      hideLoader()
+
+      if (reply.error) {
+        console.warn('HTTP: response error')
+        console.error(reply.error)
+      }
+      else if (handler) {
+        handler(reply)
+      }
+    })
+    .catch((error) => {
+      console.warn(`HTTP: ${error.toString()}`)
+      console.error(error.stack)
+    })
 }
