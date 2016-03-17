@@ -8,11 +8,11 @@ use Evaluation\EvaluationBundle\Entity\Evaluation;
 use Oro\Bundle\SecurityBundle\ORM\Walker\AclHelper;
 
 /**
- * Class EvaluationDataBaseManagerService
+ * Class EvaluationDataBaseManager
  *
  * @package Evaluation\EvaluationBundle\Services
  */
-class EvaluationDataBaseManagerService
+class EvaluationDataBaseManager
 {
     /** @var AclHelper  */
     protected $aclHelper;

@@ -3,17 +3,17 @@
 namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Evaluation\EvaluationBundle\Entity\Chapter;
+use Evaluation\EvaluationBundle\Entity\Chapter as ChapterEntity;
 use Evaluation\UtilBundle\Exception\FormException;
 use Evaluation\UtilBundle\Helpers\ChapterHelper;
 use JMS\Serializer\Serializer;
 
 /**
- * Class ChapterService
+ * Class Chapter
  *
  * @package Evaluation\EvaluationBundle\Services
  */
-class ChapterService
+class Chapter
 {
     /** @var Serializer  */
     protected $serializer;
@@ -34,13 +34,13 @@ class ChapterService
     }
 
     /**
-     * @param Chapter $chapter
-     * @param Chapter $sentChapter
+     * @param ChapterEntity $chapter
+     * @param ChapterEntity $sentChapter
      *
      * @return Chapter
      * @throws FormException
      */
-    public function getUpdateChapter(Chapter $chapter, Chapter $sentChapter)
+    public function getUpdateChapter(ChapterEntity $chapter, ChapterEntity $sentChapter)
     {
         $chapter->setContent(json_encode($sentChapter->getContent()));
 
@@ -60,11 +60,11 @@ class ChapterService
     }
 
     /**
-     * @param Chapter $chapter
+     * @param ChapterEntity $chapter
      *
      * @return array
      */
-    protected function getChapterErrors(Chapter $chapter)
+    protected function getChapterErrors(ChapterEntity $chapter)
     {
         $errors = [];
 
@@ -80,15 +80,15 @@ class ChapterService
     }
 
     /**
-     * @param Chapter $chapter
-     * @param         $serializedUpdatedChapter
+     * @param ChapterEntity $chapter
+     * @param string        $serializedUpdatedChapter
      *
-     * @return Chapter
+     * @return ChapterEntity
      * @throws FormException
      */
-    public function updateChapter(Chapter $chapter, $serializedUpdatedChapter)
+    public function updateChapter(ChapterEntity $chapter, $serializedUpdatedChapter)
     {
-        /** @var Chapter $sentChapter */
+        /** @var ChapterEntity $sentChapter */
         $sentChapter = $this->serializer->deserialize(
             $serializedUpdatedChapter,
             'Evaluation\EvaluationBundle\Entity\Chapter',

@@ -14,5 +14,5 @@ services:
             - { name: console.command }
 
     i2c_generate_evaluation.campaign_objective_data:
-        class: i2c\GenerateEvaluationBundle\Services\CampaignObjectiveDataService
+        class: i2c\GenerateEvaluationBundle\Services\CampaignObjectiveData
         arguments: [@doctrine]

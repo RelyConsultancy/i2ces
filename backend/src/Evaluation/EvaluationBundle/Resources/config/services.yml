@@ -32,27 +32,27 @@ services:
           - { name: console.command }
 
     evaluation_evaluation.evaluation_schema_update:
-        class: Evaluation\EvaluationBundle\Services\EvaluationSchemaUpdateService
+        class: Evaluation\EvaluationBundle\Services\EvaluationSchemaUpdate
         arguments: [@doctrine, %evaluation_evaluation.evaluation_table_name% ]
 
     evaluation_evaluation.chapter_schema_update:
-        class: Evaluation\EvaluationBundle\Services\ChapterSchemaUpdateService
+        class: Evaluation\EvaluationBundle\Services\ChapterSchemaUpdate
         arguments: [@doctrine, %evaluation_evaluation.chapter_table_name% ]
 
     evaluation_evaluation.evaluation_chapters_schema_update:
-        class: Evaluation\EvaluationBundle\Services\EvaluationChaptersSchemaUpdateService
+        class: Evaluation\EvaluationBundle\Services\EvaluationChaptersSchemaUpdate
         arguments: [@doctrine, %evaluation_evaluation.evaluation_chapters_table_name% ]
 
     evaluation_evaluation.chapters_service:
-        class: Evaluation\EvaluationBundle\Services\ChapterService
+        class: Evaluation\EvaluationBundle\Services\Chapter
         arguments: [@serializer, @doctrine]
 
     evaluation_evaluation.evaluation_service:
-        class: Evaluation\EvaluationBundle\Services\EvaluationService
+        class: Evaluation\EvaluationBundle\Services\Evaluation
         arguments: [@serializer, @doctrine]
 
     evaluation_evaluation.evaluation_database_manager_service:
-        class: Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService
+        class: Evaluation\EvaluationBundle\Services\EvaluationDataBaseManager
         arguments: [@oro_security.acl_helper, @doctrine]
 
     evaluation_evaluation.evaluation_jms_post_serializer:

@@ -3,14 +3,14 @@
 namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\DBAL\Exception\DriverException;
-use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\AbstractSchemaUpdate;
 
 /**
- * Class ChapterSchemaUpdateService
+ * Class ChapterSchemaUpdate
  *
  * @package Evaluation\EvaluationBundle\Services
  */
-class ChapterSchemaUpdateService extends AbstractSchemaUpdateService
+class ChapterSchemaUpdate extends AbstractSchemaUpdate
 {
     /**
      * Creates the table if it does not exist

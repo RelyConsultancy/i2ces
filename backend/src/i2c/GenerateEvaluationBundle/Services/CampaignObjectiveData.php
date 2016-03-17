@@ -8,11 +8,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use PDO;
 
 /**
- * Class CampaignObjectiveDataService
+ * Class CampaignObjectiveData
  *
  * @package i2c\GenerateEvaluationBundle\Services
  */
-class CampaignObjectiveDataService
+class CampaignObjectiveData
 {
     /** @var EntityManagerInterface */
     protected $entityManager;
