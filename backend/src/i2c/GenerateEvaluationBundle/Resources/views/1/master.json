@@ -32,6 +32,24 @@
       }
     },
     {
+      "twig_name": "evaluation-campaign-objectives.json.twig",
+      "data_service": "extract_evaluation_campaign_objectives",
+      "additional_data": {
+        "title": "campaign_objectives",
+        "state": "visible",
+        "serialized_name": "campaign_objectives"
+      }
+    },
+    {
+      "twig_name": "evaluation-channels.json.twig",
+      "data_service": "extract_evaluation_channels",
+      "additional_data": {
+        "title": "channels",
+        "state": "visible",
+        "serialized_name": "channels"
+      }
+    },
+    {
       "twig_name": "summary.json.twig",
       "data_service": "extract_summary",
       "additional_data": {
