@@ -1,9 +1,9 @@
 <?php
 
-namespace Evaluation\FileUploadBundle\Controller\Api\Rest;
+namespace Evaluation\FileUploadBundle\Controller\Api;
 
 use FOS\RestBundle\View\View;
-use i2c\EvaluationBundle\Controller\RestApiController;
+use i2c\EvaluationBundle\Controller\Api\RestApiController;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 /**
  * Class FileController
  *
- * @package Evaluation\FileUploadBundle\Controller\Api\Rest
+ * @package Evaluation\FileUploadBundle\Controller\Api
  */
 class FileController extends RestApiController
 {
