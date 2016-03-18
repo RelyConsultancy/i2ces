@@ -3,7 +3,6 @@
 namespace Evaluation\EvaluationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Evaluation\UtilBundle\Helpers\BusinessUnitHelper;
 use JMS\Serializer\Annotation as JMS;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
@@ -194,7 +193,13 @@ class Evaluation
      */
     public function getSupplier()
     {
-        return BusinessUnitHelper::getBusinessUnitAsArray($this->getBusinessUnit());
+        return [
+            'id' => $this->businessUnit->getId(),
+            'name' => $this->businessUnit->getName(),
+            'email' => $this->businessUnit->getEmail(),
+            'phone' => $this->businessUnit->getPhone(),
+            'website' => $this->businessUnit->getWebsite(),
+        ];
     }
 
     /**

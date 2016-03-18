@@ -15,6 +15,9 @@ use JMS\Serializer\Serializer;
  */
 class Chapter
 {
+    const STATE_VISIBLE = 'visible';
+    const STATE_HIDDEN = 'hidden';
+
     /** @var Serializer  */
     protected $serializer;
 
@@ -72,7 +75,7 @@ class Chapter
             $errors['chapter.title'] = 'Title must not be null';
         }
 
-        if (!isset(ChapterHelper::$states[$chapter->getState()])) {
+        if (self::STATE_VISIBLE !== $chapter->getState() && self::STATE_HIDDEN !== $chapter->getState()) {
             $errors['chapter.state'] = 'Invalid chapter state';
         }
 

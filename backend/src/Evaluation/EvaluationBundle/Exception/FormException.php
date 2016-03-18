@@ -1,6 +1,6 @@
 <?php
 
-namespace Evaluation\UtilBundle\Exception;
+namespace Evaluation\EvaluationBundle\Exception;
 
 /**
  * Class FormException

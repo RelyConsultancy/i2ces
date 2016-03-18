@@ -3,7 +3,7 @@
 namespace Evaluation\MeBundle\Controller\Api;
 
 use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManager;
-use Evaluation\UtilBundle\Helpers\BusinessUnitHelper;
+use Evaluation\MeBundle\Services\BusinessUnit;
 use FOS\RestBundle\View\View;
 use i2c\EvaluationBundle\Controller\Api\RestApiController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +31,7 @@ class UserController extends RestApiController
         $data = array(
             'id'             => $user->getId(),
             'username'       => $user->getUsername(),
-            'business_units' => BusinessUnitHelper::getBusinessUnitCollectionAsArray($user->getBusinessUnits()),
+            'business_units' => $this->getBusinessUnitService()->getBusinessUnitsForUserAsArray($user),
             'view'           => $viewEvaluations,
             'edit'           => $editEvaluations,
         );
@@ -45,5 +45,13 @@ class UserController extends RestApiController
     public function getEvaluationDatabaseManagerService()
     {
         return $this->get('evaluation_evaluation.evaluation_database_manager_service');
+    }
+
+    /**
+     * @return BusinessUnit
+     */
+    public function getBusinessUnitService()
+    {
+        return $this->get('evaluation_me.business_unit_service');
     }
 }
