@@ -30,6 +30,15 @@
         ],
         "order": 2
       }
+    },
+    {
+      "twig_name": "category-context.json.twig",
+      "data_service": "extract_category_context",
+      "additional_data": {
+        "title": "Category Context",
+        "state": "visible",
+        "order": 1
+      }
     }
   ]
 }
