@@ -77,7 +77,9 @@ class Chapter
      *
      * @ORM\Column(type="boolean", name="is_additional_data", options={"default":false})
      *
-     * @JMS\Exclude()
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("is_additional_data")
+     * @JMS\Type("boolean")
      */
     protected $isAdditionalData;
 
@@ -86,7 +88,9 @@ class Chapter
      *
      * @ORM\Column(type="string", name="serialized_name")
      *
-     * @JMS\Exclude()
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("serialized_name")
+     * @JMS\Type("string")
      */
     protected $serializedName;
 
