@@ -42,22 +42,23 @@
             "content":
             [
                 {
-                    "type": "list",
+                    "type": "list_timings",
                     "items":
                     [
                         {
-                            "pre": {
-                                "start": "{{ timing_pre[0].start_date }}",
-                                "end": "{{ timing_pre[0].end_date }}"
-                            },
-                            "during": {
-                                "start": "{{ timing_during[0].start_date }}",
-                                "end": "{{ timing_during[0].end_date }}"
-                            },
-                            "post": {
-                                "start": "{{ timing_post[0].start_date }}",
-                                "end": "{{ timing_post[0].end_date }}"
-                            }
+                            "label": "pre",
+                            "date_start": "{{ timing_pre[0].start_date }}",
+                            "date_end": "{{ timing_pre[0].end_date }}"
+                        },
+                        {
+                            "label": "during",
+                            "date_start": "{{ timing_during[0].start_date }}",
+                            "date_end": "{{ timing_during[0].end_date }}"
+                        },
+                        {
+                            "label": "post",
+                            "date_start": "{{ timing_post[0].start_date }}",
+                            "date_end": "{{ timing_post[0].end_date }}"
                         }
                     ]
                 }
