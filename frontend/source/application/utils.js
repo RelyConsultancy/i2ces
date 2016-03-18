@@ -1,4 +1,6 @@
 import moment from 'moment'
+import { B } from '/components/component.js'
+
 
 export const isElement = (value) => (
   typeof value === 'object' && value !== null && value.$$typeof
@@ -12,35 +14,66 @@ export const isString = (value) => (
   typeof value == 'string'
 )
 
+
 export const getUnique = (array) => (
   array.filter((value, index, array) => (
     array.indexOf(value) === index
   ))
 )
 
-export const fmtDate = (date) => (
-  moment(date, 'YYYY-MM-DD').format('DD MMM YYYY')
-)
 
 export const getInitials = (string) => (
   string.split(/\s+/).map(s => s.charAt(0).toUpperCase()).join('')
 )
 
+
 export const slugify = (string) => (
   string.toLowerCase().trim()
-    .replace(/&/g, '-and-')      // Replace & with 'and'
-    .replace(/[\s\W-]+/g, '-')   // Replace spaces, non-word characters and dashes with a single dash (-)
+    // replace & with 'and'
+    .replace(/&/g, '-and-')
+    // replace spaces, non-word characters and dashes with a single dash (-)
+    .replace(/[\s\W-]+/g, '-')
 )
 
-export const fmtUnit = (value, unit) => {
-  switch (unit) {
-    case 'GBP':
-      value = '£' + value
+
+// react HTML insert
+export const fmtHTML = (string) => (
+  B({ dangerouslySetInnerHTML: { __html: string } })
+)
+
+
+export const fmtDate = (date) => (
+  moment(date, 'YYYY/MM/DD').format('DD MMM YYYY')
+)
+
+
+export const fmtCurrency = (value, sign = '£') => (
+  sign + parseInt(value).toLocaleString()
+)
+
+
+export const fmtUnit = (value, unit = "") => {
+  switch (unit.toLowerCase()) {
+    case 'money':
+    case 'currency':
+    case 'gbp':
+      value = fmtCurrency(value)
+    break
+
+    case 'date':
+      value = fmtDate(value)
     break
 
     case 'ppts':
-      value = value + 'ppts'
+      value += 'ppts'
     break
+
+    case 'percent':
+      value = parseFloat(value).toFixed(2) + '%'
+    break
+
+    default:
+      value = parseInt(value)
   }
 
   return value

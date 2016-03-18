@@ -1,0 +1,467 @@
+MASTER_CAMPAIGN_ID,MEDIA_TYPE,OBJ_PRIORITY,OBJECTIVE,METRIC,PRODUCT,TIMEPERIOD,EXPOSED,CONTROL,UPLIFT,PCT_UPLIFT
+i2c1510047a,Six Sheets1,1,Acquire new customers,New_custs,Offer,2,9174,7119.150843,2054.849157,0.288637
+i2c1510047a,"Six Sheets1, Instore Sampling3",1,Acquire new customers,New_custs,Brand,2,4381,2801.144687,1579.855313,0.564003
+i2c1510047a,"Instore Sampling1, Six Sheets1",3,Grow total units,Units,Brand,2,24236,16677.04709,7558.95291,0.453255
+i2c1507187a,Total,1,Grow frequency of shop per customer,FOP,Brand,3,1.221709,1.231757,-0.010048,-0.008158
+i2c1507187a,TV Wall1,2,Acquire new customers,New_custs,Offer,3,1913,1115.364157,797.635843,0.715135
+i2c1507187a,"Entrance Gates1, Six Sheets1",3,Retain new customers (trialists),New_trialists,Brand,3,3622,3359.997006,262.002994,0.077977
+i2c1509134a,Total,2,Grow spend per existing customer,SPEC,Offer,3,4.491312,4.544146,-0.052834,-0.011627
+i2c1509134a,Total,0,Overview,Units,Offer,2,144887,110919.663,33967.33703,0.306234
+i2c1509134a,Total,0,Overview,Units,Offer,3,120072,115280.7935,4791.206478,0.041561
+i2c1507187a,Total,0,Overview,Units,Brand,2,547557,487753.4346,59803.56542,0.12261
+i2c1507187a,"Six Sheets1, TV Wall1",0,Overview,Known_spend,Brand,2,67262.37,57031.74442,10230.62558,0.179385
+i2c1510047a,"JS Magazine1, Six Sheets1",1,Acquire new customers,New_custs,Offer,3,27,15,12,0.8
+i2c1509134a,Six Sheets1,1,Retain existing customers,Existing_custs,Brand,3,3598,3709.276927,-111.276927,-0.03
+i2c1509134a,JS Magazine1,0,Overview,Known_spend,Brand,3,14723.26,12636.7225,2086.537501,0.165117
+i2c1507187a,"Entrance Gates1, Six Sheets1",2,Acquire new customers,New_custs,Brand,2,5151,4172.377423,978.622577,0.234548
+i2c1507187a,Six Sheets1,3,Retain new customers (trialists),New_trialists,Brand,3,8128,8053.700733,74.299267,0.009225
+i2c1509134a,"Six Sheets1, TV Wall1",0,Overview,Units,Offer,2,18709,14515.7303,4193.269696,0.288878
+i2c1509134a,"Six Sheets1, TV Wall1",0,Overview,Units,Offer,3,15715,15173.72237,541.277628,0.035672
+i2c1507187a,TV Wall1,0,Overview,Known_spend,Brand,2,523068.01,472028.2538,51039.75616,0.108129
+i2c1510047a,"JS Magazine1, Six Sheets1",0,Overview,Known_spend,Offer,2,2383,1349.193122,1033.806878,0.766241
+i2c1507187a,Six Sheets1,3,Retain new customers (trialists),New_trialists,Offer,3,545,504.094758,40.905242,0.081146
+i2c1509134a,"JS Magazine1, TV Wall1",3,Grow total category,Known_spend,Aisle,2,150596.77,120967.5816,29629.18841,0.244935
+i2c1509134a,"JS Magazine1, TV Wall1",0,Overview,Units,Offer,2,6398,4979.477674,1418.522326,0.284874
+i2c1507187a,"Entrance Gates1, Six Sheets1",0,Overview,Known_spend,Brand,3,58278.31,55342.30725,2936.002751,0.053052
+i2c1509134a,"Six Sheets1, TV Wall1",1,Retain existing customers,Existing_custs,Brand,2,6036,5996.0043,39.9957,0.00667
+i2c1509134a,"JS Magazine1, TV Wall1",1,Retain existing customers,Existing_custs,Brand,2,2857,2558.109077,298.890923,0.116841
+i2c1509134a,TV Wall1,3,Grow total category,Known_spend,Aisle,2,1830573.28,1578823.835,251749.445,0.159454
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",3,Retain new customers (trialists),New_trialists,Offer,2,317,225.608656,91.391344,0.405088
+i2c1509134a,TV Wall1,0,Overview,Units,Brand,2,101433,94293.35223,7139.647768,0.075717
+i2c1507187a,"Entrance Gates1, TV Wall1",0,Overview,Units,Brand,3,162672,151072.1684,11599.83161,0.076783
+i2c1507187a,Total,1,Grow frequency of shop per customer,FOP,Brand,2,1.105306,1.117933,-0.012627,-0.011295
+i2c1507187a,TV Wall1,1,Grow frequency of shop per customer,FOP,Brand,2,1.102883,1.112304,-0.009421,-0.00847
+i2c1507187a,Total,3,Retain new customers (trialists),New_trialists,Brand,2,59393,53072.59588,6320.404123,0.11909
+i2c1507187a,"Entrance Gates1, TV Wall1",3,Retain new customers (trialists),New_trialists,Offer,2,1342,984.799057,357.200943,0.362715
+i2c1509134a,"JS Magazine1, TV Wall1",1,Retain existing customers,Existing_custs,Brand,3,2851,2588.536883,262.463117,0.101394
+i2c1509134a,TV Wall1,0,Overview,Known_spend,Offer,3,239296.77,230238.9978,9057.772229,0.039341
+i2c1509134a,"JS Magazine1, TV Wall1",0,Overview,Known_spend,Offer,3,11802.68,11330.65906,472.020941,0.041659
+i2c1509134a,Other,0,Overview,Units,Offer,2,1708,1392.278277,315.721723,0.226766
+i2c1507187a,Total,0,Overview,Units,Brand,3,876804,831690.0888,45113.9112,0.054244
+i2c1510047a,Instore Sampling1,0,Overview,Known_spend,Offer,3,2638,1997.628903,640.371097,0.320566
+i2c1510047a,"Six Sheets1, Instore Sampling3",1,Acquire new customers,New_custs,Brand,3,279,182.009401,96.990599,0.532888
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",3,Grow total units,Units,Brand,3,894,817.215669,76.784331,0.093958
+i2c1507187a,"Six Sheets1, TV Wall1",1,Grow frequency of shop per customer,FOP,Brand,3,1.235995,1.263388,-0.027393,-0.021682
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",2,Acquire new customers,New_custs,Offer,3,145,85.040922,59.959078,0.705061
+i2c1509134a,"Six Sheets1, TV Wall1",0,Overview,Units,Brand,3,39412,35269.70591,4142.29409,0.117446
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",0,Overview,Known_spend,Offer,3,29.58,56.135926,-26.555926,-0.473065
+i2c1510047a,Other,1,Acquire new customers,New_custs,Offer,2,2222,1103,1119,1.014506
+i2c1509134a,"Six Sheets1, TV Wall1",0,Overview,Known_spend,Brand,3,126088.44,111392.4984,14695.94165,0.131929
+i2c1507187a,TV Wall1,2,Acquire new customers,New_custs,Offer,2,17105,10365.84811,6739.151892,0.65013
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",0,Overview,Units,Brand,3,36038,32896.58452,3141.415481,0.095494
+i2c1510047a,Six Sheets1,0,Overview,Known_spend,Offer,3,33101.05,35078.75187,-1977.701866,-0.056379
+i2c1510047a,Instore Sampling3,0,Overview,Known_spend,Offer,3,1531.24,1172.427206,358.812794,0.306043
+i2c1507187a,"Entrance Gates1, Six Sheets1",3,Retain new customers (trialists),New_trialists,Offer,3,287,254.499259,32.500741,0.127705
+i2c1510047a,"Six Sheets1, Instore Sampling2",1,Acquire new customers,New_custs,Offer,3,62,43,19,0.44186
+i2c1510047a,"Instore Sampling1, Six Sheets1",1,Acquire new customers,New_custs,Offer,2,2660,1555,1105,0.710611
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",3,Grow total units,Units,Offer,3,369,300.924178,68.075822,0.226223
+i2c1510047a,"JS Magazine1, Six Sheets1",3,Grow total units,Units,Brand,3,1241,836.646786,404.353214,0.483302
+i2c1510047a,Other,3,Grow total units,Units,Brand,2,23069,11056.02939,12012.97061,1.086554
+i2c1509134a,"JS Magazine1, TV Wall1",2,Grow spend per existing customer,SPEC,Brand,3,5.313168,5.302864,0.010304,0.001943
+i2c1507187a,Six Sheets1,0,Overview,Known_spend,Brand,3,132468.9,129375.811,3093.089049,0.023908
+i2c1510047a,Instore Sampling3,0,Overview,Known_spend,Brand,2,1606.27,1240.85272,365.41728,0.294489
+i2c1510047a,JS Magazine1,0,Overview,Known_spend,Offer,3,9303.02,6441.24811,2861.77189,0.444288
+i2c1510047a,"JS Magazine1, JS Magazine2",0,Overview,Known_spend,Offer,3,188.08,178.679169,9.400831,0.052613
+i2c1510047a,Six Sheets1,0,Overview,Known_spend,Brand,3,54566.75,60083.85584,-5517.105835,-0.091823
+i2c1510047a,"Six Sheets1, Instore Sampling3",0,Overview,Known_spend,Offer,2,8814.74,5502.018212,3312.721788,0.602092
+i2c1507187a,Six Sheets1,2,Acquire new customers,New_custs,Offer,3,141,92.128092,48.871908,0.530478
+i2c1509134a,"JS Magazine1, TV Wall1",2,Grow spend per existing customer,SPEC,Offer,2,4.633273,4.785204,-0.151932,-0.03175
+i2c1510047a,"Six Sheets1, Instore Sampling2",1,Acquire new customers,New_custs,Offer,2,1220,738,482,0.653117
+i2c1510047a,"Instore Sampling1, Six Sheets1",3,Grow total units,Units,Offer,2,6846,3910.187155,2935.812845,0.750811
+i2c1510047a,"Instore Sampling1, Six Sheets1",3,Grow total units,Units,Brand,3,9080,9392.415549,-312.415549,-0.033263
+i2c1510047a,JS Magazine1,3,Grow total units,Units,Offer,2,2980,1741.350257,1238.649743,0.711316
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",3,Grow total units,Units,Brand,2,2336,1466.97282,869.02718,0.592395
+i2c1510047a,JS Magazine2,3,Grow total units,Units,Brand,3,372,397.810389,-25.810389,-0.064881
+i2c1510047a,"JS Magazine1, Six Sheets1",3,Grow total units,Units,Offer,2,924,476.441181,447.558819,0.939379
+i2c1507187a,"Six Sheets1, TV Wall1",3,Retain new customers (trialists),New_trialists,Brand,2,4334,3553.521304,780.478696,0.219635
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",0,Overview,Units,Brand,2,24408,19831.76219,4576.237813,0.230753
+i2c1510047a,Total,0,Overview,Known_spend,Offer,3,67937.99,63937.58214,4000.407859,0.062567
+i2c1507187a,"Entrance Gates1, TV Wall1",1,Grow frequency of shop per customer,FOP,Brand,3,1.235282,1.242931,-0.007649,-0.006154
+i2c1507187a,Entrance Gates1,1,Grow frequency of shop per customer,FOP,Offer,3,1.125929,1.141127,-0.015198,-0.013318
+i2c1509134a,Six Sheets1,2,Grow spend per existing customer,SPEC,Offer,2,4.027368,3.991724,0.035644,0.00893
+i2c1509134a,"Six Sheets1, TV Wall1",3,Grow total category,Known_spend,Aisle,2,331532.95,287990.1559,43542.79409,0.151195
+i2c1510047a,"Six Sheets1, Instore Sampling3",1,Acquire new customers,New_custs,Offer,2,1389,836.043184,552.956816,0.661397
+i2c1510047a,Instore Sampling1,3,Grow total units,Units,Offer,2,481,297.841095,183.158905,0.614955
+i2c1510047a,Instore Sampling1,3,Grow total units,Units,Brand,3,2661,2415.953872,245.046128,0.101428
+i2c1509134a,JS Magazine1,0,Overview,Units,Offer,3,2537,2329.062259,207.937741,0.08928
+i2c1507187a,"Entrance Gates1, TV Wall1",0,Overview,Units,Offer,3,15187,13351.73404,1835.265963,0.137455
+i2c1507187a,"Six Sheets1, TV Wall1",3,Retain new customers (trialists),New_trialists,Offer,2,472,374.537088,97.462912,0.260222
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",1,Acquire new customers,New_custs,Offer,2,492,250,242,0.968
+i2c1509134a,Six Sheets1,2,Grow spend per existing customer,SPEC,Brand,3,5.658968,5.512722,0.146246,0.026529
+i2c1509134a,JS Magazine1,2,Grow spend per existing customer,SPEC,Brand,2,5.772176,5.944012,-0.171836,-0.028909
+i2c1507187a,"Entrance Gates1, TV Wall1",0,Overview,Known_spend,Brand,2,185377.71,159688.2484,25689.46161,0.160873
+i2c1510047a,"Six Sheets1, Instore Sampling2",0,Overview,Known_spend,Brand,3,6630.18,6759.752254,-129.572254,-0.019168
+i2c1510047a,Total,3,Grow total units,Units,Brand,3,74240,76222.2024,-1982.202398,-0.026006
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",3,Grow total units,Units,Brand,3,1325,1009.938101,315.061899,0.311962
+i2c1509134a,Six Sheets1,1,Retain existing customers,Existing_custs,Offer,2,1178,1183.087282,-5.087282,-0.0043
+i2c1509134a,Six Sheets1,2,Grow spend per existing customer,SPEC,Brand,2,4.211056,4.038016,0.17304,0.042853
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",1,Acquire new customers,New_custs,Brand,2,958,509,449,0.882122
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",1,Acquire new customers,New_custs,Brand,3,57,27,30,1.111111
+i2c1510047a,JS Magazine1,1,Acquire new customers,New_custs,Offer,3,115,55,60,1.090909
+i2c1510047a,Six Sheets1,3,Grow total units,Units,Brand,2,90102,75123.62183,14978.37817,0.199383
+i2c1510047a,"Six Sheets1, Instore Sampling2",3,Grow total units,Units,Offer,3,1794,1799.948862,-5.948862,-0.003305
+i2c1509134a,Total,1,Retain existing customers,Existing_custs,Brand,3,64405,62129.58591,2275.41409,0.036624
+i2c1509134a,Other,0,Overview,Known_spend,Offer,2,5092,4158.80943,933.19057,0.224389
+i2c1509134a,Total,0,Overview,Known_spend,Brand,3,921775.75,818475.9632,103299.7868,0.12621
+i2c1507187a,"Entrance Gates1, TV Wall1",2,Acquire new customers,New_custs,Brand,2,24973,19383.29832,5589.701677,0.288377
+i2c1507187a,TV Wall1,3,Retain new customers (trialists),New_trialists,Offer,2,3701,3019.248274,681.751726,0.225802
+i2c1509134a,"Six Sheets1, TV Wall1",0,Overview,Units,Brand,2,18303,17460.83108,842.168922,0.048232
+i2c1509134a,TV Wall1,0,Overview,Units,Offer,3,89472,85705.01618,3766.983823,0.043953
+i2c1507187a,Six Sheets1,0,Overview,Known_spend,Offer,2,7016,6307.675132,708.324868,0.112296
+i2c1510047a,"JS Magazine1, Six Sheets1",0,Overview,Known_spend,Brand,2,10236.25,4938.821372,5297.428628,1.07261
+i2c1510047a,"JS Magazine1, Six Sheets1",3,Grow total units,Units,Offer,3,483,362.940954,120.059046,0.330795
+i2c1507187a,Six Sheets1,2,Acquire new customers,New_custs,Brand,2,7089,6522.068105,566.931895,0.086925
+i2c1507187a,"Entrance Gates1, TV Wall1",2,Acquire new customers,New_custs,Brand,3,4197,3192.378528,1004.621472,0.314694
+i2c1509134a,JS Magazine1,0,Overview,Known_spend,Brand,2,16125.6,13467.86174,2657.738263,0.197339
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",0,Overview,Known_spend,Brand,2,4770.87,2702.220225,2068.649775,0.765537
+i2c1510047a,Instore Sampling1,0,Overview,Known_spend,Brand,3,4442.34,3917.127289,525.212711,0.134081
+i2c1510047a,JS Magazine2,0,Overview,Known_spend,Brand,3,177.45,187.221795,-9.771795,-0.052194
+i2c1510047a,Instore Sampling1,1,Acquire new customers,New_custs,Brand,3,50,41.005475,8.994525,0.219349
+i2c1510047a,"JS Magazine1, Six Sheets1",1,Acquire new customers,New_custs,Offer,2,375,192,183,0.953125
+i2c1510047a,Instore Sampling3,1,Acquire new customers,New_custs,Offer,2,131,65,66,1.015385
+i2c1509134a,"Six Sheets1, TV Wall1",1,Retain existing customers,Existing_custs,Brand,3,8898,8421.384403,476.615597,0.056596
+i2c1509134a,TV Wall1,1,Retain existing customers,Existing_custs,Offer,3,15224,15524.48758,-300.487583,-0.019356
+i2c1509134a,Six Sheets1,0,Overview,Known_spend,Offer,2,20294.72,18112.08861,2182.631391,0.120507
+i2c1509134a,TV Wall1,0,Overview,Known_spend,Offer,2,317783.22,241617.6883,76165.5317,0.315232
+i2c1507187a,Six Sheets1,1,Grow frequency of shop per customer,FOP,Offer,2,1.031471,1.043872,-0.012401,-0.01188
+i2c1507187a,"Six Sheets1, TV Wall1",2,Acquire new customers,New_custs,Brand,3,1484,1071.589229,412.410771,0.384859
+i2c1510047a,Instore Sampling3,3,Grow total units,Units,Brand,3,1531,1405.484717,125.515283,0.089304
+i2c1509134a,JS Magazine1,3,Grow total category,Known_spend,Aisle,3,60492.11,52651.69138,7840.418624,0.148911
+i2c1507187a,"Entrance Gates1, TV Wall1",2,Acquire new customers,New_custs,Offer,2,6173,3355.397857,2817.602143,0.839722
+i2c1507187a,"Six Sheets1, TV Wall1",0,Overview,Units,Brand,2,38683,32947.0354,5735.964602,0.174097
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",2,Acquire new customers,New_custs,Offer,2,1354,683.328817,670.671183,0.981477
+i2c1509134a,"JS Magazine1, TV Wall1",1,Retain existing customers,Existing_custs,Offer,2,1107,997.087179,109.912821,0.110234
+i2c1510047a,Instore Sampling3,1,Acquire new customers,New_custs,Brand,2,335,245,90,0.367347
+i2c1510047a,Other,0,Overview,Known_spend,Offer,2,14343.23,7077.991855,7265.238145,1.026455
+i2c1510047a,Total,3,Grow total units,Units,Brand,2,229326,155761.4006,73564.59943,0.47229
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",3,Grow total units,Units,Offer,2,779,440.540754,338.459246,0.768281
+i2c1509134a,"JS Magazine1, TV Wall1",0,Overview,Known_spend,Offer,2,18995.97,14926.44013,4069.52987,0.272639
+i2c1509134a,Six Sheets1,3,Grow total category,Known_spend,Aisle,2,111919.4,97745.98383,14173.41617,0.145003
+i2c1507187a,"Entrance Gates1, TV Wall1",2,Acquire new customers,New_custs,Offer,3,632,388.046012,243.953988,0.628673
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",3,Retain new customers (trialists),New_trialists,Brand,3,3959,3471.5453,487.4547,0.140414
+i2c1510047a,Total,0,Overview,Known_spend,Brand,2,446748.58,297240.9228,149507.6572,0.502985
+i2c1510047a,Other,0,Overview,Known_spend,Offer,3,138.59,224.436253,-85.846253,-0.382497
+i2c1510047a,JS Magazine1,0,Overview,Known_spend,Brand,2,38686.11,21699.04353,16987.06647,0.782849
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",1,Grow frequency of shop per customer,FOP,Brand,3,1.254251,1.280367,-0.026115,-0.020397
+i2c1507187a,Six Sheets1,1,Grow frequency of shop per customer,FOP,Brand,3,1.222669,1.241445,-0.018776,-0.015124
+i2c1507187a,"Entrance Gates1, Six Sheets1",2,Acquire new customers,New_custs,Offer,3,131,79.04504,51.95496,0.657283
+i2c1507187a,Entrance Gates1,3,Retain new customers (trialists),New_trialists,Brand,2,3387,3082.946015,304.053985,0.098624
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",3,Retain new customers (trialists),New_trialists,Brand,2,2676,2081.281898,594.718102,0.285746
+i2c1507187a,Entrance Gates1,3,Retain new customers (trialists),New_trialists,Brand,3,5206,5054.144365,151.855635,0.030046
+i2c1510047a,Six Sheets1,3,Grow total units,Units,Offer,3,14789,15953.04025,-1164.040251,-0.072967
+i2c1509134a,JS Magazine1,2,Grow spend per existing customer,SPEC,Offer,3,3.929889,4.306758,-0.376868,-0.087506
+i2c1509134a,Six Sheets1,0,Overview,Known_spend,Offer,3,17978.14,17727.93667,250.203331,0.014114
+i2c1509134a,JS Magazine1,0,Overview,Units,Brand,3,4932,4169.636151,762.363849,0.182837
+i2c1507187a,Entrance Gates1,0,Overview,Units,Offer,2,3778,2795.387156,982.612844,0.351512
+i2c1507187a,Entrance Gates1,0,Overview,Known_spend,Offer,2,7856.99,5954.228506,1902.761494,0.319565
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",0,Overview,Known_spend,Offer,2,7513,4905.345149,2607.654851,0.531595
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",0,Overview,Known_spend,Brand,2,6224.31,3473.352924,2750.957076,0.792018
+i2c1507187a,"Entrance Gates1, TV Wall1",1,Grow frequency of shop per customer,FOP,Brand,2,1.116784,1.132089,-0.015305,-0.01352
+i2c1507187a,Six Sheets1,1,Grow frequency of shop per customer,FOP,Offer,3,1.153938,1.164552,-0.010614,-0.009114
+i2c1507187a,"Entrance Gates1, TV Wall1",3,Retain new customers (trialists),New_trialists,Brand,2,11186,9938.072535,1247.927465,0.12557
+i2c1510047a,Other,1,Acquire new customers,New_custs,Brand,2,7173,3382,3791,1.120934
+i2c1510047a,Instore Sampling1,1,Acquire new customers,New_custs,Offer,2,220,116.015489,103.984511,0.896299
+i2c1510047a,"JS Magazine1, JS Magazine2",1,Acquire new customers,New_custs,Offer,3,20,5,15,3
+i2c1510047a,Instore Sampling3,3,Grow total units,Units,Offer,3,654,498.18052,155.81948,0.312777
+i2c1509134a,"JS Magazine1, TV Wall1",1,Retain existing customers,Existing_custs,Offer,3,870,860.389744,9.610256,0.01117
+i2c1509134a,Six Sheets1,1,Retain existing customers,Existing_custs,Brand,2,1844,1889.67232,-45.67232,-0.024169
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",0,Overview,Known_spend,Brand,2,10155.04,5183.005622,4972.034378,0.959296
+i2c1510047a,"Six Sheets1, Instore Sampling2",0,Overview,Known_spend,Brand,2,22354.7,15277.21697,7077.483034,0.46327
+i2c1510047a,Instore Sampling3,1,Acquire new customers,New_custs,Offer,3,14,5,9,1.8
+i2c1510047a,JS Magazine1,1,Acquire new customers,New_custs,Brand,2,6461,3559,2902,0.815398
+i2c1510047a,Total,1,Acquire new customers,New_custs,Offer,2,22541,14602.26603,7938.733966,0.543665
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",1,Acquire new customers,New_custs,Offer,3,5,2,3,1.5
+i2c1510047a,JS Magazine2,1,Acquire new customers,New_custs,Brand,2,2216,1278.124319,937.875681,0.733791
+i2c1509134a,TV Wall1,2,Grow spend per existing customer,SPEC,Offer,2,4.215896,4.14151,0.074386,0.017961
+i2c1510047a,Total,0,Overview,Known_spend,Offer,2,145237,96502.69609,48734.30391,0.505005
+i2c1510047a,"JS Magazine1, JS Magazine2",1,Acquire new customers,New_custs,Brand,3,68,38,30,0.789474
+i2c1510047a,JS Magazine2,1,Acquire new customers,New_custs,Brand,3,22,9.000875,12.999125,1.444207
+i2c1510047a,Instore Sampling1,1,Acquire new customers,New_custs,Brand,2,535,385.051409,149.948591,0.389425
+i2c1510047a,"Six Sheets1, Instore Sampling2",3,Grow total units,Units,Brand,3,4114,4486.681592,-372.681592,-0.083064
+i2c1509134a,Six Sheets1,1,Retain existing customers,Existing_custs,Offer,3,1278,1274.635702,3.364298,0.002639
+i2c1507187a,Entrance Gates1,3,Retain new customers (trialists),New_trialists,Offer,3,336,326.854317,9.145683,0.027981
+i2c1507187a,"Six Sheets1, TV Wall1",0,Overview,Units,Brand,3,58962,54653.50536,4308.494643,0.078833
+i2c1510047a,"JS Magazine1, Six Sheets1",0,Overview,Known_spend,Offer,3,1101.3,859.597667,241.702333,0.281181
+i2c1507187a,Entrance Gates1,1,Grow frequency of shop per customer,FOP,Brand,3,1.213559,1.211011,0.002547,0.002104
+i2c1507187a,"Six Sheets1, TV Wall1",1,Grow frequency of shop per customer,FOP,Offer,3,1.124936,1.188805,-0.063869,-0.053725
+i2c1507187a,Entrance Gates1,2,Acquire new customers,New_custs,Offer,2,1570,1026.786871,543.213129,0.529042
+i2c1507187a,Total,3,Retain new customers (trialists),New_trialists,Offer,2,6681,5346.768703,1334.231297,0.24954
+i2c1507187a,TV Wall1,3,Retain new customers (trialists),New_trialists,Offer,3,4431,3804.723115,626.276885,0.164605
+i2c1510047a,"Instore Sampling1, Six Sheets1",1,Acquire new customers,New_custs,Brand,2,7805,5201,2604,0.500673
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",1,Acquire new customers,New_custs,Brand,2,711,377,334,0.885942
+i2c1510047a,"JS Magazine1, JS Magazine2",3,Grow total units,Units,Offer,3,217,199.561812,17.438188,0.087382
+i2c1509134a,Other,2,Grow spend per existing customer,SPEC,Offer,2,4.426136,4.85287,-0.426734,-0.087934
+i2c1507187a,Six Sheets1,0,Overview,Known_spend,Offer,3,13844.89,12564.0799,1280.810103,0.101942
+i2c1510047a,Six Sheets1,1,Acquire new customers,New_custs,Brand,2,30575,24259.51402,6315.48598,0.26033
+i2c1510047a,"JS Magazine1, JS Magazine2",3,Grow total units,Units,Offer,2,5165,2654.150338,2510.849662,0.946009
+i2c1509134a,JS Magazine1,1,Retain existing customers,Existing_custs,Brand,3,1239,1131.138889,107.861111,0.095356
+i2c1507187a,TV Wall1,0,Overview,Units,Brand,2,299999,271063.496,28935.50399,0.106748
+i2c1507187a,Total,0,Overview,Units,Offer,2,77800,55953.661,21846.33901,0.390436
+i2c1507187a,Total,0,Overview,Units,Offer,3,82657,72367.05065,10289.94935,0.142191
+i2c1507187a,Total,0,Overview,Known_spend,Offer,3,185047.65,162987.2368,22060.41316,0.135351
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",1,Acquire new customers,New_custs,Offer,2,221,115,106,0.921739
+i2c1510047a,JS Magazine2,3,Grow total units,Units,Offer,2,2309,1494.229121,814.770879,0.545278
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",0,Overview,Known_spend,Offer,2,1607,898.275801,708.724199,0.788983
+i2c1510047a,"Six Sheets1, Instore Sampling2",0,Overview,Known_spend,Offer,2,7830.73,4997.144121,2833.585879,0.567041
+i2c1510047a,Other,3,Grow total units,Units,Offer,2,5685,2777.322726,2907.677274,1.046935
+i2c1507187a,TV Wall1,2,Acquire new customers,New_custs,Brand,3,12570,10288.89132,2281.108678,0.221706
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",0,Overview,Known_spend,Brand,2,42250.04,34274.96109,7975.078906,0.232679
+i2c1509134a,JS Magazine1,2,Grow spend per existing customer,SPEC,Offer,2,4.653002,4.802168,-0.149165,-0.031062
+i2c1509134a,JS Magazine1,2,Grow spend per existing customer,SPEC,Brand,3,5.064103,5.156191,-0.092088,-0.01786
+i2c1509134a,Other,0,Overview,Known_spend,Brand,3,8856.58,7331.586125,1524.993875,0.208003
+i2c1510047a,"Instore Sampling1, Six Sheets1",1,Acquire new customers,New_custs,Offer,3,138,93,45,0.483871
+i2c1510047a,Total,1,Acquire new customers,New_custs,Offer,3,925,732.013148,192.986852,0.263639
+i2c1510047a,Total,3,Grow total units,Units,Offer,2,56936,37092.33384,19843.66616,0.53498
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",1,Grow frequency of shop per customer,FOP,Brand,2,1.13622,1.164054,-0.027834,-0.023911
+i2c1507187a,"Six Sheets1, TV Wall1",1,Grow frequency of shop per customer,FOP,Offer,2,1.068694,1.120647,-0.051953,-0.04636
+i2c1507187a,"Entrance Gates1, Six Sheets1",3,Retain new customers (trialists),New_trialists,Offer,2,251,207.220741,43.779259,0.211269
+i2c1507187a,TV Wall1,0,Overview,Units,Offer,3,45656,39426.235,6229.764997,0.158011
+i2c1507187a,"Six Sheets1, TV Wall1",0,Overview,Known_spend,Offer,2,11011,8085.206825,2925.793175,0.36187
+i2c1507187a,"Entrance Gates1, Six Sheets1",0,Overview,Known_spend,Offer,2,6462.7,4361.101523,2101.598477,0.481896
+i2c1510047a,"Six Sheets1, Instore Sampling2",0,Overview,Known_spend,Offer,3,4151.29,3910.139784,241.150216,0.061673
+i2c1510047a,Total,1,Acquire new customers,New_custs,Brand,2,75162,49307.83444,25854.16557,0.524342
+i2c1510047a,Total,1,Acquire new customers,New_custs,Brand,3,3845,3004.049802,840.950198,0.279939
+i2c1510047a,Six Sheets1,1,Acquire new customers,New_custs,Offer,3,411,427.009048,-16.009048,-0.037491
+i2c1509134a,JS Magazine1,3,Grow total category,Known_spend,Aisle,2,71666.48,60377.65246,11288.82754,0.18697
+i2c1509134a,Six Sheets1,0,Overview,Units,Offer,3,6519,6496.129807,22.870193,0.003521
+i2c1510047a,Total,0,Overview,Known_spend,Brand,3,114428.96,111827.6648,2601.295171,0.023262
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",0,Overview,Known_spend,Brand,3,1999.46,1595.677335,403.782665,0.253048
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",1,Acquire new customers,New_custs,Brand,3,68,33,35,1.060606
+i2c1509134a,Other,1,Retain existing customers,Existing_custs,Brand,2,769,677.344,91.656,0.135317
+i2c1507187a,"Entrance Gates1, Six Sheets1",2,Acquire new customers,New_custs,Offer,2,1201,679.387115,521.612885,0.76777
+i2c1507187a,Entrance Gates1,0,Overview,Units,Brand,2,30561,28404.10095,2156.899054,0.075936
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",0,Overview,Known_spend,Offer,3,1188.7,891.884436,296.815564,0.332796
+i2c1510047a,JS Magazine1,1,Acquire new customers,New_custs,Offer,2,1180,725,455,0.627586
+i2c1509134a,"Six Sheets1, TV Wall1",1,Retain existing customers,Existing_custs,Offer,2,2928,2721.626084,206.373916,0.075827
+i2c1509134a,Total,1,Retain existing customers,Existing_custs,Brand,2,44604,44451.04524,152.954762,0.003441
+i2c1509134a,Total,2,Grow spend per existing customer,SPEC,Brand,3,5.710603,5.622923,0.08768,0.015593
+i2c1509134a,Total,0,Overview,Units,Brand,2,142548,131238.4164,11309.58359,0.086176
+i2c1507187a,"Entrance Gates1, Six Sheets1",0,Overview,Units,Offer,3,2818,2587.466149,230.533851,0.089096
+i2c1507187a,"Entrance Gates1, TV Wall1",0,Overview,Units,Offer,2,16175,10536.67999,5638.320006,0.535114
+i2c1507187a,"Six Sheets1, TV Wall1",0,Overview,Known_spend,Brand,3,105309.79,97250.21908,8059.570918,0.082875
+i2c1510047a,JS Magazine1,0,Overview,Known_spend,Offer,2,7751.5,4648.440944,3103.059056,0.667548
+i2c1509134a,"Six Sheets1, TV Wall1",1,Retain existing customers,Existing_custs,Offer,3,2783,2777.955397,5.044603,0.001816
+i2c1509134a,Other,2,Grow spend per existing customer,SPEC,Brand,3,5.379509,5.485369,-0.105861,-0.019299
+i2c1509134a,TV Wall1,2,Grow spend per existing customer,SPEC,Brand,3,5.73376,5.631553,0.102207,0.018149
+i2c1509134a,Total,2,Grow spend per existing customer,SPEC,Offer,2,4.237861,4.198724,0.039137,0.009321
+i2c1509134a,Other,0,Overview,Known_spend,Brand,2,9747.78,8263.808102,1483.971898,0.179575
+i2c1509134a,JS Magazine1,0,Overview,Known_spend,Offer,3,6392.84,5969.15578,423.68422,0.070979
+i2c1509134a,Total,3,Grow total category,Known_spend,Aisle,3,3555751.75,3253234.601,302517.1494,0.09299
+i2c1509134a,Total,0,Overview,Known_spend,Offer,2,426576.69,329782.8026,96793.88744,0.293508
+i2c1510047a,Other,1,Acquire new customers,New_custs,Brand,3,47,46,1,0.021739
+i2c1507187a,"Six Sheets1, TV Wall1",1,Grow frequency of shop per customer,FOP,Brand,2,1.119351,1.14878,-0.029429,-0.025618
+i2c1507187a,Total,2,Acquire new customers,New_custs,Brand,3,22461,17867.69733,4593.30267,0.257073
+i2c1507187a,Total,2,Acquire new customers,New_custs,Brand,2,136970,112158.188,24811.81199,0.221222
+i2c1507187a,Six Sheets1,2,Acquire new customers,New_custs,Offer,2,1361,1166.622039,194.377961,0.166616
+i2c1507187a,Total,3,Retain new customers (trialists),New_trialists,Brand,3,94490,89335.08098,5154.919017,0.057703
+i2c1507187a,"Six Sheets1, TV Wall1",3,Retain new customers (trialists),New_trialists,Brand,3,6418,5854.646734,563.353266,0.096223
+i2c1509134a,Other,0,Overview,Units,Brand,2,2720,2280.639106,439.360894,0.192648
+i2c1509134a,"JS Magazine1, TV Wall1",0,Overview,Units,Offer,3,4568,4351.03073,216.96927,0.049866
+i2c1507187a,"Entrance Gates1, Six Sheets1",0,Overview,Units,Brand,3,32701,31125.82981,1575.170192,0.050607
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",0,Overview,Known_spend,Brand,3,64294.13,58413.94104,5880.188965,0.100664
+i2c1507187a,Total,0,Overview,Known_spend,Brand,3,1565910.71,1482630.907,83279.80297,0.05617
+i2c1510047a,"Six Sheets1, Instore Sampling3",0,Overview,Known_spend,Brand,3,7830.96,7351.707711,479.252289,0.065189
+i2c1510047a,"JS Magazine1, JS Magazine2",0,Overview,Known_spend,Brand,3,304.03,300.648549,3.381451,0.011247
+i2c1507187a,Entrance Gates1,2,Acquire new customers,New_custs,Brand,3,1321,1084.831353,236.168647,0.217701
+i2c1507187a,TV Wall1,3,Retain new customers (trialists),New_trialists,Brand,3,50191,47433.51859,2757.481407,0.058134
+i2c1510047a,"Six Sheets1, Instore Sampling3",3,Grow total units,Units,Brand,2,13441,8944.873259,4496.126741,0.502648
+i2c1510047a,JS Magazine2,3,Grow total units,Units,Offer,3,113,136.656942,-23.656942,-0.173112
+i2c1509134a,TV Wall1,1,Retain existing customers,Existing_custs,Offer,2,15919,14947.97605,971.023948,0.06496
+i2c1509134a,Other,2,Grow spend per existing customer,SPEC,Offer,3,4.505479,4.669636,-0.164157,-0.035154
+i2c1509134a,TV Wall1,2,Grow spend per existing customer,SPEC,Offer,3,4.525388,4.534294,-0.008907,-0.001964
+i2c1509134a,TV Wall1,0,Overview,Known_spend,Brand,3,690232.38,613299.842,76932.53796,0.12544
+i2c1510047a,Instore Sampling3,3,Grow total units,Units,Offer,2,297,154.830156,142.169844,0.918231
+i2c1510047a,"Six Sheets1, Instore Sampling3",3,Grow total units,Units,Brand,3,5183,5104.076581,78.923419,0.015463
+i2c1510047a,"Six Sheets1, Instore Sampling3",3,Grow total units,Units,Offer,3,2156,2021.458634,134.541366,0.066557
+i2c1509134a,Total,2,Grow spend per existing customer,SPEC,Brand,2,5.08339,4.993824,0.089567,0.017935
+i2c1509134a,Other,0,Overview,Known_spend,Offer,3,3415.04,3245.413048,169.626952,0.052267
+i2c1509134a,Total,0,Overview,Known_spend,Brand,2,474092.5,439842.492,34250.00798,0.077869
+i2c1507187a,TV Wall1,1,Grow frequency of shop per customer,FOP,Offer,3,1.127756,1.14094,-0.013183,-0.011555
+i2c1507187a,TV Wall1,3,Retain new customers (trialists),New_trialists,Brand,2,32566,29638.86523,2927.13477,0.09876
+i2c1509134a,Six Sheets1,0,Overview,Units,Brand,2,5268,4789.238412,478.761588,0.099966
+i2c1509134a,Total,0,Overview,Units,Brand,3,293581,260316.345,33264.65499,0.127786
+i2c1509134a,Six Sheets1,0,Overview,Units,Brand,3,15060,14182.81484,877.185164,0.061848
+i2c1507187a,TV Wall1,0,Overview,Units,Brand,3,462334,441628.0988,20705.90116,0.046885
+i2c1507187a,"Entrance Gates1, TV Wall1",0,Overview,Known_spend,Offer,3,34068.43,30106.19886,3962.23114,0.131608
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",0,Overview,Known_spend,Offer,2,2002,1126.477454,875.522546,0.777222
+i2c1507187a,Entrance Gates1,1,Grow frequency of shop per customer,FOP,Brand,2,1.103747,1.111985,-0.008239,-0.007409
+i2c1507187a,Total,1,Grow frequency of shop per customer,FOP,Offer,2,1.070897,1.096299,-0.025403,-0.023171
+i2c1510047a,"Instore Sampling1, Six Sheets1",3,Grow total units,Units,Offer,3,3927,3741.538813,185.461187,0.049568
+i2c1510047a,Other,3,Grow total units,Units,Offer,3,168,268.773592,-100.773592,-0.374939
+i2c1509134a,Other,0,Overview,Units,Offer,3,1261,1225.832178,35.167822,0.028689
+i2c1507187a,Six Sheets1,0,Overview,Units,Brand,3,76150,74591.05584,1558.944163,0.0209
+i2c1507187a,Six Sheets1,0,Overview,Units,Offer,2,3424,3074.02122,349.97878,0.11385
+i2c1509134a,Other,3,Grow total category,Known_spend,Aisle,2,40813.31,33075.56764,7737.742357,0.233941
+i2c1509134a,TV Wall1,0,Overview,Units,Offer,2,107965,81152.96491,26812.03509,0.330389
+i2c1509134a,Other,0,Overview,Units,Brand,3,2846,2346.204579,499.795421,0.213023
+i2c1507187a,TV Wall1,1,Grow frequency of shop per customer,FOP,Offer,2,1.070642,1.088967,-0.018325,-0.016828
+i2c1509134a,Six Sheets1,3,Grow total category,Known_spend,Aisle,3,207709.71,194031.5891,13678.12091,0.070494
+i2c1509134a,"Six Sheets1, TV Wall1",0,Overview,Known_spend,Offer,3,41960.92,40828.08153,1132.838469,0.027747
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",0,Overview,Known_spend,Brand,3,39.13,87.203561,-48.073561,-0.55128
+i2c1510047a,Other,3,Grow total units,Units,Brand,3,485,752.837544,-267.837544,-0.355771
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",3,Grow total units,Units,Offer,3,542,411.978197,130.021803,0.315604
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",3,Grow total units,Units,Offer,2,628,348.682203,279.317797,0.801067
+i2c1510047a,Six Sheets1,3,Grow total units,Units,Brand,3,35161,41098.55949,-5937.559485,-0.144471
+i2c1509134a,"Six Sheets1, TV Wall1",3,Grow total category,Known_spend,Aisle,3,481558.28,437023.4576,44534.82244,0.101905
+i2c1509134a,JS Magazine1,0,Overview,Known_spend,Offer,2,9328.79,7842.345782,1486.444218,0.189541
+i2c1507187a,"Six Sheets1, TV Wall1",2,Acquire new customers,New_custs,Offer,2,2070,1149.632142,920.367858,0.800576
+i2c1507187a,Six Sheets1,0,Overview,Units,Brand,2,25987,24781.40457,1205.595426,0.048649
+i2c1507187a,Entrance Gates1,0,Overview,Known_spend,Brand,3,84525.04,80576.9276,3948.112404,0.048998
+i2c1510047a,"JS Magazine1, JS Magazine2",3,Grow total units,Units,Brand,3,658,628.262615,29.737385,0.047333
+i2c1510047a,Instore Sampling3,3,Grow total units,Units,Brand,2,990,782.283488,207.716512,0.265526
+i2c1509134a,TV Wall1,1,Retain existing customers,Existing_custs,Brand,3,47063,45623.37681,1439.623192,0.031555
+i2c1509134a,"Six Sheets1, TV Wall1",2,Grow spend per existing customer,SPEC,Brand,3,5.839281,5.788477,0.050805,0.008777
+i2c1507187a,TV Wall1,0,Overview,Known_spend,Offer,3,102123.32,89109.16949,13014.15051,0.146047
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",0,Overview,Known_spend,Offer,3,7545.5,6531.361914,1014.138086,0.155272
+i2c1510047a,Instore Sampling3,0,Overview,Known_spend,Offer,2,757,412.130254,344.869746,0.836798
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",0,Overview,Known_spend,Offer,2,3175.19,1785.037872,1390.152128,0.77878
+i2c1510047a,Instore Sampling1,1,Acquire new customers,New_custs,Offer,3,12,10.001335,1.998665,0.19984
+i2c1510047a,JS Magazine2,1,Acquire new customers,New_custs,Offer,2,909,581.056518,327.943482,0.564392
+i2c1510047a,JS Magazine1,3,Grow total units,Units,Offer,3,4058,2807.590399,1250.409601,0.445368
+i2c1510047a,Instore Sampling1,3,Grow total units,Units,Offer,3,1108,864.571501,243.428499,0.28156
+i2c1509134a,Other,3,Grow total category,Known_spend,Aisle,3,33475.8,28809.41591,4666.384092,0.161974
+i2c1509134a,"JS Magazine1, TV Wall1",3,Grow total category,Known_spend,Aisle,3,126217.38,106626.2034,19591.17663,0.183737
+i2c1507187a,Entrance Gates1,1,Grow frequency of shop per customer,FOP,Offer,2,1.070272,1.092054,-0.021782,-0.019946
+i2c1510047a,JS Magazine1,1,Acquire new customers,New_custs,Brand,3,750,402,348,0.865672
+i2c1509134a,Six Sheets1,2,Grow spend per existing customer,SPEC,Offer,3,4.655123,4.644341,0.010782,0.002322
+i2c1510047a,Instore Sampling1,3,Grow total units,Units,Brand,2,1480,1277.449248,202.550752,0.158559
+i2c1510047a,JS Magazine2,3,Grow total units,Units,Brand,2,7517,4614.275421,2902.724579,0.629075
+i2c1507187a,"Entrance Gates1, TV Wall1",3,Retain new customers (trialists),New_trialists,Brand,3,16966,16107.52825,858.471748,0.053296
+i2c1509134a,Other,1,Retain existing customers,Existing_custs,Offer,2,297,266.549708,30.450292,0.114239
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",0,Overview,Units,Offer,2,3644,2309.751387,1334.248613,0.577659
+i2c1507187a,Six Sheets1,0,Overview,Known_spend,Brand,2,44731.36,42595.67943,2135.680575,0.050138
+i2c1507187a,Total,1,Grow frequency of shop per customer,FOP,Offer,3,1.130597,1.15437,-0.023773,-0.020594
+i2c1507187a,Entrance Gates1,2,Acquire new customers,New_custs,Brand,2,8192,7377.653815,814.346185,0.11038
+i2c1507187a,Total,2,Acquire new customers,New_custs,Offer,2,30834,18427.00295,12406.99705,0.673305
+i2c1507187a,Total,2,Acquire new customers,New_custs,Offer,3,3382,2033.801413,1348.198587,0.662896
+i2c1507187a,Six Sheets1,2,Acquire new customers,New_custs,Brand,3,1106,963.339401,142.660599,0.14809
+i2c1507187a,"Six Sheets1, TV Wall1",2,Acquire new customers,New_custs,Brand,2,8667,6458.551329,2208.448671,0.341942
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",2,Acquire new customers,New_custs,Brand,3,929,612.294635,316.705365,0.517243
+i2c1507187a,Total,3,Retain new customers (trialists),New_trialists,Offer,3,7939,6877.643246,1061.356754,0.15432
+i2c1509134a,"Six Sheets1, TV Wall1",2,Grow spend per existing customer,SPEC,Offer,2,4.196024,4.203244,-0.00722,-0.001718
+i2c1507187a,Total,0,Overview,Known_spend,Offer,2,161769.5,119445.7794,42323.72057,0.354334
+i2c1507187a,TV Wall1,0,Overview,Known_spend,Offer,2,88392.81,67317.63897,21075.17103,0.313071
+i2c1507187a,"Entrance Gates1, Six Sheets1",0,Overview,Known_spend,Brand,2,38179.21,32701.76795,5477.442049,0.167497
+i2c1510047a,"Instore Sampling1, Six Sheets1",0,Overview,Known_spend,Brand,3,14294.69,13972.74023,321.94977,0.023041
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",1,Grow frequency of shop per customer,FOP,Offer,3,1.13299,1.187344,-0.054354,-0.045777
+i2c1507187a,"Six Sheets1, TV Wall1",2,Acquire new customers,New_custs,Offer,3,254,152.083625,101.916375,0.670134
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",3,Retain new customers (trialists),New_trialists,Offer,3,338,270.730388,67.269612,0.248475
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",1,Acquire new customers,New_custs,Brand,2,1610,757,853,1.126816
+i2c1510047a,"Six Sheets1, Instore Sampling3",1,Acquire new customers,New_custs,Offer,3,66,46.002376,19.997624,0.434708
+i2c1510047a,"JS Magazine1, JS Magazine2",3,Grow total units,Units,Brand,2,22832,10673.97538,12158.02462,1.139034
+i2c1509134a,"JS Magazine1, TV Wall1",0,Overview,Units,Brand,3,11227,9208.302832,2018.697168,0.219226
+i2c1507187a,"Entrance Gates1, TV Wall1",0,Overview,Known_spend,Brand,3,291997.38,270475.0629,21522.31706,0.079572
+i2c1507187a,TV Wall1,1,Grow frequency of shop per customer,FOP,Brand,3,1.213166,1.219977,-0.006811,-0.005583
+i2c1507187a,"Entrance Gates1, Six Sheets1",1,Grow frequency of shop per customer,FOP,Brand,3,1.227094,1.252339,-0.025245,-0.020158
+i2c1510047a,Six Sheets1,1,Acquire new customers,New_custs,Brand,3,1648,1607.03405,40.96595,0.025492
+i2c1510047a,JS Magazine1,3,Grow total units,Units,Brand,2,18871,10543.4426,8327.557401,0.789833
+i2c1510047a,"Six Sheets1, Instore Sampling3",3,Grow total units,Units,Offer,2,3440,2126.119082,1313.880918,0.617971
+i2c1509134a,Other,1,Retain existing customers,Existing_custs,Offer,3,242,237.380117,4.619883,0.019462
+i2c1510047a,"JS Magazine1, Six Sheets1",0,Overview,Known_spend,Brand,3,1982.97,1483.835715,499.134285,0.336381
+i2c1509134a,Total,1,Retain existing customers,Existing_custs,Offer,2,22032,20691.87864,1340.121357,0.064766
+i2c1509134a,Total,1,Retain existing customers,Existing_custs,Offer,3,20924,21168.03563,-244.035625,-0.011528
+i2c1509134a,Total,3,Grow total category,Known_spend,Aisle,2,2537102.19,2178980.776,358121.4136,0.164353
+i2c1509134a,Total,0,Overview,Known_spend,Offer,3,320846.39,309340.2439,11506.14614,0.037196
+i2c1507187a,"Six Sheets1, TV Wall1",3,Retain new customers (trialists),New_trialists,Offer,3,548,463.903846,84.096154,0.181279
+i2c1507187a,Total,0,Overview,Known_spend,Brand,2,953190.6,846958.4293,106232.1707,0.125428
+i2c1509134a,JS Magazine1,1,Retain existing customers,Existing_custs,Offer,3,527,493.187082,33.812918,0.06856
+i2c1509134a,"JS Magazine1, TV Wall1",2,Grow spend per existing customer,SPEC,Brand,2,6.149001,6.11413,0.03487,0.005703
+i2c1509134a,TV Wall1,0,Overview,Known_spend,Brand,2,335872.19,314567.6798,21304.51024,0.067726
+i2c1510047a,"Six Sheets1, Instore Sampling2",3,Grow total units,Units,Offer,2,3053,1889.999317,1163.000683,0.615344
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",3,Grow total units,Units,Offer,2,1254,679.434014,574.565986,0.845654
+i2c1507187a,"Entrance Gates1, Six Sheets1",1,Grow frequency of shop per customer,FOP,Offer,3,1.137014,1.163716,-0.026702,-0.022946
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",1,Grow frequency of shop per customer,FOP,Offer,2,1.074147,1.133567,-0.05942,-0.052419
+i2c1507187a,Six Sheets1,0,Overview,Units,Offer,3,6149,5605.614112,543.385888,0.096936
+i2c1507187a,"Six Sheets1, TV Wall1",0,Overview,Units,Offer,2,5267,3797.816148,1469.183852,0.38685
+i2c1507187a,"Entrance Gates1, TV Wall1",0,Overview,Known_spend,Offer,2,33517,22514.58332,11002.41668,0.48868
+i2c1510047a,JS Magazine2,0,Overview,Known_spend,Offer,2,5751.5,3553.05349,2198.44651,0.618748
+i2c1510047a,"Instore Sampling1, Six Sheets1",0,Overview,Known_spend,Brand,2,46833.69,31892.38441,14941.30559,0.468491
+i2c1510047a,"JS Magazine1, Six Sheets1",1,Acquire new customers,New_custs,Brand,3,125,56,69,1.232143
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",3,Grow total units,Units,Brand,3,73,168.677415,-95.677415,-0.567221
+i2c1509134a,"JS Magazine1, TV Wall1",2,Grow spend per existing customer,SPEC,Offer,3,4.007489,4.343563,-0.336073,-0.077373
+i2c1507187a,"Entrance Gates1, Six Sheets1",3,Retain new customers (trialists),New_trialists,Brand,2,2414,2051.751497,362.248503,0.176556
+i2c1507187a,Entrance Gates1,0,Overview,Units,Offer,3,3871,3568.227606,302.772394,0.084852
+i2c1510047a,JS Magazine2,0,Overview,Known_spend,Brand,2,12300.31,7186.329051,5113.980949,0.711626
+i2c1510047a,Total,3,Grow total units,Units,Offer,3,30415,29426.99541,988.004589,0.033575
+i2c1507187a,"Entrance Gates1, Six Sheets1",1,Grow frequency of shop per customer,FOP,Offer,2,1.086056,1.116306,-0.03025,-0.027098
+i2c1507187a,"Entrance Gates1, TV Wall1",0,Overview,Units,Brand,2,105910,91801.82543,14108.17457,0.153681
+i2c1507187a,Entrance Gates1,0,Overview,Known_spend,Offer,3,8628.49,7956.758839,671.731161,0.084423
+i2c1507187a,TV Wall1,2,Acquire new customers,New_custs,Brand,2,77586,64590.48083,12995.51917,0.201199
+i2c1509134a,"Six Sheets1, TV Wall1",0,Overview,Known_spend,Offer,2,55081.99,43125.43031,11956.55969,0.277251
+i2c1509134a,Six Sheets1,0,Overview,Known_spend,Brand,3,47650.22,45441.47662,2208.743382,0.048606
+i2c1507187a,"Entrance Gates1, Six Sheets1",0,Overview,Units,Offer,2,3114,2043.261228,1070.738772,0.524034
+i2c1510047a,Instore Sampling3,0,Overview,Known_spend,Brand,3,2613.09,2368.718139,244.371861,0.103166
+i2c1510047a,"Instore Sampling1, Six Sheets1",0,Overview,Known_spend,Offer,2,17491.71,10328.51994,7163.190065,0.693535
+i2c1510047a,"Six Sheets1, Instore Sampling3",0,Overview,Known_spend,Brand,2,25733.15,16833.24549,8899.904511,0.52871
+i2c1507187a,Entrance Gates1,2,Acquire new customers,New_custs,Offer,3,166,122.093566,43.906434,0.359613
+i2c1510047a,"Six Sheets1, Instore Sampling3",0,Overview,Known_spend,Offer,3,4761.4,4243.990235,517.409765,0.121916
+i2c1510047a,"JS Magazine1, Six Sheets1",1,Acquire new customers,New_custs,Brand,2,1662,758,904,1.192612
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",1,Acquire new customers,New_custs,Brand,3,8,11,-3,-0.272727
+i2c1507187a,Six Sheets1,1,Grow frequency of shop per customer,FOP,Brand,2,1.034147,1.046989,-0.012842,-0.012265
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",2,Acquire new customers,New_custs,Brand,2,5312,3653.758184,1658.241816,0.453846
+i2c1507187a,"Entrance Gates1, Six Sheets1",2,Acquire new customers,New_custs,Brand,3,854,654.372862,199.627138,0.305066
+i2c1507187a,"Entrance Gates1, TV Wall1",3,Retain new customers (trialists),New_trialists,Offer,3,1454,1252.837563,201.162437,0.160565
+i2c1509134a,JS Magazine1,1,Retain existing customers,Existing_custs,Offer,2,603,575.552339,27.447661,0.047689
+i2c1509134a,Other,2,Grow spend per existing customer,SPEC,Brand,2,6.309425,6.485299,-0.175874,-0.027119
+i2c1510047a,"Instore Sampling1, Six Sheets1",1,Acquire new customers,New_custs,Brand,3,465,359,106,0.295265
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",3,Grow total units,Units,Offer,3,37,59.830756,-22.830756,-0.381589
+i2c1509134a,TV Wall1,0,Overview,Units,Brand,3,220104,195139.6807,24964.31929,0.127931
+i2c1507187a,Entrance Gates1,0,Overview,Units,Brand,3,47947,45722.84604,2224.153956,0.048644
+i2c1510047a,Six Sheets1,0,Overview,Known_spend,Offer,2,59066.41,47246.30953,11820.10047,0.25018
+i2c1507187a,Entrance Gates1,3,Retain new customers (trialists),New_trialists,Offer,2,314,259.472043,54.527957,0.21015
+i2c1510047a,"JS Magazine1, JS Magazine2",1,Acquire new customers,New_custs,Offer,2,2036,1058,978,0.924386
+i2c1510047a,Other,1,Acquire new customers,New_custs,Offer,3,16,13,3,0.230769
+i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",0,Overview,Units,Offer,3,3373,2933.801325,439.198675,0.149703
+i2c1510047a,JS Magazine1,0,Overview,Known_spend,Brand,3,17960.84,12073.39296,5887.447043,0.487638
+i2c1510047a,JS Magazine2,1,Acquire new customers,New_custs,Offer,3,9,4.000389,4.999611,1.249781
+i2c1510047a,"Six Sheets1, Instore Sampling2",1,Acquire new customers,New_custs,Brand,2,3697,2509,1188,0.473495
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",1,Acquire new customers,New_custs,Offer,3,16,7,9,1.285714
+i2c1510047a,Instore Sampling3,1,Acquire new customers,New_custs,Brand,3,33,25,8,0.32
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",1,Acquire new customers,New_custs,Offer,2,312,149,163,1.09396
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",3,Grow total units,Units,Brand,2,3136,1832.780297,1303.219703,0.711062
+i2c1509134a,JS Magazine1,0,Overview,Units,Offer,2,3150,2668.966087,481.033913,0.180232
+i2c1507187a,TV Wall1,0,Overview,Units,Offer,2,42398,31396.74386,11001.25614,0.350395
+i2c1510047a,JS Magazine2,0,Overview,Known_spend,Offer,3,100.9,117.645083,-16.745083,-0.142336
+i2c1510047a,Other,0,Overview,Known_spend,Brand,3,216.33,383.868694,-167.538694,-0.436448
+i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",3,Grow total units,Units,Brand,2,5075,2569.87284,2505.12716,0.974806
+i2c1507187a,"Entrance Gates1, TV Wall1",1,Grow frequency of shop per customer,FOP,Offer,3,1.131436,1.17281,-0.041374,-0.035278
+i2c1507187a,"Entrance Gates1, Six Sheets1",1,Grow frequency of shop per customer,FOP,Brand,2,1.120172,1.142707,-0.022535,-0.019721
+i2c1509134a,"JS Magazine1, TV Wall1",0,Overview,Known_spend,Brand,2,36149.03,30018.94964,6130.080359,0.204207
+i2c1509134a,"JS Magazine1, TV Wall1",0,Overview,Known_spend,Brand,3,34224.87,28373.83756,5851.032439,0.206212
+i2c1509134a,"JS Magazine1, TV Wall1",0,Overview,Units,Brand,2,10120,8496.188803,1623.811197,0.191122
+i2c1507187a,TV Wall1,0,Overview,Known_spend,Brand,3,829037.16,791196.6382,37840.52183,0.047827
+i2c1510047a,"JS Magazine1, JS Magazine2",0,Overview,Known_spend,Brand,2,42814.29,20709.20265,22105.08735,1.067404
+i2c1510047a,Six Sheets1,0,Overview,Known_spend,Brand,2,175903.46,142334.1703,33569.28967,0.235848
+i2c1510047a,Instore Sampling1,0,Overview,Known_spend,Brand,2,2652.41,2033.248548,619.161452,0.304518
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",1,Acquire new customers,New_custs,Offer,3,14,7,7,1
+i2c1510047a,"JS Magazine1, Six Sheets1",3,Grow total units,Units,Brand,2,4994,2228.474128,2765.525872,1.240995
+i2c1509134a,TV Wall1,1,Retain existing customers,Existing_custs,Brand,2,31846,32176.67999,-330.679986,-0.010277
+i2c1507187a,Six Sheets1,3,Retain new customers (trialists),New_trialists,Brand,2,2830,2726.157398,103.842602,0.038091
+i2c1509134a,Six Sheets1,0,Overview,Units,Offer,2,6957,6210.24572,746.75428,0.120246
+i2c1507187a,"Six Sheets1, TV Wall1",0,Overview,Units,Offer,3,5603,4893.972421,709.027579,0.144878
+i2c1507187a,Entrance Gates1,0,Overview,Known_spend,Brand,2,52321.9,48637.77422,3684.125784,0.075746
+i2c1510047a,"Instore Sampling1, Six Sheets1",0,Overview,Known_spend,Offer,3,8891.74,8099.688411,792.051589,0.097788
+i2c1510047a,Instore Sampling1,0,Overview,Known_spend,Offer,2,1240,780.512287,459.487713,0.5887
+i2c1507187a,Six Sheets1,3,Retain new customers (trialists),New_trialists,Offer,2,284,275.882845,8.117155,0.029422
+i2c1509134a,"Six Sheets1, TV Wall1",0,Overview,Known_spend,Brand,2,60745.63,59425.8733,1319.756702,0.022208
+i2c1509134a,JS Magazine1,0,Overview,Units,Brand,2,4704,3918.166775,785.833225,0.200561
+i2c1507187a,"Six Sheets1, TV Wall1",0,Overview,Known_spend,Offer,3,12561.18,10954.01183,1607.16817,0.14672
+i2c1510047a,JS Magazine1,3,Grow total units,Units,Brand,3,11462,7707.642084,3754.357916,0.487096
+i2c1507187a,"Entrance Gates1, TV Wall1",1,Grow frequency of shop per customer,FOP,Offer,2,1.077785,1.115511,-0.037726,-0.03382
+i2c1509134a,Other,1,Retain existing customers,Existing_custs,Brand,3,756,655.872,100.128,0.152664
+i2c1509134a,"Six Sheets1, TV Wall1",2,Grow spend per existing customer,SPEC,Brand,2,5.015537,5.079761,-0.064223,-0.012643
+i2c1509134a,TV Wall1,2,Grow spend per existing customer,SPEC,Brand,2,4.990232,4.875619,0.114613,0.023507
+i2c1509134a,Six Sheets1,0,Overview,Known_spend,Brand,2,15452.27,14098.31948,1353.950523,0.096036
+i2c1510047a,Other,0,Overview,Known_spend,Brand,2,46477.72,21737.82894,24739.89107,1.138103
+i2c1510047a,"JS Magazine1, JS Magazine2",0,Overview,Known_spend,Offer,2,13022.99,6797.591212,6225.398788,0.915824
+i2c1509134a,JS Magazine1,1,Retain existing customers,Existing_custs,Brand,2,1252,1153.235556,98.764444,0.085641
+i2c1509134a,TV Wall1,3,Grow total category,Known_spend,Aisle,3,2646298.47,2434092.243,212206.2267,0.087181
+i2c1510047a,Six Sheets1,3,Grow total units,Units,Offer,2,23095,18101.20644,4993.793558,0.275882
+i2c1510047a,"Six Sheets1, Instore Sampling2",3,Grow total units,Units,Brand,2,11247,7970.302791,3276.697209,0.411113
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",0,Overview,Known_spend,Brand,3,1370.74,1261.914765,108.825235,0.086238
+i2c1510047a,"Six Sheets1, Instore Sampling2",1,Acquire new customers,New_custs,Brand,3,225,168,57,0.339286
+i2c1510047a,"JS Magazine1, JS Magazine2",1,Acquire new customers,New_custs,Brand,2,7043,3287,3756,1.142683
+i2c1509134a,"Six Sheets1, TV Wall1",2,Grow spend per existing customer,SPEC,Offer,3,4.490083,4.645146,-0.155063,-0.033382
+i2c1507187a,"Entrance Gates1, Six Sheets1",0,Overview,Units,Brand,2,22009,18923.81003,3085.189967,0.163032
+i2c1507187a,"Entrance Gates1, Six Sheets1",0,Overview,Known_spend,Offer,3,6275.84,5765.656008,510.183992,0.088487
+i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",0,Overview,Known_spend,Offer,3,813.1,665.329093,147.770907,0.222102

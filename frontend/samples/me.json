@@ -1,6 +1,7 @@
 {
   "id": 1,
   "username": "user",
+  "type": "i2c_employee",
   "business_units": [{
     "id": 2,
     "name": "Supplier1",

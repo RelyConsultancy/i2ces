@@ -75,3 +75,10 @@ export const updateChapter = ({ cid, chapter }) => {
     console.log(reply)
   })
 }
+
+
+export const fetchDataset = (source, handler) => {
+  http('get', source, (reply) => {
+    handler(reply.data)
+  })
+}

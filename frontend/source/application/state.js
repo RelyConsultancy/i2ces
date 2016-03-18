@@ -5,11 +5,6 @@ export default {
     flag: {
       network: false,
     },
-
-    navigation: [{
-      label: 'FAQs',
-      path: '/faqs',
-    }],
   },
 
   evaluation: {
