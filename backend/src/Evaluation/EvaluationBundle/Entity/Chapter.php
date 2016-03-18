@@ -66,7 +66,7 @@ class Chapter
      *
      * @ORM\Column(type="blob")
      *
-     * @JMS\Accessor(getter="getContent", setter="setContent")
+     * @JMS\Accessor(getter="getContent", setter="setArrayContent")
      * @JMS\Groups({"never_serialize"})
      * @JMS\Type("array")
      */
@@ -77,7 +77,9 @@ class Chapter
      *
      * @ORM\Column(type="boolean", name="is_additional_data", options={"default":false})
      *
-     * @JMS\Exclude()
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("is_additional_data")
+     * @JMS\Type("boolean")
      */
     protected $isAdditionalData;
 
@@ -86,7 +88,9 @@ class Chapter
      *
      * @ORM\Column(type="string", name="serialized_name")
      *
-     * @JMS\Exclude()
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("serialized_name")
+     * @JMS\Type("string")
      */
     protected $serializedName;
 
@@ -97,7 +101,7 @@ class Chapter
      *
      * @JMS\Groups({"never_serialize"})
      * @JMS\SerializedName("created_at")
-     * @JMS\Type("DateTime<'Y-m-d\TH:i:s'>")
+     * @JMS\Type("DateTime<'Y-m-d H:i:s'>")
      */
     protected $createdAt;
 
@@ -216,6 +220,14 @@ class Chapter
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setArrayContent($content)
+    {
+        $this->content = json_encode($content);
     }
 
     /**

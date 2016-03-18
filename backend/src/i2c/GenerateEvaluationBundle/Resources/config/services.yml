@@ -1,116 +1,5 @@
-parameters:
-    raw_tables_config:
-        ie_cat_context_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                product: 'VARCHAR(255)'
-                metric: 'VARCHAR(255)'
-                pp_results: 'DECIMAL(18,6)'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_cat_context_data.csv'
-            additional_setters: []
-        ie_campaign_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                campaign_name: 'VARCHAR(255)'
-                supplier: 'VARCHAR(255)'
-                brand: 'VARCHAR(255)'
-                category: 'VARCHAR(255)'
-                npd: 'TINYINT'
-                media_cost: 'INT(15)'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_campaign_data.csv'
-        ie_exposed_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                media_type: 'VARCHAR(255)'
-                exposed: 'INT(15)'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_exposed_data.csv'
-            additional_setters: []
-        ie_media_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                media: 'VARCHAR(255)'
-                @start_date: 'DATE'
-                @end_date: 'DATE'
-                evaluate: 'TINYINT'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_media_data.csv'
-            additional_setters:
-                - "start_date = STR_TO_DATE(@start_date, '%%d/%%m/%%Y')"
-                - "end_date = STR_TO_DATE(@end_date, '%%d/%%m/%%Y')"
-        ie_offer_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                sku_name: 'VARCHAR(255)'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_offer_data.csv'
-            additional_setters: []
-        ie_ots_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                media_type: 'VARCHAR(255)'
-                obj_priority: 'INT'
-                objective: 'VARCHAR(255)'
-                metric: 'VARCHAR(255)'
-                product: 'VARCHAR(255)'
-                timeperiod: 'INT'
-                exposed: 'INT(15)'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_ots_data.csv'
-            additional_setters: []
-        ie_promo_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                @week_commencing: 'DATE'
-                product: 'VARCHAR(255)'
-                pr_results: 'DECIMAL(18,6)'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_promo_data.csv'
-            additional_setters:
-                - "week_commencing = STR_TO_DATE(@week_commencing, '%%d/%%m/%%Y')"
-        ie_results_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                media_type: 'VARCHAR(255)'
-                obj_priority: 'INT'
-                objective: 'VARCHAR(255)'
-                metric: 'VARCHAR(255)'
-                product: 'VARCHAR(255)'
-                timeperiod: 'INT'
-                exposed: 'INT(15)'
-                control: 'DECIMAL(18,6)'
-                uplift: 'DECIMAL(18,6)'
-                pct_uplift: 'DECIMAL(18,6)'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_results_data.csv'
-            additional_setters: []
-        ie_timings_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                period: 'INT'
-                @period_date: 'DATE'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_timings_data.csv'
-            additional_setters:
-                - "period_date = STR_TO_DATE(@period_date, '%%d/%%m/%%Y')"
-        ie_weekly_results_data:
-            columns:
-                master_campaign_id: 'VARCHAR(255) NOT NULL'
-                @week_commencing: 'DATE'
-                product: 'VARCHAR(255)'
-                metric: 'VARCHAR(255)'
-                exposed: 'DECIMAL(18,2)'
-                control: 'DECIMAL(18,6)'
-            primary_key: 'master_campaign_id'
-            file_name: 'ie_weekly_results_data.csv'
-            additional_setters:
-                - "week_commencing = STR_TO_DATE(@week_commencing, '%%d/%%m/%%Y')"
-
-    colors_config:
-        - { color: ccc, media: ['Instore Sampling', 'Entrance Gates', 'Six Sheets'], label: 'Evaluated media' }
-        - { color: 555, media: ['TV Wall', 'JS Magazine'], label: 'In-Store Promotions' }
+imports:
+    - { resource: 'config.yml' }
 
 services:
     i2c_generate_evaluation.raw_import:
@@ -119,12 +8,78 @@ services:
         tags:
             - { name: console.command }
 
-    i2c_generate_evaluation.evaluation_generate:
+    i2c_generate_evaluation.evaluation_generate_command:
         class: i2c\GenerateEvaluationBundle\Command\GenerateEvaluationsCommand
-        arguments: [%colors_config%]
+        arguments: [@i2c_generate_evaluation.evaluation_generate_service, %evaluation_templates_folder_path%]
         tags:
             - { name: console.command }
 
-    i2c_generate_evaluation.campaign_objective_data:
-        class: i2c\GenerateEvaluationBundle\Services\CampaignObjectiveDataService
+    i2c_generate_evaluation.evaluation_generate_service:
+        class: i2c\GenerateEvaluationBundle\Services\GenerateEvaluations
+        arguments: [@templating.engine.twig, @doctrine, @serializer, "i2cGenerateEvaluationBundle", @i2c_generate_evaluation.table_data_generate_service]
+        calls:
+          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation, "extract_evaluation"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation_channels, "extract_evaluation_channels"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation_campaign_objectives, "extract_evaluation_campaign_objectives"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_campaign_background, "extract_campaign_background"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_category_context, "extract_category_context"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_objective_review, "extract_objective_review"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_sampling_performance, "extract_sampling_performance"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_summary, "extract_summary"]]
+
+    i2c_generate_evaluation.extract_evaluation:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\Evaluation
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_evaluation_channels:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationChannels
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_evaluation_campaign_objectives:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationCampaignObjectives
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_campaign_background:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\CampaignBackground
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_category_context:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\CategoryContext
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_objective_review:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ObjectiveReview
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_sampling_performance:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\SamplingPerformance
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_summary:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\Summary
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.table_data_generate_service:
+        class: i2c\GenerateEvaluationBundle\Services\GenerateTableData
+        arguments: [@templating.engine.twig, @doctrine, @serializer]
+        calls:
+          - [addExtractService, [@i2c_generate_evaluation.extract_table_data_category_context_promotional_activity, "extract_table_data_promotional_activity"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_table_data_category_context_sales_performance, "extract_table_data_sales_performance"]]
+
+    i2c_generate_evaluation.extract_table_data_category_context_promotional_activity:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext\PromotionalActivity
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_table_data_category_context_sales_performance:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext\SalesPerformance
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.import_date:
+        class: i2c\GenerateEvaluationBundle\Services\ImportData
+        arguments: [@doctrine]
+        calls:
+            - [buildPdoConnection, [%database_host%, %database_user%, %database_password%, %database_name%]]
+
+    i2c_generate_evaluation.extract_cids:
+        class: i2c\GenerateEvaluationBundle\Services\ExtractCids
         arguments: [@doctrine]

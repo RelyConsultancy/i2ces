@@ -1,4 +1,3 @@
 services:
-#    evaluation_me.example:
-#        class: Evaluation\MeBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    evaluation_me.business_unit_service:
+        class: Evaluation\MeBundle\Services\BusinessUnit

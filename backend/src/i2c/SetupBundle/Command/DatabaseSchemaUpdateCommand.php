@@ -2,10 +2,11 @@
 
 namespace i2c\SetupBundle\Command;
 
-use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
-use i2c\SetupBundle\Services\SchemaUpdateContainer;
+use Doctrine\DBAL\DBALException;
+use i2c\SetupBundle\Services\SchemaUpdate;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -15,19 +16,18 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
 {
-    /** @var SchemaUpdateContainer  */
-    protected $schemaUpdateContainer;
+    /** @var SchemaUpdate */
+    protected $schemaUpdateService;
 
     /**
      * DatabaseSchemaUpdateCommand constructor.
      *
-     * @param SchemaUpdateContainer $schemaUpdateContainer
-     * @param string|null           $commandName
+     * @param SchemaUpdate $schemaUpdateService
      */
-    public function __construct(SchemaUpdateContainer $schemaUpdateContainer, $commandName = null)
+    public function __construct(SchemaUpdate $schemaUpdateService)
     {
-        parent::__construct($commandName);
-        $this->schemaUpdateContainer = $schemaUpdateContainer;
+        parent::__construct(null);
+        $this->schemaUpdateService = $schemaUpdateService;
     }
 
     /**
@@ -37,11 +37,13 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
     {
         $this
             ->setName('i2c:schema:update')
+            ->addOption('version-number', null, InputOption::VALUE_REQUIRED, 'SQL Version used for generation.')
+            ->addOption('filename', null, InputOption::VALUE_OPTIONAL, 'SQL file name.', 'migration.sql')
             ->setDescription('This command will update the database structure across all i2c entities');
     }
 
     /**
-     * Update the schemas for all the tables defined in the schema update container
+     * Update the schemas for a given version.
      *
      * @param InputInterface  $input
      * @param OutputInterface $output
@@ -50,29 +52,16 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $schemaUpdateServices = $this->schemaUpdateContainer->getSchemaUpdateServices();
-
-        $currentProcessedTable = null;
         try {
-            /** @var AbstractSchemaUpdateService $schemaUpdateService */
-            foreach ($schemaUpdateServices as $schemaUpdateService) {
-                $currentProcessedTable = $schemaUpdateService->getTableName();
-                $schemaUpdateService->updateSchema();
-                $output->writeln(
-                    sprintf(
-                        'Updated schema for table: %s',
-                        $schemaUpdateService->getTableName()
-                    )
-                );
-            }
-            $output->writeln('Schemas were updated successfully!');
-        } catch (\Exception $ex) {
+            $version = $input->getOption('version-number');
+            $fileName = $input->getOption('filename');
+            $result = $this->schemaUpdateService->update($version, $fileName);
             $output->writeln(
-                sprintf(
-                    'There was an error while updating the schema for the table: %s',
-                    $currentProcessedTable
-                )
+                sprintf('Schemas were updated successfully for version \'%s\'!', $result)
             );
+        } catch (DBALException $ex) {
+            $output->writeln($ex->getMessage());
+        } catch (\Exception $ex) {
             $output->writeln($ex->getMessage());
         }
 
