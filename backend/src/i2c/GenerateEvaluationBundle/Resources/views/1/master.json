@@ -57,6 +57,15 @@
         "state": "visible",
         "serialized_name": "channels"
       }
+    },
+    {
+      "twig_name": "summary.json.twig",
+      "data_service": "extract_summary",
+      "additional_data": {
+        "title": "Summary",
+        "state": "visible",
+        "order": 5
+      }
     }
   ]
 }
