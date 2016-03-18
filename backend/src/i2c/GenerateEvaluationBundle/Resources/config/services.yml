@@ -79,3 +79,7 @@ services:
         arguments: [@doctrine]
         calls:
             - [buildPdoConnection, [%database_host%, %database_user%, %database_password%, %database_name%]]
+
+    i2c_generate_evaluation.extract_cids:
+        class: i2c\GenerateEvaluationBundle\Services\ExtractCids
+        arguments: [@doctrine]
