@@ -73,3 +73,9 @@ services:
     i2c_generate_evaluation.extract_table_data_category_context_sales_performance:
         class: i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext\SalesPerformance
         arguments: [@doctrine]
+
+    i2c_generate_evaluation.import_date:
+        class: i2c\GenerateEvaluationBundle\Services\ImportData
+        arguments: [@doctrine]
+        calls:
+            - [buildPdoConnection, [%database_host%, %database_user%, %database_password%, %database_name%]]
