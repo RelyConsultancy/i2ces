@@ -4,14 +4,14 @@ namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\DBAL\Exception\DriverException;
 use Doctrine\DBAL\Exception\InvalidFieldNameException;
-use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\AbstractSchemaUpdate;
 
 /**
- * Class EvaluationSchemaUpdateService
+ * Class EvaluationSchemaUpdate
  *
  * @package Evaluation\EvaluationBundle\Services
  */
-class EvaluationSchemaUpdateService extends AbstractSchemaUpdateService
+class EvaluationSchemaUpdate extends AbstractSchemaUpdate
 {
     /**
      * Creates the table if it does not exist

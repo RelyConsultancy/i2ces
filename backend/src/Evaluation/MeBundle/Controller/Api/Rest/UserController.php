@@ -2,7 +2,7 @@
 
 namespace Evaluation\MeBundle\Controller\Api\Rest;
 
-use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManagerService;
+use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManager;
 use Evaluation\UtilBundle\Helpers\BusinessUnitHelper;
 use FOS\RestBundle\View\View;
 use i2c\EvaluationBundle\Controller\RestApiController;
@@ -40,7 +40,7 @@ class UserController extends RestApiController
     }
 
     /**
-     * @return EvaluationDataBaseManagerService
+     * @return EvaluationDataBaseManager
      */
     public function getEvaluationDatabaseManagerService()
     {

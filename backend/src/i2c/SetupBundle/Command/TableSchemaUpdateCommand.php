@@ -2,7 +2,7 @@
 
 namespace i2c\SetupBundle\Command;
 
-use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\AbstractSchemaUpdate;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class TableSchemaUpdateCommand extends ContainerAwareCommand
 {
-    /** @var  AbstractSchemaUpdateService */
+    /** @var  AbstractSchemaUpdate */
     protected $schemaUpdateService;
 
     protected $commandName;
@@ -22,10 +22,10 @@ class TableSchemaUpdateCommand extends ContainerAwareCommand
     /**
      * EvaluationSchemaUpdateCommand constructor.
      *
-     * @param AbstractSchemaUpdateService $schemaUpdateService
-     * @param null                        $commandName
+     * @param AbstractSchemaUpdate $schemaUpdateService
+     * @param null                 $commandName
      */
-    public function __construct(AbstractSchemaUpdateService $schemaUpdateService, $commandName)
+    public function __construct(AbstractSchemaUpdate $schemaUpdateService, $commandName)
     {
         $this->schemaUpdateService = $schemaUpdateService;
         $this->commandName = $commandName;

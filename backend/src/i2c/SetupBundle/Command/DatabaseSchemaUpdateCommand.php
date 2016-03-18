@@ -2,7 +2,7 @@
 
 namespace i2c\SetupBundle\Command;
 
-use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\AbstractSchemaUpdate;
 use i2c\SetupBundle\Services\SchemaUpdateContainer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -54,7 +54,7 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
 
         $currentProcessedTable = null;
         try {
-            /** @var AbstractSchemaUpdateService $schemaUpdateService */
+            /** @var AbstractSchemaUpdate $schemaUpdateService */
             foreach ($schemaUpdateServices as $schemaUpdateService) {
                 $currentProcessedTable = $schemaUpdateService->getTableName();
                 $schemaUpdateService->updateSchema();

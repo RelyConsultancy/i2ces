@@ -3,15 +3,15 @@
 namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
-use Evaluation\EvaluationBundle\Entity\Evaluation;
+use Evaluation\EvaluationBundle\Entity\Evaluation as EvaluationEntity;
 use JMS\Serializer\Serializer;
 
 /**
- * Class EvaluationService
+ * Class Evaluation
  *
  * @package Evaluation\EvaluationBundle\Services
  */
-class EvaluationService
+class Evaluation
 {
     /** @var Serializer */
     protected $serializer;
@@ -19,7 +19,7 @@ class EvaluationService
     protected $entityManager;
 
     /**
-     * ChapterService constructor.
+     * Evaluation constructor.
      *
      * @param Serializer $serializer
      * @param Registry   $registry
@@ -32,11 +32,11 @@ class EvaluationService
     }
 
     /**
-     * @param Evaluation $evaluation
+     * @param EvaluationEntity $evaluation
      *
-     * @return Evaluation
+     * @return EvaluationEntity
      */
-    public function updateEvaluation(Evaluation $evaluation)
+    public function updateEvaluation(EvaluationEntity $evaluation)
     {
         $this->entityManager->persist($evaluation);
         $this->entityManager->flush();

@@ -6,13 +6,13 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Class AbstractSchemaUpdateService
+ * Class AbstractSchemaUpdate
  *
  * Abstract schema update service for manual schema control
  *
  * @package i2c\SetupBundle\Services
  */
-abstract class AbstractSchemaUpdateService
+abstract class AbstractSchemaUpdate
 {
     /** @var EntityManagerInterface */
     protected $entityManager;
@@ -21,7 +21,7 @@ abstract class AbstractSchemaUpdateService
     protected $tableName;
 
     /**
-     * AbstractSchemaUpdateService constructor.
+     * AbstractSchemaUpdate constructor.
      *
      * @param Registry $doctrine
      * @param string   $tableName

@@ -2,14 +2,14 @@
 
 namespace Evaluation\EvaluationBundle\Services;
 
-use i2c\SetupBundle\Services\AbstractSchemaUpdateService;
+use i2c\SetupBundle\Services\AbstractSchemaUpdate;
 
 /**
- * Class EvaluationChaptersSchemaUpdateService
+ * Class EvaluationChaptersSchemaUpdate
  *
  * @package Evaluation\EvaluationBundle\Services
  */
-class EvaluationChaptersSchemaUpdateService extends AbstractSchemaUpdateService
+class EvaluationChaptersSchemaUpdate extends AbstractSchemaUpdate
 {
     /**
      * Creates the table if it does not exist
