@@ -50,14 +50,17 @@ class SchemaUpdate
         $filePath = $this->migrationDir.$version.'/'.$migrationFile;
 
         if (!$fs->exists($filePath)) {
-            throw new Exception('The specified version file does not exist.');
+            throw new Exception(
+                sprintf('There is no migration file for version \'%s\'.', $version)
+            );
         }
 
         /** @var Connection $connection */
         $connection = $this->entityManager->getConnection();
 
         $sqlContent = file_get_contents($filePath);
+        $connection->exec($sqlContent);
 
-        return $connection->exec($sqlContent);
+        return $version;
     }
 }

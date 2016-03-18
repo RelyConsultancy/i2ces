@@ -55,8 +55,10 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
         try {
             $version = $input->getOption('version-number');
             $fileName = $input->getOption('filename');
-            $this->schemaUpdateService->update($version, $fileName);
-            $output->writeln('Schemas were updated successfully!');
+            $result = $this->schemaUpdateService->update($version, $fileName);
+            $output->writeln(
+                sprintf('Schemas were updated successfully for version \'%s\'!', $result)
+            );
         } catch (DBALException $ex) {
             $output->writeln($ex->getMessage());
         } catch (\Exception $ex) {
