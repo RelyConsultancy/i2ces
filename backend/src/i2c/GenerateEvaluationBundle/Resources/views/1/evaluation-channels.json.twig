@@ -1,0 +1,18 @@
+{
+    "content":
+    [
+        {% set prepend_comma = false %}
+        {% for channel in channels %}
+            {% if prepend_comma == true %}
+            ,
+            {% endif %}
+        "{{ channel.label }}"
+        {% set prepend_comma = true %}
+        {% endfor %}
+    ],
+    "is_additional_data": true,
+    "serialized_name": "{{ additional_data.serialized_name }}",
+    "title": "{{ additional_data.title }}",
+    "state": "{{ additional_data.state }}",
+    "created_at": "{{ date('now')|date("Y-m-d H:i:s") }}"
+}

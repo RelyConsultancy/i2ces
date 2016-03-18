@@ -19,6 +19,8 @@ services:
         arguments: [@templating.engine.twig, @doctrine, @serializer, "i2cGenerateEvaluationBundle"]
         calls:
           - [addExtractService, [@i2c_generate_evaluation.extract_evaluation, "extract_evaluation"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation_channels, "extract_evaluation_channels"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation_campaign_objectives, "extract_evaluation_campaign_objectives"]]
           - [addExtractService, [@i2c_generate_evaluation.extract_campaign_background, "extract_campaign_background"]]
           - [addExtractService, [@i2c_generate_evaluation.extract_category_context, "extract_category_context"]]
           - [addExtractService, [@i2c_generate_evaluation.extract_objective_review, "extract_objective_review"]]
@@ -27,6 +29,14 @@ services:
 
     i2c_generate_evaluation.extract_evaluation:
         class: i2c\GenerateEvaluationBundle\Services\Extract\Evaluation
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_evaluation_channels:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationChannels
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_evaluation_campaign_objectives:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationCampaignObjectives
         arguments: [@doctrine]
 
     i2c_generate_evaluation.extract_campaign_background:
