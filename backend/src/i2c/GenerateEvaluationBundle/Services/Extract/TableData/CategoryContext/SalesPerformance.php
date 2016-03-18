@@ -55,8 +55,8 @@ class SalesPerformance implements ExtractInterface
     public function getTableData($cid)
     {
         return sprintf(
-            'SELECT week_commencing as start_date, product as product, pr_results as results from
-             ie_promo_data where master_campaign_id = \'%s\'
+            'SELECT product as product, metric as metric, pp_results as results from
+             ie_cat_context_data where master_campaign_id = \'%s\' order by product
             ',
             $cid
         );

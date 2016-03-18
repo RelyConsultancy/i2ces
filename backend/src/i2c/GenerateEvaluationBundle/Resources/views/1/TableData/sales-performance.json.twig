@@ -5,9 +5,9 @@
             ,
         {% endif %}
         {
-            "date": "{{ data.start_date }}",
+            "metric": "{{ data.metric }}",
             "product": "{{ data.product }}",
-            "resuts": "{{ data.results }}"
+            "results": "{{ data.results }}"
         }
         {% set prepend_comma = true %}
     {% endfor %}
