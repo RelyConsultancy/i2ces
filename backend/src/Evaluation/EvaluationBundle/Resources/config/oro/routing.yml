@@ -8,6 +8,11 @@ evaluation_evaluation.get_evaluation_by_cid:
     methods: [GET]
     defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getEvaluationByCid }
 
+evaluation_evaluation.get_table_data:
+    path: /api/evaluations/{evaluationCid}/dataset/{tableDataId}
+    methods: [GET]
+    defaults: { _controller: EvaluationEvaluationBundle:Evaluation:getTableData }
+
 evaluation_evaluation.publish_evaluation:
     path: /api/evaluations/{evaluationCid}/publish
     methods: [POST]

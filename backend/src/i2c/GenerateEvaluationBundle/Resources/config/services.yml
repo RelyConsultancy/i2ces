@@ -16,7 +16,7 @@ services:
 
     i2c_generate_evaluation.evaluation_generate_service:
         class: i2c\GenerateEvaluationBundle\Services\GenerateEvaluations
-        arguments: [@templating.engine.twig, @doctrine, @serializer, "i2cGenerateEvaluationBundle"]
+        arguments: [@templating.engine.twig, @doctrine, @serializer, "i2cGenerateEvaluationBundle", @i2c_generate_evaluation.table_data_generate_service]
         calls:
           - [addExtractService, [@i2c_generate_evaluation.extract_evaluation, "extract_evaluation"]]
           - [addExtractService, [@i2c_generate_evaluation.extract_campaign_background, "extract_campaign_background"]]
@@ -47,4 +47,19 @@ services:
 
     i2c_generate_evaluation.extract_summary:
         class: i2c\GenerateEvaluationBundle\Services\Extract\Summary
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.table_data_generate_service:
+        class: i2c\GenerateEvaluationBundle\Services\GenerateTableData
+        arguments: [@templating.engine.twig, @doctrine, @serializer]
+        calls:
+          - [addExtractService, [@i2c_generate_evaluation.extract_table_data_category_context_promotional_activity, "extract_table_data_promotional_activity"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_table_data_category_context_sales_performance, "extract_table_data_sales_performance"]]
+
+    i2c_generate_evaluation.extract_table_data_category_context_promotional_activity:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext\PromotionalActivity
+        arguments: [@doctrine]
+
+    i2c_generate_evaluation.extract_table_data_category_context_sales_performance:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext\SalesPerformance
         arguments: [@doctrine]
