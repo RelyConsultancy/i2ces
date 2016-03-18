@@ -1,48 +1,4 @@
-parameters:
-    evaluation_evaluation.evaluation_table_name: 'evaluation'
-    evaluation_evaluation.evaluation_command_name: 'evaluation:schema:update'
-    evaluation_evaluation.chapter_table_name: 'chapter'
-    evaluation_evaluation.chapter_command_name: 'chapter:schema:update'
-    evaluation_evaluation.evaluation_chapters_table_name: 'evaluation_chapters'
-    evaluation_evaluation.evaluation_chapters_command_name: 'evaluation-chapters:schema:update'
-
 services:
-    evaluation_evaluation.evaluation_schema_update_command:
-        class: i2c\SetupBundle\Command\TableSchemaUpdateCommand
-        arguments:
-            - @evaluation_evaluation.evaluation_schema_update
-            - %evaluation_evaluation.evaluation_command_name%
-        tags:
-          - { name: console.command }
-
-    evaluation_evaluation.chapter_schema_update_command:
-        class: i2c\SetupBundle\Command\TableSchemaUpdateCommand
-        arguments:
-            - @evaluation_evaluation.chapter_schema_update
-            - %evaluation_evaluation.chapter_command_name%
-        tags:
-          - { name: console.command }
-
-    evaluation_evaluation.evaluation_chapters_schema_update_command:
-        class: i2c\SetupBundle\Command\TableSchemaUpdateCommand
-        arguments:
-            - @evaluation_evaluation.evaluation_chapters_schema_update
-            - %evaluation_evaluation.evaluation_chapters_command_name%
-        tags:
-          - { name: console.command }
-
-    evaluation_evaluation.evaluation_schema_update:
-        class: Evaluation\EvaluationBundle\Services\EvaluationSchemaUpdateService
-        arguments: [@doctrine, %evaluation_evaluation.evaluation_table_name% ]
-
-    evaluation_evaluation.chapter_schema_update:
-        class: Evaluation\EvaluationBundle\Services\ChapterSchemaUpdateService
-        arguments: [@doctrine, %evaluation_evaluation.chapter_table_name% ]
-
-    evaluation_evaluation.evaluation_chapters_schema_update:
-        class: Evaluation\EvaluationBundle\Services\EvaluationChaptersSchemaUpdateService
-        arguments: [@doctrine, %evaluation_evaluation.evaluation_chapters_table_name% ]
-
     evaluation_evaluation.chapters_service:
         class: Evaluation\EvaluationBundle\Services\ChapterService
         arguments: [@serializer, @doctrine]

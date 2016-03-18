@@ -16,6 +16,7 @@ parameters:
     web_dir_path: '%kernel.root_dir%/../web'
     evaluation_frontend_image_path: '/images/evaluations/'
     evaluation_upload_image_path: '%web_dir_path%%evaluation_frontend_image_path%'
+    migration_sql_folder_path: '%kernel.root_dir%/../src/i2c/SetupBundle/Resources/migrations/'
 
     # WebSocket server config
     websocket_bind_address:  "0.0.0.0"  # The host IP the socket server will bind to
