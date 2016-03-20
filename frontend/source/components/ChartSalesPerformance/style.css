@@ -1,0 +1,98 @@
+.component {
+  position: relative;
+}
+.component .froala-editor {
+  margin: 2em 0;
+}
+
+.toggle {
+  position: absolute;
+  right: 0;
+  top: -4rem;
+  padding: .5em 1em;
+  color: #FFF;
+  font-size: .875em;
+  background-color: #43B5DB;
+  cursor: pointer;
+}
+
+.loading {
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  font-size: .75em;
+  color: #43B5DB;
+}
+
+
+.info {
+  padding: .5rem .75rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: .875em;
+  color: #fafafa;
+  background-color: #4E8ECB;
+}
+.comment {
+  padding: .5rem .75rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: .875em;
+  color: #fafafa;
+  background-color: #5FC2E1;
+}
+
+
+.chart {
+  position: relative;
+  padding-left: 1rem;
+}
+.chart_label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-40%, -180%) rotate(-90deg);
+  font-size: .875rem;
+  font-family: 'Archer Bold', serif;
+  color: #6D6D6D;
+}
+.chart .c3-chart-texts .c3-text {
+  font-size: .875rem;
+  font-family: 'Archer Bold', serif;
+  fill: #252525 !important;
+}
+.chart .c3-axis-x text {
+  transform: translateY(.625rem);
+  font-size: .875rem;
+  font-family: 'Archer Bold', serif;
+  fill: #6D6D6D;
+}
+
+
+.table {
+  position: relative;
+  margin-bottom: 1rem;
+  padding-left: 4rem;
+}
+.table td {
+  padding: .5rem 0;
+  font-size: .875em;
+  font-family: 'Avenir LT Std 95 Black Oblique';
+  text-align: center;
+  background-color: #E3F2FD;
+}
+.table_labels {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4rem;
+}
+.table_labels > b {
+  padding: .75em 0;
+  height: 2.5rem;
+  font-size: .75em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

@@ -1,10 +1,20 @@
 import { Component, B, Link } from '/components/component.js'
-import Title from '/components/PaneTitle'
 import Grid from '/components/Grid'
-import { fetchEvaluation } from '/application/actions.js'
 import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
+import { fetchEvaluation } from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
+
+
+const Header = (text) => (
+  B({ className: style.header, content: text })
+)
+
+
+const Content = (...data) => B(
+  { className: style.content },
+  B({ className: style.content_wrap }, ...data)
+)
 
 
 const Links = ({ store, params }) => {
@@ -104,14 +114,13 @@ const Evaluation = Component({
     if (evaluation) {
       content = B(
         Links({ store, params }),
-        Title({ text: evaluation.display_title }),
-        B({ className: style.content }, B(
-          { className: style.content_wrap },
+        Header(evaluation.display_title),
+        Content(
           Date({ evaluation }),
           Channels({ items: evaluation.channels }),
-          Chapters({ evaluation: evaluation, colors: chapter_palette }),
+          Chapters({ evaluation, colors: chapter_palette }),
           Objectives({ items: evaluation.campaign_objectives })
-        ))
+        )
       )
     }
 

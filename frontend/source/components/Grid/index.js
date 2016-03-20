@@ -7,7 +7,7 @@ import { Component, B } from '/components/component.js'
     items: [],
   }
 */
-const Grid = Component({
+export default Component({
   render () {
     let { blocks, items } = this.props
 
@@ -18,6 +18,3 @@ const Grid = Component({
     return B({ className: `grid-blocks-${blocks}` }, items)
   }
 })
-
-
-export default Grid

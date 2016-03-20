@@ -1,9 +1,10 @@
 import { Component, B, Link } from '/components/component.js'
+import ChartMediaLaydown from '/components/ChartMediaLaydown'
+import ChartSalesPerformance from '/components/ChartSalesPerformance'
+import ChartPromotionalActivity from '/components/ChartPromotionalActivity'
 import SectionHTML from '/components/SectionHTML'
-import SectionBlocks from '/components/SectionBlocks'
-import SectionSalesPerformance from '/components/SectionSalesPerformance'
-import SectionPromotionalActivity from '/components/SectionPromotionalActivity'
 import SectionGallery from '/components/SectionGallery'
+import SectionTimings from '/components/SectionTimings'
 import { slugify } from '/application/utils.js'
 import store from '/application/store.js'
 import * as $ from '/application/actions.js'
@@ -30,7 +31,7 @@ const isEditable = (cid) => {
 }
 
 
-const Sections = ({ store, chapter, selected, setSection }) => {
+export default ({ store, chapter, selected, setSection }) => {
   const { cid } = store.evaluation
   const editable = isEditable(cid)
   const byType = (i => i.type == 'section')
@@ -39,12 +40,16 @@ const Sections = ({ store, chapter, selected, setSection }) => {
   const sections = chapter.content.filter(byType).map((section) => {
     const components = section.content.map((component) => {
       switch (component.type) {
-        case 'discrete_bar_chart':
-          return SectionSalesPerformance({ component, editable, onSave })
+        case 'chart_media_laydown':
+          return ChartMediaLaydown({ component, editable, onSave })
         break
 
-        case 'multi_bar_chart':
-          return SectionPromotionalActivity({ component, editable, onSave })
+        case 'chart_sales_performance':
+          return ChartSalesPerformance({ component, editable, onSave })
+        break
+
+        case 'chart_promotional_activity':
+          return ChartPromotionalActivity({ component, editable, onSave })
         break
 
         case 'gallery':
@@ -55,8 +60,8 @@ const Sections = ({ store, chapter, selected, setSection }) => {
           return SectionHTML({ component, editable, onSave })
         break
 
-        case 'blocks':
-          return SectionBlocks({ component, editable, onSave })
+        case 'list_timings':
+          return SectionTimings({ component })
         break
 
         case 'list':
@@ -80,6 +85,3 @@ const Sections = ({ store, chapter, selected, setSection }) => {
 
   return B({ className: style.sections_content }, ...sections)
 }
-
-
-export default Sections

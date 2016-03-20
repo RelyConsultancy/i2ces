@@ -1,10 +1,14 @@
 import { Component, B, Link } from '/components/component.js'
-import Title from '/components/PaneTitle'
 import store from '/application/store.js'
 import { fetchEvaluations, setEvaluation } from '/application/actions.js'
 import { fmtDate } from '/application/utils.js'
 import style from './style.css'
 import Filters from './filters.js'
+
+
+const Header = (text) => (
+  B({ className: style.header, content: text })
+)
 
 
 const applyFilters = (store) => {
@@ -68,7 +72,7 @@ const Evaluations = Component({
     const { store } = this.props
 
     return B(
-      Title({ text: 'Campaign Evaluation Index' }),
+      Header('Campaign Evaluation Index'),
       B(
         { className: style.content },
         Filters({ store }),

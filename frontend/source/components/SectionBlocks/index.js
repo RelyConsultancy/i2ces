@@ -2,7 +2,7 @@ import { Component, B, Link, Textarea } from '/components/component.js'
 import style from './style.css'
 
 
-const SectionBlocks = Component({
+export default Component({
   getInitialState () {
     return { isEditable: false }
   },
@@ -42,6 +42,3 @@ const SectionBlocks = Component({
     return B({ className: style.blocks }, blocks, editable ? toggle : null)
   }
 })
-
-
-export default SectionBlocks

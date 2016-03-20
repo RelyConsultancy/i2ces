@@ -1,0 +1,91 @@
+.component {
+  position: relative;
+}
+.component .froala-editor {
+  margin: 2em 0;
+}
+
+.toggle {
+  position: absolute;
+  right: 0;
+  top: -4rem;
+  padding: .5em 1em;
+  color: #FFF;
+  font-size: .875em;
+  background-color: #43B5DB;
+  cursor: pointer;
+}
+
+.loading {
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  font-size: .75em;
+  color: #43B5DB;
+}
+
+
+.info {
+  padding: .5rem .75rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: .875em;
+  color: #fafafa;
+  background-color: #4E8ECB;
+}
+.comment {
+  padding: .5rem .75rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: .875em;
+  color: #fafafa;
+  background-color: #5FC2E1;
+}
+
+
+.chart {
+  position: relative;
+  padding-left: 1rem;
+}
+.chart_label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-40%, -120%) rotate(-90deg);
+  font-size: .875rem;
+  font-family: 'Archer Bold', serif;
+  color: #6D6D6D;
+}
+.chart .c3-axis-x .tick > text {
+  transform: rotate(-45deg) translate(-1.75rem, 0);
+}
+.chart .c3-legend-item {
+  transform: translateY(-17.5rem);
+}
+.chart .c3-region {
+  fill: none;
+}
+.chart .stage_during {
+  fill: #E3F2FD;
+}
+.chart .stage_during > rect {
+  fill-opacity: 1 !important;
+}
+
+
+.stages {
+  margin-top: 2rem;
+  font-size: .75rem;
+  color: #575757;
+}
+.stage {
+  text-align: right;
+  margin: .5rem;
+}
+.stage_period {
+  display: inline-block;
+  width: 10rem;
+}
+.stage_label {
+  display: inline-block;
+}

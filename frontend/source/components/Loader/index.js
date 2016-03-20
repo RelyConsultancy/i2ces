@@ -2,7 +2,7 @@ import { Component, B } from '/components/component.js'
 import style from './style.css'
 
 
-const Loader = Component({
+export default Component({
   displayName: 'Loader',
   render () {
     const className = `${style.loader} ${this.props.className}`
@@ -17,6 +17,3 @@ const Loader = Component({
     )
   }
 })
-
-
-export default Loader

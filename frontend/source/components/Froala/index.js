@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import assign from 'object-assign'
 import { Component, B } from '/components/component.js'
 import { findDOMNode } from 'react-dom'
 import froala from './froala.js'
@@ -18,7 +19,8 @@ const defaults = {
 }
 
 
-const Froala = Component({
+export default Component({
+  displayName: 'Froala',
   initialize () {
     const element = this.refs.container
     const editor = froala(element)
@@ -29,24 +31,18 @@ const Froala = Component({
       hideLicenseWarning(element)
     })
 
-    editor.froalaEditor(Object.assign({}, defaults, options))
+    editor.froalaEditor(assign({}, defaults, options))
     editor.froalaEditor('html.set', content)
 
     this.editor = editor
-  },
-  destroy () {
-    this.editor.froalaEditor('destroy')
   },
   componentDidMount () {
     this.initialize()
   },
   componentWillUnmount () {
-    this.destroy()
+    this.editor.froalaEditor('destroy')
   },
   render () {
     return B({ className: 'froala-editor', ref: 'container' })
   }
 })
-
-
-export default Froala

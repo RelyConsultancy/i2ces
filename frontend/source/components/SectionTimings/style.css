@@ -1,0 +1,17 @@
+.stages {
+  margin-top: -1em;
+  font-size: .75rem;
+}
+.stage {
+  margin-bottom: .75em;
+}
+.stage:last-child {
+  margin-bottom: 0;
+}
+.stage_period {
+  display: inline-block;
+}
+.stage_label {
+  display: inline-block;
+  width: 7rem;
+}

@@ -1,0 +1,21 @@
+.chart {
+  height: auto;
+}
+
+.legend {
+  position: relative;
+  text-align: center;
+  font-size: .875em;
+}
+.legend_label {
+  display: inline-block;
+  margin: .5em 2em;
+  line-height: 1em;
+}
+.legend_color {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: .5em;
+  vertical-align: bottom;
+}

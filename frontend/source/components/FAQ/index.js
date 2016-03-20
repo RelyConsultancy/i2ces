@@ -1,7 +1,11 @@
 import { Component, B, Image, Link } from '/components/component.js'
-import Title from '/components/PaneTitle'
 import store from '/application/store.js'
 import style from './style.css'
+
+
+const Header = (text) => (
+  B({ className: style.header, content: text })
+)
 
 
 const FAQ = Component({
@@ -15,7 +19,7 @@ const FAQ = Component({
 
     return B(
       attrs,
-      Title({ text: 'FAQs' })
+      Header('FAQs')
     )
   }
 })

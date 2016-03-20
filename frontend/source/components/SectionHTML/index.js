@@ -3,7 +3,7 @@ import Froala from '/components/Froala'
 import style from './style.css'
 
 
-const SectionHTML = Component({
+export default Component({
   renderToggle () {
     const { editable, onSave } = this.props
     const { isEditable } = this.state
@@ -40,6 +40,3 @@ const SectionHTML = Component({
     return B({ className: style.component }, content, this.renderToggle())
   }
 })
-
-
-export default SectionHTML

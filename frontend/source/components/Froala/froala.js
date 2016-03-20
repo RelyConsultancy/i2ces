@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import Froala from './js/froala_editor.min.js'
 import align from './js/plugins/align.min.js'
 import colors from './js/plugins/colors.min.js'
@@ -29,8 +28,8 @@ import video from './js/plugins/video.min.js'
 // import quote from './js/plugins/quote.min.js'
 
 
-// Insert icons stylesheet
-$('head').append('<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">')
+// Insert link into <head> to load icons stylesheet
+// <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 // initiate Froala, it sets itself to jQuery
 const froala = Froala()
