@@ -43,7 +43,7 @@ export const fmtHTML = (string) => (
 
 
 export const fmtDate = (date) => (
-  moment(date, 'YYYY/MM/DD').format('DD MMM YYYY')
+  moment(date, 'YYYY-MM-DD').format('DD MMM YYYY')
 )
 
 
@@ -77,4 +77,15 @@ export const fmtUnit = (value, unit = "") => {
   }
 
   return value
+}
+
+
+export const loadCSS = (path) => {
+  const link = document.createElement('link')
+
+  link.rel = 'stylesheet'
+  link.type = 'text/css'
+  link.href = path
+
+  document.head.appendChild(link)
 }

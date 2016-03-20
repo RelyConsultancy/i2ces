@@ -1,4 +1,5 @@
 import 'whatwg-fetch' // window.fetch polyfill
+import assign from 'object-assign'
 import qs from 'qs'
 import { isFunction } from './utils.js'
 import { setFlagNetwork } from './actions.js'
@@ -53,7 +54,7 @@ export default (method, url, options, handler) => {
     handler = options; options = {}
   }
 
-  const config = Object.assign({}, defaults, { method })
+  const config = assign({}, defaults, { method })
 
   if (options.data) {
     config.body = JSON.stringify(options.data)

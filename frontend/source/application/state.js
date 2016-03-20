@@ -31,5 +31,11 @@ export default {
       '#87B900',
       '#A4A4A4',
     ],
+
+    stages: {
+      pre: 'Pre-Period',
+      during: 'Campaign-Period',
+      post: 'Post-Period',
+    }
   }
 }
