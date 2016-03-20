@@ -2,13 +2,12 @@
   "id": "1",
   "order": 1,
   "state": "visible",
-  "location": "/api/evaluations/i2c1510047a/chapters/1",
   "title": "Category Context",
   "content": [{
     "type": "section",
     "title": "Period on period sales performance",
     "content": [{
-      "type": "discrete_bar_chart",
+      "type": "chart_sales_performance",
       "source": "/api/evaluations/i2c1510047a/dataset/1",
       "comment": "... long string of text ...",
       "info": "... long string of text ..."
@@ -17,10 +16,23 @@
     "type": "section",
     "title": "Promotional activity during campaign",
     "content": [{
-      "type": "multi_bar_chart",
+      "type": "chart_promotional_activity",
       "source": "/api/evaluations/i2c1510047a/dataset/2",
       "comment": "... long string of text ...",
-      "info": "... long string of text ..."
+      "info": "... long string of text ...",
+      "timings": [{
+        "label": "pre",
+        "date_start": "2015-07-13",
+        "date_end": "2015-08-14"
+      }, {
+        "label": "during",
+        "date_start": "2015-08-14",
+        "date_end": "2015-09-21"
+      }, {
+        "label": "post",
+        "date_start": "2015-09-21",
+        "date_end": "2015-12-17"
+      }]
     }]
   }, {
     "type": "section",
@@ -33,7 +45,6 @@
 }, {
   "id": "2",
   "order": 2,
-  "location": "/api/evaluations/i2c1510047a/chapters/2",
   "state": "visible",
   "title": "Campaign Background",
   "content": [{
@@ -58,12 +69,20 @@
     "type": "section",
     "title": "Timings",
     "content": [{
-      "type": "list",
-      "items": [
-        "Pre: 2015/04/01 - 2015/06/23",
-        "During: 2015/06/24 - 2015/08/11",
-        "Post: 2015/08/12 - 2015/11/03"
-      ]
+      "type": "list_timings",
+      "items": [{
+        "label": "pre",
+        "date_start": "2015-08-04",
+        "date_end": "2015-10-26"
+      }, {
+        "label": "during",
+        "date_start": "2015-10-27",
+        "date_end": "2015-12-24"
+      }, {
+        "label": "post",
+        "date_start": "2015-12-25",
+        "date_end": "2016-01-21"
+      }]
     }]
   }, {
     "type": "section",
@@ -97,22 +116,32 @@
     "type": "section",
     "title": "Media Laydown",
     "content": [{
-      "type": "chart_time_range",
+      "type": "chart_media_laydown",
       "items": [{
+        "type": "promotion",
         "label": "Entrance Gates",
-        "start": "2015/10/07",
-        "end": "2015/10/27",
-        "marker": "#ccc"
+        "date_start": "2015-10-07",
+        "date_end": "2015-10-27"
       }, {
+        "type": "promotion",
         "label": "TV Wall",
-        "start": "2015/10/28",
-        "end": "2015/11/17",
-        "marker": "#ccc"
+        "date_start": "2015-10-18",
+        "date_end": "2015-11-17"
       }, {
+        "type": "media",
         "label": "Instore Sampling",
-        "start": "2015/10/06",
-        "end": "2015/10/06",
-        "marker": "#555"
+        "date_start": "2015-10-12",
+        "date_end": "2015-10-29"
+      }, {
+        "type": "media",
+        "label": "Facebook",
+        "date_start": "2015-10-04",
+        "date_end": "2015-11-02"
+      }, {
+        "type": "other",
+        "label": "eMail",
+        "date_start": "2015-10-09",
+        "date_end": "2015-10-21"
       }],
       "legend": [{
         "label": "Evaluated media",
@@ -126,7 +155,6 @@
 }, {
   "id": "3",
   "order": 3,
-  "location": "/api/evaluations/i2c1510047a/chapters/3",
   "state": "visible",
   "title": "Sampling Performance",
   "content": [{
@@ -161,14 +189,12 @@
 }, {
   "id": "4",
   "order": 4,
-  "location": "/api/evaluations/i2c1510047a/chapters/4",
   "state": "visible",
   "title": "Objective Review",
   "content": []
 }, {
   "id": "5",
   "order": 5,
-  "location": "/api/evaluations/i2c1510047a/chapters/5",
   "state": "visible",
   "title": "Summary",
   "content": [{
@@ -208,7 +234,6 @@
 }, {
   "id": "6",
   "order": 6,
-  "location": "/api/evaluations/i2c1510047a/chapters/6",
   "state": "visible",
   "title": "Appendix",
   "content": []

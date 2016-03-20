@@ -69,9 +69,13 @@ $('post', '/api/evaluations', function * () {
 
 
 $('get', '/api/evaluations/:cid/dataset/:id', function * (cid, id) {
-  const data = yield csv(db.csv[id])
+  let data = yield csv(db.csv[id])
 
-  this.body = fmtReply(data.filter(i => i.campaign_id == cid))
+  data = data.filter(i => i.campaign_id == cid)
+
+  console.log(data)
+
+  this.body = fmtReply(data)
 })
 
 

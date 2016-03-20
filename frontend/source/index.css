@@ -7,12 +7,11 @@
 @import raw './components/Froala/style.css';
 @import raw './components/Grid/style.css';
 
-@import raw './components/ChartNV/nv.d3.css';
-@import from './components/ChartNV/style.css';
+@import raw './components/Chart/c3.css';
+@import from './components/Chart/style.css';
 
 @import from './components/FAQ/style.css';
 @import from './components/Loader/style.css';
-@import from './components/PaneTitle/style.css';
 @import from './components/Dashboard/style.css';
 
 @import from './components/EvaluationList/style.css';
@@ -20,7 +19,9 @@
 @import from './components/EvaluationChapters/style.css';
 
 @import from './components/SectionHTML/style.css';
-@import from './components/SectionBlocks/style.css';
+@import from './components/SectionTimings/style.css';
 @import from './components/SectionGallery/style.css';
-@import from './components/SectionSalesPerformance/style.css';
-@import from './components/SectionPromotionalActivity/style.css';
+
+@import from './components/ChartMediaLaydown/style.css';
+@import from './components/ChartSalesPerformance/style.css';
+@import from './components/ChartPromotionalActivity/style.css';
