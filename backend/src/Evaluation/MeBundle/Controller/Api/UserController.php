@@ -22,6 +22,9 @@ class UserController extends RestApiController
      */
     public function getMeAction()
     {
+        $isEmployee = $this->get('oro_security.security_facade')
+            ->isGranted('EDIT', 'Entity:EvaluationEvaluationBundle:Evaluation');
+
         $user = $this->getUser();
 
         $viewEvaluations = $this->getEvaluationDatabaseManagerService()->getAllForViewing();
@@ -36,6 +39,11 @@ class UserController extends RestApiController
             'edit'           => $editEvaluations,
         );
 
+        if ($isEmployee) {
+            $data['type'] = 'i2c_employee';
+        } else {
+            $data['type'] = 'supplier';
+        }
         return $this->success($data, Response::HTTP_OK, 'minimal');
     }
 
