@@ -7,6 +7,8 @@ import TablePerformanceSamples from '/components/TablePerformanceSamples'
 import SectionHTML from '/components/SectionHTML'
 import SectionGallery from '/components/SectionGallery'
 import SectionTimings from '/components/SectionTimings'
+import SectionObjectives from '/components/SectionObjectives'
+import SectionInfo from '/components/SectionInfo'
 import { slugify } from '/application/utils.js'
 import store from '/application/store.js'
 import * as $ from '/application/actions.js'
@@ -74,6 +76,14 @@ export default ({ store, chapter, selected, setSection }) => {
 
         case 'list_timings':
           return SectionTimings({ component })
+        break
+
+        case 'list_value':
+          return SectionObjectives({ component })
+        break
+
+        case 'info':
+          return SectionInfo({ component, editable, onSave })
         break
 
         case 'list':
