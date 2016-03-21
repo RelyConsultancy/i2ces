@@ -10,10 +10,10 @@
             "content":
             [
                 {
-                    "type": "discrete_bar_chart",
+                    "type": "chart_sales_performance",
                     "source": "{{ table_data.sales_performance }}",
-                    "comment": "... long string of text ...",
-                    "info": "... long string of text ..."
+                    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                 }
             ]
         },
@@ -23,10 +23,27 @@
             "content":
             [
                 {
-                    "type": "multi_bar_chart",
+                    "type": "chart_promotional_activity",
                     "source": "{{ table_data.promotional_activity }}",
-                    "comment": "... long string of text ...",
-                    "info": "... long string of text ..."
+                    "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    "timings": [
+                        {
+                            "label": "pre",
+                            "date_start": "{{ timing_pre[0].start_date }}",
+                            "date_end": "{{ timing_pre[0].end_date }}"
+                        },
+                        {
+                            "label": "during",
+                            "date_start": "{{ timing_during[0].start_date }}",
+                            "date_end": "{{ timing_during[0].end_date }}"
+                        },
+                        {
+                            "label": "post",
+                            "date_start": "{{ timing_post[0].start_date }}",
+                            "date_end": "{{ timing_post[0].end_date }}"
+                        }
+                    ]
                 }
             ]
         },
@@ -37,7 +54,7 @@
             [
                 {
                     "type": "html",
-                    "content": "<p>... long string of text ...</p>"
+                    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
                 }
             ]
         }
