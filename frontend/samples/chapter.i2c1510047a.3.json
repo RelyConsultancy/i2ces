@@ -1,0 +1,36 @@
+{
+  "id": "3",
+  "order": 3,
+  "state": "visible",
+  "title": "Sampling Performance",
+  "content": [{
+    "type": "section",
+    "title": "Booking",
+    "content": [{
+      "type": "html",
+      "content": "<p>... long string of text ...</p>"
+    }]
+  }, {
+    "type": "section",
+    "title": "Performance",
+    "content": [{
+      "type": "table_performance_samples",
+      "source": "/api/evaluations/i2c1510047a/dataset/3"
+
+    }, {
+      "type": "chart_non_purchase",
+      "source": "/api/evaluations/i2c1510047a/dataset/4"
+    }]
+  }, {
+    "type": "section",
+    "title": "Gallery",
+    "content": [{
+      "type": "gallery",
+      "content": [
+        "/path/to/image_1.jpg",
+        "/path/to/image_2.jpg",
+        "/path/to/image_3.jpg"
+      ]
+    }]
+  }]
+}

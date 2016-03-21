@@ -1,0 +1,265 @@
+[{
+  "date": "2015-10-26",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-07-13",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-09-28",
+  "type": "Offer",
+  "value": "0"
+}, {
+  "date": "2015-09-21",
+  "type": "Offer",
+  "value": "0"
+}, {
+  "date": "2015-07-27",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-12-07",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-08-17",
+  "type": "Competitor",
+  "value": "0"
+}, {
+  "date": "2015-09-21",
+  "type": "Competitor",
+  "value": "0"
+}, {
+  "date": "2015-07-27",
+  "type": "Competitor",
+  "value": "0.41"
+}, {
+  "date": "2015-08-10",
+  "type": "Competitor",
+  "value": "0.41"
+}, {
+  "date": "2015-10-05",
+  "type": "Competitor",
+  "value": "0.32"
+}, {
+  "date": "2015-12-07",
+  "type": "Brand",
+  "value": "0.27"
+}, {
+  "date": "2015-09-14",
+  "type": "Brand",
+  "value": "0.48"
+}, {
+  "date": "2015-09-28",
+  "type": "Brand",
+  "value": "0.14"
+}, {
+  "date": "2015-10-05",
+  "type": "Brand",
+  "value": "0.32"
+}, {
+  "date": "2015-09-07",
+  "type": "Brand",
+  "value": "0.48"
+}, {
+  "date": "2015-08-17",
+  "type": "Brand",
+  "value": "0.23"
+}, {
+  "date": "2015-08-03",
+  "type": "Brand",
+  "value": "0.32"
+}, {
+  "date": "2015-08-31",
+  "type": "Brand",
+  "value": "0.48"
+}, {
+  "date": "2015-11-30",
+  "type": "Brand",
+  "value": "0.27"
+}, {
+  "date": "2015-10-12",
+  "type": "Brand",
+  "value": "0.18"
+}, {
+  "date": "2015-07-27",
+  "type": "Brand",
+  "value": "0.32"
+}, {
+  "date": "2015-08-03",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-11-16",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-07-20",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-08-10",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-08-31",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-09-07",
+  "type": "Competitor",
+  "value": "0.68"
+}, {
+  "date": "2015-11-02",
+  "type": "Competitor",
+  "value": "0.11"
+}, {
+  "date": "2015-08-31",
+  "type": "Competitor",
+  "value": "0.68"
+}, {
+  "date": "2015-08-03",
+  "type": "Competitor",
+  "value": "0.41"
+}, {
+  "date": "2015-07-13",
+  "type": "Competitor",
+  "value": "0.14"
+}, {
+  "date": "2015-10-12",
+  "type": "Competitor",
+  "value": "0.32"
+}, {
+  "date": "2015-11-02",
+  "type": "Brand",
+  "value": "0.12"
+}, {
+  "date": "2015-09-21",
+  "type": "Brand",
+  "value": "0.14"
+}, {
+  "date": "2015-07-13",
+  "type": "Brand",
+  "value": "0.24"
+}, {
+  "date": "2015-11-23",
+  "type": "Brand",
+  "value": "0.27"
+}, {
+  "date": "2015-11-16",
+  "type": "Brand",
+  "value": "0.36"
+}, {
+  "date": "2015-07-20",
+  "type": "Brand",
+  "value": "0.42"
+}, {
+  "date": "2015-10-19",
+  "type": "Brand",
+  "value": "0.18"
+}, {
+  "date": "2015-10-26",
+  "type": "Brand",
+  "value": "0.26"
+}, {
+  "date": "2015-11-09",
+  "type": "Brand",
+  "value": "0.12"
+}, {
+  "date": "2015-08-24",
+  "type": "Brand",
+  "value": "0.48"
+}, {
+  "date": "2015-08-10",
+  "type": "Brand",
+  "value": "0.41"
+}, {
+  "date": "2015-10-05",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-10-12",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-11-02",
+  "type": "Offer",
+  "value": "0"
+}, {
+  "date": "2015-11-09",
+  "type": "Offer",
+  "value": "0"
+}, {
+  "date": "2015-11-23",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-08-24",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-11-16",
+  "type": "Competitor",
+  "value": "0.43"
+}, {
+  "date": "2015-11-23",
+  "type": "Competitor",
+  "value": "0.32"
+}, {
+  "date": "2015-11-30",
+  "type": "Competitor",
+  "value": "0.32"
+}, {
+  "date": "2015-08-24",
+  "type": "Competitor",
+  "value": "0.68"
+}, {
+  "date": "2015-07-20",
+  "type": "Competitor",
+  "value": "0.46"
+}, {
+  "date": "2015-10-19",
+  "type": "Competitor",
+  "value": "0.32"
+}, {
+  "date": "2015-10-26",
+  "type": "Competitor",
+  "value": "0.43"
+}, {
+  "date": "2015-11-09",
+  "type": "Competitor",
+  "value": "0.11"
+}, {
+  "date": "2015-12-07",
+  "type": "Competitor",
+  "value": "0.43"
+}, {
+  "date": "2015-09-28",
+  "type": "Competitor",
+  "value": "0"
+}, {
+  "date": "2015-09-14",
+  "type": "Competitor",
+  "value": "0.68"
+}, {
+  "date": "2015-10-19",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-08-17",
+  "type": "Offer",
+  "value": "0"
+}, {
+  "date": "2015-11-30",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-09-07",
+  "type": "Offer",
+  "value": "1"
+}, {
+  "date": "2015-09-14",
+  "type": "Offer",
+  "value": "1"
+}]

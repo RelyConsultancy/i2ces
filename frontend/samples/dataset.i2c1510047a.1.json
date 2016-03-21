@@ -1,0 +1,97 @@
+[{
+  "label": "Corsodyl",
+  "type": "average_spend",
+  "value": "6347.36"
+}, {
+  "label": "Own Label",
+  "type": "average_spend",
+  "value": "3552.04"
+}, {
+  "label": "JS",
+  "type": "average_spend",
+  "value": "62641.74"
+}, {
+  "label": "Sensodyne",
+  "type": "average_spend",
+  "value": "235489.92"
+}, {
+  "label": "Aisle",
+  "type": "average_spend",
+  "value": "2080932.29"
+}, {
+  "label": "Brand",
+  "type": "average_spend",
+  "value": "420235.35"
+}, {
+  "label": "Offer",
+  "type": "average_spend",
+  "value": "37448.34"
+}, {
+  "label": "Rest of Cat",
+  "type": "average_spend",
+  "value": "1356217.92"
+}, {
+  "label": "Corsodyl",
+  "type": "category_share",
+  "value": "0.003"
+}, {
+  "label": "Own Label",
+  "type": "category_share",
+  "value": "0.002"
+}, {
+  "label": "JS",
+  "type": "category_share",
+  "value": "0.03"
+}, {
+  "label": "Brand",
+  "type": "category_share",
+  "value": "0.202"
+}, {
+  "label": "Sensodyne",
+  "type": "category_share",
+  "value": "0.113"
+}, {
+  "label": "Aisle",
+  "type": "category_share",
+  "value": "1"
+}, {
+  "label": "Offer",
+  "type": "category_share",
+  "value": "0.018"
+}, {
+  "label": "Rest of Cat",
+  "type": "category_share",
+  "value": "0.652"
+}, {
+  "label": "JS",
+  "type": "sales_growth",
+  "value": "0.004"
+}, {
+  "label": "Rest of Cat",
+  "type": "sales_growth",
+  "value": "0.025"
+}, {
+  "label": "Corsodyl",
+  "type": "sales_growth",
+  "value": "0.213"
+}, {
+  "label": "Own Label",
+  "type": "sales_growth",
+  "value": "0.096"
+}, {
+  "label": "Sensodyne",
+  "type": "sales_growth",
+  "value": "0.171"
+}, {
+  "label": "Aisle",
+  "type": "sales_growth",
+  "value": "0.02"
+}, {
+  "label": "Brand",
+  "type": "sales_growth",
+  "value": "-0.061"
+}, {
+  "label": "Offer",
+  "type": "sales_growth",
+  "value": "0.263"
+}]

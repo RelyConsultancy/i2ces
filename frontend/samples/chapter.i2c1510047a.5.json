@@ -1,0 +1,40 @@
+{
+  "id": "5",
+  "order": 5,
+  "state": "visible",
+  "title": "Summary",
+  "content": [{
+    "type": "section",
+    "title": "Performance",
+    "content": [{
+      "type": "list_value",
+      "label": "Campaign Objectives",
+      "items": [{
+        "label": "Total Sales Uplift",
+        "value": "38315.15",
+        "unit": "GBP"
+      }, {
+        "label": "Uplift in New Customers",
+        "value": "11637.557"
+      }, {
+        "label": "Share of Category Uplift",
+        "value": "1.8",
+        "unit": "ppts"
+      }]
+    }]
+  }, {
+    "type": "section",
+    "title": "Objectives",
+    "content": [{
+      "type": "html",
+      "content": "<p>... long string of text ...</p>"
+    }]
+  }, {
+    "type": "section",
+    "title": "Insight",
+    "content": [{
+      "type": "info",
+      "content": "<p>... long string of text ...</p>"
+    }]
+  }]
+}

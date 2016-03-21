@@ -5,32 +5,17 @@ import route from 'koa-route'
 import bodyparser from 'koa-bodyparser'
 import csvParser from 'csv-parser'
 
-import me from './samples/me.json'
-import i2c1507187a from './samples/evaluation.i2c1507187a.json'
-import i2c1509134a from './samples/evaluation.i2c1509134a.json'
-import i2c1510047a from './samples/evaluation.i2c1510047a.json'
-import i2c1510047a_chapters from './samples/chapters.i2c1510047a.json'
+
+// thunk function to load and parse JSON
+const loadJSON = (file) => ((done) => {
+  fs.readFile(file, 'utf8', (error, data) => {
+    done(null, JSON.parse(data))
+  })
+})
 
 
-const db = {
-  evaluations: {
-    i2c1507187a,
-    i2c1509134a,
-    i2c1510047a,
-  },
-  chapters: {
-    i2c1507187a: i2c1510047a_chapters,
-    i2c1509134a: i2c1510047a_chapters,
-    i2c1510047a: i2c1510047a_chapters,
-  },
-  csv: {
-    1: 'ie_cat_context_data.csv',
-    2: 'ie_promo_data.csv',
-  }
-}
-
-
-const csv = (file) => ((done) => {
+// thunk function to load and parse CSV
+const loadCSV = (file) => ((done) => {
   const rows = []
 
   fs.createReadStream(`./samples/csv/${file}`)
@@ -42,9 +27,11 @@ const csv = (file) => ((done) => {
 })
 
 
+// format reply as Oro
 const fmtReply = (data) => ({ data, error: null })
 
 
+// setup Koa
 const koa = Koa()
 const $ = (method, path, handler) => {
   koa.use(route[method](path, handler))
@@ -52,14 +39,22 @@ const $ = (method, path, handler) => {
 koa.use(bodyparser())
 
 
+// get active user
 $('get', '/api/me', function * () {
-  this.body = fmtReply(me)
+  const file = `${__dirname}/samples/me.json`
+
+  this.body = fmtReply(yield loadJSON(file))
 })
 
 
+// get evaluations list
 $('post', '/api/evaluations', function * () {
   const { cids } = this.request.body
-  const items = cids.map(id => db.evaluations[id])
+  const items = []
+
+  for (let cid of cids) {
+    items.push(yield loadJSON(`${__dirname}/samples/evaluation.${cid}.json`))
+  }
 
   this.body = fmtReply({
     count: items.length,
@@ -68,27 +63,23 @@ $('post', '/api/evaluations', function * () {
 })
 
 
-$('get', '/api/evaluations/:cid/dataset/:id', function * (cid, id) {
-  let data = yield csv(db.csv[id])
-
-  data = data.filter(i => i.campaign_id == cid)
-
-  console.log(data)
-
-  this.body = fmtReply(data)
-})
-
-
+// get evaluation
 $('get', '/api/evaluations/:cid', function * (cid) {
-  this.body = fmtReply(db.evaluations[cid])
+  const file = `${__dirname}/samples/evaluation.${cid}.json`
+
+  this.body = fmtReply(yield loadJSON(file))
 })
 
 
+// get evaluation chapter
 $('get', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
-  this.body = fmtReply(db.chapters[cid].filter(c => c.id == id).shift())
+  const file = `${__dirname}/samples/chapter.${cid}.${id}.json`
+
+  this.body = fmtReply(yield loadJSON(file))
 })
 
 
+// update evaluation chapter
 $('post', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
   this.request.body.content.forEach((section) => {
     console.log('------------------------------------------------------------')
@@ -99,6 +90,15 @@ $('post', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
 })
 
 
+// get dataset
+$('get', '/api/evaluations/:cid/dataset/:id', function * (cid, id) {
+  const file = `${__dirname}/samples/dataset.${cid}.${id}.json`
+
+  this.body = fmtReply(yield loadJSON(file))
+})
+
+
+// get webapp index
 $('get', '/*', function * () {
   const options = { root: `${__dirname}/public` }
   const isSent = yield send(this, this.path, options)

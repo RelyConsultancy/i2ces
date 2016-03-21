@@ -1,0 +1,28 @@
+{
+  "sku_details": [{
+    "sku": "3618424",
+    "name": "Lindor Coconut",
+    "count": 27357,
+    "per_store": 255
+  }, {
+    "sku": "4641928",
+    "name": "Lindor Milk Cornet",
+    "count": 25300,
+    "per_store": 178
+  }, {
+    "sku": "4723983",
+    "name": "Lindor Milk Orange",
+    "count": 39923,
+    "per_store": 273
+  }, {
+    "sku": "9472394",
+    "name": "Lindor Milk and White",
+    "count": 39871,
+    "per_store": 169
+  }],
+  "incremental_uplift": [{
+    "units": 12730,
+    "units_percent": 112,
+    "conversion": 9
+  }]
+}
