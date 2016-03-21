@@ -4,8 +4,7 @@ namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Evaluation\EvaluationBundle\Entity\Chapter as ChapterEntity;
-use Evaluation\UtilBundle\Exception\FormException;
-use Evaluation\UtilBundle\Helpers\ChapterHelper;
+use Evaluation\EvaluationBundle\Exception\FormException;
 use JMS\Serializer\Serializer;
 
 /**
@@ -40,12 +39,12 @@ class Chapter
      * @param ChapterEntity $chapter
      * @param ChapterEntity $sentChapter
      *
-     * @return Chapter
+     * @return ChapterEntity
      * @throws FormException
      */
     public function getUpdateChapter(ChapterEntity $chapter, ChapterEntity $sentChapter)
     {
-        $chapter->setContent(json_encode($sentChapter->getContent()));
+        $chapter->setContent($sentChapter->getContent());
 
         $chapter->setLastModifiedAt(new \DateTime('now'));
 
@@ -99,6 +98,8 @@ class Chapter
         );
 
         $chapter = $this->getUpdateChapter($chapter, $sentChapter);
+
+        $chapter->getContent();
 
         $this->entityManager->persist($chapter);
 

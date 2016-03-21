@@ -16,19 +16,15 @@
             "type": "section",
             "title": "Campaign Objectives",
             "access": "editable",
-            "content": [
-                {
-                    "type": "blocks",
+            "content": [{
+                    "type": "list",
                     "items": [
                         {% set prepend_comma = false %}
                         {% for objective in objectives %}
                             {% if prepend_comma == true %}
                                 ,
                             {% endif %}
-                            {
-                                "label": "{{ objective.label }}",
-                                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                            }
+                            "{{ objective.label }}"
                             {% set prepend_comma = true %}
                         {% endfor %}
                     ]
@@ -122,7 +118,7 @@
             "content":
             [
                 {
-                    "type": "chart_time_range",
+                    "type": "chart_media_laydown",
                     "items":
                     [
                         {% set prepend_comma = false %}
@@ -131,12 +127,12 @@
                                 ,
                             {% endif %}
                             {
+                                "type": "media",
                                 "label": "{{ item.media_label }}",
-                                "start": "{{ date(item.start_date)|date('Y-m-d') }}",
-                                "end": "{{ date(item.end_date)|date('Y-m-d') }}",
+                                "date_start": "{{ date(item.start_date)|date('Y-m-d') }}",
+                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}"
                                 {% for color_config in additional_data.colors_config %}
                                     {% if item.media_label in color_config.media %}
-                                        "marker": "{{ color_config.color }}"
                                         {% if color_config.color not in usedColors %}
                                             {% set legend = legend|merge([{color: color_config.color,label: color_config.label}]) %}
                                             {% set usedColors = usedColors|merge([color_config.color]) %}

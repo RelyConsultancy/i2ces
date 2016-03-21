@@ -5,9 +5,9 @@
             ,
         {% endif %}
         {
-            "metric": "{{ data.metric }}",
-            "product": "{{ data.product }}",
-            "results": "{{ data.results }}"
+            "type": "{{ data.metric }}",
+            "label": "{{ data.product }}",
+            "value": "{{ data.results }}"
         }
         {% set prepend_comma = true %}
     {% endfor %}
