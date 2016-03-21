@@ -84,6 +84,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         } catch (\Exception $ex) {
             $output->writeln("Something went wrong while generating the evaluations");
 
+            $output->writeln($ex->getMessage());
             return -2;
         }
         //todo catch load config data errors
