@@ -1,4 +1,6 @@
 import d3 from 'd3'
+// add SVGPathSeg polyfill as Chrome removed it (no longer part of specs)
+import pathseg from 'pathseg'
 import c3 from 'c3'
 import assign from 'object-assign'
 import { Component, B } from '/components/component.js'
