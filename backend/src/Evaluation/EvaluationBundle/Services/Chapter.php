@@ -39,12 +39,12 @@ class Chapter
      * @param ChapterEntity $chapter
      * @param ChapterEntity $sentChapter
      *
-     * @return Chapter
+     * @return ChapterEntity
      * @throws FormException
      */
     public function getUpdateChapter(ChapterEntity $chapter, ChapterEntity $sentChapter)
     {
-        $chapter->setContent(json_encode($sentChapter->getContent()));
+        $chapter->setContent($sentChapter->getContent());
 
         $chapter->setLastModifiedAt(new \DateTime('now'));
 
@@ -98,6 +98,8 @@ class Chapter
         );
 
         $chapter = $this->getUpdateChapter($chapter, $sentChapter);
+
+        $chapter->getContent();
 
         $this->entityManager->persist($chapter);
 

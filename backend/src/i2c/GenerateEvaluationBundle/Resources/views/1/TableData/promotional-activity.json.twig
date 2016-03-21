@@ -2,8 +2,8 @@
     {% for data in table_data %}
         {
             "date": "{{ data.start_date }}",
-            "product": "{{ data.product }}",
-            "results": "{{ data.results }}"
+            "type": "{{ data.product }}",
+            "value": "{{ data.results }}"
         }{{ not loop.last ? ',' }}
     {% endfor %}
 ]

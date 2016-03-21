@@ -1,9 +1,9 @@
 [
     {% for data in table_data %}
         {
-            "metric": "{{ data.metric }}",
-            "product": "{{ data.product }}",
-            "results": "{{ data.results }}"
+            "type": "{{ data.metric }}",
+            "label": "{{ data.product }}",
+            "value": "{{ data.results }}"
         }{{ not loop.last ? ',' }}
     {% endfor %}
 ]
