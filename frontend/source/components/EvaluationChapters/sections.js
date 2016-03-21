@@ -2,6 +2,8 @@ import { Component, B, Link } from '/components/component.js'
 import ChartMediaLaydown from '/components/ChartMediaLaydown'
 import ChartSalesPerformance from '/components/ChartSalesPerformance'
 import ChartPromotionalActivity from '/components/ChartPromotionalActivity'
+import ChartNonPurchase from '/components/ChartNonPurchase'
+import TablePerformanceSamples from '/components/TablePerformanceSamples'
 import SectionHTML from '/components/SectionHTML'
 import SectionGallery from '/components/SectionGallery'
 import SectionTimings from '/components/SectionTimings'
@@ -32,6 +34,8 @@ const isEditable = (cid) => {
 
 
 export default ({ store, chapter, selected, setSection }) => {
+  if (!store.evaluation) return null
+
   const { cid } = store.evaluation
   const editable = isEditable(cid)
   const byType = (i => i.type == 'section')
@@ -50,6 +54,14 @@ export default ({ store, chapter, selected, setSection }) => {
 
         case 'chart_promotional_activity':
           return ChartPromotionalActivity({ component, editable, onSave })
+        break
+
+        case 'table_performance_samples':
+          return TablePerformanceSamples({ component })
+        break
+
+        case 'chart_non_purchase':
+          return ChartNonPurchase({ component })
         break
 
         case 'gallery':

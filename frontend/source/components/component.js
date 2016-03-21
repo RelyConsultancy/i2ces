@@ -1,12 +1,12 @@
 import { createClass, createElement, PropTypes } from 'react'
 import { Link as link } from 'react-router'
-import { isElement, isString } from '/application/utils.js'
+import { isElement, isString, isNumber} from '/application/utils.js'
 import textarea from 'react-textarea-autosize'
 
 
 export const Element = (type) => (
   (el, ...children) => {
-    const args = (isElement(el) || isString(el))
+    const args = (isElement(el) || isString(el) || isNumber(el))
                ? [type, null, el]
                : [type, el]
 
@@ -41,5 +41,5 @@ export const Link = Element(link)
 export const SVG = Element('svg')
 export const Table = Element('table')
 export const TBody = Element('tbody')
-export const TD = Element('td')
 export const TR = Element('tr')
+export const TD = Element('td')

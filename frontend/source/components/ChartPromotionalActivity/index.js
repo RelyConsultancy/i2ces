@@ -8,12 +8,11 @@ import { fmtUnit, fmtHTML, fmtDate } from '/application/utils.js'
 import style from './style.css'
 
 
-const fmtPercent = d3.format('1%')
-const byOffer = (i => i.product.toLowerCase() == 'offer')
-const byBrand = (i => i.product.toLowerCase() == 'brand')
-const byCompetitor = (i => i.product.toLowerCase() == 'competitor')
+const byOffer = (i => i.type.toLowerCase() == 'offer')
+const byBrand = (i => i.type.toLowerCase() == 'brand')
+const byCompetitor = (i => i.type.toLowerCase() == 'competitor')
 const byDate = (a, b) => (a.date < b.date ? -1 : 1)
-const fmtChart = (i => i.results)
+const fmtChart = (i => i.value)
 
 const setRegion = (stage) => {
   const region = {
@@ -44,7 +43,6 @@ const ActivityChart = ({ data, timings }) => {
     data: {
       type: 'bar',
       x: 'Dates',
-      // labels: { format: fmtPercent },
       columns: [
         ['Dates'].concat(dates),
         ['Offer'].concat(offer),
@@ -56,12 +54,12 @@ const ActivityChart = ({ data, timings }) => {
       x: {
         type: 'timeseries',
         tick: {
-          format: '%Y-%m-%d',
+          format: '%d-%m-%Y',
           culling: false,
         },
       },
       y: {
-        tick: { format: fmtPercent },
+        tick: { format: d3.format('1%') },
         padding: { top: 0, bottom: 0 },
       },
     },
@@ -85,7 +83,7 @@ const ActivityChart = ({ data, timings }) => {
 
 const { stages } = store.getState().evaluation
 
-const Stages = ({ timings, stages }) => (
+const Stages = ({ timings }) => (
   B({ className: style.stages }, timings.map((item, key) => {
     const period = fmtDate(item.date_start) +' - '+ fmtDate(item.date_end)
     const date = B({ className: style.stage_period }, period)
@@ -171,7 +169,7 @@ export default Component({
       })
 
       const chart = ActivityChart({ data, timings })
-      const stages = Stages({ timings })
+        const stages = Stages({ timings })
 
       content = B(info, chart, stages, comment)
     }

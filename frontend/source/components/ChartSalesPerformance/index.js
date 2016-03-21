@@ -7,11 +7,10 @@ import { fmtUnit, fmtHTML } from '/application/utils.js'
 import style from './style.css'
 
 
-const fmtPercent = d3.format('1%')
 // sort filters
-const byCategory = (i => i.product.toLowerCase() == 'rest of cat')
-const byBrand = (i => i.product.toLowerCase() == 'brand')
-const byOffer = (i => i.product.toLowerCase() == 'offer')
+const byCategory = (i => i.label.toLowerCase() == 'rest of cat')
+const byBrand = (i => i.label.toLowerCase() == 'brand')
+const byOffer = (i => i.label.toLowerCase() == 'offer')
 
 const sortData = (data) => {
   let items = data.filter(byCategory)
@@ -21,7 +20,7 @@ const sortData = (data) => {
 
   let competition = data
     .filter(i => items.indexOf(i) == -1)
-    .sort((a, b) => (a.product > b.product))
+    .sort((a, b) => (a.label > b.label))
 
   return items.concat(competition)
 }
@@ -37,10 +36,10 @@ const SalesChart = ({ data }) => {
     data: {
       type: 'bar',
       x: 'Labels',
-      labels: { format: '1%' },
+      labels: { format: d3.format('1%') },
       columns: [
-        ['Labels'].concat(data.map(i => i.product)),
-        ['Results'].concat(data.map(i => i.results)),
+        ['Labels'].concat(data.map(i => i.label)),
+        ['Results'].concat(data.map(i => i.value)),
       ],
     },
     axis: {
@@ -48,7 +47,7 @@ const SalesChart = ({ data }) => {
         type: 'category',
       },
       y: {
-        tick: { format: fmtPercent },
+        tick: { format: d3.format('1%') },
       },
     },
     grid: {
@@ -65,10 +64,10 @@ const SalesChart = ({ data }) => {
 }
 
 
-// metric filters
-const bySales = (i => i.metric == 'sales_growth')
-const byShare = (i => i.metric == 'category_share')
-const bySpend = (i => i.metric == 'average_spend')
+// type filters
+const bySales = (i => i.type == 'sales_growth')
+const byShare = (i => i.type == 'category_share')
+const bySpend = (i => i.type == 'average_spend')
 
 const TableSales = ({ data }) => {
   const shares = sortData(data.filter(byShare))
@@ -78,11 +77,11 @@ const TableSales = ({ data }) => {
   const table = Table(TBody(
     TR(...shares.map(i => TD(
       { style: { width } },
-      fmtUnit(i.results * 100, 'percent')
+      (i.value * 100).toFixed(1) + '%'
     ))),
     TR(...spendings.map(i => TD(
       { style: { width } },
-      fmtUnit(i.results, 'currency')
+      fmtUnit(i.value, 'currency')
     )))
   ))
 

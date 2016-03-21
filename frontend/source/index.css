@@ -25,3 +25,6 @@
 @import from './components/ChartMediaLaydown/style.css';
 @import from './components/ChartSalesPerformance/style.css';
 @import from './components/ChartPromotionalActivity/style.css';
+@import from './components/ChartNonPurchase/style.css';
+
+@import from './components/TablePerformanceSamples/style.css';

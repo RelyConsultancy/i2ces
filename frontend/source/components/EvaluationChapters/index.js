@@ -22,8 +22,9 @@ const Navigation = ({ store, params }) => {
 const ChapterLinks = ({ store, chapter }) => {
   const { evaluation, chapter_palette } = store
   const selected = chapter
-
   const byOrder = (a, b) => (a.order > b.order ? 1 : -1)
+
+  if (!evaluation) return null
 
   const links = evaluation.chapters.sort(byOrder).map((chapter, index) => {
     const color = chapter_palette[chapter.order - 1]

@@ -14,6 +14,9 @@ export const isString = (value) => (
   typeof value == 'string'
 )
 
+export const isNumber = (value) => (
+  typeof value == 'number'
+)
 
 export const getUnique = (array) => (
   array.filter((value, index, array) => (
@@ -52,16 +55,17 @@ export const fmtCurrency = (value, sign = '£') => (
 )
 
 
+export const fmtNumber = (value) => (
+  parseInt(value).toLocaleString()
+)
+
+
 export const fmtUnit = (value, unit = "") => {
   switch (unit.toLowerCase()) {
     case 'money':
     case 'currency':
     case 'gbp':
       value = fmtCurrency(value)
-    break
-
-    case 'date':
-      value = fmtDate(value)
     break
 
     case 'ppts':
