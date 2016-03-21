@@ -69,14 +69,13 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         try {
             $versionNumber = $input->getOption('version-number');
 
-            if (is_numeric($versionNumber)) {
-                $versionNumber = (int) $versionNumber;
-            } else {
+            if (!is_numeric($versionNumber)) {
                 $this->logger->addCritical('The "version-number" must be a numeric value');
 
                 return -1;
             }
 
+            $versionNumber = (int) $versionNumber;
             //todo inject the service that handles cids and add the cids array input option
             $cids = ["i2c1510047a","i2c1509134a","i2c1507187a"];
 

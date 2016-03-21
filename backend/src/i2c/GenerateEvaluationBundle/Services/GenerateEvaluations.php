@@ -44,7 +44,7 @@ class GenerateEvaluations
      * @param GenerateTableData $generateTableDataService
      */
     public function __construct(
-        $templateRenderer,
+        EngineInterface $templateRenderer,
         Registry $registry,
         Serializer $serializer,
         $templatesPrefix,
