@@ -4,8 +4,7 @@ namespace Evaluation\EvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Evaluation\EvaluationBundle\Entity\Chapter as ChapterEntity;
-use Evaluation\UtilBundle\Exception\FormException;
-use Evaluation\UtilBundle\Helpers\ChapterHelper;
+use Evaluation\EvaluationBundle\Exception\FormException;
 use JMS\Serializer\Serializer;
 
 /**

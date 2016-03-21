@@ -3,11 +3,11 @@
 namespace Evaluation\EvaluationBundle\Controller\Api;
 
 use Evaluation\EvaluationBundle\Entity\Evaluation;
+use Evaluation\EvaluationBundle\Exception\FormException;
 use Evaluation\EvaluationBundle\Services\Chapter as ChapterService;
 use Evaluation\EvaluationBundle\Services\EvaluationDataBaseManager;
 use Evaluation\EvaluationBundle\Services\Evaluation as EvaluationService;
 use Evaluation\EvaluationBundle\Services\TableDataDatabaseManager;
-use Evaluation\UtilBundle\Exception\FormException;
 use i2c\EvaluationBundle\Controller\Api\RestApiController;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Symfony\Component\HttpFoundation\Request;

@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Evaluation\EvaluationBundle\Entity\Chapter;
 use Evaluation\EvaluationBundle\Entity\Evaluation;
 use i2c\GenerateEvaluationBundle\Services\GenerateEvaluations;
+use Monolog\Logger;
 use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,10 +25,18 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
     /** @var  string */
     protected $versionsFolderPath;
 
-    public function __construct(GenerateEvaluations $generateEvaluations, $versionsFolderPath)
+    /**
+     * GenerateEvaluationsCommand constructor.
+     *
+     * @param GenerateEvaluations $generateEvaluations
+     * @param string              $versionsFolderPath
+     * @param Logger              $logger
+     */
+    public function __construct(GenerateEvaluations $generateEvaluations, $versionsFolderPath, Logger $logger)
     {
         $this->versionsFolderPath = $versionsFolderPath;
         $this->generateEvaluationsService = $generateEvaluations;
+        $this->logger = $logger;
 
         parent::__construct();
     }
@@ -63,7 +72,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
             if (is_numeric($versionNumber)) {
                 $versionNumber = (int) $versionNumber;
             } else {
-                $output->writeln('The "version-number" must be a numeric value');
+                $this->logger->addCritical('The "version-number" must be a numeric value');
 
                 return -1;
             }
@@ -82,7 +91,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
 
             return 0;
         } catch (\Exception $ex) {
-            $output->writeln("Something went wrong while generating the evaluations");
+            $this->logger->addCritical('Something went wrong while generating the evaluations');
 
             return -2;
         }
