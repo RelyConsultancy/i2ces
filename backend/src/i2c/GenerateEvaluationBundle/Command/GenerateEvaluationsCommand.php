@@ -2,16 +2,15 @@
 
 namespace i2c\GenerateEvaluationBundle\Command;
 
-use Doctrine\ORM\EntityManager;
-use Evaluation\EvaluationBundle\Entity\Chapter;
-use Evaluation\EvaluationBundle\Entity\Evaluation;
+use Composer\Downloader\FilesystemException;
 use i2c\GenerateEvaluationBundle\Services\GenerateEvaluations;
 use Monolog\Logger;
-use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\Exception\LogicException;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 /**
  * Class GenerateEvaluationsCommand
@@ -63,6 +62,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
      * @param OutputInterface $output
      *
      * @return null|int null or 0 if everything went fine, or an error code
+     * @throws FilesystemException|LogicException
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -70,14 +70,13 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
             $versionNumber = $input->getOption('version-number');
 
             if (!is_numeric($versionNumber)) {
-                $this->logger->addCritical('The "version-number" must be a numeric value');
-
-                return -1;
+                throw new \Exception('The "version-number" must be a numeric value');
             }
 
             $versionNumber = (int) $versionNumber;
-            //todo inject the service that handles cids and add the cids array input option
-            $cids = ["i2c1510047a","i2c1509134a","i2c1507187a"];
+            $cids = $this->getContainer()
+                ->get('i2c_generate_evaluation.extract_cids')
+                ->getCampaignCidsToBeGenerated();
 
             $configFilePath = sprintf(
                 '%s/%s/master.json',
@@ -87,14 +86,13 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
             $configData = $this->generateEvaluationsService->loadConfigData($configFilePath);
 
             $this->generateEvaluationsService->generate($configData, $cids, $versionNumber);
-
-            return 0;
+            $this->logger->addInfo('Evaluations generated successfully!');
+        } catch (FileException $ex) {
+            $this->logger->addCritical($ex->getMessage());
+            throw new FilesystemException($ex->getMessage());
         } catch (\Exception $ex) {
-            $this->logger->addCritical('Something went wrong while generating the evaluations');
-
-            return -2;
+            $this->logger->addCritical($ex->getMessage());
+            throw new LogicException($ex->getMessage());
         }
-        //todo catch load config data errors
-        //todo personalize errors for generate evaluations
     }
 }

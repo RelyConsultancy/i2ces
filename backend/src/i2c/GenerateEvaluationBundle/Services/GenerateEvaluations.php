@@ -7,6 +7,8 @@ use Doctrine\ORM\EntityManager;
 use Evaluation\EvaluationBundle\Entity\Chapter;
 use Evaluation\EvaluationBundle\Entity\Evaluation;
 use JMS\Serializer\Serializer;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -142,7 +144,15 @@ class GenerateEvaluations
 
     public function loadConfigData($jsonPath)
     {
+        $fs = new Filesystem();
+        if (!$fs->exists($jsonPath)) {
+            throw new FileException('No config file found for this version.');
+        }
+
         $jsonContent = file_get_contents($jsonPath);
+        if ($jsonContent === false) {
+            throw new FileException('There was a problem loading config data.');
+        }
 
         $config = json_decode($jsonContent, true);
 
