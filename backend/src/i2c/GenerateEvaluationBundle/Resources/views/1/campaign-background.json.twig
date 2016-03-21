@@ -65,13 +65,8 @@
                     "type": "list",
                     "items":
                     [
-                    {% set prepend_comma = false %}
                     {% for channel in channels %}
-                        {% if prepend_comma == true %}
-                        ,
-                        {% endif %}
-                        "{{ channel.channel }}"
-                        {% set prepend_comma = true %}
+                        "{{ channel.channel }}"{{ not loop.last ? ',' }}
                     {% endfor %}
                     ]
                 }
@@ -116,11 +111,7 @@
                     "type": "chart_time_range",
                     "items":
                     [
-                        {% set prepend_comma = false %}
                         {% for item in media_laydown %}
-                            {% if prepend_comma == true %}
-                                ,
-                            {% endif %}
                             {
                                 "label": "{{ item.media_label }}",
                                 "start": "{{ date(item.start_date)|date('Y-m-d') }}",
@@ -134,23 +125,16 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-
-                                {% set prepend_comma = true %}
-                            }
+                            }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ],
                     "legend":
                     [
-                        {% set prepend_comma = false %}
                         {% for legend_item in legend %}
-                            {% if prepend_comma == true %}
-                                ,
-                            {% endif %}
-                            {
+                        {
                             "label": "{{ legend_item.label }}",
                             "color": "{{ legend_item.color }}"
-                            }
-                            {% set prepend_comma = true %}
+                        }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ]
                 }
