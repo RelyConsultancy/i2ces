@@ -9,7 +9,12 @@ import csvParser from 'csv-parser'
 // thunk function to load and parse JSON
 const loadJSON = (file) => ((done) => {
   fs.readFile(file, 'utf8', (error, data) => {
-    done(null, JSON.parse(data))
+    try {
+      done(null, JSON.parse(data))
+    }
+    catch (error) {
+      done(error)
+    }
   })
 })
 
