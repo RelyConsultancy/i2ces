@@ -20,16 +20,11 @@
                 {
                     "type": "blocks",
                     "items": [
-                        {% set prepend_comma = false %}
                         {% for objective in objectives %}
-                            {% if prepend_comma == true %}
-                                ,
-                            {% endif %}
                             {
                                 "label": "{{ objective.label }}",
                                 "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                            }
-                            {% set prepend_comma = true %}
+                            }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ]
                 }
@@ -74,13 +69,8 @@
                     "type": "list",
                     "items":
                     [
-                    {% set prepend_comma = false %}
                     {% for channel in channels %}
-                        {% if prepend_comma == true %}
-                        ,
-                        {% endif %}
-                        "{{ channel.channel }}"
-                        {% set prepend_comma = true %}
+                        "{{ channel.channel }}"{{ not loop.last ? ',' }}
                     {% endfor %}
                     ]
                 }
@@ -125,11 +115,7 @@
                     "type": "chart_time_range",
                     "items":
                     [
-                        {% set prepend_comma = false %}
                         {% for item in media_laydown %}
-                            {% if prepend_comma == true %}
-                                ,
-                            {% endif %}
                             {
                                 "label": "{{ item.media_label }}",
                                 "start": "{{ date(item.start_date)|date('Y-m-d') }}",
@@ -143,23 +129,16 @@
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-
-                                {% set prepend_comma = true %}
-                            }
+                            }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ],
                     "legend":
                     [
-                        {% set prepend_comma = false %}
                         {% for legend_item in legend %}
-                            {% if prepend_comma == true %}
-                                ,
-                            {% endif %}
-                            {
+                        {
                             "label": "{{ legend_item.label }}",
                             "color": "{{ legend_item.color }}"
-                            }
-                            {% set prepend_comma = true %}
+                        }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ]
                 }

@@ -14,16 +14,11 @@
                     "label": "Campaign Objectives",
                     "items":
                     [
-                        {% set prepend_comma = false %}
                         {% for objective in objectives %}
-                            {% if prepend_comma == true %}
-                                ,
-                            {% endif %}
                             {
                                 "label": "{{ objective.label }}",
                                 "value": "{{ objective.value }}"
-                            }
-                            {% set prepend_comma = true %}
+                            }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ]
                 }

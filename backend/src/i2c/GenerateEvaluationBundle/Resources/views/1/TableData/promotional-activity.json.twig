@@ -1,14 +1,9 @@
 [
-    {% set prepend_comma = false %}
     {% for data in table_data %}
-        {% if prepend_comma == true %}
-            ,
-        {% endif %}
         {
             "date": "{{ data.start_date }}",
             "product": "{{ data.product }}",
             "results": "{{ data.results }}"
-        }
-        {% set prepend_comma = true %}
+        }{{ not loop.last ? ',' }}
     {% endfor %}
 ]
