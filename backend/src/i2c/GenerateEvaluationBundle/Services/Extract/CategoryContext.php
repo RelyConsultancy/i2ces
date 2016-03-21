@@ -126,4 +126,11 @@ class CategoryContext implements ExtractInterface
             $cid
         );
     }
+    public function getProductDefinitions($cid)
+    {
+        return sprintf(
+            'SELECT sku_name as sku from ie_offer_data where master_campaign_id = \'%s\'',
+            $cid
+        );
+    }
 }
