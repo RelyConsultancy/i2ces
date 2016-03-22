@@ -26,18 +26,22 @@ export default Component({
     const { component } = this.props
     const { isEditable } = this.state
     const html = component.content || ''
+    const className = isEditable ? style.block : style.info
+
+    // ignore empty strings
+    if (!html) return null
 
     let content = fmtHTML(html)
 
     if (isEditable) {
       content = Froala({
         content: html,
-        onChange: (e, editor, data) => {
+        onChange: (e, editor) => {
           component.content = editor.html.get()
         },
       })
     }
 
-    return B({ className: style.component }, content, this.renderToggle())
+    return B({ className }, content, this.renderToggle())
   }
 })

@@ -1,4 +1,4 @@
-.component {
+.block {
   position: relative;
 }
 
@@ -11,4 +11,14 @@
   font-size: .75rem;
   background-color: #43B5DB;
   cursor: pointer;
+}
+
+.info {
+  position: relative;
+  padding: .5rem .75rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: .75rem;
+  color: #fafafa;
+  background-color: #43B5DB;
 }

@@ -92,7 +92,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
             throw new FilesystemException($ex->getMessage());
         } catch (\Exception $ex) {
             $this->logger->addCritical($ex->getMessage());
-            throw new LogicException($ex->getMessage());
+            throw new LogicException("Something went wrong while generating the evaluations");
         }
     }
 }

@@ -18,9 +18,11 @@
 @import from './components/EvaluationDashboard/style.css';
 @import from './components/EvaluationChapters/style.css';
 
-@import from './components/SectionHTML/style.css';
-@import from './components/SectionTimings/style.css';
 @import from './components/SectionGallery/style.css';
+@import from './components/SectionHTML/style.css';
+@import from './components/SectionInfo/style.css';
+@import from './components/SectionTimings/style.css';
+@import from './components/SectionObjectives/style.css';
 
 @import from './components/ChartMediaLaydown/style.css';
 @import from './components/ChartSalesPerformance/style.css';

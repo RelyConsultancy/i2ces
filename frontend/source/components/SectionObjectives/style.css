@@ -1,0 +1,19 @@
+.list {
+  color: #6C6C6C;
+  font-size: .875em;
+}
+.list_item {
+  vertical-align: middle;
+  padding: .25em .75em 0;
+  line-height: 2.5em;
+  border-bottom: 1px solid #E6E6E6;
+}
+.list_header {
+  compose: list_item;
+  background-color: #FCFDFC;
+  border: 1px solid #E6E6E6;
+}
+.list_value {
+  font-family: 'Avenir LT Std 65 Medium';
+  float: right;
+}

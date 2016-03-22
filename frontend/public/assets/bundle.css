@@ -5241,6 +5241,26 @@ body.prevent-scroll.fr-mobile {
   margin-right: .5em;
 }
 
+._SectionGallery_style_gallery {
+  position: relative;
+}
+
+._SectionGallery_style_gallery a {
+  display: inline;
+}
+
+#react-images-container button:hover {
+  background: transparent;
+}
+
+._SectionGallery_style_loading {
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  font-size: .75em;
+  color: #43B5DB;
+}
+
 ._SectionHTML_style_component {
   position: relative;
 }
@@ -5251,9 +5271,34 @@ body.prevent-scroll.fr-mobile {
   top: -5em;
   padding: .5em 1em;
   color: #FFF;
-  font-size: .875em;
+  font-size: .75rem;
   background-color: #43B5DB;
   cursor: pointer;
+}
+
+._SectionInfo_style_block {
+  position: relative;
+}
+
+._SectionInfo_style_toggle {
+  position: absolute;
+  right: 0;
+  top: -5em;
+  padding: .5em 1em;
+  color: #FFF;
+  font-size: .75rem;
+  background-color: #43B5DB;
+  cursor: pointer;
+}
+
+._SectionInfo_style_info {
+  position: relative;
+  padding: .5rem .75rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: .75rem;
+  color: #fafafa;
+  background-color: #43B5DB;
 }
 
 ._SectionTimings_style_stages {
@@ -5278,24 +5323,26 @@ body.prevent-scroll.fr-mobile {
   width: 7rem;
 }
 
-._SectionGallery_style_gallery {
-  position: relative;
+._SectionObjectives_style_list {
+  color: #6C6C6C;
+  font-size: .875em;
 }
 
-._SectionGallery_style_gallery a {
-  display: inline;
+._SectionObjectives_style_list_item {
+  vertical-align: middle;
+  padding: .25em .75em 0;
+  line-height: 2.5em;
+  border-bottom: 1px solid #E6E6E6;
 }
 
-#react-images-container button:hover {
-  background: transparent;
+._SectionObjectives_style_list_header {
+  background-color: #FCFDFC;
+  border: 1px solid #E6E6E6;
 }
 
-._SectionGallery_style_loading {
-  position: relative;
-  padding: 1rem;
-  text-align: center;
-  font-size: .75em;
-  color: #43B5DB;
+._SectionObjectives_style_list_value {
+  font-family: 'Avenir LT Std 65 Medium';
+  float: right;
 }
 
 ._ChartMediaLaydown_style_chart {
@@ -5336,7 +5383,7 @@ body.prevent-scroll.fr-mobile {
   top: -4rem;
   padding: .5em 1em;
   color: #FFF;
-  font-size: .875em;
+  font-size: .75rem;
   background-color: #43B5DB;
   cursor: pointer;
 }
@@ -5439,7 +5486,7 @@ body.prevent-scroll.fr-mobile {
   top: -4rem;
   padding: .5em 1em;
   color: #FFF;
-  font-size: .875em;
+  font-size: .75rem;
   background-color: #43B5DB;
   cursor: pointer;
 }

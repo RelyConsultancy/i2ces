@@ -74285,7 +74285,7 @@ var loadCSS = exports.loadCSS = function loadCSS(path) {
   document.head.appendChild(link);
 };
 
-},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384,"moment":54}],329:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388,"moment":54}],329:[function(require,module,exports){
 'use strict';
 
 var _d = require('d3');
@@ -74484,7 +74484,7 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./d3_gantt.js":329,"./palette.js":331,"./style.css":332,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384,"c3":251,"d3":253,"object-assign":55,"pathseg":283}],331:[function(require,module,exports){
+},{"./d3_gantt.js":329,"./palette.js":331,"./style.css":332,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388,"c3":251,"d3":253,"object-assign":55,"pathseg":283}],331:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -74576,7 +74576,7 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":334,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Chart":330,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],334:[function(require,module,exports){
+},{"./style.css":334,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Chart":330,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],334:[function(require,module,exports){
 module.exports = {"chart":"_ChartMediaLaydown_style_chart","legend":"_ChartMediaLaydown_style_legend","legend_label":"_ChartMediaLaydown_style_legend_label","legend_color":"_ChartMediaLaydown_style_legend_color"}
 },{}],335:[function(require,module,exports){
 'use strict';
@@ -74653,7 +74653,7 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":336,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Chart":330,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],336:[function(require,module,exports){
+},{"./style.css":336,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Chart":330,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],336:[function(require,module,exports){
 module.exports = {"chart":"_ChartNonPurchase_style_chart","header":"_ChartNonPurchase_style_header"}
 },{}],337:[function(require,module,exports){
 'use strict';
@@ -74878,7 +74878,7 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":338,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Chart":330,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":354,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384,"d3":253}],338:[function(require,module,exports){
+},{"./style.css":338,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Chart":330,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":354,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388,"d3":253}],338:[function(require,module,exports){
 module.exports = {"component":"_ChartPromotionalActivity_style_component","component .froala-editor":"_ChartPromotionalActivity_style_component .froala-editor","toggle":"_ChartPromotionalActivity_style_toggle","loading":"_ChartPromotionalActivity_style_loading","info":"_ChartPromotionalActivity_style_info","comment":"_ChartPromotionalActivity_style_comment","chart":"_ChartPromotionalActivity_style_chart","chart_label":"_ChartPromotionalActivity_style_chart_label","chart .c3-legend-item":"_ChartPromotionalActivity_style_chart .c3-legend-item","chart .c3-region":"_ChartPromotionalActivity_style_chart .c3-region","chart .stage_during":"_ChartPromotionalActivity_style_chart .stage_during","stages":"_ChartPromotionalActivity_style_stages","stage":"_ChartPromotionalActivity_style_stage","stage_period":"_ChartPromotionalActivity_style_stage_period","stage_label":"_ChartPromotionalActivity_style_stage_label"}
 },{}],339:[function(require,module,exports){
 'use strict';
@@ -75102,7 +75102,7 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":340,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Chart":330,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":354,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384,"d3":253}],340:[function(require,module,exports){
+},{"./style.css":340,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Chart":330,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":354,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388,"d3":253}],340:[function(require,module,exports){
 module.exports = {"component":"_ChartSalesPerformance_style_component","component .froala-editor":"_ChartSalesPerformance_style_component .froala-editor","toggle":"_ChartSalesPerformance_style_toggle","loading":"_ChartSalesPerformance_style_loading","info":"_ChartSalesPerformance_style_info","comment":"_ChartSalesPerformance_style_comment","chart":"_ChartSalesPerformance_style_chart","chart_label":"_ChartSalesPerformance_style_chart_label","chart .c3-chart-texts .c3-text":"_ChartSalesPerformance_style_chart .c3-chart-texts .c3-text","chart .c3-axis-x text":"_ChartSalesPerformance_style_chart .c3-axis-x text","table":"_ChartSalesPerformance_style_table","table td":"_ChartSalesPerformance_style_table td","table_labels":"_ChartSalesPerformance_style_table_labels"}
 },{}],341:[function(require,module,exports){
 'use strict';
@@ -75180,7 +75180,7 @@ var Dashboard = (0, _component.Component)({
 
 exports.default = _store2.default.sync('dashboard', Dashboard);
 
-},{"./style.css":342,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Loader":373,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],342:[function(require,module,exports){
+},{"./style.css":342,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Loader":373,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],342:[function(require,module,exports){
 module.exports = {"component":"_Dashboard_style_component","content":"_Dashboard_style_content","topbar":"_Dashboard_style_topbar","logo":"_Dashboard_style_logo","loader":"_Dashboard_style_loader","links":"_Dashboard_style_links"}
 },{}],343:[function(require,module,exports){
 'use strict';
@@ -75357,7 +75357,7 @@ var EvaluationChapters = (0, _component.Component)({
 
 exports.default = _store2.default.sync('evaluation', EvaluationChapters);
 
-},{"./sections.js":344,"./style.css":345,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384,"element-scroll-to":254}],344:[function(require,module,exports){
+},{"./sections.js":344,"./style.css":345,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388,"element-scroll-to":254}],344:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -75397,6 +75397,14 @@ var _SectionGallery2 = _interopRequireDefault(_SectionGallery);
 var _SectionTimings = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionTimings');
 
 var _SectionTimings2 = _interopRequireDefault(_SectionTimings);
+
+var _SectionObjectives = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionObjectives');
+
+var _SectionObjectives2 = _interopRequireDefault(_SectionObjectives);
+
+var _SectionInfo = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionInfo');
+
+var _SectionInfo2 = _interopRequireDefault(_SectionInfo);
 
 var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
 
@@ -75493,6 +75501,14 @@ exports.default = function (_ref3) {
           return (0, _SectionTimings2.default)({ component: component });
           break;
 
+        case 'list_value':
+          return (0, _SectionObjectives2.default)({ component: component });
+          break;
+
+        case 'info':
+          return (0, _SectionInfo2.default)({ component: component, editable: editable, onSave: onSave });
+          break;
+
         case 'list':
           return List({ component: component });
           break;
@@ -75515,7 +75531,7 @@ exports.default = function (_ref3) {
   return _component.B.apply(undefined, [{ className: _style2.default.sections_content }].concat(_toConsumableArray(sections)));
 };
 
-},{"./style.css":345,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/ChartMediaLaydown":333,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/ChartNonPurchase":335,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/ChartPromotionalActivity":337,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/ChartSalesPerformance":339,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionGallery":375,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionHTML":377,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionTimings":379,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/TablePerformanceSamples":382,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],345:[function(require,module,exports){
+},{"./style.css":345,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/ChartMediaLaydown":333,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/ChartNonPurchase":335,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/ChartPromotionalActivity":337,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/ChartSalesPerformance":339,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionGallery":375,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionHTML":377,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionInfo":379,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionObjectives":381,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionTimings":383,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/TablePerformanceSamples":386,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],345:[function(require,module,exports){
 module.exports = {"no_data":"_EvaluationChapters_style_no_data","content":"_EvaluationChapters_style_content","links":"_EvaluationChapters_style_links","link":"_EvaluationChapters_style_link","chapter_links":"_EvaluationChapters_style_chapter_links","chapter_link":"_EvaluationChapters_style_chapter_link","chapter_link_active":"_EvaluationChapters_style_chapter_link_active _EvaluationChapters_style_chapter_link","chapter_initials":"_EvaluationChapters_style_chapter_initials","sections":"_EvaluationChapters_style_sections","ellipses":"_EvaluationChapters_style_ellipses","sections_title":"_EvaluationChapters_style_sections_title _EvaluationChapters_style_ellipses","sections_link":"_EvaluationChapters_style_sections_link","sections_active":"_EvaluationChapters_style_sections_active _EvaluationChapters_style_sections_link","sections_content":"_EvaluationChapters_style_sections_content","section":"_EvaluationChapters_style_section","section_title":"_EvaluationChapters_style_section_title","section_text":"_EvaluationChapters_style_section_text","section_list":"_EvaluationChapters_style_section_list","section_list_item":"_EvaluationChapters_style_section_list_item"}
 },{}],346:[function(require,module,exports){
 'use strict';
@@ -75674,7 +75690,7 @@ var Evaluation = (0, _component.Component)({
 
 exports.default = _store2.default.sync('evaluation', Evaluation);
 
-},{"./style.css":347,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Grid":372,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],347:[function(require,module,exports){
+},{"./style.css":347,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Grid":372,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],347:[function(require,module,exports){
 module.exports = {"header":"_EvaluationDashboard_style_header","no_data":"_EvaluationDashboard_style_no_data","content":"_EvaluationDashboard_style_content","content_wrap":"_EvaluationDashboard_style_content_wrap","links":"_EvaluationDashboard_style_links","link":"_EvaluationDashboard_style_link","date":"_EvaluationDashboard_style_date","date_value":"_EvaluationDashboard_style_date_value","list":"_EvaluationDashboard_style_list","list_title":"_EvaluationDashboard_style_list_title","list_item":"_EvaluationDashboard_style_list_item","chapters":"_EvaluationDashboard_style_chapters","chapter":"_EvaluationDashboard_style_chapter","chapter_arrow":"_EvaluationDashboard_style_chapter_arrow","chapter_initials":"_EvaluationDashboard_style_chapter_initials","result_label":"_EvaluationDashboard_style_result_label _EvaluationDashboard_style_list_item","result_value":"_EvaluationDashboard_style_result_value"}
 },{}],348:[function(require,module,exports){
 'use strict';
@@ -75805,7 +75821,7 @@ exports.default = function (_ref4) {
   return (0, _component.B)({ className: _style2.default.filters }, label, filters);
 };
 
-},{"./style.css":350,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Grid":372,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Select":381,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],349:[function(require,module,exports){
+},{"./style.css":350,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Grid":372,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Select":385,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],349:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -75904,7 +75920,7 @@ var Evaluations = (0, _component.Component)({
 
 exports.default = _store2.default.sync('evaluation', Evaluations);
 
-},{"./filters.js":348,"./style.css":350,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],350:[function(require,module,exports){
+},{"./filters.js":348,"./style.css":350,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],350:[function(require,module,exports){
 module.exports = {"content":"_EvaluationList_style_content","header":"_EvaluationList_style_header","filters":"_EvaluationList_style_filters","filters_label":"_EvaluationList_style_filters_label","list":"_EvaluationList_style_list","list_empty":"_EvaluationList_style_list_empty","item":"_EvaluationList_style_item","item_title":"_EvaluationList_style_item_title","item_date":"_EvaluationList_style_item_date","item_view":"_EvaluationList_style_item_view"}
 },{}],351:[function(require,module,exports){
 'use strict';
@@ -75948,7 +75964,7 @@ var FAQ = (0, _component.Component)({
 
 exports.default = _store2.default.sync('faq', FAQ);
 
-},{"./style.css":352,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],352:[function(require,module,exports){
+},{"./style.css":352,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],352:[function(require,module,exports){
 module.exports = {"component":"_FAQ_style_component","header":"_FAQ_style_header"}
 },{}],353:[function(require,module,exports){
 'use strict';
@@ -76145,7 +76161,7 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./froala.js":353,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384,"jquery":50,"object-assign":55,"react-dom":62}],355:[function(require,module,exports){
+},{"./froala.js":353,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388,"jquery":50,"object-assign":55,"react-dom":62}],355:[function(require,module,exports){
 "use strict";var _typeof=typeof Symbol==="function"&&typeof Symbol.iterator==="symbol"?function(obj){return typeof obj;}:function(obj){return obj&&typeof Symbol==="function"&&obj.constructor===Symbol?"symbol":typeof obj;}; /*!
  * froala_editor v2.2.2 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
@@ -78469,7 +78485,7 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],373:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],373:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -78493,7 +78509,7 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":374,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],374:[function(require,module,exports){
+},{"./style.css":374,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],374:[function(require,module,exports){
 module.exports = {"loader":"_Loader_style_loader","line1":"_Loader_style_line1","line2":"_Loader_style_line2","line3":"_Loader_style_line3","line4":"_Loader_style_line4","line5":"_Loader_style_line5"}
 },{}],375:[function(require,module,exports){
 'use strict';
@@ -78561,7 +78577,7 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":376,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384,"jquery":50,"react-photo-gallery":284}],376:[function(require,module,exports){
+},{"./style.css":376,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388,"jquery":50,"react-photo-gallery":284}],376:[function(require,module,exports){
 module.exports = {"gallery":"_SectionGallery_style_gallery","gallery a":"_SectionGallery_style_gallery a","loading":"_SectionGallery_style_loading"}
 },{}],377:[function(require,module,exports){
 'use strict';
@@ -78571,6 +78587,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js');
+
+var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
 
 var _Froala = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala');
 
@@ -78611,7 +78629,7 @@ exports.default = (0, _component.Component)({
 
     var html = component.content || '';
 
-    var content = (0, _component.B)({ dangerouslySetInnerHTML: { __html: html } });
+    var content = (0, _utils.fmtHTML)(html);
 
     if (isEditable) {
       content = (0, _Froala2.default)({
@@ -78626,9 +78644,118 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":378,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":354,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],378:[function(require,module,exports){
+},{"./style.css":378,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":354,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],378:[function(require,module,exports){
 module.exports = {"component":"_SectionHTML_style_component","toggle":"_SectionHTML_style_toggle"}
 },{}],379:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js');
+
+var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
+
+var _Froala = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala');
+
+var _Froala2 = _interopRequireDefault(_Froala);
+
+var _style = require('./style.css');
+
+var _style2 = _interopRequireDefault(_style);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _component.Component)({
+  renderToggle: function renderToggle() {
+    var _this = this;
+
+    var _props = this.props;
+    var editable = _props.editable;
+    var onSave = _props.onSave;
+    var isEditable = this.state.isEditable;
+
+    var label = isEditable ? 'Save' : 'Edit';
+
+    if (!editable) return null;
+
+    var onClick = function onClick() {
+      if (isEditable) onSave();
+      _this.setState({ isEditable: !isEditable });
+    };
+
+    return (0, _component.B)({ onClick: onClick, className: _style2.default.toggle }, label);
+  },
+  getInitialState: function getInitialState() {
+    return { isEditable: false };
+  },
+  render: function render() {
+    var component = this.props.component;
+    var isEditable = this.state.isEditable;
+
+    var html = component.content || '';
+    var className = isEditable ? _style2.default.block : _style2.default.info;
+
+    // ignore empty strings
+    if (!html) return null;
+
+    var content = (0, _utils.fmtHTML)(html);
+
+    if (isEditable) {
+      content = (0, _Froala2.default)({
+        content: html,
+        onChange: function onChange(e, editor) {
+          component.content = editor.html.get();
+        }
+      });
+    }
+
+    return (0, _component.B)({ className: className }, content, this.renderToggle());
+  }
+});
+
+},{"./style.css":380,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":354,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],380:[function(require,module,exports){
+module.exports = {"block":"_SectionInfo_style_block","toggle":"_SectionInfo_style_toggle","info":"_SectionInfo_style_info"}
+},{}],381:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js');
+
+var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
+
+var _style = require('./style.css');
+
+var _style2 = _interopRequireDefault(_style);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+exports.default = (0, _component.Component)({
+  render: function render() {
+    var component = this.props.component;
+
+    var header = (0, _component.B)({ className: _style2.default.list_header }, 'Campaign Objectives');
+
+    var items = component.items.map(function (item) {
+      var value = (0, _utils.fmtUnit)(item.value, item.unit);
+      var listValue = (0, _component.B)({ className: _style2.default.list_value }, value);
+
+      return (0, _component.B)({ className: _style2.default.list_item }, item.label, listValue);
+    });
+
+    return _component.B.apply(undefined, [{ className: _style2.default.list }, header].concat(_toConsumableArray(items)));
+  }
+});
+
+},{"./style.css":382,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],382:[function(require,module,exports){
+module.exports = {"list":"_SectionObjectives_style_list","list_item":"_SectionObjectives_style_list_item","list_header":"_SectionObjectives_style_list_header _SectionObjectives_style_list_item","list_value":"_SectionObjectives_style_list_value"}
+},{}],383:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -78664,9 +78791,9 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":380,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],380:[function(require,module,exports){
+},{"./style.css":384,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],384:[function(require,module,exports){
 module.exports = {"stages":"_SectionTimings_style_stages","stage":"_SectionTimings_style_stage","stage_period":"_SectionTimings_style_stage_period","stage_label":"_SectionTimings_style_stage_label"}
-},{}],381:[function(require,module,exports){
+},{}],385:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -78683,7 +78810,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _component.Element)(_reactSelect2.default);
 
-},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384,"react-select":106}],382:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388,"react-select":106}],386:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -78778,9 +78905,9 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":383,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":384}],383:[function(require,module,exports){
+},{"./style.css":387,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":388}],387:[function(require,module,exports){
 module.exports = {"component":"_TablePerformanceSamples_style_component","table_samples":"_TablePerformanceSamples_style_table_samples","table_samples td":"_TablePerformanceSamples_style_table_samples td","table_uplift":"_TablePerformanceSamples_style_table_uplift","table_uplift td":"_TablePerformanceSamples_style_table_uplift td","table_uplift_data":"_TablePerformanceSamples_style_table_uplift_data","table_uplift_data td":"_TablePerformanceSamples_style_table_uplift_data td","table_cell":"_TablePerformanceSamples_style_table_cell","table_head":"_TablePerformanceSamples_style_table_head","table_footer":"_TablePerformanceSamples_style_table_footer","table_footer td":"_TablePerformanceSamples_style_table_footer td","table_header":"_TablePerformanceSamples_style_table_header"}
-},{}],384:[function(require,module,exports){
+},{}],388:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -78840,7 +78967,7 @@ var TBody = exports.TBody = Element('tbody');
 var TR = exports.TR = Element('tr');
 var TD = exports.TD = Element('td');
 
-},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"react":239,"react-router":97,"react-textarea-autosize":319}],385:[function(require,module,exports){
+},{"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"react":239,"react-router":97,"react-textarea-autosize":319}],389:[function(require,module,exports){
 'use strict';
 
 var _reactDom = require('react-dom');
@@ -78876,4 +79003,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   }
 });
 
-},{"./application/actions.js":321,"./application/http.js":322,"./application/router.js":324,"./application/store.js":327,"./application/utils.js":328,"react-dom":62}]},{},[385]);
+},{"./application/actions.js":321,"./application/http.js":322,"./application/router.js":324,"./application/store.js":327,"./application/utils.js":328,"react-dom":62}]},{},[389]);
