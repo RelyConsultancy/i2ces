@@ -7,6 +7,7 @@
         {
             "type": "section",
             "title": "Performance",
+            "access": "readonly",
             "content":
             [
                 {
@@ -21,7 +22,8 @@
                             {% endif %}
                             {
                                 "label": "{{ objective.label }}",
-                                "value": "{{ objective.value }}"
+                                "value": "{{ objective.value }}",
+                                "unit": "{{ objective.unit }}"
                             }
                             {% set prepend_comma = true %}
                         {% endfor %}
@@ -32,6 +34,7 @@
         {
             "type": "section",
             "title": "Objectives",
+            "access": "editable",
             "content":
             [
                 {
@@ -43,6 +46,7 @@
         {
             "type": "section",
             "title": "Insight",
+            "access": "editable",
             "content":
             [
                 {
