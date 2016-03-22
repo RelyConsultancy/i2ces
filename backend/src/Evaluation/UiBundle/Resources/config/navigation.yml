@@ -23,6 +23,8 @@ oro_menu_config:
         dashboard_view:
             label: 'oro.dashboard.menu.dashboards_tab.label'
             uri: '/'
+            attributes:
+                class: 'no-hash'
 
     tree:
         application_menu:
