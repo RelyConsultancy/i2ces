@@ -66,10 +66,10 @@
   fill: none;
 }
 .chart .stage_during {
-  fill: #E3F2FD;
+  fill: #b7dee8; 
 }
 .chart .stage_during > rect {
-  fill-opacity: 1 !important;
+  fill-opacity: 1 !important; 
 }
 
 

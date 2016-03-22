@@ -52,8 +52,8 @@ const ActivityChart = ({ data, timings }) => {
       colors: {
           'Brand': '#ed7b29',
           'Offer': '#4f81bd',
-          'Competitor': '#9bbb59',
-      }
+          'Competitor': '#9bbb59', 
+      } 
     },
     axis: {
       x: {
