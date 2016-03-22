@@ -8,7 +8,8 @@
             {% endif %}
             {
                 "label": "{{ objective.label }}",
-                "value": "{{ objective.value }}"
+                "value": "{{ objective.value }}",
+                "unit": "{{ objective.unit }}"
             }
             {% set prepend_comma = true %}
         {% endfor %}
