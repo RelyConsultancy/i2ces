@@ -85,8 +85,16 @@ class GenerateEvaluations
                 'Evaluation\EvaluationBundle\Entity\Evaluation',
                 'json'
             );
+
+            /** @var Evaluation $existingEvaluation */
+            $existingEvaluation = $this->entityManager->getRepository('EvaluationEvaluationBundle:Evaluation')
+                ->findOneBy(['cid' => $cid]);
+            if (!is_null($existingEvaluation)) {
+                $evaluation = $existingEvaluation;
+            }
+
             $evaluation->setCid($cid);
-            $evaluation->setState("generating");
+            $evaluation->markAsGenerating();
 
             $chapters = [];
 
@@ -133,7 +141,7 @@ class GenerateEvaluations
 
             $this->updateChaptersLocation($evaluation);
 
-            $evaluation->setState('draft');
+            $evaluation->markAsDraft();
             $this->entityManager->persist($evaluation);
 
             $this->entityManager->flush();

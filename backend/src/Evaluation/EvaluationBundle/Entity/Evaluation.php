@@ -38,6 +38,7 @@ class Evaluation
 {
     const STATE_DRAFT = 'draft';
     const STATE_PUBLISHED = 'published';
+    const STATE_GENERATING = 'generating';
 
     /**
      * @var int
@@ -454,14 +455,62 @@ class Evaluation
     }
 
     /**
+     * Marks an evaluation as unpublished
+     */
+    public function markAsDraft()
+    {
+        $this->state = self::STATE_DRAFT;
+    }
+
+    /**
+     * Marks an evaluation as unpublished
+     */
+    public function markAsGenerating()
+    {
+        $this->state = self::STATE_GENERATING;
+    }
+
+    /**
+     * Marks an evaluation as unpublished
+     */
+    public function markAsPublished()
+    {
+        $this->state = self::STATE_PUBLISHED;
+    }
+
+    /**
      * @return bool
      */
     public function isPublished()
     {
-        if ($this->state == self::STATE_PUBLISHED) {
-            return true;
+        if (self::STATE_PUBLISHED != $this->state) {
+            return false;
         }
 
-        return false;
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDraft()
+    {
+        if (self::STATE_DRAFT != $this->state) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGenerating()
+    {
+        if (self::STATE_GENERATING != $this->state) {
+            return false;
+        }
+
+        return true;
     }
 }
