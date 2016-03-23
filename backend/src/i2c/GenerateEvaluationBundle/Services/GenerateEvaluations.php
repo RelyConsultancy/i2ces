@@ -36,6 +36,9 @@ class GenerateEvaluations
     /** @var  GenerateTableData */
     protected $generateTableDataService;
 
+    /** @var ChapterDiagramInterface[] */
+    protected $tableConfigServiceContainer;
+
     /**
      * GenerateEvaluations constructor.
      *
@@ -72,6 +75,16 @@ class GenerateEvaluations
         $this->extractServicesContainer[$serviceName] = $extractInterface;
     }
 
+    /**
+     * @param ChapterDiagramInterface $chapterDiagramInterface
+     * @param string                  $serviceName
+     */
+    public function addChapterDiagramConfigService(ChapterDiagramInterface $chapterDiagramInterface, $serviceName)
+    {
+        //TODO add coresponding services
+        $this->tableConfigServiceContainer[$serviceName] = $chapterDiagramInterface;
+    }
+
     public function generate($evaluationConfigs, $cids, $versionNumber)
     {
         foreach ($cids as $cid) {
@@ -104,7 +117,7 @@ class GenerateEvaluations
             foreach ($evaluationConfigs['chapters'] as $chapterConfig) {
                 $tableData = $this->generateTableDataService->generate(
                     $cid,
-                    $chapterConfig['table_config'],
+                    $this->getTableConfig($chapterConfig['table_config'], $cid), //TODO refactor master.json
                     $versionNumber,
                     $this->templatesPrefix
                 );
@@ -214,6 +227,17 @@ class GenerateEvaluations
     protected function getData($serviceName, $cid)
     {
         return $this->extractServicesContainer[$serviceName]->fetchAll($cid);
+    }
+
+    /**
+     * @param string $serviceName
+     * @param string $cid
+     *
+     * @return array
+     */
+    protected function getTableConfig($serviceName, $cid)
+    {
+        return $this->tableConfigServiceContainer[$serviceName]->getTableConfig($cid);
     }
 
     /**
