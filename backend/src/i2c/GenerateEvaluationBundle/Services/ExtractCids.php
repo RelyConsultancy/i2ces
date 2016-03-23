@@ -31,13 +31,33 @@ class ExtractCids
     }
 
     /**
-     * Returns an array of campaign ids to be generated.
+     * Returns an array of campaign ids that can be generated.
+     *
+     * @param array $cids            When empty, all the campaign ids will be used for the validation of eligible
+     *                               campaigns for generation, otherwise only the sent ones will be used
+     * @param bool  $includeExisting If false it will exclude the campaign ids that have already been generated
+     *
+     * @return array
+     */
+    public function getCampaignIdsEligibleForBeGenerated($cids = array(), $includeExisting = false)
+    {
+        if (empty($cids)) {
+            $cids = $this->getAllImportedCampaignIds();
+        }
+
+        $cids = $this->filterCampaignIds($cids, $includeExisting);
+
+        return $cids;
+    }
+
+    /**
+     * Returns an array of all the imported campaign ids.
      *
      * @return array
      *
      * @throws DBALException
      */
-    public function getAvailableCampaignCids()
+    protected function getAllImportedCampaignIds()
     {
         /** @var Connection $connection */
         $connection = $this->entityManager->getConnection();
@@ -50,13 +70,15 @@ class ExtractCids
     }
 
     /**
-     * Check if there is incomplete campaign data.
+     * Filters the campaign ids sent, excluding the ones that don't have enough data to be generated and in case the
+     * 'includeExisting' is sent as false, it will exclude the campaign ids that already have an evaluation generated
+     * for them
      *
      * @param array $cids
      *
      * @return array
      */
-    public function validateCids($cids, $includeExisting)
+    protected function filterCampaignIds($cids, $includeExisting)
     {
         $extraCondition = '';
 
@@ -65,7 +87,7 @@ class ExtractCids
         }
 
         if (!$includeExisting) {
-            $extraCondition = 'and cd.master_campaign_id NOT IN (
+            $extraCondition = 'AND cd.master_campaign_id NOT IN (
                     SELECT cid FROM evaluation
                   )
                 ';
@@ -83,25 +105,6 @@ class ExtractCids
             $extraCondition
         );
         $cids = $connection->query($query)->fetchAll(PDO::FETCH_COLUMN);
-
-        return $cids;
-    }
-
-    /**
-     * Returns an array of campaign ids that can be generated.
-     *
-     * @param array $cids
-     * @param bool  $includeExisting
-     *
-     * @return array
-     */
-    public function getCampaignCidsToBeGenerated($cids = array(), $includeExisting = false)
-    {
-        if (empty($cids)) {
-            $cids = $this->getAvailableCampaignCids();
-        }
-
-        $cids = $this->validateCids($cids, $includeExisting);
 
         return $cids;
     }

@@ -173,11 +173,12 @@ class GenerateEvaluations
      */
     protected function removeExistingEvaluationChapters(Evaluation $evaluation)
     {
+        $conn = $this->entityManager->getConnection();
+        $chapter = $evaluation->getChapters();
         /** @var Chapter $chapter */
-        foreach ($evaluation->getChapters() as $chapter) {
-            $conn = $this->entityManager->getConnection();
+        foreach ($chapter as $chapter) {
             $query = sprintf(
-                'Delete from evaluation_chapters where chapter_id=\'%s\'',
+                'DELETE FROM evaluation_chapters WHERE chapter_id=\'%s\'',
                 $chapter->getId()
             );
             $conn->exec($query);

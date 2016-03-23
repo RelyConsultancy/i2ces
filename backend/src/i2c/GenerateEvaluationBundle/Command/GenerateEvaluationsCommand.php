@@ -27,6 +27,9 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
     /** @var  ExtractCids */
     protected $extractCidsService;
 
+    /** @var  Logger */
+    protected $logger;
+
     /**
      * GenerateEvaluationsCommand constructor.
      *
@@ -57,7 +60,28 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
         $this->setName('i2c:evaluation:generate')
              ->setDescription(
                  'This command will receive a version number and will generate all the evaluations corresponding to the
-                 configs in the master.json for that version'
+configs in the master.json for that version
+
+Usage examples:
+
+<info>Generate all evaluations that have been imported but haven\'t been generated yet</info>
+
+<question>php app/console i2c:evaluation:generate --version-number=1</question>
+
+<info>Generate all that have been imported and update any already generated evaluations</info>
+
+<question>php app/console i2c:evaluation:generate --version-number=1 --update-existing=true</question>
+
+<info>Only import some specific evaluation without updating already imported ones</info>
+<comment>Evaluations imported are: i2c1510047a, i2c1510047a, i2c1510047a</comment>
+
+<question>php app/console i2c:evaluation:generate --version-number=1 i2c1510047a i2c1510047a i2c1510047a</question>
+
+<info>Only import some specific evaluation and update already imported ones</info>
+<comment>Evaluations imported are: i2c1510047a, i2c1510047a</comment>
+
+<question>php app/console i2c:evaluation:generate --version-number=1 i2c1510047a i2c1510047a</question>
+                 '
              )
              ->addOption(
                  'version-number',
@@ -98,7 +122,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
             }
 
             $versionNumber = (int) $versionNumber;
-            $cids = $this->extractCidsService->getCampaignCidsToBeGenerated(
+            $cids = $this->extractCidsService->getCampaignIdsEligibleForBeGenerated(
                 $input->getArgument('cids'),
                 $input->getOption('update-existing')
             );
