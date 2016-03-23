@@ -91,6 +91,7 @@ class GenerateEvaluations
                 ->findOneBy(['cid' => $cid]);
             if (!is_null($existingEvaluation)) {
                 $evaluation = $existingEvaluation;
+                $this->removeExistingEvaluationChapters($evaluation);
             }
 
             $evaluation->setCid($cid);
@@ -155,6 +156,22 @@ class GenerateEvaluations
         $config = json_decode($jsonContent, true);
 
         return $config;
+    }
+
+    /**
+     * @param Evaluation $evaluation
+     */
+    protected function removeExistingEvaluationChapters(Evaluation $evaluation)
+    {
+        /** @var Chapter $chapter */
+        foreach ($evaluation->getChapters() as $chapter) {
+            $conn = $this->entityManager->getConnection();
+            $query = sprintf(
+                'Delete from evaluation_chapters where chapter_id=\'%s\'',
+                $chapter->getId()
+            );
+            $conn->exec($query);
+        }
     }
 
     /**
