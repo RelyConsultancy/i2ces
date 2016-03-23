@@ -1,0 +1,3 @@
+services:
+    i2c_me.business_unit_service:
+        class: i2c\MeBundle\Services\BusinessUnit

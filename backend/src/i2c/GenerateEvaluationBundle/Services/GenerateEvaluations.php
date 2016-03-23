@@ -4,8 +4,8 @@ namespace i2c\GenerateEvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
-use Evaluation\EvaluationBundle\Entity\Chapter;
-use Evaluation\EvaluationBundle\Entity\Evaluation;
+use i2c\EvaluationBundle\Entity\Chapter;
+use i2c\EvaluationBundle\Entity\Evaluation;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -84,7 +84,7 @@ class GenerateEvaluations
             /** @var Evaluation $evaluation */
             $evaluation = $this->serializer->deserialize(
                 $evaluationJson,
-                'Evaluation\EvaluationBundle\Entity\Evaluation',
+                'i2c\EvaluationBundle\Entity\Evaluation',
                 'json'
             );
             $evaluation->setCid($cid);
@@ -119,7 +119,7 @@ class GenerateEvaluations
                 /** @var Chapter $chapter */
                 $chapter = $this->serializer->deserialize(
                     $chapterJson,
-                    'Evaluation\EvaluationBundle\Entity\Chapter',
+                    'i2c\EvaluationBundle\Entity\Chapter',
                     'json'
                 );
                 $this->entityManager->persist($chapter);

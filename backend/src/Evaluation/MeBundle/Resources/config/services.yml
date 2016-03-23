@@ -1,3 +1,0 @@
-services:
-    evaluation_me.business_unit_service:
-        class: Evaluation\MeBundle\Services\BusinessUnit

@@ -5,13 +5,13 @@ parameters:
                 name: Supplier
                 identifier: ROLE_SUPPLIER
                 access:
-                    oid: 'Entity:EvaluationEvaluationBundle:Evaluation'
+                    oid: 'Entity:i2cEvaluationBundle:Evaluation'
                     permissions: [64] # EntityMaskBuilder::MASK_VIEW_LOCAL
             employee:
                 name: i2c Employee
                 identifier: ROLE_EMPLOYEE
                 access:
-                    oid: 'Entity:EvaluationEvaluationBundle:Evaluation'
+                    oid: 'Entity:i2cEvaluationBundle:Evaluation'
                     permissions: [64, 256] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
         suppliers:
             dummy_one:
