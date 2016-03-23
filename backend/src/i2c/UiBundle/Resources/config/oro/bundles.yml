@@ -1,0 +1,2 @@
+bundles:
+    - i2c\UiBundle\i2cUiBundle

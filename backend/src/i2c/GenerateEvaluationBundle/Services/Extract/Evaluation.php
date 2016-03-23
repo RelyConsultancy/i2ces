@@ -73,12 +73,13 @@ class Evaluation implements ExtractInterface
         );
     }
 
-    //todo refactor this to follow the matching algorith that will be provided by i2c for suppliers and campaigns
     public function getSupplier($cid)
     {
         return sprintf(
-            'SELECT id as id from oro_business_unit
-            '
+            'SELECT bu.id AS id FROM ie_campaign_data AS cd
+             JOIN oro_business_unit AS bu ON (cd.supplier = bu.name)
+             WHERE cd.master_campaign_id = \'%s\'',
+            $cid
         );
     }
 }

@@ -1,0 +1,127 @@
+[
+    {
+        "type": "section",
+        "title": "Background",
+        "access": "editable",
+        "content": [
+            {
+                "type": "html",
+                "value": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Campaign Objectives",
+        "access": "editable",
+        "content": [
+            {
+                "type": "blocks",
+                "items": [
+                    {% for objective in campaignObjectives %}
+                        {
+                            "label": "{{ objective }}",
+                            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        }{{ not loop.last ? ',' }}
+                    {% endfor %}
+                ]
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Timings",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "list",
+                "items": [
+                    "{{ timings | join('","') | raw }}"
+                ]
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Evaluated Channels",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "list",
+                "items": [
+                    "{{ evaluatedChannels | join('","') | raw }}"
+                ]
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Evaluated Cost",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "list",
+                "items": [
+                    "GBP {{ evaluatedCost | join('","') | raw }}"
+                ]
+            }
+        ]
+    },
+    {
+        "type": "section",
+        "title": "Offer SKUs",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "text",
+                "value": "Please see Product Definitions"
+            }
+        ]
+    },
+    {
+        {% set legend = [] %}
+        {% set usedColors = [] %}
+        "type": "section",
+        "title": "Media Laydown",
+        "access": "readonly",
+        "content": [
+            {
+                "type": "chart_time_range",
+                "items": [
+
+                    {% for item in mediaLaydownItems %}
+                        {
+                        "label": "{{ item.media_label }}",
+                        "start": "{{ item.start_date }}",
+                        "end": "{{ item.end_date }}",
+
+                        {% for media_laydown_config in mediaLaydownConfigs %}
+                            {% if item.media_label in media_laydown_config.media %}
+                                "marker": "{{ media_laydown_config.color }}"
+                                {% if media_laydown_config.color not in usedColors %}
+                                    {% set legend = legend|merge([
+                                        {
+
+                                            color: media_laydown_config.color,
+                                            label: media_laydown_config.label
+                                        }
+                                    ]) %}
+                                    {% set usedColors = usedColors|merge([media_laydown_config.color]) %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    }{{ not loop.last ? ',' }}
+                    {% endfor %}
+                ],
+                "legend": [
+                    {% for legend_item in legend %}
+                        {
+                            "label": "{{ legend_item.label }}",
+                            "color": "{{ legend_item.color }}"
+                        }{{ not loop.last ? ',' }}
+                    {% endfor %}
+                ]
+            }
+        ]
+    }
+]

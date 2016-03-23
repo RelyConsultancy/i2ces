@@ -27,6 +27,12 @@ class InitialSetupCommand extends ContainerAwareCommand
     /** @var UserManager */
     protected $userManager;
 
+    /**
+     * InitialSetupCommand constructor.
+     *
+     * @param null|string $initialSetupConfig
+     * @param UserManager $userManager
+     */
     public function __construct($initialSetupConfig, UserManager $userManager)
     {
         $this->initialSetupConfig = $initialSetupConfig;
@@ -65,7 +71,8 @@ class InitialSetupCommand extends ContainerAwareCommand
 
         $this->createDummySuppliers();
 
-        $output->writeln("Initial setup completed successfully");
+        $logger = $container->get('logger');
+        $logger->addInfo("Initial setup completed successfully");
     }
 
     /**

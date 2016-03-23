@@ -1,0 +1,2 @@
+bundles:
+    - i2c\FileUploadBundle\i2cFileUploadBundle

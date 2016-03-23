@@ -4,13 +4,13 @@ imports:
 services:
     i2c_generate_evaluation.raw_import:
         class: i2c\GenerateEvaluationBundle\Command\RawImportCommand
-        arguments: [%raw_tables_config%]
+        arguments: [%raw_tables_config%, @monolog.logger]
         tags:
             - { name: console.command }
 
     i2c_generate_evaluation.evaluation_generate_command:
         class: i2c\GenerateEvaluationBundle\Command\GenerateEvaluationsCommand
-        arguments: [@i2c_generate_evaluation.evaluation_generate_service, %evaluation_templates_folder_path%, @i2c_generate_evaluation.extract_cids]
+        arguments: [@i2c_generate_evaluation.evaluation_generate_service, %evaluation_templates_folder_path%, @i2c_generate_evaluation.extract_cids, @monolog.logger]
         tags:
             - { name: console.command }
 
@@ -74,7 +74,7 @@ services:
         class: i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext\SalesPerformance
         arguments: [@doctrine]
 
-    i2c_generate_evaluation.import_date:
+    i2c_generate_evaluation.import_data:
         class: i2c\GenerateEvaluationBundle\Services\ImportData
         arguments: [@doctrine]
         calls:
