@@ -19,13 +19,8 @@
             "content": [{
                     "type": "list",
                     "items": [
-                        {% set prepend_comma = false %}
                         {% for objective in objectives %}
-                            {% if prepend_comma == true %}
-                                ,
-                            {% endif %}
-                            "{{ objective.label }}"
-                            {% set prepend_comma = true %}
+                            "{{ objective.label }}"{{ not loop.last ? ',' }}
                         {% endfor %}
                     ]
                 }
@@ -70,13 +65,8 @@
                     "type": "list",
                     "items":
                     [
-                    {% set prepend_comma = false %}
                     {% for channel in channels %}
-                        {% if prepend_comma == true %}
-                        ,
-                        {% endif %}
-                        "{{ channel.channel }}"
-                        {% set prepend_comma = true %}
+                        "{{ channel.channel }}"{{ not loop.last ? ',' }}
                     {% endfor %}
                     ]
                 }
@@ -118,44 +108,33 @@
             "content":
             [
                 {
-                    "type": "chart_media_laydown",
+                    "type": "chart_time_range",
                     "items":
                     [
-                        {% set prepend_comma = false %}
                         {% for item in media_laydown %}
-                            {% if prepend_comma == true %}
-                                ,
-                            {% endif %}
                             {
-                                "type": "media",
                                 "label": "{{ item.media_label }}",
                                 "date_start": "{{ date(item.start_date)|date('Y-m-d') }}",
-                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}"
+                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}",
                                 {% for color_config in additional_data.colors_config %}
                                     {% if item.media_label in color_config.media %}
+                                        "marker": "{{ color_config.color }}"
                                         {% if color_config.color not in usedColors %}
                                             {% set legend = legend|merge([{color: color_config.color,label: color_config.label}]) %}
                                             {% set usedColors = usedColors|merge([color_config.color]) %}
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
-
-                                {% set prepend_comma = true %}
-                            }
+                            }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ],
                     "legend":
                     [
-                        {% set prepend_comma = false %}
                         {% for legend_item in legend %}
-                            {% if prepend_comma == true %}
-                                ,
-                            {% endif %}
-                            {
+                        {
                             "label": "{{ legend_item.label }}",
                             "color": "{{ legend_item.color }}"
-                            }
-                            {% set prepend_comma = true %}
+                        }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ]
                 }

@@ -4,9 +4,11 @@ namespace i2c\GenerateEvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
-use Evaluation\EvaluationBundle\Entity\Chapter;
-use Evaluation\EvaluationBundle\Entity\Evaluation;
+use i2c\EvaluationBundle\Entity\Chapter;
+use i2c\EvaluationBundle\Entity\Evaluation;
 use JMS\Serializer\Serializer;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
@@ -44,7 +46,7 @@ class GenerateEvaluations
      * @param GenerateTableData $generateTableDataService
      */
     public function __construct(
-        $templateRenderer,
+        EngineInterface $templateRenderer,
         Registry $registry,
         Serializer $serializer,
         $templatesPrefix,
@@ -82,7 +84,7 @@ class GenerateEvaluations
             /** @var Evaluation $evaluation */
             $evaluation = $this->serializer->deserialize(
                 $evaluationJson,
-                'Evaluation\EvaluationBundle\Entity\Evaluation',
+                'i2c\EvaluationBundle\Entity\Evaluation',
                 'json'
             );
             $evaluation->setCid($cid);
@@ -117,7 +119,7 @@ class GenerateEvaluations
                 /** @var Chapter $chapter */
                 $chapter = $this->serializer->deserialize(
                     $chapterJson,
-                    'Evaluation\EvaluationBundle\Entity\Chapter',
+                    'i2c\EvaluationBundle\Entity\Chapter',
                     'json'
                 );
                 $this->entityManager->persist($chapter);
@@ -142,7 +144,15 @@ class GenerateEvaluations
 
     public function loadConfigData($jsonPath)
     {
+        $fs = new Filesystem();
+        if (!$fs->exists($jsonPath)) {
+            throw new FileException('No config file found for this version.');
+        }
+
         $jsonContent = file_get_contents($jsonPath);
+        if ($jsonContent === false) {
+            throw new FileException('There was a problem loading config data.');
+        }
 
         $config = json_decode($jsonContent, true);
 

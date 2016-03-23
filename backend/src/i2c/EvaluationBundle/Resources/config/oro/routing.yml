@@ -1,0 +1,34 @@
+i2c_evaluation.get_evaluations_by_cid_minimal:
+    path: /api/evaluations
+    methods: [POST]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:getEvaluationsByCidMinimal }
+
+i2c_evaluation.get_evaluation_by_cid:
+    path: /api/evaluations/{evaluationCid}
+    methods: [GET]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:getEvaluationByCid }
+
+i2c_evaluation.get_table_data:
+    path: /api/evaluations/{evaluationCid}/dataset/{tableDataId}
+    methods: [GET]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:getTableData }
+
+i2c_evaluation.publish_evaluation:
+    path: /api/evaluations/{evaluationCid}/publish
+    methods: [POST]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:markEvaluationAsPublished }
+
+i2c_evaluation.unpublish_evaluation:
+    path: /api/evaluations/{evaluationCid}/unpublish
+    methods: [POST]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:markEvaluationAsDraft }
+
+i2c_evaluation.get_evaluation_chapter_by_id:
+    path: /api/evaluations/{evaluationCid}/chapters/{chapterId}
+    methods: [GET]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:getChapterById }
+
+i2c_evaluation.update_evaluation_chapter:
+    path: /api/evaluations/{evaluationCid}/chapters/{chapterId}
+    methods: [POST]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:updateChapter }

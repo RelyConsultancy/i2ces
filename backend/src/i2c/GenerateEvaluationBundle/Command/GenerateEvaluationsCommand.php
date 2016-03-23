@@ -2,15 +2,13 @@
 
 namespace i2c\GenerateEvaluationBundle\Command;
 
-use Doctrine\ORM\EntityManager;
-use Evaluation\EvaluationBundle\Entity\Chapter;
-use Evaluation\EvaluationBundle\Entity\Evaluation;
 use i2c\GenerateEvaluationBundle\Services\GenerateEvaluations;
-use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
+use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 /**
  * Class GenerateEvaluationsCommand
@@ -24,10 +22,18 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
     /** @var  string */
     protected $versionsFolderPath;
 
-    public function __construct(GenerateEvaluations $generateEvaluations, $versionsFolderPath)
+    /**
+     * GenerateEvaluationsCommand constructor.
+     *
+     * @param GenerateEvaluations $generateEvaluations
+     * @param string              $versionsFolderPath
+     * @param Logger              $logger
+     */
+    public function __construct(GenerateEvaluations $generateEvaluations, $versionsFolderPath, Logger $logger)
     {
         $this->versionsFolderPath = $versionsFolderPath;
         $this->generateEvaluationsService = $generateEvaluations;
+        $this->logger = $logger;
 
         parent::__construct();
     }
@@ -54,22 +60,21 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
      * @param OutputInterface $output
      *
      * @return null|int null or 0 if everything went fine, or an error code
+     * @throws \RuntimeException|\LogicException
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         try {
             $versionNumber = $input->getOption('version-number');
 
-            if (is_numeric($versionNumber)) {
-                $versionNumber = (int) $versionNumber;
-            } else {
-                $output->writeln('The "version-number" must be a numeric value');
-
-                return -1;
+            if (!is_numeric($versionNumber)) {
+                throw new \Exception('The "version-number" must be a numeric value');
             }
 
-            //todo inject the service that handles cids and add the cids array input option
-            $cids = ["i2c1510047a","i2c1509134a","i2c1507187a"];
+            $versionNumber = (int) $versionNumber;
+            $cids = $this->getContainer()
+                ->get('i2c_generate_evaluation.extract_cids')
+                ->getCampaignCidsToBeGenerated();
 
             $configFilePath = sprintf(
                 '%s/%s/master.json',
@@ -80,14 +85,15 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
 
             $this->generateEvaluationsService->generate($configData, $cids, $versionNumber);
 
-            return 0;
+            $successMessage = 'Evaluations generated successfully!';
+            $this->logger->addInfo($successMessage);
+            $output->writeln($successMessage);
+        } catch (FileException $ex) {
+            $this->logger->addCritical($ex->getTraceAsString());
+            throw new \RuntimeException($ex->getMessage());
         } catch (\Exception $ex) {
-            $output->writeln("Something went wrong while generating the evaluations");
-
-            $output->writeln($ex->getMessage());
-            return -2;
+            $this->logger->addCritical($ex->getTraceAsString());
+            throw new \LogicException('Something went wrong while generating the evaluations');
         }
-        //todo catch load config data errors
-        //todo personalize errors for generate evaluations
     }
 }

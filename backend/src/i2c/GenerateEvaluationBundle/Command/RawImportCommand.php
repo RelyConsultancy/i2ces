@@ -2,6 +2,7 @@
 
 namespace i2c\GenerateEvaluationBundle\Command;
 
+use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -19,14 +20,19 @@ class RawImportCommand extends ContainerAwareCommand
     /** @var array */
     protected $rawTablesConfig;
 
+    /** @var Logger */
+    protected $logger;
+
     /**
      * RawImportCommand constructor.
      *
-     * @param array $rawTablesConfig
+     * @param array  $rawTablesConfig
+     * @param Logger $logger
      */
-    public function __construct($rawTablesConfig)
+    public function __construct($rawTablesConfig, Logger $logger)
     {
         $this->rawTablesConfig = $rawTablesConfig;
+        $this->logger = $logger;
 
         parent::__construct("i2c:data-import");
     }
@@ -67,6 +73,7 @@ class RawImportCommand extends ContainerAwareCommand
      * @param OutputInterface $output
      *
      * @return null|int null or 0 if everything went fine, or an error code
+     * @throws \RuntimeException
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -78,12 +85,15 @@ class RawImportCommand extends ContainerAwareCommand
             );
 
             $this->getContainer()
-                ->get('i2c_generate_evaluation.import_date')
+                ->get('i2c_generate_evaluation.import_data')
                 ->import($importOptions, $this->rawTablesConfig);
 
-            $output->writeln('Import finished successfully!');
+            $successMessage = 'Import finished successfully!';
+            $this->logger->addInfo($successMessage);
+            $output->writeln($successMessage);
         } catch (\PDOException $ex) {
-            $output->writeln($ex->getMessage());
+            $this->logger->addCritical($ex->getTraceAsString());
+            throw new \RuntimeException($ex->getMessage());
         }
     }
 }

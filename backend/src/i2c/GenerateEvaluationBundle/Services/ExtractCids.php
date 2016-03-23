@@ -67,11 +67,11 @@ class ExtractCids
                 'SELECT DISTINCT cd.master_campaign_id
                  FROM ie_campaign_data AS cd
                  JOIN ie_results_data AS rd ON (cd.master_campaign_id = rd.master_campaign_id)
-                  WHERE cd.master_campaign_id IN (%s)
+                  WHERE cd.master_campaign_id IN (\'%s\')
                    AND cd.master_campaign_id NOT IN (
                     SELECT cid FROM evaluation
                   )',
-                implode(',', $cids)
+                implode('\', \'', $cids)
             );
             $cids = $connection->query($query)->fetchAll(PDO::FETCH_COLUMN);
         }

@@ -55,13 +55,8 @@
                 "type": "list",
                 "items":
                 [
-                    {% set prepend_comma = false %}
                     {% for definition in product_definitions %}
-                        {% if prepend_comma == true %}
-                            ,
-                        {% endif %}
-                        "{{ definition.sku|replace({'\r':''}) }}"
-                        {% set prepend_comma = true %}
+                        "{{ definition.sku|replace({'\r':''}) }}"{{ not loop.last ? ',' }}
                     {% endfor %}
                 ]
             }]

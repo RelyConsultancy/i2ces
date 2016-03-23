@@ -1,13 +1,8 @@
 {
     "content":
     [
-        {% set prepend_comma = false %}
         {% for channel in channels %}
-            {% if prepend_comma == true %}
-            ,
-            {% endif %}
-        "{{ channel.label }}"
-        {% set prepend_comma = true %}
+        "{{ channel.label }}"{{ not loop.last ? ',' }}
         {% endfor %}
     ],
     "is_additional_data": true,

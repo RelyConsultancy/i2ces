@@ -4,7 +4,7 @@ namespace i2c\GenerateEvaluationBundle\Services;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
-use Evaluation\EvaluationBundle\Entity\TableData;
+use i2c\EvaluationBundle\Entity\TableData;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Templating\EngineInterface;
 

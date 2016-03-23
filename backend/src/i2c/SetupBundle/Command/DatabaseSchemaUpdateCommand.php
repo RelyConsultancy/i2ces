@@ -4,6 +4,7 @@ namespace i2c\SetupBundle\Command;
 
 use Doctrine\DBAL\DBALException;
 use i2c\SetupBundle\Services\SchemaUpdate;
+use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -19,15 +20,20 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
     /** @var SchemaUpdate */
     protected $schemaUpdateService;
 
+    /** @var Logger */
+    protected $logger;
+
     /**
      * DatabaseSchemaUpdateCommand constructor.
      *
      * @param SchemaUpdate $schemaUpdateService
+     * @param Logger       $logger
      */
-    public function __construct(SchemaUpdate $schemaUpdateService)
+    public function __construct(SchemaUpdate $schemaUpdateService, Logger $logger)
     {
         parent::__construct(null);
         $this->schemaUpdateService = $schemaUpdateService;
+        $this->logger = $logger;
     }
 
     /**
@@ -49,6 +55,7 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
      * @param OutputInterface $output
      *
      * @return null|int null or 0 if everything went fine, or an error code
+     * @throws \LogicException|\RuntimeException
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -56,15 +63,16 @@ class DatabaseSchemaUpdateCommand extends ContainerAwareCommand
             $version = $input->getOption('version-number');
             $fileName = $input->getOption('filename');
             $result = $this->schemaUpdateService->update($version, $fileName);
-            $output->writeln(
-                sprintf('Schemas were updated successfully for version \'%s\'!', $result)
-            );
-        } catch (DBALException $ex) {
-            $output->writeln($ex->getMessage());
-        } catch (\Exception $ex) {
-            $output->writeln($ex->getMessage());
-        }
 
-        return 0;
+            $successMessage = sprintf('Schemas were updated successfully for version \'%s\'!', $result);
+            $this->logger->addInfo($successMessage);
+            $output->writeln($successMessage);
+        } catch (DBALException $ex) {
+            $this->logger->addCritical($ex->getTraceAsString());
+            throw new \RuntimeException($ex->getMessage());
+        } catch (\Exception $ex) {
+            $this->logger->addCritical($ex->getTraceAsString());
+            throw new \LogicException($ex->getMessage());
+        }
     }
 }
