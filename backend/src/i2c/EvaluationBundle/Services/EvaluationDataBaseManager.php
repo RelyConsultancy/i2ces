@@ -14,10 +14,10 @@ use Oro\Bundle\SecurityBundle\ORM\Walker\AclHelper;
  */
 class EvaluationDataBaseManager
 {
-    /** @var AclHelper  */
+    /** @var AclHelper */
     protected $aclHelper;
 
-    /** @var EntityManager  */
+    /** @var EntityManager */
     protected $entityManager;
 
     /**
@@ -39,7 +39,11 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-            ->from('i2cEvaluationBundle:Evaluation', 'e');
+                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->where(
+                         $queryBuilder->expr()->in('e.state', '?1')
+                     )
+                     ->setParameter(1, [Evaluation::STATE_DRAFT, Evaluation::STATE_PUBLISHED]);
 
         $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
 
@@ -55,9 +59,9 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-            ->from('i2cEvaluationBundle:Evaluation', 'e')
-            ->where($queryBuilder->expr()->neq('e.state', '?1'))
-            ->setParameter(1, Evaluation::STATE_PUBLISHED);
+                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->where($queryBuilder->expr()->eq('e.state', '?1'))
+                     ->setParameter(1, Evaluation::STATE_DRAFT);
 
         $query = $this->aclHelper->apply($queryBuilder, 'EDIT');
 
@@ -75,9 +79,9 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-            ->from('i2cEvaluationBundle:Evaluation', 'e')
-            ->where($queryBuilder->expr()->in('e.cid', '?1'))
-            ->setParameter(1, $uids);
+                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->where($queryBuilder->expr()->in('e.cid', '?1'))
+                     ->setParameter(1, $uids);
 
 
         $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
@@ -96,9 +100,9 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-            ->from('i2cEvaluationBundle:Evaluation', 'e')
-            ->where($queryBuilder->expr()->eq('e.cid', '?1'))
-            ->setParameter(1, $uid);
+                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->where($queryBuilder->expr()->eq('e.cid', '?1'))
+                     ->setParameter(1, $uid);
 
         $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
 
@@ -116,9 +120,9 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-            ->from('i2cEvaluationBundle:Evaluation', 'e')
-            ->where($queryBuilder->expr()->eq('e.cid', '?1'))
-            ->setParameter(1, $uid);
+                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->where($queryBuilder->expr()->eq('e.cid', '?1'))
+                     ->setParameter(1, $uid);
 
         $query = $this->aclHelper->apply($queryBuilder, 'EDIT');
 

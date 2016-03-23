@@ -10,7 +10,7 @@ services:
 
     i2c_generate_evaluation.evaluation_generate_command:
         class: i2c\GenerateEvaluationBundle\Command\GenerateEvaluationsCommand
-        arguments: [@i2c_generate_evaluation.evaluation_generate_service, %evaluation_templates_folder_path%, @monolog.logger]
+        arguments: [@i2c_generate_evaluation.evaluation_generate_service, %evaluation_templates_folder_path%, @i2c_generate_evaluation.extract_cids, @monolog.logger]
         tags:
             - { name: console.command }
 

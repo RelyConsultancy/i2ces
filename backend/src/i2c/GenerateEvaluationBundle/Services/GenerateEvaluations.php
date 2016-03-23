@@ -87,8 +87,17 @@ class GenerateEvaluations
                 'i2c\EvaluationBundle\Entity\Evaluation',
                 'json'
             );
+
+            /** @var Evaluation $existingEvaluation */
+            $existingEvaluation = $this->entityManager->getRepository('EvaluationEvaluationBundle:Evaluation')
+                ->findOneBy(['cid' => $cid]);
+            if (!is_null($existingEvaluation)) {
+                $evaluation = $existingEvaluation;
+                $this->removeExistingEvaluationChapters($evaluation);
+            }
+
             $evaluation->setCid($cid);
-            $evaluation->setState("generating");
+            $evaluation->markAsGenerating();
 
             $chapters = [];
 
@@ -135,7 +144,7 @@ class GenerateEvaluations
 
             $this->updateChaptersLocation($evaluation);
 
-            $evaluation->setState('draft');
+            $evaluation->markAsDraft();
             $this->entityManager->persist($evaluation);
 
             $this->entityManager->flush();
@@ -157,6 +166,23 @@ class GenerateEvaluations
         $config = json_decode($jsonContent, true);
 
         return $config;
+    }
+
+    /**
+     * @param Evaluation $evaluation
+     */
+    protected function removeExistingEvaluationChapters(Evaluation $evaluation)
+    {
+        $conn = $this->entityManager->getConnection();
+        $chapter = $evaluation->getChapters();
+        /** @var Chapter $chapter */
+        foreach ($chapter as $chapter) {
+            $query = sprintf(
+                'DELETE FROM evaluation_chapters WHERE chapter_id=\'%s\'',
+                $chapter->getId()
+            );
+            $conn->exec($query);
+        }
     }
 
     /**

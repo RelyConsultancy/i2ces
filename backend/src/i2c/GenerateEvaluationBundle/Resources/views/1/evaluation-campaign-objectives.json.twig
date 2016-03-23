@@ -4,7 +4,8 @@
         {% for objective in objectives %}
             {
                 "label": "{{ objective.label }}",
-                "value": "{{ objective.value }}"
+                "value": "{{ objective.value }}",
+                "unit": "{{ objective.unit }}"
             }{{ not loop.last ? ',' }}
         {% endfor %}
     ],

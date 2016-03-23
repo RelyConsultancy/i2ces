@@ -42,3 +42,15 @@ CREATE TABLE IF NOT EXISTS `i2c_table_data` (
   content BLOB,
   PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS `i2c_objective_units` (
+  metric VARCHAR(255) NOT NULL,
+  unit            VARCHAR(255) NOT NULL,
+  PRIMARY KEY (metric)
+);
+INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('New_custs', 'customer');
+INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('New_trialists', 'customer');
+INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Units', 'units');
+INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('SPEC', 'GBP');
+INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('FOP', 'percentage');
+INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Existing_custs', 'customer');

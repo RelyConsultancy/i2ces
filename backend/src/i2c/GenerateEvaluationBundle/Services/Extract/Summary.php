@@ -53,8 +53,8 @@ class Summary implements ExtractInterface
     public function getObjectives($cid)
     {
         return sprintf(
-            'SELECT objective as label, uplift as value
-              FROM ie_results_data
+            'SELECT r.objective AS label, r.uplift AS value, u.unit AS unit
+              FROM ie_results_data r JOIN i2c_objective_units u ON r.metric=u.metric
               WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND product = \'Offer\' AND obj_priority <> 0
               AND timeperiod = 2
               ORDER BY obj_priority ASC

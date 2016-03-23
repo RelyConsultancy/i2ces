@@ -7,6 +7,7 @@
         {
             "type": "section",
             "title": "Performance",
+            "access": "readonly",
             "content":
             [
                 {
@@ -17,7 +18,8 @@
                         {% for objective in objectives %}
                             {
                                 "label": "{{ objective.label }}",
-                                "value": "{{ objective.value }}"
+                                "value": "{{ objective.value }}",
+                                "unit": "{{ objective.unit }}"
                             }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ]
@@ -27,6 +29,7 @@
         {
             "type": "section",
             "title": "Objectives",
+            "access": "editable",
             "content":
             [
                 {
@@ -38,6 +41,7 @@
         {
             "type": "section",
             "title": "Insight",
+            "access": "editable",
             "content":
             [
                 {
