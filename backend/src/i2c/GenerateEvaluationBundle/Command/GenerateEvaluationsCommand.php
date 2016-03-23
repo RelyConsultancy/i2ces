@@ -2,14 +2,12 @@
 
 namespace i2c\GenerateEvaluationBundle\Command;
 
-use Composer\Downloader\FilesystemException;
 use i2c\GenerateEvaluationBundle\Services\GenerateEvaluations;
 use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\Exception\LogicException;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 /**
@@ -62,7 +60,7 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
      * @param OutputInterface $output
      *
      * @return null|int null or 0 if everything went fine, or an error code
-     * @throws FilesystemException|LogicException
+     * @throws \RuntimeException|\LogicException
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -86,13 +84,16 @@ class GenerateEvaluationsCommand extends ContainerAwareCommand
             $configData = $this->generateEvaluationsService->loadConfigData($configFilePath);
 
             $this->generateEvaluationsService->generate($configData, $cids, $versionNumber);
-            $this->logger->addInfo('Evaluations generated successfully!');
+
+            $successMessage = 'Evaluations generated successfully!';
+            $this->logger->addInfo($successMessage);
+            $output->writeln($successMessage);
         } catch (FileException $ex) {
-            $this->logger->addCritical($ex->getMessage());
-            throw new FilesystemException($ex->getMessage());
+            $this->logger->addCritical($ex->getTraceAsString());
+            throw new \RuntimeException($ex->getMessage());
         } catch (\Exception $ex) {
-            $this->logger->addCritical($ex->getMessage());
-            throw new LogicException("Something went wrong while generating the evaluations");
+            $this->logger->addCritical($ex->getTraceAsString());
+            throw new \LogicException('Something went wrong while generating the evaluations');
         }
     }
 }

@@ -73,6 +73,7 @@ class RawImportCommand extends ContainerAwareCommand
      * @param OutputInterface $output
      *
      * @return null|int null or 0 if everything went fine, or an error code
+     * @throws \RuntimeException
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -87,9 +88,12 @@ class RawImportCommand extends ContainerAwareCommand
                 ->get('i2c_generate_evaluation.import_data')
                 ->import($importOptions, $this->rawTablesConfig);
 
-            $this->logger->addInfo('Import finished successfully!');
+            $successMessage = 'Import finished successfully!';
+            $this->logger->addInfo($successMessage);
+            $output->writeln($successMessage);
         } catch (\PDOException $ex) {
-            $this->logger->addCritical($ex->getMessage());
+            $this->logger->addCritical($ex->getTraceAsString());
+            throw new \RuntimeException($ex->getMessage());
         }
     }
 }

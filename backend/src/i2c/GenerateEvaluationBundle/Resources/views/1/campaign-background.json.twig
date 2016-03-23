@@ -114,8 +114,8 @@
                         {% for item in media_laydown %}
                             {
                                 "label": "{{ item.media_label }}",
-                                "start": "{{ date(item.start_date)|date('Y-m-d') }}",
-                                "end": "{{ date(item.end_date)|date('Y-m-d') }}",
+                                "date_start": "{{ date(item.start_date)|date('Y-m-d') }}",
+                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}",
                                 {% for color_config in additional_data.colors_config %}
                                     {% if item.media_label in color_config.media %}
                                         "marker": "{{ color_config.color }}"
