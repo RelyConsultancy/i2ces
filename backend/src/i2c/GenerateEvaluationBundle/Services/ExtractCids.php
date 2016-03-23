@@ -79,7 +79,7 @@ class ExtractCids
              JOIN ie_results_data AS rd ON (cd.master_campaign_id = rd.master_campaign_id)
               WHERE cd.master_campaign_id IN (%s) %s
             ',
-            sprintf("'%s'", implode("','", $cids)),
+            sprintf('\'%s\'', implode('\',\'', $cids)),
             $extraCondition
         );
         $cids = $connection->query($query)->fetchAll(PDO::FETCH_COLUMN);
