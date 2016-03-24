@@ -2,7 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
@@ -36,21 +35,21 @@ class GenerateEvaluations
     /** @var  GenerateTableData */
     protected $generateTableDataService;
 
-    /** @var ChapterDiagramInterface[] */
+    /** @var ChartDataSetConfigInterface[] */
     protected $tableConfigServiceContainer;
 
     /**
      * GenerateEvaluations constructor.
      *
      * @param EngineInterface   $templateRenderer
-     * @param Registry          $registry
+     * @param EntityManager     $entityManager
      * @param Serializer        $serializer
      * @param string            $templatesPrefix
      * @param GenerateTableData $generateTableDataService
      */
     public function __construct(
         EngineInterface $templateRenderer,
-        Registry $registry,
+        EntityManager $entityManager,
         Serializer $serializer,
         $templatesPrefix,
         GenerateTableData $generateTableDataService
@@ -59,7 +58,7 @@ class GenerateEvaluations
 
         $this->templatesPrefix = $templatesPrefix;
 
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
 
         $this->serializer = $serializer;
 
@@ -76,15 +75,22 @@ class GenerateEvaluations
     }
 
     /**
-     * @param ChapterDiagramInterface $chapterDiagramInterface
-     * @param string                  $serviceName
+     * @param ChartDataSetConfigInterface $chapterDiagramInterface
+     * @param string                      $serviceName
      */
-    public function addChapterDiagramConfigService(ChapterDiagramInterface $chapterDiagramInterface, $serviceName)
-    {
-        //TODO add coresponding services
+    public function addChartDataSetConfigService(
+        ChartDataSetConfigInterface $chapterDiagramInterface,
+        $serviceName
+    ) {
+        //TODO add corresponding services
         $this->tableConfigServiceContainer[$serviceName] = $chapterDiagramInterface;
     }
 
+    /**
+     * @param array  $evaluationConfigs
+     * @param array  $cids
+     * @param string $versionNumber
+     */
     public function generate($evaluationConfigs, $cids, $versionNumber)
     {
         foreach ($cids as $cid) {
@@ -103,7 +109,7 @@ class GenerateEvaluations
 
             /** @var Evaluation $existingEvaluation */
             $existingEvaluation = $this->entityManager->getRepository('EvaluationEvaluationBundle:Evaluation')
-                ->findOneBy(['cid' => $cid]);
+                                                      ->findOneBy(['cid' => $cid]);
             if (!is_null($existingEvaluation)) {
                 $evaluation = $existingEvaluation;
                 $this->removeExistingEvaluationChapters($evaluation);
@@ -164,6 +170,11 @@ class GenerateEvaluations
         }
     }
 
+    /**
+     * @param string $jsonPath
+     *
+     * @return mixed
+     */
     public function loadConfigData($jsonPath)
     {
         $fs = new Filesystem();
@@ -187,9 +198,9 @@ class GenerateEvaluations
     protected function removeExistingEvaluationChapters(Evaluation $evaluation)
     {
         $conn = $this->entityManager->getConnection();
-        $chapter = $evaluation->getChapters();
+        $chapters = $evaluation->getChapters();
         /** @var Chapter $chapter */
-        foreach ($chapter as $chapter) {
+        foreach ($chapters as $chapter) {
             $query = sprintf(
                 'DELETE FROM evaluation_chapters WHERE chapter_id=\'%s\'',
                 $chapter->getId()

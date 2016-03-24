@@ -1,22 +1,22 @@
 <?php
 
-namespace i2c\GenerateEvaluationBundle\Services\Extract;
+namespace i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview;
 
 use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
 /**
- * Class CampaignBackground
+ * Class GrowTotalCategory
  *
- * @package i2c\GenerateEvaluationBundle\Services\Extract
+ * @package i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSetConfig\ObjectiveReview
  */
-class CampaignBackground implements ExtractInterface
+class GrowTotalCategory implements ExtractInterface
 {
     /** @var Connection */
     protected $connection;
 
     /**
-     * CampaignBackground constructor.
+     * GrowTotalCategory constructor.
      *
      * @param Connection $connection
      */
@@ -49,25 +49,6 @@ class CampaignBackground implements ExtractInterface
         }
 
         return $result;
-    }
-
-    /**
-     * Returns an array of objective titles.
-     *
-     * @param string $cid
-     *
-     * @return string
-     */
-    public function getObjectives($cid)
-    {
-        return sprintf(
-            'SELECT objective as label
-             FROM ie_results_data
-             WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND product = \'Offer\' AND obj_priority <> 0
-             AND timeperiod = 2
-            ',
-            $cid
-        );
     }
 
     /**
@@ -122,66 +103,6 @@ class CampaignBackground implements ExtractInterface
              FROM ie_timings_data AS t1
              JOIN ie_timings_data AS t2 ON (t1.master_campaign_id = t2.master_campaign_id)
              WHERE t1.master_campaign_id = \'%s\' AND t1.period = 5 AND t2.period = 6
-            ',
-            $cid
-        );
-    }
-
-    /**
-     * Returns an array with evaluation cost.
-     *
-     * @param $cid
-     *
-     * @return string
-     */
-    public function getEvaluatedCost($cid)
-    {
-        return sprintf(
-            'SELECT media_cost as cost
-             FROM ie_campaign_data
-             WHERE master_campaign_id = \'%s\'
-            ',
-            $cid
-        );
-    }
-
-    /**
-     * Returns an array with the media type and periods.
-     *
-     * @param $cid
-     *
-     * @return array
-     *
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    public function getMediaLaydown($cid)
-    {
-        return sprintf(
-            'SELECT media_label AS media_label,
-             start_date AS start_date,
-             end_date AS end_date
-             FROM ie_media_data
-             WHERE master_campaign_id = \'%s\'
-            ',
-            $cid
-        );
-    }
-
-    /**
-     * Returns an array with media types.
-     *
-     * @param $cid
-     *
-     * @return array
-     *
-     * @throws \Doctrine\DBAL\DBALException
-     */
-    public function getChannels($cid)
-    {
-        return sprintf(
-            'SELECT DISTINCT media_label AS channel
-             FROM ie_media_data
-             WHERE master_campaign_id = \'%s\'
             ',
             $cid
         );

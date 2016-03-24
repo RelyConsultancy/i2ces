@@ -7,7 +7,7 @@ namespace i2c\GenerateEvaluationBundle\Services;
  *
  * @package i2c\GenerateEvaluationBundle\Services
  */
-interface ChapterDiagramInterface
+interface ChartDataSetConfigInterface
 {
     /**
      * Returns an array with table config data.

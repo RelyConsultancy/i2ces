@@ -2,7 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\TableData;
 use JMS\Serializer\Serializer;
@@ -28,14 +27,14 @@ class GenerateTableData
      * GenerateEvaluations constructor.
      *
      * @param EngineInterface $templateRenderer
-     * @param Registry        $registry
+     * @param EntityManager        $entityManager
      * @param Serializer      $serializer
      */
-    public function __construct($templateRenderer, Registry $registry, Serializer $serializer)
+    public function __construct($templateRenderer, EntityManager $entityManager, Serializer $serializer)
     {
         $this->templateRenderer = $templateRenderer;
 
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
 
         $this->serializer = $serializer;
     }
@@ -76,7 +75,6 @@ class GenerateTableData
                 $templatePrefix,
                 $tableData
             );
-
 
             // todo research how to better generate a json string with a twig file so we don't have tabs filled lines
             $tableJson = str_replace("    ", "", $tableJson);
@@ -125,7 +123,7 @@ class GenerateTableData
     protected function getJsonEntity($twigName, $versionNumber, $templatesPrefix, $tableData = [])
     {
         return $this->templateRenderer->render(
-            sprintf('%s:%s/TableData:%s', $templatesPrefix, $versionNumber, $twigName),
+            sprintf('%s:%s/ChartDataSetConfig:%s', $templatesPrefix, $versionNumber, $twigName),
             $tableData
         );
     }

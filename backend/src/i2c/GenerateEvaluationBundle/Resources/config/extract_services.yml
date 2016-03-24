@@ -1,0 +1,44 @@
+services:
+    i2c_generate_evaluation.extract_evaluation:
+          class: i2c\GenerateEvaluationBundle\Services\Extract\Evaluation
+          arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_evaluation_channels:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationChannels
+        arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_evaluation_campaign_objectives:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationCampaignObjectives
+        arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_campaign_background:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\CampaignBackground
+        arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_category_context:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\CategoryContext
+        arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_objective_review:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ObjectiveReview
+        arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_sampling_performance:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\SamplingPerformance
+        arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_summary:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\Summary
+        arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_table_data_category_context_promotional_activity:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\CategoryContext\PromotionalActivity
+        arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_table_data_category_context_sales_performance:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\CategoryContext\SalesPerformance
+        arguments: [@doctrine.dbal.connection]
+
+    i2c_generate_evaluation.extract_table_data_grow_total_category:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\GrowTotalCategory
+        arguments: [@doctrine.dbal.connection]

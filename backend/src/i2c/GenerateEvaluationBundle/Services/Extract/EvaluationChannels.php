@@ -2,7 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services\Extract;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
@@ -19,13 +18,12 @@ class EvaluationChannels implements ExtractInterface
     /**
      * EvaluationChapters constructor.
      *
-     * @param Registry $registry
+     * @param Connection $connection
      */
-    public function __construct(Registry $registry)
+    public function __construct(Connection $connection)
     {
-        $this->connection = $registry->getEntityManager()->getConnection();
+        $this->connection = $connection;
     }
-
     /**
      * Calls all the function in the class that begin with "get"
      *

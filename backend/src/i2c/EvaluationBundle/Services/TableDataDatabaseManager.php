@@ -2,7 +2,6 @@
 
 namespace i2c\EvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\TableData;
 
@@ -19,11 +18,11 @@ class TableDataDatabaseManager
     /**
      * EvaluationDataBaseManagerService constructor.
      *
-     * @param Registry $registry
+     * @param EntityManager $entityManager
      */
-    public function __construct(Registry $registry)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
     }
 
     /**
