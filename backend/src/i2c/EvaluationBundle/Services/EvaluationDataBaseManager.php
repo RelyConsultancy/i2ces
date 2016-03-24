@@ -39,7 +39,7 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where(
                          $queryBuilder->expr()->in('e.state', '?1')
                      )
@@ -59,7 +59,7 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where($queryBuilder->expr()->eq('e.state', '?1'))
                      ->setParameter(1, Evaluation::STATE_DRAFT);
 
@@ -79,7 +79,7 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where($queryBuilder->expr()->in('e.cid', '?1'))
                      ->setParameter(1, $uids);
 
@@ -100,7 +100,7 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where($queryBuilder->expr()->eq('e.cid', '?1'))
                      ->setParameter(1, $uid);
 
@@ -120,7 +120,7 @@ class EvaluationDataBaseManager
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
-                     ->from('EvaluationEvaluationBundle:Evaluation', 'e')
+                     ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where($queryBuilder->expr()->eq('e.cid', '?1'))
                      ->setParameter(1, $uid);
 

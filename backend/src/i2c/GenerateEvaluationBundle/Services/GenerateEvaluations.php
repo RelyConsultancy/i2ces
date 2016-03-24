@@ -89,7 +89,7 @@ class GenerateEvaluations
             );
 
             /** @var Evaluation $existingEvaluation */
-            $existingEvaluation = $this->entityManager->getRepository('EvaluationEvaluationBundle:Evaluation')
+            $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
                 ->findOneBy(['cid' => $cid]);
             if (!is_null($existingEvaluation)) {
                 $evaluation = $existingEvaluation;
