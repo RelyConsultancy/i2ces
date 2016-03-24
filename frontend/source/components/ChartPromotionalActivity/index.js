@@ -49,6 +49,11 @@ const ActivityChart = ({ data, timings }) => {
         ['Brand'].concat(brand),
         ['Competitor'].concat(competitor),
       ],
+      colors: {
+          'Brand': '#ed7b29',
+          'Offer': '#4f81bd',
+          'Competitor': '#9bbb59', 
+      } 
     },
     axis: {
       x: {
