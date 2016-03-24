@@ -6,7 +6,7 @@
     {
       "twig_name": "campaign-background.json.twig",
       "data_service": "extract_campaign_background",
-      "data_set_config": [],
+      "chart_data_set_service_name": "data_set_config_campaign_background",
       "additional_data": {
         "title": "Campaign Background",
         "state": "visible",
@@ -35,7 +35,7 @@
     {
       "twig_name": "evaluation-campaign-objectives.json.twig",
       "data_service": "extract_evaluation_campaign_objectives",
-      "data_set_config": [],
+      "chart_data_set_service_name": "data_set_config_campaign_background",
       "additional_data": {
         "title": "campaign_objectives",
         "state": "visible",
@@ -45,7 +45,7 @@
     {
       "twig_name": "evaluation-channels.json.twig",
       "data_service": "extract_evaluation_channels",
-      "data_set_config": [],
+      "chart_data_set_service_name": "data_set_config_campaign_background",
       "additional_data": {
         "title": "channels",
         "state": "visible",
@@ -55,7 +55,7 @@
     {
       "twig_name": "summary.json.twig",
       "data_service": "extract_summary",
-      "data_set_config": [],
+      "chart_data_set_service_name": "data_set_config_summary",
       "additional_data": {
         "title": "Summary",
         "state": "visible",
@@ -65,18 +65,19 @@
     {
       "twig_name": "category-context.json.twig",
       "data_service": "extract_category_context",
-      "data_set_config": {
-        "promotional_activity": {
-          "twig_name": "promotional-activity.json.twig",
-          "data_service": "extract_data_set_promotional_activity"
-        },
-        "sales_performance": {
-          "twig_name": "sales-performance.json.twig",
-          "data_service": "extract_data_set_sales_performance"
-        }
-      },
+      "chart_data_set_service_name": "data_set_config_category_context",
       "additional_data": {
         "title": "Category Context",
+        "state": "visible",
+        "order": 1
+      }
+    },
+    {
+      "twig_name": "objective-review.json.twig",
+      "data_service": "extract_objective_review",
+      "chart_data_set_service_name": "data_set_config_objective_review",
+      "additional_data": {
+        "title": "Objective Review",
         "state": "visible",
         "order": 1
       }

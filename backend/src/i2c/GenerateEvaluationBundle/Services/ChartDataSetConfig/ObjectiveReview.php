@@ -21,6 +21,11 @@ class ObjectiveReview implements ChartDataSetConfigInterface
      */
     public function getTableConfig($cid)
     {
-        // TODO: Implement getTableConfig() method.
+        return [
+            "grow_total_category" => [
+                "twig_name"    => "grow-total-category.json.twig",
+                "data_service" => "extract_chart_data_set_grow_total_category",
+            ],
+        ];
     }
 }

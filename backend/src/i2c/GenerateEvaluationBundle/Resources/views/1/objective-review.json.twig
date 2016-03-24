@@ -18,7 +18,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.grow_total_category is defined %}
             {
@@ -33,7 +33,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.grow_share_of_category is defined %}
             {
@@ -48,7 +48,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.retain_existing_customers is defined %}
             {
@@ -63,7 +63,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.grow_total_units is defined %}
             {
@@ -78,7 +78,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.retain_lapsing_customers is defined %}
             {
@@ -93,7 +93,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.launch_new_product is defined %}
             {
@@ -108,7 +108,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.retain_new_customers_trialists is defined %}
             {
@@ -123,7 +123,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.grow_spend_per_existing_customer is defined %}
             {
@@ -138,7 +138,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.grow_customer_product_range is defined %}
             {
@@ -153,7 +153,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if table_data.grow_frequency_of_share_per_customer is defined %}
             {
@@ -168,7 +168,7 @@
                     }
                 ]
             },
-            {% set priority_number += 1 %}
+            {% set priority_number = priority_number + 1 %}
         {% endif %}
     ]
 }

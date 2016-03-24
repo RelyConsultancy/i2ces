@@ -34,7 +34,7 @@ class ExtractContainer
     /**
      * @param $serviceName
      *
-     * @return mixed
+     * @return ExtractInterface
      */
     public function getExtractService($serviceName)
     {

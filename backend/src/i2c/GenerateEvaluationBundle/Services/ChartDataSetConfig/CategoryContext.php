@@ -24,11 +24,11 @@ class CategoryContext implements ChartDataSetConfigInterface
         return [
             "promotional_activity" => [
                 "twig_name"    => "promotional-activity.json.twig",
-                "data_service" => "extract_data_set_promotional_activity",
+                "data_service" => "extract_chart_data_set_promotional_activity",
             ],
             "sales_performance"    => [
                 "twig_name"    => "sales-performance.json.twig",
-                "data_service" => "extract_data_set_sales_performance",
+                "data_service" => "extract_chart_data_set_sales_performance",
             ],
         ];
     }

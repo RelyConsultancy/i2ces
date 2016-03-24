@@ -7,7 +7,7 @@ use i2c\EvaluationBundle\Exception\FormException;
 use i2c\EvaluationBundle\Services\Chapter as ChapterService;
 use i2c\EvaluationBundle\Services\EvaluationDataBaseManager;
 use i2c\EvaluationBundle\Services\Evaluation as EvaluationService;
-use i2c\EvaluationBundle\Services\TableDataDatabaseManager;
+use i2c\EvaluationBundle\Services\ChartDataSetDatabaseManager;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -193,12 +193,12 @@ class EvaluationController extends RestApiController
             return $this->notFound('Evaluation was not found');
         }
 
-        $tableData = $this->getTableDataDatabaseManagerService()->getTableData($evaluationCid, $tableDataId);
+        $chartDataSet = $this->getTableDataDatabaseManagerService()->getChartDataSet($evaluationCid, $tableDataId);
 
         $response = [];
 
-        if (!is_null($tableData)) {
-            $response = $tableData->getContentAsArray();
+        if (!is_null($chartDataSet)) {
+            $response = $chartDataSet->getContentAsArray();
         }
 
         return $this->success($response);
@@ -229,10 +229,10 @@ class EvaluationController extends RestApiController
     }
 
     /**
-     * @return TableDataDatabaseManager
+     * @return ChartDataSetDatabaseManager
      */
     public function getTableDataDatabaseManagerService()
     {
-        return $this->get('i2c_evaluation.table_data_database_manager_service');
+        return $this->get('i2c_evaluation.chart_data_set_database_manager_service');
     }
 }

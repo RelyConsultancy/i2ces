@@ -5,6 +5,8 @@ namespace i2c\GenerateEvaluationBundle\Services;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
+use i2c\GenerateEvaluationBundle\Services\Containers\ChartDataSetConfigContainer;
+use i2c\GenerateEvaluationBundle\Services\Containers\ExtractContainer;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -17,7 +19,7 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class GenerateEvaluations
 {
-    /** @var  ExtractInterface[] */
+    /** @var  ExtractContainer */
     protected $extractServicesContainer;
 
     /** @var  EngineInterface */
@@ -32,27 +34,27 @@ class GenerateEvaluations
     /** @var  Serializer */
     protected $serializer;
 
-    /** @var  GenerateTableData */
-    protected $generateTableDataService;
+    /** @var  GenerateChartDataSet */
+    protected $generateChartDataSetService;
 
-    /** @var ChartDataSetConfigInterface[] */
-    protected $tableConfigServiceContainer;
+    /** @var ChartDataSetConfigContainer */
+    protected $chartDataSetConfigContainer;
 
     /**
      * GenerateEvaluations constructor.
      *
-     * @param EngineInterface   $templateRenderer
-     * @param EntityManager     $entityManager
-     * @param Serializer        $serializer
-     * @param string            $templatesPrefix
-     * @param GenerateTableData $generateTableDataService
+     * @param EngineInterface      $templateRenderer
+     * @param EntityManager        $entityManager
+     * @param Serializer           $serializer
+     * @param string               $templatesPrefix
+     * @param GenerateChartDataSet $generateTableDataService
      */
     public function __construct(
         EngineInterface $templateRenderer,
         EntityManager $entityManager,
         Serializer $serializer,
         $templatesPrefix,
-        GenerateTableData $generateTableDataService
+        GenerateChartDataSet $generateTableDataService
     ) {
         $this->templateRenderer = $templateRenderer;
 
@@ -62,28 +64,23 @@ class GenerateEvaluations
 
         $this->serializer = $serializer;
 
-        $this->generateTableDataService = $generateTableDataService;
+        $this->generateChartDataSetService = $generateTableDataService;
     }
 
     /**
-     * @param ExtractInterface $extractInterface
-     * @param string           $serviceName
+     * @param ExtractContainer $extractContainer
      */
-    public function addExtractService(ExtractInterface $extractInterface, $serviceName)
+    public function setExtractContainer(ExtractContainer $extractContainer)
     {
-        $this->extractServicesContainer[$serviceName] = $extractInterface;
+        $this->extractServicesContainer = $extractContainer;
     }
 
     /**
-     * @param ChartDataSetConfigInterface $chapterDiagramInterface
-     * @param string                      $serviceName
+     * @param ChartDataSetConfigContainer $chartDataSetConfigContainer
      */
-    public function addChartDataSetConfigService(
-        ChartDataSetConfigInterface $chapterDiagramInterface,
-        $serviceName
-    ) {
-        //TODO add corresponding services
-        $this->tableConfigServiceContainer[$serviceName] = $chapterDiagramInterface;
+    public function setChartDataSetConfigContainer(ChartDataSetConfigContainer $chartDataSetConfigContainer)
+    {
+        $this->chartDataSetConfigContainer = $chartDataSetConfigContainer;
     }
 
     /**
@@ -108,7 +105,7 @@ class GenerateEvaluations
             );
 
             /** @var Evaluation $existingEvaluation */
-            $existingEvaluation = $this->entityManager->getRepository('EvaluationEvaluationBundle:Evaluation')
+            $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
                                                       ->findOneBy(['cid' => $cid]);
             if (!is_null($existingEvaluation)) {
                 $evaluation = $existingEvaluation;
@@ -121,9 +118,9 @@ class GenerateEvaluations
             $chapters = [];
 
             foreach ($evaluationConfigs['chapters'] as $chapterConfig) {
-                $tableData = $this->generateTableDataService->generate(
+                $tableData = $this->generateChartDataSetService->generate(
                     $cid,
-                    $this->getTableConfig($chapterConfig['table_config'], $cid), //TODO refactor master.json
+                    $this->getChartDataSetConfig($chapterConfig['chart_data_set_service_name'], $cid),
                     $versionNumber,
                     $this->templatesPrefix
                 );
@@ -237,7 +234,7 @@ class GenerateEvaluations
      */
     protected function getData($serviceName, $cid)
     {
-        return $this->extractServicesContainer[$serviceName]->fetchAll($cid);
+        return $this->extractServicesContainer->getExtractService($serviceName)->fetchAll($cid);
     }
 
     /**
@@ -246,9 +243,9 @@ class GenerateEvaluations
      *
      * @return array
      */
-    protected function getTableConfig($serviceName, $cid)
+    protected function getChartDataSetConfig($serviceName, $cid)
     {
-        return $this->tableConfigServiceContainer[$serviceName]->getTableConfig($cid);
+        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->getTableConfig($cid);
     }
 
     /**

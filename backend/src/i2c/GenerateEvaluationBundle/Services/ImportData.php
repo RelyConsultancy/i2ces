@@ -132,9 +132,10 @@ class ImportData
             );
         }
         $query = sprintf(
-            '%s %s, PRIMARY KEY(`id`))',
+            '%s %s, PRIMARY KEY(`id`)) %s',
             $query,
-            implode(',', $tableColumns)
+            implode(',', $tableColumns),
+            'DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci'
         );
 
         return $this->pdoConnection->exec($query);

@@ -86,4 +86,12 @@ class Evaluation implements ExtractInterface
             $cid
         );
     }
+
+    public function getDefaultSupplier($cid)
+    {
+        return sprintf(
+            'SELECT id as id from oro_business_unit where name=\'Main\'
+            '
+        );
+    }
 }

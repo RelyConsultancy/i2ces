@@ -11,8 +11,8 @@ services:
         class: i2c\EvaluationBundle\Services\EvaluationDataBaseManager
         arguments: [@oro_security.acl_helper, @doctrine.orm.default_entity_manager]
 
-    i2c_evaluation.table_data_database_manager_service:
-        class: i2c\EvaluationBundle\Services\TableDataDatabaseManager
+    i2c_evaluation.chart_data_set_database_manager_service:
+        class: i2c\EvaluationBundle\Services\ChartDataSetDatabaseManager
         arguments: [@doctrine.orm.default_entity_manager]
 
     i2c_evaluation.evaluation_jms_post_serializer:
