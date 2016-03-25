@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 class FileController extends RestApiController
 {
     /**
-     * Upload an image and return its path.
+     * Upload an image and return its info.
      *
      * @param string $evaluationId
      *
@@ -27,8 +27,12 @@ class FileController extends RestApiController
         try {
             $request = $this->getRequest();
             $fileUploader = $this->get('i2c_evaluation_file_upload.file_upload');
-            $image = $fileUploader->process($request->files->get('file'), $evaluationId);
-            $imageUrl = $request->getUriForPath($this->getParameter('evaluation_frontend_image_path').$image);
+
+            $image = $fileUploader->process($request->files->get('image'), $evaluationId);
+
+            $imagePath = $this->getParameter('evaluation_frontend_image_path').$image;
+
+            $imageInfo = $fileUploader->getImageInfo($imagePath);
         } catch (UploadException $e) {
             return $this->clientFailure($e->getMessage());
         } catch (IOException $e) {
@@ -37,6 +41,6 @@ class FileController extends RestApiController
             return $this->serverFailure($e->getMessage());
         }
 
-        return $this->success($imageUrl);
+        return $this->success($imageInfo);
     }
 }

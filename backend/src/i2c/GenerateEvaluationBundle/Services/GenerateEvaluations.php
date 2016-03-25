@@ -2,6 +2,7 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
@@ -106,7 +107,7 @@ class GenerateEvaluations
 
             /** @var Evaluation $existingEvaluation */
             $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
-                                                      ->findOneBy(['cid' => $cid]);
+                ->findOneBy(['cid' => $cid]);
             if (!is_null($existingEvaluation)) {
                 $evaluation = $existingEvaluation;
                 $this->removeExistingEvaluationChapters($evaluation);

@@ -74739,7 +74739,12 @@ var ActivityChart = function ActivityChart(_ref) {
     data: {
       type: 'bar',
       x: 'Dates',
-      columns: [['Dates'].concat(dates), ['Offer'].concat(offer), ['Brand'].concat(brand), ['Competitor'].concat(competitor)]
+      columns: [['Dates'].concat(dates), ['Offer'].concat(offer), ['Brand'].concat(brand), ['Competitor'].concat(competitor)],
+      colors: {
+        'Brand': '#ed7b29',
+        'Offer': '#4f81bd',
+        'Competitor': '#9bbb59'
+      }
     },
     axis: {
       x: {
@@ -74956,7 +74961,10 @@ var SalesChart = function SalesChart(_ref) {
         return i.label;
       })), ['Results'].concat(data.map(function (i) {
         return i.value;
-      }))]
+      }))],
+      color: function color(_color, d) {
+        return d.value < 0 ? '#ed7b29' : '#33bf6f';
+      }
     },
     axis: {
       x: {

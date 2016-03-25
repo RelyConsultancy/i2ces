@@ -41,6 +41,9 @@ const SalesChart = ({ data }) => {
         ['Labels'].concat(data.map(i => i.label)),
         ['Results'].concat(data.map(i => i.value)),
       ],
+      color: function (color, d) {
+          return d.value < 0 ? '#ed7b29' : '#33bf6f'; 
+      }
     },
     axis: {
       x: {

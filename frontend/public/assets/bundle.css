@@ -5486,7 +5486,7 @@ body.prevent-scroll.fr-mobile {
   top: -4rem;
   padding: .5em 1em;
   color: #FFF;
-  font-size: .75rem;
+  font-size: .875em;
   background-color: #43B5DB;
   cursor: pointer;
 }
@@ -5545,7 +5545,7 @@ body.prevent-scroll.fr-mobile {
 }
 
 ._ChartPromotionalActivity_style_chart .stage_during {
-  fill: #E3F2FD;
+  fill: #b7dee8;
 }
 
 ._ChartPromotionalActivity_style_chart .stage_during > rect {
