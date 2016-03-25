@@ -118,7 +118,7 @@ class GenerateEvaluations
             $chapters = [];
 
             foreach ($evaluationConfigs['chapters'] as $chapterConfig) {
-                $tableData = $this->generateChartDataSetService->generate(
+                $chartDataSetSources = $this->generateChartDataSetService->generate(
                     $cid,
                     $this->getChartDataSetConfig($chapterConfig['chart_data_set_service_name'], $cid),
                     $versionNumber,
@@ -127,7 +127,7 @@ class GenerateEvaluations
 
                 $additionalData = [
                     'additional_data' => $chapterConfig['additional_data'],
-                    'table_data'      => $tableData,
+                    'chart_data_set'      => $chartDataSetSources,
                 ];
 
                 $chapterJson = $this->getJsonEntity(
@@ -245,7 +245,7 @@ class GenerateEvaluations
      */
     protected function getChartDataSetConfig($serviceName, $cid)
     {
-        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->getTableConfig($cid);
+        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->fetchChartDataSetConfig($cid);
     }
 
     /**

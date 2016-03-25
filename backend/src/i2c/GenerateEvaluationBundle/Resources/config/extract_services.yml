@@ -43,6 +43,14 @@ services:
         class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\GrowTotalCategory
         arguments: [@doctrine.dbal.default_connection]
 
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_weekly_units_sold_exposed_and_control:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\WeeklyUnitsSoldExposedAndControl
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_media_type_combinations:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\MediaTypeCombinations
+        arguments: [@doctrine.dbal.default_connection]
+
     i2c_generate_evaluation.extract_services_container:
         class: i2c\GenerateEvaluationBundle\Services\Containers\ExtractContainer
         calls:
@@ -61,3 +69,5 @@ services:
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_category_context_promotional_activity, "extract_chart_data_set_promotional_activity"]]
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_category_context_sales_performance, "extract_chart_data_set_sales_performance"]]
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_total_category, "extract_chart_data_set_grow_total_category"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_media_type_combinations, "extract_chart_data_set_media_type_combinations"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_weekly_units_sold_exposed_and_control, "extract_chart_data_set_weekly_units_sold_exposed_and-control"]]

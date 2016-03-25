@@ -6,11 +6,11 @@ use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
 /**
- * Class GrowTotalCategory
+ * Class WeeklyUnitsSoldExposedAndControl
  *
- * @package i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSetConfig\ObjectiveReview
+ * @package i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview
  */
-class GrowTotalCategory implements ExtractInterface
+class WeeklyUnitsSoldExposedAndControl implements ExtractInterface
 {
     /** @var Connection */
     protected $connection;
@@ -53,7 +53,7 @@ class GrowTotalCategory implements ExtractInterface
     }
 
     /**
-     * @param string $cid
+     * @param $cid
      *
      * @return string
      */
@@ -63,12 +63,13 @@ class GrowTotalCategory implements ExtractInterface
             'SELECT week_commencing AS start_date, exposed AS exposed, control AS control
              FROM ie_weekly_results_data
              WHERE master_campaign_id = \'%s\'
-             AND product=\'Aisle\'
-             AND metric=\'Known_spend\';
+             AND product=\'Offer\'
+             AND metric=\'Units\'
             ',
             $cid
         );
     }
+
 
     /**
      * Returns an array with start and end dates for pre timings.
@@ -83,9 +84,9 @@ class GrowTotalCategory implements ExtractInterface
             'SELECT uplift AS uplift, pct_uplift AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Grow total category\'
+             AND objective=\'Overview\'
              AND metric=\'Known_spend\'
-             AND product=\'Aisle\'
+             AND product=\'Offer\'
              AND timeperiod=2
              AND master_campaign_id=\'%s\'
             ',
@@ -106,9 +107,9 @@ class GrowTotalCategory implements ExtractInterface
             'SELECT uplift AS uplift, pct_uplift AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Grow total category\'
+             AND objective=\'Overview\'
              AND metric=\'Known_spend\'
-             AND product=\'Aisle\'
+             AND product=\'Offer\'
              AND timeperiod=3
              AND master_campaign_id=\'%s\'
             ',
@@ -129,9 +130,9 @@ class GrowTotalCategory implements ExtractInterface
             'SELECT SUM(uplift) AS uplift, SUM(pct_uplift) AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Grow total category\'
+             AND objective=\'Overview\'
              AND metric=\'Known_spend\'
-             AND product=\'Aisle\'
+             AND product=\'Offer\'
              AND master_campaign_id=\'%s\'
             ',
             $cid

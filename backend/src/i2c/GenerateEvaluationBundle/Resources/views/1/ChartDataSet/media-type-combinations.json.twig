@@ -1,0 +1,11 @@
+[
+    {% for item in data %}
+    {
+        "channels": "{{ item.media_type }}",
+        "uplift": "{{ item.uplift }}",
+        "percentage_uplift": "{{ item.percentage_uplift }}",
+        "exposed": "{{ item.exposed }}"
+    }
+    {{ not loop.last ? ',' }}
+    {% endfor %}
+]

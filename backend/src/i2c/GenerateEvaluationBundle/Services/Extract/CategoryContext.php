@@ -51,24 +51,6 @@ class CategoryContext implements ExtractInterface
         return $result;
     }
 
-    public function getSalesPerformanceSource($cid)
-    {
-        // todo implement this so it returns the path to the generated json/csv containing the table data
-        return sprintf(
-            'SELECT \'%s\' as path',
-            "something"
-        );
-    }
-
-    public function getPromotionalActivitySource($cid)
-    {
-        // todo implement this so it returns the path to the generated json/csv containing the table data
-        return sprintf(
-            'SELECT \'%s\' as path',
-            "something"
-        );
-    }
-
     /**
      * Returns an array with start and end dates for pre timings.
      *
@@ -125,6 +107,12 @@ class CategoryContext implements ExtractInterface
             $cid
         );
     }
+
+    /**
+     * @param $cid
+     *
+     * @return string
+     */
     public function getProductDefinitions($cid)
     {
         return sprintf(

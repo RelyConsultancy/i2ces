@@ -16,5 +16,5 @@ interface ChartDataSetConfigInterface
      *
      * @return array
      */
-    public function getTableConfig($cid);
+    public function fetchChartDataSetConfig($cid);
 }
