@@ -5726,6 +5726,10 @@ body.prevent-scroll.fr-mobile {
   display: none;
 }
 
+._ChartUnitsUplift_style_chart .c3-legend-item {
+  transform: translateY(-17rem);
+}
+
 ._ChartUnitsUplift_style_chart .c3-circle {
   r: .25rem !important;
   transform: translateY(.25em);

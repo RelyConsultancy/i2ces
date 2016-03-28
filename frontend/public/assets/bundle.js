@@ -74706,7 +74706,12 @@ var ChartSales = function ChartSales(_ref) {
 
   var chart = (0, _Chart2.default)({
     type: 'line',
+    tooltip: { show: false },
     className: _style2.default.chart,
+    padding: {
+      top: 20,
+      right: 10
+    },
     data: {
       x: 'dates',
       columns: [['dates'].concat(dates), ['Exposed'].concat(exposed), ['Control'].concat(control)]
@@ -74722,13 +74727,11 @@ var ChartSales = function ChartSales(_ref) {
       y: {
         tick: {
           format: function format(value) {
-            return '£' + value.toFixed(0) + 'k';
+            return '£' + value.toFixed(0) / 1000 + 'k';
           }
         }
       }
-    },
-    tooltip: { show: false },
-    padding: { top: 20, right: 10 }
+    }
   });
 
   var label = (0, _component.B)({ className: _style2.default.chart_label }, 'Offer Sales');
@@ -75152,7 +75155,10 @@ var ChartUplift = function ChartUplift(_ref) {
     tooltip: {
       show: false
     },
-    legend: {},
+    padding: {
+      top: 20,
+      bottom: 0
+    },
     color: {
       pattern: ['#D2E06C', '#EF7D46']
     },
@@ -75262,7 +75268,7 @@ exports.default = (0, _component.Component)({
 });
 
 },{"./style.css":344,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Chart":330,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":394,"d3":253}],344:[function(require,module,exports){
-module.exports = {"chart":"_ChartUnitsUplift_style_chart","chart .c3-chart-texts .c3-text":"_ChartUnitsUplift_style_chart .c3-chart-texts .c3-text","chart .c3-lines-percent path":"_ChartUnitsUplift_style_chart .c3-lines-percent path","chart .c3-circle":"_ChartUnitsUplift_style_chart .c3-circle","table":"_ChartUnitsUplift_style_table","table_label":"_ChartUnitsUplift_style_table_label","table_data":"_ChartUnitsUplift_style_table_data"}
+module.exports = {"chart":"_ChartUnitsUplift_style_chart","chart .c3-chart-texts .c3-text":"_ChartUnitsUplift_style_chart .c3-chart-texts .c3-text","chart .c3-lines-percent path":"_ChartUnitsUplift_style_chart .c3-lines-percent path","chart .c3-legend-item":"_ChartUnitsUplift_style_chart .c3-legend-item","chart .c3-circle":"_ChartUnitsUplift_style_chart .c3-circle","table":"_ChartUnitsUplift_style_table","table_label":"_ChartUnitsUplift_style_table_label","table_data":"_ChartUnitsUplift_style_table_data"}
 },{}],345:[function(require,module,exports){
 'use strict';
 

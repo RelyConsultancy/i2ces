@@ -15,6 +15,9 @@
 .chart .c3-lines-percent path {
   display: none;
 }
+.chart .c3-legend-item {
+  transform: translateY(-17rem);
+}
 .chart .c3-circle {
   r: .25rem !important;
   transform: translateY(.25em);
