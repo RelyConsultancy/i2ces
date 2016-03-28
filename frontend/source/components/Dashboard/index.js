@@ -1,12 +1,8 @@
 import { Component, B, Image, Link, A } from '/components/component.js'
 import Loader from '/components/Loader'
 import store from '/application/store.js'
+import { isUser } from '/application/actions.js'
 import style from './style.css'
-
-
-const hasPermissions = (type) => (
-  ~['i2c_employee'].indexOf(type)
-)
 
 
 const Logo = ({ image }) => (
@@ -19,7 +15,7 @@ const Navigation = ({ store }) => {
     Link({ to: '/faqs' }, 'FAQs'),
   ]
 
-  if (hasPermissions(store.user.type)) {
+  if (isUser('i2c_employee')) {
     links.unshift(
       A({ href: '/user' }, 'Users'),
       A({ href: '/organization/business_unit' }, 'Suppliers')

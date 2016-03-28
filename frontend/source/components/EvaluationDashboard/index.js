@@ -1,40 +1,32 @@
 import { Component, B, Link } from '/components/component.js'
 import Grid from '/components/Grid'
+import Toggle from '/components/Toggle'
 import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
-import { fetchEvaluation, isUser } from '/application/actions.js'
+import * as $ from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
 
 
-const Toggle = Component({
-  getInitialState () {
-    return { isActive: this.props.active || false }
-  },
-  render () {
-    const { isActive } = this.state
-
-    const toggle = B({
-      className: isActive ? style.toggle_active : style.toggle
-    })
-
-    const label = isActive ? 'published' : 'draft'
-
-    const onClick = () => {
-      this.setState({ isActive: !isActive })
-    }
-
-    return B({ onClick, className: style.component }, label, toggle)
-  }
-})
-
-
 const Header = ({ evaluation }) => {
-  const { display_title, state } = evaluation
-  const active = evaluation.state == 'published'
+  const toggle = !$.isUser('i2c_employee') ? null : Toggle({
+    isOn: evaluation.state == 'published',
+    label: {
+      on: 'published',
+      off: 'draft',
+      position: 'left',
+    },
+    onChange (isOn) {
+      evaluation.state = isOn ? 'published' : 'draft'
 
-  const toggle = isUser('i2c_employee') ? Toggle({ active }) : null
+      $.mutateEvaluation({
+        cid: evaluation.cid,
+        data: { state: evaluation.state }
+      })
+    },
+  })
+
   const button = B({ className: style.state }, toggle)
-  const content = B({ className: style.header_wrap }, display_title, button)
+  const content = B({ className: style.header_wrap }, button, evaluation.display_title)
 
   return B({ className: style.header }, content)
 }
@@ -128,7 +120,7 @@ const Evaluation = Component({
     const { store, params } = this.props
 
     if (!store.evaluation) {
-      fetchEvaluation({ cid: params.cid })
+      $.fetchEvaluation({ cid: params.cid })
     }
   },
   componentDidMount () {

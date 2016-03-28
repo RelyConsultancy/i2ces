@@ -9,6 +9,7 @@
 
 @import raw './components/Chart/c3.css';
 @import from './components/Chart/style.css';
+@import from './components/Toggle/style.css';
 
 @import from './components/FAQ/style.css';
 @import from './components/Loader/style.css';

@@ -30,51 +30,6 @@
   line-height: 2rem;
   margin-top: -1rem;
 }
-.component {
-  cursor: pointer;
-}
-.toggle {
-  position: relative;
-  display: inline-block;
-  padding: 2px;
-  margin-left: .5em;
-  margin-bottom: -6px;
-  width: 3em;
-  height: 1.75em;
-  cursor: pointer;
-  background-color: #DDDDDD;
-  border-radius: 5em;
-}
-.toggle::before {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  bottom: 2px;
-  right: 2px;
-  background-color: #FFFFFF;
-  border-radius: 5em;
-  transition: background .4s;
-}
-.toggle::after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 4px;
-  width: calc(50% - 4px);
-  background-color: #dddddd;
-  border-radius: 50%;
-  transition: left .25s, background .4s;
-}
-.toggle_active {
-  compose: toggle;
-  background-color: #81CDE7;
-}
-.toggle_active::after {
-  left: calc(60% - 4px);
-  background-color: #81CDE7;
-}
 
 
 .content {
