@@ -1,30 +1,43 @@
-[
-    {
-        "timings": {
-            "during": {
-                "uplift": "{{ during[0].uplift }}",
-                "percentage_uplift": "{{ during[0].percentage_uplift }}"
-            },
-            "post": {
-                "uplift": "{{ post[0].uplift }}",
-                "percentage_uplift": "{{ post[0].percentage_uplift }}"
-            },
-            "total": {
-                "uplift": "{{ total[0].uplift }}",
-                "percentage_uplift": "{{ total[0].percentage_uplift }}"
-            }
+{
+    "table": {
+        "during": {
+            "uplift": "{{ during[0].uplift }}",
+            "percentage_uplift": "{{ during[0].percentage_uplift }}"
+        },
+        "post": {
+            "uplift": "{{ post[0].uplift }}",
+            "percentage_uplift": "{{ post[0].percentage_uplift }}"
+        },
+        "total": {
+            "uplift": "{{ total[0].uplift }}",
+            "percentage_uplift": "{{ total[0].percentage_uplift }}"
         }
     },
-    {
-        "chart_data": [
-            {% for item in data %}
-            {
-                "date": "{{ item.start_date }}",
-                "exposed": "{{ item.exposed }}",
-                "control": "{{ item.control }}"
-            }
-            {{ not loop.last ? ',' }}
-            {% endfor %}
-        ]
-    }
-]
+    "chart": [
+        {% for item in data %}
+        {
+            "start_date": "{{ item.start_date }}",
+            "exposed": "{{ item.exposed }}",
+            "control": "{{ item.control }}"
+        }
+        {{ not loop.last ? ',' }}
+        {% endfor %}
+    ],
+    "timings": [
+        {
+            "label": "pre",
+            "date_start": "{{ timing_pre[0].start_date }}",
+            "date_end": "{{ timing_pre[0].end_date }}"
+        },
+        {
+            "label": "during",
+            "date_start": "{{ timing_during[0].start_date }}",
+            "date_end": "{{ timing_during[0].end_date }}"
+        },
+        {
+            "label": "post",
+            "date_start": "{{ timing_post[0].start_date }}",
+            "date_end": "{{ timing_post[0].end_date }}"
+        }
+    ]
+}

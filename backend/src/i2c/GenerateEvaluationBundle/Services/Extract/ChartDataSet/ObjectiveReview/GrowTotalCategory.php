@@ -137,4 +137,61 @@ class GrowTotalCategory implements ExtractInterface
             $cid
         );
     }
+
+    /**
+     * Returns an array with start and end dates for pre timings.
+     *
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getTimingPre($cid)
+    {
+        return sprintf(
+            'SELECT t1.period_date AS start_date, t2.period_date AS end_date
+             FROM ie_timings_data AS t1
+             JOIN ie_timings_data AS t2 ON (t1.master_campaign_id = t2.master_campaign_id)
+             WHERE t1.master_campaign_id = \'%s\' AND t1.period = 1 AND t2.period = 2
+            ',
+            $cid
+        );
+    }
+
+    /**
+     * Returns an array with start and end dates for during timings.
+     *
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getTimingDuring($cid)
+    {
+        return sprintf(
+            'SELECT t1.period_date AS start_date, t2.period_date AS end_date
+             FROM ie_timings_data AS t1
+             JOIN ie_timings_data AS t2 ON (t1.master_campaign_id = t2.master_campaign_id)
+             WHERE t1.master_campaign_id = \'%s\' AND t1.period = 3 AND t2.period = 4
+            ',
+            $cid
+        );
+    }
+
+    /**
+     * Returns an array with start and end dates for post timings.
+     *
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getTimingPost($cid)
+    {
+        return sprintf(
+            'SELECT t1.period_date AS start_date, t2.period_date AS end_date
+             FROM ie_timings_data AS t1
+             JOIN ie_timings_data AS t2 ON (t1.master_campaign_id = t2.master_campaign_id)
+             WHERE t1.master_campaign_id = \'%s\' AND t1.period = 5 AND t2.period = 6
+            ',
+            $cid
+        );
+    }
 }
