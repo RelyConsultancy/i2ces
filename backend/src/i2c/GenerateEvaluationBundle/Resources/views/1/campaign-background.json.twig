@@ -108,17 +108,17 @@
             "content":
             [
                 {
-                    "type": "chart_time_range",
+                    "type": "chart_media_laydown",
                     "items":
                     [
                         {% for item in media_laydown %}
                             {
+                                "type": "media",
                                 "label": "{{ item.media_label }}",
                                 "date_start": "{{ date(item.start_date)|date('Y-m-d') }}",
-                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}",
+                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}"
                                 {% for color_config in additional_data.colors_config %}
                                     {% if item.media_label in color_config.media %}
-                                        "marker": "{{ color_config.color }}"
                                         {% if color_config.color not in usedColors %}
                                             {% set legend = legend|merge([{color: color_config.color,label: color_config.label}]) %}
                                             {% set usedColors = usedColors|merge([color_config.color]) %}
