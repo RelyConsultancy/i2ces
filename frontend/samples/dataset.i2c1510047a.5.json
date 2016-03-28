@@ -41,5 +41,18 @@
       "uplift": "52734.711768",
       "percentage_uplift": "0.567572"
     }
-  }
+  },
+  "timings": [{
+    "label": "pre",
+    "date_start": "2015-07-13",
+    "date_end": "2015-08-14"
+  }, {
+    "label": "during",
+    "date_start": "2015-08-14",
+    "date_end": "2015-09-21"
+  }, {
+    "label": "post",
+    "date_start": "2015-09-21",
+    "date_end": "2015-12-17"
+  }]
 }
