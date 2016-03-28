@@ -4899,6 +4899,7 @@ body.prevent-scroll.fr-mobile {
   background-color: #FFA000;
   color: #fff;
   vertical-align: bottom;
+  border-radius: 2px;
 }
 
 ._EvaluationList_style_item_view {
