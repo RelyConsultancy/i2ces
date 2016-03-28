@@ -13,7 +13,7 @@ const loadJSON = (file) => ((done) => {
       done(null, JSON.parse(data))
     }
     catch (error) {
-      done(error)
+      done(Error(`${file}: ${error.message}`))
     }
   })
 })

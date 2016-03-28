@@ -76093,7 +76093,11 @@ var applyFilters = function applyFilters(store) {
 var Item = function Item(_ref) {
   var data = _ref.data;
 
-  var title = (0, _component.B)({ className: _style2.default.item_title }, data.display_title);
+  var state = data.state == 'published' ? null : (0, _component.B)({
+    className: _style2.default.item_state
+  }, data.state);
+
+  var title = (0, _component.B)({ className: _style2.default.item_title }, data.display_title, state);
 
   var date = (0, _component.B)({ className: _style2.default.item_date }, (0, _utils.fmtDate)(data.start_date) + ' - ' + (0, _utils.fmtDate)(data.end_date));
 
@@ -76142,7 +76146,7 @@ var Evaluations = (0, _component.Component)({
 exports.default = _store2.default.sync('evaluation', Evaluations);
 
 },{"./filters.js":352,"./style.css":354,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":321,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":327,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":328,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":394}],354:[function(require,module,exports){
-module.exports = {"content":"_EvaluationList_style_content","header":"_EvaluationList_style_header","filters":"_EvaluationList_style_filters","filters_label":"_EvaluationList_style_filters_label","list":"_EvaluationList_style_list","list_empty":"_EvaluationList_style_list_empty","item":"_EvaluationList_style_item","item_title":"_EvaluationList_style_item_title","item_date":"_EvaluationList_style_item_date","item_view":"_EvaluationList_style_item_view"}
+module.exports = {"content":"_EvaluationList_style_content","header":"_EvaluationList_style_header","filters":"_EvaluationList_style_filters","filters_label":"_EvaluationList_style_filters_label","list":"_EvaluationList_style_list","list_empty":"_EvaluationList_style_list_empty","item":"_EvaluationList_style_item","item_title":"_EvaluationList_style_item_title","item_date":"_EvaluationList_style_item_date","item_state":"_EvaluationList_style_item_state","item_view":"_EvaluationList_style_item_view"}
 },{}],355:[function(require,module,exports){
 'use strict';
 

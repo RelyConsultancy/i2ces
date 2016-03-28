@@ -4890,6 +4890,17 @@ body.prevent-scroll.fr-mobile {
   color: #999999;
 }
 
+._EvaluationList_style_item_state {
+  display: inline-block;
+  margin-left: 1em;
+  padding: .3em .5em .2em;
+  font-size: .75em;
+  font-family: 'Avenir LT Std 55 Roman';
+  background-color: #FFA000;
+  color: #fff;
+  vertical-align: bottom;
+}
+
 ._EvaluationList_style_item_view {
   position: absolute;
   top: 0;
@@ -4965,7 +4976,7 @@ body.prevent-scroll.fr-mobile {
   right: 2px;
   background-color: #FFFFFF;
   border-radius: 5em;
-  transition: background 0.4s;
+  transition: background .4s;
 }
 
 ._EvaluationDashboard_style_toggle::after {
@@ -4977,16 +4988,16 @@ body.prevent-scroll.fr-mobile {
   width: calc(50% - 4px);
   background-color: #dddddd;
   border-radius: 50%;
-  transition: left 0.4s, background 0.4s;
+  transition: left .25s, background .4s;
 }
 
 ._EvaluationDashboard_style_toggle_active {
-  background-color: #8ce196;
+  background-color: #81CDE7;
 }
 
 ._EvaluationDashboard_style_toggle_active::after {
   left: calc(60% - 4px);
-  background-color: #8ce196;
+  background-color: #81CDE7;
 }
 
 ._EvaluationDashboard_style_content {

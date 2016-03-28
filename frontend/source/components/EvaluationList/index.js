@@ -26,9 +26,14 @@ const applyFilters = (store) => {
 
 
 const Item = ({ data }) => {
+  const state = data.state == 'published' ? null : B({
+    className: style.item_state,
+  }, data.state)
+
   const title = B(
     { className: style.item_title },
-    data.display_title
+    data.display_title,
+    state
   )
 
   const date = B(

@@ -44,11 +44,11 @@
   margin: 0 auto;
   overflow-y: auto;
 }
-
 .list_empty {
   text-align: center;
   padding: 1em;
 }
+
 
 .item {
   position: relative;
@@ -59,18 +59,25 @@
 .item:last-child {
   border-bottom: 0;
 }
-
 .item_title {
   color: #6D6D6D;
   font-family: 'Archer Bold', serif;
 }
-
 .item_date {
   margin-top: 1em;
   font-size: .675em;
   color: #999999;
 }
-
+.item_state {
+  display: inline-block;
+  margin-left: 1em;
+  padding: .3em .5em .2em;
+  font-size: .75em;
+  font-family: 'Avenir LT Std 55 Roman';
+  background-color: #FFA000;
+  color: #fff;
+  vertical-align: bottom;
+}
 .item_view {
   position: absolute;
   top: 0;
