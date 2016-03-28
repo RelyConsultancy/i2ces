@@ -1,0 +1,26 @@
+[{
+  "channels": "Instore Sampling1",
+  "uplift": "183.158905",
+  "percentage_uplift": "0.614955",
+  "exposed": "27515"
+},{
+  "channels": "Instore Sampling1, Six Sheets1",
+  "uplift": "2935.812845",
+  "percentage_uplift": "0.750811",
+  "exposed": "179508"
+}, {
+  "channels": "Six Sheets1",
+  "uplift": "4993.793558",
+  "percentage_uplift": "0.275882",
+  "exposed": "466779"
+}, {
+  "channels": "Lorem ipsum",
+  "uplift": "1493.793558",
+  "percentage_uplift": "0.215882",
+  "exposed": "516779"
+}, {
+  "channels": "EMail",
+  "uplift": "3293.793558",
+  "percentage_uplift": "0.635882",
+  "exposed": "186779"
+}]

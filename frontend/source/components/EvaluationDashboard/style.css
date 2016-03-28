@@ -1,3 +1,9 @@
+.no_data {
+  text-align: center;
+  padding: 1em;
+}
+
+
 .header {
   position: relative;
   height: 3rem;
@@ -9,17 +15,67 @@
   color: #656565;
   z-index: 10;
 }
-.header::after {
-  content: attr(content);
-  display: block;
+.header_wrap {
+  position: relative;
   max-width: 800px;
   margin: 0 auto;
 }
 
-.no_data {
-  text-align: center;
-  padding: 1em;
+
+.state {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  font-size: .75em;
+  line-height: 2rem;
+  margin-top: -1rem;
 }
+.component {
+  cursor: pointer;
+}
+.toggle {
+  position: relative;
+  display: inline-block;
+  padding: 2px;
+  margin-left: .5em;
+  margin-bottom: -6px;
+  width: 3em;
+  height: 1.75em;
+  cursor: pointer;
+  background-color: #DDDDDD;
+  border-radius: 5em;
+}
+.toggle::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #FFFFFF;
+  border-radius: 5em;
+  transition: background .4s;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  background-color: #dddddd;
+  border-radius: 50%;
+  transition: left .25s, background .4s;
+}
+.toggle_active {
+  compose: toggle;
+  background-color: #81CDE7;
+}
+.toggle_active::after {
+  left: calc(60% - 4px);
+  background-color: #81CDE7;
+}
+
 
 .content {
   position: absolute;

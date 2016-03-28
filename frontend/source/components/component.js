@@ -39,7 +39,14 @@ export const Textarea = Element(textarea)
 export const Image = Element('img')
 export const Link = Element(link)
 export const SVG = Element('svg')
-export const Table = Element('table')
-export const TBody = Element('tbody')
 export const TR = Element('tr')
 export const TD = Element('td')
+export const Table = (...args) => (
+  Element('table')(Element('tbody')(...args))
+)
+
+
+// react HTML insert
+export const HTML = (string) => (
+  B({ dangerouslySetInnerHTML: { __html: string } })
+)

@@ -1,0 +1,51 @@
+.chart {
+  position: relative;
+}
+.chart .c3-chart-texts .c3-text {
+  font-size: .75rem;
+  font-family: 'Archer Bold', serif;
+  fill: #252525 !important;
+}
+.chart .c3-axis-y2-label,
+.chart .c3-axis-y-label {
+  font-size: .75rem;
+  font-family: 'Archer Bold', serif;
+  fill: #6D6D6D;
+}
+.chart .c3-lines-percent path {
+  display: none;
+}
+.chart .c3-circle {
+  r: .25rem !important;
+  transform: translateY(.25em);
+}
+
+
+.table {
+  position: relative;
+  margin-top: 1rem;
+  color: #4D4D4D;
+}
+.table_label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: .5rem 0;
+  font-size: .875em;
+  font-family: 'Archer Bold', serif;
+}
+.table_data {
+  position: relative;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  border-radius: .25em;
+  background-color: #E3F2FD;
+}
+.table_data > b {
+  display: inline-block;
+  padding: .5rem 0;
+  font-size: .75em;
+  font-family: 'Avenir LT Std 65 Medium Oblique';
+  text-align: center;
+}
+

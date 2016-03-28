@@ -23,10 +23,13 @@
 @import from './components/SectionInfo/style.css';
 @import from './components/SectionTimings/style.css';
 @import from './components/SectionObjectives/style.css';
+@import from './components/SectionEditableComments/style.css';
 
 @import from './components/ChartMediaLaydown/style.css';
 @import from './components/ChartSalesPerformance/style.css';
 @import from './components/ChartPromotionalActivity/style.css';
 @import from './components/ChartNonPurchase/style.css';
+@import from './components/ChartOfferSales/style.css';
+@import from './components/ChartUnitsUplift/style.css';
 
 @import from './components/TablePerformanceSamples/style.css';
