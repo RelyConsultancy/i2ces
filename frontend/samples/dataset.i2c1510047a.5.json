@@ -1,0 +1,45 @@
+{
+  "chart": [{
+    "start_date": "2015-09-29",
+    "exposed": "60.00",
+    "control": "64.450956"
+  }, {
+    "start_date": "2015-10-06",
+    "exposed": "373.00",
+    "control": "401.423956"
+  }, {
+    "start_date": "2015-10-13",
+    "exposed": "448.00",
+    "control": "448.410212"
+  }, {
+    "start_date": "2015-10-20",
+    "exposed": "341.00",
+    "control": "452.410212"
+  }, {
+    "start_date": "2015-10-27",
+    "exposed": "284.00",
+    "control": "453.410212"
+  }, {
+    "start_date": "2015-11-04",
+    "exposed": "442.00",
+    "control": "361.410212"
+  }, {
+    "start_date": "2015-11-11",
+    "exposed": "391.00",
+    "control": "42.410212"
+  }],
+  "table": {
+    "during": {
+      "uplift": "4873.303910",
+      "percentage_uplift": "0.505005"
+    },
+    "post": {
+      "uplift": "4000.062567",
+      "percentage_uplift": "0.062567"
+    },
+    "total": {
+      "uplift": "52734.711768",
+      "percentage_uplift": "0.567572"
+    }
+  }
+}

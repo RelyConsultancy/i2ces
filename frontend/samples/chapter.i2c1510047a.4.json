@@ -4,5 +4,19 @@
   "location": "/api/evaluations/i2c1510047a/chapters/4",
   "state": "visible",
   "title": "Objective Review",
-  "content": []
+  "content": [{
+    "type": "section",
+    "title": "Objective priority 1",
+    "content": [{
+      "type": "chart_offer_sales",
+      "source": "/api/evaluations/i2c1510047a/dataset/5"
+    }]
+  }, {
+    "type": "section",
+    "title": "Objective priority 2",
+    "content": [{
+      "type": "chart_units_uplift",
+      "source": "/api/evaluations/i2c1510047a/dataset/6"
+    }]
+  }]
 }
