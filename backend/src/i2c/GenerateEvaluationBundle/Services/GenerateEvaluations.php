@@ -104,6 +104,7 @@ class GenerateEvaluations
                 'i2c\EvaluationBundle\Entity\Evaluation',
                 'json'
             );
+            $businessUnit = $evaluation->getBusinessUnit();
 
             /** @var Evaluation $existingEvaluation */
             $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
@@ -153,7 +154,7 @@ class GenerateEvaluations
             }
 
             $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
-                                                ->findOneBy(['id' => $evaluation->getBusinessUnit()->getId()]);
+                                                ->findOneBy(['id' => $businessUnit->getId()]);
             $evaluation->setOwner($businessUnit);
             $evaluation->setChapters($chapters);
             $this->entityManager->persist($evaluation);
