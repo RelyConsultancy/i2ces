@@ -1,8 +1,8 @@
 import { B } from '/components/component.js'
-import { getUnique } from '/application/utils.js'
 import Grid from '/components/Grid'
 import Select from '/components/Select'
-import { setFilter } from '/application/actions.js'
+import { getUnique } from '/application/utils.js'
+import { setFilter, isUser } from '/application/actions.js'
 import style from './style.css'
 
 
@@ -82,14 +82,15 @@ export default ({ store }) => {
   if (!store.list.length) return null
 
   const label = B({ className: style.filters_label }, 'Filter by')
+  const items = [
+    Brands({ store }),
+    isUser('i2c_employee') ? Suppliers({ store }) : null,
+    Categories({ store }),
+  ]
 
   const filters = Grid({
     blocks: 3,
-    items: [
-      Brands({ store }),
-      Suppliers({ store }),
-      Categories({ store }),
-    ]
+    items: items.filter(i => i)
   })
 
   return B({ className: style.filters }, label, filters)

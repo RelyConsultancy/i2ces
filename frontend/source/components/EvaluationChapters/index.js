@@ -3,10 +3,17 @@ import { Component, B, Link } from '/components/component.js'
 import { getInitials, slugify } from '/application/utils.js'
 import store from '/application/store.js'
 import * as $ from '/application/actions.js'
-import Sections from './sections.js'
+import setComponent from './setComponent.js'
 import style from './style.css'
 
 
+// check if user has permission to edit the evaluation
+const isEditable = (cid) => {
+  const { user } = store.getState().dashboard
+  const cids = user.edit.map(i => i.cid)
+
+  return ~cids.indexOf(cid)
+}
 
 
 const Navigation = ({ store, params }) => {
@@ -47,22 +54,45 @@ const ChapterLinks = ({ store, chapter }) => {
 }
 
 
-const SectionHeadings = ({ store, chapter, selected, setSection }) => {
+const Headings = ({ store, chapter, focusedSection, focusSection }) => {
   const { evaluation, chapter_palette } = store
   const color = chapter_palette[chapter.order - 1]
   const sections = chapter.content.filter(item => item.type == 'section')
-  const isActive = (section) => (section.title == selected.title)
+  const isActive = (section) => (section.title == focusedSection.title)
 
   const title = B({ className: style.sections_title }, chapter.title)
   const links = sections.map((section, index) => B({
     className: isActive(section) ? style.sections_active : style.sections_link,
     onClick: (event) => {
-      setSection(section)
+      focusSection(section)
       scrollTo(document.getElementById(slugify(section.title)))
     },
   }, section.title))
 
   return B({ className: style.sections, style: { color } }, title, ...links)
+}
+
+
+const Sections = ({ store, chapter, focusedSection, focusSection }) => {
+  const { cid } = store.evaluation
+  const byType = (i => i.type == 'section')
+
+  const editable = isEditable(cid)
+  const onSave = () => { $.updateChapter({ chapter, cid }) }
+
+  const sections = chapter.content.filter(byType).map((section) => {
+    const components = section.content.map((component) => (
+      setComponent({ component, editable, onSave })
+    ))
+
+
+    const title = B({ className: style.section_title }, section.title)
+    const id = slugify(section.title)
+
+    return B({ className: style.section, id }, title, ...components)
+  })
+
+  return B({ className: style.sections_content }, ...sections)
 }
 
 
@@ -105,15 +135,15 @@ const EvaluationChapters = Component({
 
     let content = B({ className: style.no_data }, store.chapter_empty)
 
-    if (chapter) {
-      const setSection = (section) => { this.setState({ section }) }
-      const selected = this.state.section
+    if (store.evaluation && chapter) {
+      const focusSection = (section) => { this.setState({ section }) }
+      const focusedSection = this.state.section
 
       content = B(
         Navigation({ store, params }),
         ChapterLinks({ store, chapter }),
-        SectionHeadings({ store, chapter, selected, setSection }),
-        Sections({ store, chapter, selected })
+        Headings({ store, chapter, focusedSection, focusSection }),
+        Sections({ store, chapter, focusedSection })
       )
     }
 

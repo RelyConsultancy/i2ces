@@ -18,7 +18,6 @@ const legend = [{
 }]
 
 
-
 export default Component({
   render () {
     const { component } = this.props

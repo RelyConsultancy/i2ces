@@ -1,10 +1,9 @@
 import d3 from 'd3'
-import { Component, B, Table, TBody, TR, TD } from '/components/component.js'
-import Froala from '/components/Froala'
+import { Component, B } from '/components/component.js'
 import Chart from '/components/Chart'
 import store from '/application/store.js'
 import { fetchDataset } from '/application/actions.js'
-import { fmtUnit, fmtHTML, fmtDate } from '/application/utils.js'
+import { fmtUnit, fmtDate } from '/application/utils.js'
 import style from './style.css'
 
 
@@ -50,10 +49,10 @@ const ActivityChart = ({ data, timings }) => {
         ['Competitor'].concat(competitor),
       ],
       colors: {
-          'Brand': '#ed7b29',
-          'Offer': '#4f81bd',
-          'Competitor': '#9bbb59', 
-      } 
+        'Brand': '#ed7b29',
+        'Offer': '#4f81bd',
+        'Competitor': '#9bbb59',
+      }
     },
     axis: {
       x: {
@@ -99,27 +98,6 @@ const Stages = ({ timings }) => (
 )
 
 
-const Info = ({ component, isEditable, className, value }) => {
-  const content = component[value] || ''
-
-  if (isEditable) {
-    return Froala({
-      content,
-      onChange: (e, editor) => {
-        component[value] = editor.html.get()
-      },
-    })
-  }
-  // ignore empty strings
-  else if (!content) {
-    return null
-  }
-  else {
-    return B({ className }, fmtHTML(content))
-  }
-}
-
-
 export default Component({
   loadData () {
     const { source } = this.props.component
@@ -128,24 +106,9 @@ export default Component({
       this.setState({ data })
     })
   },
-  renderToggle () {
-    const { editable, onSave } = this.props
-    const { isEditable } = this.state
-    const label = isEditable ? 'Save' : 'Edit'
-
-    if (!editable) return null
-
-    const onClick = () => {
-      if (isEditable) onSave()
-      this.setState({ isEditable: !isEditable })
-    }
-
-    return B({ onClick, className: style.toggle }, label)
-  },
   getInitialState () {
     return {
       data: [],
-      isEditable: false,
     }
   },
   componentDidMount () {
@@ -156,29 +119,14 @@ export default Component({
     const { isEditable, data } = this.state
     const { timings } = component
 
-    let content = B({ className: style.loading }, 'Loading data ...')
-
     if (data.length) {
-      const info = Info({
-        component,
-        isEditable,
-        value: 'info',
-        className: style.info
-      })
-
-      const comment = Info({
-        component,
-        isEditable,
-        value: 'comment',
-        className: style.comment
-      })
-
       const chart = ActivityChart({ data, timings })
-        const stages = Stages({ timings })
+      const stages = Stages({ timings })
 
-      content = B(info, chart, stages, comment)
+      return B(chart, stages)
     }
-
-    return B({ className: style.component }, content, this.renderToggle())
+    else {
+      return B({ className: style.loading }, 'Loading data ...')
+    }
   }
 })

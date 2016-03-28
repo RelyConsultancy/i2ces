@@ -3,9 +3,25 @@ import http from './http.js'
 import { getUnique } from './utils.js'
 
 
+/*
+    helpers
+*/
 const cmd = (type, data) => {
   store.dispatch({ type, data })
 }
+
+
+export const isUser = (type) => {
+  const { user } = store.getState().dashboard
+
+  if (Array.isArray(type)) {
+    return ~type.indexOf(user.type)
+  }
+  else {
+    return user.type == type
+  }
+}
+
 
 
 /*
@@ -19,6 +35,7 @@ export const setUser = (data) => {
 export const setFlagNetwork = (isVisible) => {
   cmd('dashboard.flag.network', isVisible)
 }
+
 
 
 /*

@@ -1,5 +1,4 @@
-import { Component, B } from '/components/component.js'
-import { fmtHTML } from '/application/utils.js'
+import { Component, B, HTML } from '/components/component.js'
 import Froala from '/components/Froala'
 import style from './style.css'
 
@@ -31,7 +30,7 @@ export default Component({
     // ignore empty strings
     if (!html) return null
 
-    let content = fmtHTML(html)
+    let content = HTML(html)
 
     if (isEditable) {
       content = Froala({

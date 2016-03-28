@@ -1,14 +1,14 @@
-import { Component, B, Table, TBody, TR, TD } from '/components/component.js'
+import { Component, B, Table, TR, TD } from '/components/component.js'
 import { fetchDataset } from '/application/actions.js'
 import { fmtNumber, fmtUnit, fmtDate } from '/application/utils.js'
 import style from './style.css'
 
 
 const TableSamples = ({ data }) => {
-  const header = Table(TBody(TR(
+  const header = Table(TR(
     TD({ className: style.table_head }, 'SKU details'),
     TD({ className: style.table_head }, 'Sampled distributed during activity')
-  )))
+  ))
 
   const head = TR(
     { className: style.table_header },
@@ -33,16 +33,16 @@ const TableSamples = ({ data }) => {
     TD(data.map(i => i.per_store).reduce((p, c) => fmtNumber(p + c)))
   )
 
-  const table = Table(TBody(head, ...rows, footer))
+  const table = Table(head, ...rows, footer)
 
   return B({ className: style.table_samples }, header, table)
 }
 
 
 const TableUplift = ({ data }) => {
-  const header = Table(TBody(TR(
+  const header = Table(TR(
     TD({ className: style.table_head }, 'Incremental uplift during campaign')
-  )))
+  ))
 
   const head = TR(
     { className: style.table_header },
@@ -58,7 +58,7 @@ const TableUplift = ({ data }) => {
     TD(parseInt(item.conversion).toLocaleString() + '%')
   ))
 
-  const table = Table(TBody(head, ...rows))
+  const table = Table(head, ...rows)
 
   return B({ className: style.table_uplift }, header, table)
 }

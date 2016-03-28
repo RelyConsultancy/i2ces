@@ -4907,6 +4907,11 @@ body.prevent-scroll.fr-mobile {
   color: #FFFFFF;
 }
 
+._EvaluationDashboard_style_no_data {
+  text-align: center;
+  padding: 1em;
+}
+
 ._EvaluationDashboard_style_header {
   position: relative;
   height: 3rem;
@@ -4919,16 +4924,69 @@ body.prevent-scroll.fr-mobile {
   z-index: 10;
 }
 
-._EvaluationDashboard_style_header::after {
-  content: attr(content);
-  display: block;
+._EvaluationDashboard_style_header_wrap {
+  position: relative;
   max-width: 800px;
   margin: 0 auto;
 }
 
-._EvaluationDashboard_style_no_data {
-  text-align: center;
-  padding: 1em;
+._EvaluationDashboard_style_state {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  font-size: .75em;
+  line-height: 2rem;
+  margin-top: -1rem;
+}
+
+._EvaluationDashboard_style_component {
+  cursor: pointer;
+}
+
+._EvaluationDashboard_style_toggle {
+  position: relative;
+  display: inline-block;
+  padding: 2px;
+  margin-left: .5em;
+  margin-bottom: -6px;
+  width: 3em;
+  height: 1.75em;
+  cursor: pointer;
+  background-color: #DDDDDD;
+  border-radius: 5em;
+}
+
+._EvaluationDashboard_style_toggle::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #FFFFFF;
+  border-radius: 5em;
+  transition: background 0.4s;
+}
+
+._EvaluationDashboard_style_toggle::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  background-color: #dddddd;
+  border-radius: 50%;
+  transition: left 0.4s, background 0.4s;
+}
+
+._EvaluationDashboard_style_toggle_active {
+  background-color: #8ce196;
+}
+
+._EvaluationDashboard_style_toggle_active::after {
+  left: calc(60% - 4px);
+  background-color: #8ce196;
 }
 
 ._EvaluationDashboard_style_content {
@@ -5345,6 +5403,51 @@ body.prevent-scroll.fr-mobile {
   float: right;
 }
 
+._SectionEditableComments_style_component {
+  position: relative;
+}
+
+._SectionEditableComments_style_component .froala-editor {
+  margin: 2em 0;
+}
+
+._SectionEditableComments_style_toggle {
+  position: absolute;
+  right: 0;
+  top: -4rem;
+  padding: .5em 1em;
+  color: #FFF;
+  font-size: .875em;
+  background-color: #43B5DB;
+  cursor: pointer;
+}
+
+._SectionEditableComments_style_loading {
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  font-size: .75em;
+  color: #43B5DB;
+}
+
+._SectionEditableComments_style_info {
+  padding: .5rem .75rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: .875em;
+  color: #fafafa;
+  background-color: #4E8ECB;
+}
+
+._SectionEditableComments_style_comment {
+  padding: .5rem .75rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: .875em;
+  color: #fafafa;
+  background-color: #5FC2E1;
+}
+
 ._ChartMediaLaydown_style_chart {
   height: auto;
 }
@@ -5373,45 +5476,12 @@ body.prevent-scroll.fr-mobile {
   position: relative;
 }
 
-._ChartSalesPerformance_style_component .froala-editor {
-  margin: 2em 0;
-}
-
-._ChartSalesPerformance_style_toggle {
-  position: absolute;
-  right: 0;
-  top: -4rem;
-  padding: .5em 1em;
-  color: #FFF;
-  font-size: .75rem;
-  background-color: #43B5DB;
-  cursor: pointer;
-}
-
 ._ChartSalesPerformance_style_loading {
   position: relative;
   padding: 1rem;
   text-align: center;
   font-size: .75em;
   color: #43B5DB;
-}
-
-._ChartSalesPerformance_style_info {
-  padding: .5rem .75rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  font-size: .875em;
-  color: #fafafa;
-  background-color: #4E8ECB;
-}
-
-._ChartSalesPerformance_style_comment {
-  padding: .5rem .75rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-size: .875em;
-  color: #fafafa;
-  background-color: #5FC2E1;
 }
 
 ._ChartSalesPerformance_style_chart {
@@ -5472,49 +5542,12 @@ body.prevent-scroll.fr-mobile {
   text-overflow: ellipsis;
 }
 
-._ChartPromotionalActivity_style_component {
-  position: relative;
-}
-
-._ChartPromotionalActivity_style_component .froala-editor {
-  margin: 2em 0;
-}
-
-._ChartPromotionalActivity_style_toggle {
-  position: absolute;
-  right: 0;
-  top: -4rem;
-  padding: .5em 1em;
-  color: #FFF;
-  font-size: .875em;
-  background-color: #43B5DB;
-  cursor: pointer;
-}
-
 ._ChartPromotionalActivity_style_loading {
   position: relative;
   padding: 1rem;
   text-align: center;
   font-size: .75em;
   color: #43B5DB;
-}
-
-._ChartPromotionalActivity_style_info {
-  padding: .5rem .75rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  font-size: .875em;
-  color: #fafafa;
-  background-color: #4E8ECB;
-}
-
-._ChartPromotionalActivity_style_comment {
-  padding: .5rem .75rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-size: .875em;
-  color: #fafafa;
-  background-color: #5FC2E1;
 }
 
 ._ChartPromotionalActivity_style_chart {
@@ -5586,6 +5619,135 @@ body.prevent-scroll.fr-mobile {
   font-family: 'Avenir LT Std 85 Heavy';
   text-align: center;
   color: #6D6D6D;
+}
+
+._ChartOfferSales_style_loading {
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  font-size: .75em;
+  color: #43B5DB;
+}
+
+._ChartOfferSales_style_chart {
+  position: relative;
+  padding-left: .5rem;
+}
+
+._ChartOfferSales_style_chart_label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-40%, -120%) rotate(-90deg);
+  font-size: .875rem;
+  font-family: 'Archer Bold', serif;
+  color: #6D6D6D;
+}
+
+._ChartOfferSales_style_chart .c3-target path {
+  stroke-width: 2px;
+}
+
+._ChartOfferSales_style_chart .c3-target-Control path {
+  stroke-width: 1px;
+  stroke-dasharray: 5,5;
+}
+
+._ChartOfferSales_style_chart .c3-axis-x .tick > text {
+  transform: rotate(-45deg) translate(-1.75rem, 0);
+}
+
+._ChartOfferSales_style_chart .c3-legend-item {
+  transform: translateY(-18rem);
+}
+
+._ChartOfferSales_style_chart .c3-region {
+  fill: none;
+}
+
+._ChartOfferSales_style_table_sales {
+  margin-top: 2rem;
+  font-size: .875rem;
+}
+
+._ChartOfferSales_style_table_sales_header {
+  background-color: #ECF6F9;
+  font-family: 'Avenir LT Std 85 Heavy';
+}
+
+._ChartOfferSales_style_table_sales_footer {
+  font-family: 'Avenir LT Std 85 Heavy';
+  background-color: #D8E481;
+  border-bottom: 1px solid #A09F9C;
+}
+
+._ChartOfferSales_style_table_sales td {
+  padding-top: .25em;
+  line-height: 1.5rem;
+  width: 33.333333333333%;
+  font-size: .75rem;
+  text-align: center;
+}
+
+._ChartOfferSales_style_table_sales_footer td {
+  border-top: 0;
+}
+
+._ChartUnitsUplift_style_chart {
+  position: relative;
+}
+
+._ChartUnitsUplift_style_chart .c3-chart-texts .c3-text {
+  font-size: .75rem;
+  font-family: 'Archer Bold', serif;
+  fill: #252525 !important;
+}
+
+._ChartUnitsUplift_style_chart .c3-axis-y2-label,
+._ChartUnitsUplift_style_chart .c3-axis-y-label {
+  font-size: .75rem;
+  font-family: 'Archer Bold', serif;
+  fill: #6D6D6D;
+}
+
+._ChartUnitsUplift_style_chart .c3-lines-percent path {
+  display: none;
+}
+
+._ChartUnitsUplift_style_chart .c3-circle {
+  r: .25rem !important;
+  transform: translateY(.25em);
+}
+
+._ChartUnitsUplift_style_table {
+  position: relative;
+  margin-top: 1rem;
+  color: #4D4D4D;
+}
+
+._ChartUnitsUplift_style_table_label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: .5rem 0;
+  font-size: .875em;
+  font-family: 'Archer Bold', serif;
+}
+
+._ChartUnitsUplift_style_table_data {
+  position: relative;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  border-radius: .25em;
+  background-color: #E3F2FD;
+}
+
+._ChartUnitsUplift_style_table_data > b {
+  display: inline-block;
+  padding: .5rem 0;
+  font-size: .75em;
+  font-family: 'Avenir LT Std 65 Medium Oblique';
+  text-align: center;
 }
 
 ._TablePerformanceSamples_style_component {

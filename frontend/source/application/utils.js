@@ -39,12 +39,6 @@ export const slugify = (string) => (
 )
 
 
-// react HTML insert
-export const fmtHTML = (string) => (
-  B({ dangerouslySetInnerHTML: { __html: string } })
-)
-
-
 export const fmtDate = (date) => (
   moment(date, 'YYYY-MM-DD').format('DD MMM YYYY')
 )

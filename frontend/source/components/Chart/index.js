@@ -16,6 +16,7 @@ export default Component({
     const { type } = this.props
 
     switch (type) {
+      case 'line':
       case 'bar':
         const config = {
           bindto: container,

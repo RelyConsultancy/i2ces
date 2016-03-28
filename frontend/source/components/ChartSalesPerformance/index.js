@@ -1,9 +1,8 @@
 import d3 from 'd3'
-import { Component, B, Table, TBody, TR, TD } from '/components/component.js'
-import Froala from '/components/Froala'
+import { Component, B, Table, TR, TD } from '/components/component.js'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
-import { fmtUnit, fmtHTML } from '/application/utils.js'
+import { fmtUnit } from '/application/utils.js'
 import style from './style.css'
 
 
@@ -42,7 +41,7 @@ const SalesChart = ({ data }) => {
         ['Results'].concat(data.map(i => i.value)),
       ],
       color: function (color, d) {
-          return d.value < 0 ? '#ed7b29' : '#33bf6f'; 
+          return d.value < 0 ? '#ed7b29' : '#33bf6f';
       }
     },
     axis: {
@@ -77,7 +76,7 @@ const TableSales = ({ data }) => {
   const spendings = sortData(data.filter(bySpend))
   const width = 100 / shares.length + '%'
 
-  const table = Table(TBody(
+  const table = Table(
     TR(...shares.map(i => TD(
       { style: { width } },
       (i.value * 100).toFixed(1) + '%'
@@ -86,7 +85,7 @@ const TableSales = ({ data }) => {
       { style: { width } },
       fmtUnit(i.value, 'currency')
     )))
-  ))
+  )
 
   const labels = B({ className: style.table_labels},
     B('Category share'),
@@ -94,27 +93,6 @@ const TableSales = ({ data }) => {
   )
 
   return B({ className: style.table }, labels, table)
-}
-
-
-const Info = ({ component, isEditable, className, value }) => {
-  const content = component[value] || ''
-
-  if (isEditable) {
-    return Froala({
-      content,
-      onChange: (e, editor) => {
-        component[value] = editor.html.get()
-      },
-    })
-  }
-  // ignore empty strings
-  else if (!content) {
-    return null
-  }
-  else {
-    return B({ className }, fmtHTML(content))
-  }
 }
 
 
@@ -126,56 +104,25 @@ export default Component({
       this.setState({ data })
     })
   },
-  renderToggle () {
-    const { editable, onSave } = this.props
-    const { isEditable } = this.state
-    const label = isEditable ? 'Save' : 'Edit'
-
-    if (!editable) return null
-
-    const onClick = () => {
-      if (isEditable) onSave()
-      this.setState({ isEditable: !isEditable })
-    }
-
-    return B({ onClick, className: style.toggle }, label)
-  },
   getInitialState () {
     return {
       data: [],
-      isEditable: false,
     }
   },
   componentDidMount () {
     this.loadData()
   },
   render () {
-    const { component } = this.props
-    const { isEditable, data } = this.state
-
-    let content = B({ className: style.loading }, 'Loading data ...')
+    const { data } = this.state
 
     if (data.length) {
-      const info = Info({
-        component,
-        isEditable,
-        value: 'info',
-        className: style.info
-      })
-
-      const comment = Info({
-        component,
-        isEditable,
-        value: 'comment',
-        className: style.comment
-      })
-
-      const table = TableSales({ data })
-      const chart = SalesChart({ data: data.filter(bySales) })
-
-      content = B(info, chart, table, comment)
+      return B(
+        SalesChart({ data: data.filter(bySales) }),
+        TableSales({ data })
+      )
     }
-
-    return B({ className: style.component }, content, this.renderToggle())
+    else {
+      return B({ className: style.loading }, 'Loading data ...')
+    }
   }
 })

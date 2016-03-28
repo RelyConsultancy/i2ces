@@ -1,14 +1,43 @@
 import { Component, B, Link } from '/components/component.js'
 import Grid from '/components/Grid'
 import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
-import { fetchEvaluation } from '/application/actions.js'
+import { fetchEvaluation, isUser } from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
 
 
-const Header = (text) => (
-  B({ className: style.header, content: text })
-)
+const Toggle = Component({
+  getInitialState () {
+    return { isActive: this.props.active || false }
+  },
+  render () {
+    const { isActive } = this.state
+
+    const toggle = B({
+      className: isActive ? style.toggle_active : style.toggle
+    })
+
+    const label = isActive ? 'published' : 'draft'
+
+    const onClick = () => {
+      this.setState({ isActive: !isActive })
+    }
+
+    return B({ onClick, className: style.component }, label, toggle)
+  }
+})
+
+
+const Header = ({ evaluation }) => {
+  const { display_title, state } = evaluation
+  const active = evaluation.state == 'published'
+
+  const toggle = isUser('i2c_employee') ? Toggle({ active }) : null
+  const button = B({ className: style.state }, toggle)
+  const content = B({ className: style.header_wrap }, display_title, button)
+
+  return B({ className: style.header }, content)
+}
 
 
 const Content = (...data) => B(
@@ -114,7 +143,7 @@ const Evaluation = Component({
     if (evaluation) {
       content = B(
         Links({ store, params }),
-        Header(evaluation.display_title),
+        Header({ evaluation }),
         Content(
           Date({ evaluation }),
           Channels({ items: evaluation.channels }),
