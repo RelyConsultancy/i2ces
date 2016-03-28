@@ -81,6 +81,26 @@
         "state": "visible",
         "order": 4
       }
+    },
+    {
+      "twig_name": "appendix.json.twig",
+      "data_service": "extract_summary",
+      "chart_data_set_service_name": "data_set_config_summary",
+      "additional_data": {
+        "title": "Appendix",
+        "state": "visible",
+        "order": 6
+      }
+    },
+    {
+      "twig_name": "sampling-performance.json.twig",
+      "data_service": "extract_summary",
+      "chart_data_set_service_name": "data_set_config_summary",
+      "additional_data": {
+        "title": "Sampling Performance",
+        "state": "visible",
+        "order": 3
+      }
     }
   ]
 }
