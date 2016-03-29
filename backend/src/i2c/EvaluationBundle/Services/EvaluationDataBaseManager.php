@@ -54,6 +54,26 @@ class EvaluationDataBaseManager
     /**
      * @return mixed
      */
+    public function getAllPublishedForViewing()
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('e')
+                     ->from('i2cEvaluationBundle:Evaluation', 'e')
+                     ->where(
+                         $queryBuilder->expr()->in('e.state', '?1')
+                     )
+                     ->setParameter(1, [Evaluation::STATE_PUBLISHED]);
+
+        $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
+
+        $result = $query->execute();
+
+        return $result;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getAllForEditing()
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();

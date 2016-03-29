@@ -27,7 +27,11 @@ class UserController extends RestApiController
 
         $user = $this->getUser();
 
-        $viewEvaluations = $this->getEvaluationDatabaseManagerService()->getAllForViewing();
+        if ($isEmployee) {
+            $viewEvaluations = $this->getEvaluationDatabaseManagerService()->getAllForViewing();
+        } else {
+            $viewEvaluations = $this->getEvaluationDatabaseManagerService()->getAllPublishedForViewing();
+        }
 
         $editEvaluations = $this->getEvaluationDatabaseManagerService()->getAllForEditing();
 
