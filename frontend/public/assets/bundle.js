@@ -73849,7 +73849,7 @@ var mutateEvaluation = exports.mutateEvaluation = function mutateEvaluation(_ref
   if (data.state) {
     var type = data.state == 'draft' ? 'unpublish' : 'publish';
 
-    (0, _http2.default)('post', '/evaluations/' + cid + '/' + type, function (reply) {
+    (0, _http2.default)('post', '/api/evaluations/' + cid + '/' + type, function (reply) {
       handler(reply.data);
     });
   }
