@@ -16,7 +16,9 @@ const ChartUplift = ({ data }) => {
     tooltip: {
       show: false,
     },
-    legend: {
+    padding: {
+      top: 20,
+      bottom: 0,
     },
     color: {
       pattern: ['#D2E06C', '#EF7D46'],

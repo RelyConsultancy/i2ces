@@ -1,26 +1,36 @@
 [{
-  "channels": "Instore Sampling1",
-  "uplift": "183.158905",
-  "percentage_uplift": "0.614955",
-  "exposed": "27515"
-},{
-  "channels": "Instore Sampling1, Six Sheets1",
-  "uplift": "2935.812845",
-  "percentage_uplift": "0.750811",
-  "exposed": "179508"
+  "channels": "Entrance Gates1",
+  "uplift": "982.612844",
+  "percentage_uplift": "0.351512",
+  "exposed": "337250"
+}, {
+  "channels": "Entrance Gates1, Six Sheets1",
+  "uplift": "1070.738772",
+  "percentage_uplift": "0.524034",
+  "exposed": "190537"
+}, {
+  "channels": "Entrance Gates1, Six Sheets1, TV Wall1",
+  "uplift": "1334.248613",
+  "percentage_uplift": "0.577659",
+  "exposed": "165625"
+}, {
+  "channels": "Entrance Gates1, TV Wall1",
+  "uplift": "5638.320006",
+  "percentage_uplift": "0.535114",
+  "exposed": "870664"
 }, {
   "channels": "Six Sheets1",
-  "uplift": "4993.793558",
-  "percentage_uplift": "0.275882",
+  "uplift": "349.978780",
+  "percentage_uplift": "0.113850",
   "exposed": "466779"
 }, {
-  "channels": "Lorem ipsum",
-  "uplift": "1493.793558",
-  "percentage_uplift": "0.215882",
-  "exposed": "516779"
+  "channels": "Six Sheets1, TV Wall1",
+  "uplift": "1469.183852",
+  "percentage_uplift": "0.386850",
+  "exposed": "290512"
 }, {
-  "channels": "EMail",
-  "uplift": "3293.793558",
-  "percentage_uplift": "0.635882",
-  "exposed": "186779"
+  "channels": "TV Wall1",
+  "uplift": "11001.256140",
+  "percentage_uplift": "0.350395",
+  "exposed": "2904972"
 }]

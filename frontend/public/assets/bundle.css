@@ -4671,6 +4671,56 @@ body.prevent-scroll.fr-mobile {
   min-height: 300px;
 }
 
+._Toggle_style_component {
+  cursor: pointer;
+}
+
+._Toggle_style_toggle {
+  position: relative;
+  display: inline-block;
+  padding: 2px;
+  margin-left: .5em;
+  margin-bottom: -6px;
+  width: 3em;
+  height: 1.75em;
+  cursor: pointer;
+  background-color: #DDDDDD;
+  border-radius: 5em;
+}
+
+._Toggle_style_toggle::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #FFFFFF;
+  border-radius: 5em;
+  transition: background .4s;
+}
+
+._Toggle_style_toggle::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  background-color: #dddddd;
+  border-radius: 50%;
+  transition: left .25s, background .4s;
+}
+
+._Toggle_style_toggle_on {
+  background-color: #81CDE7;
+}
+
+._Toggle_style_toggle_on::after {
+  left: calc(60% - 4px);
+  background-color: #81CDE7;
+}
+
 ._FAQ_style_component {
   position: relative;
 }
@@ -4949,56 +4999,6 @@ body.prevent-scroll.fr-mobile {
   font-size: .75em;
   line-height: 2rem;
   margin-top: -1rem;
-}
-
-._EvaluationDashboard_style_component {
-  cursor: pointer;
-}
-
-._EvaluationDashboard_style_toggle {
-  position: relative;
-  display: inline-block;
-  padding: 2px;
-  margin-left: .5em;
-  margin-bottom: -6px;
-  width: 3em;
-  height: 1.75em;
-  cursor: pointer;
-  background-color: #DDDDDD;
-  border-radius: 5em;
-}
-
-._EvaluationDashboard_style_toggle::before {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  bottom: 2px;
-  right: 2px;
-  background-color: #FFFFFF;
-  border-radius: 5em;
-  transition: background .4s;
-}
-
-._EvaluationDashboard_style_toggle::after {
-  content: '';
-  position: absolute;
-  top: 4px;
-  bottom: 4px;
-  left: 4px;
-  width: calc(50% - 4px);
-  background-color: #dddddd;
-  border-radius: 50%;
-  transition: left .25s, background .4s;
-}
-
-._EvaluationDashboard_style_toggle_active {
-  background-color: #81CDE7;
-}
-
-._EvaluationDashboard_style_toggle_active::after {
-  left: calc(60% - 4px);
-  background-color: #81CDE7;
 }
 
 ._EvaluationDashboard_style_content {
@@ -5724,6 +5724,10 @@ body.prevent-scroll.fr-mobile {
 
 ._ChartUnitsUplift_style_chart .c3-lines-percent path {
   display: none;
+}
+
+._ChartUnitsUplift_style_chart .c3-legend-item {
+  transform: translateY(-17rem);
 }
 
 ._ChartUnitsUplift_style_chart .c3-circle {

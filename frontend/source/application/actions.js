@@ -6,6 +6,9 @@ import { getUnique } from './utils.js'
 /*
     helpers
 */
+// no operation, default for request handlers
+const noop = function () {}
+
 const cmd = (type, data) => {
   store.dispatch({ type, data })
 }
@@ -94,7 +97,18 @@ export const updateChapter = ({ cid, chapter }) => {
 }
 
 
-export const fetchDataset = (source, handler) => {
+export const mutateEvaluation = ({ cid, data }, handler = noop) => {
+  if (data.state) {
+    const type = data.state == 'draft' ? 'unpublish' : 'publish'
+
+    http('post', `/evaluations/${cid}/${type}`, (reply) => {
+      handler(reply.data)
+    })
+  }
+}
+
+
+export const fetchDataset = (source, handler = noop) => {
   http('get', source, (reply) => {
     handler(reply.data)
   })

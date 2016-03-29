@@ -13,7 +13,12 @@ const ChartSales = ({ data }) => {
 
   const chart = Chart({
     type: 'line',
+    tooltip: { show: false },
     className: style.chart,
+    padding: {
+      top: 20,
+      right: 10
+    },
     data: {
       x: 'dates',
       columns: [
@@ -32,12 +37,10 @@ const ChartSales = ({ data }) => {
       },
       y: {
         tick: {
-          format: (value) => ('£' + value.toFixed(0) + 'k')
+          format: (value) => ('£' + (value.toFixed(0) / 1000) + 'k')
         },
       }
     },
-    tooltip: { show: false },
-    padding: { top: 20, right: 10 },
   })
 
   const label = B({ className: style.chart_label }, 'Offer Sales')
