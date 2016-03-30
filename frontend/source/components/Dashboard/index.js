@@ -51,38 +51,25 @@ const Navigation = ({ store }) => {
 }
 
 
-const Topbar = ({ store }) => {
-  const { flag, navigation, user } = store
-
-  // network indicator
-  const loader = flag.network && Loader({ className: style.loader })
-  const attrs = { className: style.topbar }
-
-  return B(
-    attrs,
-    loader,
-    LogoSupplier({ user }),
-    Logo(),
-    Navigation({ store })
-  )
-}
-
-
 const Dashboard = Component({
   displayName: 'Dashboard',
   class: true,
   render () {
     const { store, children } = this.props
+    const { flag, navigation, user } = store
 
-    const attrs = {
-      className: style.component,
-    }
-
-    return B(
-      attrs,
-      Topbar({ store }),
-      B({ className: style.content}, children)
+    const header = B(
+      { className: style.dashboard_header },
+      // network indicator
+      flag.network && Loader({ className: style.loader }),
+      LogoSupplier({ user }),
+      Logo(),
+      Navigation({ store })
     )
+
+    const content = B({ className: style.dashboard_content }, children)
+
+    return B({ className: style.dashboard }, header, content)
   }
 })
 

@@ -75373,20 +75373,6 @@ var Navigation = function Navigation(_ref2) {
   return _component.B.apply(undefined, [{ className: _style2.default.links }].concat(links));
 };
 
-var Topbar = function Topbar(_ref3) {
-  var store = _ref3.store;
-  var flag = store.flag;
-  var navigation = store.navigation;
-  var user = store.user;
-
-  // network indicator
-
-  var loader = flag.network && (0, _Loader2.default)({ className: _style2.default.loader });
-  var attrs = { className: _style2.default.topbar };
-
-  return (0, _component.B)(attrs, loader, LogoSupplier({ user: user }), Logo(), Navigation({ store: store }));
-};
-
 var Dashboard = (0, _component.Component)({
   displayName: 'Dashboard',
   class: true,
@@ -75394,20 +75380,25 @@ var Dashboard = (0, _component.Component)({
     var _props = this.props;
     var store = _props.store;
     var children = _props.children;
+    var flag = store.flag;
+    var navigation = store.navigation;
+    var user = store.user;
 
 
-    var attrs = {
-      className: _style2.default.component
-    };
+    var header = (0, _component.B)({ className: _style2.default.dashboard_header },
+    // network indicator
+    flag.network && (0, _Loader2.default)({ className: _style2.default.loader }), LogoSupplier({ user: user }), Logo(), Navigation({ store: store }));
 
-    return (0, _component.B)(attrs, Topbar({ store: store }), (0, _component.B)({ className: _style2.default.content }, children));
+    var content = (0, _component.B)({ className: _style2.default.dashboard_content }, children);
+
+    return (0, _component.B)({ className: _style2.default.dashboard }, header, content);
   }
 });
 
 exports.default = _store2.default.sync('dashboard', Dashboard);
 
 },{"./style.css":323,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":298,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":304,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Loader":354,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":373}],323:[function(require,module,exports){
-module.exports = {"component":"_Dashboard_style_component","content":"_Dashboard_style_content","topbar":"_Dashboard_style_topbar","logo":"_Dashboard_style_logo","logo_supplier":"_Dashboard_style_logo_supplier","loader":"_Dashboard_style_loader","links":"_Dashboard_style_links"}
+module.exports = {"dashboard":"_Dashboard_style_dashboard","dashboard_header":"_Dashboard_style_dashboard_header","dashboard_content":"_Dashboard_style_dashboard_content","logo":"_Dashboard_style_logo","logo_supplier":"_Dashboard_style_logo_supplier","loader":"_Dashboard_style_loader","links":"_Dashboard_style_links"}
 },{}],324:[function(require,module,exports){
 'use strict';
 
