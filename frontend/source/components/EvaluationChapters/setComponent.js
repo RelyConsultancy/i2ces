@@ -27,32 +27,32 @@ const Text = ({ component }) => (
 )
 
 
-export default ({ component, editable, onSave }) => {
+export default ({ cid, component, editable, onSave }) => {
   switch (component.type) {
     case 'chart_sales_performance':
       return SectionEditableComments({
-        component, editable, onSave,
+        cid, component, editable, onSave,
         content: ChartSalesPerformance({ component }),
       })
     break
 
     case 'chart_promotional_activity':
       return SectionEditableComments({
-        component, editable, onSave,
+        cid, component, editable, onSave,
         content: ChartPromotionalActivity({ component }),
       })
     break
 
     case 'chart_offer_sales':
       return SectionEditableComments({
-        component, editable, onSave,
+        cid, component, editable, onSave,
         content: ChartOfferSales({ component }),
       })
     break
 
     case 'chart_units_uplift':
       return SectionEditableComments({
-        component, editable, onSave,
+        cid, component, editable, onSave,
         content: ChartUnitsUplift({ component }),
       })
     break
@@ -74,7 +74,7 @@ export default ({ component, editable, onSave }) => {
     break
 
     case 'html':
-      return SectionHTML({ component, editable, onSave })
+      return SectionHTML({ cid, component, editable, onSave })
     break
 
     case 'list_timings':

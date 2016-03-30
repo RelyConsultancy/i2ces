@@ -22,7 +22,7 @@ export default Component({
     return { isEditable: false }
   },
   render () {
-    const { component } = this.props
+    const { cid, component } = this.props
     const { isEditable } = this.state
     const html = component.content || ''
     const className = isEditable ? style.block : style.info
@@ -35,6 +35,10 @@ export default Component({
     if (isEditable) {
       content = Froala({
         content: html,
+        options: {
+          imageUploadParam: 'image',
+          imageUploadURL: `/api/images/${cid}`,
+        },
         onChange: (e, editor) => {
           component.content = editor.html.get()
         },
