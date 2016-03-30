@@ -56,10 +56,7 @@ class RestApiController extends BaseController
     public function success($data, $statusCode = Response::HTTP_OK, $serializationGroups = [])
     {
         return $this->getJsonResponse(
-            [
-                'error' => null,
-                'data'  => $data,
-            ],
+            $data,
             $statusCode,
             $serializationGroups
         );
@@ -85,10 +82,7 @@ class RestApiController extends BaseController
     public function clientFailure($errors, $statusCode = Response::HTTP_CONFLICT)
     {
         return $this->getJsonResponse(
-            [
-                'error' => $errors,
-                'data'  => null,
-            ],
+            $errors,
             $statusCode
         );
     }
@@ -102,10 +96,7 @@ class RestApiController extends BaseController
     public function serverFailure($message, $statusCode = Response::HTTP_SERVICE_UNAVAILABLE)
     {
         return $this->getJsonResponse(
-            [
-                'error' => $message,
-                'data'  => null,
-            ],
+            $message,
             $statusCode
         );
     }
