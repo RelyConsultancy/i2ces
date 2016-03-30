@@ -11,8 +11,9 @@
     "i2c1510047a"
   ],
   "logo": {
-    "path": "/images/samples/logo_supplier_1.png",
-    "width": 100,
-    "height": 165
-  }
+    "path": "/images/samples/logo_supplier.png",
+    "width": 472,
+    "height": 579
+  },
+  "host": "http://local:3000"
 }
