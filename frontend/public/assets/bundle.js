@@ -75338,7 +75338,7 @@ var Logo = function Logo() {
 var LogoSupplier = function LogoSupplier(_ref) {
   var user = _ref.user;
 
-  // if (user.type != 'supplier') return null
+  if (user.type != 'supplier') return null;
 
   var logo = user.logo;
 
