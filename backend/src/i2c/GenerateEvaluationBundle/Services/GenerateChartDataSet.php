@@ -2,9 +2,9 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
-use i2c\EvaluationBundle\Entity\TableData;
+use i2c\EvaluationBundle\Entity\ChartDataSet;
+use i2c\GenerateEvaluationBundle\Services\Containers\ChartDataSetContainer;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Templating\EngineInterface;
 
@@ -13,7 +13,7 @@ use Symfony\Component\Templating\EngineInterface;
  *
  * @package i2c\GenerateEvaluationBundle\Services
  */
-class GenerateTableData
+class GenerateChartDataSet
 {
     /** @var EngineInterface  */
     protected $templateRenderer;
@@ -21,32 +21,31 @@ class GenerateTableData
     /** @var EntityManager  */
     protected $entityManager;
 
-    /** @var  ExtractInterface[] */
-    protected $extractServicesContainer;
+    /** @var  ChartDataSetContainer */
+    protected $chartDataSetContainer;
 
     /**
      * GenerateEvaluations constructor.
      *
      * @param EngineInterface $templateRenderer
-     * @param Registry        $registry
+     * @param EntityManager        $entityManager
      * @param Serializer      $serializer
      */
-    public function __construct($templateRenderer, Registry $registry, Serializer $serializer)
+    public function __construct($templateRenderer, EntityManager $entityManager, Serializer $serializer)
     {
         $this->templateRenderer = $templateRenderer;
 
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
 
         $this->serializer = $serializer;
     }
 
     /**
-     * @param ExtractInterface $extractInterface
-     * @param string           $serviceName
+     * @param ChartDataSetContainer $chartDataSetContainer
      */
-    public function addExtractService(ExtractInterface $extractInterface, $serviceName)
+    public function setChartDataSetContainer(ChartDataSetContainer $chartDataSetContainer)
     {
-        $this->extractServicesContainer[$serviceName] = $extractInterface;
+        $this->chartDataSetContainer = $chartDataSetContainer;
     }
 
     /**
@@ -54,48 +53,47 @@ class GenerateTableData
      * reach the generated data
      *
      * @param string $cid
-     * @param array  $tablesConfig
+     * @param array  $chartDataSetConfig
      * @param string $versionNumber
      * @param string $templatePrefix
      *
      * @return array
      */
-    public function generate($cid, $tablesConfig, $versionNumber, $templatePrefix)
+    public function generate($cid, $chartDataSetConfig, $versionNumber, $templatePrefix)
     {
         $result = [];
 
-        foreach ($tablesConfig as $tableName => $tableConfig) {
-            $tableData = $this->getData(
-                $tableConfig['data_service'],
+        foreach ($chartDataSetConfig as $chartName => $chartConfig) {
+            $chartDataSetData = $this->getData(
+                $chartConfig['data_service'],
                 $cid
             );
 
-            $tableJson = $this->getJsonEntity(
-                $tableConfig['twig_name'],
+            $chartDataSetJson = $this->getJsonEntity(
+                $chartConfig['twig_name'],
                 $versionNumber,
                 $templatePrefix,
-                $tableData
+                $chartDataSetData
             );
 
-
             // todo research how to better generate a json string with a twig file so we don't have tabs filled lines
-            $tableJson = str_replace("    ", "", $tableJson);
+            $chartDataSetJson = str_replace("    ", "", $chartDataSetJson);
 
-            /** @var TableData $tableDataEntity */
-            $tableDataEntity = new TableData();
-            $tableDataEntity->setContent($tableJson);
-            $tableDataEntity->setCid($cid);
+            /** @var ChartDataSet $chartDataSetEntity */
+            $chartDataSetEntity = new ChartDataSet();
+            $chartDataSetEntity->setContent($chartDataSetJson);
+            $chartDataSetEntity->setCid($cid);
 
-            $this->entityManager->persist($tableDataEntity);
+            $this->entityManager->persist($chartDataSetEntity);
 
             $this->entityManager->flush();
 
-            $this->entityManager->refresh($tableDataEntity);
+            $this->entityManager->refresh($chartDataSetEntity);
 
-            $result[$tableName] = sprintf(
+            $result[$chartName] = sprintf(
                 '/api/evaluations/%s/dataset/%s',
-                $tableDataEntity->getCid(),
-                $tableDataEntity->getId()
+                $chartDataSetEntity->getCid(),
+                $chartDataSetEntity->getId()
             );
         }
 
@@ -111,7 +109,7 @@ class GenerateTableData
      */
     protected function getData($serviceName, $cid)
     {
-        return $this->extractServicesContainer[$serviceName]->fetchAll($cid);
+        return $this->chartDataSetContainer->getChartDataSetService($serviceName)->fetchAll($cid);
     }
 
     /**
@@ -125,7 +123,7 @@ class GenerateTableData
     protected function getJsonEntity($twigName, $versionNumber, $templatesPrefix, $tableData = [])
     {
         return $this->templateRenderer->render(
-            sprintf('%s:%s/TableData:%s', $templatesPrefix, $versionNumber, $twigName),
+            sprintf('%s:%s/ChartDataSet:%s', $templatesPrefix, $versionNumber, $twigName),
             $tableData
         );
     }

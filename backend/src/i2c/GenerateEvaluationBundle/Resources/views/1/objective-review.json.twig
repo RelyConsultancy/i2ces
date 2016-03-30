@@ -1,0 +1,204 @@
+{
+    "order": "{{ additional_data.order }}",
+    "state": "{{ additional_data.state }}",
+    "title": "{{ additional_data.title }}",
+    "content":
+    [
+        {% set priority_number = 1 %}
+        {% if chart_data_set.aquire_new_customers is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Acquire new customers",
+                "content":
+                [
+                    {
+                        "type": "chart_acquire_new_customers",
+                        "source": "{{ chart_data_set.acquire_new_customers }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.grow_total_category is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Grow total category",
+                "content":
+                [
+                    {
+                        "type": "chart_offer_sales",
+                        "source": "{{ chart_data_set.grow_total_category }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.grow_share_of_category is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Grow share of category",
+                "content":
+                [
+                    {
+                        "type": "chart_grow_share_of_category",
+                        "source": "{{ chart_data_set.grow_share_of_category }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.retain_existing_customers is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Retain existing customers",
+                "content":
+                [
+                    {
+                        "type": "chart_retain_existing_customers",
+                        "source": "{{ chart_data_set.retain_existing_customers }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.grow_total_units is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Grow total units",
+                "content":
+                [
+                    {
+                        "type": "chart_grow_total_units",
+                        "source": "{{ chart_data_set.grow_total_units }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.retain_lapsing_customers is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Retain lapsing customers",
+                "content":
+                [
+                    {
+                        "type": "chart_retain_lapsing_customers",
+                        "source": "{{ chart_data_set.retain_lapsing_customers }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.launch_new_product is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Launch new product",
+                "content":
+                [
+                    {
+                        "type": "chart_launch_new_product",
+                        "source": "{{ chart_data_set.launch_new_product }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.retain_new_customers_trialists is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Retaine new customers (trialists)",
+                "content":
+                [
+                    {
+                        "type": "chart_retain_new_customers_trialists",
+                        "source": "{{ chart_data_set.retain_new_customers_trialists }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.grow_spend_per_existing_customer is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Grow spend per existing customer",
+                "content":
+                [
+                    {
+                        "type": "chart_grow_spend_per_existing_customer",
+                        "source": "{{ chart_data_set.grow_spend_per_existing_customer }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.grow_customer_product_range is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Grow customer product range",
+                "content":
+                [
+                    {
+                        "type": "chart_grow_customer_product_range",
+                        "source": "{{ chart_data_set.grow_customer_product_range }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.grow_frequency_of_share_per_customer is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Grow frequency of share per customer",
+                "content":
+                [
+                    {
+                        "type": "chart_grow_frequency_of_share_per_customer",
+                        "source": "{{ chart_data_set.grow_frequency_of_share_per_customer }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.media_type_combinations is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - During campaign offer units uplift split by media type combination",
+                "content":
+                [
+                    {
+                        "type": "chart_units_uplift",
+                        "source": "{{ chart_data_set.media_type_combinations }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            },
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+        {% if chart_data_set.weekly_units_sold_exposed_and_control is defined %}
+            {
+                "type": "section",
+                "title": "Objective priority {{ priority_number }} - Weekly units sold of the offer SKUs for the exposed and control group",
+                "content":
+                [
+                    {
+                        "type": "chart_offer_sales",
+                        "source": "{{ chart_data_set.weekly_units_sold_exposed_and_control }}",
+                        "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    }
+                ]
+            }
+            {% set priority_number = priority_number + 1 %}
+        {% endif %}
+    ]
+}

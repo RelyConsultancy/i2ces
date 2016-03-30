@@ -2,7 +2,6 @@
 
 namespace i2c\EvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Evaluation;
 use Oro\Bundle\SecurityBundle\ORM\Walker\AclHelper;
@@ -23,13 +22,13 @@ class EvaluationDataBaseManager
     /**
      * EvaluationDataBaseManager constructor.
      *
-     * @param AclHelper $aclHelper
-     * @param Registry  $registry
+     * @param AclHelper     $aclHelper
+     * @param EntityManager $entityManager
      */
-    public function __construct(AclHelper $aclHelper, Registry $registry)
+    public function __construct(AclHelper $aclHelper, EntityManager $entityManager)
     {
         $this->aclHelper = $aclHelper;
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -82,7 +81,6 @@ class EvaluationDataBaseManager
                      ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where($queryBuilder->expr()->in('e.cid', '?1'))
                      ->setParameter(1, $uids);
-
 
         $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
 

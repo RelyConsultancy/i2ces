@@ -1,17 +1,16 @@
 <?php
 
-namespace i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext;
+namespace i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\CategoryContext;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
 /**
- * Class PromotionalActivity
+ * Class SalesPerformance
  *
- * @package i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext
+ * @package i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSetConfig\CategoryContext
  */
-class PromotionalActivity implements ExtractInterface
+class SalesPerformance implements ExtractInterface
 {
     /** @var Connection */
     protected $connection;
@@ -19,11 +18,11 @@ class PromotionalActivity implements ExtractInterface
     /**
      * CampaignBackground constructor.
      *
-     * @param Registry $registry
+     * @param Connection $connection
      */
-    public function __construct(Registry $registry)
+    public function __construct(Connection $connection)
     {
-        $this->connection = $registry->getEntityManager()->getConnection();
+        $this->connection = $connection;
     }
 
     /**
@@ -52,11 +51,16 @@ class PromotionalActivity implements ExtractInterface
         return $result;
     }
 
+    /**
+     * @param $cid
+     *
+     * @return string
+     */
     public function getTableData($cid)
     {
         return sprintf(
-            'SELECT week_commencing as start_date, product as product, pr_results as results from
-             ie_promo_data where master_campaign_id = \'%s\'
+            'SELECT product as product, metric as metric, pp_results as results from
+             ie_cat_context_data where master_campaign_id = \'%s\' order by product
             ',
             $cid
         );

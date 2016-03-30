@@ -1,19 +1,19 @@
 services:
     i2c_evaluation.chapters_service:
         class: i2c\EvaluationBundle\Services\Chapter
-        arguments: [@serializer, @doctrine]
+        arguments: [@serializer, @doctrine.orm.default_entity_manager]
 
     i2c_evaluation.evaluation_service:
         class: i2c\EvaluationBundle\Services\Evaluation
-        arguments: [@serializer, @doctrine]
+        arguments: [@serializer, @doctrine.orm.default_entity_manager]
 
     i2c_evaluation.evaluation_database_manager_service:
         class: i2c\EvaluationBundle\Services\EvaluationDataBaseManager
-        arguments: [@oro_security.acl_helper, @doctrine]
+        arguments: [@oro_security.acl_helper, @doctrine.orm.default_entity_manager]
 
-    i2c_evaluation.table_data_database_manager_service:
-        class: i2c\EvaluationBundle\Services\TableDataDatabaseManager
-        arguments: [@doctrine]
+    i2c_evaluation.chart_data_set_database_manager_service:
+        class: i2c\EvaluationBundle\Services\ChartDataSetDatabaseManager
+        arguments: [@doctrine.orm.default_entity_manager]
 
     i2c_evaluation.evaluation_jms_post_serializer:
         class: i2c\EvaluationBundle\EventListener\EvaluationPostSerializeListener

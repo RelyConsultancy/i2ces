@@ -2,7 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services\Extract;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
@@ -19,11 +18,11 @@ class CategoryContext implements ExtractInterface
     /**
      * CampaignBackground constructor.
      *
-     * @param Registry $registry
+     * @param Connection $connection
      */
-    public function __construct(Registry $registry)
+    public function __construct(Connection $connection)
     {
-        $this->connection = $registry->getEntityManager()->getConnection();
+        $this->connection = $connection;
     }
 
     /**
@@ -50,24 +49,6 @@ class CategoryContext implements ExtractInterface
         }
 
         return $result;
-    }
-
-    public function getSalesPerformanceSource($cid)
-    {
-        // todo implement this so it returns the path to the generated json/csv containing the table data
-        return sprintf(
-            'SELECT \'%s\' as path',
-            "something"
-        );
-    }
-
-    public function getPromotionalActivitySource($cid)
-    {
-        // todo implement this so it returns the path to the generated json/csv containing the table data
-        return sprintf(
-            'SELECT \'%s\' as path',
-            "something"
-        );
     }
 
     /**
@@ -126,6 +107,12 @@ class CategoryContext implements ExtractInterface
             $cid
         );
     }
+
+    /**
+     * @param $cid
+     *
+     * @return string
+     */
     public function getProductDefinitions($cid)
     {
         return sprintf(

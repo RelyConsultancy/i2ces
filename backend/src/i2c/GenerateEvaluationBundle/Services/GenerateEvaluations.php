@@ -6,6 +6,8 @@ use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
+use i2c\GenerateEvaluationBundle\Services\Containers\ChartDataSetConfigContainer;
+use i2c\GenerateEvaluationBundle\Services\Containers\ExtractContainer;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -18,7 +20,7 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class GenerateEvaluations
 {
-    /** @var  ExtractInterface[] */
+    /** @var  ExtractContainer */
     protected $extractServicesContainer;
 
     /** @var  EngineInterface */
@@ -33,45 +35,60 @@ class GenerateEvaluations
     /** @var  Serializer */
     protected $serializer;
 
-    /** @var  GenerateTableData */
-    protected $generateTableDataService;
+    /** @var  GenerateChartDataSet */
+    protected $generateChartDataSetService;
+
+    /** @var ChartDataSetConfigContainer */
+    protected $chartDataSetConfigContainer;
 
     /**
      * GenerateEvaluations constructor.
      *
-     * @param EngineInterface   $templateRenderer
-     * @param Registry          $registry
-     * @param Serializer        $serializer
-     * @param string            $templatesPrefix
-     * @param GenerateTableData $generateTableDataService
+     * @param EngineInterface      $templateRenderer
+     * @param EntityManager        $entityManager
+     * @param Serializer           $serializer
+     * @param string               $templatesPrefix
+     * @param GenerateChartDataSet $generateTableDataService
      */
     public function __construct(
         EngineInterface $templateRenderer,
-        Registry $registry,
+        EntityManager $entityManager,
         Serializer $serializer,
         $templatesPrefix,
-        GenerateTableData $generateTableDataService
+        GenerateChartDataSet $generateTableDataService
     ) {
         $this->templateRenderer = $templateRenderer;
 
         $this->templatesPrefix = $templatesPrefix;
 
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
 
         $this->serializer = $serializer;
 
-        $this->generateTableDataService = $generateTableDataService;
+        $this->generateChartDataSetService = $generateTableDataService;
     }
 
     /**
-     * @param ExtractInterface $extractInterface
-     * @param string           $serviceName
+     * @param ExtractContainer $extractContainer
      */
-    public function addExtractService(ExtractInterface $extractInterface, $serviceName)
+    public function setExtractContainer(ExtractContainer $extractContainer)
     {
-        $this->extractServicesContainer[$serviceName] = $extractInterface;
+        $this->extractServicesContainer = $extractContainer;
     }
 
+    /**
+     * @param ChartDataSetConfigContainer $chartDataSetConfigContainer
+     */
+    public function setChartDataSetConfigContainer(ChartDataSetConfigContainer $chartDataSetConfigContainer)
+    {
+        $this->chartDataSetConfigContainer = $chartDataSetConfigContainer;
+    }
+
+    /**
+     * @param array  $evaluationConfigs
+     * @param array  $cids
+     * @param string $versionNumber
+     */
     public function generate($evaluationConfigs, $cids, $versionNumber)
     {
         foreach ($cids as $cid) {
@@ -102,16 +119,16 @@ class GenerateEvaluations
             $chapters = [];
 
             foreach ($evaluationConfigs['chapters'] as $chapterConfig) {
-                $tableData = $this->generateTableDataService->generate(
+                $chartDataSetSources = $this->generateChartDataSetService->generate(
                     $cid,
-                    $chapterConfig['table_config'],
+                    $this->getChartDataSetConfig($chapterConfig['chart_data_set_service_name'], $cid),
                     $versionNumber,
                     $this->templatesPrefix
                 );
 
                 $additionalData = [
                     'additional_data' => $chapterConfig['additional_data'],
-                    'table_data'      => $tableData,
+                    'chart_data_set'      => $chartDataSetSources,
                 ];
 
                 $chapterJson = $this->getJsonEntity(
@@ -151,6 +168,11 @@ class GenerateEvaluations
         }
     }
 
+    /**
+     * @param string $jsonPath
+     *
+     * @return mixed
+     */
     public function loadConfigData($jsonPath)
     {
         $fs = new Filesystem();
@@ -174,9 +196,9 @@ class GenerateEvaluations
     protected function removeExistingEvaluationChapters(Evaluation $evaluation)
     {
         $conn = $this->entityManager->getConnection();
-        $chapter = $evaluation->getChapters();
+        $chapters = $evaluation->getChapters();
         /** @var Chapter $chapter */
-        foreach ($chapter as $chapter) {
+        foreach ($chapters as $chapter) {
             $query = sprintf(
                 'DELETE FROM evaluation_chapters WHERE chapter_id=\'%s\'',
                 $chapter->getId()
@@ -213,7 +235,18 @@ class GenerateEvaluations
      */
     protected function getData($serviceName, $cid)
     {
-        return $this->extractServicesContainer[$serviceName]->fetchAll($cid);
+        return $this->extractServicesContainer->getExtractService($serviceName)->fetchAll($cid);
+    }
+
+    /**
+     * @param string $serviceName
+     * @param string $cid
+     *
+     * @return array
+     */
+    protected function getChartDataSetConfig($serviceName, $cid)
+    {
+        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->fetchChartDataSetConfig($cid);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace i2c\EvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Chapter as ChapterEntity;
 use i2c\EvaluationBundle\Exception\FormException;
 use JMS\Serializer\Serializer;
@@ -17,7 +17,7 @@ class Chapter
     const STATE_VISIBLE = 'visible';
     const STATE_HIDDEN = 'hidden';
 
-    /** @var Serializer  */
+    /** @var Serializer */
     protected $serializer;
 
     protected $entityManager;
@@ -25,14 +25,14 @@ class Chapter
     /**
      * Chapter constructor.
      *
-     * @param Serializer $serializer
-     * @param Registry   $registry
+     * @param Serializer    $serializer
+     * @param EntityManager $entityManager
      */
-    public function __construct(Serializer $serializer, Registry $registry)
+    public function __construct(Serializer $serializer, EntityManager $entityManager)
     {
         $this->serializer = $serializer;
 
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
     }
 
     /**
