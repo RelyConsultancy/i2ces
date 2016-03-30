@@ -1,6 +1,6 @@
 <?php
 
-namespace i2c\FileUploadBundle\Services;
+namespace i2c\ImageUploadBundle\Services;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
@@ -8,11 +8,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Class FileUploadService
+ * Class ImageUpload
  *
- * @package i2c\FileUploadBundle\Services
+ * @package i2c\ImageUploadBundle\Services
  */
-class FileUploadService
+class ImageUpload
 {
     const IMAGE_WIDTH_SIZE_INDEX = 0;
     const IMAGE_HEIGHT_SIZE_INDEX = 1;
@@ -24,7 +24,7 @@ class FileUploadService
     protected $webPath;
 
     /**
-     * FileUploadService constructor.
+     * ImageUploadService constructor.
      *
      * @param string $uploadPath
      * @param string $webPath
@@ -40,10 +40,11 @@ class FileUploadService
      *
      * @param UploadedFile $file
      * @param string       $evaluationId
+     * @param string       $chapterId
      *
      * @return bool|string
      */
-    public function process($file, $evaluationId)
+    public function process($file, $evaluationId, $chapterId)
     {
         $result = false;
         $fs = new Filesystem();
@@ -56,13 +57,13 @@ class FileUploadService
             throw new UploadException($file->getErrorMessage());
         }
 
-        $uploadDir = $this->uploadPath.$evaluationId;
+        $uploadDir = $this->uploadPath.$evaluationId.'/'.$chapterId;
         if (!$fs->exists($uploadDir)) {
             $fs->mkdir($uploadDir, 0755);
         }
 
         if ($file->move($uploadDir, $file->getClientOriginalName())) {
-            $result = $evaluationId.'/'.$file->getClientOriginalName();
+            $result = $evaluationId.'/'.$chapterId.'/'.$file->getClientOriginalName();
         }
 
         return $result;

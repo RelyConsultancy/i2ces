@@ -1,0 +1,18 @@
+services:
+    i2c_image_upload.image_upload:
+        class: i2c\ImageUploadBundle\Services\ImageUpload
+        arguments: [%evaluation_upload_image_path%, %web_dir_path%]
+
+    i2c_image_upload.image_upload_queue:
+        class: i2c\ImageUploadBundle\Services\UploadedImageQueue
+        arguments: [@doctrine]
+
+    i2c_image_upload.remove_images:
+        class: i2c\ImageUploadBundle\Services\RemoveImages
+        arguments: [@doctrine, %evaluation_upload_image_path%]
+
+    i2c_image_upload.image_clear_command:
+        class: i2c\ImageUploadBundle\Command\ImageClearCommand
+        arguments: [@i2c_image_upload.remove_images, @monolog.logger]
+        tags:
+            - { name: console.command }
