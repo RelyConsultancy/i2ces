@@ -1,42 +1,42 @@
 .loader {
-  width: 40px;
-  height: 20px;
+  width: 2em;
+  height: .5em;
+  line-height: 0;
   text-align: center;
-  font-size: 10px;
 }
 
 .loader > * {
-  background-color: #AAAAAA;
-  margin-right: 1px;
-  height: 100%;
-  width: 2px;
+  background-color: #656565;
+  margin-right: 2px;
+  height: 140%;
+  width: 3px;
   display: inline-block;
 
   -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
   animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
 
-.line1 {
+.item_1 {
   -webkit-animation-delay: -1.2s;
   animation-delay: -1.2s;
 }
 
-.line2 {
+.item_2 {
   -webkit-animation-delay: -1.1s;
   animation-delay: -1.1s;
 }
 
-.line3 {
+.item_3 {
   -webkit-animation-delay: -1.0s;
   animation-delay: -1.0s;
 }
 
-.line4 {
+.item_4 {
   -webkit-animation-delay: -0.9s;
   animation-delay: -0.9s;
 }
 
-.line5 {
+.item_5 {
   -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
 }

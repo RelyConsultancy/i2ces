@@ -1,13 +1,38 @@
 import { Component, B, Image, Link, A } from '/components/component.js'
 import Loader from '/components/Loader'
 import store from '/application/store.js'
-import { isUser } from '/application/actions.js'
+import { isI2C } from '/application/actions.js'
 import style from './style.css'
 
 
-const Logo = ({ image }) => (
-  Link({ to: '/evaluations', className: style.logo }, Image({ src: image }))
+const Logo = () => (
+  Link({ to: '/evaluations', className: style.logo })
 )
+
+
+const LogoSupplier = ({ user }) => {
+  // if (user.type != 'supplier') return null
+
+  const { logo } = user
+  const css = { backgroundImage: `url(${ logo.path })` }
+  const width = 100
+  const height = 80
+
+  if (logo.height < logo.width) {
+    const ratio = logo.width / width
+    const padding = (height / 2) - (logo.height / ratio / 2)
+
+    css.backgroundPositionY = padding + 'px'
+  }
+  else {
+    const ratio = logo.height / height
+    const padding = (width / 2) - (logo.width / ratio / 2)
+
+    css.backgroundPositionX = padding + 'px'
+  }
+
+  return B({ style: css, className: style.logo_supplier })
+}
 
 
 const Navigation = ({ store }) => {
@@ -15,7 +40,7 @@ const Navigation = ({ store }) => {
     Link({ to: '/faqs' }, 'FAQs'),
   ]
 
-  if (isUser('i2c_employee')) {
+  if (isI2C()) {
     links.unshift(
       A({ href: '/user' }, 'Users'),
       A({ href: '/organization/business_unit' }, 'Suppliers')
@@ -27,7 +52,7 @@ const Navigation = ({ store }) => {
 
 
 const Topbar = ({ store }) => {
-  const { flag, navigation } = store
+  const { flag, navigation, user } = store
 
   // network indicator
   const loader = flag.network && Loader({ className: style.loader })
@@ -36,7 +61,8 @@ const Topbar = ({ store }) => {
   return B(
     attrs,
     loader,
-    Logo({ image: '/images/logo.png' }),
+    LogoSupplier({ user }),
+    Logo(),
     Navigation({ store })
   )
 }
