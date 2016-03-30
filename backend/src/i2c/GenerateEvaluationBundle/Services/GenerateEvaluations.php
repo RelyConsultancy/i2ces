@@ -2,13 +2,13 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
 use i2c\GenerateEvaluationBundle\Services\Containers\ChartDataSetConfigContainer;
 use i2c\GenerateEvaluationBundle\Services\Containers\ExtractContainer;
 use JMS\Serializer\Serializer;
+use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Templating\EngineInterface;
@@ -104,11 +104,10 @@ class GenerateEvaluations
                 'i2c\EvaluationBundle\Entity\Evaluation',
                 'json'
             );
-            $businessUnit = $evaluation->getBusinessUnit();
 
             /** @var Evaluation $existingEvaluation */
             $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
-                ->findOneBy(['cid' => $cid]);
+                                                      ->findOneBy(['cid' => $cid]);
             if (!is_null($existingEvaluation)) {
                 $evaluation = $existingEvaluation;
                 $this->removeExistingEvaluationChapters($evaluation);
@@ -129,7 +128,7 @@ class GenerateEvaluations
 
                 $additionalData = [
                     'additional_data' => $chapterConfig['additional_data'],
-                    'chart_data_set'      => $chartDataSetSources,
+                    'chart_data_set'  => $chartDataSetSources,
                 ];
 
                 $chapterJson = $this->getJsonEntity(
@@ -153,9 +152,12 @@ class GenerateEvaluations
                 $chapters[] = $chapter;
             }
 
-            $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
-                                                ->findOneBy(['id' => $businessUnit->getId()]);
-            $evaluation->setOwner($businessUnit);
+            if (is_null($evaluation->getBusinessUnit())) {
+                $evaluation->setOwner($this->getNewBusinessUnit($cid));
+            } else {
+                $evaluation->setOwner($this->getBusinessUnit($evaluation->getBusinessUnit()->getId(), $cid));
+            }
+
             $evaluation->setChapters($chapters);
             $this->entityManager->persist($evaluation);
             $this->entityManager->flush();
@@ -189,6 +191,57 @@ class GenerateEvaluations
         $config = json_decode($jsonContent, true);
 
         return $config;
+    }
+
+    /**
+     * @param string $id
+     * @param string $cid
+     *
+     * @return null|object|BusinessUnit
+     */
+    protected function getBusinessUnit($id, $cid)
+    {
+        $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
+                                            ->findOneBy(['id' => $id]);
+        if (is_null($businessUnit)) {
+            return $this->getNewBusinessUnit($cid);
+        }
+
+        return $businessUnit;
+    }
+
+    /**
+     * @param string $cid
+     *
+     * @return BusinessUnit
+     */
+    protected function getNewBusinessUnit($cid)
+    {
+        $mainBusinessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')->getFirst();
+
+        $businessUnit = new BusinessUnit();
+        $businessUnit->setName($this->getBusinessUnitName($cid));
+        $businessUnit->setOrganization($mainBusinessUnit->getOrganization());
+        $businessUnit->setOwner($mainBusinessUnit);
+
+        $this->entityManager->persist($businessUnit);
+
+        return $businessUnit;
+    }
+
+    /**
+     * @param string $cid
+     *
+     * @return mixed
+     */
+    protected function getBusinessUnitName($cid)
+    {
+        $query = sprintf(
+            'SELECT supplier FROM ie_campaign_data WHERE master_campaign_id=\'%s\'',
+            $cid
+        );
+
+        return $this->entityManager->getConnection()->fetchColumn($query);
     }
 
     /**
@@ -247,7 +300,9 @@ class GenerateEvaluations
      */
     protected function getChartDataSetConfig($serviceName, $cid)
     {
-        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->fetchChartDataSetConfig($cid);
+        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->fetchChartDataSetConfig(
+            $cid
+        );
     }
 
     /**
