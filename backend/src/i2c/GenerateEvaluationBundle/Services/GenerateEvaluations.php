@@ -2,7 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
@@ -108,9 +107,9 @@ class GenerateEvaluations
 
             /** @var Evaluation $existingEvaluation */
             $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
-                ->findOneBy(['cid' => $cid]);
+                                                      ->findOneBy(['cid' => $cid]);
             if (!is_null($existingEvaluation)) {
-                $evaluation = $existingEvaluation;
+                $evaluation = $this->updateExistingEvaluation($existingEvaluation, $evaluation);
                 $this->removeExistingEvaluationChapters($evaluation);
             }
 
@@ -129,7 +128,7 @@ class GenerateEvaluations
 
                 $additionalData = [
                     'additional_data' => $chapterConfig['additional_data'],
-                    'chart_data_set'      => $chartDataSetSources,
+                    'chart_data_set'  => $chartDataSetSources,
                 ];
 
                 $chapterJson = $this->getJsonEntity(
@@ -192,6 +191,21 @@ class GenerateEvaluations
     }
 
     /**
+     * @param Evaluation $existingEvaluation
+     * @param Evaluation $newEvaluation
+     *
+     * @return Evaluation
+     */
+    protected function updateExistingEvaluation(Evaluation $existingEvaluation, Evaluation $newEvaluation)
+    {
+        $existingEvaluation->setBrand($newEvaluation->getBrand());
+        $existingEvaluation->setTitle($newEvaluation->getTitle());
+        $existingEvaluation->setCategory($newEvaluation->getCategory());
+
+        return $existingEvaluation;
+    }
+
+    /**
      * @param Evaluation $evaluation
      */
     protected function removeExistingEvaluationChapters(Evaluation $evaluation)
@@ -247,7 +261,9 @@ class GenerateEvaluations
      */
     protected function getChartDataSetConfig($serviceName, $cid)
     {
-        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->fetchChartDataSetConfig($cid);
+        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->fetchChartDataSetConfig(
+            $cid
+        );
     }
 
     /**
