@@ -135,7 +135,7 @@ class EvaluationController extends RestApiController
 
             return $this->success($chapter, Response::HTTP_OK, ['full']);
         } catch (FormException $ex) {
-            return $this->clientFailure($ex->getErrors());
+            return $this->clientFailure("The data you entered is invalid", $ex->getErrors());
         }
     }
 
