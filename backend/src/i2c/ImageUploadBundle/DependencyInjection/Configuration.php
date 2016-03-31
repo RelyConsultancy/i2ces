@@ -1,6 +1,6 @@
 <?php
 
-namespace i2c\FileUploadBundle\DependencyInjection;
+namespace i2c\ImageUploadBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * Class Configuration
  *
- * @package i2c\FileUploadBundle\DependencyInjection
+ * @package i2c\i2cImageUpload\DependencyInjection
  */
 class Configuration implements ConfigurationInterface
 {
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('i2c_fileUpload');
+        $rootNode = $treeBuilder->root('i2c_imageUpload');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

@@ -1,6 +1,6 @@
 <?php
 
-namespace i2c\FileUploadBundle\DependencyInjection;
+namespace i2c\ImageUploadBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -8,11 +8,11 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * Class i2cFileUploadExtension
+ * Class i2cImageUploadExtension
  *
- * @package i2c\FileUploadBundle\DependencyInjection
+ * @package i2c\ImageUploadBundle\DependencyInjection
  */
-class i2cFileUploadExtension extends Extension
+class i2cImageUploadExtension extends Extension
 {
     /**
      * {@inheritdoc}
