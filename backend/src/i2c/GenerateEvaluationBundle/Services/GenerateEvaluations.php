@@ -2,7 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
@@ -106,15 +105,8 @@ class GenerateEvaluations
             );
             $businessUnit = $evaluation->getBusinessUnit();
 
-            /** @var Evaluation $existingEvaluation */
-            $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
-                ->findOneBy(['cid' => $cid]);
-            if (!is_null($existingEvaluation)) {
-                $evaluation = $existingEvaluation;
-                $this->removeExistingEvaluationChapters($evaluation);
-            }
+            $evaluation = $this->updateExistingIfPresent($evaluation, $cid);
 
-            $evaluation->setCid($cid);
             $evaluation->markAsGenerating();
 
             $chapters = [];
@@ -129,7 +121,7 @@ class GenerateEvaluations
 
                 $additionalData = [
                     'additional_data' => $chapterConfig['additional_data'],
-                    'chart_data_set'      => $chartDataSetSources,
+                    'chart_data_set'  => $chartDataSetSources,
                 ];
 
                 $chapterJson = $this->getJsonEntity(
@@ -193,6 +185,29 @@ class GenerateEvaluations
 
     /**
      * @param Evaluation $evaluation
+     * @param string     $cid
+     *
+     * @return Evaluation
+     */
+    protected function updateExistingIfPresent($evaluation, $cid)
+    {
+        /** @var Evaluation $existingEvaluation */
+        $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
+                                                  ->findOneBy(['cid' => $cid]);
+        if (!is_null($existingEvaluation)) {
+            $evaluation->setId($existingEvaluation->getId());
+            /** @var Evaluation $evaluation */
+            $evaluation = $this->entityManager->merge($evaluation);
+            $this->removeExistingEvaluationChapters($evaluation);
+        }
+
+        $evaluation->setCid($cid);
+
+        return $evaluation;
+    }
+
+    /**
+     * @param Evaluation $evaluation
      */
     protected function removeExistingEvaluationChapters(Evaluation $evaluation)
     {
@@ -247,7 +262,9 @@ class GenerateEvaluations
      */
     protected function getChartDataSetConfig($serviceName, $cid)
     {
-        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->fetchChartDataSetConfig($cid);
+        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->fetchChartDataSetConfig(
+            $cid
+        );
     }
 
     /**
