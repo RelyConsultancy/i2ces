@@ -49,29 +49,4 @@ class ImageUpload
 
         return $movedImage;
     }
-
-    /**
-     * Returns an array with image width and height.
-     *
-     * @param string $imagePath
-     *
-     * @return array
-     */
-    public function getImageInfo($imagePath)
-    {
-        if (empty($imagePath)) {
-            throw new FileException('No valid image found.');
-        }
-
-        $imageInfo = getimagesize($this->webPath.$imagePath);
-        if (!$imageInfo) {
-            throw new FileException('Unable to get image info.');
-        }
-
-        return array(
-            'link'   => $imagePath,
-            'width'  => $imageInfo[self::IMAGE_WIDTH_SIZE_INDEX],
-            'height' => $imageInfo[self::IMAGE_HEIGHT_SIZE_INDEX],
-        );
-    }
 }

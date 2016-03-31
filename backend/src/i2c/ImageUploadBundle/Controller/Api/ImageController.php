@@ -39,7 +39,7 @@ class ImageController extends RestApiController
             $evaluation = $this->getEvaluationDatabaseManager()->getByCidForEditing($evaluationId);
 
             if (is_null($evaluation)) {
-                return $this->notFound('Evaluation not found');
+                return $this->notFound(sprintf('Evaluation with ID %s was not found', $evaluationId));
             }
 
             $request = $this->getRequest();
