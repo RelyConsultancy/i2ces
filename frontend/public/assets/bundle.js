@@ -75364,7 +75364,7 @@ var LogoSupplier = function LogoSupplier(_ref) {
 var Navigation = function Navigation(_ref2) {
   var store = _ref2.store;
 
-  var links = [(0, _component.Link)({ to: '/faqs' }, 'FAQs')];
+  var links = [(0, _component.Link)({ to: '/faqs' }, 'FAQs'), (0, _component.A)({ href: '/user/logout' }, 'Logout')];
 
   if ((0, _actions.isI2C)()) {
     links.unshift((0, _component.A)({ href: '/user' }, 'Users'), (0, _component.A)({ href: '/organization/business_unit' }, 'Suppliers'));

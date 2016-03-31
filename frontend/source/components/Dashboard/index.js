@@ -38,6 +38,7 @@ const LogoSupplier = ({ user }) => {
 const Navigation = ({ store }) => {
   const links = [
     Link({ to: '/faqs' }, 'FAQs'),
+    A({ href: '/user/logout' }, 'Logout'),
   ]
 
   if (isI2C()) {
