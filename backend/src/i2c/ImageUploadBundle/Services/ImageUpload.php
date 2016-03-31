@@ -87,7 +87,7 @@ class ImageUpload
         }
 
         return array(
-            'url'    => $imagePath,
+            'link'    => $imagePath,
             'width'  => $imageInfo[self::IMAGE_WIDTH_SIZE_INDEX],
             'height' => $imageInfo[self::IMAGE_HEIGHT_SIZE_INDEX]
         );
