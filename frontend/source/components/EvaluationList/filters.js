@@ -2,7 +2,7 @@ import { B } from '/components/component.js'
 import Grid from '/components/Grid'
 import Select from '/components/Select'
 import { getUnique } from '/application/utils.js'
-import { setFilter, isUser } from '/application/actions.js'
+import { setFilter, isI2C } from '/application/actions.js'
 import style from './style.css'
 
 
@@ -84,7 +84,7 @@ export default ({ store }) => {
   const label = B({ className: style.filters_label }, 'Filter by')
   const items = [
     Brands({ store }),
-    isUser('i2c_employee') ? Suppliers({ store }) : null,
+    isI2C() ? Suppliers({ store }) : null,
     Categories({ store }),
   ]
 

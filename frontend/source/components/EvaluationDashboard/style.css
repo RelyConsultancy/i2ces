@@ -6,23 +6,28 @@
 
 .header {
   position: relative;
+  max-width: 800px;
+  margin: 0 auto;
   height: 3rem;
   line-height: 3rem;
   font-size: 1.1em;
   font-family: 'Archer Bold', serif;
+  color: #656565;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 500%;
+  left: -50%;
   border-top: 1px solid #E6E6E6;
   border-bottom: 1px solid #E6E6E6;
-  color: #656565;
-  z-index: 10;
-}
-.header_wrap {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
+  z-index: -1;
 }
 
 
-.state {
+.state_toggle {
   position: absolute;
   top: 50%;
   right: 0;

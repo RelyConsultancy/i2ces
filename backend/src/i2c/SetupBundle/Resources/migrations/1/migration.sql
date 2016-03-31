@@ -43,6 +43,12 @@ CREATE TABLE IF NOT EXISTS `i2c_chart_data_set` (
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `i2c_images_queue` (
+  chapter_id    INT(11) NOT NULL,
+  evaluation_id VARCHAR(255) NOT NULL,
+  PRIMARY KEY (chapter_id, evaluation_id)
+);
+
 CREATE TABLE IF NOT EXISTS `i2c_objective_units` (
   metric VARCHAR(255) NOT NULL,
   unit            VARCHAR(255) NOT NULL,

@@ -1,0 +1,5 @@
+i2c_evaluation_image_upload:
+    path: /api/images/{evaluationId}/{chapterId}
+    methods: [POST]
+    defaults:
+        _controller: i2cImageUploadBundle:Api/Image:uploadImage

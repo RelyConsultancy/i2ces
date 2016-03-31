@@ -47,7 +47,7 @@ class Evaluation
      * @ORM\Column(type="integer", name="id")
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @JMS\Groups({"list", "minimal"})
+     * @JMS\Groups({"list"})
      * @JMS\SerializedName("id")
      * @JMS\Type("string")
      */

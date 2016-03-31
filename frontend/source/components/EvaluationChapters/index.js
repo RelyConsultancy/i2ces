@@ -7,15 +7,6 @@ import setComponent from './setComponent.js'
 import style from './style.css'
 
 
-// check if user has permission to edit the evaluation
-const isEditable = (cid) => {
-  const { user } = store.getState().dashboard
-  const cids = user.edit.map(i => i.cid)
-
-  return ~cids.indexOf(cid)
-}
-
-
 const Navigation = ({ store, params }) => {
   const back = Link({
     to: `/evaluations/${params.cid}`,
@@ -77,12 +68,12 @@ const Sections = ({ store, chapter, focusedSection, focusSection }) => {
   const { cid } = store.evaluation
   const byType = (i => i.type == 'section')
 
-  const editable = isEditable(cid)
+  const editable = $.isEditable(cid)
   const onSave = () => { $.updateChapter({ chapter, cid }) }
 
   const sections = chapter.content.filter(byType).map((section) => {
     const components = section.content.map((component) => (
-      setComponent({ component, editable, onSave })
+      setComponent({ cid, component, editable, onSave })
     ))
 
 
