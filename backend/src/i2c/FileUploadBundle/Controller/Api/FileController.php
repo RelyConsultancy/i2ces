@@ -34,7 +34,7 @@ class FileController extends RestApiController
 
             $imageInfo = $fileUploader->getImageInfo($imagePath);
         } catch (UploadException $e) {
-            return $this->clientFailure($e->getMessage());
+            return $this->clientFailure("There was an error while uploading the image", $e->getMessage());
         } catch (IOException $e) {
             return $this->serverFailure($e->getMessage());
         } catch (FileException $e) {
