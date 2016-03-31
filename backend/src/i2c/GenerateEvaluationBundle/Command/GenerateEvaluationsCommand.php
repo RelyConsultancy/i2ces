@@ -122,7 +122,7 @@ Usage examples:
             }
 
             $versionNumber = (int) $versionNumber;
-            $cids = $this->extractCidsService->getCampaignIdsEligibleForBeGenerated(
+            $cids = $this->extractCidsService->getCampaignIdsEligibleForGeneration(
                 $input->getArgument('cids'),
                 $input->getOption('update-existing')
             );

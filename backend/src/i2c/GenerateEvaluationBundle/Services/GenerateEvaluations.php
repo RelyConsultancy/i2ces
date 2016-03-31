@@ -105,15 +105,8 @@ class GenerateEvaluations
             );
             $businessUnit = $evaluation->getBusinessUnit();
 
-            /** @var Evaluation $existingEvaluation */
-            $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
-                                                      ->findOneBy(['cid' => $cid]);
-            if (!is_null($existingEvaluation)) {
-                $evaluation = $this->updateExistingEvaluation($existingEvaluation, $evaluation);
-                $this->removeExistingEvaluationChapters($evaluation);
-            }
+            $evaluation = $this->updateExistingIfPresent($evaluation, $cid);
 
-            $evaluation->setCid($cid);
             $evaluation->markAsGenerating();
 
             $chapters = [];
@@ -191,18 +184,26 @@ class GenerateEvaluations
     }
 
     /**
-     * @param Evaluation $existingEvaluation
-     * @param Evaluation $newEvaluation
+     * @param Evaluation $evaluation
+     * @param string     $cid
      *
      * @return Evaluation
      */
-    protected function updateExistingEvaluation(Evaluation $existingEvaluation, Evaluation $newEvaluation)
+    protected function updateExistingIfPresent($evaluation, $cid)
     {
-        $existingEvaluation->setBrand($newEvaluation->getBrand());
-        $existingEvaluation->setTitle($newEvaluation->getTitle());
-        $existingEvaluation->setCategory($newEvaluation->getCategory());
+        /** @var Evaluation $existingEvaluation */
+        $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
+                                                  ->findOneBy(['cid' => $cid]);
+        if (!is_null($existingEvaluation)) {
+            $evaluation->setId($existingEvaluation->getId());
+            /** @var Evaluation $evaluation */
+            $evaluation = $this->entityManager->merge($evaluation);
+            $this->removeExistingEvaluationChapters($evaluation);
+        }
 
-        return $existingEvaluation;
+        $evaluation->setCid($cid);
+
+        return $evaluation;
     }
 
     /**

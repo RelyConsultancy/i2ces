@@ -34,7 +34,7 @@ class ExtractCids
      *
      * @return array
      */
-    public function getCampaignIdsEligibleForBeGenerated($cids = array(), $includeExisting = false)
+    public function getCampaignIdsEligibleForGeneration($cids = array(), $includeExisting = false)
     {
         if (empty($cids)) {
             $cids = $this->getAllImportedCampaignIds();
