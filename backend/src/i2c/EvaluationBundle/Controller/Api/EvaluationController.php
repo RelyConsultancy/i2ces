@@ -131,7 +131,8 @@ class EvaluationController extends RestApiController
 
             $chapter = $this->getChapterService()->updateChapter($chapter, $this->getRequest()->getContent());
 
-            $this->getUploadedImageQueueService()->updateChapterReferences($evaluationCid, $chapterId);
+            // todo enable this after the image remove functionality has been fully implemented
+            //$this->getUploadedImageQueueService()->updateChapterReferences($evaluationCid, $chapterId);
 
             return $this->success($chapter, Response::HTTP_OK, ['full']);
         } catch (FormException $ex) {
