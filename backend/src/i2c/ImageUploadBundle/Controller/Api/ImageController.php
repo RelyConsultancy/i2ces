@@ -42,6 +42,6 @@ class ImageController extends RestApiController
             return $this->serverFailure($e->getMessage());
         }
 
-        return $this->success($imageInfo);
+        return $this->getJsonResponse($imageInfo);
     }
 }

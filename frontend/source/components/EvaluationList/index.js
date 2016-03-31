@@ -6,11 +6,6 @@ import style from './style.css'
 import Filters from './filters.js'
 
 
-const Header = (text) => (
-  B({ className: style.header, content: text })
-)
-
-
 const applyFilters = (store) => {
   const { category, brand, supplier } = store.filter
   const isVisible = (item) => {
@@ -75,14 +70,12 @@ const Evaluations = Component({
   },
   render () {
     const { store } = this.props
+    const filters = Filters({ store })
+    const list = List({ store })
 
     return B(
-      Header('Campaign Evaluation Index'),
-      B(
-        { className: style.content },
-        Filters({ store }),
-        List({ store })
-      )
+      B({ className: style.header }, 'Campaign Evaluation Index'),
+      B({ className: style.content }, filters, list)
     )
   }
 })

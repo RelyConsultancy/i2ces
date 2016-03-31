@@ -10,15 +10,10 @@ loadCSS('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awes
 
 
 http('get', '/api/me', (reply) => {
-  if (reply.error) {
-    alert(`Server error: ${reply.error}`)
-  }
-  else {
-    setUser(reply.data)
+  setUser(reply)
 
-    render(
-      store.connect(router),
-      document.getElementById('application')
-    )
-  }
+  render(
+    store.connect(router),
+    document.getElementById('application')
+  )
 })

@@ -3,12 +3,16 @@ import Froala from '/components/Froala'
 import style from './style.css'
 
 
-const Info = ({ component, isEditable, className, value }) => {
+const Info = ({ cid, component, isEditable, className, value }) => {
   const content = component[value] || ''
 
   if (isEditable) {
     return Froala({
       content,
+      options: {
+        imageUploadParam: 'image',
+        imageUploadURL: `/api/images/${cid}`,
+      },
       onChange: (e, editor) => {
         component[value] = editor.html.get()
       },
@@ -31,10 +35,11 @@ export default Component({
     }
   },
   render () {
-    const { component, content, editable, onSave } = this.props
+    const { cid, component, content, editable, onSave } = this.props
     const { isEditable } = this.state
 
     const info = Info({
+      cid,
       component,
       isEditable,
       value: 'info',
@@ -42,6 +47,7 @@ export default Component({
     })
 
     const comment = Info({
+      cid,
       component,
       isEditable,
       value: 'comment',
