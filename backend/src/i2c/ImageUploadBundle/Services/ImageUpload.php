@@ -2,10 +2,11 @@
 
 namespace i2c\ImageUploadBundle\Services;
 
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class ImageUpload
@@ -17,62 +18,43 @@ class ImageUpload
     const IMAGE_WIDTH_SIZE_INDEX = 0;
     const IMAGE_HEIGHT_SIZE_INDEX = 1;
 
-    /** @var string */
-    protected $uploadPath;
-
-    /** @var string */
-    protected $webPath;
-
     /**
-     * ImageUploadService constructor.
+     * Saves the 'image' in the folder specified at 'folderPath' and returns the moved file
      *
-     * @param string $uploadPath
-     * @param string $webPath
+     * @param UploadedFile $image
+     * @param string       $folderPath The absolute path to the folder where to save the image
+     *
+     * @return File
+     *
+     * @throws FileException
+     * @throws UploadException
      */
-    public function __construct($uploadPath, $webPath)
+    public function saveImageToDisk($image, $folderPath)
     {
-        $this->uploadPath = $uploadPath;
-        $this->webPath = $webPath;
-    }
-
-    /**
-     * Upload an image for a given evaluation.
-     *
-     * @param UploadedFile $file
-     * @param string       $evaluationId
-     * @param string       $chapterId
-     *
-     * @return bool|string
-     */
-    public function process($file, $evaluationId, $chapterId)
-    {
-        $result = false;
         $fs = new Filesystem();
 
-        if (!is_object($file)) {
+        if (!is_object($image)) {
             throw new UploadException('No valid file found.');
         }
 
-        if ($file->getError()) {
-            throw new UploadException($file->getErrorMessage());
+        if ($image->getError()) {
+            throw new UploadException($image->getErrorMessage());
         }
 
-        $uploadDir = $this->uploadPath.$evaluationId.'/'.$chapterId;
-        if (!$fs->exists($uploadDir)) {
-            $fs->mkdir($uploadDir, 0755);
+        if (!$fs->exists($folderPath)) {
+            $fs->mkdir($folderPath, 0755);
         }
 
-        if ($file->move($uploadDir, $file->getClientOriginalName())) {
-            $result = $evaluationId.'/'.$chapterId.'/'.$file->getClientOriginalName();
-        }
+        $movedImage = $image->move($folderPath, $image->getClientOriginalName());
 
-        return $result;
+        return $movedImage;
     }
 
     /**
      * Returns an array with image width and height.
      *
      * @param string $imagePath
+     *
      * @return array
      */
     public function getImageInfo($imagePath)
@@ -87,9 +69,9 @@ class ImageUpload
         }
 
         return array(
-            'link'    => $imagePath,
+            'link'   => $imagePath,
             'width'  => $imageInfo[self::IMAGE_WIDTH_SIZE_INDEX],
-            'height' => $imageInfo[self::IMAGE_HEIGHT_SIZE_INDEX]
+            'height' => $imageInfo[self::IMAGE_HEIGHT_SIZE_INDEX],
         );
     }
 }
