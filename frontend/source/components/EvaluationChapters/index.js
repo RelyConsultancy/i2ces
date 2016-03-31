@@ -68,7 +68,7 @@ const Sections = ({ store, chapter, focusedSection, focusSection }) => {
   const { cid } = store.evaluation
   const byType = (i => i.type == 'section')
 
-  const editable = $.isEditable(cid)
+  const editable = $.isEditable()
   const onSave = () => { $.updateChapter({ chapter, cid }) }
 
   const sections = chapter.content.filter(byType).map((section) => {

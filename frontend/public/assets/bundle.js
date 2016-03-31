@@ -73744,11 +73744,16 @@ var isI2C = exports.isI2C = function isI2C() {
   return isUser('i2c_employee');
 };
 
-// check if user has permission to edit the evaluation
-var isEditable = exports.isEditable = function isEditable(cid) {
+// check if evaluation is editable
+var isEditable = exports.isEditable = function isEditable() {
   var user = _store2.default.getState().dashboard.user;
 
-  return user.edit.indexOf(cid) != -1;
+  var evaluation = _store2.default.getState().evaluation.evaluation;
+
+  var isDraft = evaluation.state == 'draft';
+  var isEditable = user.edit.indexOf(evaluation.cid) != -1;
+
+  return isDraft && isEditable;
 };
 
 /*
@@ -73844,7 +73849,7 @@ var mutateEvaluation = exports.mutateEvaluation = function mutateEvaluation(_ref
     var action = data.state == 'draft' ? 'unpublish' : 'publish';
 
     // set evaluation state
-    evaluation.state = data.state == 'draft' ? 'published' : 'draft';
+    evaluation.state = data.state == 'draft' ? 'draft' : 'published';
 
     // remove evaluation form editable list
     if (data.state == 'published') {
@@ -75522,7 +75527,7 @@ var Sections = function Sections(_ref4) {
     return i.type == 'section';
   };
 
-  var editable = $.isEditable(cid);
+  var editable = $.isEditable();
   var onSave = function onSave() {
     $.updateChapter({ chapter: chapter, cid: cid });
   };

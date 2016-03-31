@@ -36,11 +36,15 @@ export const isI2C = () => (
 )
 
 
-// check if user has permission to edit the evaluation
-export const isEditable = (cid) => {
+// check if evaluation is editable
+export const isEditable = () => {
   const { user } = store.getState().dashboard
+  const { evaluation } = store.getState().evaluation
 
-  return user.edit.indexOf(cid) != -1
+  const isDraft = evaluation.state == 'draft'
+  const isEditable = user.edit.indexOf(evaluation.cid) != -1
+
+  return isDraft && isEditable
 }
 
 
@@ -132,7 +136,7 @@ export const mutateEvaluation = ({ cid, data }, handler = noop) => {
     const action = (data.state == 'draft' ? 'unpublish' : 'publish')
 
     // set evaluation state
-    evaluation.state = (data.state == 'draft' ? 'published' : 'draft')
+    evaluation.state = (data.state == 'draft' ? 'draft' : 'published')
 
     // remove evaluation form editable list
     if (data.state == 'published') {
