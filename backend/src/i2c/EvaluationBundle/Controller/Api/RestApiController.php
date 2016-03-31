@@ -70,19 +70,27 @@ class RestApiController extends BaseController
      */
     public function notFound($message, $statusCode = Response::HTTP_NOT_FOUND)
     {
-        return $this->clientFailure($message, $statusCode);
+        return $this->clientFailure($message, [], $statusCode);
     }
 
     /**
-     * @param string|array $errors
-     * @param int          $statusCode
+     * @param string $message
+     * @param array  $data
+     * @param int    $statusCode
      *
      * @return Response
      */
-    public function clientFailure($errors, $statusCode = Response::HTTP_CONFLICT)
+    public function clientFailure($message, $data, $statusCode = Response::HTTP_CONFLICT)
     {
+        if (!is_array($data)) {
+            $data = array($data);
+        }
+
         return $this->getJsonResponse(
-            $errors,
+            [
+                'message' => $message,
+                'data'    => $data,
+            ],
             $statusCode
         );
     }
@@ -96,7 +104,10 @@ class RestApiController extends BaseController
     public function serverFailure($message, $statusCode = Response::HTTP_SERVICE_UNAVAILABLE)
     {
         return $this->getJsonResponse(
-            $message,
+            [
+                'message' => $message,
+                'data'    => [],
+            ],
             $statusCode
         );
     }
