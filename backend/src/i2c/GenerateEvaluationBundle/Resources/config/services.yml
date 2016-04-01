@@ -16,6 +16,11 @@ services:
         tags:
             - { name: console.command }
 
+    i2c_generate_evaluation.twig_minify_command:
+        class: i2c\GenerateEvaluationBundle\Command\MinifyTwigCommand
+        tags:
+            - { name: console.command }
+
     i2c_generate_evaluation.evaluation_generate_service:
         class: i2c\GenerateEvaluationBundle\Services\GenerateEvaluations
         arguments: [@templating.engine.twig, @doctrine.orm.default_entity_manager, @serializer, 'i2cGenerateEvaluationBundle', @i2c_generate_evaluation.chart_data_set_generate_service]

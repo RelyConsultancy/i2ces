@@ -41,6 +41,7 @@ class UserController extends RestApiController
             'business_units' => $this->getBusinessUnitService()->getBusinessUnitsForUserAsArray($user),
             'view'           => $viewEvaluations,
             'edit'           => $editEvaluations,
+            'host'           => $this->container->get('request')->getSchemeAndHttpHost(),
         );
 
         if ($isEmployee) {

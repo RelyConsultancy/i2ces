@@ -69,6 +69,9 @@ class Chapter
     protected function getChapterErrors(ChapterEntity $chapter)
     {
         $errors = [];
+        if ($message = $this->validateChapterContent($chapter->getContent())) {
+            $errors['chapter.content'] = $message;
+        }
 
         if (is_null($chapter->getTitle())) {
             $errors['chapter.title'] = 'Title must not be null';
@@ -79,6 +82,28 @@ class Chapter
         }
 
         return $errors;
+    }
+
+    /**
+     * Validate chapter content
+     *
+     * @param $chapterContent
+     *
+     * @return bool|string
+     */
+    protected function validateChapterContent($chapterContent)
+    {
+        $result = false;
+        if (empty($chapterContent)) {
+            return 'Content must not be null';
+        }
+
+        json_decode($chapterContent);
+        if (json_last_error()) {
+            $result = 'Content has an invalid format.';
+        }
+
+        return $result;
     }
 
     /**

@@ -3,44 +3,65 @@ import Froala from '/components/Froala'
 import style from './style.css'
 
 
+const Info = ({ uploadPath, component, editMode, className, value }) => {
+  const content = component[value] || ''
+
+  if (editMode) {
+    return Froala({
+      content,
+      options: {
+        imageUploadParam: 'image',
+        imageUploadURL: uploadPath,
+      },
+      onChange: (e, editor) => {
+        component[value] = editor.html.get()
+      },
+    })
+  }
+  // ignore empty strings
+  else if (!content) {
+    return null
+  }
+  else {
+    return B({ className }, HTML(content))
+  }
+}
+
+
 export default Component({
-  renderToggle () {
-    const { editable, onSave } = this.props
-    const { isEditable } = this.state
-    const label = isEditable ? 'Save' : 'Edit'
-
-    if (!editable) return null
-
-    const onClick = () => {
-      if (isEditable) onSave()
-      this.setState({ isEditable: !isEditable })
-    }
-
-    return B({ onClick, className: style.toggle }, label)
-  },
   getInitialState () {
-    return { isEditable: false }
+    return {
+      editMode: false,
+    }
   },
   render () {
-    const { component } = this.props
-    const { isEditable } = this.state
-    const html = component.content || ''
-    const className = isEditable ? style.block : style.info
+    const { uploadPath, component, content, isEditable, onSave } = this.props
+    const { editMode } = this.state
 
-    // ignore empty strings
-    if (!html) return null
+    const info = Info({
+      uploadPath,
+      component,
+      editMode,
+      value: 'info',
+      className: style.info,
+    })
 
-    let content = HTML(html)
+    const comment = Info({
+      uploadPath,
+      component,
+      editMode,
+      value: 'comment',
+      className: style.comment,
+    })
 
-    if (isEditable) {
-      content = Froala({
-        content: html,
-        onChange: (e, editor) => {
-          component.content = editor.html.get()
-        },
-      })
-    }
+    const toggle = !isEditable ? null: B({
+      className: style.toggle,
+      onClick: () => {
+        if (editMode) onSave()
+        this.setState({ editMode: !editMode })
+      }
+    }, editMode ? 'Save' : 'Edit')
 
-    return B({ className }, content, this.renderToggle())
+    return B({ className: style.component }, info, content, comment, toggle)
   }
 })

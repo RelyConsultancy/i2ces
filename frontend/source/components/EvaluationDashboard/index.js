@@ -7,29 +7,31 @@ import store from '/application/store.js'
 import style from './style.css'
 
 
-const Header = ({ evaluation }) => {
-  const toggle = !$.isUser('i2c_employee') ? null : Toggle({
-    isOn: evaluation.state == 'published',
+const ToggleState = ({ evaluation }) => {
+  const toggle = !$.isI2C() ? null : Toggle({
+    isOn: evaluation.state != 'draft',
     label: {
       on: 'published',
       off: 'draft',
       position: 'left',
     },
     onChange (isOn) {
-      evaluation.state = isOn ? 'published' : 'draft'
-
       $.mutateEvaluation({
         cid: evaluation.cid,
-        data: { state: evaluation.state }
+        data: { state: isOn ? 'published' : 'draft' }
       })
     },
   })
 
-  const button = B({ className: style.state }, toggle)
-  const content = B({ className: style.header_wrap }, button, evaluation.display_title)
-
-  return B({ className: style.header }, content)
+  return B({ className: style.state_toggle }, toggle)
 }
+
+
+const Header = ({ evaluation }) => B(
+  { className: style.header },
+  ToggleState({ evaluation }),
+  evaluation.display_title
+)
 
 
 const Content = (...data) => B(
