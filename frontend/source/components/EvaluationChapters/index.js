@@ -65,15 +65,16 @@ const Headings = ({ store, chapter, focusedSection, focusSection }) => {
 
 
 const Sections = ({ store, chapter, focusedSection, focusSection }) => {
-  const { cid } = store.evaluation
+  const { evaluation } = store
+  const { cid } = evaluation
   const byType = (i => i.type == 'section')
 
-  const editable = $.isEditable()
+  const isEditable = $.isEditable()
   const onSave = () => { $.updateChapter({ chapter, cid }) }
 
   const sections = chapter.content.filter(byType).map((section) => {
     const components = section.content.map((component) => (
-      setComponent({ cid, component, editable, onSave })
+      setComponent({ evaluation, chapter, component, isEditable, onSave })
     ))
 
 

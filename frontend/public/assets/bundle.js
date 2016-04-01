@@ -75521,20 +75521,21 @@ var Sections = function Sections(_ref4) {
   var chapter = _ref4.chapter;
   var focusedSection = _ref4.focusedSection;
   var focusSection = _ref4.focusSection;
-  var cid = store.evaluation.cid;
+  var evaluation = store.evaluation;
+  var cid = evaluation.cid;
 
   var byType = function byType(i) {
     return i.type == 'section';
   };
 
-  var editable = $.isEditable();
+  var isEditable = $.isEditable();
   var onSave = function onSave() {
     $.updateChapter({ chapter: chapter, cid: cid });
   };
 
   var sections = chapter.content.filter(byType).map(function (section) {
     var components = section.content.map(function (component) {
-      return (0, _setComponent2.default)({ cid: cid, component: component, editable: editable, onSave: onSave });
+      return (0, _setComponent2.default)({ evaluation: evaluation, chapter: chapter, component: component, isEditable: isEditable, onSave: onSave });
     });
 
     var title = (0, _component.B)({ className: _style2.default.section_title }, section.title);
@@ -75689,36 +75690,51 @@ var Text = function Text(_ref2) {
 };
 
 exports.default = function (_ref3) {
-  var cid = _ref3.cid;
+  var evaluation = _ref3.evaluation;
+  var chapter = _ref3.chapter;
   var component = _ref3.component;
-  var editable = _ref3.editable;
+  var isEditable = _ref3.isEditable;
   var onSave = _ref3.onSave;
+
+  var uploadPath = '/api/images/' + evaluation.cid + '/' + chapter.id;
 
   switch (component.type) {
     case 'chart_sales_performance':
       return (0, _SectionEditableComments2.default)({
-        cid: cid, component: component, editable: editable, onSave: onSave,
+        onSave: onSave,
+        isEditable: isEditable,
+        uploadPath: uploadPath,
+        component: component,
         content: (0, _ChartSalesPerformance2.default)({ component: component })
       });
       break;
 
     case 'chart_promotional_activity':
       return (0, _SectionEditableComments2.default)({
-        cid: cid, component: component, editable: editable, onSave: onSave,
+        onSave: onSave,
+        isEditable: isEditable,
+        uploadPath: uploadPath,
+        component: component,
         content: (0, _ChartPromotionalActivity2.default)({ component: component })
       });
       break;
 
     case 'chart_offer_sales':
       return (0, _SectionEditableComments2.default)({
-        cid: cid, component: component, editable: editable, onSave: onSave,
+        onSave: onSave,
+        isEditable: isEditable,
+        uploadPath: uploadPath,
+        component: component,
         content: (0, _ChartOfferSales2.default)({ component: component })
       });
       break;
 
     case 'chart_units_uplift':
       return (0, _SectionEditableComments2.default)({
-        cid: cid, component: component, editable: editable, onSave: onSave,
+        onSave: onSave,
+        isEditable: isEditable,
+        uploadPath: uploadPath,
+        component: component,
         content: (0, _ChartUnitsUplift2.default)({ component: component })
       });
       break;
@@ -75740,7 +75756,12 @@ exports.default = function (_ref3) {
       break;
 
     case 'html':
-      return (0, _SectionHTML2.default)({ cid: cid, component: component, editable: editable, onSave: onSave });
+      return (0, _SectionHTML2.default)({
+        onSave: onSave,
+        isEditable: isEditable,
+        uploadPath: uploadPath,
+        component: component
+      });
       break;
 
     case 'list_timings':
@@ -75752,7 +75773,12 @@ exports.default = function (_ref3) {
       break;
 
     case 'info':
-      return (0, _SectionInfo2.default)({ component: component, editable: editable, onSave: onSave });
+      return (0, _SectionInfo2.default)({
+        onSave: onSave,
+        isEditable: isEditable,
+        uploadPath: uploadPath,
+        component: component
+      });
       break;
 
     case 'list':
@@ -78806,20 +78832,20 @@ var _style2 = _interopRequireDefault(_style);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Info = function Info(_ref) {
-  var cid = _ref.cid;
+  var uploadPath = _ref.uploadPath;
   var component = _ref.component;
-  var isEditable = _ref.isEditable;
+  var editMode = _ref.editMode;
   var className = _ref.className;
   var value = _ref.value;
 
   var content = component[value] || '';
 
-  if (isEditable) {
+  if (editMode) {
     return (0, _Froala2.default)({
       content: content,
       options: {
         imageUploadParam: 'image',
-        imageUploadURL: '/api/images/' + cid
+        imageUploadURL: uploadPath
       },
       onChange: function onChange(e, editor) {
         component[value] = editor.html.get();
@@ -78837,44 +78863,44 @@ var Info = function Info(_ref) {
 exports.default = (0, _component.Component)({
   getInitialState: function getInitialState() {
     return {
-      isEditable: false
+      editMode: false
     };
   },
   render: function render() {
     var _this = this;
 
     var _props = this.props;
-    var cid = _props.cid;
+    var uploadPath = _props.uploadPath;
     var component = _props.component;
     var content = _props.content;
-    var editable = _props.editable;
+    var isEditable = _props.isEditable;
     var onSave = _props.onSave;
-    var isEditable = this.state.isEditable;
+    var editMode = this.state.editMode;
 
 
     var info = Info({
-      cid: cid,
+      uploadPath: uploadPath,
       component: component,
-      isEditable: isEditable,
+      editMode: editMode,
       value: 'info',
       className: _style2.default.info
     });
 
     var comment = Info({
-      cid: cid,
+      uploadPath: uploadPath,
       component: component,
-      isEditable: isEditable,
+      editMode: editMode,
       value: 'comment',
       className: _style2.default.comment
     });
 
-    var toggle = !editable ? null : (0, _component.B)({
+    var toggle = !isEditable ? null : (0, _component.B)({
       className: _style2.default.toggle,
       onClick: function onClick() {
-        if (isEditable) onSave();
-        _this.setState({ isEditable: !isEditable });
+        if (editMode) onSave();
+        _this.setState({ editMode: !editMode });
       }
-    }, isEditable ? 'Save' : 'Edit');
+    }, editMode ? 'Save' : 'Edit');
 
     return (0, _component.B)({ className: _style2.default.component }, info, content, comment, toggle);
   }
@@ -78974,40 +79000,40 @@ exports.default = (0, _component.Component)({
     var _this = this;
 
     var _props = this.props;
-    var editable = _props.editable;
+    var isEditable = _props.isEditable;
     var onSave = _props.onSave;
-    var isEditable = this.state.isEditable;
+    var editMode = this.state.editMode;
 
-    var label = isEditable ? 'Save' : 'Edit';
+    var label = editMode ? 'Save' : 'Edit';
 
-    if (!editable) return null;
+    if (!isEditable) return null;
 
     var onClick = function onClick() {
-      if (isEditable) onSave();
-      _this.setState({ isEditable: !isEditable });
+      if (editMode) onSave();
+      _this.setState({ editMode: !editMode });
     };
 
     return (0, _component.B)({ onClick: onClick, className: _style2.default.toggle }, label);
   },
   getInitialState: function getInitialState() {
-    return { isEditable: false };
+    return { editMode: false };
   },
   render: function render() {
     var _props2 = this.props;
-    var cid = _props2.cid;
+    var uploadPath = _props2.uploadPath;
     var component = _props2.component;
-    var isEditable = this.state.isEditable;
+    var editMode = this.state.editMode;
 
     var html = component.content || '';
 
     var content = (0, _component.HTML)(html);
 
-    if (isEditable) {
+    if (editMode) {
       content = (0, _Froala2.default)({
         content: html,
         options: {
           imageUploadParam: 'image',
-          imageUploadURL: '/api/images/' + cid
+          imageUploadURL: uploadPath
         },
         onChange: function onChange(e, editor, data) {
           component.content = editor.html.get();

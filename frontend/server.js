@@ -102,7 +102,7 @@ $('get', '/api/evaluations/:cid/dataset/:id', function * (cid, id) {
 
 
 // upload images
-$('post', '/api/images/:cid', function * (cid) {
+$('post', '/api/images/:cid/:id', function * (evaluation_cid, chapter_id) {
   const path = `/images/samples`
   const root = join(__dirname, '/public', path)
 

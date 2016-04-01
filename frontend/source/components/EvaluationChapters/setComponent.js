@@ -27,32 +27,46 @@ const Text = ({ component }) => (
 )
 
 
-export default ({ cid, component, editable, onSave }) => {
+export default ({ evaluation, chapter, component, isEditable, onSave }) => {
+  const uploadPath = `/api/images/${evaluation.cid}/${chapter.id}`
+
   switch (component.type) {
     case 'chart_sales_performance':
       return SectionEditableComments({
-        cid, component, editable, onSave,
+        onSave,
+        isEditable,
+        uploadPath,
+        component,
         content: ChartSalesPerformance({ component }),
       })
     break
 
     case 'chart_promotional_activity':
       return SectionEditableComments({
-        cid, component, editable, onSave,
+        onSave,
+        isEditable,
+        uploadPath,
+        component,
         content: ChartPromotionalActivity({ component }),
       })
     break
 
     case 'chart_offer_sales':
       return SectionEditableComments({
-        cid, component, editable, onSave,
+        onSave,
+        isEditable,
+        uploadPath,
+        component,
         content: ChartOfferSales({ component }),
       })
     break
 
     case 'chart_units_uplift':
       return SectionEditableComments({
-        cid, component, editable, onSave,
+        onSave,
+        isEditable,
+        uploadPath,
+        component,
         content: ChartUnitsUplift({ component }),
       })
     break
@@ -74,7 +88,12 @@ export default ({ cid, component, editable, onSave }) => {
     break
 
     case 'html':
-      return SectionHTML({ cid, component, editable, onSave })
+      return SectionHTML({
+        onSave,
+        isEditable,
+        uploadPath,
+        component,
+      })
     break
 
     case 'list_timings':
@@ -86,7 +105,12 @@ export default ({ cid, component, editable, onSave }) => {
     break
 
     case 'info':
-      return SectionInfo({ component, editable, onSave })
+      return SectionInfo({
+        onSave,
+        isEditable,
+        uploadPath,
+        component,
+      })
     break
 
     case 'list':
