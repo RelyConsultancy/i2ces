@@ -2,10 +2,13 @@
 
 namespace i2c\MeBundle\Controller\Api;
 
-use i2c\EvaluationBundle\Services\EvaluationDataBaseManager;
-use i2c\MeBundle\Services\BusinessUnit;
 use FOS\RestBundle\View\View;
 use i2c\EvaluationBundle\Controller\Api\RestApiController;
+use i2c\EvaluationBundle\Services\EvaluationDataBaseManager;
+use i2c\MeBundle\Services\BusinessUnit as BusinessUnitService;
+use i2c\SupplierBundle\Services\SupplierLogo;
+use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
+use Oro\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -23,8 +26,9 @@ class UserController extends RestApiController
     public function getMeAction()
     {
         $isEmployee = $this->get('oro_security.security_facade')
-            ->isGranted('EDIT', 'Entity:i2cEvaluationBundle:Evaluation');
+                           ->isGranted('EDIT', 'Entity:i2cEvaluationBundle:Evaluation');
 
+        /** @var User $user */
         $user = $this->getUser();
 
         if ($isEmployee) {
@@ -35,6 +39,37 @@ class UserController extends RestApiController
 
         $editEvaluations = $this->getEvaluationDatabaseManagerService()->getAllForEditing();
 
+        /** @var BusinessUnit $businessUnit */
+        $businessUnit = $user->getBusinessUnits()->first();
+
+        $logoName = $this->getSupplierLogoService()->getSupplierLogoName($businessUnit->getId());
+
+        $logo = null;
+
+        if (false !== $logoName) {
+            $logoInfo = getimagesize(
+                sprintf(
+                    '%s/%s/%s/%s',
+                    $this->getParameter('upload_image_path'),
+                    $this->getParameter('supplier_logo_upload_directory'),
+                    $businessUnit->getId(),
+                    $logoName
+                )
+            );
+
+            $logo = [
+                'path'   => sprintf(
+                    '/%s/%s/%s/%s',
+                    'images',
+                    $this->getParameter('supplier_logo_upload_directory'),
+                    $businessUnit->getId(),
+                    $logoName
+                ),
+                'width'  => $logoInfo[0],
+                'height' => $logoInfo[1],
+            ];
+        }
+
         $data = array(
             'id'             => $user->getId(),
             'username'       => $user->getUsername(),
@@ -42,6 +77,7 @@ class UserController extends RestApiController
             'view'           => $viewEvaluations,
             'edit'           => $editEvaluations,
             'host'           => $this->container->get('request')->getSchemeAndHttpHost(),
+            'logo'           => $logo,
         );
 
         if ($isEmployee) {
@@ -49,6 +85,7 @@ class UserController extends RestApiController
         } else {
             $data['type'] = 'supplier';
         }
+
         return $this->success($data, Response::HTTP_OK, 'minimal');
     }
 
@@ -61,10 +98,18 @@ class UserController extends RestApiController
     }
 
     /**
-     * @return BusinessUnit
+     * @return BusinessUnitService
      */
     public function getBusinessUnitService()
     {
         return $this->get('i2c_me.business_unit_service');
+    }
+
+    /**
+     * @return SupplierLogo
+     */
+    public function getSupplierLogoService()
+    {
+        return $this->get('i2c_supplier.supplier_logo_service');
     }
 }
