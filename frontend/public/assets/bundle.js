@@ -76418,6 +76418,10 @@ var hideLicenseWarning = function hideLicenseWarning(element) {
 
 var defaults = {
   placeholderText: ' ',
+  requestHeaders: {
+    // ORO header required
+    'X-CSRF-Header': 1
+  },
   fontFamily: {
     "'Avenir LT Std 45 Book'": 'Avenir',
     "'Archer Bold', serif": 'Archer',
