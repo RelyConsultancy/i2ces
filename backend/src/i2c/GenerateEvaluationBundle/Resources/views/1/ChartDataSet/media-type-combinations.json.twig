@@ -1,3 +1,4 @@
+{% autoescape false %}
 [
     {% for item in data %}
     {
@@ -9,3 +10,4 @@
     {{ not loop.last ? ',' }}
     {% endfor %}
 ]
+{% endautoescape %}

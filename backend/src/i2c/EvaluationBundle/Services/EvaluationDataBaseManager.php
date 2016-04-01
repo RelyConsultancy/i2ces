@@ -37,7 +37,7 @@ class EvaluationDataBaseManager
     public function getAllForViewing()
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
-        $queryBuilder->select('e')
+        $queryBuilder->select('e.cid')
                      ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where(
                          $queryBuilder->expr()->in('e.state', '?1')
@@ -48,7 +48,7 @@ class EvaluationDataBaseManager
 
         $result = $query->execute();
 
-        return $result;
+        return array_map('current', $result);
     }
 
     /**
@@ -77,7 +77,7 @@ class EvaluationDataBaseManager
     public function getAllForEditing()
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
-        $queryBuilder->select('e')
+        $queryBuilder->select('e.cid')
                      ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where($queryBuilder->expr()->eq('e.state', '?1'))
                      ->setParameter(1, Evaluation::STATE_DRAFT);
@@ -86,7 +86,7 @@ class EvaluationDataBaseManager
 
         $result = $query->execute();
 
-        return $result;
+        return array_map('current', $result);
     }
 
     /**

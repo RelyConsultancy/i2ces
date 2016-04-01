@@ -105,13 +105,7 @@ class GenerateEvaluations
                 'json'
             );
 
-            /** @var Evaluation $existingEvaluation */
-            $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
-                                                      ->findOneBy(['cid' => $cid]);
-            if (!is_null($existingEvaluation)) {
-                $evaluation = $existingEvaluation;
-                $this->removeExistingEvaluationChapters($evaluation);
-            }
+            $evaluation = $this->updateExistingIfPresent($evaluation, $cid);
 
             $evaluation->setCid($cid);
             $evaluation->markAsGenerating();
@@ -191,6 +185,29 @@ class GenerateEvaluations
         $config = json_decode($jsonContent, true);
 
         return $config;
+    }
+
+    /**
+     * @param Evaluation $evaluation
+     * @param string     $cid
+     *
+     * @return Evaluation
+     */
+    protected function updateExistingIfPresent($evaluation, $cid)
+    {
+        /** @var Evaluation $existingEvaluation */
+        $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
+                                                  ->findOneBy(['cid' => $cid]);
+        if (!is_null($existingEvaluation)) {
+            $evaluation->setId($existingEvaluation->getId());
+            /** @var Evaluation $evaluation */
+            $evaluation = $this->entityManager->merge($evaluation);
+            $this->removeExistingEvaluationChapters($evaluation);
+        }
+
+        $evaluation->setCid($cid);
+
+        return $evaluation;
     }
 
     /**

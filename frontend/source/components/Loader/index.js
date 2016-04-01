@@ -9,11 +9,11 @@ export default Component({
 
     return B(
       { className },
-      B({ className: style.line1 }),
-      B({ className: style.line2 }),
-      B({ className: style.line3 }),
-      B({ className: style.line4 }),
-      B({ className: style.line5 })
+      B({ className: style.item_1 }),
+      B({ className: style.item_2 }),
+      B({ className: style.item_3 }),
+      B({ className: style.item_4 }),
+      B({ className: style.item_5 })
     )
   }
 })

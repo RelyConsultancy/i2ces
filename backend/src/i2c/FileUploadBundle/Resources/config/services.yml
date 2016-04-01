@@ -1,4 +1,0 @@
-services:
-    i2c_evaluation_file_upload.file_upload:
-        class: i2c\FileUploadBundle\Services\FileUploadService
-        arguments: [%evaluation_upload_image_path%, %web_dir_path%]
