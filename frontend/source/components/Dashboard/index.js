@@ -11,7 +11,7 @@ const Logo = () => (
 
 
 const LogoSupplier = ({ user }) => {
-  if (user.type != 'supplier') return null
+  if (user.type != 'supplier' || !user.logo) return null
 
   const { logo } = user
   const css = { backgroundImage: `url(${ logo.path })` }

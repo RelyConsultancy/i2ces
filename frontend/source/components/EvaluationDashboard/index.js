@@ -9,7 +9,7 @@ import style from './style.css'
 
 const ToggleState = ({ evaluation }) => {
   const toggle = !$.isI2C() ? null : Toggle({
-    isOn: evaluation.state == 'published',
+    isOn: evaluation.state != 'draft',
     label: {
       on: 'published',
       off: 'draft',
@@ -18,7 +18,7 @@ const ToggleState = ({ evaluation }) => {
     onChange (isOn) {
       $.mutateEvaluation({
         cid: evaluation.cid,
-        data: { state: evaluation.state }
+        data: { state: isOn ? 'published' : 'draft' }
       })
     },
   })

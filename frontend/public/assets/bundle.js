@@ -75343,7 +75343,7 @@ var Logo = function Logo() {
 var LogoSupplier = function LogoSupplier(_ref) {
   var user = _ref.user;
 
-  if (user.type != 'supplier') return null;
+  if (user.type != 'supplier' || !user.logo) return null;
 
   var logo = user.logo;
 
@@ -75835,7 +75835,7 @@ var ToggleState = function ToggleState(_ref) {
   var evaluation = _ref.evaluation;
 
   var toggle = !$.isI2C() ? null : (0, _Toggle2.default)({
-    isOn: evaluation.state == 'published',
+    isOn: evaluation.state != 'draft',
     label: {
       on: 'published',
       off: 'draft',
@@ -75844,7 +75844,7 @@ var ToggleState = function ToggleState(_ref) {
     onChange: function onChange(isOn) {
       $.mutateEvaluation({
         cid: evaluation.cid,
-        data: { state: evaluation.state }
+        data: { state: isOn ? 'published' : 'draft' }
       });
     }
   });
