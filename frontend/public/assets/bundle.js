@@ -76391,7 +76391,17 @@ var hideLicenseWarning = function hideLicenseWarning(element) {
 };
 
 var defaults = {
-  placeholderText: ' '
+  placeholderText: ' ',
+  fontFamily: {
+    "'Avenir LT Std 45 Book'": 'Avenir',
+    "'Archer Bold', serif": 'Archer',
+    "Arial,Helvetica,sans-serif": 'Arial',
+    "Georgia,serif": 'Georgia',
+    "Impact,Charcoal,sans-serif": 'Impact',
+    "Tahoma,Geneva,sans-serif": 'Tahoma',
+    "'Times New Roman',Times,serif": 'Times New Roman',
+    "Verdana,Geneva,sans-serif": 'Verdana'
+  }
 };
 
 exports.default = (0, _component.Component)({
@@ -79012,80 +79022,9 @@ exports.default = (0, _component.Component)({
 },{"./style.css":361,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":335,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":373}],361:[function(require,module,exports){
 module.exports = {"component":"_SectionHTML_style_component","toggle":"_SectionHTML_style_toggle"}
 },{}],362:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js');
-
-var _Froala = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala');
-
-var _Froala2 = _interopRequireDefault(_Froala);
-
-var _style = require('./style.css');
-
-var _style2 = _interopRequireDefault(_style);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = (0, _component.Component)({
-  renderToggle: function renderToggle() {
-    var _this = this;
-
-    var _props = this.props;
-    var editable = _props.editable;
-    var onSave = _props.onSave;
-    var isEditable = this.state.isEditable;
-
-    var label = isEditable ? 'Save' : 'Edit';
-
-    if (!editable) return null;
-
-    var onClick = function onClick() {
-      if (isEditable) onSave();
-      _this.setState({ isEditable: !isEditable });
-    };
-
-    return (0, _component.B)({ onClick: onClick, className: _style2.default.toggle }, label);
-  },
-  getInitialState: function getInitialState() {
-    return { isEditable: false };
-  },
-  render: function render() {
-    var _props2 = this.props;
-    var cid = _props2.cid;
-    var component = _props2.component;
-    var isEditable = this.state.isEditable;
-
-    var html = component.content || '';
-    var className = isEditable ? _style2.default.block : _style2.default.info;
-
-    // ignore empty strings
-    if (!html) return null;
-
-    var content = (0, _component.HTML)(html);
-
-    if (isEditable) {
-      content = (0, _Froala2.default)({
-        content: html,
-        options: {
-          imageUploadParam: 'image',
-          imageUploadURL: '/api/images/' + cid
-        },
-        onChange: function onChange(e, editor) {
-          component.content = editor.html.get();
-        }
-      });
-    }
-
-    return (0, _component.B)({ className: className }, content, this.renderToggle());
-  }
-});
-
-},{"./style.css":363,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":335,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":373}],363:[function(require,module,exports){
-module.exports = {"block":"_SectionInfo_style_block","toggle":"_SectionInfo_style_toggle","info":"_SectionInfo_style_info"}
+arguments[4][356][0].apply(exports,arguments)
+},{"./style.css":363,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":335,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":373,"dup":356}],363:[function(require,module,exports){
+module.exports = {"component":"_SectionInfo_style_component","component .froala-editor":"_SectionInfo_style_component .froala-editor","toggle":"_SectionInfo_style_toggle","info":"_SectionInfo_style_info","comment":"_SectionInfo_style_comment"}
 },{}],364:[function(require,module,exports){
 'use strict';
 

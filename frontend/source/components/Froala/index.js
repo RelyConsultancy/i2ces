@@ -16,6 +16,16 @@ const hideLicenseWarning = (element) => {
 
 const defaults = {
   placeholderText: ' ',
+  fontFamily: {
+    "'Avenir LT Std 45 Book'": 'Avenir',
+    "'Archer Bold', serif": 'Archer',
+    "Arial,Helvetica,sans-serif": 'Arial',
+    "Georgia,serif": 'Georgia',
+    "Impact,Charcoal,sans-serif": 'Impact',
+    "Tahoma,Geneva,sans-serif": 'Tahoma',
+    "'Times New Roman',Times,serif": 'Times New Roman',
+    "Verdana,Geneva,sans-serif": 'Verdana',
+  },
 }
 
 

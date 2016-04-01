@@ -5363,29 +5363,57 @@ body.prevent-scroll.fr-mobile {
   cursor: pointer;
 }
 
-._SectionInfo_style_block {
+._SectionInfo_style_component {
   position: relative;
+}
+
+._SectionInfo_style_component .froala-editor {
+  margin: 2em 0;
 }
 
 ._SectionInfo_style_toggle {
   position: absolute;
   right: 0;
-  top: -5em;
+  top: -4rem;
   padding: .5em 1em;
   color: #FFF;
-  font-size: .75rem;
+  font-size: .875em;
   background-color: #43B5DB;
   cursor: pointer;
 }
 
 ._SectionInfo_style_info {
   position: relative;
-  padding: .5rem .75rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
-  font-size: .75rem;
+  font-size: .875em;
+}
+
+._SectionInfo_style_comment {
+  position: relative;
+  padding: .5rem .75rem;
+  padding-left: 3rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: .875em;
   color: #fafafa;
-  background-color: #43B5DB;
+  background-color: #6C6C6C;
+  min-height: 3.5rem;
+  border-radius: 3px;
+}
+
+._SectionInfo_style_comment::before {
+  content: '';
+  background-image: url(/images/icon_gears.png);
+  background-size: contain;
+  position: absolute;
+  left: -.75rem;
+  top: -.75rem;
+  width: 3rem;
+  height: 3rem;
+  background-repeat: no-repeat;
+  border: 4px solid #ddd;
+  border-radius: 100%;
 }
 
 ._SectionTimings_style_stages {
@@ -5460,21 +5488,54 @@ body.prevent-scroll.fr-mobile {
 }
 
 ._SectionEditableComments_style_info {
+  position: relative;
   padding: .5rem .75rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
   font-size: .875em;
   color: #fafafa;
   background-color: #4E8ECB;
+  border-radius: 3px;
+}
+
+._SectionEditableComments_style_info::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: -20px;
+  border-style: solid;
+  border-width: 3px 20px 15px 0;
+  border-color: transparent #4E8ECB;
+  display: block;
+  width: 0;
+  z-index: 1;
 }
 
 ._SectionEditableComments_style_comment {
+  position: relative;
   padding: .5rem .75rem;
+  padding-left: 3rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-size: .875em;
   color: #fafafa;
-  background-color: #5FC2E1;
+  background-color: #6C6C6C;
+  min-height: 3.5rem;
+  border-radius: 3px;
+}
+
+._SectionEditableComments_style_comment::before {
+  content: '';
+  background-image: url(/images/icon_gears.png);
+  background-size: contain;
+  position: absolute;
+  left: -.75rem;
+  top: -.75rem;
+  width: 3rem;
+  height: 3rem;
+  background-repeat: no-repeat;
+  border: 4px solid #ddd;
+  border-radius: 100%;
 }
 
 ._ChartMediaLaydown_style_chart {
