@@ -2,11 +2,13 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
+use i2c\GenerateEvaluationBundle\Services\Containers\ChartDataSetConfigContainer;
+use i2c\GenerateEvaluationBundle\Services\Containers\ExtractContainer;
 use JMS\Serializer\Serializer;
+use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Templating\EngineInterface;
@@ -18,7 +20,7 @@ use Symfony\Component\Templating\EngineInterface;
  */
 class GenerateEvaluations
 {
-    /** @var  ExtractInterface[] */
+    /** @var  ExtractContainer */
     protected $extractServicesContainer;
 
     /** @var  EngineInterface */
@@ -33,45 +35,60 @@ class GenerateEvaluations
     /** @var  Serializer */
     protected $serializer;
 
-    /** @var  GenerateTableData */
-    protected $generateTableDataService;
+    /** @var  GenerateChartDataSet */
+    protected $generateChartDataSetService;
+
+    /** @var ChartDataSetConfigContainer */
+    protected $chartDataSetConfigContainer;
 
     /**
      * GenerateEvaluations constructor.
      *
-     * @param EngineInterface   $templateRenderer
-     * @param Registry          $registry
-     * @param Serializer        $serializer
-     * @param string            $templatesPrefix
-     * @param GenerateTableData $generateTableDataService
+     * @param EngineInterface      $templateRenderer
+     * @param EntityManager        $entityManager
+     * @param Serializer           $serializer
+     * @param string               $templatesPrefix
+     * @param GenerateChartDataSet $generateTableDataService
      */
     public function __construct(
         EngineInterface $templateRenderer,
-        Registry $registry,
+        EntityManager $entityManager,
         Serializer $serializer,
         $templatesPrefix,
-        GenerateTableData $generateTableDataService
+        GenerateChartDataSet $generateTableDataService
     ) {
         $this->templateRenderer = $templateRenderer;
 
         $this->templatesPrefix = $templatesPrefix;
 
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
 
         $this->serializer = $serializer;
 
-        $this->generateTableDataService = $generateTableDataService;
+        $this->generateChartDataSetService = $generateTableDataService;
     }
 
     /**
-     * @param ExtractInterface $extractInterface
-     * @param string           $serviceName
+     * @param ExtractContainer $extractContainer
      */
-    public function addExtractService(ExtractInterface $extractInterface, $serviceName)
+    public function setExtractContainer(ExtractContainer $extractContainer)
     {
-        $this->extractServicesContainer[$serviceName] = $extractInterface;
+        $this->extractServicesContainer = $extractContainer;
     }
 
+    /**
+     * @param ChartDataSetConfigContainer $chartDataSetConfigContainer
+     */
+    public function setChartDataSetConfigContainer(ChartDataSetConfigContainer $chartDataSetConfigContainer)
+    {
+        $this->chartDataSetConfigContainer = $chartDataSetConfigContainer;
+    }
+
+    /**
+     * @param array  $evaluationConfigs
+     * @param array  $cids
+     * @param string $versionNumber
+     */
     public function generate($evaluationConfigs, $cids, $versionNumber)
     {
         foreach ($cids as $cid) {
@@ -88,13 +105,7 @@ class GenerateEvaluations
                 'json'
             );
 
-            /** @var Evaluation $existingEvaluation */
-            $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
-                ->findOneBy(['cid' => $cid]);
-            if (!is_null($existingEvaluation)) {
-                $evaluation = $existingEvaluation;
-                $this->removeExistingEvaluationChapters($evaluation);
-            }
+            $evaluation = $this->updateExistingIfPresent($evaluation, $cid);
 
             $evaluation->setCid($cid);
             $evaluation->markAsGenerating();
@@ -102,16 +113,16 @@ class GenerateEvaluations
             $chapters = [];
 
             foreach ($evaluationConfigs['chapters'] as $chapterConfig) {
-                $tableData = $this->generateTableDataService->generate(
+                $chartDataSetSources = $this->generateChartDataSetService->generate(
                     $cid,
-                    $chapterConfig['table_config'],
+                    $this->getChartDataSetConfig($chapterConfig['chart_data_set_service_name'], $cid),
                     $versionNumber,
                     $this->templatesPrefix
                 );
 
                 $additionalData = [
                     'additional_data' => $chapterConfig['additional_data'],
-                    'table_data'      => $tableData,
+                    'chart_data_set'  => $chartDataSetSources,
                 ];
 
                 $chapterJson = $this->getJsonEntity(
@@ -135,9 +146,12 @@ class GenerateEvaluations
                 $chapters[] = $chapter;
             }
 
-            $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
-                                                ->findOneBy(['id' => $evaluation->getBusinessUnit()->getId()]);
-            $evaluation->setOwner($businessUnit);
+            if (is_null($evaluation->getBusinessUnit())) {
+                $evaluation->setOwner($this->getNewBusinessUnit($cid));
+            } else {
+                $evaluation->setOwner($this->getBusinessUnit($evaluation->getBusinessUnit()->getId(), $cid));
+            }
+
             $evaluation->setChapters($chapters);
             $this->entityManager->persist($evaluation);
             $this->entityManager->flush();
@@ -151,6 +165,11 @@ class GenerateEvaluations
         }
     }
 
+    /**
+     * @param string $jsonPath
+     *
+     * @return mixed
+     */
     public function loadConfigData($jsonPath)
     {
         $fs = new Filesystem();
@@ -170,13 +189,87 @@ class GenerateEvaluations
 
     /**
      * @param Evaluation $evaluation
+     * @param string     $cid
+     *
+     * @return Evaluation
+     */
+    protected function updateExistingIfPresent($evaluation, $cid)
+    {
+        /** @var Evaluation $existingEvaluation */
+        $existingEvaluation = $this->entityManager->getRepository('i2cEvaluationBundle:Evaluation')
+                                                  ->findOneBy(['cid' => $cid]);
+        if (!is_null($existingEvaluation)) {
+            $evaluation->setId($existingEvaluation->getId());
+            /** @var Evaluation $evaluation */
+            $evaluation = $this->entityManager->merge($evaluation);
+            $this->removeExistingEvaluationChapters($evaluation);
+        }
+
+        $evaluation->setCid($cid);
+
+        return $evaluation;
+    }
+
+    /**
+     * @param string $id
+     * @param string $cid
+     *
+     * @return null|object|BusinessUnit
+     */
+    protected function getBusinessUnit($id, $cid)
+    {
+        $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
+                                            ->findOneBy(['id' => $id]);
+        if (is_null($businessUnit)) {
+            return $this->getNewBusinessUnit($cid);
+        }
+
+        return $businessUnit;
+    }
+
+    /**
+     * @param string $cid
+     *
+     * @return BusinessUnit
+     */
+    protected function getNewBusinessUnit($cid)
+    {
+        $mainBusinessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')->getFirst();
+
+        $businessUnit = new BusinessUnit();
+        $businessUnit->setName($this->getBusinessUnitName($cid));
+        $businessUnit->setOrganization($mainBusinessUnit->getOrganization());
+        $businessUnit->setOwner($mainBusinessUnit);
+
+        $this->entityManager->persist($businessUnit);
+
+        return $businessUnit;
+    }
+
+    /**
+     * @param string $cid
+     *
+     * @return mixed
+     */
+    protected function getBusinessUnitName($cid)
+    {
+        $query = sprintf(
+            'SELECT supplier FROM ie_campaign_data WHERE master_campaign_id=\'%s\'',
+            $cid
+        );
+
+        return $this->entityManager->getConnection()->fetchColumn($query);
+    }
+
+    /**
+     * @param Evaluation $evaluation
      */
     protected function removeExistingEvaluationChapters(Evaluation $evaluation)
     {
         $conn = $this->entityManager->getConnection();
-        $chapter = $evaluation->getChapters();
+        $chapters = $evaluation->getChapters();
         /** @var Chapter $chapter */
-        foreach ($chapter as $chapter) {
+        foreach ($chapters as $chapter) {
             $query = sprintf(
                 'DELETE FROM evaluation_chapters WHERE chapter_id=\'%s\'',
                 $chapter->getId()
@@ -213,7 +306,20 @@ class GenerateEvaluations
      */
     protected function getData($serviceName, $cid)
     {
-        return $this->extractServicesContainer[$serviceName]->fetchAll($cid);
+        return $this->extractServicesContainer->getExtractService($serviceName)->fetchAll($cid);
+    }
+
+    /**
+     * @param string $serviceName
+     * @param string $cid
+     *
+     * @return array
+     */
+    protected function getChartDataSetConfig($serviceName, $cid)
+    {
+        return $this->chartDataSetConfigContainer->getChartDataSetConfigService($serviceName)->fetchChartDataSetConfig(
+            $cid
+        );
     }
 
     /**

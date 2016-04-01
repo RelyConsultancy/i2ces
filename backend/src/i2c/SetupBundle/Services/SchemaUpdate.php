@@ -16,7 +16,7 @@ use Doctrine\DBAL\Connection;
 class SchemaUpdate
 {
     /** @var EntityManager  */
-    protected $entityManager;
+    protected $connection;
 
     /** @var string */
     protected $migrationDir;
@@ -24,12 +24,12 @@ class SchemaUpdate
     /**
      * SchemaUpdate constructor.
      *
-     * @param Registry $registry
+     * @param Connection $connection
      * @param string   $migrationDir
      */
-    public function __construct(Registry $registry, $migrationDir)
+    public function __construct(Connection $connection, $migrationDir)
     {
-        $this->entityManager = $registry->getEntityManager();
+        $this->connection = $connection;
         $this->migrationDir = $migrationDir;
     }
 
@@ -55,11 +55,8 @@ class SchemaUpdate
             );
         }
 
-        /** @var Connection $connection */
-        $connection = $this->entityManager->getConnection();
-
         $sqlContent = file_get_contents($filePath);
-        $connection->exec($sqlContent);
+        $this->connection->exec($sqlContent);
 
         return $version;
     }

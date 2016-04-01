@@ -1,3 +1,4 @@
+{% autoescape false %}
 [
     {% for data in table_data %}
         {
@@ -7,3 +8,4 @@
         }{{ not loop.last ? ',' }}
     {% endfor %}
 ]
+{% endautoescape %}

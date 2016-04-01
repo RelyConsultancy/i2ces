@@ -6,14 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 
 /**
- * Class TableData
+ * Class ChartDataSetConfig
  *
  * @ORM\Entity()
- * @ORM\Table(name="i2c_table_data")
+ * @ORM\Table(name="i2c_chart_data_set")
  *
  * @package i2c\EvaluationBundle\Entity
  */
-class TableData
+class ChartDataSet
 {
     /**
      * @var int

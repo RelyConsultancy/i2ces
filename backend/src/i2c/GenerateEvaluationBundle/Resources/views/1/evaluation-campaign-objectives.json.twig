@@ -1,3 +1,4 @@
+{% autoescape false %}
 {
     "content":
     [
@@ -15,3 +16,4 @@
     "state": "{{ additional_data.state }}",
     "created_at": "{{ date('now')|date("Y-m-d H:i:s") }}"
 }
+{% endautoescape %}

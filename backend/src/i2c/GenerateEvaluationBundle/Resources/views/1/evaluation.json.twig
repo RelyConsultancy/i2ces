@@ -1,3 +1,4 @@
+{% autoescape false %}
 {
     "title": "{{ general_data[0]['title'] }}",
     "category": "{{ general_data[0]['category'] }}",
@@ -6,7 +7,8 @@
     "end_date": "{{ date(start_date[0]['date'])|date("Y-m-d") }}",
     "generated_at": "{{ date('now')|date("Y-m-d H:i:s") }}",
     "businessUnit": {
-        "id": "{{ supplier[0]['id'] }}"
+        "id": {% if supplier[0] is defined %}"{{ supplier[0]['id'] }}"{% else %}null{% endif %}
     },
     "chapters": []
 }
+{% endautoescape %}

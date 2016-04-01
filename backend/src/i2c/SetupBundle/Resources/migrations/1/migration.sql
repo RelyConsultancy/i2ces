@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `evaluation` (
   business_unit_id INT(11),
   FOREIGN KEY (business_unit_id) REFERENCES oro_business_unit (id),
   PRIMARY KEY (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `chapter` (
   id                 INT(11) NOT NULL AUTO_INCREMENT,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `chapter` (
   is_additional_data TINYINT(1)       DEFAULT 0,
   serialized_name    VARCHAR(255),
   PRIMARY KEY (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 CREATE TABLE IF NOT EXISTS `evaluation_chapters` (
@@ -34,14 +34,14 @@ CREATE TABLE IF NOT EXISTS `evaluation_chapters` (
   FOREIGN KEY (evaluation_id) REFERENCES evaluation (id),
   FOREIGN KEY (chapter_id) REFERENCES chapter (id),
   PRIMARY KEY (evaluation_id, chapter_id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `i2c_table_data` (
+CREATE TABLE IF NOT EXISTS `i2c_chart_data_set` (
   id      INT(11) NOT NULL AUTO_INCREMENT,
   cid     VARCHAR(255),
   content BLOB,
   PRIMARY KEY (id)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `i2c_images_queue` (
   chapter_id    INT(11) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `i2c_objective_units` (
   metric VARCHAR(255) NOT NULL,
   unit            VARCHAR(255) NOT NULL,
   PRIMARY KEY (metric)
-);
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('New_custs', 'customer');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('New_trialists', 'customer');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Units', 'units');

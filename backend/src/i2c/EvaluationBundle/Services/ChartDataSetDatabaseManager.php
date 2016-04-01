@@ -2,16 +2,15 @@
 
 namespace i2c\EvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
-use i2c\EvaluationBundle\Entity\TableData;
+use i2c\EvaluationBundle\Entity\ChartDataSet;
 
 /**
  * Class TableDataDatabaseManager
  *
  * @package i2c\EvaluationBundle\Services
  */
-class TableDataDatabaseManager
+class ChartDataSetDatabaseManager
 {
     /** @var EntityManager */
     protected $entityManager;
@@ -19,24 +18,24 @@ class TableDataDatabaseManager
     /**
      * EvaluationDataBaseManagerService constructor.
      *
-     * @param Registry $registry
+     * @param EntityManager $entityManager
      */
-    public function __construct(Registry $registry)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
     }
 
     /**
      * @param string $cid
      * @param string $id
      *
-     * @return TableData
+     * @return ChartDataSet
      */
-    public function getTableData($cid, $id)
+    public function getChartDataSet($cid, $id)
     {
-        $tableData = $this->entityManager->getRepository('i2cEvaluationBundle:TableData')
+        $chartDataSet = $this->entityManager->getRepository('i2cEvaluationBundle:ChartDataSet')
                                          ->findOneBy(['cid' => $cid, 'id' => $id]);
 
-        return $tableData;
+        return $chartDataSet;
     }
 }

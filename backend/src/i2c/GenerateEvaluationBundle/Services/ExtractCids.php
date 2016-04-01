@@ -2,10 +2,8 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
-use Doctrine\ORM\EntityManagerInterface;
 use PDO;
 
 /**
@@ -15,21 +13,18 @@ use PDO;
  */
 class ExtractCids
 {
-    protected $cids;
-
-    /** @var EntityManagerInterface */
-    protected $entityManager;
+    /** @var Connection  */
+    protected $connection;
 
     /**
      * ExtractCids constructor.
      *
-     * @param Registry $doctrine
+     * @param Connection $connection
      */
-    public function __construct(Registry $doctrine)
+    public function __construct(Connection $connection)
     {
-        $this->entityManager = $doctrine->getEntityManager();
+        $this->connection = $connection;
     }
-
     /**
      * Returns an array of campaign ids that can be generated.
      *
@@ -39,7 +34,7 @@ class ExtractCids
      *
      * @return array
      */
-    public function getCampaignIdsEligibleForBeGenerated($cids = array(), $includeExisting = false)
+    public function getCampaignIdsEligibleForGeneration($cids = array(), $includeExisting = false)
     {
         if (empty($cids)) {
             $cids = $this->getAllImportedCampaignIds();
@@ -59,12 +54,10 @@ class ExtractCids
      */
     protected function getAllImportedCampaignIds()
     {
-        /** @var Connection $connection */
-        $connection = $this->entityManager->getConnection();
         $query = 'SELECT master_campaign_id
                   FROM ie_campaign_data
                  ';
-        $response = $connection->query($query)->fetchAll(PDO::FETCH_COLUMN);
+        $response = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN);
 
         return $response;
     }
@@ -93,8 +86,6 @@ class ExtractCids
                 ';
         }
 
-        /** @var Connection $connection */
-        $connection = $this->entityManager->getConnection();
         $query = sprintf(
             'SELECT DISTINCT cd.master_campaign_id
              FROM ie_campaign_data AS cd
@@ -104,7 +95,7 @@ class ExtractCids
             sprintf('\'%s\'', implode('\',\'', $cids)),
             $extraCondition
         );
-        $cids = $connection->query($query)->fetchAll(PDO::FETCH_COLUMN);
+        $cids = $this->connection->query($query)->fetchAll(PDO::FETCH_COLUMN);
 
         return $cids;
     }

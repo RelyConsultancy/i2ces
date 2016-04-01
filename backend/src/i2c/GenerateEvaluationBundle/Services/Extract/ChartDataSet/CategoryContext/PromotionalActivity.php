@@ -1,22 +1,22 @@
 <?php
 
-namespace i2c\GenerateEvaluationBundle\Services\Extract;
+namespace i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\CategoryContext;
 
 use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
 /**
- * Class EvaluationChapters
+ * Class PromotionalActivity
  *
- * @package i2c\GenerateEvaluationBundle\Services\Extract
+ * @package i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSetConfig\CategoryContext
  */
-class EvaluationChannels implements ExtractInterface
+class PromotionalActivity implements ExtractInterface
 {
-    /** @var Connection  */
+    /** @var Connection */
     protected $connection;
 
     /**
-     * EvaluationChapters constructor.
+     * CampaignBackground constructor.
      *
      * @param Connection $connection
      */
@@ -24,6 +24,7 @@ class EvaluationChannels implements ExtractInterface
     {
         $this->connection = $connection;
     }
+
     /**
      * Calls all the function in the class that begin with "get"
      *
@@ -50,12 +51,16 @@ class EvaluationChannels implements ExtractInterface
         return $result;
     }
 
-    public function getChannels($cid)
+    /**
+     * @param string $cid
+     *
+     * @return string
+     */
+    public function getTableData($cid)
     {
         return sprintf(
-            'SELECT distinct media_label as label
-             from ie_media_data
-             where master_campaign_id = \'%s\'
+            'SELECT week_commencing as start_date, product as product, pr_results as results from
+             ie_promo_data where master_campaign_id = \'%s\'
             ',
             $cid
         );
