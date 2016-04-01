@@ -174,7 +174,7 @@
         {% if chart_data_set.media_type_combinations is defined %}
             {
                 "type": "section",
-                "title": "Objective priority {{ priority_number }} - During campaign offer units uplift split by media type combination",
+                "title": "During campaign offer units uplift split by media type combination",
                 "content":
                 [
                     {
@@ -184,12 +184,11 @@
                     }
                 ]
             },
-            {% set priority_number = priority_number + 1 %}
         {% endif %}
         {% if chart_data_set.weekly_units_sold_exposed_and_control is defined %}
             {
                 "type": "section",
-                "title": "Objective priority {{ priority_number }} - Weekly units sold of the offer SKUs for the exposed and control group",
+                "title": "Weekly units sold of the offer SKUs for the exposed and control group",
                 "content":
                 [
                     {
@@ -199,7 +198,6 @@
                     }
                 ]
             }
-            {% set priority_number = priority_number + 1 %}
         {% endif %}
     ]
 }
