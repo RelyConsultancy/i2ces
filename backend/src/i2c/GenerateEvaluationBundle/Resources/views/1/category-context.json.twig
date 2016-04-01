@@ -47,20 +47,6 @@
                     ]
                 }
             ]
-        },
-        {
-            "type": "section",
-            "title": "Product definitions",
-            "content":
-            [{
-                "type": "list",
-                "items":
-                [
-                    {% for definition in product_definitions %}
-                        "{{ definition.sku|replace({'\r':''}) }}"{{ not loop.last ? ',' }}
-                    {% endfor %}
-                ]
-            }]
         }
     ]
 }
