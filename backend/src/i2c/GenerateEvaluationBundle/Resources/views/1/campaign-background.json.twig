@@ -91,14 +91,16 @@
         {
             "type": "section",
             "title": "Offer SKUs",
-            "access": "readonly",
             "content":
-            [
-                {
-                    "type": "text",
-                    "value": "Please see Product Definitions"
-                }
-            ]
+            [{
+                "type": "list",
+                "items":
+                [
+                    {% for definition in product_definitions %}
+                    "{{ definition.sku|replace({'\r':''}) }}"{{ not loop.last ? ',' }}
+                    {% endfor %}
+                ]
+            }]
         },
         {
             {% set legend = [] %}
