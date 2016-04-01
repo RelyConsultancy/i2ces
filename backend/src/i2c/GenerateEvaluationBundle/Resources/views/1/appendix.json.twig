@@ -3,6 +3,18 @@
     "order": "{{ additional_data.order }}",
     "state": "{{ additional_data.state }}",
     "title": "{{ additional_data.title }}",
-    "content": []
+    "content": [
+        {
+            "access": "readonly",
+            "content": [
+                {
+                    "content": "<img src=\"/images/default-appendix.jpg\">",
+                    "type": "html"
+                }
+            ],
+            "title": "Appendix",
+            "type": "section"
+        }
+    ]
 }
 {% endautoescape %}
