@@ -202,7 +202,7 @@ class GenerateEvaluations
             $evaluation->setId($existingEvaluation->getId());
             /** @var Evaluation $evaluation */
             $evaluation = $this->entityManager->merge($evaluation);
-            $this->removeExistingEvaluationChapters($evaluation);
+            $this->removeExistingEvaluationChapters($existingEvaluation);
         }
 
         $evaluation->setCid($cid);
@@ -267,11 +267,17 @@ class GenerateEvaluations
     protected function removeExistingEvaluationChapters(Evaluation $evaluation)
     {
         $conn = $this->entityManager->getConnection();
-        $chapters = $evaluation->getChapters();
+        $chapters = $evaluation->getChaptersIncludingAdditionalData();
         /** @var Chapter $chapter */
         foreach ($chapters as $chapter) {
             $query = sprintf(
                 'DELETE FROM evaluation_chapters WHERE chapter_id=\'%s\'',
+                $chapter->getId()
+            );
+            $conn->exec($query);
+
+            $query = sprintf(
+                'DELETE FROM chapter WHERE id=\'%s\'',
                 $chapter->getId()
             );
             $conn->exec($query);
