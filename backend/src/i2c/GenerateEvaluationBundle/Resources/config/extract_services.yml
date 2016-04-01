@@ -1,0 +1,73 @@
+services:
+    i2c_generate_evaluation.extract_evaluation:
+          class: i2c\GenerateEvaluationBundle\Services\Extract\Evaluation
+          arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_evaluation_channels:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationChannels
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_evaluation_campaign_objectives:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationCampaignObjectives
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_campaign_background:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\CampaignBackground
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_category_context:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\CategoryContext
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_objective_review:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ObjectiveReview
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_sampling_performance:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\SamplingPerformance
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_summary:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\Summary
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_chart_data_set_category_context_promotional_activity:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\CategoryContext\PromotionalActivity
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_chart_data_set_category_context_sales_performance:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\CategoryContext\SalesPerformance
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_total_category:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\GrowTotalCategory
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_weekly_units_sold_exposed_and_control:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\WeeklyUnitsSoldExposedAndControl
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_media_type_combinations:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\MediaTypeCombinations
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.extract_services_container:
+        class: i2c\GenerateEvaluationBundle\Services\Containers\ExtractContainer
+        calls:
+          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation, "extract_evaluation"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation_channels, "extract_evaluation_channels"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation_campaign_objectives, "extract_evaluation_campaign_objectives"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_campaign_background, "extract_campaign_background"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_category_context, "extract_category_context"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_objective_review, "extract_objective_review"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_sampling_performance, "extract_sampling_performance"]]
+          - [addExtractService, [@i2c_generate_evaluation.extract_summary, "extract_summary"]]
+
+    i2c_generate_evaluation.chart_data_set_services_container:
+        class: i2c\GenerateEvaluationBundle\Services\Containers\ChartDataSetContainer
+        calls:
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_category_context_promotional_activity, "extract_chart_data_set_promotional_activity"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_category_context_sales_performance, "extract_chart_data_set_sales_performance"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_total_category, "extract_chart_data_set_grow_total_category"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_media_type_combinations, "extract_chart_data_set_media_type_combinations"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_weekly_units_sold_exposed_and_control, "extract_chart_data_set_weekly_units_sold_exposed_and-control"]]

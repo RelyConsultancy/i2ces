@@ -1,29 +1,28 @@
 <?php
 
-namespace i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext;
+namespace i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
 /**
- * Class SalesPerformance
+ * Class MediaTypeCombinations
  *
- * @package i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext
+ * @package i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview
  */
-class SalesPerformance implements ExtractInterface
+class MediaTypeCombinations implements ExtractInterface
 {
     /** @var Connection */
     protected $connection;
 
     /**
-     * CampaignBackground constructor.
+     * GrowTotalCategory constructor.
      *
-     * @param Registry $registry
+     * @param Connection $connection
      */
-    public function __construct(Registry $registry)
+    public function __construct(Connection $connection)
     {
-        $this->connection = $registry->getEntityManager()->getConnection();
+        $this->connection = $connection;
     }
 
     /**
@@ -46,17 +45,30 @@ class SalesPerformance implements ExtractInterface
 
             $underscoreMethodName = $string = preg_replace('/(?<=\\w)(?=[A-Z])/', "_$1", $methodName);
             $underscoreMethodName = strtolower($underscoreMethodName);
+
             $result[$underscoreMethodName] = $this->connection->fetchAll($sql);
         }
 
         return $result;
     }
 
-    public function getTableData($cid)
+    /**
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getData($cid)
     {
         return sprintf(
-            'SELECT product as product, metric as metric, pp_results as results from
-             ie_cat_context_data where master_campaign_id = \'%s\' order by product
+            'SELECT r.media_type AS media_type, r.uplift AS uplift, r.pct_uplift AS percentage_uplift, e.exposed AS exposed
+             FROM ie_results_data AS r
+             JOIN ie_exposed_data AS e ON (e.media_type=r.media_type)
+             WHERE r.media_type <> \'Total\'
+             AND r.media_type <> \'Other\'
+             AND r.timeperiod=2
+             AND r.metric=\'Units\'
+             AND r.product=\'Offer\'
+             AND r.master_campaign_id=\'%s\' GROUP BY e.media_type;
             ',
             $cid
         );

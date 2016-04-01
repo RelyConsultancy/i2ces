@@ -2,8 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
-use Doctrine\ORM\EntityManagerInterface;
 use i2c\GenerateEvaluationBundle\Entity\ImportOption;
 
 /**
@@ -13,21 +11,8 @@ use i2c\GenerateEvaluationBundle\Entity\ImportOption;
  */
 class ImportData
 {
-    /** @var EntityManagerInterface */
-    protected $entityManager;
-
     /** @var \PDO */
     protected $pdoConnection;
-
-    /**
-     * ImportData constructor.
-     *
-     * @param Registry $doctrine
-     */
-    public function __construct(Registry $doctrine)
-    {
-        $this->entityManager = $doctrine->getEntityManager();
-    }
 
     /**
      * Build and set PDO connection.
@@ -147,9 +132,10 @@ class ImportData
             );
         }
         $query = sprintf(
-            '%s %s, PRIMARY KEY(`id`))',
+            '%s %s, PRIMARY KEY(`id`)) %s',
             $query,
-            implode(',', $tableColumns)
+            implode(',', $tableColumns),
+            'DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci'
         );
 
         return $this->pdoConnection->exec($query);

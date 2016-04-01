@@ -2,7 +2,6 @@
 
 namespace i2c\EvaluationBundle\Services;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Evaluation;
 use Oro\Bundle\SecurityBundle\ORM\Walker\AclHelper;
@@ -23,13 +22,13 @@ class EvaluationDataBaseManager
     /**
      * EvaluationDataBaseManager constructor.
      *
-     * @param AclHelper $aclHelper
-     * @param Registry  $registry
+     * @param AclHelper     $aclHelper
+     * @param EntityManager $entityManager
      */
-    public function __construct(AclHelper $aclHelper, Registry $registry)
+    public function __construct(AclHelper $aclHelper, EntityManager $entityManager)
     {
         $this->aclHelper = $aclHelper;
-        $this->entityManager = $registry->getEntityManager();
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -50,6 +49,26 @@ class EvaluationDataBaseManager
         $result = $query->execute();
 
         return array_map('current', $result);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllPublishedForViewing()
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+        $queryBuilder->select('e')
+                     ->from('i2cEvaluationBundle:Evaluation', 'e')
+                     ->where(
+                         $queryBuilder->expr()->in('e.state', '?1')
+                     )
+                     ->setParameter(1, [Evaluation::STATE_PUBLISHED]);
+
+        $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
+
+        $result = $query->execute();
+
+        return $result;
     }
 
     /**
@@ -82,7 +101,6 @@ class EvaluationDataBaseManager
                      ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where($queryBuilder->expr()->in('e.cid', '?1'))
                      ->setParameter(1, $uids);
-
 
         $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
 
