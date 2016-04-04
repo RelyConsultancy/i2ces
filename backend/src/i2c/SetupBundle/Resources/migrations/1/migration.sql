@@ -152,4 +152,15 @@ INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('SPEC', 'GBP');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('FOP', 'percentage');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Existing_custs', 'customer');
 
+
+
+CREATE TABLE IF NOT EXISTS `i2c_generate_pdf_queue` (
+  id             INT(11)      NOT NULL AUTO_INCREMENT,
+  evaluation_cid VARCHAR(255) NOT NULL,
+  published_time DATETIME     NOT NULL,
+  PRIMARY KEY (id)
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
+
 INSERT INTO `i2c_pages` (`type`, `title`, `content`) VALUES ('faq', 'F.A.Q.', 'FAQ page content');

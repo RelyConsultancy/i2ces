@@ -67,6 +67,17 @@ class Evaluation
     /**
      * @var string
      *
+     * @ORM\Column(type="string", name="version_number")
+     *
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("version_number")
+     * @JMS\Type("string")
+     */
+    protected $versionNumber;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, name="title")
      *
      * @JMS\Groups({"list"})
@@ -233,6 +244,22 @@ class Evaluation
     public function setCid($cid)
     {
         $this->cid = $cid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersionNumber()
+    {
+        return $this->versionNumber;
+    }
+
+    /**
+     * @param string $versionNumber
+     */
+    public function setVersionNumber($versionNumber)
+    {
+        $this->versionNumber = $versionNumber;
     }
 
     /**
