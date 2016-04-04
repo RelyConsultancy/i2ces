@@ -1,7 +1,8 @@
 import Dashboard from '/components/Dashboard'
 import EvaluationList from '/components/EvaluationList'
 import EvaluationDashboard from '/components/EvaluationDashboard'
-import EvaluationChapters from '/components/EvaluationChapters'
+import EvaluationChapter from '/components/EvaluationChapter'
+import EvaluationPreview from '/components/EvaluationPreview'
 import FAQ from '/components/FAQ'
 
 
@@ -19,12 +20,12 @@ const routes = {
     component: EvaluationDashboard,
   }, {
     path: 'evaluations/:cid/chapters/:id',
-    component: EvaluationChapters,
+    component: EvaluationChapter,
+  }, {
+    path: 'preview/:cid',
+    component: EvaluationPreview,
   }, {
     path: 'faqs',
-    component: FAQ,
-  }, {
-    path: 'logout',
     component: FAQ,
   }]
 }

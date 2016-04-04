@@ -81,53 +81,56 @@ export const setChapterSection = (data) => {
 }
 
 
-export const fetchChapter = ({ cid, id }) => {
-  http('get', `/api/evaluations/${cid}/chapters/${id}`, (reply) => {
-    setChapter(reply)
-  })
-}
-
-
-export const updateChapter = ({ cid, chapter }) => {
-  const { id } = chapter
-  const options = { data: chapter }
-
-  http('post', `/api/evaluations/${cid}/chapters/${id}`, options, (reply) => {
-    console.info(`Evaluation ${cid} chapter ${id} updated`)
-    console.log(reply)
-  })
-}
-
-
-export const fetchDataset = (source, handler = noop) => {
-  http('get', source, (reply) => {
-    handler(reply)
-  })
-}
-
-
-export const fetchEvaluations = () => {
-  const { user } = store.getState().dashboard
-  const options = {
-    data: { cids: user.view }
-  }
-
-  http('post', '/api/evaluations', options, (reply) => {
-    cmd('evaluation.list', reply.items)
-  })
-}
-
-
 export const setEvaluation = (data) => {
   cmd('evaluation.evaluation', data)
 }
 
 
-export const fetchEvaluation = ({ cid }) => {
-  http('get', `/api/evaluations/${cid}`, (reply) => {
-    setEvaluation(reply)
+export const updateChapter = ({ cid, chapter }, handler = noop) => {
+  const { id } = chapter
+  const options = { data: chapter }
+
+  http('post', `/api/evaluations/${cid}/chapters/${id}`, options, (data) => {
+    handler(data)
   })
 }
+
+
+export const fetchChapter = ({ cid, id }, handler = noop) => {
+  http('get', `/api/evaluations/${cid}/chapters/${id}`, (data) => {
+    setChapter(data)
+    handler(data)
+  })
+}
+
+
+export const fetchDataset = (source, handler = noop) => {
+  http('get', source, (data) => {
+    handler(data)
+  })
+}
+
+
+export const fetchEvaluations = (handler = noop) => {
+  const { user } = store.getState().dashboard
+  const options = {
+    data: { cids: user.view }
+  }
+
+  http('post', '/api/evaluations', options, (data) => {
+    cmd('evaluation.list', data.items)
+    handler(data)
+  })
+}
+
+
+export const fetchEvaluation = ({ cid }, handler = noop) => {
+  http('get', `/api/evaluations/${cid}`, (data) => {
+    setEvaluation(data)
+    handler(data)
+  })
+}
+
 
 export const mutateEvaluation = ({ cid, data }, handler = noop) => {
   if (data.state) {
@@ -146,8 +149,8 @@ export const mutateEvaluation = ({ cid, data }, handler = noop) => {
       user.edit.push(evaluation.cid)
     }
 
-    http('post', `/api/evaluations/${cid}/${action}`, (reply) => {
-      handler(reply)
+    http('post', `/api/evaluations/${cid}/${action}`, (data) => {
+      handler(data)
     })
   }
 }
