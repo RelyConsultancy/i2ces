@@ -17,7 +17,7 @@ export default Component({
         // imageUploadURL: uploadPath,
       },
       onChange: (e, editor) => {
-        this.content = editor.html.get()
+        this.toSave = editor.html.get()
       },
     })
 
@@ -42,8 +42,8 @@ export default Component({
       onClick: () => {
         this.setState({ editMode: !editMode })
 
-        if (editMode) {
-          this.setState({ content: this.content })
+        if (editMode && this.toSave) {
+          this.setState({ content: this.toSave })
         }
       }
     }, editMode ? 'Save' : 'Edit')

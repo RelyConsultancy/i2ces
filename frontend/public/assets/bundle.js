@@ -76439,7 +76439,7 @@ exports.default = (0, _component.Component)({
       },
       // imageUploadURL: uploadPath,
       onChange: function onChange(e, editor) {
-        _this.content = editor.html.get();
+        _this.toSave = editor.html.get();
       }
     });
 
@@ -76471,8 +76471,8 @@ exports.default = (0, _component.Component)({
       onClick: function onClick() {
         _this3.setState({ editMode: !editMode });
 
-        if (editMode) {
-          _this3.setState({ content: _this3.content });
+        if (editMode && _this3.toSave) {
+          _this3.setState({ content: _this3.toSave });
         }
       }
     }, editMode ? 'Save' : 'Edit');
