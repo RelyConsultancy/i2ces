@@ -7,6 +7,7 @@ use i2c\EvaluationBundle\Exception\FormException;
 use i2c\EvaluationBundle\Services\Chapter as ChapterService;
 use i2c\EvaluationBundle\Services\EvaluationDataBaseManager;
 use i2c\EvaluationBundle\Services\Evaluation as EvaluationService;
+use i2c\GeneratePdfBundle\Services\EvaluationQueue;
 use i2c\ImageUploadBundle\Services\UploadedImageQueue;
 use i2c\EvaluationBundle\Services\ChartDataSetDatabaseManager;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
@@ -158,6 +159,8 @@ class EvaluationController extends RestApiController
 
         $evaluation = $this->getEvaluationService()->updateEvaluation($evaluation);
 
+        $this->getEvaluationPdfQueueService()->insertToQueue($evaluation->getCid());
+
         return $this->success($evaluation, Response::HTTP_OK, ['list']);
     }
 
@@ -246,5 +249,13 @@ class EvaluationController extends RestApiController
     public function getUploadedImageQueueService()
     {
         return $this->get('i2c_image_upload.image_upload_queue');
+    }
+
+    /**
+     * @return EvaluationQueue
+     */
+    public function getEvaluationPdfQueueService()
+    {
+        return $this->get('i2c_generate_pdf.evaluation_queue_service');
     }
 }
