@@ -110,6 +110,14 @@ $('post', '/api/evaluations/:cid/unpublish', function * (cid) {
 })
 
 
+// FAQ page
+$('get', '/api/faq', function * () {
+  const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+
+  this.body = { content }
+})
+
+
 // upload images
 $('post', '/api/images/:cid/:id', function * (evaluation_cid, chapter_id) {
   const path = `/images/samples`

@@ -4754,6 +4754,25 @@ body.prevent-scroll.fr-mobile {
   z-index: -1;
 }
 
+._FAQ_style_content {
+  width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+._FAQ_style_toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: .5em 1em;
+  line-height: 1rem;
+  font-size: .875em;
+  background-color: #43B5DB;
+  color: #FFF;
+  cursor: pointer;
+}
+
 ._Loader_style_loader {
   width: 2em;
   height: .5em;

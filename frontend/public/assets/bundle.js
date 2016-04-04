@@ -73702,7 +73702,7 @@ module.exports = warning;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mutateEvaluation = exports.fetchEvaluation = exports.fetchEvaluations = exports.fetchDataset = exports.fetchChapter = exports.updateChapter = exports.setEvaluation = exports.setChapterSection = exports.setChapter = exports.setFilter = exports.setFlagNetwork = exports.setUser = exports.isEditable = exports.isI2C = exports.setURL = exports.isUser = undefined;
+exports.mutateEvaluation = exports.fetchEvaluation = exports.fetchEvaluations = exports.fetchDataset = exports.fetchChapter = exports.updateChapter = exports.setEvaluation = exports.setChapterSection = exports.setChapter = exports.setFilter = exports.fetchFAQ = exports.setFlagNetwork = exports.setUser = exports.isEditable = exports.isI2C = exports.setURL = exports.isUser = undefined;
 
 var _store = require('./store.js');
 
@@ -73765,6 +73765,17 @@ var setUser = exports.setUser = function setUser(data) {
 
 var setFlagNetwork = exports.setFlagNetwork = function setFlagNetwork(isVisible) {
   cmd('dashboard.flag.network', isVisible);
+};
+
+/*
+    FAQ
+*/
+var fetchFAQ = exports.fetchFAQ = function fetchFAQ() {
+  var handler = arguments.length <= 0 || arguments[0] === undefined ? noop : arguments[0];
+
+  (0, _http2.default)('get', '/api/faq', function (data) {
+    handler(data);
+  });
 };
 
 /*
@@ -76395,6 +76406,12 @@ Object.defineProperty(exports, "__esModule", {
 
 var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js');
 
+var _Froala = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala');
+
+var _Froala2 = _interopRequireDefault(_Froala);
+
+var _actions = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js');
+
 var _store = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js');
 
 var _store2 = _interopRequireDefault(_store);
@@ -76405,24 +76422,69 @@ var _style2 = _interopRequireDefault(_style);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var FAQ = (0, _component.Component)({
+exports.default = (0, _component.Component)({
   class: true,
+  editor: function editor() {
+    var _this = this;
+
+    var _state = this.state;
+    var editMode = _state.editMode;
+    var content = _state.content;
+
+
+    var editor = (0, _Froala2.default)({
+      content: content,
+      options: {
+        imageUploadParam: 'image'
+      },
+      // imageUploadURL: uploadPath,
+      onChange: function onChange(e, editor) {
+        _this.content = editor.html.get();
+      }
+    });
+
+    return editor;
+  },
+  getInitialState: function getInitialState() {
+    return {
+      content: '',
+      editMode: false
+    };
+  },
+  componentDidMount: function componentDidMount() {
+    var _this2 = this;
+
+    (0, _actions.fetchFAQ)(function (data) {
+      _this2.setState({ content: data.content });
+    });
+  },
   render: function render() {
-    var _props = this.props;
-    var store = _props.store;
-    var children = _props.children;
-    var dispatch = _props.dispatch;
+    var _this3 = this;
 
-    var header = (0, _component.B)({ className: _style2.default.header }, 'FAQs');
+    var _state2 = this.state;
+    var editMode = _state2.editMode;
+    var content = _state2.content;
 
-    return (0, _component.B)({ className: _style2.default.faq }, header);
+
+    var toggle = !(0, _actions.isI2C)() ? null : (0, _component.B)({
+      className: _style2.default.toggle,
+      onClick: function onClick() {
+        _this3.setState({ editMode: !editMode });
+
+        if (editMode) {
+          _this3.setState({ content: _this3.content });
+        }
+      }
+    }, editMode ? 'Save' : 'Edit');
+
+    var header = (0, _component.B)({ className: _style2.default.header }, 'FAQs', toggle);
+
+    return (0, _component.B)({ className: _style2.default.faq }, header, (0, _component.B)({ className: _style2.default.content }, editMode ? this.editor() : (0, _component.HTML)(content)));
   }
 });
 
-exports.default = _store2.default.sync('faq', FAQ);
-
-},{"./style.css":337,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":304,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":377}],337:[function(require,module,exports){
-module.exports = {"faq":"_FAQ_style_faq","header":"_FAQ_style_header"}
+},{"./style.css":337,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":298,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":304,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":339,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":377}],337:[function(require,module,exports){
+module.exports = {"faq":"_FAQ_style_faq","header":"_FAQ_style_header","content":"_FAQ_style_content","toggle":"_FAQ_style_toggle"}
 },{}],338:[function(require,module,exports){
 'use strict';
 

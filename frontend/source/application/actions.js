@@ -62,6 +62,15 @@ export const setFlagNetwork = (isVisible) => {
 }
 
 
+/*
+    FAQ
+*/
+export const fetchFAQ = (handler = noop) => {
+  http('get', `/api/faq`, (data) => {
+    handler(data)
+  })
+}
+
 
 /*
     evaluation
