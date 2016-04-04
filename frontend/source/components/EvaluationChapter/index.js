@@ -1,9 +1,9 @@
 import scrollTo from 'element-scroll-to'
 import { Component, B, Link } from '/components/component.js'
+import Section from '/components/EvaluationSection'
 import { getInitials, slugify } from '/application/utils.js'
 import store from '/application/store.js'
-import * as $ from '/application/actions.js'
-import setComponent from './setComponent.js'
+import * as action from '/application/actions.js'
 import style from './style.css'
 
 
@@ -69,26 +69,23 @@ const Sections = ({ store, chapter, focusedSection, focusSection }) => {
   const { cid } = evaluation
   const byType = (i => i.type == 'section')
 
-  const isEditable = $.isEditable()
-  const onSave = () => { $.updateChapter({ chapter, cid }) }
+  const isEditable = action.isEditable()
+  const uploadPath = `/api/images/${evaluation.cid}/${chapter.id}`
+  const onSave = () => {
+    action.updateChapter({ chapter, cid }, (data) => {
+      console.info(`Evaluation ${cid} chapter ${id} updated`, data)
+    })
+  }
 
-  const sections = chapter.content.filter(byType).map((section) => {
-    const components = section.content.map((component) => (
-      setComponent({ evaluation, chapter, component, isEditable, onSave })
-    ))
-
-
-    const title = B({ className: style.section_title }, section.title)
-    const id = slugify(section.title)
-
-    return B({ className: style.section, id }, title, ...components)
-  })
+  const sections = chapter.content.filter(byType).map((section) => (
+    Section({ section, isEditable, uploadPath, onSave })
+  ))
 
   return B({ className: style.sections_content }, ...sections)
 }
 
 
-const EvaluationChapters = Component({
+const EvaluationChapter = Component({
   class: true,
   load () {
     const { store, params } = this.props
@@ -96,14 +93,15 @@ const EvaluationChapters = Component({
     const chapter = store.chapters_cache[id]
 
     if (!store.evaluation) {
-      $.fetchEvaluation({ cid })
-      $.fetchChapter({ cid, id })
+      action.fetchEvaluation({ cid }, () => {
+        action.fetchChapter({ cid, id })
+      })
     }
     else if (!chapter) {
-      $.fetchChapter({ cid, id })
+      action.fetchChapter({ cid, id })
     }
     else {
-      $.setChapter(chapter)
+      action.setChapter(chapter)
     }
   },
   getInitialState () {
@@ -144,4 +142,4 @@ const EvaluationChapters = Component({
 })
 
 
-export default store.sync('evaluation', EvaluationChapters)
+export default store.sync('evaluation', EvaluationChapter)

@@ -27,9 +27,7 @@ const Text = ({ component }) => (
 )
 
 
-export default ({ evaluation, chapter, component, isEditable, onSave }) => {
-  const uploadPath = `/api/images/${evaluation.cid}/${chapter.id}`
-
+export default ({ uploadPath, component, isEditable, onSave }) => {
   switch (component.type) {
     case 'chart_sales_performance':
       return SectionEditableComments({

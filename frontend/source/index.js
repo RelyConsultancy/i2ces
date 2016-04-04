@@ -9,8 +9,8 @@ import { setUser } from './application/actions.js'
 loadCSS('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css')
 
 
-http('get', '/api/me', (reply) => {
-  setUser(reply)
+http('get', '/api/me', (user) => {
+  setUser(user)
 
   render(
     store.connect(router),

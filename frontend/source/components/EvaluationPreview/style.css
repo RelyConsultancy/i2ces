@@ -1,0 +1,17 @@
+.preview {
+  width: 700px;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.no_data {
+  text-align: center;
+  padding: 1em;
+}
+
+
+@media print {
+  .preview {
+    padding-top: 0;
+  }
+}
