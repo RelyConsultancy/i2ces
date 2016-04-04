@@ -53,9 +53,9 @@ class EvaluationChannels implements ExtractInterface
     public function getChannels($cid)
     {
         return sprintf(
-            'SELECT distinct media_label as label
-             from ie_media_data
-             where master_campaign_id = \'%s\'
+            'SELECT DISTINCT m.media_label AS label, i.icon_name AS icon
+             FROM ie_media_data AS m JOIN i2c_channel_icons AS i ON (m.media_label = i.channel_name)
+             WHERE master_campaign_id = \'%s\'
             ',
             $cid
         );

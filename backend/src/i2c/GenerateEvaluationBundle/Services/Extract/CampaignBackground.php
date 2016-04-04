@@ -179,8 +179,8 @@ class CampaignBackground implements ExtractInterface
     public function getChannels($cid)
     {
         return sprintf(
-            'SELECT DISTINCT media_label AS channel
-             FROM ie_media_data
+            'SELECT DISTINCT m.media_label AS channel, i.icon_name AS icon
+             FROM ie_media_data AS m JOIN i2c_channel_icons AS i ON (m.media_label = i.channel_name)
              WHERE master_campaign_id = \'%s\'
             ',
             $cid
