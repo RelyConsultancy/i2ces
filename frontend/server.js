@@ -101,6 +101,15 @@ $('get', '/api/evaluations/:cid/dataset/:id', function * (cid, id) {
 })
 
 
+// evaluation publish / unpublish
+$('post', '/api/evaluations/:cid/publish', function * (cid) {
+  this.body = { ok: 1 }
+})
+$('post', '/api/evaluations/:cid/unpublish', function * (cid) {
+  this.body = { ok: 1 }
+})
+
+
 // upload images
 $('post', '/api/images/:cid/:id', function * (evaluation_cid, chapter_id) {
   const path = `/images/samples`

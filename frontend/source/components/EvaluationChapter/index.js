@@ -22,8 +22,6 @@ const ChapterLinks = ({ store, chapter }) => {
   const selected = chapter
   const byOrder = (a, b) => (a.order > b.order ? 1 : -1)
 
-  if (!evaluation) return null
-
   const links = evaluation.chapters.sort(byOrder).map((chapter, index) => {
     const color = chapter_palette[chapter.order - 1]
     const isActive = chapter.id == selected.id
@@ -73,7 +71,7 @@ const Sections = ({ store, chapter, focusedSection, focusSection }) => {
   const uploadPath = `/api/images/${evaluation.cid}/${chapter.id}`
   const onSave = () => {
     action.updateChapter({ chapter, cid }, (data) => {
-      console.info(`Evaluation ${cid} chapter ${id} updated`, data)
+      console.info(`Evaluation ${cid}/${chapter.id} updated`, data)
     })
   }
 

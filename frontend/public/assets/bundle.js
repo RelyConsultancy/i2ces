@@ -75475,8 +75475,6 @@ var ChapterLinks = function ChapterLinks(_ref2) {
     return a.order > b.order ? 1 : -1;
   };
 
-  if (!evaluation) return null;
-
   var links = evaluation.chapters.sort(byOrder).map(function (chapter, index) {
     var color = chapter_palette[chapter.order - 1];
     var isActive = chapter.id == selected.id;
@@ -75543,7 +75541,7 @@ var Sections = function Sections(_ref4) {
   var uploadPath = '/api/images/' + evaluation.cid + '/' + chapter.id;
   var onSave = function onSave() {
     action.updateChapter({ chapter: chapter, cid: cid }, function (data) {
-      console.info('Evaluation ' + cid + ' chapter ' + id + ' updated', data);
+      console.info('Evaluation ' + cid + '/' + chapter.id + ' updated', data);
     });
   };
 
