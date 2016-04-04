@@ -2,9 +2,9 @@
 
 namespace i2c\SupplierBundle\DependencyInjection;
 
+use Oro\Bundle\OrganizationBundle\DependencyInjection\OroOrganizationExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class i2cSupplierExtension extends Extension
+class i2cSupplierExtension extends OroOrganizationExtension
 {
     /**
      * {@inheritdoc}
@@ -24,5 +24,7 @@ class i2cSupplierExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        parent::load($configs, $container);
     }
 }

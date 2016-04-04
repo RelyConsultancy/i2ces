@@ -45,7 +45,7 @@ oro:
             phone.label:         Phone
             users.label:         Users
             website.label:       Website
-            supplier_logo3.label: Supplier Logo 
+            supplier_logo.label: Supplier Logo 
 
         controller:
             message:
