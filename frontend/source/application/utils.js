@@ -87,3 +87,26 @@ export const loadCSS = (path) => {
 
   document.head.appendChild(link)
 }
+
+
+/*
+  options: {
+    multiple - disallow multiple file select
+  }
+  onSelect - function called after the files have been selected
+*/
+export const filePicker = (options, onSelect) => {
+  // make `options` optional
+  if (!onSelect) onSelect = options
+
+  const input = document.createElement('input')
+
+  input.type = 'file'
+  input.multiple = (options.multiple ? true : false)
+
+  input.addEventListener('change', () => {
+    onSelect(input.files)
+  })
+
+  input.click()
+}

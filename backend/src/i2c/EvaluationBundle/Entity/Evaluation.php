@@ -394,6 +394,14 @@ class Evaluation
     }
 
     /**
+     * @return Chapter[]
+     */
+    public function getChaptersIncludingAdditionalData()
+    {
+        return $this->chapters;
+    }
+
+    /**
      * @param Chapter[] $chapters
      */
     public function setChapters($chapters)

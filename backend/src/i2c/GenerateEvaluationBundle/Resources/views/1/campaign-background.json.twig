@@ -1,3 +1,4 @@
+{% autoescape false %}
 {
     "content":
     [
@@ -90,14 +91,16 @@
         {
             "type": "section",
             "title": "Offer SKUs",
-            "access": "readonly",
             "content":
-            [
-                {
-                    "type": "text",
-                    "value": "Please see Product Definitions"
-                }
-            ]
+            [{
+                "type": "list",
+                "items":
+                [
+                    {% for definition in product_definitions %}
+                    "{{ definition.sku|replace({'\r':''}) }}"{{ not loop.last ? ',' }}
+                    {% endfor %}
+                ]
+            }]
         },
         {
             {% set legend = [] %}
@@ -108,17 +111,17 @@
             "content":
             [
                 {
-                    "type": "chart_time_range",
+                    "type": "chart_media_laydown",
                     "items":
                     [
                         {% for item in media_laydown %}
                             {
+                                "type": "media",
                                 "label": "{{ item.media_label }}",
                                 "date_start": "{{ date(item.start_date)|date('Y-m-d') }}",
-                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}",
+                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}"
                                 {% for color_config in additional_data.colors_config %}
                                     {% if item.media_label in color_config.media %}
-                                        "marker": "{{ color_config.color }}"
                                         {% if color_config.color not in usedColors %}
                                             {% set legend = legend|merge([{color: color_config.color,label: color_config.label}]) %}
                                             {% set usedColors = usedColors|merge([color_config.color]) %}
@@ -146,3 +149,4 @@
     "order": "{{ additional_data['order'] }}",
     "created_at": "{{ date("now")|date("Y-m-d H:i:s") }}"
 }
+{% endautoescape %}

@@ -1,28 +1,58 @@
-import { Component, B, Image, Link } from '/components/component.js'
+import { Component, B, HTML } from '/components/component.js'
+import Froala from '/components/Froala'
+import { fetchFAQ, saveFAQ, isI2C } from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
 
 
-const Header = (text) => (
-  B({ className: style.header, content: text })
-)
-
-
-const FAQ = Component({
+export default Component({
   class: true,
-  render () {
-    const { store, children, dispatch } = this.props
+  editor () {
+    const { editMode, content } = this.state
 
-    const attrs = {
-      className: style.component,
+    const editor = Froala({
+      content,
+      options: {
+        imageUploadParam: 'image',
+        // imageUploadURL: uploadPath,
+      },
+      onChange: (e, editor) => {
+        this.toSave = editor.html.get()
+      },
+    })
+
+    return editor
+  },
+  getInitialState () {
+    return {
+      content: '',
+      editMode: false,
     }
+  },
+  componentDidMount () {
+    fetchFAQ((data) => {
+      this.setState({ content: data.content })
+    })
+  },
+  render () {
+    const { editMode, content } = this.state
 
-    return B(
-      attrs,
-      Header('FAQs')
-    )
+    const toggle = !isI2C() ? null: B({
+      className: style.toggle,
+      onClick: () => {
+        this.setState({ editMode: !editMode })
+
+        if (editMode && this.toSave) {
+          this.setState({ content: this.toSave })
+        }
+      }
+    }, editMode ? 'Save' : 'Edit')
+
+    const header = B({ className: style.header }, 'FAQs', toggle)
+
+    return B({ className: style.faq }, header, B(
+      { className: style.content },
+      editMode ? this.editor() : HTML(content)
+    ))
   }
 })
-
-
-export default store.sync('faq', FAQ)

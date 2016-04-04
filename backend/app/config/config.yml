@@ -80,6 +80,11 @@ fos_rest:
     routing_loader:
         default_format:       json
 
+jms_serializer:
+    visitors:
+        json:
+            options: [JSON_UNESCAPED_SLASHES, JSON_UNESCAPED_UNICODE]
+
 fos_js_routing:
     routes_to_expose:         [oro_*]
 

@@ -17,7 +17,9 @@
 
 @import from './components/EvaluationList/style.css';
 @import from './components/EvaluationDashboard/style.css';
-@import from './components/EvaluationChapters/style.css';
+@import from './components/EvaluationChapter/style.css';
+@import from './components/EvaluationSection/style.css';
+@import from './components/EvaluationPreview/style.css';
 
 @import from './components/SectionGallery/style.css';
 @import from './components/SectionHTML/style.css';

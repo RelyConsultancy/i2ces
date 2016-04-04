@@ -2,7 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services\Extract;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
@@ -16,9 +15,14 @@ class Evaluation implements ExtractInterface
     /** @var Connection  */
     protected $connection;
 
-    public function __construct(Registry $registry)
+    /**
+     * Evaluation constructor.
+     *
+     * @param Connection $connection
+     */
+    public function __construct(Connection $connection)
     {
-        $this->connection = $registry->getEntityManager()->getConnection();
+        $this->connection = $connection;
     }
 
     /**
@@ -80,6 +84,14 @@ class Evaluation implements ExtractInterface
              JOIN oro_business_unit AS bu ON (cd.supplier = bu.name)
              WHERE cd.master_campaign_id = \'%s\'',
             $cid
+        );
+    }
+
+    public function getDefaultSupplier($cid)
+    {
+        return sprintf(
+            'SELECT id as id from oro_business_unit where name=\'Main\'
+            '
         );
     }
 }

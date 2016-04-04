@@ -5,32 +5,36 @@ import style from './style.css'
 
 export default Component({
   renderToggle () {
-    const { editable, onSave } = this.props
-    const { isEditable } = this.state
-    const label = isEditable ? 'Save' : 'Edit'
+    const { isEditable, onSave } = this.props
+    const { editMode } = this.state
+    const label = editMode ? 'Save' : 'Edit'
 
-    if (!editable) return null
+    if (!isEditable) return null
 
     const onClick = () => {
-      if (isEditable) onSave()
-      this.setState({ isEditable: !isEditable })
+      if (editMode) onSave()
+      this.setState({ editMode: !editMode })
     }
 
     return B({ onClick, className: style.toggle }, label)
   },
   getInitialState () {
-    return { isEditable: false }
+    return { editMode: false }
   },
   render () {
-    const { component } = this.props
-    const { isEditable } = this.state
+    const { uploadPath, component } = this.props
+    const { editMode } = this.state
     const html = component.content || ''
 
     let content = HTML(html)
 
-    if (isEditable) {
+    if (editMode) {
       content = Froala({
         content: html,
+        options: {
+          imageUploadParam: 'image',
+          imageUploadURL: uploadPath,
+        },
         onChange: (e, editor, data) => {
           component.content = editor.html.get()
         },

@@ -1,5 +1,7 @@
 imports:
     - { resource: 'config.yml' }
+    - { resource: 'extract_services.yml'}
+    - { resource: 'chart_data_set_config_services.yml'}
 
 services:
     i2c_generate_evaluation.raw_import:
@@ -14,72 +16,29 @@ services:
         tags:
             - { name: console.command }
 
+    i2c_generate_evaluation.twig_minify_command:
+        class: i2c\GenerateEvaluationBundle\Command\MinifyTwigCommand
+        tags:
+            - { name: console.command }
+
     i2c_generate_evaluation.evaluation_generate_service:
         class: i2c\GenerateEvaluationBundle\Services\GenerateEvaluations
-        arguments: [@templating.engine.twig, @doctrine, @serializer, "i2cGenerateEvaluationBundle", @i2c_generate_evaluation.table_data_generate_service]
+        arguments: [@templating.engine.twig, @doctrine.orm.default_entity_manager, @serializer, 'i2cGenerateEvaluationBundle', @i2c_generate_evaluation.chart_data_set_generate_service]
         calls:
-          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation, "extract_evaluation"]]
-          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation_channels, "extract_evaluation_channels"]]
-          - [addExtractService, [@i2c_generate_evaluation.extract_evaluation_campaign_objectives, "extract_evaluation_campaign_objectives"]]
-          - [addExtractService, [@i2c_generate_evaluation.extract_campaign_background, "extract_campaign_background"]]
-          - [addExtractService, [@i2c_generate_evaluation.extract_category_context, "extract_category_context"]]
-          - [addExtractService, [@i2c_generate_evaluation.extract_objective_review, "extract_objective_review"]]
-          - [addExtractService, [@i2c_generate_evaluation.extract_sampling_performance, "extract_sampling_performance"]]
-          - [addExtractService, [@i2c_generate_evaluation.extract_summary, "extract_summary"]]
+          - [setExtractContainer, [@i2c_generate_evaluation.extract_services_container]]
+          - [setChartDataSetConfigContainer, [@i2c_generate_evaluation.chart_data_set_config_services_container]]
 
-    i2c_generate_evaluation.extract_evaluation:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\Evaluation
-        arguments: [@doctrine]
-
-    i2c_generate_evaluation.extract_evaluation_channels:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationChannels
-        arguments: [@doctrine]
-
-    i2c_generate_evaluation.extract_evaluation_campaign_objectives:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\EvaluationCampaignObjectives
-        arguments: [@doctrine]
-
-    i2c_generate_evaluation.extract_campaign_background:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\CampaignBackground
-        arguments: [@doctrine]
-
-    i2c_generate_evaluation.extract_category_context:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\CategoryContext
-        arguments: [@doctrine]
-
-    i2c_generate_evaluation.extract_objective_review:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\ObjectiveReview
-        arguments: [@doctrine]
-
-    i2c_generate_evaluation.extract_sampling_performance:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\SamplingPerformance
-        arguments: [@doctrine]
-
-    i2c_generate_evaluation.extract_summary:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\Summary
-        arguments: [@doctrine]
-
-    i2c_generate_evaluation.table_data_generate_service:
-        class: i2c\GenerateEvaluationBundle\Services\GenerateTableData
-        arguments: [@templating.engine.twig, @doctrine, @serializer]
+    i2c_generate_evaluation.chart_data_set_generate_service:
+        class: i2c\GenerateEvaluationBundle\Services\GenerateChartDataSet
+        arguments: [@templating.engine.twig, @doctrine.orm.default_entity_manager, @serializer]
         calls:
-          - [addExtractService, [@i2c_generate_evaluation.extract_table_data_category_context_promotional_activity, "extract_table_data_promotional_activity"]]
-          - [addExtractService, [@i2c_generate_evaluation.extract_table_data_category_context_sales_performance, "extract_table_data_sales_performance"]]
-
-    i2c_generate_evaluation.extract_table_data_category_context_promotional_activity:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext\PromotionalActivity
-        arguments: [@doctrine]
-
-    i2c_generate_evaluation.extract_table_data_category_context_sales_performance:
-        class: i2c\GenerateEvaluationBundle\Services\Extract\TableData\CategoryContext\SalesPerformance
-        arguments: [@doctrine]
+          - [setChartDataSetContainer, [@i2c_generate_evaluation.chart_data_set_services_container]]
 
     i2c_generate_evaluation.import_data:
         class: i2c\GenerateEvaluationBundle\Services\ImportData
-        arguments: [@doctrine]
         calls:
             - [buildPdoConnection, [%database_host%, %database_user%, %database_password%, %database_name%]]
 
     i2c_generate_evaluation.extract_cids:
         class: i2c\GenerateEvaluationBundle\Services\ExtractCids
-        arguments: [@doctrine]
+        arguments: [@doctrine.dbal.default_connection]

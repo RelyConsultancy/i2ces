@@ -3,12 +3,16 @@ import Froala from '/components/Froala'
 import style from './style.css'
 
 
-const Info = ({ component, isEditable, className, value }) => {
+const Info = ({ uploadPath, component, editMode, className, value }) => {
   const content = component[value] || ''
 
-  if (isEditable) {
+  if (editMode) {
     return Froala({
       content,
+      options: {
+        imageUploadParam: 'image',
+        imageUploadURL: uploadPath,
+      },
       onChange: (e, editor) => {
         component[value] = editor.html.get()
       },
@@ -27,34 +31,36 @@ const Info = ({ component, isEditable, className, value }) => {
 export default Component({
   getInitialState () {
     return {
-      isEditable: false,
+      editMode: false,
     }
   },
   render () {
-    const { component, content, editable, onSave } = this.props
-    const { isEditable } = this.state
+    const { uploadPath, component, content, isEditable, onSave } = this.props
+    const { editMode } = this.state
 
     const info = Info({
+      uploadPath,
       component,
-      isEditable,
+      editMode,
       value: 'info',
       className: style.info,
     })
 
     const comment = Info({
+      uploadPath,
       component,
-      isEditable,
+      editMode,
       value: 'comment',
       className: style.comment,
     })
 
-    const toggle = !editable ? null: B({
+    const toggle = !isEditable ? null: B({
       className: style.toggle,
       onClick: () => {
-        if (isEditable) onSave()
-        this.setState({ isEditable: !isEditable })
+        if (editMode) onSave()
+        this.setState({ editMode: !editMode })
       }
-    }, isEditable ? 'Save' : 'Edit')
+    }, editMode ? 'Save' : 'Edit')
 
     return B({ className: style.component }, info, content, comment, toggle)
   }

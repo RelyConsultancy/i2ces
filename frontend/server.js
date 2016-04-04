@@ -1,9 +1,11 @@
+import { resolve, join } from 'path'
 import fs from 'fs'
 import Koa from 'koa'
 import send from 'koa-send'
 import route from 'koa-route'
 import bodyparser from 'koa-bodyparser'
 import csvParser from 'csv-parser'
+import handleUpload from './server-upload.js'
 
 
 // thunk function to load and parse JSON
@@ -32,10 +34,6 @@ const loadCSV = (file) => ((done) => {
 })
 
 
-// format reply as Oro
-const fmtReply = (data) => ({ data, error: null })
-
-
 // setup Koa
 const koa = Koa()
 const $ = (method, path, handler) => {
@@ -48,7 +46,7 @@ koa.use(bodyparser())
 $('get', '/api/me', function * () {
   const file = `${__dirname}/samples/me.json`
 
-  this.body = fmtReply(yield loadJSON(file))
+  this.body = yield loadJSON(file)
 })
 
 
@@ -61,10 +59,10 @@ $('post', '/api/evaluations', function * () {
     items.push(yield loadJSON(`${__dirname}/samples/evaluation.${cid}.json`))
   }
 
-  this.body = fmtReply({
+  this.body = {
     count: items.length,
     items,
-  })
+  }
 })
 
 
@@ -72,7 +70,7 @@ $('post', '/api/evaluations', function * () {
 $('get', '/api/evaluations/:cid', function * (cid) {
   const file = `${__dirname}/samples/evaluation.${cid}.json`
 
-  this.body = fmtReply(yield loadJSON(file))
+  this.body = yield loadJSON(file)
 })
 
 
@@ -80,7 +78,7 @@ $('get', '/api/evaluations/:cid', function * (cid) {
 $('get', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
   const file = `${__dirname}/samples/chapter.${cid}.${id}.json`
 
-  this.body = fmtReply(yield loadJSON(file))
+  this.body = yield loadJSON(file)
 })
 
 
@@ -91,7 +89,7 @@ $('post', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
     section.content.forEach(component => console.log(component))
   })
 
-  this.body = fmtReply({ ok: 1 })
+  this.body = { ok: 1 }
 })
 
 
@@ -99,8 +97,61 @@ $('post', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
 $('get', '/api/evaluations/:cid/dataset/:id', function * (cid, id) {
   const file = `${__dirname}/samples/dataset.${cid}.${id}.json`
 
-  this.body = fmtReply(yield loadJSON(file))
+  this.body = yield loadJSON(file)
 })
+
+
+// evaluation publish / unpublish
+$('post', '/api/evaluations/:cid/publish', function * (cid) {
+  this.body = { ok: 1 }
+})
+$('post', '/api/evaluations/:cid/unpublish', function * (cid) {
+  this.body = { ok: 1 }
+})
+
+
+// FAQ page
+$('get', '/api/faq', function * () {
+  const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+
+  this.body = { content }
+})
+
+
+// upload images
+$('post', '/api/images/:cid/:id', function * (evaluation_cid, chapter_id) {
+  const path = `/images/samples`
+  const root = join(__dirname, '/public', path)
+
+  const result = yield handleUpload({ path: root, request: this.req })
+
+  if (!result || !result.files.length) {
+    this.body = { error: { message: 'No files uploaded' } }
+  }
+  else {
+    let { data } = result
+    let files = []
+
+    for (let file of result.files) {
+      fs.renameSync(join(file.path, file.filename), join(root, file.name))
+
+      files.push({
+        path: join(path, file.name),
+        name: file.name,
+      })
+
+      // return
+      if (file.field == 'image') {
+        return this.body = {
+          link: join(path, file.name),
+        }
+      }
+    }
+
+    this.body = { files }
+  }
+})
+
 
 
 // get webapp index

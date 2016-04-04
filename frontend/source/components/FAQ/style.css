@@ -1,21 +1,45 @@
-.component {
+.faq {
   position: relative;
 }
 
 .header {
   position: relative;
+  max-width: 800px;
+  margin: 0 auto;
   height: 3rem;
   line-height: 3rem;
   font-size: 1.1em;
   font-family: 'Archer Bold', serif;
-  border-top: 1px solid #E6E6E6;
-  border-bottom: 1px solid #E6E6E6;
   color: #656565;
-  z-index: 10;
 }
 .header::after {
-  content: attr(content);
-  display: block;
-  max-width: 800px;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  border-top: 1px solid #E6E6E6;
+  border-bottom: 1px solid #E6E6E6;
+  z-index: -1;
+}
+
+.content {
+  width: 800px;
   margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: .5em 1em;
+  line-height: 1rem;
+  font-size: .875em;
+  background-color: #43B5DB;
+  color: #FFF;
+  cursor: pointer;
 }

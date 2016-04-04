@@ -2,7 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services\Extract;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
@@ -16,9 +15,14 @@ class EvaluationCampaignObjectives implements ExtractInterface
     /** @var Connection */
     protected $connection;
 
-    public function __construct(Registry $registry)
+    /**
+     * EvaluationCampaignObjectives constructor.
+     *
+     * @param Connection $connection
+     */
+    public function __construct(Connection $connection)
     {
-        $this->connection = $registry->getEntityManager()->getConnection();
+        $this->connection = $connection;
     }
 
     /**

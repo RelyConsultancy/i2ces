@@ -2,7 +2,6 @@
 
 namespace i2c\GenerateEvaluationBundle\Services\Extract;
 
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\DBAL\Connection;
 use i2c\GenerateEvaluationBundle\Services\ExtractInterface;
 
@@ -19,11 +18,11 @@ class CampaignBackground implements ExtractInterface
     /**
      * CampaignBackground constructor.
      *
-     * @param Registry $registry
+     * @param Connection $connection
      */
-    public function __construct(Registry $registry)
+    public function __construct(Connection $connection)
     {
-        $this->connection = $registry->getEntityManager()->getConnection();
+        $this->connection = $connection;
     }
 
     /**
@@ -184,6 +183,19 @@ class CampaignBackground implements ExtractInterface
              FROM ie_media_data
              WHERE master_campaign_id = \'%s\'
             ',
+            $cid
+        );
+    }
+
+    /**
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getProductDefinitions($cid)
+    {
+        return sprintf(
+            'SELECT sku_name as sku from ie_offer_data where master_campaign_id = \'%s\'',
             $cid
         );
     }

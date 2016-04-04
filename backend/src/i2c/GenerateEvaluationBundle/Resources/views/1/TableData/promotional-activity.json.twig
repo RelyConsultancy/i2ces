@@ -1,9 +1,0 @@
-[
-    {% for data in table_data %}
-        {
-            "date": "{{ data.start_date }}",
-            "type": "{{ data.product }}",
-            "value": "{{ data.results }}"
-        }{{ not loop.last ? ',' }}
-    {% endfor %}
-]

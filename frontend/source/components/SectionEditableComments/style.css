@@ -26,18 +26,49 @@
 
 
 .info {
+  position: relative;
   padding: .5rem .75rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
   font-size: .875em;
   color: #fafafa;
   background-color: #4E8ECB;
+  border-radius: 3px;
+}
+.info::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: calc(-1rem + 1px);
+  border-width: 0.25rem 1rem .75rem 0;
+  border-style: solid;
+  border-color: transparent #4E8ECB;
+  display: block;
+  width: 0;
+  z-index: 1;
 }
 .comment {
+  position: relative;
   padding: .5rem .75rem;
+  padding-left: 3rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-size: .875em;
   color: #fafafa;
-  background-color: #5FC2E1;
+  background-color: #6C6C6C;
+  min-height: 3.5rem;
+  border-radius: 3px;
+}
+.comment::before {
+  content: '';
+  background-image: url(/images/icon_gears.png);
+  background-size: contain;
+  position: absolute;
+  left: -.75rem;
+  top: -.75rem;
+  width: 3rem;
+  height: 3rem;
+  background-repeat: no-repeat;
+  border: 4px solid #ddd;
+  border-radius: 100%;
 }
