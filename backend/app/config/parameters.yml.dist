@@ -14,8 +14,11 @@ parameters:
     mailer_password:        ~
 
     web_dir_path: '%kernel.root_dir%/../web'
-    evaluation_frontend_image_path: '/images/evaluations/'
-    evaluation_upload_image_path: '%web_dir_path%%evaluation_frontend_image_path%'
+    oro_attachment_path: '%kernel.root_dir%/attachment'
+    upload_image_path: '%web_dir_path%/images'
+    evaluation_image_upload_directory: evaluations
+    pages_image_upload_directory: pages
+    supplier_logo_upload_directory: supplier/logo
     evaluation_templates_folder_path: '%kernel.root_dir%/../src/i2c/GenerateEvaluationBundle/Resources/views'
     migration_sql_folder_path: '%kernel.root_dir%/../src/i2c/SetupBundle/Resources/migrations/'
 
