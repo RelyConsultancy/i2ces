@@ -66,7 +66,14 @@ export const setFlagNetwork = (isVisible) => {
     FAQ
 */
 export const fetchFAQ = (handler = noop) => {
-  http('get', `/api/faq`, (data) => {
+  http('get', `/api/pages/faq`, (data) => {
+    handler(data)
+  })
+}
+export const saveFAQ = (data, handler = noop) => {
+  const options = { data }
+
+  http('post', `/api/pages/faq`, options, (data) => {
     handler(data)
   })
 }
