@@ -27,9 +27,12 @@ else {
   const fs = require('fs')
   const argv = require('yargs').argv
 
-  // options
-  const output = `${__dirname}/samples/export.pdf`
-  const url = 'http://local:3000/#/preview/i2c1510047a'
+  const basePath = argv['base-url']
+  const evaluation_cid = argv['evaluation']
+  const chapter_id = argv['chapter']
+  const output = argv['output']
+
+  const url = `${basePath}/${evaluation_cid}`
 
   const toPDF = (error, data) => {
     if (error) return console.log(error)
