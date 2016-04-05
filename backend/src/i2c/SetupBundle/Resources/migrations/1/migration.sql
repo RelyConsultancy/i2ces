@@ -9,9 +9,12 @@ CREATE TABLE IF NOT EXISTS `evaluation` (
   end_date         DATETIME,
   generated_at     DATETIME,
   business_unit_id INT(11),
+  version_number   VARCHAR(255),
   FOREIGN KEY (business_unit_id) REFERENCES oro_business_unit (id),
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `chapter` (
   id                 INT(11) NOT NULL AUTO_INCREMENT,
@@ -25,7 +28,9 @@ CREATE TABLE IF NOT EXISTS `chapter` (
   is_additional_data TINYINT(1)       DEFAULT 0,
   serialized_name    VARCHAR(255),
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
 
 
 CREATE TABLE IF NOT EXISTS `evaluation_chapters` (
@@ -34,26 +39,32 @@ CREATE TABLE IF NOT EXISTS `evaluation_chapters` (
   FOREIGN KEY (evaluation_id) REFERENCES evaluation (id),
   FOREIGN KEY (chapter_id) REFERENCES chapter (id),
   PRIMARY KEY (evaluation_id, chapter_id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `i2c_chart_data_set` (
   id      INT(11) NOT NULL AUTO_INCREMENT,
   cid     VARCHAR(255),
   content BLOB,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `i2c_images_queue` (
-  chapter_id    INT(11) NOT NULL,
+  chapter_id    INT(11)      NOT NULL,
   evaluation_id VARCHAR(255) NOT NULL,
   PRIMARY KEY (chapter_id, evaluation_id)
 );
 
 CREATE TABLE IF NOT EXISTS `i2c_objective_units` (
   metric VARCHAR(255) NOT NULL,
-  unit            VARCHAR(255) NOT NULL,
+  unit   VARCHAR(255) NOT NULL,
   PRIMARY KEY (metric)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('New_custs', 'customer');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('New_trialists', 'customer');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Units', 'units');
@@ -62,3 +73,22 @@ INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('FOP', 'percentage'
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Existing_custs', 'customer');
 
 INSERT INTO `i2c_pages` (`type`, `title`, `content`) VALUES ('faq', 'F.A.Q.', 'FAQ page content');
+
+
+CREATE TABLE IF NOT EXISTS `i2c_channel_icons` (
+  channel_name             VARCHAR(255)      NOT NULL,
+  icon_name VARCHAR(255) NOT NULL,
+  PRIMARY KEY (channel_name)
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
+
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Instore Sampling', 'sampling');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('JS Magazine', 'magazine');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Six Sheets', '6_sheet');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Entrance Gates', 'entrance_gate');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Milk Media', 'milk_media');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Trolleys', 'trolleys');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('TV Wall', 'tv_wall');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Aisle Fins', 'aisle_fin');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Take Home Barker', 'barkers');
