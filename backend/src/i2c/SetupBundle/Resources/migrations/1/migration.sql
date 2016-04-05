@@ -72,6 +72,17 @@ INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('SPEC', 'GBP');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('FOP', 'percentage');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Existing_custs', 'customer');
 
+
+
+CREATE TABLE IF NOT EXISTS `i2c_pages` (
+  type VARCHAR(255) NOT NULL,
+  title   VARCHAR(255) NOT NULL,
+  content   BLOB,
+  PRIMARY KEY (type)
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
+
 INSERT INTO `i2c_pages` (`type`, `title`, `content`) VALUES ('faq', 'F.A.Q.', 'FAQ page content');
 
 
@@ -92,3 +103,4 @@ INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Trolleys'
 INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('TV Wall', 'tv_wall');
 INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Aisle Fins', 'aisle_fin');
 INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Take Home Barker', 'barkers');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Car Park Posters', '6_sheet');

@@ -73773,7 +73773,7 @@ var setFlagNetwork = exports.setFlagNetwork = function setFlagNetwork(isVisible)
 var fetchFAQ = exports.fetchFAQ = function fetchFAQ() {
   var handler = arguments.length <= 0 || arguments[0] === undefined ? noop : arguments[0];
 
-  (0, _http2.default)('get', '/api/faq', function (data) {
+  (0, _http2.default)('get', '/api/pages/faq', function (data) {
     handler(data);
   });
 };
