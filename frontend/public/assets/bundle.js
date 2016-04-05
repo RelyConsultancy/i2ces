@@ -73702,7 +73702,7 @@ module.exports = warning;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.mutateEvaluation = exports.fetchEvaluation = exports.fetchEvaluations = exports.fetchDataset = exports.fetchChapter = exports.updateChapter = exports.setEvaluation = exports.setChapterSection = exports.setChapter = exports.setFilter = exports.fetchFAQ = exports.setFlagNetwork = exports.setUser = exports.isEditable = exports.isI2C = exports.setURL = exports.isUser = undefined;
+exports.mutateEvaluation = exports.fetchEvaluation = exports.fetchEvaluations = exports.fetchDataset = exports.fetchChapter = exports.updateChapter = exports.setEvaluation = exports.setChapterSection = exports.setChapter = exports.setFilter = exports.saveFAQ = exports.fetchFAQ = exports.setFlagNetwork = exports.setUser = exports.isEditable = exports.isI2C = exports.setURL = exports.isUser = undefined;
 
 var _store = require('./store.js');
 
@@ -73774,6 +73774,15 @@ var fetchFAQ = exports.fetchFAQ = function fetchFAQ() {
   var handler = arguments.length <= 0 || arguments[0] === undefined ? noop : arguments[0];
 
   (0, _http2.default)('get', '/api/pages/faq', function (data) {
+    handler(data);
+  });
+};
+var saveFAQ = exports.saveFAQ = function saveFAQ(data) {
+  var handler = arguments.length <= 1 || arguments[1] === undefined ? noop : arguments[1];
+
+  var options = { data: data };
+
+  (0, _http2.default)('post', '/api/pages/faq', options, function (data) {
     handler(data);
   });
 };
@@ -74190,6 +74199,18 @@ exports.default = {
       pre: 'Pre-Period',
       during: 'Campaign-Period',
       post: 'Post-Period'
+    },
+
+    channelIcons: {
+      'aisle_fin': 'icon-name',
+      'entrance_gate': 'icon-name',
+      'sampling': 'icon-name',
+      'magazine': 'icon-name',
+      'milk_media': 'icon-name',
+      '6_sheet': 'icon-name',
+      'barkers': 'icon-name',
+      'trolleys': 'icon-name',
+      'tv_wall': 'icon-name'
     }
   }
 };
@@ -76093,7 +76114,7 @@ var Chapter = function Chapter(_ref) {
     return (0, _EvaluationSection2.default)({ section: section, isEditable: isEditable });
   });
 
-  return _component.B.apply(undefined, _toConsumableArray(sections));
+  return _component.B.apply(undefined, [{ className: _style2.default.chapter }].concat(_toConsumableArray(sections)));
 };
 
 exports.default = (0, _component.Component)({
@@ -76170,7 +76191,7 @@ exports.default = (0, _component.Component)({
 });
 
 },{"./style.css":332,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":298,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/EvaluationSection":333,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":377}],332:[function(require,module,exports){
-module.exports = {"preview":"_EvaluationPreview_style_preview","no_data":"_EvaluationPreview_style_no_data"}
+module.exports = {"preview":"_EvaluationPreview_style_preview","no_data":"_EvaluationPreview_style_no_data","chapter":"_EvaluationPreview_style_chapter"}
 },{}],333:[function(require,module,exports){
 'use strict';
 
@@ -76424,62 +76445,75 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _component.Component)({
   class: true,
-  editor: function editor() {
-    var _this = this;
+  toSave: null,
+  toggleEditMode: function toggleEditMode() {
+    var editMode = this.state.editMode;
 
-    var _state = this.state;
-    var editMode = _state.editMode;
-    var content = _state.content;
+    var state = { editMode: !editMode };
 
+    if (editMode && this.toSave) {
+      state.content = this.toSave;
 
-    var editor = (0, _Froala2.default)({
-      content: content,
-      options: {
-        imageUploadParam: 'image'
-      },
-      // imageUploadURL: uploadPath,
-      onChange: function onChange(e, editor) {
-        _this.toSave = editor.html.get();
-      }
-    });
+      (0, _actions.saveFAQ)({
+        title: state.title,
+        content: state.content
+      });
+    }
 
-    return editor;
+    this.setState(state);
   },
   getInitialState: function getInitialState() {
     return {
       content: '',
+      title: '',
       editMode: false
     };
   },
   componentDidMount: function componentDidMount() {
-    var _this2 = this;
+    var _this = this;
 
     (0, _actions.fetchFAQ)(function (data) {
-      _this2.setState({ content: data.content });
+      return _this.setState(data);
     });
   },
   render: function render() {
-    var _this3 = this;
+    var _this2 = this;
 
-    var _state2 = this.state;
-    var editMode = _state2.editMode;
-    var content = _state2.content;
+    var _state = this.state;
+    var editMode = _state.editMode;
+    var title = _state.title;
+    var content = _state.content;
 
 
-    var toggle = !(0, _actions.isI2C)() ? null : (0, _component.B)({
-      className: _style2.default.toggle,
-      onClick: function onClick() {
-        _this3.setState({ editMode: !editMode });
+    if ((0, _actions.isI2C)()) {
+      var toggle = (0, _component.B)({
+        className: _style2.default.toggle,
+        onClick: this.toggleEditMode
+      }, editMode ? 'Save' : 'Edit');
+    }
 
-        if (editMode && _this3.toSave) {
-          _this3.setState({ content: _this3.toSave });
+    if (editMode) {
+      var input = (0, _component.Input)({
+        type: 'text',
+        value: title,
+        onChange: function onChange(e) {
+          _this2.setState({ title: e.target.value });
         }
-      }
-    }, editMode ? 'Save' : 'Edit');
+      });
 
-    var header = (0, _component.B)({ className: _style2.default.header }, 'FAQs', toggle);
+      var editor = (0, _Froala2.default)({
+        content: content,
+        options: {
+          imageUploadParam: 'image',
+          imageUploadURL: '/api/images/page/faq'
+        },
+        onChange: function onChange(e, editor) {
+          _this2.toSave = editor.html.get();
+        }
+      });
+    }
 
-    return (0, _component.B)({ className: _style2.default.faq }, header, (0, _component.B)({ className: _style2.default.content }, editMode ? this.editor() : (0, _component.HTML)(content)));
+    return (0, _component.B)({ className: _style2.default.faq }, (0, _component.B)({ className: _style2.default.header }, input || title, toggle), (0, _component.B)({ className: _style2.default.content }, editor || (0, _component.HTML)(content)));
   }
 });
 

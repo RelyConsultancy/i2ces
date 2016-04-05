@@ -12,7 +12,7 @@ const Chapter = ({ evaluation, chapter }) => {
     Section({ section, isEditable })
   ))
 
-  return B(...sections)
+  return B({ className: style.chapter }, ...sections)
 }
 
 

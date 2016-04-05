@@ -5351,6 +5351,7 @@ body.prevent-scroll.fr-mobile {
 }
 
 ._EvaluationPreview_style_preview {
+  position: relative;
   width: 700px;
   margin: 0 auto;
   padding-top: 2rem;
@@ -5361,9 +5362,29 @@ body.prevent-scroll.fr-mobile {
   padding: 1em;
 }
 
+._EvaluationPreview_style_chapter {
+  position: relative;
+  padding: 1em 0;
+  border-top: 1px dashed #E6E6E6;
+}
+
+._EvaluationPreview_style_chapter:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
 @media print {
   ._EvaluationPreview_style_preview {
     padding-top: 0;
+  }
+
+  ._EvaluationPreview_style_chapter {
+    display: block;
+    padding: 0;
+    padding-top: 2rem !important;
+    border: 0;
+    page-break-after: always;
+    page-break-inside: avoid;
   }
 }
 
