@@ -37,17 +37,5 @@ export default {
       during: 'Campaign-Period',
       post: 'Post-Period',
     },
-
-    channelIcons: {
-      'aisle_fin': 'icon-name',
-      'entrance_gate': 'icon-name',
-      'sampling': 'icon-name',
-      'magazine': 'icon-name',
-      'milk_media': 'icon-name',
-      '6_sheet': 'icon-name',
-      'barkers': 'icon-name',
-      'trolleys': 'icon-name',
-      'tv_wall': 'icon-name',
-    },
   }
 }

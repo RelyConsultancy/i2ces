@@ -789,6 +789,59 @@ input::-moz-focus-inner {
   }
 }
 
+[class^=icon_channel_] {
+  position: relative;
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-size: contain;
+  border: 2px solid #DDD;
+  border-radius: 100%;
+  padding: 2px;
+  margin-right: .5em;
+  vertical-align: middle;
+}
+
+.icon_channel_aisle_fin {
+  background-image: url(/images/icons/icon_aisle_fin.png);
+}
+
+.icon_channel_entrance_gate {
+  background-image: url(/images/icons/icon_entrance_gate.png);
+}
+
+.icon_channel_sampling {
+  background-image: url(/images/icons/icon_sampling.png);
+}
+
+.icon_channel_magazine {
+  background-image: url(/images/icons/icon_magazine.png);
+}
+
+.icon_channel_milk_media {
+  background-image: url(/images/icons/icon_milk_media.png);
+}
+
+.icon_channel_6_sheet {
+  background-image: url(/images/icons/icon_6_sheet.png);
+}
+
+.icon_channel_barkers {
+  background-image: url(/images/icons/icon_barkers.png);
+}
+
+.icon_channel_trolleys {
+  background-image: url(/images/icons/icon_trolleys.png);
+}
+
+.icon_channel_tv_wall {
+  background-image: url(/images/icons/icon_tv_wall.png);
+}
+
+.icon_channel_6_sheet {
+  background-image: url(/images/icons/icon_6_sheet.png);
+}
+
 .Select {
   position: relative;
   width: 100%;
@@ -5116,6 +5169,11 @@ body.prevent-scroll.fr-mobile {
   color: #555;
 }
 
+._EvaluationDashboard_style_list_item > span {
+  position: relative;
+  top: 2px;
+}
+
 ._EvaluationDashboard_style_chapters {
   margin: 2em 0;
 }
@@ -5343,6 +5401,25 @@ body.prevent-scroll.fr-mobile {
   color: #6D6D6D;
 }
 
+._EvaluationSection_style_list {
+  position: relative;
+  margin-top: -1rem;
+}
+
+._EvaluationSection_style_list_item {
+  position: relative;
+  font-size: .875em;
+  line-height: 1.4rem;
+}
+
+._EvaluationSection_style_list_item::before {
+  content: '●';
+  position: relative;
+  top: -1px;
+  margin-right: .5em;
+  color: #9A9A9A;
+}
+
 @media print {
   ._EvaluationSection_style_section {
     padding: 1rem;
@@ -5496,6 +5573,24 @@ body.prevent-scroll.fr-mobile {
 ._SectionTimings_style_stage_label {
   display: inline-block;
   width: 7rem;
+}
+
+._SectionChannels_style_list {
+  position: relative;
+  margin-top: -1rem;
+}
+
+._SectionChannels_style_list_item {
+  position: relative;
+  line-height: 2.25em;
+  vertical-align: middle;
+}
+
+/* fix font line-height issue */
+
+._SectionChannels_style_list_item > span {
+  position: relative;
+  top: 2px;
 }
 
 ._SectionObjectives_style_list {
