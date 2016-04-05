@@ -111,15 +111,20 @@ $('post', '/api/evaluations/:cid/unpublish', function * (cid) {
 
 
 // FAQ page
-$('get', '/api/faq', function * () {
+$('get', '/api/pages/*', function * () {
   const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 
-  this.body = { content }
+  this.body = { content, title: 'F.A.Q.' }
+})
+$('post', '/api/pages/*', function * () {
+  console.info(this.request.body)
+
+  this.body = { ok: 1 }
 })
 
 
 // upload images
-$('post', '/api/images/:cid/:id', function * (evaluation_cid, chapter_id) {
+$('post', '/api/images/*', function * () {
   const path = `/images/samples`
   const root = join(__dirname, '/public', path)
 

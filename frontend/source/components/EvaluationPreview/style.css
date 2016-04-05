@@ -1,4 +1,5 @@
 .preview {
+  position: relative;
   width: 700px;
   margin: 0 auto;
   padding-top: 2rem;
@@ -9,9 +10,27 @@
   padding: 1em;
 }
 
+.chapter {
+  position: relative;
+  padding: 1em 0;
+  border-top: 1px dashed #E6E6E6;
+}
+.chapter:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
 
 @media print {
   .preview {
     padding-top: 0;
+  }
+  .chapter {
+    display: block;
+    padding: 0;
+    padding-top: 2rem !important;
+    border: 0;
+    page-break-after: always;
+    page-break-inside: avoid;
   }
 }
