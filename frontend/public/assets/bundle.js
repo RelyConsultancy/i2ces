@@ -74196,9 +74196,9 @@ exports.default = {
     chapter_palette: ['#3778C1', '#E58700', '#7D3184', '#DE0000', '#87B900', '#A4A4A4'],
 
     stages: {
-      pre: 'Pre-Period',
-      during: 'Campaign-Period',
-      post: 'Post-Period'
+      pre: 'Pre-period',
+      during: 'Campaign period',
+      post: 'Post-period'
     }
   }
 };

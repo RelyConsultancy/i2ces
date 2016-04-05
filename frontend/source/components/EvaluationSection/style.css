@@ -23,7 +23,6 @@
 }
 .list_item {
   position: relative;
-  font-size: .875em;
   line-height: 1.4rem;
 }
 .list_item::before {
@@ -31,7 +30,7 @@
   position: relative;
   top: -1px;
   margin-right: .5em;
-  color: #9A9A9A;
+  color: #D0D0D0;
 }
 
 

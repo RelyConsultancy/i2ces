@@ -33,9 +33,9 @@ export default {
     ],
 
     stages: {
-      pre: 'Pre-Period',
-      during: 'Campaign-Period',
-      post: 'Post-Period',
+      pre: 'Pre-period',
+      during: 'Campaign period',
+      post: 'Post-period',
     },
   }
 }
