@@ -1,4 +1,4 @@
-import { Component, B, HTML } from '/components/component.js'
+import { Component, B, Input, HTML } from '/components/component.js'
 import Froala from '/components/Froala'
 import { fetchFAQ, saveFAQ, isI2C } from '/application/actions.js'
 import store from '/application/store.js'
@@ -7,52 +7,67 @@ import style from './style.css'
 
 export default Component({
   class: true,
-  editor () {
-    const { editMode, content } = this.state
+  toSave: null,
+  toggleEditMode () {
+    const { editMode } = this.state
+    const state = { editMode: !editMode }
 
-    const editor = Froala({
-      content,
-      options: {
-        imageUploadParam: 'image',
-        // imageUploadURL: uploadPath,
-      },
-      onChange: (e, editor) => {
-        this.toSave = editor.html.get()
-      },
-    })
+    if (editMode && this.toSave) {
+      state.content = this.toSave
 
-    return editor
+      saveFAQ({
+        title: state.title,
+        content: state.content,
+      })
+    }
+
+    this.setState(state)
   },
   getInitialState () {
     return {
       content: '',
+      title: '',
       editMode: false,
     }
   },
   componentDidMount () {
-    fetchFAQ((data) => {
-      this.setState({ content: data.content })
-    })
+    fetchFAQ(data => this.setState(data))
   },
   render () {
-    const { editMode, content } = this.state
+    const { editMode, title, content } = this.state
 
-    const toggle = !isI2C() ? null: B({
-      className: style.toggle,
-      onClick: () => {
-        this.setState({ editMode: !editMode })
+    if (isI2C()) {
+      var toggle = B({
+        className: style.toggle,
+        onClick: this.toggleEditMode,
+      }, editMode ? 'Save' : 'Edit')
+    }
 
-        if (editMode && this.toSave) {
-          this.setState({ content: this.toSave })
+    if (editMode) {
+      var input = Input({
+        type: 'text',
+        value: title,
+        onChange: (e) => {
+          this.setState({ title: e.target.value })
         }
-      }
-    }, editMode ? 'Save' : 'Edit')
+      })
 
-    const header = B({ className: style.header }, 'FAQs', toggle)
+      var editor = Froala({
+        content,
+        options: {
+          imageUploadParam: 'image',
+          imageUploadURL: '/api/images/page/faq',
+        },
+        onChange: (e, editor) => {
+          this.toSave = editor.html.get()
+        },
+      })
+    }
 
-    return B({ className: style.faq }, header, B(
-      { className: style.content },
-      editMode ? this.editor() : HTML(content)
-    ))
+    return B(
+      { className: style.faq },
+      B({ className: style.header }, input || title, toggle),
+      B({ className: style.content }, editor || HTML(content))
+    )
   }
 })
