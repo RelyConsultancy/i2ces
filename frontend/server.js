@@ -117,6 +117,8 @@ $('get', '/api/pages/*', function * () {
   this.body = { content, title: 'F.A.Q.' }
 })
 $('post', '/api/pages/*', function * () {
+  console.info(this.request.body)
+
   this.body = { ok: 1 }
 })
 

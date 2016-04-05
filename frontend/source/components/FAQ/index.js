@@ -10,18 +10,18 @@ export default Component({
   toSave: null,
   toggleEditMode () {
     const { editMode } = this.state
-    const state = { editMode: !editMode }
+    const update = { editMode: !editMode }
 
     if (editMode && this.toSave) {
-      state.content = this.toSave
+      update.content = this.toSave
 
       saveFAQ({
-        title: state.title,
-        content: state.content,
+        title: this.state.title,
+        content: update.content,
       })
     }
 
-    this.setState(state)
+    this.setState(update)
   },
   getInitialState () {
     return {
