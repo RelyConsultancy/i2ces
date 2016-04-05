@@ -5680,7 +5680,7 @@ body.prevent-scroll.fr-mobile {
 
 ._SectionEditableComments_style_comment::before {
   content: '';
-  background-image: url(/images/icon_gears.png);
+  background-image: url(/images/icons/icon_gears.png);
   background-size: contain;
   position: absolute;
   left: -.75rem;
