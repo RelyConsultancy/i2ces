@@ -1,0 +1,14 @@
+.list {
+  position: relative;
+  margin-top: -1rem;
+}
+.list_item {
+  position: relative;
+  line-height: 2.25em;
+  vertical-align: middle;
+}
+/* fix font line-height issue */
+.list_item > span {
+  position: relative;
+  top: 2px;
+}

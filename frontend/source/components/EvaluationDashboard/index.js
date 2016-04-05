@@ -60,8 +60,10 @@ const Date = ({ evaluation }) => B(
 const Channels = ({ items }) => {
   const title = B({ className: style.list_title}, 'Channels')
 
-  items = items.map((item) => (
-    B({ className: style.list_item }, item)
+  items = items.map((item) => B(
+    { className: style.list_item, },
+    B({ className: `icon_channel_${item.type}` }),
+    item.label
   ))
 
   items = Grid({ blocks: 2, items })

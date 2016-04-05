@@ -1,3 +1,4 @@
+import { B } from '/components/component.js'
 import ChartMediaLaydown from '/components/ChartMediaLaydown'
 import ChartSalesPerformance from '/components/ChartSalesPerformance'
 import ChartPromotionalActivity from '/components/ChartPromotionalActivity'
@@ -6,18 +7,18 @@ import ChartOfferSales from '/components/ChartOfferSales'
 import ChartUnitsUplift from '/components/ChartUnitsUplift'
 import TablePerformanceSamples from '/components/TablePerformanceSamples'
 import SectionHTML from '/components/SectionHTML'
+import SectionEditableComments from '/components/SectionEditableComments'
 import SectionGallery from '/components/SectionGallery'
 import SectionTimings from '/components/SectionTimings'
+import SectionChannels from '/components/SectionChannels'
 import SectionObjectives from '/components/SectionObjectives'
 import SectionInfo from '/components/SectionInfo'
-import SectionEditableComments from '/components/SectionEditableComments'
-import { B } from '/components/component.js'
 import style from './style.css'
 
 
 const List = ({ component }) => (
-  B({ className: style.section_list }, component.items.map((item, key) => (
-    B({ className: style.section_list_item, key }, item)
+  B({ className: style.list }, component.items.map((item, key) => (
+    B({ className: style.list_item, key }, item)
   )))
 )
 
@@ -94,14 +95,6 @@ export default ({ uploadPath, component, isEditable, onSave }) => {
       })
     break
 
-    case 'list_timings':
-      return SectionTimings({ component })
-    break
-
-    case 'list_value':
-      return SectionObjectives({ component })
-    break
-
     case 'info':
       return SectionInfo({
         onSave,
@@ -109,6 +102,18 @@ export default ({ uploadPath, component, isEditable, onSave }) => {
         uploadPath,
         component,
       })
+    break
+
+    case 'list_channels':
+      return SectionChannels({ component })
+    break
+
+    case 'list_timings':
+      return SectionTimings({ component })
+    break
+
+    case 'list_value':
+      return SectionObjectives({ component })
     break
 
     case 'list':

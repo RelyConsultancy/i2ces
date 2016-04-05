@@ -44,13 +44,20 @@
     "type": "section",
     "title": "Evaluated Channels",
     "content": [{
-      "type": "list",
-      "items": [
-        "Six Sheets",
-        "Entrance Gates",
-        "JS Magazine",
-        "Coupon at Till"
-      ]
+      "type": "list_channels",
+      "items": [{
+        "label": "Aisle Fins",
+        "type": "aisle_fin"
+      }, {
+        "label": "Entrance Gates",
+        "type": "entrance_gate"
+      }, {
+        "label": "Instore Sampling",
+        "type": "sampling"
+      }, {
+        "label": "JS Magazine",
+        "type": "magazine"
+      }]
     }]
   }, {
     "type": "section",

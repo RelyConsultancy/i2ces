@@ -99,6 +99,10 @@
   border-bottom: 1px solid #E6E6E6;
   color: #555;
 }
+.list_item > span {
+  position: relative;
+  top: 2px;
+}
 
 .chapters {
   margin: 2em 0;
