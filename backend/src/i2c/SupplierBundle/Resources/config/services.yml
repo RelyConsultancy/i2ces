@@ -1,0 +1,4 @@
+services:
+    i2c_supplier.supplier_logo_service:
+        class: i2c\SupplierBundle\Services\SupplierLogo
+        arguments: [@doctrine.dbal.default_connection]
