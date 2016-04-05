@@ -27,6 +27,7 @@ services:
         calls:
           - [setExtractContainer, [@i2c_generate_evaluation.extract_services_container]]
           - [setChartDataSetConfigContainer, [@i2c_generate_evaluation.chart_data_set_config_services_container]]
+          - [setOptionalChaptersConfigService, [@i2c_generate_evaluation.optional_chapters_config_service]]
 
     i2c_generate_evaluation.chart_data_set_generate_service:
         class: i2c\GenerateEvaluationBundle\Services\GenerateChartDataSet
@@ -41,4 +42,8 @@ services:
 
     i2c_generate_evaluation.extract_cids:
         class: i2c\GenerateEvaluationBundle\Services\ExtractCids
+        arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate_evaluation.optional_chapters_config_service:
+        class: i2c\GenerateEvaluationBundle\Services\OptionalChaptersConfig
         arguments: [@doctrine.dbal.default_connection]
