@@ -1,7 +1,13 @@
 services:
+    i2c_generate_pdf.evaluation_pdf_command:
+        class: i2c\GeneratePdfBundle\Command\GeneratePDF
+        tags:
+            - { name: console.command }
+
     i2c_generate_pdf.evaluation_queue_service:
         class: i2c\GeneratePdfBundle\Services\EvaluationQueue
         arguments: [@doctrine.dbal.default_connection]
 
     i2c_generate_pdf.generate_evaluation_pdf_service:
         class: i2c\GeneratePdfBundle\Services\GenerateEvaluationPdf
+        arguments: [@doctrine.orm.default_entity_manager, %url_base%]

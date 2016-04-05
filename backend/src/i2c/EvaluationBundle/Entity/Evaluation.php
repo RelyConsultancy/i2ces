@@ -78,6 +78,17 @@ class Evaluation
     /**
      * @var string
      *
+     * @ORM\Column(type="string", name="latest_pdf_path")
+     *
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("latest_pdf_path")
+     * @JMS\Type("string")
+     */
+    protected $latestPdfPath;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, name="title")
      *
      * @JMS\Groups({"list"})
@@ -260,6 +271,22 @@ class Evaluation
     public function setVersionNumber($versionNumber)
     {
         $this->versionNumber = $versionNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLatestPdfPath()
+    {
+        return $this->latestPdfPath;
+    }
+
+    /**
+     * @param string $latestPdfPath
+     */
+    public function setLatestPdfPath($latestPdfPath)
+    {
+        $this->latestPdfPath = $latestPdfPath;
     }
 
     /**

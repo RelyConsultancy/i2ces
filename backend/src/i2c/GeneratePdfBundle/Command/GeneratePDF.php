@@ -4,10 +4,12 @@ namespace i2c\GeneratePdfBundle\Command;
 
 use i2c\EvaluationBundle\Entity\Evaluation;
 use i2c\EvaluationBundle\Repository\EvaluationRepository;
+use i2c\GeneratePdfBundle\Entity\EvaluationPdfConfig;
 use i2c\GeneratePdfBundle\Services\EvaluationQueue;
 use i2c\GeneratePdfBundle\Services\GenerateEvaluationPdf;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -20,7 +22,19 @@ class GeneratePDF extends ContainerAwareCommand
     public function configure()
     {
         $this->setName('i2c:generate-pdf:evaluation')
-             ->setDefinition(
+             ->addOption(
+                 'output-folder',
+                 null,
+                 InputOption::VALUE_REQUIRED,
+                 'The folder in which the pdfs will be generated'
+             )
+             ->addOption(
+                 'node-command',
+                 null,
+                 InputOption::VALUE_REQUIRED,
+                 'The absolute path to the node command'
+             )
+             ->setDescription(
                  'Generates a PDF file for an evaluation and stores the resulting location in the database'
              );
     }
@@ -35,6 +49,16 @@ class GeneratePDF extends ContainerAwareCommand
     {
         $cids = $this->getEvaluationQueueService()->getEvaluationForGeneration();
 
+        if (empty($cids)) {
+            return;
+        }
+
+        $config = new EvaluationPdfConfig();
+
+        $config->setNodeJsCommand($input->getOption('node-command'));
+        $config->setOutputDirectory($input->getOption('output-folder'));
+
+
         foreach ($cids as $cid) {
             /** @var Evaluation $evaluation */
             $evaluation = $this->getEvaluationRepository()->findOneBy(['cid' => $cid]);
@@ -43,11 +67,9 @@ class GeneratePDF extends ContainerAwareCommand
                 continue;
             }
 
-            $config = [];
-
             $this->getGenerateEvaluationPdfService()->generatePdf($evaluation, $config);
 
-            $this->getEvaluationQueueService()->removeFromQueue($cid);
+            //$this->getEvaluationQueueService()->removeFromQueue($cid);
         }
     }
 

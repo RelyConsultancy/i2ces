@@ -30,7 +30,7 @@ class EvaluationQueue
     {
         $query = 'SELECT evaluation_cid as cid from i2c_generate_pdf_queue ORDER BY published_time';
 
-        $result = $this->connection->fetchColumn($query);
+        $result = $this->connection->fetchArray($query);
 
         return $result;
     }
