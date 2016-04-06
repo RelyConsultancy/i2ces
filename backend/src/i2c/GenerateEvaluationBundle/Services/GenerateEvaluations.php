@@ -41,6 +41,9 @@ class GenerateEvaluations
     /** @var ChartDataSetConfigContainer */
     protected $chartDataSetConfigContainer;
 
+    /** @var OptionalChaptersConfig */
+    protected $optionalChaptersConfigService;
+
     /**
      * GenerateEvaluations constructor.
      *
@@ -85,6 +88,14 @@ class GenerateEvaluations
     }
 
     /**
+     * @param OptionalChaptersConfig $optionalChaptersConfig
+     */
+    public function setOptionalChaptersConfigService(OptionalChaptersConfig $optionalChaptersConfig)
+    {
+        $this->optionalChaptersConfigService = $optionalChaptersConfig;
+    }
+
+    /**
      * @param array  $evaluationConfigs
      * @param array  $cids
      * @param string $versionNumber
@@ -112,7 +123,12 @@ class GenerateEvaluations
 
             $chapters = [];
 
-            foreach ($evaluationConfigs['chapters'] as $chapterConfig) {
+            $chaptersConfig = array_merge(
+                $evaluationConfigs['chapters'],
+                $this->optionalChaptersConfigService->fetchOptionalChaptersConfig($cid)
+            );
+
+            foreach ($chaptersConfig as $chapterConfig) {
                 $chartDataSetSources = $this->generateChartDataSetService->generate(
                     $cid,
                     $this->getChartDataSetConfig($chapterConfig['chart_data_set_service_name'], $cid),
