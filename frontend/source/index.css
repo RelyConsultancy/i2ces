@@ -12,8 +12,8 @@
 @import from './components/Chart/style.css';
 @import from './components/Toggle/style.css';
 
-@import from './components/FAQ/style.css';
 @import from './components/Loader/style.css';
+@import from './components/FAQ/style.css';
 @import from './components/Dashboard/style.css';
 
 @import from './components/EvaluationList/style.css';

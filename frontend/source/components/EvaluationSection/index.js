@@ -13,8 +13,12 @@ export default Component({
     ))
 
     const title = B({ className: style.section_title }, section.title)
-    const id = slugify(section.title)
 
-    return B({ className: style.section, id }, title, ...components)
+    const attrs = {
+      id: slugify(section.title),
+      className: style.section,
+    }
+
+    return B(attrs, title, ...components)
   }
 })

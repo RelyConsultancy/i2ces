@@ -50,3 +50,5 @@ export const Table = (...args) => (
 export const HTML = (string) => (
   B({ dangerouslySetInnerHTML: { __html: string } })
 )
+
+

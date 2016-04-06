@@ -1,4 +1,4 @@
-import scrollTo from 'element-scroll-to'
+import scrollIntoView from 'scroll-into-view'
 import { Component, B, Link } from '/components/component.js'
 import Section from '/components/EvaluationSection'
 import { getInitials, slugify } from '/application/utils.js'
@@ -53,8 +53,14 @@ const Headings = ({ store, chapter, focusedSection, focusSection }) => {
   const links = sections.map((section, index) => B({
     className: isActive(section) ? style.sections_active : style.sections_link,
     onClick: (event) => {
+      const element = document.getElementById(slugify(section.title))
+
+      scrollIntoView(element, {
+        time: 400,
+        align:{ top: 0, left: 0 }
+      })
+
       focusSection(section)
-      scrollTo(document.getElementById(slugify(section.title)))
     },
   }, section.title))
 
