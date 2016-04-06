@@ -1,0 +1,6 @@
+label: i2c Theme
+name: i2c
+logo: bundles/i2ctheme/themes/i2c/images/logo.ico
+icon: bundles/i2ctheme/themes/i2c/images/logo.ico
+styles:
+  - bundles/i2ctheme/themes/i2c/css/styles.css

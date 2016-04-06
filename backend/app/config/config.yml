@@ -160,4 +160,4 @@ oro_help:
             uri: Platform/OroDashboardBundle
 
 oro_theme:
-    active_theme: oro
+    active_theme: i2c
