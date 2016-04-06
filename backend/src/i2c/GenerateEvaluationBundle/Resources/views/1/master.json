@@ -26,7 +26,15 @@
               "TV Wall",
               "JS Magazine"
             ],
-            "label": "In-Store Promotions"
+            "label": "Offer"
+          },
+          {
+            "color": "#555",
+            "media": [
+              "TV Wall",
+              "JS Magazine"
+            ],
+            "label": "Other"
           }
         ],
         "order": 2

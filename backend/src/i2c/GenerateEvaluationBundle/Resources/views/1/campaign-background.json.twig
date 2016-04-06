@@ -117,9 +117,13 @@
                     "type": "chart_media_laydown",
                     "items":
                     [
+                        {% set media_laydown = {} %}
+                        {% set media_laydown = media_laydown|merge(evaluated_media_laydown) %}
+                        {% set media_laydown = media_laydown|merge(offer_media_laydown) %}
+                        {% set media_laydown = media_laydown|merge(other_media_laydown) %}
                         {% for item in media_laydown %}
                             {
-                                "type": "media",
+                                "type": "{{ item.type }}",
                                 "label": "{{ item.media_label }}",
                                 "date_start": "{{ date(item.start_date)|date('Y-m-d') }}",
                                 "date_end": "{{ date(item.end_date)|date('Y-m-d') }}"
