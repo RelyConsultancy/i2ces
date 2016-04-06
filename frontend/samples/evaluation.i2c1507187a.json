@@ -13,12 +13,19 @@
   "start_date": "2015/04/01",
   "end_date": "2015/04/15",
 
-  "channels": [
-    "TV Wall",
-    "Six Sheets",
-    "JS Magazine",
-    "Instore Sampling"
-  ],
+  "channels": [{
+    "label": "Aisle Fins",
+    "type": "aisle_fin"
+  },{
+    "label": "Entrance Gates",
+    "type": "entrance_gate"
+  },{
+    "label": "Instore Sampling",
+    "type": "sampling"
+  },{
+    "label": "JS Magazine",
+    "type": "magazine"
+  }],
 
   "supplier": {
     "id": 1,

@@ -12,7 +12,7 @@ const legend = [{
   color: '#bdc3c7',
   key: 'other',
 }, {
-  label: 'In-Store promotions',
+  label: 'In-store promotions',
   color: '#3498db',
   key: 'promotion',
 }]
