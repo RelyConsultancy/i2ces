@@ -58,5 +58,4 @@ class AddIsNewBooleanMigration implements Migration
             ]
         );
     }
-
 }
