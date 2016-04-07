@@ -74816,7 +74816,8 @@ var defaults = {
   },
   fontFamily: {
     "'Avenir LT Std 45 Book'": 'Avenir',
-    "'Archer Bold', serif": 'Archer',
+    "'Archer Medium', serif": 'Archer',
+    "'Archer Bold', serif": 'Archer Bold',
     "Arial,Helvetica,sans-serif": 'Arial',
     "Georgia,serif": 'Georgia',
     "Impact,Charcoal,sans-serif": 'Impact',
@@ -74843,7 +74844,7 @@ exports.default = (0, _component.Component)({
     });
 
     editor.froalaEditor((0, _objectAssign2.default)({}, defaults, options));
-    editor.froalaEditor('html.set', content);
+    editor.froalaEditor('html.set', content || '');
 
     this.editor = editor;
   },
@@ -74854,7 +74855,13 @@ exports.default = (0, _component.Component)({
     this.editor.froalaEditor('destroy');
   },
   render: function render() {
-    return (0, _component.B)({ className: 'froala-editor', ref: 'container' });
+    var attrs = {
+      className: 'froala-editor',
+      style: this.props.style,
+      ref: 'container'
+    };
+
+    return (0, _component.B)(attrs);
   }
 });
 
@@ -77262,11 +77269,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Info = function Info(_ref) {
   var uploadPath = _ref.uploadPath;
   var component = _ref.component;
+  var property = _ref.property;
   var editMode = _ref.editMode;
   var className = _ref.className;
-  var value = _ref.value;
 
-  var content = component[value] || '';
+  var content = component[property];
 
   if (editMode) {
     return (0, _Froala2.default)({
@@ -77276,7 +77283,7 @@ var Info = function Info(_ref) {
         imageUploadURL: uploadPath
       },
       onChange: function onChange(e, editor) {
-        component[value] = editor.html.get();
+        component[property] = editor.html.get();
       }
     });
   }
@@ -77310,7 +77317,7 @@ exports.default = (0, _component.Component)({
       uploadPath: uploadPath,
       component: component,
       editMode: editMode,
-      value: 'info',
+      property: 'info',
       className: _style2.default.info
     });
 
@@ -77318,7 +77325,7 @@ exports.default = (0, _component.Component)({
       uploadPath: uploadPath,
       component: component,
       editMode: editMode,
-      value: 'comment',
+      property: 'comment',
       className: _style2.default.comment
     });
 
@@ -77476,8 +77483,97 @@ exports.default = (0, _component.Component)({
 },{"./style.css":368,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":340,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":380}],368:[function(require,module,exports){
 module.exports = {"component":"_SectionHTML_style_component","toggle":"_SectionHTML_style_toggle"}
 },{}],369:[function(require,module,exports){
-arguments[4][363][0].apply(exports,arguments)
-},{"./style.css":370,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":340,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":380,"dup":363}],370:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _component = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js');
+
+var _Froala = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala');
+
+var _Froala2 = _interopRequireDefault(_Froala);
+
+var _style = require('./style.css');
+
+var _style2 = _interopRequireDefault(_style);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Editor = function Editor(_ref) {
+  var content = _ref.content;
+  var onChange = _ref.onChange;
+  var uploadPath = _ref.uploadPath;
+  var style = _ref.style;
+  return (0, _Froala2.default)({
+    style: style,
+    content: content,
+    onChange: onChange,
+    options: {
+      imageUploadParam: 'image',
+      imageUploadURL: uploadPath
+    }
+  });
+};
+
+exports.default = (0, _component.Component)({
+  getInitialState: function getInitialState() {
+    return {
+      editMode: false
+    };
+  },
+  render: function render() {
+    var _this = this;
+
+    var _props = this.props;
+    var uploadPath = _props.uploadPath;
+    var component = _props.component;
+    var isEditable = _props.isEditable;
+    var onSave = _props.onSave;
+    var editMode = this.state.editMode;
+
+
+    if (editMode) {
+      var info = Editor({
+        uploadPath: uploadPath,
+        content: component.info,
+        onChange: function onChange(event, editor) {
+          component.info = editor.html.get();
+        }
+      });
+
+      var comment = Editor({
+        style: { fontFamily: '"Archer Medium"' },
+        uploadPath: uploadPath,
+        content: component.info,
+        onChange: function onChange(event, editor) {
+          component.info = editor.html.get();
+        }
+      });
+    } else {
+      var info = !component.info ? null : (0, _component.B)({
+        className: _style2.default.info
+      }, (0, _component.HTML)(component.info));
+
+      var comment = !component.comment ? null : (0, _component.B)({
+        className: _style2.default.comment
+      }, (0, _component.HTML)(component.comment));
+    }
+
+    var toggle = !isEditable ? null : (0, _component.B)({
+      className: _style2.default.toggle,
+      onClick: function onClick() {
+        if (editMode) onSave();
+        _this.setState({ editMode: !editMode });
+      }
+    }, editMode ? 'Save' : 'Edit');
+
+    return (0, _component.B)({ className: _style2.default.component }, info, comment, toggle);
+  }
+});
+
+},{"./style.css":370,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Froala":340,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":380}],370:[function(require,module,exports){
 module.exports = {"component":"_SectionInfo_style_component","component .froala-editor":"_SectionInfo_style_component .froala-editor","toggle":"_SectionInfo_style_toggle","info":"_SectionInfo_style_info","comment":"_SectionInfo_style_comment"}
 },{}],371:[function(require,module,exports){
 'use strict';

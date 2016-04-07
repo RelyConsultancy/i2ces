@@ -3,8 +3,8 @@ import Froala from '/components/Froala'
 import style from './style.css'
 
 
-const Info = ({ uploadPath, component, editMode, className, value }) => {
-  const content = component[value] || ''
+const Info = ({ uploadPath, component, property, editMode, className }) => {
+  const content = component[property]
 
   if (editMode) {
     return Froala({
@@ -14,7 +14,7 @@ const Info = ({ uploadPath, component, editMode, className, value }) => {
         imageUploadURL: uploadPath,
       },
       onChange: (e, editor) => {
-        component[value] = editor.html.get()
+        component[property] = editor.html.get()
       },
     })
   }
@@ -42,7 +42,7 @@ export default Component({
       uploadPath,
       component,
       editMode,
-      value: 'info',
+      property: 'info',
       className: style.info,
     })
 
@@ -50,7 +50,7 @@ export default Component({
       uploadPath,
       component,
       editMode,
-      value: 'comment',
+      property: 'comment',
       className: style.comment,
     })
 
