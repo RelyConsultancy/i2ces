@@ -73,6 +73,22 @@ class SupplierLogo
     /**
      * @param string $businessUnitId
      *
+     * @return mixed
+     */
+    public function getLogoLabel($businessUnitId)
+    {
+        $query = sprintf(
+            'SELECT DISTINCT brand FROM evaluation
+             WHERE business_unit_id = \'%s\'',
+            $businessUnitId
+        );
+
+        return $this->connection->fetchColumn($query);
+    }
+
+    /**
+     * @param string $businessUnitId
+     *
      * @return string
      */
     protected function getAttachmentLogoName($businessUnitId)

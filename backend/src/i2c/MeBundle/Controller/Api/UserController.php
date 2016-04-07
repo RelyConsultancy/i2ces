@@ -44,31 +44,11 @@ class UserController extends RestApiController
 
         $logoName = $this->getSupplierLogoService()->getSupplierLogoName($businessUnit->getId());
 
-        $logo = null;
-
-        if (false !== $logoName) {
-            $logoInfo = getimagesize(
-                sprintf(
-                    '%s/%s/%s/%s',
-                    $this->getParameter('upload_image_path'),
-                    $this->getParameter('supplier_logo_upload_directory'),
-                    $businessUnit->getId(),
-                    $logoName
-                )
-            );
-
-            $logo = [
-                'path'   => sprintf(
-                    '/%s/%s/%s/%s',
-                    'images',
-                    $this->getParameter('supplier_logo_upload_directory'),
-                    $businessUnit->getId(),
-                    $logoName
-                ),
-                'width'  => $logoInfo[0],
-                'height' => $logoInfo[1],
-            ];
+        if (false != $logoName) {
+            $logo = $this->getLogoDetails($logoName, $businessUnit->getId());
         }
+
+        $logo['label'] = $this->getSupplierLogoService()->getLogoLabel($businessUnit->getId());
 
         $data = array(
             'id'             => $user->getId(),
@@ -87,6 +67,42 @@ class UserController extends RestApiController
         }
 
         return $this->success($data, Response::HTTP_OK, 'minimal');
+    }
+
+    /**
+     * @param $logoName
+     * @param $businessUnitId
+     *
+     * @return array
+     */
+    protected function getLogoDetails($logoName, $businessUnitId)
+    {
+        $logo['path'] = sprintf(
+            '/%s/%s/%s/%s',
+            'images',
+            $this->getParameter('supplier_logo_upload_directory'),
+            $businessUnitId,
+            $logoName
+        );
+
+        $logoInfo = getimagesize(
+            sprintf(
+                '%s/%s/%s/%s',
+                $this->getParameter('upload_image_path'),
+                $this->getParameter('supplier_logo_upload_directory'),
+                $businessUnitId,
+                $logoName
+            )
+        );
+
+        if (false == $logoInfo) {
+            return [];
+        }
+
+        $logo['width'] = $logoInfo[0];
+        $logo['height'] = $logoInfo[1];
+
+        return $logo;
     }
 
     /**
