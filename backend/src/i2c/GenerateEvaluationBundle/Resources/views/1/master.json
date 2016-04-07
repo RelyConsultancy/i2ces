@@ -10,30 +10,17 @@
       "additional_data": {
         "title": "Campaign Background",
         "state": "visible",
-        "colors_config": [
+        "legend_configs": [
           {
-            "color": "#ccc",
-            "media": [
-              "Instore Sampling",
-              "Entrance Gates",
-              "Six Sheets"
-            ],
+            "media_type": "media",
             "label": "Evaluated media"
           },
           {
-            "color": "#555",
-            "media": [
-              "TV Wall",
-              "JS Magazine"
-            ],
+            "media_type": "promotion",
             "label": "Offer"
           },
           {
-            "color": "#555",
-            "media": [
-              "TV Wall",
-              "JS Magazine"
-            ],
+            "media_type": "other",
             "label": "Other"
           }
         ],
