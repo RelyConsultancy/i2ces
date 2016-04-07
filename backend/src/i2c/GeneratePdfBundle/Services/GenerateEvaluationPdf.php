@@ -61,27 +61,27 @@ class GenerateEvaluationPdf
         }
 
 
-        $commandThatMergesPdfs = "pdfunite ";
+        $chapterPdfs = [];
 
         /** @var Chapter $chapter */
         foreach ($chapters as $chapter) {
+            $chapterPdfPath = sprintf(
+                '%s/%s.pdf',
+                $evaluationVersionPdfDirectory,
+                $chapter->getId()
+            );
             $command = sprintf(
-                '%s --output=%s/%s.pdf --base-url=%s/#/preview --evaluation=%s
+                '%s --output=%s --base-url=%s/#/preview --evaluation=%s
                 --chapter=%s',
                 $config->getNodeJsCommand(),
-                $evaluationVersionPdfDirectory,
-                $chapter->getId(),
+                $chapterPdfPath,
                 $this->urlBase,
                 $evaluation->getCid(),
                 $chapter->getId()
             );
             exec($command);
-            $commandThatMergesPdfs = sprintf(
-                '%s %s/%s.pdf',
-                $commandThatMergesPdfs,
-                $evaluationVersionPdfDirectory,
-                $chapter->getId()
-            );
+
+            $chapterPdfs[] = $chapterPdfPath;
         }
 
         $now = new \DateTime('now');
@@ -94,8 +94,9 @@ class GenerateEvaluationPdf
         );
 
         $commandThatMergesPdfs = sprintf(
-            '%s %s',
-            $commandThatMergesPdfs,
+            '%s %s %s',
+            'pdfunite',
+            implode(' ', $chapterPdfs),
             $finalPdfPath
         );
 
@@ -105,5 +106,9 @@ class GenerateEvaluationPdf
 
         $this->entityManager->persist($evaluation);
         $this->entityManager->flush();
+
+        foreach ($chapterPdfs as $chapterPdf) {
+            $filesystem->remove($chapterPdf);
+        }
     }
 }
