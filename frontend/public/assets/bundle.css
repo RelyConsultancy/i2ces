@@ -5495,10 +5495,13 @@ body.prevent-scroll.fr-mobile {
   border: 1px solid #E6E6E6;
   border-top-width: 0;
   z-index: 1;
+  background-image: url(/images/pdf_splash_bg.png);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 ._EvaluationPreview_style_splash::before {
-  content: '';
+  /*content: '';*/
   position: absolute;
   top: 50%;
   left: 50%;
@@ -5516,7 +5519,7 @@ body.prevent-scroll.fr-mobile {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
+  width: 450px;
   font-family: 'Archer Bold';
   text-align: center;
   color: #FFF;
@@ -5527,8 +5530,7 @@ body.prevent-scroll.fr-mobile {
     padding-top: 0;
   }
 
-  ._EvaluationPreview_style_section {
-    padding: 2rem 0;
+  ._EvaluationPreview_style_splash {
     border: 0 !important;
   }
 
@@ -5547,8 +5549,10 @@ body.prevent-scroll.fr-mobile {
     page-break-inside: avoid;
   }
 
-  ._EvaluationPreview_style_splash {
+  ._EvaluationPreview_style_section {
+    padding: 2rem 0;
     border: 0 !important;
+    page-break-inside: avoid;
   }
 
   ._EvaluationPreview_style_page_break {
@@ -5969,15 +5973,13 @@ body.prevent-scroll.fr-mobile {
 }
 
 ._ChartNonPurchase_style_chart {
-  position: absolute;
-  right: 2rem;
-  top: 5.5rem;
-  bottom: 2rem;
-  width: calc(50% - 2rem);
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
 }
 
 ._ChartNonPurchase_style_header {
-  padding: 1rem 0;
+  padding-bottom: 1rem;
   font-size: 1.125rem;
   font-family: 'Avenir LT Std 85 Heavy';
   text-align: center;
@@ -6118,7 +6120,9 @@ body.prevent-scroll.fr-mobile {
 }
 
 ._TablePerformanceSamples_style_component {
-  margin-right: 50%;
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
 }
 
 ._TablePerformanceSamples_style_table_samples {

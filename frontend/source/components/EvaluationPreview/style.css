@@ -72,9 +72,12 @@
   border: 1px solid #E6E6E6;
   border-top-width: 0;
   z-index: 1;
+  background-image: url(/images/pdf_splash_bg.png);
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .splash::before {
-  content: '';
+  /*content: '';*/
   position: absolute;
   top: 50%;
   left: 50%;
@@ -91,7 +94,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
+  width: 450px;
   font-family: 'Archer Bold';
   text-align: center;
   color: #FFF;
@@ -102,8 +105,7 @@
   .preview {
     padding-top: 0;
   }
-  .section {
-    padding: 2rem 0;
+  .splash {
     border: 0 !important;
   }
   .chapter {
@@ -118,8 +120,10 @@
     page-break-before: always;
     page-break-inside: avoid;
   }
-  .splash {
+  .section {
+    padding: 2rem 0;
     border: 0 !important;
+    page-break-inside: avoid;
   }
   .page_break {
     margin: 0;

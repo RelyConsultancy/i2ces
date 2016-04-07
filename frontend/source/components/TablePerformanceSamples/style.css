@@ -1,5 +1,7 @@
 .component {
-  margin-right: 50%;
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
 }
 
 .table_samples {
