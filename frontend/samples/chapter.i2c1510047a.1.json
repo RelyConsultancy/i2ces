@@ -5,6 +5,7 @@
   "title": "Category Context",
   "content": [{
     "type": "section",
+    "page_break": true,
     "title": "Period on period sales performance",
     "content": [{
       "type": "chart_sales_performance",
@@ -14,6 +15,7 @@
     }]
   }, {
     "type": "section",
+    "page_break": true,
     "title": "Promotional activity during campaign",
     "content": [{
       "type": "chart_promotional_activity",

@@ -1,23 +1,100 @@
-.preview {
-  position: relative;
-  width: 700px;
-  margin: 0 auto;
-  padding-top: 2rem;
-}
-
 .no_data {
   text-align: center;
   padding: 1em;
 }
+.preview {
+  position: relative;
+  width: 940px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
 
 .chapter {
   position: relative;
-  padding: 1em 0;
+  margin-top: 2rem;
+  border-top: 1px solid #E6E6E6;
+}
+.chapter::before {
+  content: '';
+  position: absolute;
+  top: calc(-1rem - 2px);
+  left: 0;
+  right: 0;
   border-top: 1px dashed #E6E6E6;
 }
-.chapter:first-child {
-  padding-top: 0;
-  border-top: 0;
+.chapter:first-child::before {
+  display: none;
+}
+
+
+.section {
+  position: relative;
+  padding: 2rem;
+  max-width: 940px;
+  border: 1px solid #E6E6E6;
+  border-top-width: 0;
+  font-size: .875em;
+}
+.section_title {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  font-family: 'Archer Bold', serif;
+  color: #6D6D6D;
+}
+
+
+.page_break {
+  position: relative;
+  margin-top: 2rem;
+  border-top-width: 1px;
+}
+.page_break::before {
+  content: '';
+  position: absolute;
+  top: calc(-1rem - 2px);
+  left: 0;
+  right: 0;
+  border-top: 1px dashed #E6E6E6;
+}
+.page_break:first-child {
+  margin-top: 0;
+  border-top-width: 0;
+}
+.page_break:first-child::before {
+  display: none;
+}
+
+
+.splash {
+  position: relative;
+  height: 680px;
+  border: 1px solid #E6E6E6;
+  border-top-width: 0;
+  z-index: 1;
+}
+.splash::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 100%;
+  background-color: #5FC3E1;
+  z-index: -1;
+}
+.splash_title {
+  position: absolute;
+  font-size: 3rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  font-family: 'Archer Bold';
+  text-align: center;
+  color: #FFF;
 }
 
 
@@ -25,12 +102,32 @@
   .preview {
     padding-top: 0;
   }
+  .section {
+    padding: 2rem 0;
+    border: 0 !important;
+  }
   .chapter {
-    display: block;
+    margin: 0;
     padding: 0;
-    padding-top: 2rem !important;
-    border: 0;
-    page-break-after: always;
+    border: 0 !important;
+  }
+  .chapter::before {
+    display: none;
+  }
+  .chapter:not(:first-child) {
+    page-break-before: always;
     page-break-inside: avoid;
+  }
+  .splash {
+    border: 0 !important;
+  }
+  .page_break {
+    margin: 0;
+    padding: 0;
+    page-break-before: always;
+    page-break-inside: avoid;
+  }
+  .page_break::before {
+    display: none;
   }
 }

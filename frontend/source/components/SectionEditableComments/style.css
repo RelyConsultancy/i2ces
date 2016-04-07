@@ -13,7 +13,7 @@
   padding: .5em 1em;
   color: #FFF;
   font-size: .875em;
-  background-color: #43B5DB;
+  background-color: #5FC3E1;
   cursor: pointer;
 }
 
@@ -22,7 +22,7 @@
   padding: 1rem;
   text-align: center;
   font-size: .75em;
-  color: #43B5DB;
+  color: #5FC3E1;
 }
 
 
@@ -34,7 +34,7 @@
   font-size: .875em;
   font-family: 'Archer Medium';
   color: #fafafa;
-  background-color: #4E8ECB;
+  background-color: #4E8FCC;
   border-radius: 3px;
 }
 .info::before {
@@ -44,7 +44,7 @@
   left: calc(-1rem + 1px);
   border-width: 0.25rem 1rem .75rem 0;
   border-style: solid;
-  border-color: transparent #4E8ECB;
+  border-color: transparent #4E8FCC;
   display: block;
   width: 0;
   z-index: 1;
@@ -61,7 +61,7 @@
   font-size: .875em;
   font-family: 'Archer Medium';
   border-radius: 3px;
-  background-color: #6C6C6C;
+  background-color: #6F6F6F;
   color: #fafafa;
 }
 .comment::before {
