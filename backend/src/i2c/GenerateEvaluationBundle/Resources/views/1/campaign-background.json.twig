@@ -103,8 +103,10 @@
             }]
         },
         {
-            {% set legend = [] %}
-            {% set usedColors = [] %}
+            {% set legendItems = [] %}
+            {% set usedMediaTypes = [] %}
+            {% set media_laydown = [] %}
+            {% set media_laydown = media_laydown|merge(evaluated_media_laydown)|merge(offer_media_laydown)|merge(other_media_laydown) %}
             "type": "section",
             "title": "Media Laydown",
             "access": "readonly",
@@ -116,15 +118,14 @@
                     [
                         {% for item in media_laydown %}
                             {
-                                "type": "media",
+                                "type": "{{ item.type }}",
                                 "label": "{{ item.media_label }}",
                                 "date_start": "{{ date(item.start_date)|date('Y-m-d') }}",
                                 "date_end": "{{ date(item.end_date)|date('Y-m-d') }}"
-                                {% for color_config in additional_data.colors_config %}
-                                    {% if item.media_label in color_config.media %}
-                                        {% if color_config.color not in usedColors %}
-                                            {% set legend = legend|merge([{color: color_config.color,label: color_config.label}]) %}
-                                            {% set usedColors = usedColors|merge([color_config.color]) %}
+                                {% for legend_config in additional_data.legend_configs %}
+                                    {% if item.type == legend_config.media_type %}
+                                        {% if legend_config.media_type not in usedMediaTypes %}
+                                            {% set legendItems = legendItems|merge([{type: legend_config.media_type,label: legend_config.label}]) %}
                                         {% endif %}
                                     {% endif %}
                                 {% endfor %}
@@ -133,11 +134,11 @@
                     ],
                     "legend":
                     [
-                        {% for legend_item in legend %}
-                        {
-                            "label": "{{ legend_item.label }}",
-                            "color": "{{ legend_item.color }}"
-                        }{{ not loop.last ? ',' }}
+                        {% for legend_item in legendItems %}
+                            {
+                                "type": "{{ legend_item.type }}",
+                                "label": "{{ legend_item.label }}"
+                            }{{ not loop.last ? ',' }}
                         {% endfor %}
                     ]
                 }
