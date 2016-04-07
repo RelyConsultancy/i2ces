@@ -4873,7 +4873,6 @@ body.prevent-scroll.fr-mobile {
 }
 
 ._Dashboard_style_dashboard {
-  /*font-family: 'Archer Medium', Helvetica, sans-serif;*/
   font-family: 'Avenir LT Std 45 Book', Helvetica, sans-serif;
   font-size: 16px;
   position: absolute;
@@ -4923,6 +4922,16 @@ body.prevent-scroll.fr-mobile {
   transform: translate(-50%, -50%);
   background-size: contain;
   background-repeat: no-repeat;
+  font-size: .875rem;
+  font-family: "Archer Bold";
+}
+
+._Dashboard_style_logo_supplier_label {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #454545;
 }
 
 ._Dashboard_style_loader {

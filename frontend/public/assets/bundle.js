@@ -73496,23 +73496,29 @@ var LogoSupplier = function LogoSupplier(_ref) {
 
   var logo = user.logo;
 
-  var css = { backgroundImage: 'url(' + logo.path + ')' };
-  var width = 100;
-  var height = 80;
 
-  if (logo.height < logo.width) {
-    var ratio = logo.width / width;
-    var padding = height / 2 - logo.height / ratio / 2;
+  if (logo.path) {
+    var css = { backgroundImage: 'url(' + logo.path + ')' };
+    var width = 100;
+    var height = 80;
 
-    css.backgroundPositionY = padding + 'px';
+    if (logo.height < logo.width) {
+      var ratio = logo.width / width;
+      var padding = height / 2 - logo.height / ratio / 2;
+
+      css.backgroundPositionY = padding + 'px';
+    } else {
+      var _ratio = logo.height / height;
+      var _padding = width / 2 - logo.width / _ratio / 2;
+
+      css.backgroundPositionX = _padding + 'px';
+    }
   } else {
-    var _ratio = logo.height / height;
-    var _padding = width / 2 - logo.width / _ratio / 2;
-
-    css.backgroundPositionX = _padding + 'px';
+    var label = (0, _component.B)({ className: _style2.default.logo_supplier_label }, logo.label);
+    var css = { fontSize: logo.label.length < 13 ? '1.25em' : '' };
   }
 
-  return (0, _component.B)({ style: css, className: _style2.default.logo_supplier });
+  return (0, _component.B)({ style: css, className: _style2.default.logo_supplier }, label);
 };
 
 var Navigation = function Navigation(_ref2) {
@@ -73552,7 +73558,7 @@ var Dashboard = (0, _component.Component)({
 exports.default = _store2.default.sync('dashboard', Dashboard);
 
 },{"./style.css":324,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":299,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/store.js":305,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/Loader":359,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":380}],324:[function(require,module,exports){
-module.exports = {"dashboard":"_Dashboard_style_dashboard","dashboard_header":"_Dashboard_style_dashboard_header","dashboard_content":"_Dashboard_style_dashboard_content","logo":"_Dashboard_style_logo","logo_supplier":"_Dashboard_style_logo_supplier","loader":"_Dashboard_style_loader","links":"_Dashboard_style_links"}
+module.exports = {"dashboard":"_Dashboard_style_dashboard","dashboard_header":"_Dashboard_style_dashboard_header","dashboard_content":"_Dashboard_style_dashboard_content","logo":"_Dashboard_style_logo","logo_supplier":"_Dashboard_style_logo_supplier","logo_supplier_label":"_Dashboard_style_logo_supplier_label","loader":"_Dashboard_style_loader","links":"_Dashboard_style_links"}
 },{}],325:[function(require,module,exports){
 'use strict';
 
