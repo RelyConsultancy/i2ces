@@ -1,9 +1,11 @@
 {% autoescape false %}
 {
-    "content":
-    [
+    "content": [
         {% for channel in channels %}
-        "{{ channel.label }}"{{ not loop.last ? ',' }}
+        {
+            "label": "{{ channel.label }}",
+            "type": "{{ channel.icon }}"
+        }{{ not loop.last ? ',' }}
         {% endfor %}
     ],
     "is_additional_data": true,
