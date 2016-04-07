@@ -14,24 +14,31 @@ const LogoSupplier = ({ user }) => {
   if (user.type != 'supplier' || !user.logo) return null
 
   const { logo } = user
-  const css = { backgroundImage: `url(${ logo.path })` }
-  const width = 100
-  const height = 80
 
-  if (logo.height < logo.width) {
-    const ratio = logo.width / width
-    const padding = (height / 2) - (logo.height / ratio / 2)
+  if (logo.path) {
+    var css = { backgroundImage: `url(${ logo.path })` }
+    const width = 100
+    const height = 80
 
-    css.backgroundPositionY = padding + 'px'
+    if (logo.height < logo.width) {
+      const ratio = logo.width / width
+      const padding = (height / 2) - (logo.height / ratio / 2)
+
+      css.backgroundPositionY = padding + 'px'
+    }
+    else {
+      const ratio = logo.height / height
+      const padding = (width / 2) - (logo.width / ratio / 2)
+
+      css.backgroundPositionX = padding + 'px'
+    }
   }
   else {
-    const ratio = logo.height / height
-    const padding = (width / 2) - (logo.width / ratio / 2)
-
-    css.backgroundPositionX = padding + 'px'
+    var label = B({ className: style.logo_supplier_label }, logo.label)
+    var css = { fontSize: logo.label.length < 13 ? '1.25em' : '' }
   }
 
-  return B({ style: css, className: style.logo_supplier })
+  return B({ style: css, className: style.logo_supplier }, label)
 }
 
 

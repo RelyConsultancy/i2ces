@@ -11,10 +11,9 @@
   right: 0;
   top: -4rem;
   padding: .5em 1em;
-  color: #FFF;
-  font-size: .875em;
   background-color: #43B5DB;
   cursor: pointer;
+  color: #FFF;
 }
 
 
@@ -22,7 +21,6 @@
   position: relative;
   margin-top: 1rem;
   margin-bottom: 2rem;
-  font-size: .875em;
 }
 
 
@@ -32,15 +30,16 @@
   padding-left: 3rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  min-height: 3rem;
+  background-color: #6C6C6C;
+  border-radius: 3px;
+  font-family: 'Archer Medium';
   font-size: .875em;
   color: #fafafa;
-  background-color: #6C6C6C;
-  min-height: 3.5rem;
-  border-radius: 3px;
 }
 .comment::before {
   content: '';
-  background-image: url(/images/icon_gears.png);
+  background-image: url(/images/icons/icon_gears.png);
   background-size: contain;
   position: absolute;
   left: -.75rem;
