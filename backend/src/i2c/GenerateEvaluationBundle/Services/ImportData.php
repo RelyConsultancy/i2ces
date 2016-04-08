@@ -103,7 +103,7 @@ class ImportData
             }
 
             $query = sprintf(
-                'DELETE FROM %s WHERE master_campaign_id in %s',
+                'DELETE FROM %s WHERE master_campaign_id IN %s',
                 $config['table_name'],
                 $cidsString
             );
@@ -120,11 +120,9 @@ class ImportData
      */
     protected function removeGeneratedEvaluations($importedCids)
     {
-
-
         $evaluationIds = $this->pdoConnection->query(
             sprintf(
-                'SELECT id FROM evaluation WHERE cid IN %s',
+                'SELECT id FROM i2c_evaluation WHERE cid IN %s',
                 $importedCids
             )
         )->fetchAll(\PDO::FETCH_COLUMN);
@@ -132,7 +130,7 @@ class ImportData
         $evaluationIdsString = sprintf('(\'%s\')', implode('\',\'', $evaluationIds));
 
         $query = sprintf(
-            'SELECT chapter_id FROM evaluation_chapters WHERE evaluation_id in %s',
+            'SELECT chapter_id FROM i2c_evaluation_chapters WHERE evaluation_id IN %s',
             $evaluationIdsString
         );
 
@@ -141,21 +139,44 @@ class ImportData
 
         $this->pdoConnection->exec(
             sprintf(
-                'DELETE FROM evaluation_chapters where evaluation_id in %s',
+                'INSERT INTO i2c_reimported_evaluation SELECT e.* FROM i2c_evaluation e WHERE e.id IN %s',
                 $evaluationIdsString
             )
         );
 
         $this->pdoConnection->exec(
             sprintf(
-                'DELETE FROM evaluation where id in %s',
+                'INSERT INTO i2c_reimported_chapter SELECT c.* FROM i2c_chapter c WHERE c.id IN %s',
+                $chapterIdsString
+            )
+        );
+
+        $this->pdoConnection->exec(
+            sprintf(
+                'INSERT INTO i2c_reimported_evaluation_chapters SELECT e.* FROM i2c_evaluation_chapters e
+                 WHERE e.evaluation_id IN %s
+                ',
                 $evaluationIdsString
             )
         );
 
         $this->pdoConnection->exec(
             sprintf(
-                'DELETE FROM chapter where id in %s',
+                'DELETE FROM i2c_evaluation_chapters WHERE evaluation_id IN %s',
+                $evaluationIdsString
+            )
+        );
+
+        $this->pdoConnection->exec(
+            sprintf(
+                'DELETE FROM i2c_evaluation WHERE id IN %s',
+                $evaluationIdsString
+            )
+        );
+
+        $this->pdoConnection->exec(
+            sprintf(
+                'DELETE FROM i2c_chapter WHERE id IN %s',
                 $chapterIdsString
             )
         );
