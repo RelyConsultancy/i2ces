@@ -81,7 +81,7 @@ class ExtractCids
 
         if (!$includeExisting) {
             $extraCondition = 'AND cd.master_campaign_id NOT IN (
-                    SELECT cid FROM evaluation
+                    SELECT cid FROM i2c_evaluation
                   )
                 ';
         }
