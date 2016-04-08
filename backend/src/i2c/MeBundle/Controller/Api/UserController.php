@@ -5,10 +5,12 @@ namespace i2c\MeBundle\Controller\Api;
 use FOS\RestBundle\View\View;
 use i2c\EvaluationBundle\Controller\Api\RestApiController;
 use i2c\EvaluationBundle\Services\EvaluationDataBaseManager;
+use i2c\ImageUploadBundle\Services\ImageProcessing;
 use i2c\MeBundle\Services\BusinessUnit as BusinessUnitService;
 use i2c\SupplierBundle\Services\SupplierLogo;
 use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Oro\Bundle\UserBundle\Entity\User;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -77,32 +79,33 @@ class UserController extends RestApiController
      */
     protected function getLogoDetails($logoName, $businessUnitId)
     {
-        $logo['path'] = sprintf(
-            '/%s/%s/%s/%s',
-            'images',
-            $this->getParameter('supplier_logo_upload_directory'),
-            $businessUnitId,
-            $logoName
-        );
-
-        $logoInfo = getimagesize(
-            sprintf(
-                '%s/%s/%s/%s',
-                $this->getParameter('upload_image_path'),
+        try {
+            $logo['path'] = sprintf(
+                '/%s/%s/%s/%s',
+                'images',
                 $this->getParameter('supplier_logo_upload_directory'),
                 $businessUnitId,
                 $logoName
-            )
-        );
+            );
 
-        if (false == $logoInfo) {
+            $logoInfo = $this->getImageProcessingService()->getImageDetails(
+                sprintf(
+                    '%s/%s/%s/%s',
+                    $this->getParameter('upload_image_path'),
+                    $this->getParameter('supplier_logo_upload_directory'),
+                    $businessUnitId,
+                    $logoName
+                )
+            );
+
+            $logo['width'] = $logoInfo->getWidth();
+            $logo['height'] = $logoInfo->getHeight();
+
+            return $logo;
+        } catch (FileException $ex) {
+            $this->get('logger')->addCritical($ex->getTraceAsString());
             return [];
         }
-
-        $logo['width'] = $logoInfo[0];
-        $logo['height'] = $logoInfo[1];
-
-        return $logo;
     }
 
     /**
@@ -127,5 +130,13 @@ class UserController extends RestApiController
     public function getSupplierLogoService()
     {
         return $this->get('i2c_supplier.supplier_logo_service');
+    }
+
+    /**
+     * @return ImageProcessing
+     */
+    protected function getImageProcessingService()
+    {
+        return $this->get('i2c_image_upload.image_processing');
     }
 }

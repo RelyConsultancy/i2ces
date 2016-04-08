@@ -5,6 +5,7 @@ namespace i2c\ImageUploadBundle\Controller\Api;
 use FOS\RestBundle\View\View;
 use i2c\EvaluationBundle\Controller\Api\RestApiController;
 use i2c\EvaluationBundle\Services\EvaluationDataBaseManager;
+use i2c\ImageUploadBundle\Services\ImageProcessing;
 use i2c\ImageUploadBundle\Services\ImageUpload;
 use i2c\PageBundle\Services\PageDatabaseManager;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
@@ -61,7 +62,7 @@ class ImageController extends RestApiController
 
             $image = $imageUploadService->saveImageToDisk($request->files->get('image'), $path);
 
-            $imageInfo = getimagesize($image->getRealPath());
+            $imageInfo = $this->getImageProcessingService()->getImageDetails($image->getRealPath());
 
             return $this->success(
                 [
@@ -73,8 +74,8 @@ class ImageController extends RestApiController
                         $chapterId,
                         $image->getFilename()
                     ),
-                    'width' => $imageInfo[0],
-                    'height' => $imageInfo[1],
+                    'width' => $imageInfo->getWidth(),
+                    'height' => $imageInfo->getHeight(),
                 ]
             );
 
@@ -127,7 +128,7 @@ class ImageController extends RestApiController
 
             $image = $imageUploadService->saveImageToDisk($request->files->get('image'), $path);
 
-            $imageInfo = getimagesize($image->getRealPath());
+            $imageInfo = $this->getImageProcessingService()->getImageDetails($image->getRealPath());
 
             return $this->success(
                 [
@@ -138,8 +139,8 @@ class ImageController extends RestApiController
                         $type,
                         $image->getFilename()
                     ),
-                    'width' => $imageInfo[0],
-                    'height' => $imageInfo[1],
+                    'width' => $imageInfo->getWidth(),
+                    'height' => $imageInfo->getHeight(),
                 ]
             );
 
@@ -174,5 +175,13 @@ class ImageController extends RestApiController
     protected function getPageDatabaseManager()
     {
         return $this->get('i2c_page.page_database_manager_service');
+    }
+
+    /**
+     * @return ImageProcessing
+     */
+    protected function getImageProcessingService()
+    {
+        return $this->get('i2c_image_upload.image_processing');
     }
 }
