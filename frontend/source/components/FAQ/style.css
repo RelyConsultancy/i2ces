@@ -10,7 +10,7 @@
   line-height: 3rem;
   font-size: 1.1em;
   font-family: 'Archer Bold', serif;
-  color: #656565;
+  color: #6F6F6F;
 }
 .header::after {
   content: '';
@@ -39,7 +39,7 @@
   padding: .5em 1em;
   line-height: 1rem;
   font-size: .875em;
-  background-color: #43B5DB;
+  background-color: #5FC3E1;
   color: #FFF;
   cursor: pointer;
 }

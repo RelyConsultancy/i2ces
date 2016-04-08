@@ -66,9 +66,12 @@
                     "type": "list",
                     "items":
                     [
-                    {% for channel in channels %}
-                        "{{ channel.channel }}"{{ not loop.last ? ',' }}
-                    {% endfor %}
+                        {% for channel in channels %}
+                        {
+                            "label": "{{ channel.channel }}",
+                            "type": "{{ channel.icon }}"
+                        }{{ not loop.last ? ',' }}
+                        {% endfor %}
                     ]
                 }
             ]

@@ -2,43 +2,44 @@ parameters:
     initial_setup_config:
         roles:
             supplier:
-                name: Supplier
-                identifier: ROLE_SUPPLIER
+                name: User
+                new_name: Supplier
                 access:
-                    oid: 'Entity:i2cEvaluationBundle:Evaluation'
-                    permissions: [64] # EntityMaskBuilder::MASK_VIEW_LOCAL
-            employee:
-                name: i2c Employee
-                identifier: ROLE_EMPLOYEE
+                    evaluation:
+                        oid: 'Entity:i2cEvaluationBundle:Evaluation'
+                        permissions: [64] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+                    page:
+                        oid: 'Entity:i2cPageBundle:Page'
+                        permissions: [64] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+                    groups:
+                        oid: 'Entity:OroUserBundle:Group'
+                        permissions: [0] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+            account_manager:
+                name: Manager
+                new_name: Account Manager
+                identifier: ROLE_ACCOUNT_MANAGER
                 access:
-                    oid: 'Entity:i2cEvaluationBundle:Evaluation'
-                    permissions: [64, 256] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
-        suppliers:
-            dummy_one:
-                name: Dummy Supplier One
-                email: dummy-one@email.none
-                fax: some fax
-                phone: XXXXXXXXXXXXXXXX
-                website: http://dummy-one.none
-                user:
-                    first_name: User
-                    middle_name: for
-                    last_name: Dummy Supplier One
-                    username: user_sup_one
-                    password: pass
-                    email: user@sup.one
-                    role: Supplier
-            dummy_two:
-                name: Dummy Supplier Two
-                email: dummy-two@email.none
-                fax: some other fax
-                phone: XXXXXXXXXXXXXXXX
-                website: http://dummy-two.none
-                user:
-                    first_name: User
-                    middle_name: for
-                    last_name: Dummy Supplier Two
-                    username: user_sup_two
-                    password: pass
-                    email: user@sup.two
-                    role: Supplier
+                    evaluation:
+                        oid: 'Entity:i2cEvaluationBundle:Evaluation'
+                        permissions: [64, 256] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+                    page:
+                        oid: 'Entity:i2cPageBundle:Page'
+                        permissions: [64, 256] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+                    groups:
+                        oid: 'Entity:OroUserBundle:Group'
+                        permissions: [0] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+                    business_unit:
+                        oid: 'Entity:OroOrganizationBundle:BusinessUnit'
+                        permissions: [16777216, 33554432, 67108864, 134217728, 268435456] # Full system access
+                    supplier:
+                        oid: 'Entity:i2cSupplierBundle:Supplier'
+                        permissions: [16777216, 33554432, 67108864, 134217728, 268435456] # Full system access
+                    user:
+                        oid: 'Entity:OroUserBundle:User'
+                        permissions: [16777216, 33554432, 67108864, 134217728, 268435456] # Full system access
+                    organization:
+                        oid: 'Entity:OroOrganizationBundle:Organization'
+                        permissions: [16777216, 33554432, 67108864, 134217728] # Full system access with no assign
+                    attachment:
+                        oid: 'Entity:OroAttachmentBundle:Attachment'
+                        permissions: [16777216, 33554432, 67108864, 134217728, 268435456] # Full system access

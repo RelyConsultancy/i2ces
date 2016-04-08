@@ -43,8 +43,8 @@ parameters:
             primary_key: 'master_campaign_id'
             file_name: 'ie_media_data.csv'
             additional_setters:
-                - "start_date = STR_TO_DATE(@start_date, '%%d/%%m/%%Y')"
-                - "end_date = STR_TO_DATE(@end_date, '%%d/%%m/%%Y')"
+                - "start_date = STR_TO_DATE(@start_date, '%%Y-%%m-%%d')"
+                - "end_date = STR_TO_DATE(@end_date, '%%Y-%%m-%%d')"
                 - "media_label = CONCAT(LEFT(media, CHAR_LENGTH(media) - 1), IF(RIGHT(media, 1) REGEXP '[0-9]' = 0, RIGHT(media, 1), ''))"
         ie_offer_data:
             table_name: 'ie_offer_data'
@@ -78,7 +78,7 @@ parameters:
             primary_key: 'master_campaign_id'
             file_name: 'ie_promo_data.csv'
             additional_setters:
-                - "week_commencing = STR_TO_DATE(@week_commencing, '%%d/%%m/%%Y')"
+                - "week_commencing = STR_TO_DATE(@week_commencing, '%%Y-%%m-%%d')"
         ie_results_data:
             table_name: 'ie_results_data'
             columns:
@@ -105,7 +105,7 @@ parameters:
             primary_key: 'master_campaign_id'
             file_name: 'ie_timings_data.csv'
             additional_setters:
-                - "period_date = STR_TO_DATE(@period_date, '%%d/%%m/%%Y')"
+                - "period_date = STR_TO_DATE(@period_date, '%%Y-%%m-%%d')"
         ie_weekly_results_data:
             table_name: 'ie_weekly_results_data'
             columns:
@@ -118,7 +118,7 @@ parameters:
             primary_key: 'master_campaign_id'
             file_name: 'ie_weekly_results_data.csv'
             additional_setters:
-                - "week_commencing = STR_TO_DATE(@week_commencing, '%%d/%%m/%%Y')"
+                - "week_commencing = STR_TO_DATE(@week_commencing, '%%Y-%%m-%%d')"
 
     media_laydown_config:
         - { color: "#ccc", media: ['Instore Sampling', 'Entrance Gates', 'Six Sheets'], label: 'Evaluated media' }

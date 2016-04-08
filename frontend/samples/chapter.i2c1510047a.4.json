@@ -6,6 +6,7 @@
   "title": "Objective Review",
   "content": [{
     "type": "section",
+    "page_break": true,
     "title": "Objective priority 1",
     "content": [{
       "type": "chart_offer_sales",
@@ -13,6 +14,7 @@
     }]
   }, {
     "type": "section",
+    "page_break": true,
     "title": "Objective priority 2",
     "content": [{
       "type": "chart_units_uplift",

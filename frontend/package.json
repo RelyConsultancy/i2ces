@@ -33,7 +33,7 @@
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
-    "@carrd/css-modules": "^1.2.0",
+    "@carrd/css-modules": "^1.5.2",
     "@carrd/cssify": "^1.0.0",
     "babel-cli": "^6.5.1",
     "babel-preset-carrd": "^1.0.0",
