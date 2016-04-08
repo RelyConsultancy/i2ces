@@ -75,6 +75,18 @@ CREATE TABLE IF NOT EXISTS `i2c_channel_icons` (
   DEFAULT CHARSET = utf8
   COLLATE = utf8_unicode_ci;
 
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Direct Mail', 'dm');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Secondary Space', '');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Nectar Competition Barker', 'barkers');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Yahoo', 'programmatic');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Programmatic', 'programmatic');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('In Store Broadcasting', 'in_store_tanoy');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Recipe Card Barker', 'barkers');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Email', 'email');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('New Information Barker', 'barkers');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Mobile', 'mobile');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Coupon At Till', 'coupon_at_till');
+INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Bollards', 'entrance_gate');
 INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Instore Sampling', 'sampling');
 INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('JS Magazine', 'magazine');
 INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Six Sheets', '6_sheet');
