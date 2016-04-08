@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as JMS;
  * Class Chapter
  *
  * @ORM\Entity(repositoryClass="i2c\EvaluationBundle\Repository\ChapterRepository")
- * @ORM\Table(name="chapter")
+ * @ORM\Table(name="i2c_chapter")
  *
  * @package i2c\EvaluationBundle\Entity
  */
