@@ -234,7 +234,7 @@ class GenerateEvaluations
         $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
                                             ->findOneBy(['name' => $businessUnitName]);
         if (is_null($businessUnit)) {
-            return $this->getNewBusinessUnit($cid);
+            return $this->getNewBusinessUnit($businessUnitName);
         }
 
         return $businessUnit;
