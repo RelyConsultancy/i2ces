@@ -33,7 +33,7 @@ class PageController extends RestApiController
         $page = $this->getPageDatabaseManagerService()->getPageForViewing($type);
 
         if (is_null($page)) {
-            return $this->notFound('Requested page was not found');
+            return $this->notFound(sprintf('Requested page `%s` was not found.', $type));
         }
 
         return $this->success($page, Response::HTTP_OK, ['full']);
