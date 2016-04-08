@@ -123,10 +123,8 @@
                                 "date_start": "{{ date(item.start_date)|date('Y-m-d') }}",
                                 "date_end": "{{ date(item.end_date)|date('Y-m-d') }}"
                                 {% for legend_config in additional_data.legend_configs %}
-                                    {% if item.type == legend_config.media_type %}
-                                        {% if legend_config.media_type not in usedMediaTypes %}
-                                            {% set legendItems = legendItems|merge([{type: legend_config.media_type,label: legend_config.label}]) %}
-                                        {% endif %}
+                                    {% if (item.type == legend_config.media_type) and (legend_config.media_type not in usedMediaTypes) %}
+                                        {% set legendItems = legendItems|merge([{type: legend_config.media_type,label: legend_config.label}]) %}
                                     {% endif %}
                                 {% endfor %}
                             }{{ not loop.last ? ',' }}
