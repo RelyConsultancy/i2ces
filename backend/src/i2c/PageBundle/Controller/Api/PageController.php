@@ -57,7 +57,7 @@ class PageController extends RestApiController
             $page = $this->getPageDatabaseManagerService()->getPageForEditing($type);
 
             if (is_null($page)) {
-                return $this->notFound('Requested page was not found');
+                return $this->notFound(sprintf('Requested page `%s` was not found.', $type));
             }
 
             $page = $this->getPageService()->updatePage($page, $this->getRequest()->getContent());
