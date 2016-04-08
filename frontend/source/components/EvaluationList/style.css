@@ -16,7 +16,7 @@
   line-height: 3rem;
   font-size: 1.1em;
   font-family: 'Archer Bold', serif;
-  color: #656565;
+  color: #6F6F6F;
 }
 .header::after {
   content: '';
@@ -92,7 +92,7 @@
   font-family: 'Archer Medium', serif;
   font-size: .875em;
   color: #FFFFFF;
-  background-color: #43B5DB;
+  background-color: #5FC3E1;
   text-decoration: none;
 }
 .item_view:hover,

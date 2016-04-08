@@ -3,9 +3,7 @@
 namespace i2c\SetupBundle\Command;
 
 use Doctrine\ORM\EntityManager;
-use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Oro\Bundle\UserBundle\Entity\Role;
-use Oro\Bundle\UserBundle\Entity\User;
 use Oro\Bundle\UserBundle\Entity\UserManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -48,8 +46,10 @@ class InitialSetupCommand extends ContainerAwareCommand
     {
         $this
             ->setName('i2c:initial-setup')
-            ->setDescription('This command will update the database structure to work with the i2c application.
-            Should be ran once when the server was just installed');
+            ->setDescription(
+                'This command will update the database structure to work with the i2c application.
+It will only update the initial roles in the application once.'
+            );
     }
 
     /**
@@ -66,91 +66,11 @@ class InitialSetupCommand extends ContainerAwareCommand
 
         $this->entityManager = $container->get('doctrine')->getEntityManager();
 
-        // for now we create the roles and the users manually
-//        $this->createRoles();
-
-        $this->createDummySuppliers();
+        $this->createRoles();
 
         $logger = $container->get('logger');
         $logger->addInfo("Initial setup completed successfully");
-    }
-
-    /**
-     * Creates dummy supplier based on the configuration
-     */
-    protected function createDummySuppliers()
-    {
-        if ($this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')->getBusinessUnitsCount() > 1) {
-            // this means that the tables are already populated
-//            return;
-        }
-
-        // at this point there is only the 'Main' business unit that is generated during the oro setup
-        $i2cBusinessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')->getFirst();
-
-        /** @var array $supplierConfig */
-        foreach ($this->initialSetupConfig['suppliers'] as $supplierConfig) {
-            $dummyBusinessUnit = new BusinessUnit();
-            $dummyBusinessUnit->setName($supplierConfig['name']);
-            $dummyBusinessUnit->setEmail($supplierConfig['email']);
-            $dummyBusinessUnit->setOwner($i2cBusinessUnit);
-            $dummyBusinessUnit->setFax($supplierConfig['fax']);
-            $dummyBusinessUnit->setPhone($supplierConfig['phone']);
-            $dummyBusinessUnit->setWebsite($supplierConfig['website']);
-            $dummyBusinessUnit->setOrganization($i2cBusinessUnit->getOrganization());
-
-            // for now the user creation doesn't work properly
-            // todo update this
-//            $userForBusinessUnit = $this->createUser($supplierConfig['user']);
-//
-//            $userForBusinessUnit->setOrganization($i2cBusinessUnit->getOrganization());
-//
-//            $userForBusinessUnit->addBusinessUnit($dummyBusinessUnit);
-//
-//            $dummyBusinessUnit->addUser($userForBusinessUnit);
-//            $this->entityManager->persist($userForBusinessUnit);
-
-            $this->entityManager->persist($dummyBusinessUnit);
-        }
-
-        $this->entityManager->flush();
-    }
-
-    /**
-     * @param array        $userConfig
-     *
-     * @return User
-     */
-    public function createUser($userConfig)
-    {
-        /** @var User $user */
-        $user = $this->entityManager->getRepository('OroUserBundle:User')
-            ->findOneBy(['username' => $userConfig['username']]);
-        if (is_null($user)) {
-            $user = $this->userManager->createUser();
-            $user->setEnabled(true);
-        }
-
-        $role = $this->entityManager->getRepository('OroUserBundle:Role')->findOneBy(['label' => $userConfig['role']]);
-
-        if (!is_null($role)) {
-            $user->addRole($role);
-        }
-
-        $user->setFirstName($userConfig['first_name']);
-        $user->setLastName($userConfig['last_name']);
-        $user->setMiddleName($userConfig['middle_name']);
-        $user->setUsername($userConfig['username']);
-        $user->setPlainPassword($userConfig['password']);
-        $user->setEmail($userConfig['email']);
-        $this->userManager->updatePassword($user);
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
-        $this->entityManager->refresh($user);
-
-        return $user;
+        $output->addInfo("Initial setup completed successfully");
     }
 
     /**
@@ -164,32 +84,45 @@ class InitialSetupCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
 
         foreach ($this->initialSetupConfig['roles'] as $roleConfig) {
-            $existingRole = $em->getRepository('OroUserBundle:Role')->findOneBy(['label' => $roleConfig['name']]);
-            if (is_null($existingRole)) {
-                $role = new Role();
-                $role->setLabel($roleConfig['name']);
-                $role->setRole($roleConfig['identifier']);
+            $existingRole = $em->getRepository('OroUserBundle:Role')->findOneBy(
+                [
+                    'label' => $roleConfig['new_name'],
+                ]
+            );
 
-                $em->persist($role);
-                $em->flush($role);
+            if (!is_null($existingRole)) {
+                continue;
+            }
 
+            $role = $em->getRepository('OroUserBundle:Role')->findOneBy(
+                [
+                    'label' => $roleConfig['name'],
+                ]
+            );
 
-                $oid = $aclManager->getOid($roleConfig['access']['oid']);
+            $role->setLabel($roleConfig['new_name']);
+
+            $em->persist($role);
+
+            foreach ($roleConfig['access'] as $accessConfig) {
+                $oid = $aclManager->getOid($accessConfig['oid']);
 
                 $sid = $aclManager->getSid($role);
 
                 $builder = $aclManager->getMaskBuilder($oid);
 
-                foreach ($roleConfig['access']['permissions'] as $permission) {
+                foreach ($accessConfig['permissions'] as $permission) {
                     $builder = $builder->add($permission);
                 }
 
                 $mask = $builder->get();
 
                 $aclManager->setPermission($sid, $oid, $mask);
-
-                $aclManager->flush();
             }
+
+            $aclManager->flush();
+
         }
+        $em->flush();
     }
 }

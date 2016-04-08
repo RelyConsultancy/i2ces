@@ -12,7 +12,7 @@
   line-height: 3rem;
   font-size: 1.1em;
   font-family: 'Archer Bold', serif;
-  color: #656565;
+  color: #6F6F6F;
 }
 .header::before {
   content: '';
@@ -65,10 +65,18 @@
 }
 .link {
   display: inline-block;
-  color: #43B5DB;
+  color: #5FC3E1;
   font-size: .75em;
   text-decoration: none;
 }
+.link::before {
+  content: '●';
+  margin: .5em;
+}
+.link:first-child::before {
+  display: none;
+}
+
 
 .date {
   padding: 1rem 0;
@@ -97,7 +105,11 @@
   font-size: .75em;
   line-height: 2rem;
   border-bottom: 1px solid #E6E6E6;
-  color: #555;
+  color: #6F6F6F;
+}
+.list_item > span {
+  position: relative;
+  top: 2px;
 }
 
 .chapters {

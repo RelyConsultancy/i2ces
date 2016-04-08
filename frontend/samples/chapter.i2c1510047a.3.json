@@ -12,6 +12,7 @@
     }]
   }, {
     "type": "section",
+    "page_break": true,
     "title": "Performance",
     "content": [{
       "type": "table_performance_samples",
@@ -23,6 +24,7 @@
   }, {
     "type": "section",
     "title": "Gallery",
+    "page_break": true,
     "content": [{
       "type": "gallery",
       "content": [{

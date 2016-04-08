@@ -41,6 +41,9 @@ class GenerateEvaluations
     /** @var ChartDataSetConfigContainer */
     protected $chartDataSetConfigContainer;
 
+    /** @var OptionalChaptersConfig */
+    protected $optionalChaptersConfigService;
+
     /**
      * GenerateEvaluations constructor.
      *
@@ -85,6 +88,14 @@ class GenerateEvaluations
     }
 
     /**
+     * @param OptionalChaptersConfig $optionalChaptersConfig
+     */
+    public function setOptionalChaptersConfigService(OptionalChaptersConfig $optionalChaptersConfig)
+    {
+        $this->optionalChaptersConfigService = $optionalChaptersConfig;
+    }
+
+    /**
      * @param array  $evaluationConfigs
      * @param array  $cids
      * @param string $versionNumber
@@ -112,7 +123,12 @@ class GenerateEvaluations
 
             $chapters = [];
 
-            foreach ($evaluationConfigs['chapters'] as $chapterConfig) {
+            $chaptersConfig = array_merge(
+                $evaluationConfigs['chapters'],
+                $this->optionalChaptersConfigService->fetchOptionalChaptersConfig($cid)
+            );
+
+            foreach ($chaptersConfig as $chapterConfig) {
                 $chartDataSetSources = $this->generateChartDataSetService->generate(
                     $cid,
                     $this->getChartDataSetConfig($chapterConfig['chart_data_set_service_name'], $cid),
@@ -146,11 +162,7 @@ class GenerateEvaluations
                 $chapters[] = $chapter;
             }
 
-            if (is_null($evaluation->getBusinessUnit())) {
-                $evaluation->setOwner($this->getNewBusinessUnit($cid));
-            } else {
-                $evaluation->setOwner($this->getBusinessUnit($evaluation->getBusinessUnit()->getId(), $cid));
-            }
+            $evaluation->setOwner($this->getBusinessUnit($cid));
 
             $evaluation->setChapters($chapters);
             $this->entityManager->persist($evaluation);
@@ -211,15 +223,16 @@ class GenerateEvaluations
     }
 
     /**
-     * @param string $id
      * @param string $cid
      *
-     * @return null|object|BusinessUnit
+     * @return BusinessUnit
      */
-    protected function getBusinessUnit($id, $cid)
+    protected function getBusinessUnit($cid)
     {
+        $businessUnitName = $this->getBusinessUnitName($cid);
+
         $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
-                                            ->findOneBy(['id' => $id]);
+                                            ->findOneBy(['name' => $businessUnitName]);
         if (is_null($businessUnit)) {
             return $this->getNewBusinessUnit($cid);
         }
@@ -228,16 +241,16 @@ class GenerateEvaluations
     }
 
     /**
-     * @param string $cid
+     * @param string $name
      *
      * @return BusinessUnit
      */
-    protected function getNewBusinessUnit($cid)
+    protected function getNewBusinessUnit($name)
     {
         $mainBusinessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')->getFirst();
 
         $businessUnit = new BusinessUnit();
-        $businessUnit->setName($this->getBusinessUnitName($cid));
+        $businessUnit->setName($name);
         $businessUnit->setOrganization($mainBusinessUnit->getOrganization());
         $businessUnit->setOwner($mainBusinessUnit);
 

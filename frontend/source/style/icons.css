@@ -1,0 +1,43 @@
+[class^=icon_channel_] {
+  position: relative;
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-size: contain;
+  border: 2px solid #DDD;
+  border-radius: 100%;
+  padding: 2px;
+  margin-right: .5em;
+  vertical-align: middle;
+}
+
+.icon_channel_aisle_fin {
+  background-image: url(/images/icons/icon_aisle_fin.png);
+}
+.icon_channel_entrance_gate {
+  background-image: url(/images/icons/icon_entrance_gate.png);
+}
+.icon_channel_sampling {
+  background-image: url(/images/icons/icon_sampling.png);
+}
+.icon_channel_magazine {
+  background-image: url(/images/icons/icon_magazine.png);
+}
+.icon_channel_milk_media {
+  background-image: url(/images/icons/icon_milk_media.png);
+}
+.icon_channel_6_sheet {
+  background-image: url(/images/icons/icon_6_sheet.png);
+}
+.icon_channel_barkers {
+  background-image: url(/images/icons/icon_barkers.png);
+}
+.icon_channel_trolleys {
+  background-image: url(/images/icons/icon_trolleys.png);
+}
+.icon_channel_tv_wall {
+  background-image: url(/images/icons/icon_tv_wall.png);
+}
+.icon_channel_6_sheet {
+  background-image: url(/images/icons/icon_6_sheet.png);
+}

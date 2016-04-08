@@ -2,6 +2,7 @@
 @import raw './style/avenir.css';
 @import raw './style/archer.css';
 @import raw './style/loader.css';
+@import raw './style/icons.css';
 
 @import raw './components/Select/style.css';
 @import raw './components/Froala/style.css';
@@ -11,20 +12,21 @@
 @import from './components/Chart/style.css';
 @import from './components/Toggle/style.css';
 
-@import from './components/FAQ/style.css';
 @import from './components/Loader/style.css';
+@import from './components/FAQ/style.css';
 @import from './components/Dashboard/style.css';
 
 @import from './components/EvaluationList/style.css';
 @import from './components/EvaluationDashboard/style.css';
 @import from './components/EvaluationChapter/style.css';
-@import from './components/EvaluationSection/style.css';
 @import from './components/EvaluationPreview/style.css';
 
+@import from './components/SectionComponent/style.css';
 @import from './components/SectionGallery/style.css';
 @import from './components/SectionHTML/style.css';
 @import from './components/SectionInfo/style.css';
 @import from './components/SectionTimings/style.css';
+@import from './components/SectionChannels/style.css';
 @import from './components/SectionObjectives/style.css';
 @import from './components/SectionEditableComments/style.css';
 

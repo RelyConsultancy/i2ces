@@ -1,6 +1,6 @@
-import scrollTo from 'element-scroll-to'
+import scrollIntoView from 'scroll-into-view'
+import SectionComponent from '/components/SectionComponent'
 import { Component, B, Link } from '/components/component.js'
-import Section from '/components/EvaluationSection'
 import { getInitials, slugify } from '/application/utils.js'
 import store from '/application/store.js'
 import * as action from '/application/actions.js'
@@ -10,14 +10,14 @@ import style from './style.css'
 const Navigation = ({ store, params }) => {
   const back = Link({
     to: `/evaluations/${params.cid}`,
-    className: style.link,
+    className: style.navigation_item,
   }, 'Back to Evaluation Dashboard')
 
-  return B({ className: style.links }, back)
+  return B({ className: style.navigation }, back)
 }
 
 
-const ChapterLinks = ({ store, chapter }) => {
+const Chapters = ({ store, chapter }) => {
   const { evaluation, chapter_palette } = store
   const selected = chapter
   const byOrder = (a, b) => (a.order > b.order ? 1 : -1)
@@ -33,13 +33,13 @@ const ChapterLinks = ({ store, chapter }) => {
 
     const attrs = {
       to: `/evaluations/${evaluation.cid}/chapters/${chapter.id}`,
-      className: isActive ? style.chapter_link_active : style.chapter_link,
+      className: isActive ? style.chapter_active : style.chapter,
       key: index,
     }
     return Link(attrs, initials)
   })
 
-  return B({ className: style.chapter_links }, links)
+  return B({ className: style.chapters }, links)
 }
 
 
@@ -49,16 +49,22 @@ const Headings = ({ store, chapter, focusedSection, focusSection }) => {
   const sections = chapter.content.filter(item => item.type == 'section')
   const isActive = (section) => (section.title == focusedSection.title)
 
-  const title = B({ className: style.sections_title }, chapter.title)
+  const title = B({ className: style.headings_title }, chapter.title)
   const links = sections.map((section, index) => B({
-    className: isActive(section) ? style.sections_active : style.sections_link,
+    className: isActive(section) ? style.headings_active : style.headings_link,
     onClick: (event) => {
+      const element = document.getElementById(slugify(section.title))
+
+      scrollIntoView(element, {
+        time: 400,
+        align:{ top: 0, left: 0 }
+      })
+
       focusSection(section)
-      scrollTo(document.getElementById(slugify(section.title)))
     },
   }, section.title))
 
-  return B({ className: style.sections, style: { color } }, title, ...links)
+  return B({ className: style.headings, style: { color } }, title, ...links)
 }
 
 
@@ -75,11 +81,18 @@ const Sections = ({ store, chapter, focusedSection, focusSection }) => {
     })
   }
 
-  const sections = chapter.content.filter(byType).map((section) => (
-    Section({ section, isEditable, uploadPath, onSave })
-  ))
+  const sections = chapter.content.filter(byType).map((section) => {
+    const id = slugify(section.title)
+    const title = B({ className: style.section_title }, section.title)
 
-  return B({ className: style.sections_content }, ...sections)
+    const components = section.content.map((component) => (
+      SectionComponent({ component, isEditable, uploadPath, onSave })
+    ))
+
+    return B({ id, className: style.section }, title, ...components)
+  })
+
+  return B({ className: style.headings_content }, ...sections)
 }
 
 
@@ -129,7 +142,7 @@ const EvaluationChapter = Component({
 
       content = B(
         Navigation({ store, params }),
-        ChapterLinks({ store, chapter }),
+        Chapters({ store, chapter }),
         Headings({ store, chapter, focusedSection, focusSection }),
         Sections({ store, chapter, focusedSection })
       )

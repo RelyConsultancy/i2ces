@@ -28,7 +28,7 @@ class MinifyTwigCommand extends Command
                 'twig-folder-path',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'The absolute path of the directory containing the csv files'
+                'The absolute path of the directory containing the twig files'
             )
             ->setDescription('This command will minify the twig files by removing any extra tabs and EOL');
     }
@@ -57,9 +57,9 @@ class MinifyTwigCommand extends Command
             $twigContent = $file->getContents();
             $twigContent = str_replace("  ", "", $twigContent);
             $twigContent = str_replace("\n", "", $twigContent);
-            $twigContent = str_replace("\r", "", $twigContent);
+            $twigContent = str_replace("\r\n", "", $twigContent);
 
-            file_put_contents($file->getRealPath()."123", $twigContent);
+            file_put_contents($file->getRealPath(), $twigContent);
         }
 
         $output->writeln("All twig files were minified");

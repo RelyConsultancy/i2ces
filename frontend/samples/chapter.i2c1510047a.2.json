@@ -44,13 +44,20 @@
     "type": "section",
     "title": "Evaluated Channels",
     "content": [{
-      "type": "list",
-      "items": [
-        "Six Sheets",
-        "Entrance Gates",
-        "JS Magazine",
-        "Coupon at Till"
-      ]
+      "type": "list_channels",
+      "items": [{
+        "label": "Aisle Fins",
+        "type": "aisle_fin"
+      }, {
+        "label": "Entrance Gates",
+        "type": "entrance_gate"
+      }, {
+        "label": "Instore Sampling",
+        "type": "sampling"
+      }, {
+        "label": "JS Magazine",
+        "type": "magazine"
+      }]
     }]
   }, {
     "type": "section",
@@ -74,12 +81,12 @@
     "content": [{
       "type": "chart_media_laydown",
       "items": [{
-        "type": "promotion",
+        "type": "offer",
         "label": "Entrance Gates",
         "date_start": "2015-10-07",
         "date_end": "2015-10-27"
       }, {
-        "type": "promotion",
+        "type": "offer",
         "label": "TV Wall",
         "date_start": "2015-10-18",
         "date_end": "2015-11-17"
@@ -98,13 +105,6 @@
         "label": "eMail",
         "date_start": "2015-10-09",
         "date_end": "2015-10-21"
-      }],
-      "legend": [{
-        "label": "Evaluated media",
-        "color": "#ccc"
-      }, {
-        "label": "In-store promotions",
-        "color": "#555"
       }]
     }]
   }]

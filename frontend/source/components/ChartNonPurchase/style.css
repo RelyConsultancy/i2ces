@@ -1,13 +1,11 @@
 .chart {
-  position: absolute;
-  right: 2rem;
-  top: 5.5rem;
-  bottom: 2rem;
-  width: calc(50% - 2rem);
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
 }
 
 .header {
-  padding: 1rem 0;
+  padding-bottom: 1rem;
   font-size: 1.125rem;
   font-family: 'Avenir LT Std 85 Heavy';
   text-align: center;

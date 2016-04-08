@@ -41,12 +41,22 @@ const Content = (...data) => B(
 
 
 const Links = ({ store, params }) => {
-  const back = Link({
-    to: `/evaluations`,
-    className: style.link,
-  }, 'Back to Evaluation Index')
+  let links = [{
+    path: `/evaluations`,
+    label: 'Back to Evaluations',
+  }, {
+    path: `/preview/${params.cid}`,
+    label: 'Preview',
+  }, {
+    path: `/preview/${params.cid}`,
+    label: 'PDF',
+  }]
 
-  return B({ className: style.links }, back)
+  links = links.map((item) => (
+    Link({ className: style.link, to: item.path }, item.label)
+  ))
+
+  return B({ className: style.links }, ...links)
 }
 
 
@@ -60,8 +70,10 @@ const Date = ({ evaluation }) => B(
 const Channels = ({ items }) => {
   const title = B({ className: style.list_title}, 'Channels')
 
-  items = items.map((item) => (
-    B({ className: style.list_item }, item)
+  items = items.map((item) => B(
+    { className: style.list_item, },
+    B({ className: `icon_channel_${item.type}` }),
+    item.label
   ))
 
   items = Grid({ blocks: 2, items })

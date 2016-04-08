@@ -46,6 +46,15 @@
   transform: translate(-50%, -50%);
   background-size: contain;
   background-repeat: no-repeat;
+  font-size: .875rem;
+  font-family: "Archer Bold";
+}
+.logo_supplier_label {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #454545;
 }
 
 

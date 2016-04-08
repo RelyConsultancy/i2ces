@@ -22,7 +22,8 @@ const defaults = {
   },
   fontFamily: {
     "'Avenir LT Std 45 Book'": 'Avenir',
-    "'Archer Bold', serif": 'Archer',
+    "'Archer Medium', serif": 'Archer',
+    "'Archer Bold', serif": 'Archer Bold',
     "Arial,Helvetica,sans-serif": 'Arial',
     "Georgia,serif": 'Georgia',
     "Impact,Charcoal,sans-serif": 'Impact',
@@ -46,7 +47,7 @@ export default Component({
     })
 
     editor.froalaEditor(assign({}, defaults, options))
-    editor.froalaEditor('html.set', content)
+    editor.froalaEditor('html.set', content || '')
 
     this.editor = editor
   },
@@ -57,6 +58,12 @@ export default Component({
     this.editor.froalaEditor('destroy')
   },
   render () {
-    return B({ className: 'froala-editor', ref: 'container' })
+    const attrs = {
+      className: 'froala-editor',
+      style: this.props.style,
+      ref: 'container',
+    }
+
+    return B(attrs)
   }
 })

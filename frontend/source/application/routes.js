@@ -22,7 +22,7 @@ const routes = {
     path: 'evaluations/:cid/chapters/:id',
     component: EvaluationChapter,
   }, {
-    path: 'preview/:cid',
+    path: 'preview/:cid(/:id)',
     component: EvaluationPreview,
   }, {
     path: 'faqs',
