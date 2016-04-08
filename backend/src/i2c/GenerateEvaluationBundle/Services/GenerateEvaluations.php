@@ -162,11 +162,7 @@ class GenerateEvaluations
                 $chapters[] = $chapter;
             }
 
-            if (is_null($evaluation->getBusinessUnit())) {
-                $evaluation->setOwner($this->getNewBusinessUnit($cid));
-            } else {
-                $evaluation->setOwner($this->getBusinessUnit($evaluation->getBusinessUnit()->getId(), $cid));
-            }
+            $evaluation->setOwner($this->getBusinessUnit($cid));
 
             $evaluation->setChapters($chapters);
             $this->entityManager->persist($evaluation);
@@ -227,15 +223,16 @@ class GenerateEvaluations
     }
 
     /**
-     * @param string $id
      * @param string $cid
      *
-     * @return null|object|BusinessUnit
+     * @return BusinessUnit
      */
-    protected function getBusinessUnit($id, $cid)
+    protected function getBusinessUnit($cid)
     {
+        $businessUnitName = $this->getBusinessUnitName($cid);
+
         $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
-                                            ->findOneBy(['id' => $id]);
+                                            ->findOneBy(['name' => $businessUnitName]);
         if (is_null($businessUnit)) {
             return $this->getNewBusinessUnit($cid);
         }
@@ -244,16 +241,16 @@ class GenerateEvaluations
     }
 
     /**
-     * @param string $cid
+     * @param string $name
      *
      * @return BusinessUnit
      */
-    protected function getNewBusinessUnit($cid)
+    protected function getNewBusinessUnit($name)
     {
         $mainBusinessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')->getFirst();
 
         $businessUnit = new BusinessUnit();
-        $businessUnit->setName($this->getBusinessUnitName($cid));
+        $businessUnit->setName($name);
         $businessUnit->setOrganization($mainBusinessUnit->getOrganization());
         $businessUnit->setOwner($mainBusinessUnit);
 
