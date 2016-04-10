@@ -78,14 +78,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     staging.vm.hostname = 'staging.i2ces.info'
 
     staging.vm.provider :digital_ocean do |provider, override|
-      provider.image = '11478463'
+      provider.image = '14782952'
       # provider.ssh_key_name = 'Georgiana'
       override.ssh.private_key_path = '~/.ssh/id_rsa'
       override.vm.box = 'digital_ocean'
       override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
 
       provider.token = '0700281c55c0d95e9d0c52ca93077d1268d46ae14bda34b8bb44b62c9d7f52f8'
-      provider.image = 'centos-7-0-x64'
+      provider.image = 'centos-6-5-x64'
       provider.region = 'lon1'
       provider.size = '8gb'
     end
