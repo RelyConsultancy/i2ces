@@ -1,22 +1,23 @@
 php_memory_limit: "3G"
 php_max_execution_time: "90"
 php_upload_max_filesize: "256M"
+
 php_packages:
-  - php
-  - php-cli
-  - php-common
-  - php-devel
-  - php-gd
-  - php-mbstring
-  - php-pdo
+  - php56-php
+  - php56-php-cli
+  - php56-php-common
+  - php56-php-devel.x86_64
+  - php56-php-gd
+  - php56-php-mbstring
+  - php56-php-pdo
 #  - php-pecl-apc
-  - php-xml
-  - php-intl
-  - php-soap
-  - php-mcrypt
-  - php-posix
-  - php-pecl-apc
-  - php-mysql
+  - php56-php-xml
+  - php56-php-intl
+  - php56-php-soap
+  - php56-php-mcrypt
+  - php56-php-posix
+  - php56-php-pecl-apc
+  - php56-php-mysql
 
 #mysql_packages:
 #  - mariadb
