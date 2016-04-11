@@ -70,7 +70,7 @@ class RemoveImages
     {
         $query = sprintf(
             'SELECT content AS content
-             FROM chapter
+             FROM i2c_chapter
              WHERE id = %s',
             $cid
         );

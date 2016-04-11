@@ -18,19 +18,21 @@ php_packages:
   - php-pecl-apc
   - php-mysql
 
-mysql_packages:
-  - mariadb
-  - mariadb-server
-  - mariadb-libs
-  - MySQL-python
-  - perl-DBD-MySQL
-mysql_daemon: mariadb
+#mysql_packages:
+#  - mariadb
+#  - mariadb-server
+#  - mariadb-libs
+#  - MySQL-python
+#  - perl-DBD-MySQL
+mysql_daemon: mysql
 mysql_root_password: root
 mysql_root_password_update: yes
 mysql_socket: /var/lib/mysql/mysql.sock
-mysql_log_error: /var/log/mariadb/mariadb.log
-mysql_syslog_tag: mariadb
-mysql_pid_file: /var/run/mariadb/mariadb.pid
+mysql_log_error: /var/log/mysql.log
+#mysql_syslog_tag: mariadb
+mysql_pid_file: /var/lib/mysql/mysql.pid
+mariadb_version: 5.5
+#mysql_enablerepo: "mariadb"
 
 composer_path: /usr/local/bin/composer
 composer_keep_updated: true

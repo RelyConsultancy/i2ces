@@ -23,7 +23,7 @@ const Info = ({ uploadPath, component, property, editMode, className }) => {
     return null
   }
   else {
-    return B({ className }, HTML(content))
+    return B({ className: className + ' fr-view' }, HTML(content))
   }
 }
 

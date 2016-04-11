@@ -16,3 +16,6 @@ dev
 [multi:vars]
 ansible_ssh_user=vagrant
 ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[centos]
+139.59.160.208

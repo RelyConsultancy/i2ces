@@ -11,7 +11,7 @@ use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
  * Class Evaluation
  *
  * @ORM\Entity(repositoryClass="i2c\EvaluationBundle\Repository\EvaluationRepository")
- * @ORM\Table(name="evaluation")
+ * @ORM\Table(name="i2c_evaluation")
  *
  * @package i2c\EvaluationBundle\Entity
  *
@@ -158,7 +158,7 @@ class Evaluation
      *
      * @ORM\ManyToMany(targetEntity="i2c\EvaluationBundle\Entity\Chapter")
      * @ORM\JoinTable(
-     *     name="evaluation_chapters",
+     *     name="i2c_evaluation_chapters",
      *     joinColumns={@ORM\JoinColumn(name="evaluation_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="chapter_id", referencedColumnName="id")}
      * )

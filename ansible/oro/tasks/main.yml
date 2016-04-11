@@ -29,7 +29,7 @@
   register: uploads_exists
 
 - name: Create web/uploads folder.
-  command: "mkdir /var/www/html/web/uploads"
+  file: path=/var/www/html/web/uploads state=directory mode=0755
   when: not uploads_exists.stat.exists
 
 - name: Check if web/bundles folder exists.
@@ -37,7 +37,7 @@
   register: bundles_exists
 
 - name: Create web/bundles folder.
-  command: "mkdir /var/www/html/web/bundles"
+  file: path=/var/www/html/web/bundles state=directory mode=0755
   when: not bundles_exists.stat.exists
 
 - name: Maxxed out composer timeout

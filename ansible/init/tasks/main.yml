@@ -26,6 +26,7 @@
       - bind-utils
       - traceroute
       - links
+      - libselinux-python
 
   - name: Updatedb
     shell: >
@@ -43,3 +44,6 @@
       - chmod +x phpunit-4.8.0.phar
       - mv phpunit-4.8.0.phar /usr/local/bin/phpunit
     when: not phpunit_present.stat.exists
+
+  - name: Add repo file
+    template: src=mariadb_centos.repo.j2 dest=/etc/yum.repos.d/mariadb.repo owner=root group=root mode=0644

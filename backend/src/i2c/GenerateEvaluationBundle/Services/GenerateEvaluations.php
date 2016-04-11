@@ -234,7 +234,7 @@ class GenerateEvaluations
         $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
                                             ->findOneBy(['name' => $businessUnitName]);
         if (is_null($businessUnit)) {
-            return $this->getNewBusinessUnit($cid);
+            return $this->getNewBusinessUnit($businessUnitName);
         }
 
         return $businessUnit;
@@ -284,13 +284,13 @@ class GenerateEvaluations
         /** @var Chapter $chapter */
         foreach ($chapters as $chapter) {
             $query = sprintf(
-                'DELETE FROM evaluation_chapters WHERE chapter_id=\'%s\'',
+                'DELETE FROM i2c_evaluation_chapters WHERE chapter_id=\'%s\'',
                 $chapter->getId()
             );
             $conn->exec($query);
 
             $query = sprintf(
-                'DELETE FROM chapter WHERE id=\'%s\'',
+                'DELETE FROM i2c_chapter WHERE id=\'%s\'',
                 $chapter->getId()
             );
             $conn->exec($query);

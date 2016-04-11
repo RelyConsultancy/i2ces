@@ -67,7 +67,7 @@ export default Component({
     return B(
       { className: style.faq },
       B({ className: style.header }, input || title, toggle),
-      B({ className: style.content }, editor || HTML(content))
+      B({ className: style.content + ' fr-view' }, editor || HTML(content))
     )
   }
 })
