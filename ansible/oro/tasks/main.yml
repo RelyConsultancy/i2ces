@@ -115,7 +115,7 @@
   copy: src=../frontend/public/fonts dest=/var/www/html/web/fonts force=yes
 
 - name: Integrate images from frontend to backend
-  copy: src=../frontend/public/images dest=/var/www/ht§ml/web/images force=yes
+  copy: src=../frontend/public/images dest=/var/www/html/web/images force=yes
 
 - name: Install assets
   command: chdir=/var/www/html php app/console asset:install --env=prod
@@ -124,15 +124,20 @@
   command: chdir=/var/www/html php app/console assetic:dump --env=prod
 
 - name: Update the database
-  command: chdir=/var/www/html php app/console i2c:schema:update
+  command: chdir=/var/www/html php app/console i2c:schema:update --version-number=1
   become_user: root
 
 - name: Load custom entities into oro-crm
   command: chdir=/var/www/html php app/console oro:entity-config:update -f
 
+- name: Apply oro migrations
+  command: chdir=/var/www/html php app/console oro:migration:load --force
+  become_user: root
+
+- name: Create new translations for the oro dashboard
+  command: chdir=/var/www/html php app/console oro:translation:dump en
+  become_user: root
+
 - name: Create initial data
   command: chdir=/var/www/html php app/console i2c:initial-setup
   become_user: root
-
-- name: Import demo data to mysql
-  mysql_db: state=import name=i2c target=/var/www/html/src/Evaluation/EvaluationBundle/Resources/data/demo.sql login_user=root login_password=root
