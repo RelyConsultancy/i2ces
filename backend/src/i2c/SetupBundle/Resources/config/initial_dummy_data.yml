@@ -10,7 +10,7 @@ parameters:
                         permissions: [64] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
                     page:
                         oid: 'Entity:i2cPageBundle:Page'
-                        permissions: [64] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+                        permissions: [16777216] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
                     groups:
                         oid: 'Entity:OroUserBundle:Group'
                         permissions: [0] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
@@ -24,15 +24,12 @@ parameters:
                         permissions: [64, 256] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
                     page:
                         oid: 'Entity:i2cPageBundle:Page'
-                        permissions: [64, 256] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+                        permissions: [16777216, 67108864]
                     groups:
                         oid: 'Entity:OroUserBundle:Group'
                         permissions: [0] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
                     business_unit:
                         oid: 'Entity:OroOrganizationBundle:BusinessUnit'
-                        permissions: [16777216, 33554432, 67108864, 134217728, 268435456] # Full system access
-                    supplier:
-                        oid: 'Entity:i2cSupplierBundle:Supplier'
                         permissions: [16777216, 33554432, 67108864, 134217728, 268435456] # Full system access
                     user:
                         oid: 'Entity:OroUserBundle:User'
