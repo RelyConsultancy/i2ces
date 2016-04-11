@@ -84,7 +84,7 @@
   debug: msg="Variable 'dashboard_public_exists' is set to {{ dashboard_public_exists }}"
 
 - name: Create backend dirs for frontend integration
-   file:  path=“{{ item }}" state=directory mode=0775
+  file:  path="{{ item }}" state=directory mode=0775
   with_items:
     - /var/www/html/src/Evaluation/DashboardBundle/Resources/public
     - /var/www/html/src/Evaluation/DashboardBundle/Resources/public/js
@@ -99,7 +99,7 @@
   debug: msg="Variable 'web_fonts_exists' is set to {{ web_fonts_exists }}"
 
 - name: Create web dirs for frontend integration
-  file:  path=“{{ item }}" state=directory mode=0775
+  file:  path="{{ item }}" state=directory mode=0775
   with_items:
     - /var/www/html/web/fonts
     - /var/www/html/web/images
