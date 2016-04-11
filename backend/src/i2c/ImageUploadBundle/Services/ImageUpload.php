@@ -15,9 +15,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class ImageUpload
 {
-    const IMAGE_WIDTH_SIZE_INDEX = 0;
-    const IMAGE_HEIGHT_SIZE_INDEX = 1;
-
     /**
      * Saves the 'image' in the folder specified at 'folderPath' and returns the moved file
      *

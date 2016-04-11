@@ -141,3 +141,6 @@ INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('New_trialists', 'c
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Units', 'units');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('SPEC', 'GBP');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('FOP', 'percentage');
+INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Existing_custs', 'customer');
+
+INSERT INTO `i2c_pages` (`type`, `title`, `content`) VALUES ('faq', 'F.A.Q.', 'FAQ page content');
