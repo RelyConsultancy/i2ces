@@ -1,4 +1,4 @@
-php_memory_limit: "3G"
+php_memory_limit: "4G"
 php_max_execution_time: "90"
 php_upload_max_filesize: "256M"
 
@@ -39,4 +39,4 @@ composer_path: /usr/local/bin/composer
 composer_keep_updated: true
 composer_add_to_path: true
 composer_github_oauth_token: 'f41d1264849cb0098970a887aa040d534b0a1085'
-php_executable: php
+php_executable: php56
