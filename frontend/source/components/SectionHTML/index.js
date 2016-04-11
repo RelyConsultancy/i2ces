@@ -41,6 +41,10 @@ export default Component({
       })
     }
 
-    return B({ className: style.component }, content, this.renderToggle())
+    const attrs = {
+      className: style.component + ' fr-view',
+    }
+
+    return B(attrs, content, this.renderToggle())
   }
 })

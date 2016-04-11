@@ -38,19 +38,19 @@ export default Component({
       var comment = Editor({
         style: { fontFamily: '"Archer Medium"' },
         uploadPath,
-        content: component.info,
+        content: component.comment,
         onChange: (event, editor) => {
-          component.info = editor.html.get()
+          component.comment = editor.html.get()
         }
       })
     }
     else {
       var info = !component.info ? null : B({
-        className: style.info,
+        className: style.info + ' fr-view',
       }, HTML(component.info))
 
       var comment = !component.comment ? null : B({
-        className: style.comment,
+        className: style.comment + ' fr-view',
       }, HTML(component.comment))
     }
 

@@ -74758,7 +74758,7 @@ exports.default = (0, _component.Component)({
       });
     }
 
-    return (0, _component.B)({ className: _style2.default.faq }, (0, _component.B)({ className: _style2.default.header }, input || title, toggle), (0, _component.B)({ className: _style2.default.content }, editor || (0, _component.HTML)(content)));
+    return (0, _component.B)({ className: _style2.default.faq }, (0, _component.B)({ className: _style2.default.header }, input || title, toggle), (0, _component.B)({ className: _style2.default.content + ' fr-view' }, editor || (0, _component.HTML)(content)));
   }
 });
 
@@ -77601,7 +77601,7 @@ var Info = function Info(_ref) {
   else if (!content) {
       return null;
     } else {
-      return (0, _component.B)({ className: className }, (0, _component.HTML)(content));
+      return (0, _component.B)({ className: className + ' fr-view' }, (0, _component.HTML)(content));
     }
 };
 
@@ -77786,7 +77786,11 @@ exports.default = (0, _component.Component)({
       });
     }
 
-    return (0, _component.B)({ className: _style2.default.component }, content, this.renderToggle());
+    var attrs = {
+      className: _style2.default.component + ' fr-view'
+    };
+
+    return (0, _component.B)(attrs, content, this.renderToggle());
   }
 });
 
@@ -77856,18 +77860,18 @@ exports.default = (0, _component.Component)({
       var comment = Editor({
         style: { fontFamily: '"Archer Medium"' },
         uploadPath: uploadPath,
-        content: component.info,
+        content: component.comment,
         onChange: function onChange(event, editor) {
-          component.info = editor.html.get();
+          component.comment = editor.html.get();
         }
       });
     } else {
       var info = !component.info ? null : (0, _component.B)({
-        className: _style2.default.info
+        className: _style2.default.info + ' fr-view'
       }, (0, _component.HTML)(component.info));
 
       var comment = !component.comment ? null : (0, _component.B)({
-        className: _style2.default.comment
+        className: _style2.default.comment + ' fr-view'
       }, (0, _component.HTML)(component.comment));
     }
 
