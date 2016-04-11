@@ -64,7 +64,7 @@ class Evaluation implements ExtractInterface
     public function getStartDate($cid)
     {
         return sprintf(
-            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' and period = 1',
+            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' AND period = 1',
             $cid
         );
     }
@@ -72,7 +72,7 @@ class Evaluation implements ExtractInterface
     public function getEndDate($cid)
     {
         return sprintf(
-            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' and period = 2',
+            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' ORDER BY period DESC ',
             $cid
         );
     }
