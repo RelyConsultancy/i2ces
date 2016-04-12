@@ -1,3 +1,11 @@
+- name: Create php link
+  file: src=/usr/bin/php56 dest=/usr/bin/php state=link
+
+- name: Make sure there is no wrong php.ini file
+  file: path=/etc/php.ini state=absent
+
+- name: Create php.ini link
+  file: src=/opt/remi/php56/root/etc/php.ini dest=/etc/php.ini state=link
 
 - name: set SELinux to permissive
   action: selinux policy=targeted state=permissive

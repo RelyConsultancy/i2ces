@@ -39,4 +39,5 @@ composer_path: /usr/local/bin/composer
 composer_keep_updated: true
 composer_add_to_path: true
 composer_github_oauth_token: 'f41d1264849cb0098970a887aa040d534b0a1085'
-php_executable: php
+php_executable: php56
+php_conf_path: /opt/remi/php56/root/etc/
