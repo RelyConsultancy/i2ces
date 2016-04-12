@@ -8,6 +8,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use i2c\GenerateEvaluationBundle\Entity\ImportOption;
+use Symfony\Component\DependencyInjection\Exception\LogicException;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class RawImportCommand
@@ -20,6 +23,9 @@ class RawImportCommand extends ContainerAwareCommand
     /** @var array */
     protected $rawTablesConfig;
 
+    /** @var string */
+    protected $importValidationFile;
+
     /** @var Logger */
     protected $logger;
 
@@ -27,11 +33,13 @@ class RawImportCommand extends ContainerAwareCommand
      * RawImportCommand constructor.
      *
      * @param array  $rawTablesConfig
+     * @param string $importValidationFile
      * @param Logger $logger
      */
-    public function __construct($rawTablesConfig, Logger $logger)
+    public function __construct($rawTablesConfig, $importValidationFile, Logger $logger)
     {
         $this->rawTablesConfig = $rawTablesConfig;
+        $this->importValidationFile = $importValidationFile;
         $this->logger = $logger;
 
         parent::__construct("i2c:data-import");
@@ -84,6 +92,18 @@ class RawImportCommand extends ContainerAwareCommand
                 $input->getOption('line-endings')
             );
 
+            $fs = new Filesystem();
+            $importValidationFilePath = sprintf(
+                '%s/%s',
+                $importOptions->getImportFilePath(),
+                $this->importValidationFile
+            );
+            if (!$fs->exists($importValidationFilePath)) {
+                throw new FileNotFoundException(
+                    sprintf('The import for path \'%s\' is not finished!', $importOptions->getImportFilePath())
+                );
+            }
+
             $this->getContainer()
                 ->get('i2c_generate_evaluation.import_data')
                 ->import($importOptions, $this->rawTablesConfig);
@@ -94,6 +114,9 @@ class RawImportCommand extends ContainerAwareCommand
         } catch (\PDOException $ex) {
             $this->logger->addCritical($ex->getTraceAsString());
             throw new \RuntimeException($ex->getMessage());
+        } catch (FileNotFoundException $ex) {
+            $this->logger->addCritical($ex->getMessage());
+            throw new LogicException($ex->getMessage());
         }
     }
 }

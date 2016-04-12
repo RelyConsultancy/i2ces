@@ -123,3 +123,5 @@ parameters:
     media_laydown_config:
         - { color: "#ccc", media: ['Instore Sampling', 'Entrance Gates', 'Six Sheets'], label: 'Evaluated media' }
         - { color: "#555", media: ['TV Wall', 'JS Magazine'], label: 'In-Store Promotions' }
+
+    import_validation_filename: "done.txt"
