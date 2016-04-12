@@ -48,3 +48,8 @@ services:
     i2c_generate_evaluation.optional_chapters_config_service:
         class: i2c\GenerateEvaluationBundle\Services\OptionalChaptersConfig
         arguments: [@doctrine.dbal.default_connection]
+
+    i2c_generate.import_all:
+        class: i2c\GenerateEvaluationBundle\Services\ImportAll
+        calls:
+            - [buildPdoConnection, [%database_host%, %database_user%, %database_password%, %database_name%]]
