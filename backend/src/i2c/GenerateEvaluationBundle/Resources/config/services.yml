@@ -5,6 +5,12 @@ imports:
     - { resource: 'import_config.yml' }
 
 services:
+    i2c_generate_evaluation.import_all:
+        class: i2c\GenerateEvaluationBundle\Command\ImportCommand
+        arguments: [%import%,@monolog.logger, @i2c_generate.import_all]
+        tags:
+            - { name: console.command }
+
     i2c_generate_evaluation.raw_import:
         class: i2c\GenerateEvaluationBundle\Command\RawImportCommand
         arguments: [%raw_tables_config%, %import_validation_filename%, @monolog.logger]

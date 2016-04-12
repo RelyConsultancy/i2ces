@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `i2c_import_version` (
   version_number   INT(11),
   start_date       DATETIME,
   end_date         DATETIME,
-  last_import_date DATETIME,
+  last_import_folder VARCHAR(255),
   config_data      BLOB,
   PRIMARY KEY (id)
 )

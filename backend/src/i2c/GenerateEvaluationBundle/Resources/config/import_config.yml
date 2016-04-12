@@ -1,5 +1,6 @@
-import:
-    folder_path: '/var/www/i2ces/import/'
-    version_number: 1
-    field-separator: ','
-    line-endings: '\n'
+parameters:
+    import:
+        folder_path: '/Users/mac/Documents/imports/'
+        version_number: 1
+        field-separator: ','
+        line-endings: '\n'

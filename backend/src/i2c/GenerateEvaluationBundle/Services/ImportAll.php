@@ -53,9 +53,9 @@ class ImportAll
             json_encode($importData)
         );
 
-        $result = $this->pdoConnection->query($sql)->fetch(\PDO::FETCH_COLUMN);
+        $this->pdoConnection->query($sql);
 
-        return $result;
+        return $this->pdoConnection->lastInsertId();
     }
 
     /**
@@ -68,10 +68,28 @@ class ImportAll
     {
         $sql = sprintf(
             'UPDATE i2c_import_version
-             SET end_date=\'%s\', last_import_date=\'%s\'
+             SET end_date=\'%s\', last_import_folder=\'%s\'
              WHERE id=%s',
             $this->getCurrentDate(),
             $lastImportedFolder,
+            $importId
+        );
+
+        return $this->pdoConnection->exec($sql);
+    }
+
+    /**
+     * @param $importId
+     *
+     * @return int
+     */
+    public function markImportAsFailure($importId)
+    {
+        $sql = sprintf(
+            'UPDATE i2c_import_version
+             SET end_date=\'%s\', last_import_folder=NULL
+             WHERE id=%s',
+            $this->getCurrentDate(),
             $importId
         );
 
@@ -83,7 +101,7 @@ class ImportAll
      */
     public function getLastImportDate()
     {
-        $sql = 'SELECT last_import_date
+        $sql = 'SELECT last_import_folder
                 FROM i2c_import_version
                 ORDER BY id DESC
                 LIMIT 1';
@@ -96,6 +114,8 @@ class ImportAll
      */
     protected function getCurrentDate()
     {
-        return date('YYYY-MM-DD', time());
+        $now = new \DateTime('now');
+
+        return $now->format('Y-m-d\TH:i:s');
     }
 }
