@@ -78,7 +78,7 @@ class SupplierLogo
     public function getLogoLabel($businessUnitId)
     {
         $query = sprintf(
-            'SELECT DISTINCT brand FROM evaluation
+            'SELECT DISTINCT brand FROM i2c_evaluation
              WHERE business_unit_id = \'%s\'',
             $businessUnitId
         );

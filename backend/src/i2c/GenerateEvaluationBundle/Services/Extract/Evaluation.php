@@ -64,15 +64,24 @@ class Evaluation implements ExtractInterface
     public function getStartDate($cid)
     {
         return sprintf(
-            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' and period = 1',
+            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' AND period = 1',
             $cid
         );
     }
 
+    /**
+     * Returns an array of all the dates of the campaign in descending order the first value would be either the end
+     * of the post period or the latest date provided for a given campaign, the decision on which date to use should be
+     * handled in the twig file
+     *
+     * @param $cid
+     *
+     * @return string
+     */
     public function getEndDate($cid)
     {
         return sprintf(
-            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' and period = 2',
+            'SELECT period_date as date from ie_timings_data where master_campaign_id = \'%s\' ORDER BY period DESC ',
             $cid
         );
     }
