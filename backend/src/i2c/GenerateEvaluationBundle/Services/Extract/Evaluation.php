@@ -69,6 +69,15 @@ class Evaluation implements ExtractInterface
         );
     }
 
+    /**
+     * Returns an array of all the dates of the campaign in descending order the first value would be either the end
+     * of the post period or the latest date provided for a given campaign, the decision on which date to use should be
+     * handled in the twig file
+     *
+     * @param $cid
+     *
+     * @return string
+     */
     public function getEndDate($cid)
     {
         return sprintf(
