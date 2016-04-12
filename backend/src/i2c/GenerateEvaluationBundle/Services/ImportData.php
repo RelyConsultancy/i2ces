@@ -242,14 +242,6 @@ class ImportData
         $lineEndings,
         $additionalSetters
     ) {
-        foreach ($columns as $column) {
-            $additionalSetters[] = sprintf(
-                '%s = TRIM(@%s, \'%%Y-%%m-%%d\')',
-                $column,
-                $column
-            );
-        }
-
         if ($additionalSetters) {
             $additionalSetters = sprintf(
                 'SET %s',
