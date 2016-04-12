@@ -83,7 +83,7 @@ class ImportAll
      */
     public function getLastImportDate()
     {
-        $sql = 'SELECT last_import_id
+        $sql = 'SELECT last_import_date
                 FROM i2c_import_version
                 ORDER BY id DESC
                 LIMIT 1';
