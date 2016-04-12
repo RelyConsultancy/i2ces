@@ -9,7 +9,9 @@ parameters:
                 pp_results: 'DECIMAL(18,6)'
             primary_key: 'master_campaign_id'
             file_name: 'ie_cat_context_data.csv'
-            additional_setters: []
+            additional_setters:
+                - "metric = TRIM(metric)"
+                - "product = TRIM(product)"
         ie_campaign_data:
             table_name: 'ie_campaign_data'
             columns:
@@ -79,6 +81,7 @@ parameters:
             file_name: 'ie_promo_data.csv'
             additional_setters:
                 - "week_commencing = STR_TO_DATE(@week_commencing, '%%Y-%%m-%%d')"
+                - "product = TRIM(product)"
         ie_results_data:
             table_name: 'ie_results_data'
             columns:

@@ -46,12 +46,15 @@
                             "label": "during",
                             "date_start": "{{ timing_during[0].start_date }}",
                             "date_end": "{{ timing_during[0].end_date }}"
-                        },
+                        }
+                        {% if timing_post[0] is defined %}
+                        ,
                         {
                             "label": "post",
-                            "date_start": {% if timing_post[0] is defined %}"{{ timing_post[0].start_date }}"{% else %}null{% endif %},
-                            "date_end": {% if timing_post[0] is defined %}"{{ timing_post[0].end_date }}"{% else %}null{% endif %}
+                            "date_start": "{{ timing_post[0].start_date }}",
+                            "date_end": "{{ timing_post[0].end_date }}"
                         }
+                        {% endif %}
                     ]
                 }
             ]

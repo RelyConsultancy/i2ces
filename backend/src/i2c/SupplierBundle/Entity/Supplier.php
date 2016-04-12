@@ -33,5 +33,5 @@ class Supplier extends BusinessUnit
      *
      * @JMS\Exclude()
      */
-    protected $isNewSupplier;
+    protected $isNewSupplier = true;
 }
