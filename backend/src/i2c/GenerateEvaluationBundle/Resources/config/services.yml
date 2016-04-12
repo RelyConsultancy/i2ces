@@ -2,6 +2,7 @@ imports:
     - { resource: 'config.yml' }
     - { resource: 'extract_services.yml'}
     - { resource: 'chart_data_set_config_services.yml'}
+    - { resource: 'import_config.yml' }
 
 services:
     i2c_generate_evaluation.raw_import:

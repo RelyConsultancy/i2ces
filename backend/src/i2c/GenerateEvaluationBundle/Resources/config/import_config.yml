@@ -1,0 +1,5 @@
+import:
+    folder_path: '/var/www/i2ces/import/'
+    version_number: 1
+    field-separator: ','
+    line-endings: '\n'
