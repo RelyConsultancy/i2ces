@@ -113,6 +113,15 @@ CREATE TABLE IF NOT EXISTS `i2c_channel_icons` (
   DEFAULT CHARSET = utf8
   COLLATE = utf8_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `i2c_pages` (
+  type VARCHAR(255) NOT NULL,
+  title   VARCHAR(255) NOT NULL,
+  content   BLOB,
+  PRIMARY KEY (type)
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
+
 INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Direct Mail', 'dm');
 INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Secondary Space', '');
 INSERT INTO `i2c_channel_icons` (`channel_name`, `icon_name`) VALUES ('Nectar Competition Barker', 'barkers');
@@ -141,3 +150,6 @@ INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('New_trialists', 'c
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Units', 'units');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('SPEC', 'GBP');
 INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('FOP', 'percentage');
+INSERT INTO `i2c_objective_units` (`metric`, `unit`) VALUES ('Existing_custs', 'customer');
+
+INSERT INTO `i2c_pages` (`type`, `title`, `content`) VALUES ('faq', 'F.A.Q.', 'FAQ page content');

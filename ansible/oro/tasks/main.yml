@@ -76,19 +76,19 @@
 - name: Clear cache
   command: chdir=/var/www/html php app/console cache:clear --env=prod
 
-- name: Check if src/Evaluation/DashboardBundle/Resources/public folder exists.
-  stat: "path=/var/www/html/src/Evaluation/DashboardBundle/Resources/public"
+- name: Check if src/i2c/DashboardBundle/Resources/public folder exists.
+  stat: "path=/var/www/html/src/i2c/DashboardBundle/Resources/public"
   register: dashboard_public_exists
 
 - name: Debug dashboard_public_exists
   debug: msg="Variable 'dashboard_public_exists' is set to {{ dashboard_public_exists }}"
 
 - name: Create backend dirs for frontend integration
-  command: " mkdir {{ item }} "
+  file:  path="{{ item }}" state=directory mode=0775
   with_items:
-    - /var/www/html/src/Evaluation/DashboardBundle/Resources/public
-    - /var/www/html/src/Evaluation/DashboardBundle/Resources/public/js
-    - /var/www/html/src/Evaluation/DashboardBundle/Resources/public/css
+    - /var/www/html/src/i2c/DashboardBundle/Resources/public
+    - /var/www/html/src/i2c/DashboardBundle/Resources/public/js
+    - /var/www/html/src/i2c/DashboardBundle/Resources/public/css
   when: not dashboard_public_exists.stat.exists
 
 - name: Check if web/fonts folder exists.
@@ -99,23 +99,23 @@
   debug: msg="Variable 'web_fonts_exists' is set to {{ web_fonts_exists }}"
 
 - name: Create web dirs for frontend integration
-  command: " mkdir {{ item }} "
+  file:  path="{{ item }}" state=directory mode=0775
   with_items:
     - /var/www/html/web/fonts
     - /var/www/html/web/images
   when: not web_fonts_exists.stat.exists
 
 - name: Integrate bundles.js from frontend to backend
-  copy: src=../frontend/public/assets/bundle.js dest=/var/www/html/src/Evaluation/DashboardBundle/Resources/public/js/index.js force=yes
+  copy: src=../frontend/public/assets/bundle.js dest=/var/www/html/src/i2c/DashboardBundle/Resources/public/js/index.js force=yes
 
 - name: Integrate bundles.css from frontend to backend
-  copy: src=../frontend/public/assets/bundle.css dest=/var/www/html/src/Evaluation/DashboardBundle/Resources/public/css/index.css force=yes
+  copy: src=../frontend/public/assets/bundle.css dest=/var/www/html/src/i2c/DashboardBundle/Resources/public/css/index.css force=yes
 
 - name: Integrate fonts from frontend to backend
   copy: src=../frontend/public/fonts dest=/var/www/html/web/fonts force=yes
 
 - name: Integrate images from frontend to backend
-  copy: src=../frontend/public/images dest=/var/www/ht§ml/web/images force=yes
+  copy: src=../frontend/public/images dest=/var/www/html/web/images force=yes
 
 - name: Install assets
   command: chdir=/var/www/html php app/console asset:install --env=prod
@@ -124,15 +124,20 @@
   command: chdir=/var/www/html php app/console assetic:dump --env=prod
 
 - name: Update the database
-  command: chdir=/var/www/html php app/console i2c:schema:update
+  command: chdir=/var/www/html php app/console i2c:schema:update --version-number=1
   become_user: root
 
 - name: Load custom entities into oro-crm
   command: chdir=/var/www/html php app/console oro:entity-config:update -f
 
+- name: Apply oro migrations
+  command: chdir=/var/www/html php app/console oro:migration:load --force
+  become_user: root
+
+- name: Create new translations for the oro dashboard
+  command: chdir=/var/www/html php app/console oro:translation:dump en
+  become_user: root
+
 - name: Create initial data
   command: chdir=/var/www/html php app/console i2c:initial-setup
   become_user: root
-
-- name: Import demo data to mysql
-  mysql_db: state=import name=i2c target=/var/www/html/src/Evaluation/EvaluationBundle/Resources/data/demo.sql login_user=root login_password=root

@@ -32,7 +32,10 @@ else {
   const chapter_id = argv['chapter']
   const output = argv['output']
 
-  const url = `${basePath}/${evaluation_cid}`
+  const url = chapter_id
+    ? `${basePath}/${evaluation_cid}/${chapter_id}`
+    : `${basePath}/${evaluation_cid}`
+
 
   const toPDF = (error, data) => {
     if (error) return console.log(error)
@@ -54,8 +57,8 @@ else {
 
   electron.app.on('ready', (ctx) => {
     let window = new electron.BrowserWindow({
-      width: 1000,
-      height: 800,
+      width: 1680,
+      height: 900,
       show: false,
     })
 
@@ -69,10 +72,10 @@ else {
       const options = {
         pageSize: 'A4',
         // 0: default, 1: no margin, 2: minimum margin
-        marginType: 2,
+        marginType: 0,
         printBackground: true,
         printSelectionOnly: false,
-        landscape: false,
+        landscape: true,
       }
 
       setTimeout(() => {

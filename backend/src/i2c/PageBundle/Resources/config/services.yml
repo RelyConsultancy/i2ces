@@ -1,0 +1,8 @@
+services:
+    i2c_page.page_database_manager_service:
+        class: i2c\PageBundle\Services\PageDatabaseManager
+        arguments: [@oro_security.acl_helper, @doctrine.orm.default_entity_manager]
+
+    i2c_page.page_service:
+        class: i2c\PageBundle\Services\Page
+        arguments: [@serializer, @doctrine.orm.default_entity_manager]

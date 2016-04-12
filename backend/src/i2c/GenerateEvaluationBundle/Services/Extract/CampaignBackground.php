@@ -146,23 +146,63 @@ class CampaignBackground implements ExtractInterface
     }
 
     /**
-     * Returns an array with the media type and periods.
-     *
      * @param $cid
      *
-     * @return array
-     *
-     * @throws \Doctrine\DBAL\DBALException
+     * @return string
      */
-    public function getMediaLaydown($cid)
+    public function getEvaluatedMediaLaydown($cid)
     {
         return sprintf(
-            'SELECT media_label AS media_label,
+            'SELECT \'media\' AS type,
+             media_label AS media_label,
              start_date AS start_date,
              end_date AS end_date
              FROM ie_media_data
              WHERE master_campaign_id = \'%s\'
+              AND evaluate = 1
             ',
+            $cid
+        );
+    }
+
+    /**
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getOfferMediaLaydown($cid)
+    {
+        return sprintf(
+            'SELECT \'promotion\' AS type,
+             media_label AS media_label,
+             start_date AS start_date,
+             end_date AS end_date
+             FROM ie_media_data
+             WHERE master_campaign_id = \'%s\'
+              AND evaluate = 0
+              AND media_label LIKE \'%%sampling%%\'
+            ',
+            $cid
+        );
+    }
+
+    /**
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getOtherMediaLaydown($cid)
+    {
+        return sprintf(
+            'SELECT \'other\' AS type,
+               media_label AS media_label,
+               start_date AS start_date,
+               end_date AS end_date
+               FROM ie_media_data
+               WHERE master_campaign_id = \'%s\'
+                AND evaluate = 0
+                AND media_label NOT LIKE \'%%sampling%%\'
+              ',
             $cid
         );
     }

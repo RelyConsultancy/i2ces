@@ -2,6 +2,9 @@ services:
     i2c_image_upload.image_upload:
         class: i2c\ImageUploadBundle\Services\ImageUpload
 
+    i2c_image_upload.image_processing:
+        class: i2c\ImageUploadBundle\Services\ImageProcessing
+
     i2c_image_upload.image_upload_queue:
         class: i2c\ImageUploadBundle\Services\UploadedImageQueue
         arguments: [@doctrine]

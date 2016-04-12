@@ -70,7 +70,7 @@ It will only update the initial roles in the application once.'
 
         $logger = $container->get('logger');
         $logger->addInfo("Initial setup completed successfully");
-        $output->addInfo("Initial setup completed successfully");
+        $output->writeln("Initial setup completed successfully");
     }
 
     /**
