@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\Exception\LogicException;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -102,9 +104,16 @@ class ImportCommand extends ContainerAwareCommand
 
         } catch (\PDOException $ex) {
             $this->logger->addCritical($ex->getTraceAsString());
-            throw new \RuntimeException($ex->getMessage());
-        } finally {
             $this->importAllService->markImportAsFailure($importId);
+            throw new \RuntimeException($ex->getMessage());
+        } catch (FileNotFoundException $ex) {
+            $this->logger->addCritical($ex->getMessage());
+            $this->importAllService->markImportAsFailure($importId);
+            throw new LogicException($ex->getMessage());
+        } catch (\Exception $ex) {
+            $this->logger->addCritical($ex->getTraceAsString());
+            $this->importAllService->markImportAsFailure($importId);
+            throw new \LogicException('Something went wrong while generating the evaluations');
         }
     }
 }

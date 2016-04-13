@@ -87,7 +87,7 @@ class ImportAll
     {
         $sql = sprintf(
             'UPDATE i2c_import_version
-             SET end_date=\'%s\', last_import_folder=NULL
+             SET end_date=null
              WHERE id=%s',
             $this->getCurrentDate(),
             $importId
