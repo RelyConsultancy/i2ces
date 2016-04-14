@@ -1,39 +1,132 @@
 {
-  "id": "2",
-  "order": 2,
-  "state": "visible",
-  "title": "Campaign Background",
   "content": [{
     "type": "section",
+    "title": "Background",
+    "access": "editable",
+    "content": [{
+      "type": "html",
+      "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+    }]
+  }, {
+    "type": "section",
+    "title": "Campaign Objectives",
+    "access": "editable",
+    "content": [{
+      "type": "list",
+      "items": ["Grow total units", "Acquire new customers"]
+    }]
+  }, {
+    "type": "section",
+    "title": "Timings",
+    "access": "readonly",
+    "content": [{
+      "type": "list_timings",
+      "items": [{
+        "label": "pre",
+        "date_start": "2015-08-04",
+        "date_end": "2015-10-26"
+      }, {
+        "label": "during",
+        "date_start": "2015-10-27",
+        "date_end": "2015-12-24"
+      }, {
+        "label": "post",
+        "date_start": "2015-12-25",
+        "date_end": "2016-01-21"
+      }]
+    }]
+  }, {
+    "type": "section",
+    "title": "Evaluated Channels",
+    "access": "readonly",
+    "content": [{
+      "type": "list_channels",
+      "items": [{
+        "label": "Instore Sampling",
+        "type": "sampling"
+      }, {
+        "label": "JS Magazine",
+        "type": "magazine"
+      }, {
+        "label": "Six Sheets",
+        "type": "6_sheet"
+      }]
+    }]
+  }, {
+    "type": "section",
+    "title": "Evaluated Cost",
+    "access": "readonly",
+    "content": [{
+      "type": "list",
+      "items": ["GBP 37600"]
+    }]
+  }, {
+    "type": "section",
+    "title": "Offer SKUs",
+    "content": [{
+      "type": "list",
+      "items": ["LINDT GOLD REINDEER 100G", "LINDT GOLD TEDDY BEAR 100G", "LINDT RED SANTA 125G"]
+    }]
+  }, {
+    "type": "section",
     "title": "Media Laydown",
+    "access": "readonly",
     "content": [{
       "type": "chart_media_laydown",
       "items": [{
-        "type": "offer",
-        "label": "TV Wall",
-        "date_start": "2015-10-18T00:00:00",
-        "date_end": "2015-10-18T23:59:59"
+        "type": "media",
+        "label": "Instore Sampling",
+        "date_start": "2015-12-04T00:00:00",
+        "date_end": "2015-12-04T23:59:59"
       }, {
         "type": "media",
         "label": "Instore Sampling",
-        "date_start": "2015-10-12T00:00:00",
-        "date_end": "2015-10-29T00:00:00"
-      }, {
-        "type": "offer",
-        "label": "TV Wall",
-        "date_start": "2015-10-12T00:00:00",
-        "date_end": "2015-10-12T23:59:59"
+        "date_start": "2015-12-06T00:00:00",
+        "date_end": "2015-12-06T23:59:59"
       }, {
         "type": "media",
-        "label": "Facebook",
-        "date_start": "2015-10-04T00:00:00",
-        "date_end": "2015-11-02T00:00:00"
+        "label": "Instore Sampling",
+        "date_start": "2015-12-05T00:00:00",
+        "date_end": "2015-12-05T23:59:59"
       }, {
-        "type": "other",
-        "label": "eMail",
-        "date_start": "2015-10-09T00:00:00",
-        "date_end": "2015-10-21T00:00:00"
+        "type": "media",
+        "label": "JS Magazine",
+        "date_start": "2015-12-01T00:00:00",
+        "date_end": "2015-12-24T23:59:59"
+      }, {
+        "type": "media",
+        "label": "JS Magazine",
+        "date_start": "2015-10-27T00:00:00",
+        "date_end": "2015-12-01T23:59:59"
+      }, {
+        "type": "media",
+        "label": "Six Sheets",
+        "date_start": "2015-11-30T00:00:00",
+        "date_end": "2015-12-13T23:59:59"
+      }],
+      "legend": [{
+        "type": "media",
+        "label": "Evaluated media"
+      }, {
+        "type": "media",
+        "label": "Evaluated media"
+      }, {
+        "type": "media",
+        "label": "Evaluated media"
+      }, {
+        "type": "media",
+        "label": "Evaluated media"
+      }, {
+        "type": "media",
+        "label": "Evaluated media"
+      }, {
+        "type": "media",
+        "label": "Evaluated media"
       }]
     }]
-  }]
+  }],
+  "id": 2 ,
+  "title": "Campaign Background",
+  "state": "visible",
+  "order": 2
 }

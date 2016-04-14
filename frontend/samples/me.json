@@ -1,7 +1,7 @@
 {
   "id": 1,
   "username": "user",
-  "type": "i2c_employee",
+  "type": "supplier",
   "view": [
     "i2c1507187a",
     "i2c1509134a",
@@ -13,8 +13,8 @@
   "logo": {
     "path": "/images/samples/logo_supplier.png",
     "label": "Collgate International LTD",
-    "width": 472,
-    "height": 579
+    "width": 200,
+    "height": 63
   },
   "host": "http://local:3000"
 }
