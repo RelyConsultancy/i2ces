@@ -8,6 +8,8 @@ var url = system.args[1]
 var filepath = system.args[2]
 var delay = system.args[3] || 0
 
+console.log(url, filepath, delay)
+
 var dpi = 72.0
 var dpcm = dpi/2.05
 var pageWidth = 29.7

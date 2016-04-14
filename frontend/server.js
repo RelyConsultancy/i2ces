@@ -5,7 +5,7 @@ import send from 'koa-send'
 import route from 'koa-route'
 import bodyparser from 'koa-bodyparser'
 import csvParser from 'csv-parser'
-import handleUpload from './server-upload.js'
+import handleUpload from './server_upload.js'
 
 
 // thunk function to load and parse JSON
