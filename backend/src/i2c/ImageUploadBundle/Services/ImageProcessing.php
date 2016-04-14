@@ -34,8 +34,8 @@ class ImageProcessing
         }
 
         $imageDetails = new ImageDetails();
-        $imageDetails->setWidth($details[self::IMAGE_HEIGHT_INDEX]);
-        $imageDetails->setHeight($details[self::IMAGE_WIDTH_INDEX]);
+        $imageDetails->setWidth($details[self::IMAGE_WIDTH_INDEX]);
+        $imageDetails->setHeight($details[self::IMAGE_HEIGHT_INDEX]);
 
         return $imageDetails;
     }
