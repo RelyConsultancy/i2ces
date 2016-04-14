@@ -50,7 +50,7 @@ class UserController extends RestApiController
             $logo = $this->getLogoDetails($logoName, $businessUnit->getId());
         }
 
-        $logo['label'] = $this->getSupplierLogoService()->getLogoLabel($businessUnit->getId());
+        $logo['label'] = $businessUnit->getName();
 
         $data = array(
             'id'             => $user->getId(),
