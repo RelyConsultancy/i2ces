@@ -6,6 +6,7 @@
 
   roles:
     - init
+    - jailed-users
     - geerlingguy.repo-remi
     - geerlingguy.mysql
     - geerlingguy.apache

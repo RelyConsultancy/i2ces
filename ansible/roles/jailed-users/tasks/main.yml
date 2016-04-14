@@ -1,0 +1,58 @@
+---
+- name: Make sure the jailed group exists
+  group: name=jailed state=present system=yes
+
+- name: insert sshd configuration for jailed sftp
+  blockinfile:
+    dest: /etc/ssh/sshd_config
+    insertafter: EOF
+    block: |
+      ClientAliveInterval 220
+      ClientAliveCountMax 0
+      Match Group jailed
+          ChrootDirectory %h
+          X11Forwarding no
+          AllowTcpForwarding no
+          PasswordAuthentication no
+          ForceCommand internal-sftp
+  notify: restart-sshd
+  tags: jailed-user
+
+- name: Make sure subsystem is correctly configured
+  lineinfile: dest=/etc/ssh/sshd_config regexp='^Subsystem' line='Subsystem     sftp   internal-sftp'
+  sudo: yes
+  notify: restart-sshd
+  tags: jailed-user
+
+- name: Add the deploy user
+  user: name="{{ item.name }}"
+        home="{{ item.folder }}"
+        shell=/bin/bash
+        password="{{ item.password }}"
+        update_password=always
+        comment="SFTP jailed user"
+        groups=jailed
+  sudo: yes
+  with_items: "{{ sftp_user }}"
+  tags: jailed-user
+
+- name: jailed user | Ensure user home path exists
+  file: state=directory owner=root group=root  path="{{ item.folder }}" mode=0755
+  sudo: yes
+  with_items: "{{ sftp_user }}"
+  tags: jailed-user
+
+- name: jailed user | Ensure incoming folder exists
+  file: state=directory owner="{{ item.name }}" group="{{ item.name }}"  path="{{ item.folder }}/incoming" mode=0775
+  sudo: yes
+  with_items: "{{ sftp_user }}"
+  tags:
+    - jailed-users
+
+- name: Set up authorized_keys for the deployment user
+  authorized_key: user="{{ item.name }}"
+                  state=present
+                  key="{{ item.key }}"
+  sudo: yes
+  with_items: "{{ sftp_user }}"
+  tags: jailed-user
