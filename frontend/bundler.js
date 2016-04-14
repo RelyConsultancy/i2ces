@@ -8,6 +8,8 @@ import { watch } from 'chokidar'
 import CSSModules from '@carrd/css-modules'
 import cssify from '@carrd/cssify'
 import LiveReload from 'tiny-lr'
+import autoprefixer from 'autoprefixer'
+import postcss from 'postcss'
 
 
 const livereload = LiveReload()
@@ -111,12 +113,27 @@ const bundleCSS = (options) => {
   const save = () => {
     try {
       css.load(input)
-      writeFileSync(output, css.stringify())
-      css.cache.clear()
 
-      const path = output.replace(__dirname, '')
-      console.log(`CSS bundled: ${path}`)
-      browserReload(path)
+      const handleCSS = (result) => {
+        result.warnings().forEach((warn) => {
+          console.warn(warn.toString())
+        })
+
+        writeFileSync(output, result.css)
+      }
+
+      const emitChange = () => {
+        css.cache.clear()
+
+        const path = output.replace(__dirname, '')
+        browserReload(path)
+        console.log(`CSS bundled: ${path}`)
+      }
+
+      postcss([autoprefixer])
+        .process(css.stringify())
+        .then(handleCSS)
+        .then(emitChange)
     }
     catch (error) {
       console.log(error.stack)
