@@ -19,7 +19,6 @@ d3.gantt = function (container, { data, palette, tickFormat }) {
     return item
   })
 
-  const labels = data.map(i => i.label)
   const margin = { top: 30, right: 20, bottom: 0, left: 130 }
 
   const timeDomainStart = data
@@ -46,7 +45,7 @@ d3.gantt = function (container, { data, palette, tickFormat }) {
       .rangeRound([0, width])
 
     const yScale = d3.scale.ordinal()
-      .domain(labels)
+      .domain(data.map(i => i.label))
       .rangeBands([0, height - margin.top - margin.bottom])
 
     var svg = d3.select(container)
@@ -132,4 +131,3 @@ d3.gantt = function (container, { data, palette, tickFormat }) {
   // resize
   d3.select(window).on('resize', draw)
 }
-

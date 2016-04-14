@@ -1,6 +1,6 @@
 import { Component, B } from '/components/component.js'
 import Chart from '/components/Chart'
-import { getUnique, capitalize } from '/application/utils.js'
+import { getUnique } from '/application/utils.js'
 import style from './style.css'
 
 
@@ -16,10 +16,11 @@ const colors = [
 
 export default Component({
   render () {
-    const { items } = this.props.component
-    const palette = {}
+    const { component } = this.props
+    const { items } = component
     const types = getUnique(items.map(i => i.type)).sort()
     const labels = getUnique(items.map(i => i.label))
+    const palette = {}
 
     types.forEach((type, index) => {
       palette[type] = colors[index]
@@ -39,7 +40,9 @@ export default Component({
         backgroundColor: colors[key]
       }})
 
-      return B({ key, className: style.legend_label }, color, capitalize(type))
+      const label = component.legend.filter(i => i.type == type).shift().label
+
+      return B({ key, className: style.legend_label }, color, label)
     }))
 
     return B({ className: style.component }, chart, legend)

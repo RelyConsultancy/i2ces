@@ -61,11 +61,15 @@ const TableSales = ({ data }) => {
     TD('During'),
     TD(fmtUnit(data.during.uplift, 'currency')),
     TD(fmtUnit(data.during.percentage_uplift, 'percent'))
-  ), TR(
-    TD('Post'),
-    TD(fmtUnit(data.post.uplift, 'currency')),
-    TD(fmtUnit(data.post.percentage_uplift, 'percent'))
   )]
+
+  if (data.post.uplift) {
+    rows.push(TR(
+      TD('Post'),
+      TD(fmtUnit(data.post.uplift, 'currency')),
+      TD(fmtUnit(data.post.percentage_uplift, 'percent'))
+    ))
+  }
 
   const footer = TR(
     { className: style.table_sales_footer },
