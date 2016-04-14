@@ -126,8 +126,8 @@
                             {
                                 "type": "{{ item.type }}",
                                 "label": "{{ item.media_label }}",
-                                "date_start": "{{ date(item.start_date)|date('Y-m-d') }}",
-                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}"
+                                "date_start": "{{ date(item.start_date)|date('Y-m-d') }}T00:00:00",
+                                "date_end": "{{ date(item.end_date)|date('Y-m-d') }}T23:59:59"
                                 {% for legend_config in additional_data.legend_configs %}
                                     {% if (item.type == legend_config.media_type) and (legend_config.media_type not in usedMediaTypes) %}
                                         {% set legendItems = legendItems|merge([{type: legend_config.media_type,label: legend_config.label}]) %}
