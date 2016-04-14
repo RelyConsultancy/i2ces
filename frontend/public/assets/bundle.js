@@ -72769,11 +72769,15 @@ var _d2 = _interopRequireDefault(_d);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-window.d3 = _d2.default;
-/**
- * @author Dimitry Kudrayvtsev
- * @version 2.1
- */
+var fmtTime = _d2.default.time.format('%Y-%m-%dT%H:%M:%S');
+
+var getDayOfYear = function getDayOfYear(date) {
+  var start = new Date(date.getFullYear(), 0, 0);
+  var diff = date - start;
+  var oneDay = 1000 * 60 * 60 * 24;
+
+  return Math.floor(diff / oneDay);
+};
 
 _d2.default.gantt = function (container, _ref) {
   var data = _ref.data;
@@ -72781,8 +72785,8 @@ _d2.default.gantt = function (container, _ref) {
   var tickFormat = _ref.tickFormat;
 
   data = data.map(function (item) {
-    item.date_start = new Date(item.date_start);
-    item.date_end = new Date(item.date_end);
+    item.date_start = fmtTime.parse(item.date_start);
+    item.date_end = fmtTime.parse(item.date_end);
 
     return item;
   });
@@ -72792,7 +72796,6 @@ _d2.default.gantt = function (container, _ref) {
   });
   var margin = { top: 30, right: 20, bottom: 0, left: 130 };
 
-  var timeDomainMode = 'fit'; // fixed or fit
   var timeDomainStart = data.map(function (i) {
     return i.date_start;
   }).sort(function (a, b) {
@@ -72805,30 +72808,27 @@ _d2.default.gantt = function (container, _ref) {
     return a - b;
   }).pop();
 
+  var from = getDayOfYear(timeDomainStart);
+  var to = getDayOfYear(timeDomainEnd);
+  var days = to - from;
+
   var draw = function draw() {
     var height = container.offsetHeight - margin.top - margin.bottom;
     var width = container.offsetWidth - margin.right - margin.left;
 
-    var xScale = _d2.default.time.scale().domain([timeDomainStart, timeDomainEnd]).nice(_d2.default.time.week).range([0, width]).clamp(true);
+    var xScale = _d2.default.time.scale().domain([timeDomainStart, timeDomainEnd]).nice(_d2.default.time[days <= 14 ? 'day' : 'week']).rangeRound([0, width]);
 
     var yScale = _d2.default.scale.ordinal().domain(labels).rangeBands([0, height - margin.top - margin.bottom]);
 
-    var xAxis = _d2.default.svg.axis().scale(xScale).orient('top').tickFormat(_d2.default.time.format(tickFormat)).tickPadding(10).tickSize(0);
+    var svg = _d2.default.select(container).html('').append('svg').attr('class', 'chart').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append('g').attr('class', 'gantt-chart').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+
+    var xAxis = _d2.default.svg.axis().scale(xScale).orient('top').tickFormat(_d2.default.time.format(tickFormat)).tickPadding(10).tickSize(0).ticks(_d2.default.time[days <= 14 ? 'day' : 'week']);
+
+    svg.append('g').attr('class', 'axis axis_x').attr('font-size', '.75em').attr('fill', '#5A5A5A').transition().call(xAxis);
 
     var yAxis = _d2.default.svg.axis().scale(yScale).orient('left').tickPadding(5).tickSize(0);
 
-    if (timeDomainMode === 'fit') {
-      data.sort(function (a, b) {
-        return a.date_end - b.date_end;
-      });
-      timeDomainEnd = data[data.length - 1].date_end;
-      data.sort(function (a, b) {
-        return a.date_start - b.date_start;
-      });
-      timeDomainStart = data[0].date_start;
-    }
-
-    var svg = _d2.default.select(container).html('').append('svg').attr('class', 'chart').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).append('g').attr('class', 'gantt-chart').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom).attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+    svg.append('g').attr('class', 'axis axis_y').attr('transform', 'translate(-10, 0)').transition().call(yAxis);
 
     svg.selectAll('.chart').data(data).enter().append('rect').attr('fill', function (item) {
       return palette[item.type];
@@ -72839,10 +72839,6 @@ _d2.default.gantt = function (container, _ref) {
     }).attr('width', function (item) {
       return xScale(item.date_end) - xScale(item.date_start);
     });
-
-    svg.append('g').attr('class', 'axis axis_x').attr('font-size', '.75em').attr('fill', '#5A5A5A').transition().call(xAxis);
-
-    svg.append('g').attr('class', 'axis axis_y').attr('transform', 'translate(-10, 0)').transition().call(yAxis);
 
     // grid
     svg.selectAll('line.horizontal_grid').data(data).enter().append('line').attr({
@@ -72860,11 +72856,18 @@ _d2.default.gantt = function (container, _ref) {
       'stroke-width': '1px',
       'shape-rendering': 'crispEdges'
     });
+
+    setTimeout(function () {
+      svg.selectAll('.axis_x .tick > line').attr({
+        'stroke': '#C9C9C9',
+        'y2': '-4'
+      });
+    }, 0);
   };
 
   draw();
 
-  // responsive
+  // resize
   _d2.default.select(window).on('resize', draw);
 };
 
@@ -73019,12 +73022,15 @@ var colors = ['#2ECC71', // emerald
 // sun flower
 exports.default = (0, _component.Component)({
   render: function render() {
-    var component = this.props.component;
+    var items = this.props.component.items;
 
     var palette = {};
-    var types = (0, _utils.getUnique)(component.items.map(function (i) {
+    var types = (0, _utils.getUnique)(items.map(function (i) {
       return i.type;
     })).sort();
+    var labels = (0, _utils.getUnique)(items.map(function (i) {
+      return i.label;
+    }));
 
     types.forEach(function (type, index) {
       palette[type] = colors[index];
@@ -73033,13 +73039,13 @@ exports.default = (0, _component.Component)({
     var chart = (0, _Chart2.default)({
       palette: palette,
       type: 'gantt',
-      data: component.items,
+      data: items,
       tickFormat: '%d %b',
-      style: { height: component.items.length * 3 + 'em' },
+      style: { height: labels.length * 2 + 4 + 'em' },
       className: _style2.default.chart
     });
 
-    var labels = (0, _component.B)({ className: _style2.default.legend }, types.map(function (type, key) {
+    var legend = (0, _component.B)({ className: _style2.default.legend }, types.map(function (type, key) {
       var color = (0, _component.B)({ className: _style2.default.legend_color, style: {
           backgroundColor: colors[key]
         } });
@@ -73047,7 +73053,7 @@ exports.default = (0, _component.Component)({
       return (0, _component.B)({ key: key, className: _style2.default.legend_label }, color, (0, _utils.capitalize)(type));
     }));
 
-    return (0, _component.B)({ className: _style2.default.component }, chart, labels);
+    return (0, _component.B)({ className: _style2.default.component }, chart, legend);
   }
 });
 

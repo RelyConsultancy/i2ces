@@ -16,9 +16,10 @@ const colors = [
 
 export default Component({
   render () {
-    const { component } = this.props
+    const { items } = this.props.component
     const palette = {}
-    const types = getUnique(component.items.map(i => i.type)).sort()
+    const types = getUnique(items.map(i => i.type)).sort()
+    const labels = getUnique(items.map(i => i.label))
 
     types.forEach((type, index) => {
       palette[type] = colors[index]
@@ -27,13 +28,13 @@ export default Component({
     const chart = Chart({
       palette,
       type: 'gantt',
-      data: component.items,
+      data: items,
       tickFormat: '%d %b',
-      style: { height: component.items.length * 3 + 'em' },
+      style: { height: (labels.length * 2 + 4) + 'em' },
       className: style.chart,
     })
 
-    const labels = B({ className: style.legend }, types.map((type, key) => {
+    const legend = B({ className: style.legend }, types.map((type, key) => {
       const color = B({ className: style.legend_color, style: {
         backgroundColor: colors[key]
       }})
@@ -41,6 +42,6 @@ export default Component({
       return B({ key, className: style.legend_label }, color, capitalize(type))
     }))
 
-    return B({ className: style.component }, chart, labels)
+    return B({ className: style.component }, chart, legend)
   }
 })

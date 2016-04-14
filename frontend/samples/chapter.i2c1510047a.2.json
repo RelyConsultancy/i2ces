@@ -5,106 +5,34 @@
   "title": "Campaign Background",
   "content": [{
     "type": "section",
-    "title": "Background",
-    "content": [{
-      "type": "html",
-      "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
-    }]
-  }, {
-    "type": "section",
-    "title": "Campaign Objectives",
-    "content": [{
-      "type": "list",
-      "items": [
-        "Launch New Product",
-        "Grow Total Units",
-        "Grow Share of Category"
-      ]
-    }]
-  }, {
-    "type": "section",
-    "title": "Timings",
-    "content": [{
-      "type": "list_timings",
-      "items": [{
-        "label": "pre",
-        "date_start": "2015-08-04",
-        "date_end": "2015-10-26"
-      }, {
-        "label": "during",
-        "date_start": "2015-10-27",
-        "date_end": "2015-12-24"
-      }, {
-        "label": "post",
-        "date_start": "2015-12-25",
-        "date_end": "2016-01-21"
-      }]
-    }]
-  }, {
-    "type": "section",
-    "title": "Evaluated Channels",
-    "content": [{
-      "type": "list_channels",
-      "items": [{
-        "label": "Aisle Fins",
-        "type": "aisle_fin"
-      }, {
-        "label": "Entrance Gates",
-        "type": "entrance_gate"
-      }, {
-        "label": "Instore Sampling",
-        "type": "sampling"
-      }, {
-        "label": "JS Magazine",
-        "type": "magazine"
-      }]
-    }]
-  }, {
-    "type": "section",
-    "title": "Evaluated Cost",
-    "content": [{
-      "type": "list",
-      "items": [
-        "GBP 10,132"
-      ]
-    }]
-  }, {
-    "type": "section",
-    "title": "Offer SKUs",
-    "content": [{
-      "type": "text",
-      "content": "Please see Product Definitions"
-    }]
-  }, {
-    "type": "section",
     "title": "Media Laydown",
     "content": [{
       "type": "chart_media_laydown",
       "items": [{
         "type": "offer",
-        "label": "Entrance Gates",
-        "date_start": "2015-10-07",
-        "date_end": "2015-10-27"
-      }, {
-        "type": "offer",
         "label": "TV Wall",
-        "date_start": "2015-10-18",
-        "date_end": "2015-11-17"
+        "date_start": "2015-10-18T00:00:00",
+        "date_end": "2015-10-18T23:59:59"
       }, {
         "type": "media",
         "label": "Instore Sampling",
-        "date_start": "2015-10-12",
-        "date_end": "2015-10-29"
+        "date_start": "2015-10-12T00:00:00",
+        "date_end": "2015-10-29T00:00:00"
+      }, {
+        "type": "offer",
+        "label": "TV Wall",
+        "date_start": "2015-10-12T00:00:00",
+        "date_end": "2015-10-12T23:59:59"
       }, {
         "type": "media",
         "label": "Facebook",
-        "date_start": "2015-10-04",
-        "date_end": "2015-11-02"
+        "date_start": "2015-10-04T00:00:00",
+        "date_end": "2015-11-02T00:00:00"
       }, {
         "type": "other",
         "label": "eMail",
-        "date_start": "2015-10-09",
-        "date_end": "2015-10-21"
+        "date_start": "2015-10-09T00:00:00",
+        "date_end": "2015-10-21T00:00:00"
       }]
     }]
   }]
