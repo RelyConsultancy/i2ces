@@ -1,0 +1,18 @@
+.chart {
+  position: relative;
+}
+
+/* style text */
+.chart .c3-chart-texts .c3-text {
+  font-size: .75rem;
+  font-family: 'Archer Bold', serif;
+  fill: #252525 !important;
+}
+
+/* style labels */
+.chart .c3-axis-y2-label,
+.chart .c3-axis-y-label {
+  font-size: .75rem;
+  font-family: 'Archer Bold', serif;
+  fill: #6D6D6D;
+}

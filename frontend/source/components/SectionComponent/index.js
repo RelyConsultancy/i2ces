@@ -1,6 +1,8 @@
 import ChartMediaLaydown from '/components/ChartMediaLaydown'
 import ChartSalesPerformance from '/components/ChartSalesPerformance'
 import ChartPromotionalActivity from '/components/ChartPromotionalActivity'
+import ChartAcquireNewCustomers from '/components/ChartAcquireNewCustomers'
+import ChartAcquireNewCustomers from '/components/ChartGrowCustomerProductRange'
 import ChartNonPurchase from '/components/ChartNonPurchase'
 import ChartOfferSales from '/components/ChartOfferSales'
 import ChartUnitsUplift from '/components/ChartUnitsUplift'
@@ -80,7 +82,15 @@ export default Component({
       case 'chart_non_purchase':
         return ChartNonPurchase({ component })
       break
-
+      
+      case 'chart_acquire_new_customers':
+        return ChartAcquireNewCustomers({ component })
+      break
+      
+      case 'grow_customer_product_range':
+        return ChartGrowCustomerProductRange({ component })
+      break
+      
       case 'table_performance_samples':
         return TablePerformanceSamples({ component })
       break

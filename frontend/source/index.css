@@ -36,5 +36,7 @@
 @import from './components/ChartNonPurchase/style.css';
 @import from './components/ChartOfferSales/style.css';
 @import from './components/ChartUnitsUplift/style.css';
+@import from './components/ChartAcquireNewCustomers/style.css';
+@import from './components/ChartGrowCustomerProductRange/style.css';
 
 @import from './components/TablePerformanceSamples/style.css';
