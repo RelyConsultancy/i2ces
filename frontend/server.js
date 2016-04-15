@@ -158,6 +158,13 @@ $('post', '/api/images/*', function * () {
 })
 
 
+// test incoming headers
+$('get', '/api/headers', function * () {
+  console.log(this.request.headers)
+
+  this.body = this.request.headers
+})
+
 
 // get webapp index
 $('get', '/*', function * () {
