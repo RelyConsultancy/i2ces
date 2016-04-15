@@ -1,9 +1,6 @@
-console.log('Started Phantom.js')
-
 var system = require('system')
 var Page = require('webpage')
 
-var page = Page.create()
 var url = system.args[1]
 var filepath = system.args[2]
 var headers = system.args[3]
@@ -13,15 +10,24 @@ var dpi = 72.0
 var dpcm = dpi/2.05
 var pageWidth = 29.7
 var pageHeight = 21.0
+var customHeaders = {}
+
 
 // set request headers
-var customHeaders = {}
-var setHeader = function (string) {
+headers.split('|').forEach(function (string) {
   var kv = string.trim().split('=')
   customHeaders[kv[0]] = kv[1]
-}
-headers.split('|').forEach(setHeader)
+})
 
+
+// log headers
+Object.keys(customHeaders).forEach(function (key) {
+  console.log('Header:', key + '=' + customHeaders[key])
+})
+console.log('Open:', url)
+
+
+var page = Page.create()
 
 page.settings.dpi = dpi
 page.zoomFactor = 1
@@ -39,6 +45,8 @@ page.paperSize = {
 }
 
 page.open(url, function (status) {
+  console.log('Open status:', status)
+
   if (status == "fail") {
     page.close()
     phantom.exit(1)
@@ -48,8 +56,12 @@ page.open(url, function (status) {
   setTimeout(function () {
     page.render(filepath, { format: 'pdf', quality: 100 })
 
-    console.log('Rendering complete')
+    console.log('Rendered PDF to:', filepath)
 
     phantom.exit()
   }, delay)
+
+  if (delay) {
+    console.log('Renderer delayed by ' + delay + 'ms')
+  }
 })
