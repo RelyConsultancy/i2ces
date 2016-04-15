@@ -50,6 +50,46 @@ services:
     i2c_generate_evaluation.extract_chart_data_set_objective_review_media_type_combinations:
         class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\MediaTypeCombinations
         arguments: [@doctrine.dbal.default_connection]
+        
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_launch_new_product:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\LaunchNewProduct
+        arguments: [@doctrine.dbal.default_connection]
+        
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_acquire_new_customers:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\AcquireNewCustomers
+        arguments: [@doctrine.dbal.default_connection]
+        
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_cross_sell:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\GrowCrossSell
+        arguments: [@doctrine.dbal.default_connection]
+        
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_frequency_of_purchase:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\GrowFrequencyOfPurchase
+        arguments: [@doctrine.dbal.default_connection]
+    
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_share_of_category:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\GrowShareOfCategory
+        arguments: [@doctrine.dbal.default_connection]
+        
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_spend_per_existing_customer:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\GrowSpendPerExistingCustomer
+        arguments: [@doctrine.dbal.default_connection]
+        
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_units_per_existing_customer:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\GrowUnitsPerExistingCustomer
+        arguments: [@doctrine.dbal.default_connection]
+        
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_retain_existing_customers:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\RetainExistingCustomers
+        arguments: [@doctrine.dbal.default_connection]
+        
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_retain_lapsed_customers:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\RetainLapsedCustomers
+        arguments: [@doctrine.dbal.default_connection]
+    
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_retain_new_customers_trialists:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\RetainNewCustomersTrialists
+        arguments: [@doctrine.dbal.default_connection]
 
     i2c_generate_evaluation.extract_services_container:
         class: i2c\GenerateEvaluationBundle\Services\Containers\ExtractContainer
@@ -70,4 +110,14 @@ services:
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_category_context_sales_performance, "extract_chart_data_set_sales_performance"]]
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_total_category, "extract_chart_data_set_grow_total_category"]]
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_media_type_combinations, "extract_chart_data_set_media_type_combinations"]]
-          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_weekly_units_sold_exposed_and_control, "extract_chart_data_set_weekly_units_sold_exposed_and-control"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_weekly_units_sold_exposed_and_control, "extract_chart_data_set_weekly_units_sold_exposed_and_control"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_launch_new_product, "extract_chart_data_set_launch_new_product"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_acquire_new_customers, "extract_chart_data_set_acquire_new_customers"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_cross_sell, "extract_chart_data_set_grow_cross_sell"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_frequency_of_purchase, "extract_chart_data_set_grow_frequency_of_purchase"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_share_of_category, "extract_chart_data_set_grow_share_of_category"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_spend_per_existing_customer, "extract_chart_data_set_grow_spend_per_existing_customer"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_units_per_existing_customer, "extract_chart_data_set_grow_units_per_existing_customer"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_retain_existing_customers, "extract_chart_data_set_retain_existing_customers"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_retain_lapsed_customers, "extract_chart_data_set_retain_lapsed_customers"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_retain_new_customers_trialists, "extract_chart_data_set_retain_new_customers_trialists"]]
