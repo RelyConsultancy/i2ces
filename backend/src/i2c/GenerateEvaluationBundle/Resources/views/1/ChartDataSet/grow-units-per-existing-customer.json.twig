@@ -1,0 +1,54 @@
+{% autoescape false %}
+{
+    "charts": {
+        "offer": [
+            {% for item in offer_data %}
+                { 
+                    "timeperiod": {{ item.timeperiod }},
+                    "exposed": {{ item.exposed }},
+                    "control": {{ item.control}}
+                }
+            {% endfor %}
+        ],
+        "brand": [
+            {% for item in brand_data %}
+                { 
+                    "timeperiod": {{ item.timeperiod }},
+                    "exposed": {{ item.exposed }},
+                    "control": {{ item.control}}
+                }
+                {{ not loop.last ? ',' }}
+            {% endfor %}
+        ]
+    },
+    "table": [
+        {% for item in during_combinations %}
+            {
+                "media_type": {{ item.media_type }},
+                "uplift": {{ item.uplift }},
+                "percentage_uplift": {{ item.percentage_uplift }},
+                "exposed": {{ item.exposed }},
+                "control": {{ item.control }},
+            }
+            {{ not loop.last ? ',' }}
+        {% endfor %}
+    ],
+    "timings": [
+        {
+            "label": "pre",
+            "date_start": "{{ timing_pre[0].start_date }}",
+            "date_end": "{{ timing_pre[0].end_date }}"
+        },
+        {
+            "label": "during",
+            "date_start": "{{ timing_during[0].start_date }}",
+            "date_end": "{{ timing_during[0].end_date }}"
+        },
+        {
+            "label": "post",
+            "date_start": {% if timing_post[0] is defined %} "{{ timing_post[0].start_date }}" {% else %} "" {% endif %},
+            "date_end": {% if timing_post[0] is defined %} "{{ timing_post[0].end_date }}" {% else %} "" {% endif %}
+        }
+    ]
+}
+{% endautoescape %}
