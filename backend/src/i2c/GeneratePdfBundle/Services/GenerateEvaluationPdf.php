@@ -7,6 +7,7 @@ use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
 use i2c\GeneratePdfBundle\Entity\EvaluationPdfConfig;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 /**
  * Class GenerateEvaluationPdf
@@ -17,16 +18,20 @@ class GenerateEvaluationPdf
 {
     protected $entityManager;
     protected $urlBase;
+    protected $encoder;
 
     /**
      * GenerateEvaluationPdf constructor.
      *
-     * @param EntityManager $entityManager
+     * @param EntityManager                $entityManager
+     * @param string                       $urlBase
+     * @param MessageDigestPasswordEncoder $encoder
      */
-    public function __construct(EntityManager $entityManager, $urlBase)
+    public function __construct(EntityManager $entityManager, $urlBase, MessageDigestPasswordEncoder $encoder)
     {
         $this->entityManager = $entityManager;
         $this->urlBase = $urlBase;
+        $this->encoder = $encoder;
     }
 
     /**
@@ -60,24 +65,24 @@ class GenerateEvaluationPdf
             $filesystem->mkdir($evaluationVersionPdfDirectory, 0755);
         }
 
-
         $chapterPdfs = [];
 
         /** @var Chapter $chapter */
         foreach ($chapters as $chapter) {
+            $headers = $this->getWsseHeader($evaluation->getCid());
             $chapterPdfPath = sprintf(
                 '%s/%s.pdf',
                 $evaluationVersionPdfDirectory,
                 $chapter->getId()
             );
             $command = sprintf(
-                '%s --output=%s --base-url=%s/#/preview --evaluation=%s
-                --chapter=%s',
+                '%s %s/#/preview/%s/%s %s \'%s\' 10000',
                 $config->getNodeJsCommand(),
-                $chapterPdfPath,
                 $this->urlBase,
                 $evaluation->getCid(),
-                $chapter->getId()
+                $chapter->getId(),
+                $chapterPdfPath,
+                $headers
             );
             exec($command);
 
@@ -94,7 +99,7 @@ class GenerateEvaluationPdf
         );
 
         $commandThatMergesPdfs = sprintf(
-            '%s %s %s',
+            '%s %s \'%s\'',
             'pdfunite',
             implode(' ', $chapterPdfs),
             $finalPdfPath
@@ -110,5 +115,36 @@ class GenerateEvaluationPdf
         foreach ($chapterPdfs as $chapterPdf) {
             $filesystem->remove($chapterPdf);
         }
+    }
+
+    protected function getWsseHeader($cid)
+    {
+
+        $created = new \DateTime('now');
+        $created = $created->format('Y-m-d\TH:i:s');
+
+        // http://stackoverflow.com/questions/18117695/how-to-calculate-wsse-nonce
+        $prefix = gethostname();
+        $nonce = base64_encode(substr(md5(uniqid($prefix.'_', true)), 0, 16));
+        $salt = ''; // do not use real salt here, because API key already encrypted enough
+
+        $user = $this->entityManager->getRepository('OroUserBundle:UserApi')->find(1);
+        $passwordDigest = $this->encoder->encodePassword(
+            sprintf(
+                '%s%s%s',
+                base64_decode($nonce),
+                $created,
+                $user->getApiKey()
+            ),
+            $salt
+        );
+
+        return sprintf(
+            'Authorization~ WSSE profile="UsernameToken"`X-WSSE~ UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"`DNT~ 1',
+            $user->getUser()->getUsername(),
+            $passwordDigest,
+            $nonce,
+            $created
+        );
     }
 }

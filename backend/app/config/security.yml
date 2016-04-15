@@ -6,3 +6,11 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        dashboard_wsse_secured:
+            pattern: ^/
+            wsse:
+                lifetime: 3600
+                realm:    "Secured API"
+                profile:  "UsernameToken"
+            context: main

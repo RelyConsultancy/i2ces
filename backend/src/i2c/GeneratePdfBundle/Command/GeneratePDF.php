@@ -50,6 +50,7 @@ class GeneratePDF extends ContainerAwareCommand
         $cids = $this->getEvaluationQueueService()->getEvaluationForGeneration();
 
         if (empty($cids)) {
+            $output->writeln('No pdfs to generate');
             return;
         }
 
@@ -69,7 +70,7 @@ class GeneratePDF extends ContainerAwareCommand
 
             $this->getGenerateEvaluationPdfService()->generatePdf($evaluation, $config);
 
-            $this->getEvaluationQueueService()->removeFromQueue($cid);
+            //$this->getEvaluationQueueService()->removeFromQueue($cid);
         }
     }
 

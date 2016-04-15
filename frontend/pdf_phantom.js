@@ -14,8 +14,8 @@ var customHeaders = {}
 
 
 // set request headers
-headers.split('|').forEach(function (string) {
-  var kv = string.trim().split('=')
+headers.split('`').forEach(function (string) {
+  var kv = string.trim().split('~')
   customHeaders[kv[0]] = kv[1]
 })
 
