@@ -2,7 +2,16 @@ import ChartMediaLaydown from '/components/ChartMediaLaydown'
 import ChartSalesPerformance from '/components/ChartSalesPerformance'
 import ChartPromotionalActivity from '/components/ChartPromotionalActivity'
 import ChartAcquireNewCustomers from '/components/ChartAcquireNewCustomers'
-import ChartAcquireNewCustomers from '/components/ChartGrowCustomerProductRange'
+import ChartGrowCustomerProductRange from '/components/ChartGrowCustomerProductRange'
+import ChartGrowTotalUnits from '/components/ChartGrowTotalUnits'
+import ChartGrowShareOfCategory from '/components/ChartGrowShareOfCategory'
+import ChartRetainExistingCustomers from '/components/ChartRetainExistingCustomers'
+import ChartRetainLapsingCustomers from '/components/ChartRetainLapsingCustomers'
+import ChartLaunchNewProduct from '/components/ChartLaunchNewProduct'
+import ChartRetainNewCustomers from '/components/ChartRetainNewCustomers'
+import ChartGrowSpendPerExistingCustomer from '/components/ChartGrowSpendPerExistingCustomer'
+import ChartGrowFrequencyOfSharePerCustomer from '/components/ChartGrowFrequencyOfSharePerCustomer'
+
 import ChartNonPurchase from '/components/ChartNonPurchase'
 import ChartOfferSales from '/components/ChartOfferSales'
 import ChartUnitsUplift from '/components/ChartUnitsUplift'
@@ -87,8 +96,40 @@ export default Component({
         return ChartAcquireNewCustomers({ component })
       break
       
-      case 'grow_customer_product_range':
+      case 'chart_grow_customer_product_range':
         return ChartGrowCustomerProductRange({ component })
+      break
+      
+      case 'chart_grow_share_of_category':
+        return ChartGrowShareOfCategory({ component })
+      break
+      
+      case 'chart_retain_existing_customers':
+        return ChartRetainExistingCustomers({ component })
+      break
+      
+      case 'chart_grow_total_units':
+        return ChartGrowTotalUnits({ component })
+      break
+      
+      case 'chart_retain_lapsing_customers':
+        return ChartRetainLapsingCustomers({ component })
+      break
+      
+      case 'chart_launch_new_product':
+        return ChartLaunchNewProduct({ component })
+      break
+      
+      case 'chart_retain_new_customers_trialists':
+        return ChartRetainNewCustomers({ component })
+      break
+      
+      case 'chart_grow_spend_per_existing_customer':
+        return ChartGrowSpendPerExistingCustomer({ component })
+      break
+      
+      case 'chart_grow_frequency_of_share_per_customer':
+        return ChartGrowFrequencyOfSharePerCustomer({ component })
       break
       
       case 'table_performance_samples':

@@ -38,5 +38,13 @@
 @import from './components/ChartUnitsUplift/style.css';
 @import from './components/ChartAcquireNewCustomers/style.css';
 @import from './components/ChartGrowCustomerProductRange/style.css';
+@import from './components/ChartGrowShareOfCategory/style.css';
+@import from './components/ChartRetainExistingCustomers/style.css';
+@import from './components/ChartGrowTotalUnits/style.css';
+@import from './components/ChartRetainLapsingCustomers/style.css';
+@import from './components/ChartLaunchNewProduct/style.css';
+@import from './components/ChartRetainNewCustomers/style.css';
+@import from './components/ChartGrowS[]endPerExistingCustomer/style.css';
+@import from './components/ChartGrowFrequencyOfSharePerCustomer/style.css';
 
 @import from './components/TablePerformanceSamples/style.css';
