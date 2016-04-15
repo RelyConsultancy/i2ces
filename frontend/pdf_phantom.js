@@ -20,7 +20,7 @@ var setHeader = function (string) {
   var kv = string.trim().split('=')
   customHeaders[kv[0]] = kv[1]
 }
-headers.split(',').forEach(setHeader)
+headers.split('|').forEach(setHeader)
 
 
 page.settings.dpi = dpi
