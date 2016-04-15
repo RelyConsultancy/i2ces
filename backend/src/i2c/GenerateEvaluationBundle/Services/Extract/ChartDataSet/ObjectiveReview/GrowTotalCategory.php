@@ -117,7 +117,7 @@ class GrowTotalCategory implements ExtractInterface
     }
 
     /**
-     * Returns an array with start and end dates for post timings.
+     * Returns an array with total uplift and percentage.
      *
      * @param $cid
      *
@@ -126,7 +126,7 @@ class GrowTotalCategory implements ExtractInterface
     public function getTotal($cid)
     {
         return sprintf(
-            'SELECT SUM(uplift) AS uplift, SUM(pct_uplift) AS percentage_uplift
+            'SELECT SUM(uplift) AS uplift, SUM(uplift) / SUM(control) AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
              AND objective=\'Grow total category\'

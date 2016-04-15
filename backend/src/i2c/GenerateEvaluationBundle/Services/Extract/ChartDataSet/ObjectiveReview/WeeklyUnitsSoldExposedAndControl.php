@@ -127,7 +127,7 @@ class WeeklyUnitsSoldExposedAndControl implements ExtractInterface
     public function getTotal($cid)
     {
         return sprintf(
-            'SELECT SUM(uplift) AS uplift, AVG(pct_uplift) AS percentage_uplift
+            'SELECT SUM(uplift) AS uplift, SUM(uplift) / SUM(control) AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
              AND objective=\'Overview\'
