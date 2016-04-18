@@ -64,7 +64,7 @@ class WeeklyUnitsSoldExposedAndControl implements ExtractInterface
              FROM ie_weekly_results_data
              WHERE master_campaign_id = \'%s\'
              AND product=\'Offer\'
-             AND metric=\'Units\'
+             AND metric=\'Known_spend\'
             ',
             $cid
         );
@@ -127,7 +127,7 @@ class WeeklyUnitsSoldExposedAndControl implements ExtractInterface
     public function getTotal($cid)
     {
         return sprintf(
-            'SELECT SUM(uplift) AS uplift, SUM(pct_uplift) AS percentage_uplift
+            'SELECT SUM(uplift) AS uplift, SUM(uplift) / SUM(control) AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
              AND objective=\'Overview\'
