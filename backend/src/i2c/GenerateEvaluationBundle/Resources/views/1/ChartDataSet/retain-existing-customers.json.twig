@@ -8,6 +8,7 @@
                     "exposed": {{ item.exposed }},
                     "control": {{ item.control}}
                 }
+                {{ not loop.last ? ',' }}
             {% endfor %}
         ],
         "brand": [
@@ -24,7 +25,7 @@
     "table": [
         {% for item in during_combinations %}
             {
-                "media_type": {{ item.media_type }},
+                "media_type": "{{ item.media_type }}",
                 "uplift": {{ item.uplift }},
                 "percentage_uplift": {{ item.percentage_uplift }},
                 "exposed": {{ item.exposed }},
