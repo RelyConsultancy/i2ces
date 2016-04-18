@@ -10,4 +10,4 @@ services:
 
     i2c_generate_pdf.generate_evaluation_pdf_service:
         class: i2c\GeneratePdfBundle\Services\GenerateEvaluationPdf
-        arguments: [@doctrine.orm.default_entity_manager, %url_base%,@escape_wsse_authentication.encoder.wsse_secured]
+        arguments: [@doctrine.orm.default_entity_manager, %url_base%]

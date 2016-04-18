@@ -7,7 +7,6 @@ use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
 use i2c\GeneratePdfBundle\Entity\EvaluationPdfConfig;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 /**
  * Class GenerateEvaluationPdf
@@ -18,20 +17,17 @@ class GenerateEvaluationPdf
 {
     protected $entityManager;
     protected $urlBase;
-    protected $encoder;
 
     /**
      * GenerateEvaluationPdf constructor.
      *
-     * @param EntityManager                $entityManager
-     * @param string                       $urlBase
-     * @param MessageDigestPasswordEncoder $encoder
+     * @param EntityManager $entityManager
+     * @param string        $urlBase
      */
-    public function __construct(EntityManager $entityManager, $urlBase, MessageDigestPasswordEncoder $encoder)
+    public function __construct(EntityManager $entityManager, $urlBase)
     {
         $this->entityManager = $entityManager;
         $this->urlBase = $urlBase;
-        $this->encoder = $encoder;
     }
 
     /**
@@ -66,10 +62,10 @@ class GenerateEvaluationPdf
         }
 
         $chapterPdfs = [];
+        $headers = $this->getHeader();
 
         /** @var Chapter $chapter */
         foreach ($chapters as $chapter) {
-            $headers = $this->getWsseHeader($evaluation->getCid());
             $chapterPdfPath = sprintf(
                 '%s/%s.pdf',
                 $evaluationVersionPdfDirectory,
@@ -85,7 +81,7 @@ class GenerateEvaluationPdf
                 $headers,
                 $config->getDelay()
             );
-            exec($command);
+            exec($command, $output);
 
             $chapterPdfs[] = $chapterPdfPath;
         }
@@ -118,34 +114,57 @@ class GenerateEvaluationPdf
         }
     }
 
-    protected function getWsseHeader($cid)
+    /**
+     * @return string
+     */
+    protected function getHeader()
     {
-
-        $created = new \DateTime('now');
-        $created = $created->format('Y-m-d\TH:i:s');
-
-        // http://stackoverflow.com/questions/18117695/how-to-calculate-wsse-nonce
-        $prefix = gethostname();
-        $nonce = base64_encode(substr(md5(uniqid($prefix.'_', true)), 0, 16));
-        $salt = ''; // do not use real salt here, because API key already encrypted enough
-
-        $user = $this->entityManager->getRepository('OroUserBundle:UserApi')->find(1);
-        $passwordDigest = $this->encoder->encodePassword(
-            sprintf(
-                '%s%s%s',
-                base64_decode($nonce),
-                $created,
-                $user->getApiKey()
-            ),
-            $salt
+        $loginRequest = sprintf(
+            'curl \'%s/user/login\' -s --compressed -H \'DNT: 1\' -D header.txt | grep _csrf_token',
+            $this->urlBase
         );
+        $result = exec($loginRequest);
+
+        $initialCookie = $this->getCookieFromResponseHeaderFile('header.txt');
+
+        $start = strpos($result, 'value="') + strlen('value="');
+        $end = strpos($result, '"', $start);
+        $csrfToken = substr($result, $start, $end - $start);
+
+        exec(
+            sprintf(
+                'curl \'%s/user/login-check\' -s --compressed -H \'DNT: 1\' -H \'Cookie: %s\' \
+                 --data \'_username=%s&_password=%s&_target_path=&_csrf_token=%s\' \
+                 -D header2.txt',
+                $this->urlBase,
+                $initialCookie,
+                'user',
+                'pass',
+                $csrfToken
+            )
+        );
+
+        $cookie = $this->getCookieFromResponseHeaderFile('header2.txt');
 
         return sprintf(
-            'Authorization~ WSSE profile="UsernameToken"`X-WSSE~ UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"`DNT~ 1',
-            $user->getUser()->getUsername(),
-            $passwordDigest,
-            $nonce,
-            $created
+            'Cookie~ %s`DNT~ 1`x-csrf-token~1',
+            $cookie
         );
+    }
+
+    /**
+     * @param string $filename
+     *
+     * @return string
+     */
+    protected function getCookieFromResponseHeaderFile($filename)
+    {
+        $cookieString = exec(sprintf('cat %s | grep \'Set-Cookie: BAPID=\'', $filename));
+
+        $start = strpos($cookieString, 'BAPID=');
+        $end = strpos($cookieString, ';', $start);
+        $cookie = substr($cookieString, $start, $end - $start);
+
+        return $cookie;
     }
 }
