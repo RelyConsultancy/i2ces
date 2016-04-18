@@ -235,8 +235,6 @@ class ObjectiveReview implements ChartDataSetConfigInterface
 
         $result = $this->connection->fetchAll($query);
         
-        $this->logger->addCritical($result);
-        
         if (1 > (int) $result[0]['count']) {
             return [];
         }
