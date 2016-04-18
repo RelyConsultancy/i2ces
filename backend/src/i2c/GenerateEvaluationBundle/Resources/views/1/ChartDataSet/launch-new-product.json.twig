@@ -14,16 +14,28 @@
             "percentage_uplift": "{{ total[0].percentage_uplift }}"
         }
     },
-    "chart": [
-        {% for item in data %}
-        {
-            "start_date": "{{ item.start_date }}",
-            "exposed": "{{ item.exposed }}",
-            "control": "{{ item.control }}"
-        }
-        {{ not loop.last ? ',' }}
-        {% endfor %}
-    ],
+    "chart": {
+        "offer": [
+            {% for item in offer_data %}
+            {
+                "start_date": "{{ item.start_date }}",
+                "exposed": "{{ item.exposed }}",
+                "control": "{{ item.control }}"
+            }
+            {{ not loop.last ? ',' }}
+            {% endfor %}
+        ],
+        "brand": [
+            {% for item in brand_data %}
+            {
+                "start_date": "{{ item.start_date }}",
+                "exposed": "{{ item.exposed }}",
+                "control": "{{ item.control }}"
+            }
+            {{ not loop.last ? ',' }}
+            {% endfor %}
+        ]
+    },
     "timings": [
         {
             "label": "pre",
