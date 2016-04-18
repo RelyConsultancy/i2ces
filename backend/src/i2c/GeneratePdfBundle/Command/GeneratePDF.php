@@ -77,7 +77,7 @@ class GeneratePDF extends ContainerAwareCommand
 
             $this->getGenerateEvaluationPdfService()->generatePdf($evaluation, $config);
 
-            //$this->getEvaluationQueueService()->removeFromQueue($cid);
+            $this->getEvaluationQueueService()->removeFromQueue($cid);
         }
     }
 
