@@ -1,5 +1,6 @@
 import { Component, B } from '/components/component.js'
 import Chart from '/components/Chart'
+import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
 import style from './style.css'
 
