@@ -13,6 +13,8 @@ class EvaluationPdfConfig
 
     protected $nodeJsCommand;
 
+    protected $delay;
+
     /**
      * @return mixed
      */
@@ -43,5 +45,21 @@ class EvaluationPdfConfig
     public function setNodeJsCommand($nodeJsCommand)
     {
         $this->nodeJsCommand = $nodeJsCommand;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDelay()
+    {
+        return $this->delay;
+    }
+
+    /**
+     * @param mixed $delay
+     */
+    public function setDelay($delay)
+    {
+        $this->delay = $delay;
     }
 }

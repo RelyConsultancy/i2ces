@@ -34,6 +34,12 @@ class GeneratePDF extends ContainerAwareCommand
                  InputOption::VALUE_REQUIRED,
                  'The absolute path to the node command'
              )
+             ->addOption(
+                 'delay',
+                 null,
+                 InputOption::VALUE_REQUIRED,
+                 'The delay for the rendering in order for all the data to load'
+             )
              ->setDescription(
                  'Generates a PDF file for an evaluation and stores the resulting location in the database'
              );
@@ -58,6 +64,7 @@ class GeneratePDF extends ContainerAwareCommand
 
         $config->setNodeJsCommand($input->getOption('node-command'));
         $config->setOutputDirectory($input->getOption('output-folder'));
+        $config->setDelay($input->getOption('delay'));
 
 
         foreach ($cids as $cid) {

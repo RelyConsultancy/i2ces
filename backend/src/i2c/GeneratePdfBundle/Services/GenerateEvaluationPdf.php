@@ -76,13 +76,14 @@ class GenerateEvaluationPdf
                 $chapter->getId()
             );
             $command = sprintf(
-                '%s %s/#/preview/%s/%s %s \'%s\' 10000',
+                '%s %s/#/preview/%s/%s %s \'%s\' %s',
                 $config->getNodeJsCommand(),
                 $this->urlBase,
                 $evaluation->getCid(),
                 $chapter->getId(),
                 $chapterPdfPath,
-                $headers
+                $headers,
+                $config->getDelay()
             );
             exec($command);
 
