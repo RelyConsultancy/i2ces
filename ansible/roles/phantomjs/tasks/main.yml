@@ -1,0 +1,28 @@
+---
+- name: install the needed packages
+  yum: name="{{ item }}" state=latest
+  with_items:
+    - fontconfig
+    - libstdc++
+
+- name: Check if phnatomjs is on server
+  stat: path=/usr/local/bin/phantomjs
+  register: phantomjs
+
+- name: Check if phnatomjs is on server
+  stat: path="~/{{ phantomjs_version }}.tar.bz2"
+  register: phantomjsarchive
+
+- name: Copy phantomjs to server
+  get_url: url="https://bitbucket.org/ariya/phantomjs/downloads/{{ phantomjs_version }}-linux-x86_64.tar.bz2" dest="~/{{ phantomjs_version }}.tar.bz2"
+  when: (phantomjs.stat.exists == False) or (phantomjsarchive.stat.exists == False)
+  register: copy_phantomjs
+
+- name: Unpack phantomjs
+ # shell: tar xvf ~/{{ phantomjs_version }}.tar.bz2 ~/{{ phantomjs_version }}-linux-x86_64
+  unarchive: src="~/{{ phantomjs_version }}.tar.bz2" dest="~" copy=no 
+  when: copy_phantomjs|changed
+
+- name: Copy binary file to bin folder
+  shell: cp -ir ~/{{ phantomjs_version }}-linux-x86_64/bin/phantomjs /usr/local/bin/phantomjs
+  when: (copy_phantomjs|changed) or (phantomjs.stat.exists == False)
