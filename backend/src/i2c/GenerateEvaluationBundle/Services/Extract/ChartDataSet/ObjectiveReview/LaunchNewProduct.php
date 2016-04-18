@@ -53,46 +53,23 @@ class LaunchNewProduct implements ExtractInterface
     }
 
     /**
-     * @param string $cid
+     * @param $cid
      *
      * @return string
      */
-    public function getOfferData($cid)
+    public function getData($cid)
     {
         return sprintf(
-            'SELECT timeperiod AS timeperiod, exposed AS exposed, control AS control
-             FROM ie_results_data
+            'SELECT week_commencing AS start_date, exposed AS exposed, control AS control
+             FROM ie_weekly_results_data
              WHERE master_campaign_id = \'%s\'
              AND product=\'Offer\'
-             AND media_type=\'Total\'
-             AND timeperiod IN (2,3)
-             AND metric=\'New_custs\'
-             AND objective=\'Launch new product\';
+             AND metric=\'Units\'
             ',
             $cid
         );
     }
-    
-    /**
-     * @param string $cid
-     *
-     * @return string
-     */
-    public function getBrandData($cid)
-    {
-        return sprintf(
-            'SELECT timeperiod AS timeperiod, exposed AS exposed, control AS control
-             FROM ie_results_data
-             WHERE master_campaign_id = \'%s\'
-             AND product=\'Brand\'
-             AND media_type=\'Total\'
-             AND timeperiod IN (2,3)
-             AND metric=\'New_custs\'
-             AND objective=\'Launch new product\';
-            ',
-            $cid
-        );
-    }
+
 
     /**
      * Returns an array with start and end dates for pre timings.
@@ -101,26 +78,67 @@ class LaunchNewProduct implements ExtractInterface
      *
      * @return string
      */
-    public function getDuringCombinations($cid)
+    public function getDuring($cid)
     {
         return sprintf(
-            'SELECT r.media_type AS media_type, r.uplift AS uplift, r.pct_uplift AS percentage_uplift, r.control as control, e.exposed AS exposed
-             FROM ie_results_data AS r
-             JOIN ie_exposed_data AS e ON e.media_type=r.media_type
-             AND e.master_campaign_id=r.master_campaign_id
-             WHERE r.media_type <> \'Total\'
-             AND r.media_type <> \'Other\'
-             AND r.timeperiod=2
-             AND r.metric=\'New_custs\'
-             AND r.objective=\'Launch new product\'
-             AND r.product=\'Offer\'
-             AND r.master_campaign_id=\'%s\' GROUP BY e.media_type;
+            'SELECT uplift AS uplift, pct_uplift AS percentage_uplift
+             FROM ie_results_data
+             WHERE media_type=\'Total\'
+             AND objective=\'Overview\'
+             AND metric=\'Known_spend\'
+             AND product=\'Offer\'
+             AND timeperiod=2
+             AND master_campaign_id=\'%s\'
             ',
             $cid
         );
     }
 
-    
+    /**
+     * Returns an array with start and end dates for during timings.
+     *
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getPost($cid)
+    {
+        return sprintf(
+            'SELECT uplift AS uplift, pct_uplift AS percentage_uplift
+             FROM ie_results_data
+             WHERE media_type=\'Total\'
+             AND objective=\'Overview\'
+             AND metric=\'Known_spend\'
+             AND product=\'Offer\'
+             AND timeperiod=3
+             AND master_campaign_id=\'%s\'
+            ',
+            $cid
+        );
+    }
+
+    /**
+     * Returns an array with start and end dates for post timings.
+     *
+     * @param $cid
+     *
+     * @return string
+     */
+    public function getTotal($cid)
+    {
+        return sprintf(
+            'SELECT SUM(uplift) AS uplift, SUM(pct_uplift) AS percentage_uplift
+             FROM ie_results_data
+             WHERE media_type=\'Total\'
+             AND objective=\'Overview\'
+             AND metric=\'Known_spend\'
+             AND product=\'Offer\'
+             AND master_campaign_id=\'%s\'
+            ',
+            $cid
+        );
+    }
+
     /**
      * Returns an array with start and end dates for pre timings.
      *
