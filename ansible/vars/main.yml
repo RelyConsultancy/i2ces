@@ -50,3 +50,6 @@ sftp_user:
     password: '$6$rounds=656000$dHJdvzXneg3GTE0r$gyRPu1ytc70NrvnCcykqKzhsVw1ilw8QSWbgEWIeqsxgzaLYquFh1bH2eKd1csGVF8qKzp4wOmo6JnU5lOMxO.' # Le7gmeuy4qvA
     key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChPbLtYmEjEVruL/4x0F8/3ysgdCfUvD1wIGl4ue0/JlQ9dERNmMOQdg5OIWKc+cXWVffCC2V+i8oJMIdh20hX7KAjaZ69756qivCp0D/JNZ07HowRAUSrPS3jAvKMsg/ekV/lZcE5QVHMgoGMIT53AzL/irjFa2SDbf1jtBu7SlExerI8auwqhtrFuIy8h9ephUlpBhAPBWZRc2sRp3wiKR0ZGAVY0eFBjikXkMIFDtmEgVpJCErbNk8Ax/OEBZnJb7u/yoOg/VtUnftIU/K1qwgZXymsE7GXfnWFQpX12O4xCbakYrHrUe3a6X9nZG8+hcWvxaxdKcNDVRZVnaHh zoltan.sandor@Admins-MacBook-Pro.local'
     folder: '/sftp-folder'
+
+# Phantomjs variables
+phantomjs_version: "phantomjs-2.1.1"

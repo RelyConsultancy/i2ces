@@ -7,6 +7,7 @@
   roles:
     - init
     - jailed-users
+    - { role: phantomjs, sudo: yes, tags: phantomjs}
     - geerlingguy.repo-remi
     - geerlingguy.mysql
     - geerlingguy.apache

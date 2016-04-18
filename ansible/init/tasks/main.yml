@@ -27,6 +27,7 @@
       - traceroute
       - links
       - libselinux-python
+      - poppler-utils
 
   - name: Updatedb
     shell: >
