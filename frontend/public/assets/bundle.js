@@ -80669,7 +80669,7 @@ var Links = function Links(_ref3) {
 
   links = links.map(function (item) {
     if (item.href) {
-      return A({ className: _style2.default.link, href: item.href }, item.label);
+      return (0, _component.A)({ className: _style2.default.link, href: item.href }, item.label);
     }
 
     return (0, _component.Link)({ className: _style2.default.link, to: item.path }, item.label);
