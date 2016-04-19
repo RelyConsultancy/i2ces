@@ -90,7 +90,7 @@ export default Component({
           items: [
               B(
                 HTML('<h3>Offer products share of category during and post campaign</h3>'),
-                B({ className: style.chart }, ChartGrowShareOfCategory(data)),
+                B({ className: style.chart }, ChartGrowShareOfCategory(data))
               ),
               B(
                 HTML('<h3>Brand products share of category during and post campaign</h3>'),
