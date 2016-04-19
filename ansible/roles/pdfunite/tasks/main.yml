@@ -1,0 +1,27 @@
+---
+- name: install the needed packages
+  yum: name="{{ item }}" state=latest
+  with_items:
+    - poppler-utils
+    - fontconfig
+
+- name: Check if pdfunite is on server
+  stat: path=/usr/bin/pdfunite
+  register: pdfunite
+
+- name: Download and Unpack poppler
+  unarchive: src="http://poppler.freedesktop.org/{{ poppler_version }}.tar.xz" dest="~" copy=no
+  when: pdfunite.stat.exists == False
+  register: copy_poppler
+
+- name: Compile poppler
+  shell: "cd ~/{{ poppler_version }} && ./configure --prefix=/usr --sysconfdir=/etc --disable-static --enable-build-type=release --enable-cmyk --enable-xpdf-headers --with-testdatadir=$PWD/testfiles && make && make install"
+  when: (copy_poppler|changed) or (pdfunite.stat.exists == False)
+
+- name: Check if libpoppler.so.59 is in the correct location
+  stat: path=/usr/lib64/libpoppler.so.59
+  register: libpoppler
+
+- name: Create link for libpoppler if not there
+  file: src=/usr/lib/libpoppler.so.59 dest=/usr/lib64/libpoppler.so.59 owner=root group=root state=link
+  when: libpoppler.stat.exists == False

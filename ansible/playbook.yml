@@ -7,6 +7,8 @@
   roles:
     - init
     - jailed-users
+    - { role: phantomjs, sudo: yes, tags: phantomjs}
+    - { role: pdfunite, sudo: yes, tags: pdfunite}
     - geerlingguy.repo-remi
     - geerlingguy.mysql
     - geerlingguy.apache

@@ -1,0 +1,6 @@
+parameters:
+    import:
+        folder_path: '/var/www/html/imports/'
+        version_number: 1
+        field-separator: ','
+        line-endings: '\n'
