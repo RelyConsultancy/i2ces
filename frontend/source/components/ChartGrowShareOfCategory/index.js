@@ -1,11 +1,11 @@
-import { Component, B, HTML } from '/components/component.js'
+import { Component, B, Element } from '/components/component.js'
 import Grid from '/components/Grid'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
 import style from './style.css'
 
-
+const H3 = Element('h3')
 // a factory function for the chart
 const ChartGrowShareOfCategory = (data, type) => {
   
@@ -89,11 +89,11 @@ export default Component({
           blocks: 2,
           items: [
               B(
-                HTML('<h3>Offer products share of category during and post campaign</h3>'),
+                H3('Offer products share of category during and post campaign'),
                 B({ className: style.chart }, ChartGrowShareOfCategory(data))
               ),
               B(
-                HTML('<h3>Brand products share of category during and post campaign</h3>'),
+                H3('Brand products share of category during and post campaign'),
                 B({ className: style.chart }, ChartGrowShareOfCategory(data, 'brand'))
               )
 
