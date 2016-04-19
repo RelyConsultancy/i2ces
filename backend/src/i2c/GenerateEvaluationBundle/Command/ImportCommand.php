@@ -41,7 +41,7 @@ class ImportCommand extends ContainerAwareCommand
         $this->logger = $logger;
         $this->importAllService = $importAll;
 
-        parent::__construct("i2c:import:all");
+        parent::__construct("i2c:data:bulk");
     }
 
     /**
@@ -50,8 +50,8 @@ class ImportCommand extends ContainerAwareCommand
     public function configure()
     {
         $this
-            ->setName('i2c:import:all')
-            ->setDescription('This command will import all the available i2c data and generate the evaluations.');
+            ->setName('i2c:data:bulk')
+            ->setDescription('Imports all new i2c data, and (re)generates corresponding evaluations.');
     }
 
     /**
