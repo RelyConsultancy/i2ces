@@ -69,7 +69,7 @@ export default Component({
   render () {
     const { data } = this.state
     console.log(data);
-    if (typeof data === 'object' && data !== null) {
+    if ('charts' in data) {
       return B({ className: style.chart }, ChartGrowShareOfCategory(data))
     }
     else {
