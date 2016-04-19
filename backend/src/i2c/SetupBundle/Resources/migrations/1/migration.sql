@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `i2c_reimported_evaluation` (
   end_date         DATETIME,
   generated_at     DATETIME,
   business_unit_id INT(11),
+  version_number   VARCHAR(255),
   FOREIGN KEY (business_unit_id) REFERENCES oro_business_unit (id),
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -106,18 +107,30 @@ CREATE TABLE IF NOT EXISTS `i2c_objective_units` (
 
 
 CREATE TABLE IF NOT EXISTS `i2c_channel_icons` (
-  channel_name             VARCHAR(255)      NOT NULL,
-  icon_name VARCHAR(255) NOT NULL,
+  channel_name VARCHAR(255) NOT NULL,
+  icon_name    VARCHAR(255) NOT NULL,
   PRIMARY KEY (channel_name)
 )
   DEFAULT CHARSET = utf8
   COLLATE = utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `i2c_pages` (
-  type VARCHAR(255) NOT NULL,
-  title   VARCHAR(255) NOT NULL,
+  type  VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,
   content   BLOB,
   PRIMARY KEY (type)
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `i2c_import_version` (
+  id               INT(11) NOT NULL AUTO_INCREMENT,
+  version_number   INT(11),
+  start_date       DATETIME,
+  end_date         DATETIME,
+  last_import_folder VARCHAR(255),
+  config_data      BLOB,
+  PRIMARY KEY (id)
 )
   DEFAULT CHARSET = utf8
   COLLATE = utf8_unicode_ci;
