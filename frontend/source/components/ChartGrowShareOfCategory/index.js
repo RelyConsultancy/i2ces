@@ -92,7 +92,7 @@ export default Component({
                   blocks: 1,
                   items: [
                       B({className: 'i2c-chart-title'}, '<h3>Offer products share of category during and post campaign</h3>'),
-                      B({ className: style.chart }, '<h3>Brand products share of category during and post campaign</h3>' + ChartGrowShareOfCategory(data))
+                      B({ className: style.chart }, ChartGrowShareOfCategory(data))
                   ]
               }),
               Grid({
