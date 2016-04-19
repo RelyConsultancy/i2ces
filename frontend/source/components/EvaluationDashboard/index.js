@@ -48,7 +48,7 @@ const Links = ({ store, params }) => {
     path: `/preview/${params.cid}`,
     label: 'Preview',
   }, {
-    path: `/preview/${params.cid}`,
+    path: `/api/evaluations/${params.cid}/pdf`,
     label: 'PDF',
   }]
 
