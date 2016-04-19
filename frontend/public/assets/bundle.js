@@ -80663,7 +80663,7 @@ var Links = function Links(_ref3) {
     path: '/preview/' + params.cid,
     label: 'Preview'
   }, {
-    path: '/preview/' + params.cid,
+    path: '/api/evaluations/' + params.cid + '/pdf',
     label: 'PDF'
   }];
 
@@ -81095,10 +81095,11 @@ var Intro = function Intro(_ref2) {
     style: { fontSize: subtitleSize }
   }, channels);
 
-  var text = (0, _component.B)({ className: _style2.default.splash_intro_text }, title, subtitle);
+  var titleWrap = (0, _component.B)({ className: _style2.default.splash_intro_title_wrap }, title, subtitle);
+  var titleBox = (0, _component.B)({ className: _style2.default.splash_intro_title_box }, titleWrap);
   var dates = (0, _component.B)({ className: _style2.default.splash_intro_date }, (0, _utils.fmtDate)(evaluation.start_date), ' - ', (0, _utils.fmtDate)(evaluation.end_date));
 
-  return (0, _component.B)({ className: _style2.default.splash_intro }, text, dates);
+  return (0, _component.B)({ className: _style2.default.splash_intro }, titleBox, dates);
 };
 
 var Outro = function Outro(_ref3) {
@@ -81245,7 +81246,7 @@ exports.default = (0, _component.Component)({
 });
 
 },{"./style.css":626,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":591,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":599,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionComponent":653,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":672}],626:[function(require,module,exports){
-module.exports = {"no_data":"_EvaluationPreview_style_no_data","preview":"_EvaluationPreview_style_preview","chapter":"_EvaluationPreview_style_chapter","section":"_EvaluationPreview_style_section","section_title":"_EvaluationPreview_style_section_title","splash":"_EvaluationPreview_style_splash","splash_title":"_EvaluationPreview_style_splash_title","splash_outro":"_EvaluationPreview_style_splash_outro _EvaluationPreview_style_splash","splash_intro":"_EvaluationPreview_style_splash_intro _EvaluationPreview_style_splash","splash_intro_text":"_EvaluationPreview_style_splash_intro_text","splash_intro_title":"_EvaluationPreview_style_splash_intro_title","splash_intro_subtitle":"_EvaluationPreview_style_splash_intro_subtitle","splash_intro_date":"_EvaluationPreview_style_splash_intro_date"}
+module.exports = {"no_data":"_EvaluationPreview_style_no_data","preview":"_EvaluationPreview_style_preview","chapter":"_EvaluationPreview_style_chapter","section":"_EvaluationPreview_style_section","section_title":"_EvaluationPreview_style_section_title","splash":"_EvaluationPreview_style_splash","splash_title":"_EvaluationPreview_style_splash_title","splash_outro":"_EvaluationPreview_style_splash_outro _EvaluationPreview_style_splash","splash_intro":"_EvaluationPreview_style_splash_intro _EvaluationPreview_style_splash","splash_intro_title_box":"_EvaluationPreview_style_splash_intro_title_box","splash_intro_title_wrap":"_EvaluationPreview_style_splash_intro_title_wrap","splash_intro_title":"_EvaluationPreview_style_splash_intro_title","splash_intro_subtitle":"_EvaluationPreview_style_splash_intro_subtitle","splash_intro_date":"_EvaluationPreview_style_splash_intro_date"}
 },{}],627:[function(require,module,exports){
 'use strict';
 

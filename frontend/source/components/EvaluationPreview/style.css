@@ -70,7 +70,7 @@
   compose: splash;
   background-image: url(/images/pdf_intro_bg.png);
 }
-.splash_intro_text {
+.splash_intro_title_box {
   position: absolute;
   bottom: 145px;
   right: 1rem;
@@ -78,17 +78,17 @@
   height: 8.5rem;
   color: #FFFFFF;
 }
-.splash_intro_title {
+.splash_intro_title_wrap {
   position: relative;
-  top: 40%;
   transform: translateY(-50%);
+  top: 50%;
+}
+.splash_intro_title {
   font-size: 1.8rem;
   font-family: 'Archer Bold', serif;
+  margin-bottom: .5rem;
 }
 .splash_intro_subtitle {
-  position: relative;
-  top: 35%;
-  transform: translateY(-50%);
   font-size: 1.2rem;
   font-family: 'Archer Medium', serif;
 }
@@ -103,10 +103,11 @@
 
 @media print {
   .preview {
-    padding-top: 0;
+    padding: 0;
   }
   .splash {
     border: 0 !important;
+    page-break-inside: avoid;
   }
   .chapter {
     margin: 0;

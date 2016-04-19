@@ -5354,7 +5354,7 @@ body.prevent-scroll.fr-mobile {
   background-image: url(/images/pdf_intro_bg.png);
 }
 
-._EvaluationPreview_style_splash_intro_text {
+._EvaluationPreview_style_splash_intro_title_box {
   position: absolute;
   bottom: 145px;
   right: 1rem;
@@ -5363,20 +5363,20 @@ body.prevent-scroll.fr-mobile {
   color: #FFFFFF;
 }
 
-._EvaluationPreview_style_splash_intro_title {
+._EvaluationPreview_style_splash_intro_title_wrap {
   position: relative;
-  top: 40%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
+  top: 50%;
+}
+
+._EvaluationPreview_style_splash_intro_title {
   font-size: 1.8rem;
   font-family: 'Archer Bold', serif;
+  margin-bottom: .5rem;
 }
 
 ._EvaluationPreview_style_splash_intro_subtitle {
-  position: relative;
-  top: 35%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
   font-size: 1.2rem;
   font-family: 'Archer Medium', serif;
 }
@@ -5391,11 +5391,12 @@ body.prevent-scroll.fr-mobile {
 
 @media print {
   ._EvaluationPreview_style_preview {
-    padding-top: 0;
+    padding: 0;
   }
 
   ._EvaluationPreview_style_splash {
     border: 0 !important;
+    page-break-inside: avoid;
   }
 
   ._EvaluationPreview_style_chapter {

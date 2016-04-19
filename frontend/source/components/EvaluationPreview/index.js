@@ -48,14 +48,15 @@ const Intro = ({ evaluation }) => {
     style: { fontSize: subtitleSize },
   }, channels)
 
-  const text = B({ className: style.splash_intro_text }, title, subtitle)
+  const titleWrap = B({ className: style.splash_intro_title_wrap }, title, subtitle)
+  const titleBox = B({ className: style.splash_intro_title_box }, titleWrap)
   const dates = B({ className: style.splash_intro_date },
     fmtDate(evaluation.start_date),
     ' - ',
     fmtDate(evaluation.end_date)
   )
 
-  return B({ className: style.splash_intro }, text, dates)
+  return B({ className: style.splash_intro }, titleBox, dates)
 }
 
 
