@@ -54,13 +54,13 @@ const ChartGrowShareOfCategory = (data, type) => {
       y: {
         label: {
           text: 'Share of category',
-          position: 'outer-middle',
-          tick: {
-              format: (value) => {
-                  return value + '%'
-              }
-          }
+          position: 'outer-middle'
         },
+        tick: {
+            format: (value) => {
+                return value + '%'
+            }
+        }
       },
     },
   })
