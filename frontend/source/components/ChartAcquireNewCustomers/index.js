@@ -8,7 +8,7 @@ import style from './style.css'
 // a factory function for the chart
 const ChartAcquireNewCustomers = (data, type) => {
   
-  const type = type || 'offer'
+  type = type || 'offer'
   
   const charts = {}
   
