@@ -5,11 +5,11 @@ import { fmtDate } from '/application/utils.js'
 import style from './style.css'
 
 
-const Links = ({ cid }) => {
+const Links = ({ evaluation }) => {
   let links = [
     Link({
       className: style.link,
-      to: `/evaluations/${cid}`,
+      to: `/evaluations/${evaluation.cid}`,
     }, 'Back to Evaluation'),
   ]
 
@@ -171,6 +171,6 @@ export default Component({
       }
     }
 
-    return B({ className: style.preview }, Links({ cid }), content)
+    return B({ className: style.preview }, Links({ evaluation }), content)
   }
 })

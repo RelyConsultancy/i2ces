@@ -81045,11 +81045,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var Links = function Links(_ref) {
-  var cid = _ref.cid;
+  var evaluation = _ref.evaluation;
 
   var links = [(0, _component.Link)({
     className: _style2.default.link,
-    to: '/evaluations/' + cid
+    to: '/evaluations/' + evaluation.cid
   }, 'Back to Evaluation')];
 
   if (evaluation.has_pdf) {
@@ -81265,7 +81265,7 @@ exports.default = (0, _component.Component)({
       }
     }
 
-    return (0, _component.B)({ className: _style2.default.preview }, Links({ cid: cid }), content);
+    return (0, _component.B)({ className: _style2.default.preview }, Links({ evaluation: evaluation }), content);
   }
 });
 
