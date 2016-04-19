@@ -144,10 +144,12 @@ class GenerateEvaluationPdf
      */
     protected function generateChapterPdf($chapterId, $pdfLocation, EvaluationPdfConfig $config, $cid, $headers)
     {
+        $now = new \DateTime('now');
         $pdfPath = sprintf(
-            '%s/%s.pdf',
+            '%s/%s-%s.pdf',
             $pdfLocation,
-            $chapterId
+            $chapterId,
+            $now->format('Y-m-d\TH-i-s')
         );
         $command = sprintf(
             '%s %s/#/preview/%s/%s %s \'%s\' %s',
