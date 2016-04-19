@@ -43,14 +43,6 @@ const ChartGrowShareOfCategory = (data, type) => {
       labels: true
     },
     axis: {
-      x: {
-        type: 'category',
-        tick: {
-            culling: false,
-            centered: true,
-            values: ['During', 'Post']
-        }
-      },
       y: {
         label: {
           text: 'Share of category',
