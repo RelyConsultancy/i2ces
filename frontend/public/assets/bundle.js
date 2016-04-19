@@ -80663,11 +80663,15 @@ var Links = function Links(_ref3) {
     path: '/preview/' + params.cid,
     label: 'Preview'
   }, {
-    path: '/api/evaluations/' + params.cid + '/pdf',
+    href: '/api/evaluations/' + params.cid + '/pdf',
     label: 'PDF'
   }];
 
   links = links.map(function (item) {
+    if (item.href) {
+      return A({ className: _style2.default.link, href: item.href }, item.label);
+    }
+
     return (0, _component.Link)({ className: _style2.default.link, to: item.path }, item.label);
   });
 

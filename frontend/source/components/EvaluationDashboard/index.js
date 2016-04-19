@@ -48,13 +48,17 @@ const Links = ({ store, params }) => {
     path: `/preview/${params.cid}`,
     label: 'Preview',
   }, {
-    path: `/api/evaluations/${params.cid}/pdf`,
+    href: `/api/evaluations/${params.cid}/pdf`,
     label: 'PDF',
   }]
 
-  links = links.map((item) => (
-    Link({ className: style.link, to: item.path }, item.label)
-  ))
+  links = links.map((item) => {
+    if (item.href) {
+      return A({ className: style.link, href: item.href }, item.label)
+    }
+
+    return Link({ className: style.link, to: item.path }, item.label)
+  })
 
   return B({ className: style.links }, ...links)
 }
