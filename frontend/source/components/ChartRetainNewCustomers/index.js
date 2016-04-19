@@ -7,6 +7,7 @@ import style from './style.css'
 
 // a factory function for the chart
 const ChartRetainNewCustomers = (data) => {
+    
   // format data
   const labels = data.map(i => i.label)
   const uplift = data.map(i => i.uplift)
