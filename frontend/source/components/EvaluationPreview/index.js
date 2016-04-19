@@ -35,7 +35,7 @@ const Chapter = ({ evaluation, chapter, isSplashPage }) => {
 
 const Intro = ({ evaluation }) => {
   const channels = evaluation.channels.map(i => i.label).join(', ')
-  const titleSize = evaluation.display_title.length > 35 ? '1.2em' : null
+  const titleSize = evaluation.display_title.length > 40 ? '1.5em' : null
   const subtitleSize = channels.length > 60 ? '0.875em' : titleSize ? '1em' : null
 
   const title = B({

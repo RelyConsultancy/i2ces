@@ -81082,7 +81082,7 @@ var Intro = function Intro(_ref2) {
   var channels = evaluation.channels.map(function (i) {
     return i.label;
   }).join(', ');
-  var titleSize = evaluation.display_title.length > 35 ? '1.2em' : null;
+  var titleSize = evaluation.display_title.length > 40 ? '1.5em' : null;
   var subtitleSize = channels.length > 60 ? '0.875em' : titleSize ? '1em' : null;
 
   var title = (0, _component.B)({
