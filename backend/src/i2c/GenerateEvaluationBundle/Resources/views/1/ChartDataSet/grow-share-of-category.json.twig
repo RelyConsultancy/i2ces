@@ -5,8 +5,8 @@
             {% for item in offer_data %}
                 { 
                     "timeperiod": {{ item.timeperiod }},
-                    "exposed": {{ item.exposed }},
-                    "control": {{ item.control}}
+                    "exposed": {{ item.exposed * 100 }},
+                    "control": {{ item.control * 100}}
                 }
                 {{ not loop.last ? ',' }}
             {% endfor %}
@@ -15,8 +15,8 @@
             {% for item in brand_data %}
                 { 
                     "timeperiod": {{ item.timeperiod }},
-                    "exposed": {{ item.exposed }},
-                    "control": {{ item.control}}
+                    "exposed": {{ item.exposed * 100 }},
+                    "control": {{ item.control * 100 }}
                 }
                 {{ not loop.last ? ',' }}
             {% endfor %}
