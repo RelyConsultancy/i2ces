@@ -456,12 +456,14 @@ class ObjectiveReview implements ChartDataSetConfigInterface
             return false;
         }
         
+        return true;
+        /*
         $query = sprintf(
             'SELECT COUNT(0) as count
              FROM ie_results_data
              WHERE media_type=\'Total\'
              AND objective=\'' . $objective . '\'
-             AND metric=\'' . $metric . '\'
+             AND metric LIKE \'' . $metric . '\'
              AND product=\'Offer\'
              AND timeperiod=3
              AND master_campaign_id=\'%s\'
@@ -476,5 +478,7 @@ class ObjectiveReview implements ChartDataSetConfigInterface
         }
         
         return true;
+         * */
+         
     }
 }
