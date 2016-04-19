@@ -28,6 +28,7 @@ const ChartGrowShareOfCategory = (data, type) => {
   const chart = Chart({
     type: 'bar',
     data: {
+      type: 'bar',
       columns: [
         ['Control'].concat(charts[type].control),
         ['Exposed'].concat(charts[type].exposed)
