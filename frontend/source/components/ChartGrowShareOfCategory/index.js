@@ -6,32 +6,43 @@ import style from './style.css'
 
 
 // a factory function for the chart
-const ChartGrowShareOfCategory = (data) => {
-  // format data
-  const labels = data.map(i => i.label)
-  const uplift = data.map(i => i.uplift)
+const ChartGrowShareOfCategory = (data, type) => {
+  
+  type = type || 'offer'
+  
+  const charts = {}
+  
+  charts.offer = {
+      exposed: data.charts.offer.map(i => i.exposed),
+      control: data.charts.offer.map(i => i.control)
+  }
+  
+  charts.brand = {
+      exposed: data.charts.brand.map(i => i.exposed),
+      control: data.charts.brand.map(i => i.control)
+  }
+  
+  console.log(charts);
 
   // below is a C3 chart
   const chart = Chart({
     type: 'bar',
     data: {
-      x: 'labels',
       columns: [
-        ['labels'].concat(labels),
-        ['uplift'].concat(uplift),
-      ],
-      names: {
-        uplift: 'Units uplift',
-        percent: 'Weekly unit uplift/HH vs average',
-      },
+        ['Control'].concat(charts[type].control),
+        ['Exposed'].concat(charts[type].exposed)
+      ]
     },
     axis: {
       x: {
-        type: 'category'
+        type: 'category',
+        tick: {
+            values: ['During', 'Post']
+        }
       },
       y: {
         label: {
-          text: 'lorem ipsum sit dolor',
+          text: 'Share of category',
           position: 'outer-middle',
         },
       },
