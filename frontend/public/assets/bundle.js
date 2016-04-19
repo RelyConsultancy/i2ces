@@ -81034,6 +81034,8 @@ var _actions = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/applica
 
 var action = _interopRequireWildcard(_actions);
 
+var _utils = require('/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js');
+
 var _style = require('./style.css');
 
 var _style2 = _interopRequireDefault(_style);
@@ -81074,6 +81076,43 @@ var Chapter = function Chapter(_ref) {
   return _component.B.apply(undefined, [{ className: _style2.default.chapter, key: chapter.id }].concat(_toConsumableArray(sections)));
 };
 
+var Intro = function Intro(_ref2) {
+  var evaluation = _ref2.evaluation;
+
+  var channels = evaluation.channels.map(function (i) {
+    return i.label;
+  }).join(', ');
+  var titleSize = evaluation.display_title.length > 35 ? '1.2em' : null;
+  var subtitleSize = channels.length > 60 ? '0.875em' : titleSize ? '1em' : null;
+
+  var title = (0, _component.B)({
+    className: _style2.default.splash_intro_title,
+    style: { fontSize: titleSize }
+  }, evaluation.display_title);
+
+  var subtitle = (0, _component.B)({
+    className: _style2.default.splash_intro_subtitle,
+    style: { fontSize: subtitleSize }
+  }, channels);
+
+  var text = (0, _component.B)({ className: _style2.default.splash_intro_text }, title, subtitle);
+  var dates = (0, _component.B)({ className: _style2.default.splash_intro_date }, (0, _utils.fmtDate)(evaluation.start_date), ' - ', (0, _utils.fmtDate)(evaluation.end_date));
+
+  return (0, _component.B)({ className: _style2.default.splash_intro }, text, dates);
+};
+
+var Outro = function Outro(_ref3) {
+  var evaluation = _ref3.evaluation;
+  return (0, _component.B)({ className: _style2.default.splash_outro }, (0, _component.B)({ className: _style2.default.splash_title }, 'Thank you'));
+};
+
+var isIntro = function isIntro(id) {
+  return id == 'intro';
+};
+var isOutro = function isOutro(id) {
+  return id == 'outro';
+};
+
 exports.default = (0, _component.Component)({
   load: function load() {
     var _this = this;
@@ -81084,51 +81123,22 @@ exports.default = (0, _component.Component)({
 
     var chapters = [];
 
-    // load all chapters
-    if (!id) {
+    // load just the evaluation
+    if (isIntro(id) || isOutro(id)) {
       action.fetchEvaluation({ cid: cid }, function (evaluation) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = evaluation.chapters[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var chapter = _step.value;
-
-            action.fetchChapter({ cid: cid, id: chapter.id }, function (chapter) {
-              chapters.push(chapter);
-
-              if (chapters.length == evaluation.chapters.length) {
-                _this.setState({ evaluation: evaluation, chapters: chapters });
-              }
-            });
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
+        _this.setState({ evaluation: evaluation });
       });
     }
     // load just a chapter
-    else {
+    else if (id) {
         action.fetchEvaluation({ cid: cid }, function (evaluation) {
-          var _iteratorNormalCompletion2 = true;
-          var _didIteratorError2 = false;
-          var _iteratorError2 = undefined;
+          var _iteratorNormalCompletion = true;
+          var _didIteratorError = false;
+          var _iteratorError = undefined;
 
           try {
-            for (var _iterator2 = evaluation.chapters[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-              var chapter = _step2.value;
+            for (var _iterator = evaluation.chapters[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+              var chapter = _step.value;
 
               if (chapter.id == id) {
                 action.fetchChapter({ cid: cid, id: chapter.id }, function (chapter) {
@@ -81137,21 +81147,56 @@ exports.default = (0, _component.Component)({
               }
             }
           } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
+            _didIteratorError = true;
+            _iteratorError = err;
           } finally {
             try {
-              if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                _iterator2.return();
+              if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
               }
             } finally {
-              if (_didIteratorError2) {
-                throw _iteratorError2;
+              if (_didIteratorError) {
+                throw _iteratorError;
               }
             }
           }
         });
       }
+      // load all chapters
+      else {
+          action.fetchEvaluation({ cid: cid }, function (evaluation) {
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+              for (var _iterator2 = evaluation.chapters[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var chapter = _step2.value;
+
+                action.fetchChapter({ cid: cid, id: chapter.id }, function (chapter) {
+                  chapters.push(chapter);
+
+                  if (chapters.length == evaluation.chapters.length) {
+                    _this.setState({ evaluation: evaluation, chapters: chapters });
+                  }
+                });
+              }
+            } catch (err) {
+              _didIteratorError2 = true;
+              _iteratorError2 = err;
+            } finally {
+              try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                  _iterator2.return();
+                }
+              } finally {
+                if (_didIteratorError2) {
+                  throw _iteratorError2;
+                }
+              }
+            }
+          });
+        }
   },
   getInitialState: function getInitialState() {
     return { evaluation: null, chapters: null };
@@ -81159,8 +81204,8 @@ exports.default = (0, _component.Component)({
   componentDidMount: function componentDidMount() {
     this.load();
   },
-  componentDidUpdate: function componentDidUpdate(_ref2) {
-    var params = _ref2.params;
+  componentDidUpdate: function componentDidUpdate(_ref4) {
+    var params = _ref4.params;
     var _props$params2 = this.props.params;
     var cid = _props$params2.cid;
     var id = _props$params2.id;
@@ -81171,18 +81216,25 @@ exports.default = (0, _component.Component)({
     }
   },
   render: function render() {
+    var id = this.props.params.id;
     var _state = this.state;
     var evaluation = _state.evaluation;
     var chapters = _state.chapters;
 
-    var isSplashPage = Boolean(this.props.params.id);
     var byOrder = function byOrder(a, b) {
       return a.order > b.order;
     };
+    var isSplashPage = Boolean(id);
 
     var content = (0, _component.B)({ className: _style2.default.no_data }, 'Loading evaluation ...');
 
-    if (evaluation && chapters) {
+    if (!evaluation) return content;
+
+    if (isIntro(id)) {
+      content = Intro({ evaluation: evaluation });
+    } else if (isOutro(id)) {
+      content = Outro({ evaluation: evaluation });
+    } else if (evaluation && chapters) {
       content = chapters.sort(byOrder).map(function (chapter) {
         return Chapter({ evaluation: evaluation, chapter: chapter, isSplashPage: isSplashPage });
       });
@@ -81192,8 +81244,8 @@ exports.default = (0, _component.Component)({
   }
 });
 
-},{"./style.css":626,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":591,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionComponent":653,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":672}],626:[function(require,module,exports){
-module.exports = {"no_data":"_EvaluationPreview_style_no_data","preview":"_EvaluationPreview_style_preview","chapter":"_EvaluationPreview_style_chapter","section":"_EvaluationPreview_style_section","section_title":"_EvaluationPreview_style_section_title","page_break":"_EvaluationPreview_style_page_break","splash":"_EvaluationPreview_style_splash","splash_title":"_EvaluationPreview_style_splash_title"}
+},{"./style.css":626,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":591,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":599,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionComponent":653,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":672}],626:[function(require,module,exports){
+module.exports = {"no_data":"_EvaluationPreview_style_no_data","preview":"_EvaluationPreview_style_preview","chapter":"_EvaluationPreview_style_chapter","section":"_EvaluationPreview_style_section","section_title":"_EvaluationPreview_style_section_title","splash":"_EvaluationPreview_style_splash","splash_title":"_EvaluationPreview_style_splash_title","splash_outro":"_EvaluationPreview_style_splash_outro _EvaluationPreview_style_splash","splash_intro":"_EvaluationPreview_style_splash_intro _EvaluationPreview_style_splash","splash_intro_text":"_EvaluationPreview_style_splash_intro_text","splash_intro_title":"_EvaluationPreview_style_splash_intro_title","splash_intro_subtitle":"_EvaluationPreview_style_splash_intro_subtitle","splash_intro_date":"_EvaluationPreview_style_splash_intro_date"}
 },{}],627:[function(require,module,exports){
 'use strict';
 

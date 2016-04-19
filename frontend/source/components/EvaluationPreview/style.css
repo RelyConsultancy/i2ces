@@ -4,7 +4,7 @@
 }
 .preview {
   position: relative;
-  width: 940px;
+  width: 842px;
   margin: 0 auto;
   padding: 2rem 0;
 }
@@ -13,7 +13,6 @@
 .chapter {
   position: relative;
   margin-top: 2rem;
-  border-top: 1px solid #E6E6E6;
 }
 .chapter::before {
   content: '';
@@ -31,7 +30,6 @@
 .section {
   position: relative;
   padding: 2rem;
-  max-width: 940px;
   border: 1px solid #E6E6E6;
   border-top-width: 0;
   font-size: .875em;
@@ -44,60 +42,62 @@
 }
 
 
-.page_break {
-  position: relative;
-  margin-top: 2rem;
-  border-top-width: 1px;
-}
-.page_break::before {
-  content: '';
-  position: absolute;
-  top: calc(-1rem - 2px);
-  left: 0;
-  right: 0;
-  border-top: 1px dashed #E6E6E6;
-}
-.page_break:first-child {
-  margin-top: 0;
-  border-top-width: 0;
-}
-.page_break:first-child::before {
-  display: none;
-}
-
-
 .splash {
   position: relative;
-  height: 680px;
+  height: 595px;
   border: 1px solid #E6E6E6;
-  border-top-width: 0;
   z-index: 1;
   background-image: url(/images/pdf_splash_bg.png);
   background-repeat: no-repeat;
-  background-size: contain;
-}
-.splash::before {
-  /*content: '';*/
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 500px;
-  border-radius: 100%;
-  background-color: #5FC3E1;
-  z-index: -1;
+  background-size: cover;
 }
 .splash_title {
   position: absolute;
   font-size: 3rem;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 450px;
+  transform: translate(-50%, -45%);
+  width: 400px;
   font-family: 'Archer Bold';
   text-align: center;
   color: #FFF;
+}
+.splash_outro {
+  compose: splash;
+  background-image: url(/images/pdf_outro_bg.png);
+}
+.splash_intro {
+  compose: splash;
+  background-image: url(/images/pdf_intro_bg.png);
+}
+.splash_intro_text {
+  position: absolute;
+  bottom: 145px;
+  right: 1rem;
+  left: 16.5rem;
+  height: 8.5rem;
+  color: #FFFFFF;
+}
+.splash_intro_title {
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  font-family: 'Archer Bold', serif;
+}
+.splash_intro_subtitle {
+  position: relative;
+  top: 35%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  font-family: 'Archer Medium', serif;
+}
+.splash_intro_date {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  font-size: 1.2rem;
+  font-family: 'Archer Medium', serif;
 }
 
 
@@ -118,20 +118,11 @@
   }
   .chapter:not(:first-child) {
     page-break-before: always;
-    page-break-inside: avoid;
   }
   .section {
-    padding: 2rem 0;
+    padding: 2rem;
+    padding-bottom: 0;
     border: 0 !important;
     page-break-inside: avoid;
-  }
-  .page_break {
-    margin: 0;
-    padding: 0;
-    page-break-before: always;
-    page-break-inside: avoid;
-  }
-  .page_break::before {
-    display: none;
   }
 }

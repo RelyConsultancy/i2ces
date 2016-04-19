@@ -3,12 +3,13 @@
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
-  background-size: cover;
-  border: 2px solid #DDD;
-  border-radius: 100%;
   padding: 2px;
   margin-right: .5em;
   vertical-align: middle;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 2px solid #DDD;
+  border-radius: 100%;
 }
 
 .icon_channel_aisle_fin {
@@ -38,6 +39,6 @@
 .icon_channel_tv_wall {
   background-image: url(/images/icons/icon_tv_wall.png);
 }
-.icon_channel_6_sheet {
-  background-image: url(/images/icons/icon_6_sheet.png);
+.icon_channel_mobile {
+  background-image: url(/images/icons/icon_mobile.png);
 }

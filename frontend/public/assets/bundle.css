@@ -799,12 +799,13 @@ input::-moz-focus-inner {
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
-  background-size: cover;
-  border: 2px solid #DDD;
-  border-radius: 100%;
   padding: 2px;
   margin-right: .5em;
   vertical-align: middle;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 2px solid #DDD;
+  border-radius: 100%;
 }
 
 .icon_channel_aisle_fin {
@@ -843,8 +844,8 @@ input::-moz-focus-inner {
   background-image: url(/images/icons/icon_tv_wall.png);
 }
 
-.icon_channel_6_sheet {
-  background-image: url(/images/icons/icon_6_sheet.png);
+.icon_channel_mobile {
+  background-image: url(/images/icons/icon_mobile.png);
 }
 
 .Select {
@@ -5284,7 +5285,7 @@ body.prevent-scroll.fr-mobile {
 
 ._EvaluationPreview_style_preview {
   position: relative;
-  width: 940px;
+  width: 842px;
   margin: 0 auto;
   padding: 2rem 0;
 }
@@ -5292,7 +5293,6 @@ body.prevent-scroll.fr-mobile {
 ._EvaluationPreview_style_chapter {
   position: relative;
   margin-top: 2rem;
-  border-top: 1px solid #E6E6E6;
 }
 
 ._EvaluationPreview_style_chapter::before {
@@ -5311,7 +5311,6 @@ body.prevent-scroll.fr-mobile {
 ._EvaluationPreview_style_section {
   position: relative;
   padding: 2rem;
-  max-width: 940px;
   border: 1px solid #E6E6E6;
   border-top-width: 0;
   font-size: .875em;
@@ -5324,53 +5323,14 @@ body.prevent-scroll.fr-mobile {
   color: #6D6D6D;
 }
 
-._EvaluationPreview_style_page_break {
-  position: relative;
-  margin-top: 2rem;
-  border-top-width: 1px;
-}
-
-._EvaluationPreview_style_page_break::before {
-  content: '';
-  position: absolute;
-  top: calc(-1rem - 2px);
-  left: 0;
-  right: 0;
-  border-top: 1px dashed #E6E6E6;
-}
-
-._EvaluationPreview_style_page_break:first-child {
-  margin-top: 0;
-  border-top-width: 0;
-}
-
-._EvaluationPreview_style_page_break:first-child::before {
-  display: none;
-}
-
 ._EvaluationPreview_style_splash {
   position: relative;
-  height: 680px;
+  height: 595px;
   border: 1px solid #E6E6E6;
-  border-top-width: 0;
   z-index: 1;
   background-image: url(/images/pdf_splash_bg.png);
   background-repeat: no-repeat;
-  background-size: contain;
-}
-
-._EvaluationPreview_style_splash::before {
-  /*content: '';*/
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  width: 500px;
-  height: 500px;
-  border-radius: 100%;
-  background-color: #5FC3E1;
-  z-index: -1;
+  background-size: cover;
 }
 
 ._EvaluationPreview_style_splash_title {
@@ -5378,12 +5338,55 @@ body.prevent-scroll.fr-mobile {
   font-size: 3rem;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  width: 450px;
+  -webkit-transform: translate(-50%, -45%);
+          transform: translate(-50%, -45%);
+  width: 400px;
   font-family: 'Archer Bold';
   text-align: center;
   color: #FFF;
+}
+
+._EvaluationPreview_style_splash_outro {
+  background-image: url(/images/pdf_outro_bg.png);
+}
+
+._EvaluationPreview_style_splash_intro {
+  background-image: url(/images/pdf_intro_bg.png);
+}
+
+._EvaluationPreview_style_splash_intro_text {
+  position: absolute;
+  bottom: 145px;
+  right: 1rem;
+  left: 16.5rem;
+  height: 8.5rem;
+  color: #FFFFFF;
+}
+
+._EvaluationPreview_style_splash_intro_title {
+  position: relative;
+  top: 40%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.8rem;
+  font-family: 'Archer Bold', serif;
+}
+
+._EvaluationPreview_style_splash_intro_subtitle {
+  position: relative;
+  top: 35%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.2rem;
+  font-family: 'Archer Medium', serif;
+}
+
+._EvaluationPreview_style_splash_intro_date {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  font-size: 1.2rem;
+  font-family: 'Archer Medium', serif;
 }
 
 @media print {
@@ -5407,24 +5410,13 @@ body.prevent-scroll.fr-mobile {
 
   ._EvaluationPreview_style_chapter:not(:first-child) {
     page-break-before: always;
-    page-break-inside: avoid;
   }
 
   ._EvaluationPreview_style_section {
-    padding: 2rem 0;
+    padding: 2rem;
+    padding-bottom: 0;
     border: 0 !important;
     page-break-inside: avoid;
-  }
-
-  ._EvaluationPreview_style_page_break {
-    margin: 0;
-    padding: 0;
-    page-break-before: always;
-    page-break-inside: avoid;
-  }
-
-  ._EvaluationPreview_style_page_break::before {
-    display: none;
   }
 }
 

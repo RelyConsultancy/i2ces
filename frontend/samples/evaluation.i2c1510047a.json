@@ -25,24 +25,6 @@
   }, {
     "label": "JS Magazine",
     "type": "magazine"
-  }, {
-    "label": "Milk Media",
-    "type": "milk_media"
-  }, {
-    "label": "Six Sheets",
-    "type": "6_sheet"
-  }, {
-    "label": "Take Home Barker",
-    "type": "barkers"
-  }, {
-    "label": "Trolleys",
-    "type": "trolleys"
-  }, {
-    "label": "TV Wall",
-    "type": "tv_wall"
-  }, {
-    "label": "Car Park Posters",
-    "type": "6_sheet"
   }],
 
   "supplier": {
