@@ -40,7 +40,11 @@ const ChartGrowShareOfCategory = (data, type) => {
         ['Exposed'].concat(charts[type].exposed),
         ['Labels', 'During', 'Post']
       ],
-      labels: true
+      labels: {
+          format: (value) => {
+              return value.toFixed(2) + '%'
+          }
+      }
     },
     axis: {
       x: {
