@@ -62,12 +62,13 @@ export default Component({
     const { source } = this.props.component
 
     fetchDataset(source, (data) => {
+        
       this.setState({ data })
     })
   },
   render () {
     const { data } = this.state
-
+    console.log(data);
     if (data.length) {
       return B({ className: style.chart }, ChartGrowShareOfCategory(data))
     }
