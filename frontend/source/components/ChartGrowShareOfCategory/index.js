@@ -43,6 +43,8 @@ const ChartGrowShareOfCategory = (data, type) => {
       x: {
         type: 'category',
         tick: {
+            culling: false,
+            centered: true,
             values: ['During', 'Post']
         }
       },
