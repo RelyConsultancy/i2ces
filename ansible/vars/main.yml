@@ -53,3 +53,7 @@ sftp_user:
 
 # Phantomjs variables
 phantomjs_version: "phantomjs-2.1.1"
+
+# Poppler/pdfunite variables
+
+poppler_version: "poppler-0.42.0"
