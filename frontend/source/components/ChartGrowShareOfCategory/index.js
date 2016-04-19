@@ -88,8 +88,8 @@ export default Component({
         return Grid({
           blocks: 2,
           items: [
-              B({ className: style.chart }, ChartGrowShareOfCategory(data)),
-              B({ className: style.chart }, ChartGrowShareOfCategory(data, 'brand'))
+              B({ className: style.chart }, '<h3>Offer products share of category during and post campaign</h3>' + ChartGrowShareOfCategory(data)),
+              B({ className: style.chart }, '<h3>Brand products share of category during and post campaign</h3>' + ChartGrowShareOfCategory(data, 'brand'))
           ]
       })
     }
