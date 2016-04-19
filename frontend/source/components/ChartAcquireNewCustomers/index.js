@@ -8,21 +8,21 @@ import style from './style.css'
 // a factory function for the chart
 const ChartAcquireNewCustomers = (data, type) => {
   
-  const type = type || 'offer';
+  const type = type || 'offer'
   
-  const charts = {};
+  const charts = {}
   
-  const charts.offer = {
+  charts.offer = {
       exposed: data.charts.offer.map(i => i.exposed),
       control: data.charts.offer.map(i => i.control)
   }
   
-  const charts.brand = {
+  charts.brand = {
       exposed: data.charts.brand.map(i => i.exposed),
       control: data.charts.brand.map(i => i.control)
   }
   
-  console.log(data.charts);
+  console.log(charts);
   // below is a C3 chart
   const chart = Chart({
     type: 'bar',
