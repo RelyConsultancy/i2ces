@@ -67,6 +67,28 @@ class Evaluation
     /**
      * @var string
      *
+     * @ORM\Column(type="string", name="version_number")
+     *
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("version_number")
+     * @JMS\Type("string")
+     */
+    protected $versionNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", name="latest_pdf_path")
+     *
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("latest_pdf_path")
+     * @JMS\Type("string")
+     */
+    protected $latestPdfPath;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, name="title")
      *
      * @JMS\Groups({"list"})
@@ -204,6 +226,21 @@ class Evaluation
     }
 
     /**
+     * @JMS\VirtualProperty()
+     * @JMS\Groups({"list"})
+     *
+     * @return array
+     */
+    public function gethasPdf()
+    {
+        if (is_null($this->getLatestPdfPath())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -233,6 +270,38 @@ class Evaluation
     public function setCid($cid)
     {
         $this->cid = $cid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVersionNumber()
+    {
+        return $this->versionNumber;
+    }
+
+    /**
+     * @param string $versionNumber
+     */
+    public function setVersionNumber($versionNumber)
+    {
+        $this->versionNumber = $versionNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLatestPdfPath()
+    {
+        return $this->latestPdfPath;
+    }
+
+    /**
+     * @param string $latestPdfPath
+     */
+    public function setLatestPdfPath($latestPdfPath)
+    {
+        $this->latestPdfPath = $latestPdfPath;
     }
 
     /**
@@ -460,6 +529,7 @@ class Evaluation
     public function unpublish()
     {
         $this->state = self::STATE_DRAFT;
+        $this->latestPdfPath = null;
     }
 
     /**
