@@ -101,7 +101,13 @@ export default Component({
       break
       
       case 'chart_grow_share_of_category':
-        return ChartGrowShareOfCategory({ component })
+        return SectionEditableComments({
+            onSave,
+            isEditable,
+            uploadPath,
+            component,
+            content: ChartGrowShareOfCategory({ component }),
+          })
       break
       
       case 'chart_retain_existing_customers':
