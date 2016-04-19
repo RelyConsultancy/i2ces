@@ -54,62 +54,6 @@ class ObjectiveReview implements ChartDataSetConfigInterface
      */
     public function getWeeklyUnitsSoldExposedAndControlConfig($cid)
     {
-
-        $query = sprintf(
-            'SELECT COUNT(0) as count
-             FROM ie_results_data
-             WHERE media_type=\'Total\'
-             AND objective=\'Overview\'
-             AND metric=\'Known_spend\'
-             AND product=\'Offer\'
-             AND timeperiod=2
-             AND master_campaign_id=\'%s\'
-            ',
-            $cid
-        );
-
-        $result = $this->connection->fetchAll($query);
-
-        if (1 > (int) $result[0]['count']) {
-            return [];
-        }
-
-        $query = sprintf(
-            'SELECT COUNT(0) as count
-             FROM ie_results_data
-             WHERE media_type=\'Total\'
-             AND objective=\'Overview\'
-             AND metric=\'Known_spend\'
-             AND product=\'Offer\'
-             AND timeperiod=3
-             AND master_campaign_id=\'%s\'
-            ',
-            $cid
-        );
-
-        $result = $this->connection->fetchAll($query);
-
-        if (1 > (int) $result[0]['count']) {
-            return [];
-        }
-
-
-        $query = sprintf(
-            'SELECT COUNT(0) as count
-             FROM ie_weekly_results_data
-             WHERE master_campaign_id = \'%s\'
-             AND product=\'Offer\'
-             AND metric=\'Units\'
-            ',
-            $cid
-        );
-
-        $result = $this->connection->fetchAll($query);
-
-        if (1 > (int) $result[0]['count']) {
-            return [];
-        }
-
         return [
             "weekly_units_sold_exposed_and_control" => [
                 "twig_name"    => "weekly-units-sold-exposed-and-control.json.twig",
@@ -195,13 +139,13 @@ class ObjectiveReview implements ChartDataSetConfigInterface
     public function getMediaTypeCombinationsConfig($cid)
     {
         $query = sprintf(
-            'SELECT count(0) AS count FROM ie_exposed_data WHERE master_campaign_id=\'%s\'',
+            'SELECT count(0) AS count FROM ie_exposed_data WHERE master_campaign_id=\'%s\' and media_type <> \'Total\'',
             $cid
         );
 
         $result = $this->connection->fetchAll($query);
 
-        if (1 > (int) $result[0]['count']) {
+        if (2 > (int) $result[0]['count']) {
             return [];
         }
 

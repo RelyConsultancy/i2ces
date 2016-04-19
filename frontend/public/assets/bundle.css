@@ -799,7 +799,7 @@ input::-moz-focus-inner {
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
-  background-size: contain;
+  background-size: cover;
   border: 2px solid #DDD;
   border-radius: 100%;
   padding: 2px;
