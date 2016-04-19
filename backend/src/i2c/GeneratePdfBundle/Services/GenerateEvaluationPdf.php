@@ -37,6 +37,9 @@ class GenerateEvaluationPdf
      */
     public function generatePdf(Evaluation $evaluation, EvaluationPdfConfig $config)
     {
+        if (!$evaluation->isPublished()) {
+            return;
+        }
 
         $filesystem = new Filesystem();
 
