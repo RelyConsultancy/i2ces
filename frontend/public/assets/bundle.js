@@ -80616,8 +80616,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 var ToggleState = function ToggleState(_ref) {
   var evaluation = _ref.evaluation;
 
@@ -80656,26 +80654,19 @@ var Links = function Links(_ref3) {
   var store = _ref3.store;
   var params = _ref3.params;
 
-  var links = [{
-    path: '/evaluations',
-    label: 'Back to Evaluations'
-  }, {
-    path: '/preview/' + params.cid,
-    label: 'Preview'
-  }, {
+  var links = [(0, _component.Link)({
+    className: _style2.default.link,
+    to: '/evaluations'
+  }, 'Back to Evaluations'), (0, _component.Link)({
+    className: _style2.default.link,
+    to: '/preview/' + params.cid
+  }, 'Preview'), (0, _component.A)({
+    className: _style2.default.link,
     href: '/api/evaluations/' + params.cid + '/pdf',
-    label: 'PDF'
-  }];
+    target: '_blank'
+  }, 'PDF')];
 
-  links = links.map(function (item) {
-    if (item.href) {
-      return (0, _component.A)({ className: _style2.default.link, href: item.href }, item.label);
-    }
-
-    return (0, _component.Link)({ className: _style2.default.link, to: item.path }, item.label);
-  });
-
-  return _component.B.apply(undefined, [{ className: _style2.default.links }].concat(_toConsumableArray(links)));
+  return _component.B.apply(undefined, [{ className: _style2.default.links }].concat(links));
 };
 
 var Date = function Date(_ref4) {
@@ -81050,10 +81041,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-var Chapter = function Chapter(_ref) {
-  var evaluation = _ref.evaluation;
-  var chapter = _ref.chapter;
-  var isSplashPage = _ref.isSplashPage;
+var Links = function Links(_ref) {
+  var cid = _ref.cid;
+
+  var links = [(0, _component.Link)({
+    className: _style2.default.link,
+    to: '/evaluations/' + cid
+  }, 'Back to Evaluation'), (0, _component.A)({
+    className: _style2.default.link,
+    href: '/api/evaluations/' + cid + '/pdf',
+    target: '_blank'
+  }, 'PDF')];
+
+  return _component.B.apply(undefined, [{ className: _style2.default.links }].concat(links));
+};
+
+var Chapter = function Chapter(_ref2) {
+  var evaluation = _ref2.evaluation;
+  var chapter = _ref2.chapter;
+  var isSplashPage = _ref2.isSplashPage;
 
   var byType = function byType(i) {
     return i.type == 'section';
@@ -81080,8 +81086,8 @@ var Chapter = function Chapter(_ref) {
   return _component.B.apply(undefined, [{ className: _style2.default.chapter, key: chapter.id }].concat(_toConsumableArray(sections)));
 };
 
-var Intro = function Intro(_ref2) {
-  var evaluation = _ref2.evaluation;
+var Intro = function Intro(_ref3) {
+  var evaluation = _ref3.evaluation;
 
   var channels = evaluation.channels.map(function (i) {
     return i.label;
@@ -81103,12 +81109,12 @@ var Intro = function Intro(_ref2) {
   var titleBox = (0, _component.B)({ className: _style2.default.splash_intro_title_box }, titleWrap);
   var dates = (0, _component.B)({ className: _style2.default.splash_intro_date }, (0, _utils.fmtDate)(evaluation.start_date), ' - ', (0, _utils.fmtDate)(evaluation.end_date));
 
-  return (0, _component.B)({ className: _style2.default.splash_intro }, titleBox, dates);
+  return (0, _component.B)({ className: _style2.default.splash_intro, key: 'intro' }, titleBox, dates);
 };
 
-var Outro = function Outro(_ref3) {
-  var evaluation = _ref3.evaluation;
-  return (0, _component.B)({ className: _style2.default.splash_outro }, (0, _component.B)({ className: _style2.default.splash_title }, 'Thank you'));
+var Outro = function Outro(_ref4) {
+  var evaluation = _ref4.evaluation;
+  return (0, _component.B)({ className: _style2.default.splash_outro, key: 'outro' }, (0, _component.B)({ className: _style2.default.splash_title }, 'Thank you'));
 };
 
 var isIntro = function isIntro(id) {
@@ -81209,8 +81215,8 @@ exports.default = (0, _component.Component)({
   componentDidMount: function componentDidMount() {
     this.load();
   },
-  componentDidUpdate: function componentDidUpdate(_ref4) {
-    var params = _ref4.params;
+  componentDidUpdate: function componentDidUpdate(_ref5) {
+    var params = _ref5.params;
     var _props$params2 = this.props.params;
     var cid = _props$params2.cid;
     var id = _props$params2.id;
@@ -81221,7 +81227,9 @@ exports.default = (0, _component.Component)({
     }
   },
   render: function render() {
-    var id = this.props.params.id;
+    var _props$params3 = this.props.params;
+    var cid = _props$params3.cid;
+    var id = _props$params3.id;
     var _state = this.state;
     var evaluation = _state.evaluation;
     var chapters = _state.chapters;
@@ -81243,14 +81251,19 @@ exports.default = (0, _component.Component)({
       content = chapters.sort(byOrder).map(function (chapter) {
         return Chapter({ evaluation: evaluation, chapter: chapter, isSplashPage: isSplashPage });
       });
+
+      if (chapters.length > 1) {
+        content.unshift(Intro({ evaluation: evaluation }));
+        content.push(Outro({ evaluation: evaluation }));
+      }
     }
 
-    return (0, _component.B)({ className: _style2.default.preview }, content);
+    return (0, _component.B)({ className: _style2.default.preview }, Links({ cid: cid }), content);
   }
 });
 
 },{"./style.css":626,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/actions.js":591,"/Users/eugen/GitHub/matter/i2ces/frontend/source/application/utils.js":599,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/SectionComponent":653,"/Users/eugen/GitHub/matter/i2ces/frontend/source/components/component.js":672}],626:[function(require,module,exports){
-module.exports = {"no_data":"_EvaluationPreview_style_no_data","preview":"_EvaluationPreview_style_preview","chapter":"_EvaluationPreview_style_chapter","section":"_EvaluationPreview_style_section","section_title":"_EvaluationPreview_style_section_title","splash":"_EvaluationPreview_style_splash","splash_title":"_EvaluationPreview_style_splash_title","splash_outro":"_EvaluationPreview_style_splash_outro _EvaluationPreview_style_splash","splash_intro":"_EvaluationPreview_style_splash_intro _EvaluationPreview_style_splash","splash_intro_title_box":"_EvaluationPreview_style_splash_intro_title_box","splash_intro_title_wrap":"_EvaluationPreview_style_splash_intro_title_wrap","splash_intro_title":"_EvaluationPreview_style_splash_intro_title","splash_intro_subtitle":"_EvaluationPreview_style_splash_intro_subtitle","splash_intro_date":"_EvaluationPreview_style_splash_intro_date"}
+module.exports = {"no_data":"_EvaluationPreview_style_no_data","preview":"_EvaluationPreview_style_preview","links":"_EvaluationPreview_style_links","link":"_EvaluationPreview_style_link","chapter":"_EvaluationPreview_style_chapter","section":"_EvaluationPreview_style_section","section_title":"_EvaluationPreview_style_section_title","splash":"_EvaluationPreview_style_splash","splash_title":"_EvaluationPreview_style_splash_title","splash_outro":"_EvaluationPreview_style_splash_outro _EvaluationPreview_style_splash","splash_intro":"_EvaluationPreview_style_splash_intro _EvaluationPreview_style_splash","splash_intro_title_box":"_EvaluationPreview_style_splash_intro_title_box","splash_intro_title_wrap":"_EvaluationPreview_style_splash_intro_title_wrap","splash_intro_title":"_EvaluationPreview_style_splash_intro_title","splash_intro_subtitle":"_EvaluationPreview_style_splash_intro_subtitle","splash_intro_date":"_EvaluationPreview_style_splash_intro_date"}
 },{}],627:[function(require,module,exports){
 'use strict';
 

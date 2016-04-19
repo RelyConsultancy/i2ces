@@ -10,6 +10,30 @@
 }
 
 
+.links {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  z-index: 10;
+  text-align: right;
+}
+.link {
+  display: inline-block;
+  color: #5FC3E1;
+  font-size: .75em;
+  text-decoration: none;
+}
+.link::before {
+  content: '●';
+  margin: .5em;
+}
+.link:first-child::before {
+  display: none;
+}
+
+
 .chapter {
   position: relative;
   margin-top: 2rem;
@@ -33,6 +57,9 @@
   border: 1px solid #E6E6E6;
   border-top-width: 0;
   font-size: .875em;
+}
+.section:first-child {
+  border-top-width: 1px;
 }
 .section_title {
   margin-bottom: 2rem;

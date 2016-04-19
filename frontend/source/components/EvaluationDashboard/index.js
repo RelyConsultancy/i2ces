@@ -41,24 +41,21 @@ const Content = (...data) => B(
 
 
 const Links = ({ store, params }) => {
-  let links = [{
-    path: `/evaluations`,
-    label: 'Back to Evaluations',
-  }, {
-    path: `/preview/${params.cid}`,
-    label: 'Preview',
-  }, {
-    href: `/api/evaluations/${params.cid}/pdf`,
-    label: 'PDF',
-  }]
-
-  links = links.map((item) => {
-    if (item.href) {
-      return A({ className: style.link, href: item.href }, item.label)
-    }
-
-    return Link({ className: style.link, to: item.path }, item.label)
-  })
+  let links = [
+    Link({
+      className: style.link,
+      to: `/evaluations`,
+    }, 'Back to Evaluations'),
+    Link({
+      className: style.link,
+      to: `/preview/${params.cid}`,
+    }, 'Preview'),
+    A({
+      className: style.link,
+      href: `/api/evaluations/${params.cid}/pdf`,
+      target: '_blank',
+    }, 'PDF')
+  ]
 
   return B({ className: style.links }, ...links)
 }

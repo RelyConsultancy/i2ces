@@ -1,8 +1,25 @@
 import SectionComponent from '/components/SectionComponent'
-import { Component, B, Link } from '/components/component.js'
+import { Component, B, A, Link } from '/components/component.js'
 import * as action from '/application/actions.js'
 import { fmtDate } from '/application/utils.js'
 import style from './style.css'
+
+
+const Links = ({ cid }) => {
+  let links = [
+    Link({
+      className: style.link,
+      to: `/evaluations/${cid}`,
+    }, 'Back to Evaluation'),
+    A({
+      className: style.link,
+      href: `/api/evaluations/${cid}/pdf`,
+      target: '_blank',
+    }, 'PDF')
+  ]
+
+  return B({ className: style.links }, ...links)
+}
 
 
 const Chapter = ({ evaluation, chapter, isSplashPage }) => {
@@ -56,13 +73,13 @@ const Intro = ({ evaluation }) => {
     fmtDate(evaluation.end_date)
   )
 
-  return B({ className: style.splash_intro }, titleBox, dates)
+  return B({ className: style.splash_intro, key: 'intro' }, titleBox, dates)
 }
 
 
 
 const Outro = ({ evaluation }) => B(
-  { className: style.splash_outro },
+  { className: style.splash_outro, key: 'outro' },
   B({ className: style.splash_title }, 'Thank you')
 )
 
@@ -123,7 +140,7 @@ export default Component({
     }
   },
   render () {
-    const { id } = this.props.params
+    const { cid, id } = this.props.params
     const { evaluation, chapters } = this.state
     const byOrder = (a, b) => (a.order > b.order)
     const isSplashPage = Boolean(id)
@@ -142,8 +159,13 @@ export default Component({
       content = chapters.sort(byOrder).map((chapter) => (
         Chapter({ evaluation, chapter, isSplashPage })
       ))
+
+      if (chapters.length > 1) {
+        content.unshift(Intro({ evaluation }))
+        content.push(Outro({ evaluation }))
+      }
     }
 
-    return B({ className: style.preview }, content)
+    return B({ className: style.preview }, Links({ cid }), content)
   }
 })

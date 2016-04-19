@@ -5290,6 +5290,33 @@ body.prevent-scroll.fr-mobile {
   padding: 2rem 0;
 }
 
+._EvaluationPreview_style_links {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 800px;
+  z-index: 10;
+  text-align: right;
+}
+
+._EvaluationPreview_style_link {
+  display: inline-block;
+  color: #5FC3E1;
+  font-size: .75em;
+  text-decoration: none;
+}
+
+._EvaluationPreview_style_link::before {
+  content: '●';
+  margin: .5em;
+}
+
+._EvaluationPreview_style_link:first-child::before {
+  display: none;
+}
+
 ._EvaluationPreview_style_chapter {
   position: relative;
   margin-top: 2rem;
@@ -5314,6 +5341,10 @@ body.prevent-scroll.fr-mobile {
   border: 1px solid #E6E6E6;
   border-top-width: 0;
   font-size: .875em;
+}
+
+._EvaluationPreview_style_section:first-child {
+  border-top-width: 1px;
 }
 
 ._EvaluationPreview_style_section_title {
