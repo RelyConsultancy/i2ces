@@ -88,20 +88,8 @@ export default Component({
         return Grid({
           blocks: 2,
           items: [
-              Grid({
-                  blocks: 1,
-                  items: [
-                      B({className: 'i2c-chart-title'}, 'Offer products share of category during and post campaign'),
-                      B({ className: style.chart }, ChartGrowShareOfCategory(data))
-                  ]
-              }),
-              Grid({
-                  blocks: 1,
-                  items: [
-                      B({className: 'i2c-chart-title'}, 'Brand products share of category during and post campaign'),
-                      B({ className: style.chart }, ChartGrowShareOfCategory(data, 'brand'))
-                  ]
-              })
+              '<h3>Offer products share of category during and post campaign</h3>' + B({ className: style.chart }, ChartGrowShareOfCategory(data)),
+              '<h3>Brand products share of category during and post campaign</h3>' + B({ className: style.chart }, ChartGrowShareOfCategory(data, 'brand'))
           ]
       })
     }
