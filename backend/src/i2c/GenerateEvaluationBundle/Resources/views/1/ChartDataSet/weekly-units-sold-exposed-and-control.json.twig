@@ -3,15 +3,15 @@
     "table": {
         "during": {
             "uplift": "{{ during[0].uplift }}",
-            "percentage_uplift": "{{ during[0].percentage_uplift }}"
+            "percentage_uplift": "{{ during[0].percentage_uplift * 100 }}"
         },
         "post": {
-            "uplift": "{{ post[0].uplift }}",
-            "percentage_uplift": "{{ post[0].percentage_uplift }}"
+            "uplift": {% if post[0] is defined %}"{{ post[0].uplift }}",{% else %}null,{% endif %}
+            "percentage_uplift": {% if post[0] is defined %}"{{ post[0].percentage_uplift * 100 }}"{% else %}null{% endif %}
         },
         "total": {
             "uplift": "{{ total[0].uplift }}",
-            "percentage_uplift": "{{ total[0].percentage_uplift }}"
+            "percentage_uplift": "{{ total[0].percentage_uplift * 100 }}"
         }
     },
     "chart": [
@@ -34,12 +34,15 @@
             "label": "during",
             "date_start": "{{ timing_during[0].start_date }}",
             "date_end": "{{ timing_during[0].end_date }}"
-        },
+        }
+        {% if timing_post[0] is defined %}
+        ,
         {
             "label": "post",
             "date_start": "{{ timing_post[0].start_date }}",
             "date_end": "{{ timing_post[0].end_date }}"
         }
+        {% endif %}
     ]
 }
 {% endautoescape %}
