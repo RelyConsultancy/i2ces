@@ -30,13 +30,15 @@ const ChartGrowShareOfCategory = (data, type) => {
     type: 'bar',
     data: {
       type: 'bar',
+      x: 'Labels',
       colors: {
         'Control': '#A6A6A6',
         'Exposed': '#4FB7DA'
       },
       columns: [
         ['Control'].concat(charts[type].control),
-        ['Exposed'].concat(charts[type].exposed)
+        ['Exposed'].concat(charts[type].exposed),
+        ['Labels', 'During', 'Post']
       ]
     },
     axis: {
