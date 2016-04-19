@@ -7,10 +7,12 @@ use i2c\EvaluationBundle\Repository\EvaluationRepository;
 use i2c\GeneratePdfBundle\Entity\EvaluationPdfConfig;
 use i2c\GeneratePdfBundle\Services\EvaluationQueue;
 use i2c\GeneratePdfBundle\Services\GenerateEvaluationPdf;
+use Symfony\Bridge\Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 /**
  * Class GeneratePDF
@@ -19,6 +21,15 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GeneratePDF extends ContainerAwareCommand
 {
+    /** @var Logger */
+    protected $logger;
+
+    public function __construct(Logger $logger)
+    {
+        $this->logger = $logger;
+        parent::__construct('i2c:generate-pdf:evaluation');
+    }
+
     public function configure()
     {
         $this->setName('i2c:generate-pdf:evaluation')
@@ -53,31 +64,37 @@ class GeneratePDF extends ContainerAwareCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $cidsArray = $this->getEvaluationQueueService()->getEvaluationForGeneration();
+        try {
+            $cidsArray = $this->getEvaluationQueueService()->getEvaluationForGeneration();
 
-        if (empty($cidsArray)) {
-            $output->writeln('No pdfs to generate');
-            return;
-        }
+            if (empty($cidsArray)) {
+                $output->writeln('No pdfs to generate');
 
-        $config = new EvaluationPdfConfig();
-
-        $config->setNodeJsCommand($input->getOption('node-command'));
-        $config->setOutputDirectory($input->getOption('output-folder'));
-        $config->setDelay($input->getOption('delay'));
-
-
-        foreach ($cidsArray as $item) {
-            /** @var Evaluation $evaluation */
-            $evaluation = $this->getEvaluationRepository()->findOneBy(['cid' => $item['cid']]);
-
-            if (is_null($evaluation)) {
-                continue;
+                return;
             }
 
-            $this->getGenerateEvaluationPdfService()->generatePdf($evaluation, $config);
+            $config = new EvaluationPdfConfig();
 
-            $this->getEvaluationQueueService()->removeFromQueue($item['cid']);
+            $config->setNodeJsCommand($input->getOption('node-command'));
+            $config->setOutputDirectory($input->getOption('output-folder'));
+            $config->setDelay($input->getOption('delay'));
+
+            foreach ($cidsArray as $item) {
+                /** @var Evaluation $evaluation */
+                $evaluation = $this->getEvaluationRepository()->findOneBy(['cid' => $item['cid']]);
+
+                if (is_null($evaluation)) {
+                    continue;
+                }
+
+                $this->getGenerateEvaluationPdfService()->generatePdf($evaluation, $config);
+
+                $this->getEvaluationQueueService()->removeFromQueue($item['cid']);
+            }
+        } catch (ProcessFailedException $ex) {
+            $this->logger->addCritical($ex->getMessage());
+            $this->logger->addCritical($ex->getTraceAsString());
+            throw new \RuntimeException($ex->getMessage());
         }
     }
 

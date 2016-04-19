@@ -225,7 +225,7 @@ class EvaluationController extends RestApiController
         $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
 
         if (is_null($evaluation)) {
-            return $this->notFound('Evaluation was not found');
+            return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
         }
 
         $filesystem = new Filesystem();
@@ -240,7 +240,11 @@ class EvaluationController extends RestApiController
         $response->headers->set('Content-Type', 'mime/type');
         $response->headers->set(
             'Content-Disposition',
-            sprintf('attachment;filename="%s.pdf"', $evaluation->getDisplayName())
+            sprintf(
+                'attachment;filename="%s - version %s.pdf"',
+                $evaluation->getDisplayName(),
+                $evaluation->getVersionNumber()
+            )
         );
 
         $response->setContent($pdf);

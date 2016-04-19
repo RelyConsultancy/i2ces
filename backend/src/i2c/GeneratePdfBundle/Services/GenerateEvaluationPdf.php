@@ -7,6 +7,7 @@ use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
 use i2c\GeneratePdfBundle\Entity\EvaluationPdfConfig;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
 
 /**
  * Class GenerateEvaluationPdf
@@ -81,7 +82,8 @@ class GenerateEvaluationPdf
                 $headers,
                 $config->getDelay()
             );
-            exec($command, $output);
+            $process = new Process($command);
+            $process->mustRun();
 
             $chapterPdfs[] = $chapterPdfPath;
         }
@@ -102,9 +104,11 @@ class GenerateEvaluationPdf
             $finalPdfPath
         );
 
-        exec($commandThatMergesPdfs);
+        $process = new Process($commandThatMergesPdfs);
+        $process->mustRun();
 
-        exec(sprintf('chmod 755 %s', $finalPdfPath));
+        $process = new Process(sprintf('chmod 755 %s', $finalPdfPath));
+        $process->mustRun();
 
         $evaluation->setLatestPdfPath($finalPdfPath);
 
@@ -125,7 +129,11 @@ class GenerateEvaluationPdf
             'curl \'%s/user/login\' -s --compressed -H \'DNT: 1\' -D header.txt | grep _csrf_token',
             $this->urlBase
         );
-        $result = exec($loginRequest);
+
+        $process = new Process($loginRequest);
+        $process->mustRun();
+
+        $result = $process->getOutput();
 
         $initialCookie = $this->getCookieFromResponseHeaderFile('header.txt');
 
@@ -133,7 +141,8 @@ class GenerateEvaluationPdf
         $end = strpos($result, '"', $start);
         $csrfToken = substr($result, $start, $end - $start);
 
-        exec(
+
+        $process = new Process(
             sprintf(
                 'curl \'%s/user/login-check\' -s --compressed -H \'DNT: 1\' -H \'Cookie: %s\' \
                  --data \'_username=%s&_password=%s&_target_path=&_csrf_token=%s\' \
@@ -145,6 +154,7 @@ class GenerateEvaluationPdf
                 $csrfToken
             )
         );
+        $process->mustRun();
 
         $cookie = $this->getCookieFromResponseHeaderFile('header2.txt');
 
@@ -161,7 +171,9 @@ class GenerateEvaluationPdf
      */
     protected function getCookieFromResponseHeaderFile($filename)
     {
-        $cookieString = exec(sprintf('cat %s | grep \'Set-Cookie: BAPID=\'', $filename));
+        $process = new Process(sprintf('cat %s | grep \'Set-Cookie: BAPID=\'', $filename));
+        $process->mustRun();
+        $cookieString = $process->getOutput();
 
         $start = strpos($cookieString, 'BAPID=');
         $end = strpos($cookieString, ';', $start);

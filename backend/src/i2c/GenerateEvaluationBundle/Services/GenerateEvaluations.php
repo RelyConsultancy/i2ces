@@ -119,6 +119,7 @@ class GenerateEvaluations
             $evaluation = $this->updateExistingIfPresent($evaluation, $cid);
 
             $evaluation->setVersionNumber($versionNumber);
+            $evaluation->setLatestPdfPath(null);
             $evaluation->markAsGenerating();
 
             $chapters = [];
