@@ -40,7 +40,7 @@ const Content = (...data) => B(
 )
 
 
-const Links = ({ store, params }) => {
+const Links = ({ evaluation }) => {
   let links = [
     Link({
       className: style.link,
@@ -48,14 +48,19 @@ const Links = ({ store, params }) => {
     }, 'Back to Evaluations'),
     Link({
       className: style.link,
-      to: `/preview/${params.cid}`,
+      to: `/preview/${evaluation.cid}`,
     }, 'Preview'),
-    A({
-      className: style.link,
-      href: `/api/evaluations/${params.cid}/pdf`,
-      target: '_blank',
-    }, 'PDF')
   ]
+
+  if (evaluation.has_pdf) {
+    links.push(
+      A({
+        className: style.link,
+        href: `/api/evaluations/${evaluation.cid}/pdf`,
+        target: '_blank',
+      }, 'PDF')
+    )
+  }
 
   return B({ className: style.links }, ...links)
 }
@@ -149,7 +154,7 @@ const Evaluation = Component({
 
     if (evaluation) {
       content = B(
-        Links({ store, params }),
+        Links({ evaluation }),
         Header({ evaluation }),
         Content(
           Date({ evaluation }),

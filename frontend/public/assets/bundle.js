@@ -80651,20 +80651,23 @@ var Content = function Content() {
 };
 
 var Links = function Links(_ref3) {
-  var store = _ref3.store;
-  var params = _ref3.params;
+  var evaluation = _ref3.evaluation;
 
   var links = [(0, _component.Link)({
     className: _style2.default.link,
     to: '/evaluations'
   }, 'Back to Evaluations'), (0, _component.Link)({
     className: _style2.default.link,
-    to: '/preview/' + params.cid
-  }, 'Preview'), (0, _component.A)({
-    className: _style2.default.link,
-    href: '/api/evaluations/' + params.cid + '/pdf',
-    target: '_blank'
-  }, 'PDF')];
+    to: '/preview/' + evaluation.cid
+  }, 'Preview')];
+
+  if (evaluation.has_pdf) {
+    links.push((0, _component.A)({
+      className: _style2.default.link,
+      href: '/api/evaluations/' + evaluation.cid + '/pdf',
+      target: '_blank'
+    }, 'PDF'));
+  }
 
   return _component.B.apply(undefined, [{ className: _style2.default.links }].concat(links));
 };
@@ -80766,7 +80769,7 @@ var Evaluation = (0, _component.Component)({
     var content = (0, _component.B)({ className: _style2.default.no_evaluation }, evaluation_empty);
 
     if (evaluation) {
-      content = (0, _component.B)(Links({ store: store, params: params }), Header({ evaluation: evaluation }), Content(Date({ evaluation: evaluation }), Channels({ items: evaluation.channels }), Chapters({ evaluation: evaluation, colors: chapter_palette }), Objectives({ items: evaluation.campaign_objectives })));
+      content = (0, _component.B)(Links({ evaluation: evaluation }), Header({ evaluation: evaluation }), Content(Date({ evaluation: evaluation }), Channels({ items: evaluation.channels }), Chapters({ evaluation: evaluation, colors: chapter_palette }), Objectives({ items: evaluation.campaign_objectives })));
     }
 
     return content;
@@ -81047,11 +81050,15 @@ var Links = function Links(_ref) {
   var links = [(0, _component.Link)({
     className: _style2.default.link,
     to: '/evaluations/' + cid
-  }, 'Back to Evaluation'), (0, _component.A)({
-    className: _style2.default.link,
-    href: '/api/evaluations/' + cid + '/pdf',
-    target: '_blank'
-  }, 'PDF')];
+  }, 'Back to Evaluation')];
+
+  if (evaluation.has_pdf) {
+    links.push((0, _component.A)({
+      className: _style2.default.link,
+      href: '/api/evaluations/' + evaluation.cid + '/pdf',
+      target: '_blank'
+    }, 'PDF'));
+  }
 
   return _component.B.apply(undefined, [{ className: _style2.default.links }].concat(links));
 };

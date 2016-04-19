@@ -11,12 +11,17 @@ const Links = ({ cid }) => {
       className: style.link,
       to: `/evaluations/${cid}`,
     }, 'Back to Evaluation'),
-    A({
-      className: style.link,
-      href: `/api/evaluations/${cid}/pdf`,
-      target: '_blank',
-    }, 'PDF')
   ]
+
+  if (evaluation.has_pdf) {
+    links.push(
+      A({
+        className: style.link,
+        href: `/api/evaluations/${evaluation.cid}/pdf`,
+        target: '_blank',
+      }, 'PDF')
+    )
+  }
 
   return B({ className: style.links }, ...links)
 }
