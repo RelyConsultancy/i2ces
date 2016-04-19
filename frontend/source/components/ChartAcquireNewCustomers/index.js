@@ -1,4 +1,5 @@
 import { Component, B } from '/components/component.js'
+import Grid from '/components/Grid'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
@@ -68,7 +69,13 @@ export default Component({
     const { data } = this.state
 
     if (data.length) {
-      return B({ className: style.chart }, ChartAcquireNewCustomers(data))
+      return Grid({
+          blocks: 2,
+          items: [
+              B({ className: style.chart }, ChartAcquireNewCustomers(data)),
+              B({ className: style.chart }, ChartAcquireNewCustomers(data, 'brand'))
+          ]
+      })
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')
