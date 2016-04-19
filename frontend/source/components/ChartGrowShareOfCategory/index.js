@@ -1,4 +1,5 @@
 import { Component, B } from '/components/component.js'
+import Grid from '/components/Grid'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
@@ -69,9 +70,14 @@ export default Component({
   },
   render () {
     const { data } = this.state
-    console.log(data);
     if ('charts' in data) {
-      return B({ className: style.chart }, ChartGrowShareOfCategory(data))
+        return Grid({
+          blocks: 2,
+          items: [
+              B({ className: style.chart }, ChartGrowShareOfCategory(data)),
+              B({ className: style.chart }, ChartGrowShareOfCategory(data, 'brand'))
+          ]
+      })
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')
