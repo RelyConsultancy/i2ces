@@ -1,4 +1,4 @@
-import { Component, B } from '/components/component.js'
+import { Component, B, HTML } from '/components/component.js'
 import Grid from '/components/Grid'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
@@ -88,8 +88,15 @@ export default Component({
         return Grid({
           blocks: 2,
           items: [
-              B({ className: style.chart }, ChartGrowShareOfCategory(data)),
-              B({ className: style.chart }, ChartGrowShareOfCategory(data, 'brand'))
+              B(
+                HTML('<h3>Offer products share of category during and post campaign</h3>'),
+                B({ className: style.chart }, ChartGrowShareOfCategory(data)),
+              ),
+              B(
+                HTML('<h3>Brand products share of category during and post campaign</h3>'),
+                B({ className: style.chart }, ChartGrowShareOfCategory(data, 'brand'))
+              )
+
           ]
       })
     }
