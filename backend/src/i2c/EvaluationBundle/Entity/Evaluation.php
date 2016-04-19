@@ -226,6 +226,21 @@ class Evaluation
     }
 
     /**
+     * @JMS\VirtualProperty()
+     * @JMS\Groups({"list"})
+     *
+     * @return array
+     */
+    public function gethasPdf()
+    {
+        if (is_null($this->getLatestPdfPath())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -514,6 +529,7 @@ class Evaluation
     public function unpublish()
     {
         $this->state = self::STATE_DRAFT;
+        $this->latestPdfPath = null;
     }
 
     /**

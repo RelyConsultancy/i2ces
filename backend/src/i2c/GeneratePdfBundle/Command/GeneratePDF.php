@@ -53,9 +53,9 @@ class GeneratePDF extends ContainerAwareCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $cids = $this->getEvaluationQueueService()->getEvaluationForGeneration();
+        $cidsArray = $this->getEvaluationQueueService()->getEvaluationForGeneration();
 
-        if (empty($cids)) {
+        if (empty($cidsArray)) {
             $output->writeln('No pdfs to generate');
             return;
         }
@@ -67,9 +67,9 @@ class GeneratePDF extends ContainerAwareCommand
         $config->setDelay($input->getOption('delay'));
 
 
-        foreach ($cids as $cid) {
+        foreach ($cidsArray as $item) {
             /** @var Evaluation $evaluation */
-            $evaluation = $this->getEvaluationRepository()->findOneBy(['cid' => $cid]);
+            $evaluation = $this->getEvaluationRepository()->findOneBy(['cid' => $item['cid']]);
 
             if (is_null($evaluation)) {
                 continue;
@@ -77,7 +77,7 @@ class GeneratePDF extends ContainerAwareCommand
 
             $this->getGenerateEvaluationPdfService()->generatePdf($evaluation, $config);
 
-            $this->getEvaluationQueueService()->removeFromQueue($cid);
+            $this->getEvaluationQueueService()->removeFromQueue($item['cid']);
         }
     }
 

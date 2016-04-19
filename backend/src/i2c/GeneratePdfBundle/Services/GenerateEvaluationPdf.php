@@ -89,10 +89,10 @@ class GenerateEvaluationPdf
         $now = new \DateTime('now');
 
         $finalPdfPath = sprintf(
-            '%s/%s - %s.pdf',
+            '%s/%s-%s.pdf',
             $evaluationPdfDirectory,
-            $now->format('Y-m-d\TH:i:s'),
-            $evaluation->getCid()
+            $evaluation->getCid(),
+            $now->format('Y-m-d\TH-i-s')
         );
 
         $commandThatMergesPdfs = sprintf(
@@ -103,6 +103,8 @@ class GenerateEvaluationPdf
         );
 
         exec($commandThatMergesPdfs);
+
+        exec(sprintf('chmod 755 %s', $finalPdfPath));
 
         $evaluation->setLatestPdfPath($finalPdfPath);
 

@@ -13,6 +13,7 @@ use i2c\ImageUploadBundle\Services\UploadedImageQueue;
 use Monolog\Logger;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\UserBundle\Entity\User;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -227,7 +228,12 @@ class EvaluationController extends RestApiController
             return $this->notFound('Evaluation was not found');
         }
 
-        $pdf = file_get_contents($evaluation->getLatestPdfPath());
+        $filesystem = new Filesystem();
+        if (!$filesystem->exists($evaluation->getLatestPdfPath())) {
+            return $this->notFound('PDF was not found');
+        }
+
+        $pdf = file_get_contents($evaluation->getLatestPdfPath(), FILE_BINARY);
 
         $response = new Response();
 
@@ -240,7 +246,7 @@ class EvaluationController extends RestApiController
         $response->setContent($pdf);
 
         /** @var Logger $logger */
-        $logger = $this->get('monolog.logger');
+        $logger = $this->get('logger');
 
         /** @var User $loggedInUser */
         $loggedInUser = $this->getUser();
