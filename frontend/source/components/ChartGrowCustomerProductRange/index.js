@@ -33,7 +33,7 @@ const ChartGrowCustomerProductRange = (data, type) => {
       x: 'Labels',
       colors: {
         'Control': '#A6A6A6',
-        'Exposed': '#E36112'
+        'Exposed': '#C0CE0A'
       },
       columns: [
         ['Control'].concat(charts[type].control),
@@ -42,7 +42,7 @@ const ChartGrowCustomerProductRange = (data, type) => {
       ],
       labels: {
           format: (value) => {
-              return value.toFixed(2)
+              return value.toFixed(0)
           }
       }
     },
@@ -61,7 +61,7 @@ const ChartGrowCustomerProductRange = (data, type) => {
         },
         tick: {
             format: (value) => {
-                return value.toFixed(1)
+                return value.toFixed(0)
             }
             
         }
@@ -90,15 +90,11 @@ export default Component({
     const { data } = this.state
     if ('charts' in data) {
         return Grid({
-          blocks: 2,
+          blocks: 1,
           items: [
-              B(
+              B({ className: 'i2c-single-chart-middle' },
                 H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of offer during and post campaign'),
                 B({ className: style.chart }, ChartGrowCustomerProductRange(data))
-              ),
-              B(
-                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of brand during and post campaign'),
-                B({ className: style.chart }, ChartGrowCustomerProductRange(data, 'brand'))
               )
           ]
       })
