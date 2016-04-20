@@ -2,6 +2,7 @@ import { Component, B, A, Link } from '/components/component.js'
 import Grid from '/components/Grid'
 import Toggle from '/components/Toggle'
 import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
+import { download } from '/application/http.js'
 import * as $ from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
@@ -53,11 +54,16 @@ const Links = ({ evaluation }) => {
   ]
 
   if (evaluation.has_pdf) {
+    const url = `/api/evaluations/${evaluation.cid}/pdf`
+
     links.push(
       A({
         className: style.link,
-        href: `/api/evaluations/${evaluation.cid}/pdf`,
-        target: '_blank',
+        href: url,
+        onClick: (event) => {
+          event.preventDefault()
+          download(url, `${evaluation.cid}.pdf`)
+        },
       }, 'PDF')
     )
   }

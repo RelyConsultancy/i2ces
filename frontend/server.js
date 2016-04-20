@@ -158,6 +158,12 @@ $('post', '/api/images/*', function * () {
 })
 
 
+// PDF download test
+$('get', '/api/evaluations/:cid/pdf', function * () {
+  yield send(this, 'phantomjs_export.pdf', { root: `${__dirname}/samples` })
+})
+
+
 // test incoming headers
 $('get', '/api/headers', function * () {
   console.log(this.request.headers)
