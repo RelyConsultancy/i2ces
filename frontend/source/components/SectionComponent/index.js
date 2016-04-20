@@ -93,49 +93,103 @@ export default Component({
       break
       
       case 'chart_acquire_new_customers':
-        return ChartAcquireNewCustomers({ component })
+          return SectionEditableComments({
+            component,
+            isEditable,
+            uploadPath,
+            onSave,
+            content: ChartAcquireNewCustomers({ component }),
+          })
       break
       
       case 'chart_grow_customer_product_range':
-        return ChartGrowCustomerProductRange({ component })
+        return SectionEditableComments({
+          component,
+          isEditable,
+          uploadPath,
+          onSave,
+          content: ChartGrowCustomerProductRange({ component }),
+        })
       break
       
       case 'chart_grow_share_of_category':
         return SectionEditableComments({
-            onSave,
-            isEditable,
-            uploadPath,
-            component,
-            content: ChartGrowShareOfCategory({ component }),
-          })
+          component,
+          isEditable,
+          uploadPath,
+          onSave,
+          content: ChartGrowShareOfCategory({ component }),
+        })
       break
       
       case 'chart_retain_existing_customers':
-        return ChartRetainExistingCustomers({ component })
+        return SectionEditableComments({
+          component,
+          isEditable,
+          uploadPath,
+          onSave,
+          content: ChartRetainExistingCustomers({ component }),
+        })
       break
       
       case 'chart_grow_total_units':
-        return ChartGrowTotalUnits({ component })
+        return SectionEditableComments({
+          component,
+          isEditable,
+          uploadPath,
+          onSave,
+          content: ChartGrowTotalUnits({ component }),
+        })
       break
       
       case 'chart_retain_lapsing_customers':
-        return ChartRetainLapsingCustomers({ component })
+        return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartRetainLapsingCustomers({ component }),
+            })
       break
       
       case 'chart_launch_new_product':
-        return ChartLaunchNewProduct({ component })
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartLaunchNewProduct({ component }),
+            })
       break
       
       case 'chart_retain_new_customers_trialists':
-        return ChartRetainNewCustomers({ component })
-      break
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartRetainNewCustomers({ component }),
+            })
+          break
       
       case 'chart_grow_spend_per_existing_customer':
-        return ChartGrowSpendPerExistingCustomer({ component })
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartGrowSpendPerExistingCustomer({ component }),
+            })
       break
       
       case 'chart_grow_frequency_of_share_per_customer':
-        return ChartGrowFrequencyOfSharePerCustomer({ component })
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartGrowFrequencyOfSharePerCustomer({ component }),
+            })
       break
       
       case 'table_performance_samples':
