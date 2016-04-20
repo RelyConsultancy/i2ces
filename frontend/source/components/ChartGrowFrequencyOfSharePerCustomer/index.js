@@ -36,17 +36,19 @@ const ChartGrowFrequencyOfSharePerCustomer = (data, type) => {
         'Exposed': '#E36112'
       },
       columns: [
-        ['Control'].concat(charts[type
-        ].control),
+        ['Control'].concat(charts[type].control),
         ['Exposed'].concat(charts[type].exposed),
         ['Labels', 'During', 'Post']
       ],
       labels: {
           format: (value) => {
-              return value.toFixed(2) + '%'
+              return value.toFixed(2)'
           }
       }
     },
+    tooltip: {
+        show: false
+    }
     axis: {
       x: {
         type: 'category',
@@ -54,13 +56,14 @@ const ChartGrowFrequencyOfSharePerCustomer = (data, type) => {
       },
       y: {
         label: {
-          text: 'Share of category',
+          text: 'Frequency of Purchase',
           position: 'outer-middle'
         },
         tick: {
             format: (value) => {
                 return value.toFixed(1)
             }
+            
         }
       },
     },
