@@ -7,7 +7,7 @@ import style from './style.css'
 
 const H3 = Element('h3')
 // a factory function for the chart
-const ChartGrowFrequencyOfSharePerCustomer = (data, type) => {
+const ChartGrowCustomerProductRange = (data, type) => {
   
   type = type || 'offer'
   
