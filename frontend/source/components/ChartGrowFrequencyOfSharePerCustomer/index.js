@@ -1,39 +1,66 @@
-import { Component, B } from '/components/component.js'
+import { Component, B, Element } from '/components/component.js'
+import Grid from '/components/Grid'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
 import style from './style.css'
 
-
+const H3 = Element('h3')
 // a factory function for the chart
-const ChartGrowFrequencyOfSharePerCustomer = (data) => {
-  // format data
-  const labels = data.map(i => i.label)
-  const uplift = data.map(i => i.uplift)
+const ChartGrowFrequencyOfSharePerCustomer = (data, type) => {
+  
+  type = type || 'offer'
+  
+  const charts = {}
+  
+  charts.offer = {
+      exposed: data.charts.offer.map(i => i.exposed),
+      control: data.charts.offer.map(i => i.control)
+  }
+  
+  charts.brand = {
+      exposed: data.charts.brand.map(i => i.exposed),
+      control: data.charts.brand.map(i => i.control)
+  }
+  
+  console.log(charts);
 
   // below is a C3 chart
   const chart = Chart({
     type: 'bar',
     data: {
-      x: 'labels',
-      columns: [
-        ['labels'].concat(labels),
-        ['uplift'].concat(uplift),
-      ],
-      names: {
-        uplift: 'Units uplift',
-        percent: 'Weekly unit uplift/HH vs average',
+      type: 'bar',
+      x: 'Labels',
+      colors: {
+        'Control': '#A6A6A6',
+        'Exposed': '#4FB7DA'
       },
+      columns: [
+        ['Control'].concat(charts[type].control),
+        ['Exposed'].concat(charts[type].exposed),
+        ['Labels', 'During', 'Post']
+      ],
+      labels: {
+          format: (value) => {
+              return value.toFixed(2) + '%'
+          }
+      }
     },
     axis: {
       x: {
-        type: 'category'
+        type: 'category',
+        categories: ['During', 'Post']
       },
       y: {
         label: {
-          text: 'lorem ipsum sit dolor',
-          position: 'outer-middle',
+          text: 'Share of category',
+          position: 'outer-middle'
         },
+        tick: {
+            format: (value) => {
+                return value + '%'
+            }
+        }
       },
     },
   })
@@ -51,14 +78,26 @@ export default Component({
     const { source } = this.props.component
 
     fetchDataset(source, (data) => {
+        
       this.setState({ data })
     })
   },
   render () {
     const { data } = this.state
-
-    if (data.length) {
-      return B({ className: style.chart }, ChartGrowFrequencyOfSharePerCustomer(data))
+    if ('charts' in data) {
+        return Grid({
+          blocks: 2,
+          items: [
+              B(
+                H3({ className: 'i2c-chart-title' }, 'Offer products share of category during and post campaign'),
+                B({ className: style.chart }, ChartGrowFrequencyOfSharePerCustomer(data))
+              ),
+              B(
+                H3({ className: 'i2c-chart-title' }, 'Brand products share of category during and post campaign'),
+                B({ className: style.chart }, ChartGrowFrequencyOfSharePerCustomer(data, 'brand'))
+              )
+          ]
+      })
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')
