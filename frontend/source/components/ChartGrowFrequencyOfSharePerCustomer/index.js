@@ -33,10 +33,11 @@ const ChartGrowFrequencyOfSharePerCustomer = (data, type) => {
       x: 'Labels',
       colors: {
         'Control': '#A6A6A6',
-        'Exposed': '#4FB7DA'
+        'Exposed': '#E36112'
       },
       columns: [
-        ['Control'].concat(charts[type].control),
+        ['Control'].concat(charts[type
+        ].control),
         ['Exposed'].concat(charts[type].exposed),
         ['Labels', 'During', 'Post']
       ],
@@ -58,7 +59,7 @@ const ChartGrowFrequencyOfSharePerCustomer = (data, type) => {
         },
         tick: {
             format: (value) => {
-                return value + '%'
+                return value.toFixed(1)
             }
         }
       },
@@ -89,11 +90,11 @@ export default Component({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, 'Offer products share of category during and post campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of offer during and post campaign'),
                 B({ className: style.chart }, ChartGrowFrequencyOfSharePerCustomer(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'Brand products share of category during and post campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of brand during and post campaign'),
                 B({ className: style.chart }, ChartGrowFrequencyOfSharePerCustomer(data, 'brand'))
               )
           ]
