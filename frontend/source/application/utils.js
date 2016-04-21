@@ -1,4 +1,5 @@
 import moment from 'moment'
+import _ from 'underscore'
 import { B } from '/components/component.js'
 
 
@@ -57,6 +58,10 @@ export const fmtCurrency = (value, sign = '£') => (
 export const fmtNumber = (value) => (
   parseInt(value).toLocaleString()
 )
+
+export const sortAlpha = (collection, key) => {
+    return _.sortBy(collection, key);
+}
 
 
 export const fmtUnit = (value, unit = "") => {
