@@ -32,8 +32,9 @@ class ImportCommand extends ContainerAwareCommand
     /**
      * ImportCommand constructor.
      *
-     * @param array  $importConfig
-     * @param Logger $logger
+     * @param array     $importConfig
+     * @param Logger    $logger
+     * @param ImportAll $importAll
      */
     public function __construct($importConfig, Logger $logger, ImportAll $importAll)
     {
@@ -72,22 +73,25 @@ class ImportCommand extends ContainerAwareCommand
 
             $finder = new Finder();
 
+            $finder->in($this->importConfig['folder_path']);
             $finder->directories();
             $finder->sortByName();
-            $finder->in($this->importConfig['folder_path']);
-
 
             $importCommand = $this->getApplication()->get('i2c:data-import');
             $arguments = [
                 '--field-separator' => $this->importConfig['field-separator'],
-                '--line-endings' => $this->importConfig['line-endings'],
+                '--line-endings'    => $this->importConfig['line-endings'],
             ];
+
+            $latestImportedFolder = null;
+
             /** @var SplFileInfo $directory */
             foreach ($finder as $directory) {
                 if ($directory->getBasename() > $lastImported) {
                     $arguments['--import-folder-path'] = $directory->getRealPath();
                     $importCommand->run(new ArrayInput($arguments), $output);
                     $this->importAllService->endImport($importId, $directory->getBasename());
+                    $latestImportedFolder = $directory->getBasename();
                 }
             }
 
@@ -101,6 +105,7 @@ class ImportCommand extends ContainerAwareCommand
             $generateCommand->run(new ArrayInput($arguments), $output);
 
             $output->writeln('Generation finished');
+            $this->importAllService->endImport($importId, $latestImportedFolder);
 
         } catch (\PDOException $ex) {
             $this->logger->addCritical($ex->getTraceAsString());
