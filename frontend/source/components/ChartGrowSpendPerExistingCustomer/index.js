@@ -1,39 +1,70 @@
-import { Component, B } from '/components/component.js'
+import { Component, B, Element } from '/components/component.js'
+import Grid from '/components/Grid'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
 import style from './style.css'
 
-
+const H3 = Element('h3')
 // a factory function for the chart
-const ChartGrowSpendPerExistingCustomer = (data) => {
-  // format data
-  const labels = data.map(i => i.label)
-  const uplift = data.map(i => i.uplift)
+const ChartGrowFrequencyOfSharePerCustomer = (data, type) => {
+  
+  type = type || 'offer'
+  
+  const charts = {}
+  
+  charts.offer = {
+      exposed: data.charts.offer.map(i => i.exposed),
+      control: data.charts.offer.map(i => i.control)
+  }
+  
+  charts.brand = {
+      exposed: data.charts.brand.map(i => i.exposed),
+      control: data.charts.brand.map(i => i.control)
+  }
+  
+  console.log(charts);
 
   // below is a C3 chart
   const chart = Chart({
     type: 'bar',
     data: {
-      x: 'labels',
-      columns: [
-        ['labels'].concat(labels),
-        ['uplift'].concat(uplift),
-      ],
-      names: {
-        uplift: 'Units uplift',
-        percent: 'Weekly unit uplift/HH vs average',
+      type: 'bar',
+      x: 'Labels',
+      colors: {
+        'Control': '#A6A6A6',
+        'Exposed': '#7D3471'
       },
+      columns: [
+        ['Control'].concat(charts[type].control),
+        ['Exposed'].concat(charts[type].exposed),
+        ['Labels', 'During', 'Post']
+      ],
+      labels: {
+          format: (value) => {
+              return value.toFixed(2)
+          }
+      }
+    },
+    tooltip: {
+        show: false
     },
     axis: {
       x: {
-        type: 'category'
+        type: 'category',
+        categories: ['During', 'Post']
       },
       y: {
         label: {
-          text: 'lorem ipsum sit dolor',
-          position: 'outer-middle',
+          text: 'Frequency of Purchase',
+          position: 'outer-middle'
         },
+        tick: {
+            format: (value) => {
+                return value.toFixed(1)
+            }
+            
+        }
       },
     },
   })
@@ -51,14 +82,26 @@ export default Component({
     const { source } = this.props.component
 
     fetchDataset(source, (data) => {
+        
       this.setState({ data })
     })
   },
   render () {
     const { data } = this.state
-
-    if (data.length) {
-      return B({ className: style.chart }, ChartGrowSpendPerExistingCustomer(data))
+    if ('charts' in data) {
+        return Grid({
+          blocks: 2,
+          items: [
+              B(
+                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of offer during and post campaign'),
+                B({ className: style.chart }, ChartGrowFrequencyOfSharePerCustomer(data))
+              ),
+              B(
+                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of brand during and post campaign'),
+                B({ className: style.chart }, ChartGrowFrequencyOfSharePerCustomer(data, 'brand'))
+              )
+          ]
+      })
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')
