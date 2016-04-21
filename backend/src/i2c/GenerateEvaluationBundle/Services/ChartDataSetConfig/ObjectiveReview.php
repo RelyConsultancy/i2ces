@@ -195,7 +195,7 @@ class ObjectiveReview implements ChartDataSetConfigInterface
     public function getMediaTypeCombinationsConfig($cid)
     {
         $query = sprintf(
-            'SELECT count(0) AS count FROM ie_exposed_data WHERE master_campaign_id=\'%s\'',
+            'SELECT count(*) AS count FROM ie_exposed_data WHERE master_campaign_id=\'%s\'',
             $cid
         );
 
