@@ -21,4 +21,5 @@ h3.i2c-chart-title {
     font-size: 0.9em;
     text-align: center;
     font-family: 'Avenir LT Std 45 Book', Helvetica, sans-serif;
+    min-height: 34px;
 }
