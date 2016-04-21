@@ -63,7 +63,9 @@ const Suppliers = ({ store }) => {
     if (brand && brand != item.brand) return false
   })
 
-
+  
+  console.log(items);
+  
   const options = {
     placeholder: 'Supplier',
     value: store.filter.supplier,
