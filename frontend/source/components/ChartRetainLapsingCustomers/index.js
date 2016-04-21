@@ -43,7 +43,7 @@ const ChartRetainLapsingCustomers = (data, type) => {
       ],
       labels: {
           format: (value) => {
-              return value
+              return numeral(value).format('0,0')
           }
       }
     },
@@ -62,7 +62,7 @@ const ChartRetainLapsingCustomers = (data, type) => {
         },
         tick: {
             format: (value) => {
-                return value
+                return numeral(value).format('0,0')
             }
             
         }
@@ -95,11 +95,11 @@ export default Component({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, data.charts.offer[0].exposed - data.charts.offer[0].control + ' additional lapsed customer purchasing offer during campaign'),
+                H3({ className: 'i2c-chart-title' }, numeral(data.charts.offer[0].exposed - data.charts.offer[0].control).format('0,0') + ' additional lapsed customer purchasing offer during campaign'),
                 B({ className: style.chart }, ChartRetainLapsingCustomers(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, data.charts.brand[0].exposed - data.charts.brand[0].control + ' additional lapsed customer purchasing brand during campaign'),
+                H3({ className: 'i2c-chart-title' }, numeral(data.charts.brand[0].exposed - data.charts.brand[0].control).format('0,0') + ' additional lapsed customer purchasing brand during campaign'),
                 B({ className: style.chart }, ChartRetainLapsingCustomers(data, 'brand'))
               )
           ]
