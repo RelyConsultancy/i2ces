@@ -35,6 +35,7 @@ services:
           - [setExtractContainer, [@i2c_generate_evaluation.extract_services_container]]
           - [setChartDataSetConfigContainer, [@i2c_generate_evaluation.chart_data_set_config_services_container]]
           - [setOptionalChaptersConfigService, [@i2c_generate_evaluation.optional_chapters_config_service]]
+          - [setMasterUser, [%master_user%]]
 
     i2c_generate_evaluation.chart_data_set_generate_service:
         class: i2c\GenerateEvaluationBundle\Services\GenerateChartDataSet

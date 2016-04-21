@@ -18,17 +18,23 @@ class GenerateEvaluationPdf
 {
     protected $entityManager;
     protected $urlBase;
+    protected $masterUser;
+    protected $masterToken;
 
     /**
      * GenerateEvaluationPdf constructor.
      *
      * @param EntityManager $entityManager
      * @param string        $urlBase
+     * @param string        $user
+     * @param string        $token
      */
-    public function __construct(EntityManager $entityManager, $urlBase)
+    public function __construct(EntityManager $entityManager, $urlBase, $user, $token)
     {
         $this->entityManager = $entityManager;
         $this->urlBase = $urlBase;
+        $this->masterUser = $user;
+        $this->masterToken = $token;
     }
 
     /**
@@ -195,8 +201,8 @@ class GenerateEvaluationPdf
                  -D header2.txt',
                 $this->urlBase,
                 $initialCookie,
-                'user',
-                'pass',
+                $this->masterUser,
+                $this->masterToken,
                 $csrfToken
             )
         );
