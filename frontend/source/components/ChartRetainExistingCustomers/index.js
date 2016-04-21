@@ -4,6 +4,7 @@ import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
 import style from './style.css'
+import numeral from 'numeral'
 
 const H3 = Element('h3')
 // a factory function for the chart
@@ -42,7 +43,7 @@ const ChartRetainExistingCustomers = (data, type) => {
       ],
       labels: {
           format: (value) => {
-              return value.toFixed(2)
+              return numeral(value).format('0.0a')
           }
       }
     },
@@ -61,7 +62,7 @@ const ChartRetainExistingCustomers = (data, type) => {
         },
         tick: {
             format: (value) => {
-                return value.toFixed(1)
+                return numeral(value).format('0.0a')
             }
             
         }
