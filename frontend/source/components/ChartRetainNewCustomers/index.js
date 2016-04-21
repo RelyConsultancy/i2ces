@@ -5,6 +5,7 @@ import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
 import style from './style.css'
 import numeral from 'numeral'
+import _ from 'underscore'
 
 const H3 = Element('h3')
 // a factory function for the chart
@@ -32,7 +33,7 @@ const ChartRetainNewCustomers = (data, type) => {
       x: 'Labels',
       colors: {
         'Control': '#A6A6A6',
-        'Exposed': '#7D3471'
+        'Exposed': '#CB0270'
       },
       columns: [
         ['Control'].concat(charts[type].control),
@@ -71,14 +72,21 @@ const ChartRetainNewCustomers = (data, type) => {
   return chart
 }
 
+const TH = Element('th')
+
 const TableMediaCombos = (data) => {
     
     console.log(data);
+    const rows = [];
     
-    return Table(
-              TR(
-                TD('Channels and combinations'), TD('Number of households exposed'), TD('Control'), TD('During campaign uplift'), TD('% uplift vs control'))
-            )
+    rows.push(TR(TH('Channels and combinations'), TH('Number of households exposed'), TH('Control'), TH('During campaign uplift'), TH('% uplift vs control')));
+    
+    _.each(data.table, (combo) => {
+        rows.push(TR(TD(combo.media_type), TD(combo.exposed), TD(combo.control), TD(combo.uplift), TD(combo.percentage_uplift)))
+    });
+    
+    return Table.apply(null, rows);
+              
     
 }
 
