@@ -64,8 +64,6 @@ const Suppliers = ({ store }) => {
   })
 
   
-  console.log(items);
-  
   const options = {
     placeholder: 'Supplier',
     value: store.filter.supplier,
