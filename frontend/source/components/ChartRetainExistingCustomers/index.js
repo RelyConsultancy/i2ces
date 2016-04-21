@@ -57,7 +57,7 @@ const ChartRetainExistingCustomers = (data, type) => {
       },
       y: {
         label: {
-          text: 'Frequency of Purchase',
+          text: 'Number of existing customers',
           position: 'outer-middle'
         },
         tick: {
@@ -94,11 +94,11 @@ export default Component({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of offer during and post campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Existing customers who purchased the offer products during and post campaign'),
                 B({ className: style.chart }, ChartRetainExistingCustomers(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of brand during and post campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Existing customers who purchased the brands products during and post campaign'),
                 B({ className: style.chart }, ChartRetainExistingCustomers(data, 'brand'))
               )
           ]
