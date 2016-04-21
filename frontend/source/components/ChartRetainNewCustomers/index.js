@@ -84,7 +84,7 @@ const TableMediaCombos = (data) => {
         
     }
     const avgTotal = (metric) => {
-        return (_.reduce(_.pluck(data.table, metric), (memo, num) => { return memo + num }, 0)) / data.length
+        return (_.reduce(_.pluck(data.table, metric), (memo, num) => { return memo + num }, 0)) / data.table.length
     }
     
     const rows = [];
