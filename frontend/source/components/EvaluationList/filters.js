@@ -44,7 +44,7 @@ const Brands = ({ store }) => {
   const options = {
     placeholder: 'Brand',
     value: store.filter.brand,
-    options: sortAlpha(fmtOptions(getUnique(items.map(i => i.category))), 'value'),
+    options: sortAlpha(fmtOptions(getUnique(items.map(i => i.brand))), 'value'),
     searchable: false,
     onChange: (option) => {
       setFilter('brand', option ? option.value : null)
@@ -67,7 +67,7 @@ const Suppliers = ({ store }) => {
   const options = {
     placeholder: 'Supplier',
     value: store.filter.supplier,
-    options: sortAlpha(fmtOptions(getUnique(items.map(i => i.category))), 'value'),
+    options: sortAlpha(fmtOptions(getUnique(items.map(i => i.supplier))), 'value'),
     searchable: false,
     onChange: (option) => {
       setFilter('supplier', option ? option.value : null)
