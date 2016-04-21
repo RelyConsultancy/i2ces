@@ -201,7 +201,7 @@ class ObjectiveReview implements ChartDataSetConfigInterface
 
         $result = $this->connection->fetchAll($query);
 
-        if (1 > (int) $result[0]['count']) {
+        if (2 > (int) $result[0]['count']) {
             return [];
         }
 
