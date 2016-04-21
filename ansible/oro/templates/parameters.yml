@@ -1,33 +1,45 @@
 parameters:
-    database_driver:        pdo_mysql
-    database_host:          127.0.0.1
-    database_port:          ~
-    database_name:          i2c
-    database_user:          root
-    database_password:      root
+    database_driver:        {{ database_driver }}
+    database_host:          {{ database_host }}
+    database_port:          {{ database_port }}
+    database_name:          {{ database_name }}
+    database_user:          {{ database_user }}
+    database_password:      {{ database_password }}
 
-    mailer_transport:       mail
-    mailer_host:            127.0.0.1
-    mailer_port:            ~
-    mailer_encryption:      ~
-    mailer_user:            ~
-    mailer_password:        ~
+    mailer_transport:       {{ mailer_transport }}
+    mailer_host:            {{ mailer_host }}
+    mailer_port:            {{ mailer_port }}
+    mailer_encryption:      {{ mailer_encryption }}
+    mailer_user:            {{ mailer_user }}
+    mailer_password:        {{ mailer_password }}
 
     # WebSocket server config
-    websocket_bind_address:  "0.0.0.0"  # The host IP the socket server will bind to
-    websocket_bind_port:     8080       # The port the socket server will listen on
-    websocket_frontend_host: "*"        # Websocket host the browser will connect to
-    websocket_frontend_port: 8080       # Websocket port the browser will connect to
-    websocket_backend_host:  "*"        # Websocket host the application server will connect to
-    websocket_backend_port:  8080       # Websocket port the application server will connect to
+    websocket_bind_address:  {{ websocket_bind_address }}  # The host IP the socket server will bind to
+    websocket_bind_port:     {{ websocket_bind_port }}       # The port the socket server will listen on
+    websocket_frontend_host: {{ websocket_frontend_host }}        # Websocket host the browser will connect to
+    websocket_frontend_port: {{ websocket_frontend_port }}       # Websocket port the browser will connect to
+    websocket_backend_host:  {{ websocket_backend_host }}        # Websocket host the application server will connect to
+    websocket_backend_port:  {{ websocket_backend_port }}       # Websocket port the application server will connect to
 
-    session_handler:        session.handler.native_file
+    session_handler:        {{ session_handler }}
 
-    locale:                 en
-    secret:                 ThisTokenIsNotSoSecretChangeIt
-    installed:              ~
-    assets_version:         ~
-    assets_version_strategy: time_hash # A strategy should be used to generate the global assets version, can be:
+    locale:                 {{ locale }}
+    secret:                 {{ secret }}
+    installed:              {{ installed }}
+    assets_version:         {{ assets_version }}
+    assets_version_strategy: {{ assets_version_strategy }} # A strategy should be used to generate the global assets version, can be:
      # null        - the assets version stays unchanged
      # time_hash   - a hash of the current time
      # incremental - the next assets version is the previous version is incremented by one (e.g. 'ver1' -> 'ver2' or '1' -> '2')
+
+    web_dir_path: {{ web_dir_path }}
+    oro_attachment_path: {{ oro_attachment_path }}
+    upload_image_path: {{ upload_image_path }}
+    evaluation_image_upload_directory: {{ evaluation_image_upload_directory }}
+    pages_image_upload_directory: {{ pages_image_upload_directory }}
+    supplier_logo_upload_directory: {{ supplier_logo_upload_directory }}
+    evaluation_templates_folder_path: {{ evaluation_templates_folder_path }}
+    migration_sql_folder_path: {{ migration_sql_folder_path }}
+    url_base: http://{{ url_base }}
+    master_user: {{ master_user }}
+    master_pass: {{ master_pass }}
