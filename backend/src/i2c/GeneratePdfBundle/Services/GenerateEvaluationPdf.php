@@ -37,10 +37,13 @@ class GenerateEvaluationPdf
      */
     public function generatePdf(Evaluation $evaluation, EvaluationPdfConfig $config)
     {
+        if (!$evaluation->isPublished()) {
+            return;
+        }
 
         $filesystem = new Filesystem();
 
-        $chapters = $evaluation->getChapters();
+        $chapters = $evaluation->getChaptersOrderedByOrder();
 
         $evaluationPdfDirectory = sprintf(
             '%s/%s',
@@ -65,28 +68,38 @@ class GenerateEvaluationPdf
         $chapterPdfs = [];
         $headers = $this->getHeader();
 
+        $pdfPath = $this->generateChapterPdf(
+            'intro',
+            $evaluationVersionPdfDirectory,
+            $config,
+            $evaluation->getCid(),
+            $headers
+        );
+
+        $chapterPdfs[] = $pdfPath;
+
         /** @var Chapter $chapter */
         foreach ($chapters as $chapter) {
-            $chapterPdfPath = sprintf(
-                '%s/%s.pdf',
-                $evaluationVersionPdfDirectory,
-                $chapter->getId()
-            );
-            $command = sprintf(
-                '%s %s/#/preview/%s/%s %s \'%s\' %s',
-                $config->getNodeJsCommand(),
-                $this->urlBase,
-                $evaluation->getCid(),
+            $pdfPath = $this->generateChapterPdf(
                 $chapter->getId(),
-                $chapterPdfPath,
-                $headers,
-                $config->getDelay()
+                $evaluationVersionPdfDirectory,
+                $config,
+                $evaluation->getCid(),
+                $headers
             );
-            $process = new Process($command);
-            $process->mustRun();
 
-            $chapterPdfs[] = $chapterPdfPath;
+            $chapterPdfs[] = $pdfPath;
         }
+
+        $pdfPath = $this->generateChapterPdf(
+            'outro',
+            $evaluationVersionPdfDirectory,
+            $config,
+            $evaluation->getCid(),
+            $headers
+        );
+
+        $chapterPdfs[] = $pdfPath;
 
         $now = new \DateTime('now');
 
@@ -121,6 +134,40 @@ class GenerateEvaluationPdf
     }
 
     /**
+     * @param string              $chapterId
+     * @param string              $pdfLocation
+     * @param EvaluationPdfConfig $config
+     * @param string              $cid
+     * @param string              $headers
+     *
+     * @return string
+     */
+    protected function generateChapterPdf($chapterId, $pdfLocation, EvaluationPdfConfig $config, $cid, $headers)
+    {
+        $now = new \DateTime('now');
+        $pdfPath = sprintf(
+            '%s/%s-%s.pdf',
+            $pdfLocation,
+            $chapterId,
+            $now->format('Y-m-d\TH-i-s')
+        );
+        $command = sprintf(
+            '%s %s/#/preview/%s/%s %s \'%s\' %s',
+            $config->getNodeJsCommand(),
+            $this->urlBase,
+            $cid,
+            $chapterId,
+            $pdfPath,
+            $headers,
+            $config->getDelay()
+        );
+        $process = new Process($command);
+        $process->mustRun();
+
+        return $pdfPath;
+    }
+
+    /**
      * @return string
      */
     protected function getHeader()
@@ -140,7 +187,6 @@ class GenerateEvaluationPdf
         $start = strpos($result, 'value="') + strlen('value="');
         $end = strpos($result, '"', $start);
         $csrfToken = substr($result, $start, $end - $start);
-
 
         $process = new Process(
             sprintf(

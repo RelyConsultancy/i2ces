@@ -465,6 +465,22 @@ class Evaluation
     /**
      * @return Chapter[]
      */
+    public function getChaptersOrderedByOrder()
+    {
+        $result = array();
+        foreach ($this->chapters as $chapter) {
+            if (!$chapter->getIsAdditionalData()) {
+                $result[$chapter->getOrder()] = $chapter;
+            }
+        }
+
+        ksort($result);
+        return $result;
+    }
+
+    /**
+     * @return Chapter[]
+     */
     public function getChaptersIncludingAdditionalData()
     {
         return $this->chapters;
