@@ -3,6 +3,7 @@
   remote_user: root
   vars_files:
     - vars/main.yml
+    - vars/server_parameters_qa.yml # Replace with your own
 
   roles:
     - init

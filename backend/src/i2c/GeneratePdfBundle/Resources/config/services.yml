@@ -11,4 +11,4 @@ services:
 
     i2c_generate_pdf.generate_evaluation_pdf_service:
         class: i2c\GeneratePdfBundle\Services\GenerateEvaluationPdf
-        arguments: [@doctrine.orm.default_entity_manager, %url_base%]
+        arguments: [@doctrine.orm.default_entity_manager, %url_base%, %master_user%, %master_pass%]

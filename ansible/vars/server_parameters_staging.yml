@@ -1,0 +1,44 @@
+database_driver:        pdo_mysql
+database_host:          127.0.0.1
+database_port:          ~
+database_name:          i2c
+database_user:          root
+database_password:      root
+
+mailer_transport:       mail
+mailer_host:            127.0.0.1
+mailer_port:            ~
+mailer_encryption:      ~
+mailer_user:            ~
+mailer_password:        ~
+
+# WebSocket server config
+websocket_bind_address:  "0.0.0.0"  # The host IP the socket server will bind to
+websocket_bind_port:     8080       # The port the socket server will listen on
+websocket_frontend_host: "*"        # Websocket host the browser will connect to
+websocket_frontend_port: 8080       # Websocket port the browser will connect to
+websocket_backend_host:  "*"        # Websocket host the application server will connect to
+websocket_backend_port:  8080       # Websocket port the application server will connect to
+
+session_handler:        session.handler.native_file
+
+locale:                 en
+secret:                 ThisTokenIsNotSoSecretChangeIt
+installed:              true
+assets_version:         ~
+assets_version_strategy: time_hash # A strategy should be used to generate the global assets version, can be:
+
+web_dir_path: '%kernel.root_dir%/../web'
+oro_attachment_path: '%kernel.root_dir%/attachment'
+upload_image_path: '%web_dir_path%/images'
+evaluation_image_upload_directory: evaluations
+pages_image_upload_directory: pages
+supplier_logo_upload_directory: supplier/logo
+evaluation_templates_folder_path: '%kernel.root_dir%/../src/i2c/GenerateEvaluationBundle/Resources/views'
+migration_sql_folder_path: '%kernel.root_dir%/../src/i2c/SetupBundle/Resources/migrations/'
+url_base: 'staging.i2ces.info'
+master_user: user
+master_pass: pass
+master_first_name: 'first'
+master_last_name: 'last'
+master_email: 'i2c@freshbyteinc.com'
