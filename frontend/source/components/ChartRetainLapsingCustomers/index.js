@@ -91,17 +91,15 @@ export default Component({
     const { data } = this.state
     if ('charts' in data) {
         
-        console.log(data);
-        
         return Grid({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, data.charts.offer.exposed[0] - data.charts.offer.control[0] + ' additional lapsed customer purchasing offer during campaign'),
+                H3({ className: 'i2c-chart-title' }, data.charts.offer[0].exposed - data.charts.offer[0].control + ' additional lapsed customer purchasing offer during campaign'),
                 B({ className: style.chart }, ChartRetainLapsingCustomers(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, data.charts.brand.exposed[0] - data.charts.brand.control[0] + ' additional lapsed customer purchasing brand during campaign'),
+                H3({ className: 'i2c-chart-title' }, data.charts.brand[0].exposed - data.charts.brand[0].control + ' additional lapsed customer purchasing brand during campaign'),
                 B({ className: style.chart }, ChartRetainLapsingCustomers(data, 'brand'))
               )
           ]
