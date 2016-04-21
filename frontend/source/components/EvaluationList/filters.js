@@ -69,7 +69,7 @@ const Suppliers = ({ store }) => {
   const options = {
     placeholder: 'Supplier',
     value: store.filter.supplier,
-    options: sortAlpha(fmtOptions(getUnique(items.map(i => i.supplier))), 'value'),
+    options: sortAlpha(fmtOptions(getUnique(items.map(i => i.supplier.name))), 'value'),
     searchable: false,
     onChange: (option) => {
       setFilter('supplier', option ? option.value : null)
