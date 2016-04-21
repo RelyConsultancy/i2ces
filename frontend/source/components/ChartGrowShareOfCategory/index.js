@@ -46,6 +46,9 @@ const ChartGrowShareOfCategory = (data, type) => {
           }
       }
     },
+    tooltip: {
+        show: false
+    },
     axis: {
       x: {
         type: 'category',
