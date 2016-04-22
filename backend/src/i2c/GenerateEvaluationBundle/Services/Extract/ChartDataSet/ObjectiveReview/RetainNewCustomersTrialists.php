@@ -104,15 +104,17 @@ class RetainNewCustomersTrialists implements ExtractInterface
     public function getDuringCombinations($cid)
     {
         return sprintf(
-            'SELECT media_type AS media_type, uplift AS uplift, pct_uplift AS percentage_uplift, control as control, exposed AS exposed
-             FROM ie_results_data
-             WHERE media_type <> \'Total\'
-             AND media_type <> \'Other\'
-             AND timeperiod=2
-             AND metric=\'New_trialists\'
-             AND objective=\'Retain new customers (trialists)\'
-             AND product=\'Offer\'
-             AND master_campaign_id=\'%s\' GROUP BY media_type;
+            'SELECT r.media_type AS media_type, r.uplift AS uplift, r.pct_uplift AS percentage_uplift, r.control as control, e.exposed AS exposed
+             FROM ie_results_data AS r
+             JOIN ie_exposed_data AS e ON e.media_type=r.media_type
+             AND e.master_campaign_id=r.master_campaign_id
+             WHERE r.media_type <> \'Total\'
+             AND r.media_type <> \'Other\'
+             AND r.timeperiod=2
+             AND r.metric=\'New_trialists\'
+             AND r.objective=\'Retain new customers (trialists)\'
+             AND r.product=\'Offer\'
+             AND r.master_campaign_id=\'%s\' GROUP BY e.media_type;
             ',
             $cid
         );
