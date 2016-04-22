@@ -64,10 +64,10 @@ export default Component({
     })
   },
   render () {
-    const { data } = this.state
+    const { chart } = this.state
 
     if (data) {
-      return B({ className: style.chart }, ChartLaunchNewProduct(data))
+      return B({ className: style.chart }, ChartLaunchNewProduct(chart))
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')
