@@ -28,3 +28,7 @@ parameters:
     installed:              ~
     assets_version:         ~
     assets_version_strategy: time_hash
+    
+    # User Params
+    master_user:    user
+    master_pass:    pass
