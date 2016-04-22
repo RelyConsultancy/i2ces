@@ -16,3 +16,18 @@
   font-family: 'Archer Bold', serif;
   fill: #6D6D6D;
 }
+
+.i2c-mc-table table {
+    font-size: 0.7em;
+}
+
+.i2c-mc-table table tbody tr:first-child {
+    background-color: #E7FCFF;
+    border-top: 2px solid #CCCCCC;
+}
+.i2c-mc-table table tbody tr td, .i2c-mc-table table tbody tr th {
+    text-align: center;
+}
+.i2c-mc-table table tbody tr td:first-child, .i2c-mc-table table tbody tr th:first-child {
+    text-align: left;
+}

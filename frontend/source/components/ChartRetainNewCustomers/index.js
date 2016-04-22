@@ -94,10 +94,10 @@ const TableMediaCombos = (data) => {
     rows.push(TR(TH('Channels and combinations'), TH('Number of households exposed'), TH('Control'), TH('During campaign uplift'), TH('% uplift vs control')));
     
     _.each(data.table, (combo) => {
-        rows.push(TR(TD(combo.media_type), TD(combo.exposed), TD(combo.control), TD(combo.uplift), TD(combo.percentage_uplift)))
+        rows.push(TR(TD(numeral(combo.media_type).format('0,0')), TD(numeral(combo.exposed).format('0,0')), TD(numeral(combo.control).format('0,0')), TD(numeral(combo.uplift).format('0,0')), TD(numeral(combo.percentage_uplift).format('0,0%'))))
     });
     
-    rows.push(TR(TD('Totals'), TD(sumTotal('exposed')), TD(sumTotal('control')), TD(sumTotal('uplift')), TD(avgTotal('percentage_uplift'))))
+    rows.push(TR(TD('Totals'), TD(numeral(sumTotal('exposed')).format('0,0'))), TD(numeral(sumTotal('control')).format('0,0')), TD(numeral(sumTotal('uplift')).format('0,0')), TD(numeral(avgTotal('percentage_uplift')).format('0,0%')))
     
     return Table.apply(null, rows);
               
