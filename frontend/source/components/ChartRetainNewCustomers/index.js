@@ -91,13 +91,13 @@ const TableMediaCombos = (data) => {
     
     const rows = [];
     
-    rows.push(TR(TH('Channels and combinations'), TH('Number of households exposed'), TH('Control'), TH('During campaign uplift'), TH('% uplift vs control')));
+    rows.push(TR(TH('Channels and combinations'), TH('Number of households exposed'), TH('Control'), TH({ className: 'highlighted' }, 'During campaign uplift'), TH('% uplift vs control')));
     
     _.each(data.table, (combo) => {
-        rows.push(TR(TD(numeral(combo.media_type).format('0,0')), TD(numeral(combo.exposed).format('0,0')), TD(numeral(combo.control).format('0,0')), TD(numeral(combo.uplift).format('0,0')), TD(numeral(combo.percentage_uplift).format('0,0%'))))
+        rows.push(TR(TD(combo.media_type), TD(numeral(combo.exposed).format('0,0')), TD(numeral(combo.control).format('0,0')), TD({ className: 'highlighted' }, numeral(combo.uplift).format('0,0')), TD(numeral(combo.percentage_uplift).format('0,0%'))))
     });
     
-    rows.push(TR(TD('Totals'), TD(numeral(sumTotal('exposed')).format('0,0')), TD(numeral(sumTotal('control')).format('0,0')), TD(numeral(sumTotal('uplift')).format('0,0')), TD(numeral(avgTotal('percentage_uplift')).format('0,0%'))))
+    rows.push(TR(TD('Totals'), TD(numeral(sumTotal('exposed')).format('0,0')), TD(numeral(sumTotal('control')).format('0,0')), TD({ className: 'highlighted' }, numeral(sumTotal('uplift')).format('0,0')), TD(numeral(avgTotal('percentage_uplift')).format('0,0%'))))
     
     return Table.apply(null, rows);
               
