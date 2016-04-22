@@ -4,6 +4,8 @@
   with_items:
     - poppler-utils
     - fontconfig
+    - fontconfig-devel
+    - gcc-c++
 
 - name: Check if pdfunite is on server
   stat: path=/usr/bin/pdfunite

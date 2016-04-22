@@ -117,7 +117,7 @@ class GrowTotalCategory implements ExtractInterface
     }
 
     /**
-     * Returns an array with start and end dates for post timings.
+     * Returns an array with total uplift and percentage.
      *
      * @param $cid
      *

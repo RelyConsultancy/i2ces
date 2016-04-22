@@ -5,11 +5,15 @@ namespace i2c\EvaluationBundle\Controller\Api;
 use i2c\EvaluationBundle\Entity\Evaluation;
 use i2c\EvaluationBundle\Exception\FormException;
 use i2c\EvaluationBundle\Services\Chapter as ChapterService;
-use i2c\EvaluationBundle\Services\EvaluationDataBaseManager;
-use i2c\EvaluationBundle\Services\Evaluation as EvaluationService;
-use i2c\ImageUploadBundle\Services\UploadedImageQueue;
 use i2c\EvaluationBundle\Services\ChartDataSetDatabaseManager;
+use i2c\EvaluationBundle\Services\Evaluation as EvaluationService;
+use i2c\EvaluationBundle\Services\EvaluationDataBaseManager;
+use i2c\GeneratePdfBundle\Services\EvaluationQueue;
+use i2c\ImageUploadBundle\Services\UploadedImageQueue;
+use Monolog\Logger;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
+use Oro\Bundle\UserBundle\Entity\User;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -158,6 +162,8 @@ class EvaluationController extends RestApiController
 
         $evaluation = $this->getEvaluationService()->updateEvaluation($evaluation);
 
+        $this->getEvaluationPdfQueueService()->insertToQueue($evaluation->getCid());
+
         return $this->success($evaluation, Response::HTTP_OK, ['list']);
     }
 
@@ -209,6 +215,59 @@ class EvaluationController extends RestApiController
     }
 
     /**
+     * @param string $evaluationCid
+     *
+     * @return Response
+     */
+    public function getPdfAction($evaluationCid)
+    {
+        /** @var Evaluation $evaluation */
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+
+        if (is_null($evaluation)) {
+            return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+        }
+
+        $filesystem = new Filesystem();
+        if (!$filesystem->exists($evaluation->getLatestPdfPath())) {
+            return $this->notFound('PDF was not found');
+        }
+
+        $pdf = file_get_contents($evaluation->getLatestPdfPath(), FILE_BINARY);
+
+        $response = new Response();
+
+        $response->headers->set('Content-Type', 'mime/type');
+        $response->headers->set(
+            'Content-Disposition',
+            sprintf(
+                'attachment;filename="%s - version %s.pdf"',
+                $evaluation->getDisplayName(),
+                $evaluation->getVersionNumber()
+            )
+        );
+
+        $response->setContent($pdf);
+
+        /** @var Logger $logger */
+        $logger = $this->get('logger');
+
+        /** @var User $loggedInUser */
+        $loggedInUser = $this->getUser();
+
+        $logger->addInfo(
+            sprintf(
+                '[PDF Download]User with id %s and username %s downloaded the pdf %s',
+                $loggedInUser->getId(),
+                $loggedInUser->getUsername(),
+                $evaluation->getLatestPdfPath()
+            )
+        );
+
+        return $response;
+    }
+
+    /**
      * @return ChapterService
      */
     public function getChapterService()
@@ -246,5 +305,13 @@ class EvaluationController extends RestApiController
     public function getUploadedImageQueueService()
     {
         return $this->get('i2c_image_upload.image_upload_queue');
+    }
+
+    /**
+     * @return EvaluationQueue
+     */
+    public function getEvaluationPdfQueueService()
+    {
+        return $this->get('i2c_generate_pdf.evaluation_queue_service');
     }
 }

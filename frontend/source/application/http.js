@@ -3,6 +3,7 @@ import assign from 'object-assign'
 import qs from 'qs'
 import { isFunction } from './utils.js'
 import { setFlagNetwork } from './actions.js'
+import { saveAs } from './http_download.js'
 
 
 let inFlight = 0
@@ -45,6 +46,17 @@ const defaults = {
     // ORO header required
     'X-CSRF-Header': 1,
   },
+}
+
+
+export const download = (url, filename) => {
+  const config = assign({ method: 'GET' }, defaults)
+
+  fetch(url, config)
+    .then(reply => reply.blob())
+    .then((blob) => {
+      saveAs(blob, filename)
+    })
 }
 
 

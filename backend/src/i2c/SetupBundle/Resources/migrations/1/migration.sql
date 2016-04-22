@@ -50,9 +50,10 @@ CREATE TABLE IF NOT EXISTS `i2c_reimported_evaluation` (
   state            VARCHAR(255) NOT NULL,
   start_date       DATETIME,
   end_date         DATETIME,
+  version_number   VARCHAR(255),
+  latest_pdf_path  VARCHAR(255),
   generated_at     DATETIME,
   business_unit_id INT(11),
-  version_number   VARCHAR(255),
   FOREIGN KEY (business_unit_id) REFERENCES oro_business_unit (id),
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -130,6 +131,15 @@ CREATE TABLE IF NOT EXISTS `i2c_import_version` (
   end_date         DATETIME,
   last_import_folder VARCHAR(255),
   config_data      BLOB,
+  PRIMARY KEY (id)
+)
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `i2c_generate_pdf_queue` (
+  id             INT(11)      NOT NULL AUTO_INCREMENT,
+  evaluation_cid VARCHAR(255) NOT NULL,
+  published_time DATETIME     NOT NULL,
   PRIMARY KEY (id)
 )
   DEFAULT CHARSET = utf8

@@ -57,9 +57,6 @@
   with_items:
     - /usr/local/bin/composer install -d /var/www/html -n --prefer-dist --no-scripts
 
-- name: New Parameters.yml
-  template: src=parameters.yml dest=/var/www/html/app/config/parameters.yml
-
 - name: Install and set permissions
   command: " {{item}} "
   with_items:
@@ -77,8 +74,11 @@
 - name: Update ORO db pass
   lineinfile: dest=/var/www/html/app/config/parameters.yml regexp='(database_password:\ null)' line="    database_password{{colon}} root"
 
+- name: New Parameters.yml
+  template: src=parameters.yml dest=/var/www/html/app/config/parameters.yml force=yes
+
 - name: Install Oro Platform
-  command: chdir=/var/www/html php ./app/console oro:install --application-url i2ces.dev --organization-name i2c --user-name user --user-email gb@tekkie.us --user-firstname first --user-lastname last --user-password pass --drop-database --sample-data no --force -n
+  command: chdir=/var/www/html php ./app/console oro:install --application-url {{url_base}} --organization-name {{database_name}} --user-name {{master_user}} --user-email {{master_email}} --user-firstname {{master_first_name}} --user-lastname {{master_last_name}} --user-password {{master_pass}} --drop-database --sample-data no --force -n
   # when: not composer_locked.stat.exists
 
 - name: Clear cache
@@ -90,6 +90,20 @@
 
 - name: Debug dashboard_public_exists
   debug: msg="Variable 'dashboard_public_exists' is set to {{ dashboard_public_exists }}"
+
+- name: Check if web/bundles/i2cdashboard folder exists.
+  stat: "path=/var/www/html/web/bundles/i2cdashboard"
+  register: web_dashboard_exists
+
+- name: Debug web_dashboard_public_exists
+  debug: msg="Variable 'web_dashboard_exists' is set to {{ web_dashboard_exists }}"
+
+- name: Create backend web dirs for frontend integration
+  file:  path="{{ item }}" state=directory mode=0775
+  with_items:
+    - /var/www/html/web/bundles/i2cdashboard
+    - /var/www/html/web/bundles/i2cdashboard/js
+  when: not web_dashboard_exists.stat.exists
 
 - name: Create backend dirs for frontend integration
   file:  path="{{ item }}" state=directory mode=0775
@@ -116,8 +130,14 @@
 - name: Integrate bundles.js from frontend to backend
   copy: src=../frontend/public/assets/bundle.js dest=/var/www/html/src/i2c/DashboardBundle/Resources/public/js/index.js force=yes
 
+- name: Integrate bundles.js from frontend to web folder
+  copy: src=../frontend/public/assets/bundle.js dest=/var/www/html/web/bundles/i2cdashboard/js/index.js force=yes
+
 - name: Integrate bundles.css from frontend to backend
   copy: src=../frontend/public/assets/bundle.css dest=/var/www/html/src/i2c/DashboardBundle/Resources/public/css/index.css force=yes
+
+- name: Integrate bundles.css from frontend to web folder
+  copy: src=../frontend/public/assets/bundle.css dest=/var/www/html/web/css/index.css force=yes
 
 - name: Integrate fonts from frontend to backend
   copy: src=../frontend/public/fonts dest=/var/www/html/web/fonts force=yes
@@ -148,4 +168,8 @@
 
 - name: Create initial data
   command: chdir=/var/www/html php app/console i2c:initial-setup
+  become_user: root
+
+- name: Create production cache
+  command: chdir=/var/www/html php app/console cache:clear --env=prod --no-debug
   become_user: root

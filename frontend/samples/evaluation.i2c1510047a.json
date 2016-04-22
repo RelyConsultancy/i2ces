@@ -3,6 +3,7 @@
   "cid": "i2c1510047a",
 
   "state": "draft",
+  "has_pdf": true,
 
   "title": "Lindt - Christmas 2015",
   "brand": "Lindor",
@@ -25,24 +26,6 @@
   }, {
     "label": "JS Magazine",
     "type": "magazine"
-  }, {
-    "label": "Milk Media",
-    "type": "milk_media"
-  }, {
-    "label": "Six Sheets",
-    "type": "6_sheet"
-  }, {
-    "label": "Take Home Barker",
-    "type": "barkers"
-  }, {
-    "label": "Trolleys",
-    "type": "trolleys"
-  }, {
-    "label": "TV Wall",
-    "type": "tv_wall"
-  }, {
-    "label": "Car Park Posters",
-    "type": "6_sheet"
   }],
 
   "supplier": {

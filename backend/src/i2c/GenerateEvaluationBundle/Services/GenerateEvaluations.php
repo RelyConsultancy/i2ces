@@ -44,6 +44,9 @@ class GenerateEvaluations
     /** @var OptionalChaptersConfig */
     protected $optionalChaptersConfigService;
 
+    /** @var  string */
+    protected $masterUser;
+
     /**
      * GenerateEvaluations constructor.
      *
@@ -69,6 +72,14 @@ class GenerateEvaluations
         $this->serializer = $serializer;
 
         $this->generateChartDataSetService = $generateTableDataService;
+    }
+
+    /**
+     * @param string $username
+     */
+    public function setMasterUser($username)
+    {
+        $this->masterUser = $username;
     }
 
     /**
@@ -118,7 +129,8 @@ class GenerateEvaluations
 
             $evaluation = $this->updateExistingIfPresent($evaluation, $cid);
 
-            $evaluation->setCid($cid);
+            $evaluation->setVersionNumber($versionNumber);
+            $evaluation->setLatestPdfPath(null);
             $evaluation->markAsGenerating();
 
             $chapters = [];
@@ -230,12 +242,18 @@ class GenerateEvaluations
     protected function getBusinessUnit($cid)
     {
         $businessUnitName = $this->getBusinessUnitName($cid);
+        $user = $this->entityManager->getRepository('OroUserBundle:User')->findOneBy(
+            ['username' => $this->masterUser]
+        );
 
         $businessUnit = $this->entityManager->getRepository('OroOrganizationBundle:BusinessUnit')
                                             ->findOneBy(['name' => $businessUnitName]);
         if (is_null($businessUnit)) {
-            return $this->getNewBusinessUnit($businessUnitName);
+            $businessUnit = $this->getNewBusinessUnit($businessUnitName);
         }
+
+        $user->addBusinessUnit($businessUnit);
+        $this->entityManager->persist($user);
 
         return $businessUnit;
     }

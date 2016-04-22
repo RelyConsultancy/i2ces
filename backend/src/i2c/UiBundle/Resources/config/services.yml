@@ -1,0 +1,5 @@
+services:
+    i2c_ui.grid_after_listener:
+        class: i2c\UiBundle\Listener\OnGridBuildAfterListener
+        tags:
+            - { name: kernel.event_listener, event: oro_datagrid.datagrid.build.after.users-grid, method: onBuildAfter }
