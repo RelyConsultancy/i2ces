@@ -97,7 +97,7 @@ const TableMediaCombos = (data) => {
         rows.push(TR(TD(numeral(combo.media_type).format('0,0')), TD(numeral(combo.exposed).format('0,0')), TD(numeral(combo.control).format('0,0')), TD(numeral(combo.uplift).format('0,0')), TD(numeral(combo.percentage_uplift).format('0,0%'))))
     });
     
-    rows.push(TR(TD('Totals'), TD(numeral(sumTotal('exposed')).format('0,0'))), TD(numeral(sumTotal('control')).format('0,0')), TD(numeral(sumTotal('uplift')).format('0,0')), TD(numeral(avgTotal('percentage_uplift')).format('0,0%')))
+    rows.push(TR(TD('Totals'), TD(numeral(sumTotal('exposed')).format('0,0')), TD(numeral(sumTotal('control')).format('0,0')), TD(numeral(sumTotal('uplift')).format('0,0')), TD(numeral(avgTotal('percentage_uplift')).format('0,0%')))
     
     return Table.apply(null, rows);
               
