@@ -28,6 +28,10 @@ const ChartLaunchNewProduct = (data) => {
         ['Exposed'].concat(exposed),
         ['Control'].concat(control),
       ],
+      colors: {
+          Exposed: '#CB0270',
+          Control: '#A6A6A6'
+      }
     },
     axis: {
       x: {
