@@ -67,12 +67,12 @@ export default Component({
       
     console.log(this.state);
     
-    const { chart } = this.state
+    const { data } = this.state
     
     console.log(chart);
     
-    if (chart) {
-      return B({ className: style.chart }, ChartLaunchNewProduct(chart))
+    if (data.chart) {
+      return B({ className: style.chart }, ChartLaunchNewProduct(data.chart))
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')
