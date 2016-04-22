@@ -26,6 +26,10 @@ const ChartSales = ({ data }) => {
         ['Exposed'].concat(exposed),
         ['Control'].concat(control),
       ],
+      colors: {
+          Exposed: '#3F7CC0',
+          Control: '#A6A6A6'
+      },
     },
     axis: {
       x: {
