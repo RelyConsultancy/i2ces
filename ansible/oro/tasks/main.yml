@@ -96,14 +96,14 @@
   register: web_dashboard_exists
 
 - name: Debug web_dashboard_public_exists
-  debug: msg="Variable 'web_dashboard_public_exists' is set to {{ web_dashboard_public_exists }}"
+  debug: msg="Variable 'web_dashboard_exists' is set to {{ web_dashboard_exists }}"
 
 - name: Create backend web dirs for frontend integration
   file:  path="{{ item }}" state=directory mode=0775
   with_items:
     - /var/www/html/web/bundles/i2cdashboard
     - /var/www/html/web/bundles/i2cdashboard/js
-  when: not dashboard_public_exists.stat.exists
+  when: not web_dashboard_exists.stat.exists
 
 - name: Create backend dirs for frontend integration
   file:  path="{{ item }}" state=directory mode=0775
