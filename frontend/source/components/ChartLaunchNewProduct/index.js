@@ -64,6 +64,9 @@ export default Component({
     })
   },
   render () {
+      
+    console.log(this.state);
+    
     const { chart } = this.state
     
     console.log(chart);
