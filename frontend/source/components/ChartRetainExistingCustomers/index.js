@@ -24,8 +24,6 @@ const ChartRetainExistingCustomers = (data, type) => {
       control: data.charts.brand.map(i => i.control)
   }
   
-  console.log(charts);
-
   // below is a C3 chart
   const chart = Chart({
     type: 'bar',
