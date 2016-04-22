@@ -14,12 +14,12 @@ parameters:
     mailer_password:        {{ mailer_password }}
 
     # WebSocket server config
-    websocket_bind_address:  {{ websocket_bind_address }}  # The host IP the socket server will bind to
-    websocket_bind_port:     {{ websocket_bind_port }}       # The port the socket server will listen on
-    websocket_frontend_host: {{ websocket_frontend_host }}        # Websocket host the browser will connect to
-    websocket_frontend_port: {{ websocket_frontend_port }}       # Websocket port the browser will connect to
-    websocket_backend_host:  {{ websocket_backend_host }}        # Websocket host the application server will connect to
-    websocket_backend_port:  {{ websocket_backend_port }}       # Websocket port the application server will connect to
+    websocket_bind_address:  "{{ websocket_bind_address }}"
+    websocket_bind_port:     {{ websocket_bind_port }}
+    websocket_frontend_host: "{{ websocket_frontend_host }}"
+    websocket_frontend_port: {{ websocket_frontend_port }}
+    websocket_backend_host:  "{{ websocket_backend_host }}"
+    websocket_backend_port:  {{ websocket_backend_port }}
 
     session_handler:        {{ session_handler }}
 
