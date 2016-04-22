@@ -7,38 +7,47 @@ import style from './style.css'
 
 // a factory function for the chart
 const ChartLaunchNewProduct = (data) => {
-  // format data
-  const labels = data.map(i => i.label)
-  const uplift = data.map(i => i.uplift)
-
-  // below is a C3 chart
+  const dates = data.map(i => i.start_date)
+  const exposed = data.map(i => parseFloat(i.exposed))
+  const control = data.map(i => parseFloat(i.control))
+  
+  console.log(data);
+  
   const chart = Chart({
-    type: 'bar',
+    type: 'line',
+    tooltip: { show: false },
+    className: style.chart,
+    padding: {
+      top: 20,
+      right: 10
+    },
     data: {
-      x: 'labels',
+      x: 'dates',
       columns: [
-        ['labels'].concat(labels),
-        ['uplift'].concat(uplift),
+        ['dates'].concat(dates),
+        ['Exposed'].concat(exposed),
+        ['Control'].concat(control),
       ],
-      names: {
-        uplift: 'Units uplift',
-        percent: 'Weekly unit uplift/HH vs average',
-      },
     },
     axis: {
       x: {
-        type: 'category'
-      },
-      y: {
-        label: {
-          text: 'lorem ipsum sit dolor',
-          position: 'outer-middle',
+        type: 'timeseries',
+        tick: {
+          format: '%d-%m-%Y',
+          culling: false,
         },
       },
+      y: {
+        tick: {
+          format: (value) => ('£' + (value.toFixed(0) / 1000) + 'k')
+        },
+      }
     },
   })
 
-  return chart
+  const label = B({ className: style.chart_label }, 'Offer Sales')
+
+  return B({ className: style.chart }, label, chart)
 }
 
 
@@ -57,7 +66,7 @@ export default Component({
   render () {
     const { data } = this.state
 
-    if (data.length) {
+    if (data) {
       return B({ className: style.chart }, ChartLaunchNewProduct(data))
     }
     else {
