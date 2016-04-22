@@ -37,7 +37,7 @@
     background: rgba(203,2,112,0.25);
 }
 
-.i2c-mc-table table tbody tr tr.tr-totals {
+.i2c-mc-table table tbody tr.tr-totals {
     background: #EEE;
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
