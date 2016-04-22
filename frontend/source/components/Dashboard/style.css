@@ -31,8 +31,8 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 150px;
-  /*height: 80px;*/
+  width: 215px;
+  height: 60px;
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url(/images/report_hub_logo.png);
