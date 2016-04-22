@@ -69,8 +69,6 @@ export default Component({
     
     const { data } = this.state
     
-    console.log(chart);
-    
     if (data.chart) {
       return B({ className: style.chart }, ChartLaunchNewProduct(data.chart))
     }
