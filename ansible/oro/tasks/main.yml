@@ -91,6 +91,20 @@
 - name: Debug dashboard_public_exists
   debug: msg="Variable 'dashboard_public_exists' is set to {{ dashboard_public_exists }}"
 
+- name: Check if web/bundles/i2cdashboard folder exists.
+  stat: "path=/var/www/html/web/bundles/i2cdashboard"
+  register: web_dashboard_exists
+
+- name: Debug web_dashboard_public_exists
+  debug: msg="Variable 'web_dashboard_public_exists' is set to {{ web_dashboard_public_exists }}"
+
+- name: Create backend web dirs for frontend integration
+  file:  path="{{ item }}" state=directory mode=0775
+  with_items:
+    - /var/www/html/web/bundles/i2cdashboard
+    - /var/www/html/web/bundles/i2cdashboard/js
+  when: not dashboard_public_exists.stat.exists
+
 - name: Create backend dirs for frontend integration
   file:  path="{{ item }}" state=directory mode=0775
   with_items:
