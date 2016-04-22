@@ -27,7 +27,12 @@
 }
 .i2c-mc-table table tbody tr td, .i2c-mc-table table tbody tr th {
     text-align: center;
+    padding: 2px;
 }
 .i2c-mc-table table tbody tr td:first-child, .i2c-mc-table table tbody tr th:first-child {
     text-align: left;
+}
+
+.i2c-mc-table table tbody tr td.highlighted, .i2c-mc-table table tbody tr th.highlighted {
+    background: rgba(203,2,112,0.25);
 }
