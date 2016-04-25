@@ -154,7 +154,7 @@ const Objectives2 = ({ items }) => {
       rows.push(B({className: 'i2c_objective_list_row' }, items.splice(0,4)))
   }
   
-  return B({ className: 'i2c_objectives_list_' + count }, rows)
+  return B({ className: 'i2c_objectives_list' }, rows)
   
 }
 

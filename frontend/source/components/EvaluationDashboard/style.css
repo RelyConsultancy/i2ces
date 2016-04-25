@@ -180,11 +180,18 @@
     width: 200px;
     height: 200px;
     background: #0099ff;
+    margin-left: 20px;
 }
 
 .i2c_objective_blob:nth-child(1) {
     background: #0099ff;
     color: #fff;
+}
+.i2c_objective_blob:last-child {
+    margin-left: 0px;
+}
+b.i2c_objectives_list {
+    text-align: center;
 }
 
 b.i2c_objective_blob_inner {
@@ -193,4 +200,8 @@ b.i2c_objective_blob_inner {
     height: 200px;
     padding: 0 20px;
     text-align: center;
+}
+b.i2c_objective_list_row {
+    display: inline-block;
+    margin: 0 auto 20px;
 }
