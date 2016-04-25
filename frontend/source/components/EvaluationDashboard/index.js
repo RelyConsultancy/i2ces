@@ -129,16 +129,29 @@ const Chapters = ({ evaluation, colors }) => (
 
 const Objectives = ({ items }) => {
   const title = B({ className: style.list_title}, 'Campaign Highlights')
-
+  
   items = items.map(({ label, value, unit }, index) => {
     value = B({ className: style.result_value }, fmtUnit(value, unit))
 
     return B({ className: style.result_label, key: index }, label, value)
   })
-
+  
   return B({ className: style.list }, title, items)
 }
 
+const Objectives2 = ({ items }) => {
+  
+  const count = items.length
+  
+  items = items.map(({ label, value, unit }, index) => {
+      
+       return B({ className: 'i2c-objective-blob' }, B({ className: 'i2c-objective-title' }, label), B({ className: 'i2c-objective-value' }, fmtUnit(value, unit)));
+      
+  })
+  
+  return B({ className: 'i2c-objectives-list-' + count }, items)
+  
+}
 
 const Evaluation = Component({
   class: true,
@@ -164,9 +177,9 @@ const Evaluation = Component({
         Header({ evaluation }),
         Content(
           Date({ evaluation }),
+          Objectives2({ items: evaluation.campaign_objectives }),
           Channels({ items: evaluation.channels }),
-          Chapters({ evaluation, colors: chapter_palette }),
-          Objectives({ items: evaluation.campaign_objectives })
+          Chapters({ evaluation, colors: chapter_palette })
         )
       )
     }
