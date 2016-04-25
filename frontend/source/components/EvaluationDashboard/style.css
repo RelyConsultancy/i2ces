@@ -181,6 +181,7 @@
     height: 200px;
     background: #0099ff;
     margin-left: 20px;
+    float: left;
 }
 
 .i2c_objective_blob:nth-child(1) {
