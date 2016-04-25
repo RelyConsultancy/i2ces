@@ -173,3 +173,21 @@
   font-size: 1.4em;
   font-family: 'Archer Bold', serif;
 }
+
+.i2c-objective-blob {
+    display: table;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background: #0099ff;
+}
+
+.i2c-objective-blob:nth-child(1) {
+    background: #0099ff;
+    color: #fff;
+}
+
+.i2c-objective-blob .i2c-objective-blob-inner {
+    display: table-cell;
+    vertical-align: middle;
+}
