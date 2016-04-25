@@ -180,8 +180,9 @@
     width: 200px;
     height: 200px;
     background: #0099ff;
-    margin-left: 20px;
+    margin-right: 20px;
     float: left;
+    font-family: 'Archer Bold', serif;
 }
 
 .i2c_objective_blob:nth-child(1) {
@@ -189,7 +190,7 @@
     color: #fff;
 }
 .i2c_objective_blob:last-child {
-    margin-left: 0px;
+    margin-right: 0px;
 }
 b.i2c_objectives_list {
     text-align: center;
