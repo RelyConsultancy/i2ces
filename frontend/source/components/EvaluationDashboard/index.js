@@ -145,11 +145,11 @@ const Objectives2 = ({ items }) => {
   
   items = items.map(({ label, value, unit }, index) => {
       
-       return B({ className: style.i2c_objective_blob }, B({ className: 'i2c-objetive-blob-inner'}, B({ className: 'i2c-objective-title' }, label), B({ className: 'i2c-objective-value' }, fmtUnit(value, unit))));
+       return B({ className: style.i2c_objective_blob }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, label), B({ className: 'i2c_objective_value' }, fmtUnit(value, unit))));
       
   })
   
-  return B({ className: 'i2c-objectives-list-' + count }, items)
+  return B({ className: 'i2c_objectives_list_' + count }, items)
   
 }
 
