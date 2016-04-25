@@ -177,8 +177,8 @@
 .i2c_objective_blob {
     display: table;
     border-radius: 50%;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     background: #0099ff;
     margin-right: 20px;
     float: left;
@@ -196,10 +196,18 @@ b.i2c_objectives_list {
     text-align: center;
 }
 
+b.i2c_objective_title {
+    font-size: 1.2em;
+}
+
+b.i2c_objective_value {
+    font-size: 1.6em;
+}
+
 b.i2c_objective_blob_inner {
     display: table-cell;
     vertical-align: middle;
-    height: 200px;
+    height: 150px;
     padding: 0 20px;
     text-align: center;
 }
