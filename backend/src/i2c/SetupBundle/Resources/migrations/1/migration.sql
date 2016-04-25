@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `i2c_evaluation` (
   generated_at     DATETIME,
   business_unit_id INT(11),
   version_number   VARCHAR(255),
+  latest_pdf_path  VARCHAR(255),
   FOREIGN KEY (business_unit_id) REFERENCES oro_business_unit (id),
   PRIMARY KEY (id)
 )
