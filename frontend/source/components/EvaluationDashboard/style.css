@@ -174,7 +174,7 @@
   font-family: 'Archer Bold', serif;
 }
 
-.i2c-objective-blob {
+.i2c_objective_blob {
     display: table;
     border-radius: 50%;
     width: 200px;
@@ -182,12 +182,12 @@
     background: #0099ff;
 }
 
-.i2c-objective-blob:nth-child(1) {
+.i2c_objective_blob:nth-child(1) {
     background: #0099ff;
     color: #fff;
 }
 
-.i2c-objective-blob .i2c-objective-blob-inner {
+.i2c_objective_blob .i2c_objective_blob_inner {
     display: table-cell;
     vertical-align: middle;
 }

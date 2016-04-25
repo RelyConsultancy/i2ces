@@ -145,7 +145,7 @@ const Objectives2 = ({ items }) => {
   
   items = items.map(({ label, value, unit }, index) => {
       
-       return B({ className: 'i2c-objective-blob' }, B({ className: 'i2c-objetive-blob-inner'}, B({ className: 'i2c-objective-title' }, label), B({ className: 'i2c-objective-value' }, fmtUnit(value, unit))));
+       return B({ className: style.i2c_objective_blob }, B({ className: 'i2c-objetive-blob-inner'}, B({ className: 'i2c-objective-title' }, label), B({ className: 'i2c-objective-value' }, fmtUnit(value, unit))));
       
   })
   
