@@ -3,7 +3,7 @@ parameters:
         roles:
             administrator:
                 name: Administrator
-                new_name: Administrator
+                new_name: Admin
                 access:
                     evaluation:
                         oid: 'Entity:i2cEvaluationBundle:Evaluation'
