@@ -8,6 +8,7 @@
   position: relative;
   margin: 0 auto;
   height: 3rem;
+  max-width: 800px;
   line-height: 3rem;
   font-size: 1.1em;
   font-family: 'Archer Bold', serif;
