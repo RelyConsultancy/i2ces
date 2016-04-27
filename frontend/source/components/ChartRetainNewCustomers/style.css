@@ -28,6 +28,7 @@
 .i2c-mc-table table tbody tr td, .i2c-mc-table table tbody tr th {
     text-align: center;
     padding: 2px;
+    vertical-align: middle;
 }
 .i2c-mc-table table tbody tr td:first-child, .i2c-mc-table table tbody tr th:first-child {
     text-align: left;
