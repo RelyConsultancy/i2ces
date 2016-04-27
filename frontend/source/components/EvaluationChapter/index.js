@@ -145,7 +145,7 @@ const EvaluationChapter = Component({
       const focusedSection = this.state.section
 
       content = B(
-        Header({ evaluiation }),
+        Header({ evaluation }),
         Navigation({ store, params }),
         Chapters({ store, chapter }),
         Headings({ store, chapter, focusedSection, focusSection }),
