@@ -6,14 +6,15 @@
 
 .header {
   position: relative;
-  max-width: 800px;
   margin: 0 auto;
   height: 3rem;
   line-height: 3rem;
   font-size: 1.1em;
   font-family: 'Archer Bold', serif;
   color: #6F6F6F;
+  border-bottom: 1px solid #E6E6E6;
 }
+
 .header::before {
   content: '';
   position: absolute;
