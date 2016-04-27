@@ -186,9 +186,25 @@
 }
 
 .i2c_objective_blob:nth-child(1) {
-    background: #0099ff;
+    background: #4E90CD;
     color: #fff;
 }
+
+.i2c_objective_blob:nth-child(2) {
+    background: #EA7518;
+    color: #fff;
+}
+
+.i2c_objective_blob:nth-child(3) {
+    background: #914B97;
+    color: #fff;
+}
+
+.i2c_objective_blob:nth-child(4) {
+    background: #5FC4E1;
+    color: #fff;
+}
+
 .i2c_objective_blob:last-child {
     margin-right: 0px;
 }
