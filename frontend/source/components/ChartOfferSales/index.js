@@ -1,10 +1,11 @@
 import d3 from 'd3'
-import { Component, B, Table, TR, TD } from '/components/component.js'
+import { Component, B, Table, TR, TD, Element } from '/components/component.js'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import { fmtUnit, fmtDate } from '/application/utils.js'
 import style from './style.css'
 
+const IMG = Element('img');
 
 const ChartSales = ({ data }) => {
   const dates = data.map(i => i.start_date)
@@ -48,8 +49,8 @@ const ChartSales = ({ data }) => {
   })
 
   const label = B({ className: style.chart_label }, 'Offer Sales')
-
-  return B({ className: style.chart }, label, chart)
+  const overlay = B({ className: style.overlay});
+  return B({ className: style.chart }, label, chart , overlay)
 }
 
 
