@@ -150,6 +150,7 @@
 .header {
   position: relative;
   max-width: 800px;
+  text-align: center;
   margin: 0 auto;
   height: 3rem;
   line-height: 3rem;
