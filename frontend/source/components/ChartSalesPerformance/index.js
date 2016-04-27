@@ -55,6 +55,7 @@ const SalesChart = ({ data }) => {
     grid: {
       y: { show: false },
     },
+    ygrids: [{value: 400, text: ''}]
   })
 
   const label = B(
