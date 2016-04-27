@@ -11,6 +11,8 @@
   src: local('Archer Bold'), url('/fonts/Archer/Archer-Bold-Pro.woff') format('woff');
 }
 
+/* OLD STYLE */
+/*
 #login-form .title-box {
   position: absolute;
   top: 6rem;
@@ -22,6 +24,16 @@
   border-bottom: 1px solid #E6E6E6;
   overflow: visible;
 }
+*/
+
+
+#login-form .title-box {
+  padding: 9rem 0;
+  background: transparent;
+  overflow: visible;
+  margin: 0 -100px;
+}
+
 #login-form .title {
   position: relative;
   max-width: 800px;
@@ -122,4 +134,11 @@
   bottom: -3em;
   color: #43B5DB;
   font-size: 12px;
+}
+.title-box {
+    
+}
+
+.login-logo {
+    
 }
