@@ -53,7 +53,7 @@ const SalesChart = ({ data }) => {
       },
     },
     grid: {
-      y: { show: false },
+      y: { show: true },
     },
     ygrids: [{value: 400, text: ''}]
   })
