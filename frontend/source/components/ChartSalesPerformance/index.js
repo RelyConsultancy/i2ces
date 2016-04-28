@@ -15,9 +15,6 @@ const byAisle = (i => i.label.toLowerCase() == 'aisle')
 
 const sortData = (data) => {
   
-  
-  data = data.table_data;
-    
   let items = data.filter(byAisle)
 
   items.push(data.filter(byOffer).pop())
@@ -34,11 +31,11 @@ const sortData = (data) => {
 }
 
 
-const SalesChart = ({ table_data }) => {
+const SalesChart = ({ data }) => {
   
-  console.log(table_data);
+  console.log(data);
     
-  data = sortData(table_data)
+  data = sortData(data)
   
   const chart = Chart({
     type: 'bar',
@@ -92,9 +89,9 @@ const bySales = (i => i.type == 'sales_growth')
 const byShare = (i => i.type == 'category_share')
 const bySpend = (i => i.type == 'average_spend')
 
-const TableSales = ({ table_data }) => {
-  const shares = sortData(table_data.filter(byShare))
-  const spendings = sortData(table_data.filter(bySpend))
+const TableSales = ({ data }) => {
+  const shares = sortData(data.filter(byShare))
+  const spendings = sortData(data.filter(bySpend))
   const width = 100 / shares.length + '%'
 
   const table = Table(
@@ -116,7 +113,7 @@ const TableSales = ({ table_data }) => {
   return B({ className: style.table }, labels, table)
 }
 
-const Timings = ({ start_date }) => {
+const Timings = ({ data }) => {
     
     console.log(start_date);
     
@@ -146,11 +143,11 @@ export default Component({
     
     console.log(data);
     
-    if (data.length) {
+    if (data.table_data.length) {
       return B(
-        SalesChart({ data: data.filter(bySales) }),
-        TableSales({ data }),
-        Timings({ data })
+        SalesChart({ data: data.table_data.filter(bySales) }),
+        TableSales({ data.table_data }),
+        Timings({ data.start_date })
       )
     }
     else {
