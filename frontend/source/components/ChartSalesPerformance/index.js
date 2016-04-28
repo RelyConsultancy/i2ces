@@ -11,14 +11,14 @@ import _ from 'underscore'
 const byCategory = (i => i.label.toLowerCase() == 'rest of cat')
 const byBrand = (i => i.label.toLowerCase() == 'brand')
 const byOffer = (i => i.label.toLowerCase() == 'offer')
+const byAisle = (i => i.label.toLowerCase() == 'aisle')
 
 const sortData = (data) => {
-  let items = data.filter(byCategory)
+  let items = data.filter(byAisle)
 
   items.push(data.filter(byOffer).pop())
   items.push(data.filter(byBrand).pop())
-  
-  items.reverse();
+  items.push(data.filter(byCategory).pop())
   
   let competition = data
     .filter(i => items.indexOf(i) == -1)
