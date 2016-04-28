@@ -107,6 +107,13 @@ const TableSales = ({ data }) => {
   return B({ className: style.table }, labels, table)
 }
 
+const Timings = ({ data }) => {
+    
+    console.log(data);
+    
+    
+}
+
 
 export default Component({
   loadData () {
@@ -130,7 +137,8 @@ export default Component({
     if (data.length) {
       return B(
         SalesChart({ data: data.filter(bySales) }),
-        TableSales({ data })
+        TableSales({ data }),
+        Timings({ data })
       )
     }
     else {
