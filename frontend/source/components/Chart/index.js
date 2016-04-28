@@ -11,9 +11,9 @@ import palette from './palette.js'
 
 
 export default Component({
-  renderChart () {
+  componentDidMount () {
     const { container } = this.refs
-    const { type } = this.props
+    const { type, onMount } = this.props
 
     switch (type) {
       case 'line':
@@ -23,7 +23,7 @@ export default Component({
           color: { pattern: palette },
         }
 
-        c3.generate(assign(config, this.props))
+        var chart = c3.generate(assign(config, this.props))
       break
 
       case 'gantt':
@@ -37,12 +37,11 @@ export default Component({
           })
         }
 
-        const chart = d3.gantt(container, options)
+        var chart = d3.gantt(container, options)
       break
     }
-  },
-  componentDidMount () {
-    this.renderChart()
+
+    if (onMount) onMount(chart)
   },
   render () {
     const { className } = this.props
