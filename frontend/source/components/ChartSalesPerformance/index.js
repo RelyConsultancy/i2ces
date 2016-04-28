@@ -4,6 +4,7 @@ import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import { fmtUnit } from '/application/utils.js'
 import style from './style.css'
+import _ from 'underscore'
 
 
 // sort filters
@@ -14,9 +15,11 @@ const byOffer = (i => i.label.toLowerCase() == 'offer')
 const sortData = (data) => {
   let items = data.filter(byCategory)
 
-  items.push(data.filter(byBrand).pop())
   items.push(data.filter(byOffer).pop())
-
+  items.push(data.filter(byBrand).pop())
+  
+  items.reverse();
+  
   let competition = data
     .filter(i => items.indexOf(i) == -1)
     .sort((a, b) => (a.label > b.label))

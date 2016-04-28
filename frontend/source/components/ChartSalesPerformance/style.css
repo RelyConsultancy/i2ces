@@ -35,7 +35,7 @@
   font-family: 'Archer Bold', serif;
   fill: #6D6D6D;
 }
-.chart .c3-axis-x path {
+.chart .c3-axis-x path, .chart .c3-axis-x .tick line {
     stroke: transparent!important;
 }
 .chart .c3-ygrid-line line {
