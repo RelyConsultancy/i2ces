@@ -21,6 +21,8 @@ const sortData = (data) => {
   items.push(data.filter(byBrand).pop())
   const rest_of_cat = data.filter(byCategory).pop()
   
+  data.filter(byCategory).pop()
+  
   let competition = data
     .filter(i => items.indexOf(i) == -1)
     .sort((a, b) => (a.label > b.label))
