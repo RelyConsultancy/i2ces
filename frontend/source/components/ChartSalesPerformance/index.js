@@ -53,7 +53,7 @@ const SalesChart = ({ data }) => {
       },
     },
     grid: {
-      y: { show: true },
+      y: { show: false },
     },
     onMount (chart) {
         chart.ygrids.remove()
