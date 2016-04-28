@@ -68,3 +68,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.chart .region-offer-brand {
+    background: rgba(192, 206, 10, 0.7);
+    border-radius: 5px;
+}
