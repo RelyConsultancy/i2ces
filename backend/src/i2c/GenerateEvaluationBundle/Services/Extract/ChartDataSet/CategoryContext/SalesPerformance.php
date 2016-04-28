@@ -65,4 +65,15 @@ class SalesPerformance implements ExtractInterface
             $cid
         );
     }
+    
+    public function getStartDate($cid) 
+    {
+        return sprintf(
+            'SELECT period_date AS start_date
+             FROM ie_timings_data
+             WHERE master_campaign_id = \'%s\' AND period = 3
+            ',
+            $cid
+        );
+    }
 }
