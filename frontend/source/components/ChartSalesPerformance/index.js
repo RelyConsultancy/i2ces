@@ -67,7 +67,7 @@ const SalesChart = ({ data }) => {
       },
       y: {
         tick: { format: d3.format('1%') },
-        
+        max: max()
       },
     },
     grid: {
