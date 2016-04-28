@@ -71,8 +71,10 @@
 
 .chart .region-offer-brand {
     fill: rgba(192, 206, 10, 0.7);
-    stroke: rgba(192, 206, 10, 0.7);
-    stroke-width: 3;
+}
+
+.chart .region-competitors {
+    fill: rgba(125, 52, 133, 0.75);
 }
 .chart .c3-region > rect {
     fill-opacity: 1!important;
