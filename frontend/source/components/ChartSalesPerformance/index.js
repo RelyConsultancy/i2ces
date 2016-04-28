@@ -115,7 +115,7 @@ const TableSales = ({ data }) => {
 
 const Timings = ({ data }) => {
     
-    console.log(start_date);
+    console.log(data);
     
     
 }
@@ -146,8 +146,8 @@ export default Component({
     if (data.table_data.length) {
       return B(
         SalesChart({ data: data.table_data.filter(bySales) }),
-        TableSales({ data.table_data }),
-        Timings({ data.start_date })
+        TableSales({ data: data.table_data }),
+        Timings({ data: data.start_date })
       )
     }
     else {
