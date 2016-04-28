@@ -79,3 +79,9 @@
 .chart .c3-region > rect {
     fill-opacity: 0.5!important;
 }
+
+.chart .c3-region > text {
+    fill-opacity: 1!important;
+    fill: #2a2a2a;
+    font-size: 16;
+}
