@@ -19,20 +19,18 @@ const sortData = (data) => {
 
   items.push(data.filter(byOffer).pop())
   items.push(data.filter(byBrand).pop())
-  items.push(data.filter(byCategory).pop())
+  const rest_of_cat = data.filter(byCategory).pop()
   
   let competition = data
     .filter(i => items.indexOf(i) == -1)
     .sort((a, b) => (a.label > b.label))
   
-  return items.concat(competition);
+  return items.concat(competition).concat(rest_of_cat);
 }
 
 
 const SalesChart = ({ data }) => {
   
-  console.log(data);
-    
   data = sortData(data)
   
   const chart = Chart({
