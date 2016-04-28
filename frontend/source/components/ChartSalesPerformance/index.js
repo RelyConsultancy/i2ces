@@ -38,12 +38,12 @@ const SalesChart = ({ data }) => {
             return d.value
         }).value
         
-        console.log(val);
         
-        return val <= 0 ? 10 : max + 15
+        
+        return val <= 0 ? 10 : val + 15
     }
   
-  max();
+  console.log(max())
   
   const chart = Chart({
     type: 'bar',
