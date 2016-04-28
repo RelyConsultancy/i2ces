@@ -70,6 +70,10 @@
 }
 
 .chart .region-offer-brand {
-    background: rgba(192, 206, 10, 0.7);
-    border-radius: 5px;
+    fill: rgba(192, 206, 10, 0.7);
+    stroke: rgba(192, 206, 10, 0.7);
+    stroke-width: 3;
+}
+.chart .c3-region > rect {
+    fill-opacity: 1!important;
 }
