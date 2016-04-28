@@ -43,6 +43,8 @@ const SalesChart = ({ data }) => {
         return val <= 0 ? 10 : max + 15
     }
   
+  max();
+  
   const chart = Chart({
     type: 'bar',
     tooltip: { show: false },
