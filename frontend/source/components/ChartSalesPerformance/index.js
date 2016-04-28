@@ -55,7 +55,11 @@ const SalesChart = ({ data }) => {
     grid: {
       y: { show: true },
     },
-    ygrids: [{value: 400, text: ''}]
+    onMount (chart) {
+        chart.ygrids.remove()
+        chart.ygrids.add({value: 0, text: ''})
+    }
+    
   })
 
   const label = B(
