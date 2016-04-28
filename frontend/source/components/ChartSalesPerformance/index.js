@@ -61,7 +61,10 @@ const SalesChart = ({ data }) => {
     onMount (chart) {
         chart.ygrids.remove()
         chart.ygrids.add({value: 0, text: ''})
-    }
+    },
+    regions: [
+        { axis: 'x', start: 'Offer' , end: 'Brand', class: 'region-offer-brand'}
+    ]
     
   })
 
