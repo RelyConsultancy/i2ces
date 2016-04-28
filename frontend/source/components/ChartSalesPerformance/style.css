@@ -38,6 +38,9 @@
 .chart .c3-axis-x path {
     stroke: transparent!important;
 }
+.chart .c3-ygrid-line line {
+    stroke: #000;
+}
 
 .table {
   position: relative;
