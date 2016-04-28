@@ -9,6 +9,6 @@
             }{{ not loop.last ? ',' }}
         {% endfor %}
     ],
-    start_date: start_date[0].start_date
+    start_date: "{{ start_date[0].start_date }}"
 }
 {% endautoescape %}
