@@ -16,8 +16,7 @@ const byAisle = (i => i.label.toLowerCase() == 'aisle')
 const sortData = (data) => {
   
   
-  const start_date = data.start_date;
-  const data = data.table_data;
+  data = data.table_data;
     
   let items = data.filter(byAisle)
 
