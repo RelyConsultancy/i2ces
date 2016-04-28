@@ -22,13 +22,15 @@ const sortData = (data) => {
 
   items.push(data.filter(byOffer).pop())
   items.push(data.filter(byBrand).pop())
-  items.push(data.filter(byCategory).pop())
   
   let competition = data
     .filter(i => items.indexOf(i) == -1)
     .sort((a, b) => (a.label > b.label))
   
-  return items.concat(competition)
+  items.concat(competition)
+  items.push(data.filter(byCategory).pop())
+  
+  return items;
 }
 
 
