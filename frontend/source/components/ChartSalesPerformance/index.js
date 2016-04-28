@@ -24,7 +24,7 @@ const sortData = (data) => {
     .filter(i => items.indexOf(i) == -1)
     .sort((a, b) => (a.label > b.label))
   
-  items.concat(competition)
+  items.push(competition)
   items.push(data.filter(byCategory).pop())
   
   return items;
