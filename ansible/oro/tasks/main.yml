@@ -140,10 +140,10 @@
   copy: src=../frontend/public/assets/bundle.css dest=/var/www/html/web/css/index.css force=yes
 
 - name: Integrate fonts from frontend to backend
-  copy: src=../frontend/public/fonts dest=/var/www/html/web/fonts force=yes
+  copy: src=../frontend/public/fonts dest=/var/www/html/web force=yes
 
 - name: Integrate images from frontend to backend
-  copy: src=../frontend/public/images dest=/var/www/html/web/images force=yes
+  copy: src=../frontend/public/images dest=/var/www/html/web force=yes
 
 - name: Install assets
   command: chdir=/var/www/html php app/console asset:install --env=prod

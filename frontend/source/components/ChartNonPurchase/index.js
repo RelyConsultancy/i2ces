@@ -1,3 +1,4 @@
+import d3 from 'd3'
 import { Component, B } from '/components/component.js'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'

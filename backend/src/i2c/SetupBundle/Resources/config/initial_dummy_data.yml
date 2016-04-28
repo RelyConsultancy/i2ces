@@ -1,6 +1,13 @@
 parameters:
     initial_setup_config:
         roles:
+            administrator:
+                name: Administrator
+                new_name: Admin
+                access:
+                    evaluation:
+                        oid: 'Entity:i2cEvaluationBundle:Evaluation'
+                        permissions: [64, 256] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
             supplier:
                 name: User
                 new_name: Supplier
