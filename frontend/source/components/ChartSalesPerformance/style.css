@@ -35,7 +35,9 @@
   font-family: 'Archer Bold', serif;
   fill: #6D6D6D;
 }
-
+.chart .c3-axis-x path {
+    stroke: transparent!important;
+}
 
 .table {
   position: relative;
