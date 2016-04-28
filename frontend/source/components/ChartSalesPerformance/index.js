@@ -38,7 +38,7 @@ const SalesChart = ({ data }) => {
             return d.value
         }).value
         
-        return val <= 0 ? 0.1 : parseFloat(val) + 0.15
+        return val <= 0 ? 0.1 : parseFloat(val) + 0.05
     }
   
   console.log(max())
