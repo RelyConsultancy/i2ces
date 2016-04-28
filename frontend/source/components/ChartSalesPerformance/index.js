@@ -33,7 +33,7 @@ const SalesChart = ({ data }) => {
   
   data = sortData(data)
   
-  const max () => {
+  const max = () => {
         const val = _.max(data, (d) => {
             return d.value
         }).value
