@@ -130,8 +130,7 @@ export default Component({
 
     fetchDataset(source, (data) => {
         
-      console.log(data);
-      this.setState( data )
+      this.setState({ data })
     })
   },
   getInitialState () {
