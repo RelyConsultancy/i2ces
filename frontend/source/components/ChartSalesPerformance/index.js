@@ -66,7 +66,7 @@ const SalesChart = ({ data }) => {
     },
     regions: [
         { axis: 'x', start: 0.5 , end: 2.5, class: 'region-offer-brand' },
-        { axis: 'x', start: 3.5 , end: 3.5 + data.length - 4, class: 'region-competitors' }
+        { axis: 'x', start: 2.5 , end: 3.5 + data.length - 5, class: 'region-competitors' }
     ]
     
   })
