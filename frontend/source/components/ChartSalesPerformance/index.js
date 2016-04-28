@@ -143,7 +143,7 @@ export default Component({
     
     console.log(data);
     
-    if (data.table_data.length) {
+    if ('table_data' in data) {
       return B(
         SalesChart({ data: data.table_data.filter(bySales) }),
         TableSales({ data: data.table_data }),
