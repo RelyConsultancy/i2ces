@@ -25,7 +25,7 @@ const sortData = (data) => {
     .filter(i => items.indexOf(i) == -1)
     .sort((a, b) => (a.label > b.label))
   
-  return items.concat(competition).concat(rest_of_cat);
+  return items.concat(competition, rest_of_cat);
 }
 
 
