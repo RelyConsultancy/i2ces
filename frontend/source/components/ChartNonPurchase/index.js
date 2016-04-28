@@ -46,9 +46,6 @@ export default Component({
           tick: { format: d3.format('1%') },
         }
       },
-      onMount (chart) {
-        console.log(chart)
-      }
     })
 
     const header = B({ className: style.header }, 'Reasons of non purchase')

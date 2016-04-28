@@ -81033,9 +81033,6 @@ exports.default = (0, _component.Component)({
         y: {
           tick: { format: _d2.default.format('1%') }
         }
-      },
-      onMount: function onMount(chart) {
-        console.log(chart);
       }
     });
 
