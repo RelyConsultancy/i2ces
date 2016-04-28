@@ -23,14 +23,14 @@ const sortData = (data) => {
   let competition = data
     .filter(i => items.indexOf(i) == -1)
     .sort((a, b) => (a.label > b.label))
-
+  
   return items.concat(competition)
 }
 
 
 const SalesChart = ({ data }) => {
   data = sortData(data)
-
+  
   const chart = Chart({
     type: 'bar',
     tooltip: { show: false },
@@ -63,7 +63,8 @@ const SalesChart = ({ data }) => {
         chart.ygrids.add({value: 0, text: ''})
     },
     regions: [
-        { axis: 'x', start: 0.5 , end: 2.5, class: 'region-offer-brand'}
+        { axis: 'x', start: 0.5 , end: 2.5, class: 'region-offer-brand' }
+        { axis: 'x', start: 3.5 , end: 3.5 + data.length - 4, class: 'region-competitors' }
     ]
     
   })
