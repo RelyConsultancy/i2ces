@@ -55,6 +55,13 @@ const SalesChart = ({ data }) => {
       },
       y: {
         tick: { format: d3.format('1%') },
+        max () {
+            const max = _.max(data, (d) => {
+                return d.value
+            }).value
+            
+            return max <= 0 ? 10 : max + 15
+        }
       },
     },
     grid: {
