@@ -35,6 +35,8 @@ const sortData = (data) => {
 
 
 const SalesChart = ({ table_data }) => {
+  
+  console.log(table_data);
     
   data = sortData(table_data)
   
@@ -127,7 +129,9 @@ export default Component({
     const { source } = this.props.component
 
     fetchDataset(source, (data) => {
-      this.setState({ data })
+        
+      console.log(data);
+      this.setState( data )
     })
   },
   getInitialState () {
@@ -140,7 +144,9 @@ export default Component({
   },
   render () {
     const { data } = this.state
-
+    
+    console.log(data);
+    
     if (data.length) {
       return B(
         SalesChart({ data: data.filter(bySales) }),
