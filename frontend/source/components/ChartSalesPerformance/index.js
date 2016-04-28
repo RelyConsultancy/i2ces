@@ -33,6 +33,16 @@ const SalesChart = ({ data }) => {
   
   data = sortData(data)
   
+  const max () => {
+        const val = _.max(data, (d) => {
+            return d.value
+        }).value
+        
+        console.log(val);
+        
+        return val <= 0 ? 10 : max + 15
+    }
+  
   const chart = Chart({
     type: 'bar',
     tooltip: { show: false },
@@ -55,13 +65,7 @@ const SalesChart = ({ data }) => {
       },
       y: {
         tick: { format: d3.format('1%') },
-        max () {
-            const max = _.max(data, (d) => {
-                return d.value
-            }).value
-            
-            return max <= 0 ? 10 : max + 15
-        }
+        
       },
     },
     grid: {
