@@ -83,5 +83,6 @@
 .chart .c3-region > text {
     fill-opacity: 1!important;
     fill: #2a2a2a;
-    font-size: 16;
+    stroke: #3a3a3a;
+    font-size: 12px;
 }
