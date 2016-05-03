@@ -8,34 +8,48 @@ import style from './style.css'
 // a factory function for the chart
 const ChartGrowTotalUnits = (data) => {
   // format data
-  const labels = data.chart.map(i => i.label)
-  const uplift = data.chart.map(i => i.uplift)
+  const dates = data.chart.map(i => i.start_date)
+  const exposed = data.chart.map(i => parseFloat(i.exposed))
+  const control = data.chart.map(i => parseFloat(i.control))
 
   // below is a C3 chart
   const chart = Chart({
-    type: 'bar',
+    type: 'line',
+    tooltip: { show: false },
+    className: style.chart,
+    padding: {
+      top: 20,
+      right: 10
+    },
     data: {
-      x: 'labels',
+      x: 'dates',
       columns: [
-        ['labels'].concat(labels),
-        ['uplift'].concat(uplift),
+        ['dates'].concat(dates),
+        ['Exposed'].concat(exposed),
+        ['Control'].concat(control),
       ],
-      names: {
-        uplift: 'Units uplift',
-        percent: 'Weekly unit uplift/HH vs average',
+      colors: {
+          Exposed: '#3F7CC0',
+          Control: '#A6A6A6'
       },
     },
     axis: {
       x: {
-        type: 'category'
-      },
-      y: {
-        label: {
-          text: 'lorem ipsum sit dolor',
-          position: 'outer-middle',
+        type: 'timeseries',
+        tick: {
+          format: '%d-%m-%Y',
+          culling: false,
         },
       },
+      y: {
+        tick: {
+          format: (value) => ('£' + (value.toFixed(0) / 1000) + 'k')
+        },
+      }
     },
+    regions: [
+        {axis: 'x', start: data.timings[1].date_start, end: data.timings[1].date_end, class: 'campaign-period'},
+    ]
   })
 
   return chart
@@ -51,7 +65,6 @@ export default Component({
     const { source } = this.props.component
 
     fetchDataset(source, (data) => {
-        console.log(data)
       this.setState({ data })
     })
   },
