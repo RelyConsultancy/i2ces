@@ -107,6 +107,7 @@
   line-height: 2rem;
   border-bottom: 1px solid #E6E6E6;
   color: #6F6F6F;
+  margin-bottom: 5px;
 }
 .list_item > span {
   position: relative;
