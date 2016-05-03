@@ -61,3 +61,8 @@
 .table_sales_footer td {
   border-top: 0;
 }
+
+.c3-region.campaign-period rect {
+    fill-opacity: 1!important;
+    fill: #b7dee8;
+}

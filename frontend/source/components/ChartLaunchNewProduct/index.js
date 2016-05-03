@@ -6,7 +6,7 @@ import style from './style.css'
 
 
 // a factory function for the chart
-const ChartLaunchNewProduct = (data) => {
+const ChartLaunchNewProduct = (data, timings) => {
   const dates = data.map(i => i.start_date)
   const exposed = data.map(i => parseFloat(i.exposed))
   const control = data.map(i => parseFloat(i.control))
@@ -47,6 +47,9 @@ const ChartLaunchNewProduct = (data) => {
         },
       }
     },
+    regions: [
+        {axis: 'x', start: timings[1].date_start, end: timings[1].date_end, class: 'campaign-period'},
+    ]
   })
 
   const label = B({ className: style.chart_label }, 'Offer Sales')
@@ -74,7 +77,7 @@ export default Component({
     const { data } = this.state
     
     if (data.chart) {
-      return B({ className: style.chart }, ChartLaunchNewProduct(data.chart))
+      return B({ className: style.chart }, ChartLaunchNewProduct(data.chart, data.timings))
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')
