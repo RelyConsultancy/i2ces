@@ -51,6 +51,7 @@ export default Component({
     const { source } = this.props.component
 
     fetchDataset(source, (data) => {
+        console.log(data)
       this.setState({ data })
     })
   },
