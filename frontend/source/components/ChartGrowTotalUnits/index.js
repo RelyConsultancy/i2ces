@@ -8,8 +8,8 @@ import style from './style.css'
 // a factory function for the chart
 const ChartGrowTotalUnits = (data) => {
   // format data
-  const labels = data.map(i => i.label)
-  const uplift = data.map(i => i.uplift)
+  const labels = data.chart.map(i => i.label)
+  const uplift = data.chart.map(i => i.uplift)
 
   // below is a C3 chart
   const chart = Chart({
