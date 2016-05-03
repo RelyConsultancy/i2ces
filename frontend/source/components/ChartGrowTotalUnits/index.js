@@ -29,7 +29,7 @@ const ChartGrowTotalUnits = (data) => {
         ['Control'].concat(control),
       ],
       colors: {
-          Exposed: '#3F7CC0',
+          Exposed: '#CB0270',
           Control: '#A6A6A6'
       },
     },
