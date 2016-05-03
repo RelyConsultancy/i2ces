@@ -91,6 +91,10 @@ services:
         class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\RetainNewCustomersTrialists
         arguments: [@doctrine.dbal.default_connection]
 
+    i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_total_units:
+        class: i2c\GenerateEvaluationBundle\Services\Extract\ChartDataSet\ObjectiveReview\GrowTotalUnits
+        arguments: [@doctrine.dbal.default_connection]
+
     i2c_generate_evaluation.extract_services_container:
         class: i2c\GenerateEvaluationBundle\Services\Containers\ExtractContainer
         calls:
@@ -120,4 +124,5 @@ services:
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_units_per_existing_customer, "extract_chart_data_set_grow_units_per_existing_customer"]]
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_retain_existing_customers, "extract_chart_data_set_retain_existing_customers"]]
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_retain_lapsed_customers, "extract_chart_data_set_retain_lapsed_customers"]]
+          - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_grow_total_units, "extract_chart_data_set_grow_total_units"]]
           - [addChartDataSetService, [@i2c_generate_evaluation.extract_chart_data_set_objective_review_retain_new_customers_trialists, "extract_chart_data_set_retain_new_customers_trialists"]]

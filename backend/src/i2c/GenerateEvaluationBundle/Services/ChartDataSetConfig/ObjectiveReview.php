@@ -282,6 +282,70 @@ class ObjectiveReview implements ChartDataSetConfigInterface
         ];
     }
     
+    public function getGrowTotalUnitsConfig($cid)
+    {
+        $query = sprintf(
+            'SELECT COUNT(0) as count
+             FROM ie_results_data
+             WHERE media_type=\'Total\'
+             AND objective=\'Grow total units\'
+             AND metric=\'Units\'
+             AND product=\'Offer\'
+             AND timeperiod=2
+             AND master_campaign_id=\'%s\'
+            ',
+            $cid
+        );
+
+        $result = $this->connection->fetchAll($query);
+        
+        if (1 > (int) $result[0]['count']) {
+            return [];
+        }
+
+        $query = sprintf(
+            'SELECT COUNT(0) as count
+             FROM ie_results_data
+             WHERE media_type=\'Total\'
+             AND objective=\'Launch new product\'
+             AND metric=\'New_custs\'
+             AND product=\'Offer\'
+             AND timeperiod=3
+             AND master_campaign_id=\'%s\'
+            ', 
+            $cid
+        );
+
+        $result = $this->connection->fetchAll($query);
+
+        if (1 > (int) $result[0]['count']) {
+            return [];
+        }
+
+        $query = sprintf(
+            'SELECT COUNT(0) as count
+             FROM ie_weekly_results_data
+             WHERE master_campaign_id = \'%s\'
+             AND product=\'Offer\'
+             AND metric=\'Units\'
+            ',
+            $cid
+        );
+
+        $result = $this->connection->fetchAll($query);
+
+        if (1 > (int) $result[0]['count']) {
+            return [];
+        }
+
+        return [
+            "grow_total_units" => [
+                "twig_name"    => "grow-total-units.json.twig",
+                "data_service" => "extract_chart_data_set_grow_total_units",
+            ],
+        ];
+    }
+    
     public function getAcquireNewCustomersConfig ($cid)
     {
         

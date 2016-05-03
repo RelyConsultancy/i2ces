@@ -83,7 +83,7 @@ class GrowTotalUnits implements ExtractInterface
             'SELECT uplift AS uplift, pct_uplift AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Launch new product\'
+             AND objective=\'Grow total units\'
              AND metric=\'Units\'
              AND product=\'Offer\'
              AND timeperiod=2
@@ -106,7 +106,7 @@ class GrowTotalUnits implements ExtractInterface
             'SELECT uplift AS uplift, pct_uplift AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Launch new product\'
+             AND objective=\'Grow total units\'
              AND metric=\'Units\'
              AND product=\'Offer\'
              AND timeperiod=3
@@ -129,7 +129,7 @@ class GrowTotalUnits implements ExtractInterface
             'SELECT SUM(uplift) AS uplift, SUM(pct_uplift) AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Launch new product\'
+             AND objective=\'Grow total units\'
              AND metric=\'Units\'
              AND product=\'Offer\'
              AND master_campaign_id=\'%s\'
