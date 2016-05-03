@@ -72,3 +72,7 @@
     bottom: 0;
     display: none;
 }
+.c3-region.campaign-period rect {
+    fill-opacity: 1!important;
+    fill: #ccc;
+}
