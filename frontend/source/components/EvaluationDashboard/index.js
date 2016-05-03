@@ -151,7 +151,7 @@ const Objectives2 = ({ items }) => {
       
   })
   
-  const splice = items.lenght % 2 == 0 ? 4 : 3;
+  const splice = items.lenght % 2 == 0 ? 4 : 3
   
   while(items.length) {
       rows.push(B({className: 'i2c_objective_list_row_wrapper'}, B({className: 'i2c_objective_list_row' }, items.splice(0,splice))))

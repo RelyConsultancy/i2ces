@@ -108,7 +108,9 @@ export default Component({
   render () {
     const { component } = this.props
     const { data } = this.state
-
+    
+    console.log(data);
+    
     if (data) {
       return B(
         ChartSales({ data: data.chart }),
