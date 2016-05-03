@@ -7,11 +7,13 @@ import style from './style.css'
 
 const IMG = Element('img');
 
-const ChartSales = ({ data }) => {
+const ChartSales = ({ data, timings }) => {
   const dates = data.map(i => i.start_date)
   const exposed = data.map(i => parseFloat(i.exposed))
   const control = data.map(i => parseFloat(i.control))
-
+  
+  
+  
   const chart = Chart({
     type: 'line',
     tooltip: { show: false },
@@ -46,6 +48,11 @@ const ChartSales = ({ data }) => {
         },
       }
     },
+    regions: [
+        {axis: 'x', start: timings[1].date_start, end: timings[1].date_end, class: 'campaign-period'},
+    ]
+        
+    
   })
 
   const label = B({ className: style.chart_label }, 'Offer Sales')
@@ -113,7 +120,7 @@ export default Component({
     
     if (data) {
       return B(
-        ChartSales({ data: data.chart }),
+        ChartSales({ data: data.chart, timings: data.timings }),
         TableSales({ data: data.table })
       )
     }
