@@ -307,7 +307,7 @@ class ObjectiveReview implements ChartDataSetConfigInterface
             'SELECT COUNT(0) as count
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Launch new product\'
+             AND objective=\'Grow total units\'
              AND metric=\'New_custs\'
              AND product=\'Offer\'
              AND timeperiod=3
