@@ -56,7 +56,9 @@ export default Component({
   },
   render () {
     const { data } = this.state
-
+    
+    console.log(data);
+    
     if (data.length) {
       return B({ className: style.chart }, ChartGrowTotalUnits(data))
     }
