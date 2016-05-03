@@ -16,6 +16,32 @@
   font-family: 'Archer Bold', serif;
   fill: #6D6D6D;
 }
+.chart {
+  position: relative;
+  padding-left: .5rem;
+}
+.chart_label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-40%, -120%) rotate(-90deg);
+  font-size: .875rem;
+  font-family: 'Archer Bold', serif;
+  color: #6D6D6D;
+}
+.chart .c3-target path {
+  stroke-width: 2px;
+}
+.chart .c3-target-Control path {
+  stroke-width: 1px;
+  stroke-dasharray: 5,5;
+}
+.chart .c3-axis-x .tick > text {
+  transform: rotate(-45deg) translate(-1.75rem, 0);
+}
+.chart .c3-legend-item {
+  transform: translateY(-18rem);
+}
 
 .c3-region.campaign-period rect {
     fill-opacity: 1!important;
