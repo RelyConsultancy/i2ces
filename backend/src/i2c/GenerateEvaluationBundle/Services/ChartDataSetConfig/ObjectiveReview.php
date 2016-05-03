@@ -308,7 +308,7 @@ class ObjectiveReview implements ChartDataSetConfigInterface
              FROM ie_results_data
              WHERE media_type=\'Total\'
              AND objective=\'Grow total units\'
-             AND metric=\'New_custs\'
+             AND metric=\'Units\'
              AND product=\'Offer\'
              AND timeperiod=3
              AND master_campaign_id=\'%s\'
