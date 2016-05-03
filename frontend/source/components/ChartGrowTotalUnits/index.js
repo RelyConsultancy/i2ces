@@ -60,7 +60,7 @@ export default Component({
     
     console.log(data);
     
-    if (data.length) {
+    if ('chart' in data) {
       return B({ className: style.chart }, ChartGrowTotalUnits(data))
     }
     else {
