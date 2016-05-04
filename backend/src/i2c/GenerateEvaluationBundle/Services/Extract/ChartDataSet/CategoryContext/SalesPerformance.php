@@ -71,7 +71,7 @@ class SalesPerformance implements ExtractInterface
         return sprintf(
             'SELECT period_date AS start_date
              FROM ie_timings_data
-             WHERE master_campaign_id = \'%s\' AND period = 3
+             WHERE master_campaign_id = \'%s\' AND period = 2
             ',
             $cid
         );
