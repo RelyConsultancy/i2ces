@@ -58,8 +58,10 @@ const ChartUplift = ({ data }) => {
       },
       y: {
         tick: {
-          format: (value) => ((value / 1000).toFixed(1) + 'k'),
-        },
+          format: (value) => { 
+            if (value > 999) { return (value / 1000).toFixed(1) + 'k' } else { return value } 
+            
+          },
         label: {
           text: 'Offer Units Uplift',
           position: 'outer-middle',
