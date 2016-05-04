@@ -89,3 +89,20 @@
     font-weight: bold;
     font-family: 'Archer Bold', serif;
 }
+
+.stages {
+  margin-top: 2rem;
+  font-size: .75rem;
+  color: #575757;
+}
+.stage {
+  text-align: right;
+  margin: .5rem;
+}
+.stage_period {
+  display: inline-block;
+  width: 10rem;
+}
+.stage_label {
+  display: inline-block;
+}
