@@ -90,11 +90,11 @@ export default Component({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, 'Offer products share of category during and post campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Offer'),
                 B({ className: style.chart }, ChartGrowShareOfCategory(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'Brand products share of category during and post campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Brand'),
                 B({ className: style.chart }, ChartGrowShareOfCategory(data, 'brand'))
               )
           ]

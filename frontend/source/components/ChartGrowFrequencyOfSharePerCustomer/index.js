@@ -93,11 +93,11 @@ export default Component({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of offer during and post campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Offer'),
                 B({ className: style.chart }, ChartGrowFrequencyOfSharePerCustomer(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of brand during and post campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Brand'),
                 B({ className: style.chart }, ChartGrowFrequencyOfSharePerCustomer(data, 'brand'))
               )
           ]

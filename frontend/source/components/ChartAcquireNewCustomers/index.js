@@ -95,11 +95,11 @@ export default Component({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, 'Uplift of ' + numeral(data.charts.offer[0].exposed - data.charts.offer[0].control).format('0,0a') + ' in new customers to the offer products during the campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Offer'),
                 B({ className: style.chart }, ChartAcquireNewCustomers(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'Uplift of ' + numeral(data.charts.brand[0].exposed - data.charts.brand[0].control).format('0,0') + ' in new customers to the offer products during the campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Brand'),
                 B({ className: style.chart }, ChartAcquireNewCustomers(data, 'brand'))
               )
           ]

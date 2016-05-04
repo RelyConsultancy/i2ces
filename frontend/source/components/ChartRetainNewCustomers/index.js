@@ -125,11 +125,11 @@ export default Component({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, numeral(data.charts.offer[0].exposed - data.charts.offer[0].control).format('0,0') + ' new customers (trialists) returning to purchase offer product during campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Offer'),
                 B({ className: style.chart }, ChartRetainNewCustomers(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'During campaign uplift in new customers (trialists) returning, split by media channel combination'),
+                H3({ className: 'i2c-chart-title' }, 'Brand'),
                 B({ className: 'i2c-mc-table' }, TableMediaCombos(data))
               )
           ]

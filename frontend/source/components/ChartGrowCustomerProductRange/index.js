@@ -93,7 +93,7 @@ export default Component({
           blocks: 1,
           items: [
               B({ className: 'i2c-single-chart-middle' },
-                H3({ className: 'i2c-chart-title' }, 'Frequency of purchase of offer during and post campaign'),
+                H3({ className: 'i2c-chart-title' }, 'Offer'),
                 B({ className: style.chart }, ChartGrowCustomerProductRange(data))
               )
           ]
