@@ -28,7 +28,11 @@ const sortData = (data) => {
     .filter(i => items.indexOf(i) == -1)
     .sort((a, b) => (a.label > b.label))
   
-  console.log(competition)
+  competition = _.reject(competition, (i) => {
+      return i.label.toLowerCase() == 'rest of cat'
+  })
+  
+  
   
   return items.concat(competition, rest_of_cat);
 }
@@ -46,7 +50,6 @@ const SalesChart = ({ data }) => {
         return val <= 0 ? 0.1 : parseFloat(val) + 0.05
     }
   
-  console.log(max())
   
   const chart = Chart({
     type: 'bar',
