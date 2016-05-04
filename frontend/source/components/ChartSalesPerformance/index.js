@@ -133,8 +133,8 @@ const Timings = ({ data }) => {
     const start_date = moment(data)
     console.log(start_date.format('DD/MM/YYYY'))
     const stages = [
-        B({ className:style.stage }, 'Previous Period',  B({ className: style.stage_period }, start_date.clone().subtract(364, 'days').format('DD/MM/YYYY') + ' - ' + start_date.clone().subtract(183, 'days').format('DD/MM/YYYY'))),
-        B({ className:style.stage }, 'Current Period',  B({ className: style.stage_period }, start_date.clone().subtract(182, 'days').format('DD/MM/YYYY') + ' - ' + start_date.clone().subtract(1, 'days').format('DD/MM/YYYY')))
+        B({ className:style.stage }, 'Previous Period:',  B({ className: style.stage_period }, start_date.clone().subtract(364, 'days').format('DD/MM/YYYY') + ' - ' + start_date.clone().subtract(183, 'days').format('DD/MM/YYYY'))),
+        B({ className:style.stage }, 'Current Period:',  B({ className: style.stage_period }, start_date.clone().subtract(182, 'days').format('DD/MM/YYYY') + ' - ' + start_date.clone().subtract(1, 'days').format('DD/MM/YYYY')))
     ]
     
     return B({ className: style.stages }, stages);
