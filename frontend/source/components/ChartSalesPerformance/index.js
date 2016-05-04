@@ -127,7 +127,14 @@ const TableSales = ({ data }) => {
 
 const Timings = ({ data }) => {
     const start_date = moment(data)
-    console.log(start_date)
+    
+    const stages = [
+        B({ className:style.stage }, 'Pre Period - ',  B({ className: style.stage_period }, start_date.subtract(364, 'days').format('DD/MM/YYYY') + ' - ' + start_date.subtract(183, 'days').format('DD/MM/YYYY'))),
+        B({ className:style.stage }, 'Current Period - ',  B({ className: style.stage_period }, start_date.subtract(182, 'days').format('DD/MM/YYYY') + ' - ' + start_date.subtract(1, 'days').format('DD/MM/YYYY')))
+    ]
+    
+    return B({ className: style.stages }, stages);
+    
 }
 
 
