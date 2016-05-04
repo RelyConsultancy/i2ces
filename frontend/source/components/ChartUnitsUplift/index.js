@@ -61,7 +61,7 @@ const ChartUplift = ({ data }) => {
           format: (value) => ((value / 1000).toFixed(1) + 'k'),
         },
         label: {
-          text: 'Period on period sales growth',
+          text: 'Offer Units Uplift',
           position: 'outer-middle',
         },
       },
