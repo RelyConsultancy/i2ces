@@ -92,7 +92,7 @@ const TableExposed = ({ data }) => {
     B({ key, style: { width } }, parseInt(item).toLocaleString())
   )))
 
-  const label = B({ className: style.table_label }, 'Exposed')
+  const label = B({ className: style.table_label }, 'Households Exposed')
 
   return B({ className: style.table }, label, info)
 }
