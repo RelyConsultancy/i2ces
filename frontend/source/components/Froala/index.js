@@ -32,7 +32,9 @@ const defaults = {
     "Verdana,Geneva,sans-serif": 'Verdana',
   },
   tableStyles: {
-      "tbl-insight-recommendation": "Insight / Recommendation"
+      "tbl-insight-recommendation": "Insight / Recommendation",
+      'fr-dashed-borders': 'Dashed Borders',
+      'fr-alternate-rows': 'Alternate Rows'
   }
 }
 
