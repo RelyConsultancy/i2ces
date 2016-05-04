@@ -1,3 +1,4 @@
+import moment from 'moment'
 import d3 from 'd3'
 import { Component, B, Table, TR, TD } from '/components/component.js'
 import Chart from '/components/Chart'
@@ -125,10 +126,8 @@ const TableSales = ({ data }) => {
 }
 
 const Timings = ({ data }) => {
-    
-    console.log(data);
-    
-    
+    const start_date = moment(data)
+    console.log(start_date)
 }
 
 
