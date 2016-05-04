@@ -31,6 +31,9 @@ const defaults = {
     "'Times New Roman',Times,serif": 'Times New Roman',
     "Verdana,Geneva,sans-serif": 'Verdana',
   },
+  tableStyles: {
+      "tbl-insight-recommendation": "Insight / Recommendation"
+  }
 }
 
 
