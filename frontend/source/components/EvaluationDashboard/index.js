@@ -7,6 +7,7 @@ import * as $ from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
 import numeral from 'numeral'
+import ObjectiveBlob from '/components/ObjectiveBlob'
 
 
 const ToggleState = ({ evaluation }) => {
@@ -131,10 +132,13 @@ const Chapters = ({ evaluation, colors }) => (
 const Objectives = ({ items }) => {
   const title = B({ className: style.list_title}, 'Campaign Highlights')
   
-  items = items.map(({ label, value, unit }, index) => {
-    value = B({ className: style.result_value }, fmtUnit(value, unit))
+  items = items.map((data, index) => {
+      return ObjectiveBlob(data)
+      /*
+        value = B({ className: style.result_value }, fmtUnit(value, unit))
 
-    return B({ className: style.result_label, key: index }, label, value)
+        return B({ className: style.result_label, key: index }, label, value)
+        */
   })
   
   return B({ className: style.list }, title, items)

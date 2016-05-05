@@ -1,0 +1,24 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04-May-2016, 17:26:04
+    Author     : jfairbrother
+*/
+.result_label {
+  compose: list_item;
+  padding: .25rem 1rem;
+  font-size: .875em;
+  color: #45678E;
+}
+.result_value {
+  position: absolute;
+  right: 1rem;
+  bottom: .25rem;
+  font-size: 1.4em;
+  font-family: 'Archer Bold', serif;
+}
+
+.blob {}
