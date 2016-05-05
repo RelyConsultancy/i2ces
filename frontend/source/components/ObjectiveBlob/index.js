@@ -6,7 +6,7 @@ import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
 const ObjectiveBlob = ({ label, value, unit }) => {
     console.log()
     value = B({ className: style.result_value }, fmtUnit(value, unit))
-    return B({ className: style.i2c_objective_blob }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, label), B({ className: 'i2c_objective_value' }, fmtUnit(value, unit))));
+    return B({ className: style.i2c_objective_blob }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, label), B({ className: 'i2c_objective_value' }, value)));
     //return B({ className: style.result_label, key: index }, label, value)
     
 }
