@@ -7,7 +7,7 @@ import * as $ from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
 import numeral from 'numeral'
-import Blob from '/components/ObjectiveBlob'
+import ObjectiveBlob from '/components/ObjectiveBlob'
 
 
 const ToggleState = ({ evaluation }) => {
