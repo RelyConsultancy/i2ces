@@ -13,10 +13,11 @@ const ObjectiveBlob = ({ label, value, unit }) => {
 
 export default Component({
   getInitialState () {
-    return { on: this.props.on || false }
+    return this.props
   },
   render () {
     const { data } = this.props
+    coonsole.log(data)
     if (data) {
         return B({ className: style.blob }, ObjectiveBlob(data))
     } else {
