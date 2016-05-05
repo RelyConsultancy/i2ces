@@ -17,7 +17,8 @@ export default Component({
   },
   render () {
     const { data } = this.props
-    
-    return B({ className: style.blob }, ObjectiveBlob(data))
+    if (data) {
+        return B({ className: style.blob }, ObjectiveBlob(data))
+    }
   }
 })
