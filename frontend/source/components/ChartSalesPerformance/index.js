@@ -161,9 +161,7 @@ export default Component({
   },
   render () {
     const { data } = this.state
-    
-    console.log(data);
-    
+        
     if ('table_data' in data) {
       return B(
         SalesChart({ data: data.table_data.filter(bySales) }),
