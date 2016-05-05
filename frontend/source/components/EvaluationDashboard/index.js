@@ -7,7 +7,7 @@ import * as $ from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
 import numeral from 'numeral'
-import ObjectiveBlob from '/components/ObjectiveBlob'
+import Blob from '/components/ObjectiveBlob'
 
 
 const ToggleState = ({ evaluation }) => {
@@ -133,12 +133,9 @@ const Objectives = ({ items }) => {
   const title = B({ className: style.list_title}, 'Campaign Highlights')
   
   items = items.map((data, index) => {
-      return ObjectiveBlob(data)
-      /*
-        value = B({ className: style.result_value }, fmtUnit(value, unit))
+    value = B({ className: style.result_value }, fmtUnit(value, unit))
 
-        return B({ className: style.result_label, key: index }, label, value)
-        */
+    return B({ className: style.result_label, key: index }, label, value)
   })
   
   return B({ className: style.list }, title, items)
@@ -149,9 +146,9 @@ const Objectives2 = ({ items }) => {
   const count = items.length
   const rows = []  
   
-  items = items.map(({ label, value, unit }, index) => {
-      
-       return B({ className: style.i2c_objective_blob }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, label), B({ className: 'i2c_objective_value' }, fmtUnit(value, unit))));
+  items = items.map((data, index) => {
+       return ObjectiveBlob(data)
+       //return B({ className: style.i2c_objective_blob }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, label), B({ className: 'i2c_objective_value' }, fmtUnit(value, unit))));
       
   })
   
