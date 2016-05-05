@@ -1,0 +1,30 @@
+{% autoescape false %}
+{
+    "data": [
+            {% for item in data %}
+                { 
+                    "media_type": "{{ item.media_type }}",
+                    "exposed": {{ item.exposed }}
+                }
+                {{ not loop.last ? ',' }}
+            {% endfor %}
+        ],
+    "timings": [
+        {
+            "label": "pre",
+            "date_start": "{{ timing_pre[0].start_date }}",
+            "date_end": "{{ timing_pre[0].end_date }}"
+        },
+        {
+            "label": "during",
+            "date_start": "{{ timing_during[0].start_date }}",
+            "date_end": "{{ timing_during[0].end_date }}"
+        },
+        {
+            "label": "post",
+            "date_start": {% if timing_post[0] is defined %} "{{ timing_post[0].start_date }}" {% else %} "" {% endif %},
+            "date_end": {% if timing_post[0] is defined %} "{{ timing_post[0].end_date }}" {% else %} "" {% endif %}
+        }
+    ]
+}
+{% endautoescape %}

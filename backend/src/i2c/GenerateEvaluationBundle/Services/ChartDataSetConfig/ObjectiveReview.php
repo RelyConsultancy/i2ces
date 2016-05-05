@@ -346,6 +346,33 @@ class ObjectiveReview implements ChartDataSetConfigInterface
         ];
     }
     
+    
+    public function getGrowAwarenessConfig ($cid) 
+    {
+        
+        $query = sprintf(
+            'SELECT COUNT(0) as count
+             FROM ie_ots_data
+             WHERE master_campaign_id = \'%s\'
+             AND media_type <> \'Total\'
+            ',
+            $cid
+        );
+
+        $result = $this->connection->fetchAll($query);
+
+        if (1 > (int) $result[0]['count']) {
+            return [];
+        }
+        
+        return [
+            "grow_awareness" => [
+                "twig_name"    => "grow-awareness.json.twig",
+                "data_service" => "extract_chart_data_set_grow_awareness",
+            ],
+        ];
+        
+    }
     public function getAcquireNewCustomersConfig ($cid)
     {
         
@@ -521,28 +548,8 @@ class ObjectiveReview implements ChartDataSetConfigInterface
         }
         
         return true;
-        /*
-        $query = sprintf(
-            'SELECT COUNT(0) as count
-             FROM ie_results_data
-             WHERE media_type=\'Total\'
-             AND objective=\'' . $objective . '\'
-             AND metric LIKE \'' . $metric . '\'
-             AND product=\'Offer\'
-             AND timeperiod=3
-             AND master_campaign_id=\'%s\'
-            ',
-            $cid
-        );
-        
-        $result = $this->connection->fetchAll($query);
-
-        if (1 > (int) $result[0]['count']) {
-            return false;
-        }
-        
-        return true;
-         * */
          
     }
+    
+    
 }
