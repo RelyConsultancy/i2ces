@@ -89,6 +89,28 @@ class Evaluation
     /**
      * @var string
      *
+     * @ORM\Column(type="string", name="temporary_pdf_path")
+     *
+     * @JMS\Groups({"never_serialize"})
+     * @JMS\SerializedName("temporary_pdf_path")
+     * @JMS\Type("string")
+     */
+    protected $temporaryPdfPath;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", name="pdf_markers")
+     *
+     * @JMS\Groups({"list"})
+     * @JMS\SerializedName("pdf_markers")
+     * @JMS\Type("string")
+     */
+    protected $pdfMarkers;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, name="title")
      *
      * @JMS\Groups({"list"})
@@ -302,6 +324,38 @@ class Evaluation
     public function setLatestPdfPath($latestPdfPath)
     {
         $this->latestPdfPath = $latestPdfPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemporaryPdfPath()
+    {
+        return $this->temporaryPdfPath;
+    }
+
+    /**
+     * @param string $temporaryPdfPath
+     */
+    public function setTemporaryPdfPath($temporaryPdfPath)
+    {
+        $this->temporaryPdfPath = $temporaryPdfPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPdfMarkers()
+    {
+        return $this->pdfMarkers;
+    }
+
+    /**
+     * @param string $pdfMarkers
+     */
+    public function setPdfMarkers($pdfMarkers)
+    {
+        $this->pdfMarkers = $pdfMarkers;
     }
 
     /**

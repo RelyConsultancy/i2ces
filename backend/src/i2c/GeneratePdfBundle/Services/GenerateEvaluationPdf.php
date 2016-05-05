@@ -3,9 +3,7 @@
 namespace i2c\GeneratePdfBundle\Services;
 
 use Doctrine\ORM\EntityManager;
-use i2c\EvaluationBundle\Entity\Chapter;
 use i2c\EvaluationBundle\Entity\Evaluation;
-use i2c\GeneratePdfBundle\Entity\EvaluationPdfConfig;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
@@ -20,6 +18,9 @@ class GenerateEvaluationPdf
     protected $urlBase;
     protected $masterUser;
     protected $masterToken;
+    protected $pdfDelay;
+    protected $pdfNodeJsCommand;
+    protected $pdfOutputFolder;
 
     /**
      * GenerateEvaluationPdf constructor.
@@ -38,134 +39,65 @@ class GenerateEvaluationPdf
     }
 
     /**
-     * @param Evaluation          $evaluation
-     * @param EvaluationPdfConfig $config
+     * @param Evaluation $evaluation
+     * @param string     $cookie
+     * @param string     $markers
+     *
+     * @return Evaluation
      */
-    public function generatePdf(Evaluation $evaluation, EvaluationPdfConfig $config)
+    public function generatePdf(Evaluation $evaluation, $cookie, $markers)
     {
-        if (!$evaluation->isPublished()) {
-            return;
-        }
-
         $filesystem = new Filesystem();
 
-        $chapters = $evaluation->getChaptersOrderedByOrder();
-
-        $evaluationPdfDirectory = sprintf(
-            '%s/%s',
-            $config->getOutputDirectory(),
+        $pdfPath = sprintf(
+            '%s/%s-temporary.pdf',
+            $this->pdfOutputFolder,
             $evaluation->getCid()
         );
 
-        if (!$filesystem->exists($evaluationPdfDirectory)) {
-            $filesystem->mkdir($evaluationPdfDirectory, 0755);
+        $headers = sprintf('Cookie~ %s`DNT~ 1`x-csrf-token~1', $cookie);
+
+        if (!$filesystem->exists($this->pdfOutputFolder)) {
+            $filesystem->mkdir($this->pdfOutputFolder, 0755);
         }
 
-        $evaluationVersionPdfDirectory = sprintf(
-            '%s/%s',
-            $evaluationPdfDirectory,
-            $evaluation->getVersionNumber()
-        );
-
-        if (!$filesystem->exists($evaluationVersionPdfDirectory)) {
-            $filesystem->mkdir($evaluationVersionPdfDirectory, 0755);
-        }
-
-        $chapterPdfs = [];
-        $headers = $this->getHeader();
-
-        $pdfPath = $this->generateChapterPdf(
-            'intro',
-            $evaluationVersionPdfDirectory,
-            $config,
+        $this->generateChapterPdf(
+            $pdfPath,
             $evaluation->getCid(),
-            $headers
+            $headers,
+            $markers
         );
 
-        $chapterPdfs[] = $pdfPath;
-
-        /** @var Chapter $chapter */
-        foreach ($chapters as $chapter) {
-            $pdfPath = $this->generateChapterPdf(
-                $chapter->getId(),
-                $evaluationVersionPdfDirectory,
-                $config,
-                $evaluation->getCid(),
-                $headers
-            );
-
-            $chapterPdfs[] = $pdfPath;
-        }
-
-        $pdfPath = $this->generateChapterPdf(
-            'outro',
-            $evaluationVersionPdfDirectory,
-            $config,
-            $evaluation->getCid(),
-            $headers
-        );
-
-        $chapterPdfs[] = $pdfPath;
-
-        $now = new \DateTime('now');
-
-        $finalPdfPath = sprintf(
-            '%s/%s-%s.pdf',
-            $evaluationPdfDirectory,
-            $evaluation->getCid(),
-            $now->format('Y-m-d\TH-i-s')
-        );
-
-        $commandThatMergesPdfs = sprintf(
-            '%s %s \'%s\'',
-            'pdfunite',
-            implode(' ', $chapterPdfs),
-            $finalPdfPath
-        );
-
-        $process = new Process($commandThatMergesPdfs);
+        $process = new Process(sprintf('chmod 755 %s', $pdfPath));
         $process->mustRun();
 
-        $process = new Process(sprintf('chmod 755 %s', $finalPdfPath));
-        $process->mustRun();
-
-        $evaluation->setLatestPdfPath($finalPdfPath);
+        $evaluation->setTemporaryPdfPath($pdfPath);
 
         $this->entityManager->persist($evaluation);
         $this->entityManager->flush();
 
-        foreach ($chapterPdfs as $chapterPdf) {
-            $filesystem->remove($chapterPdf);
-        }
+        return $evaluation;
     }
 
     /**
-     * @param string              $chapterId
-     * @param string              $pdfLocation
-     * @param EvaluationPdfConfig $config
+     * @param string              $pdfPath
      * @param string              $cid
      * @param string              $headers
+     * @param string              $markers
      *
      * @return string
      */
-    protected function generateChapterPdf($chapterId, $pdfLocation, EvaluationPdfConfig $config, $cid, $headers)
+    protected function generateChapterPdf($pdfPath, $cid, $headers, $markers)
     {
-        $now = new \DateTime('now');
-        $pdfPath = sprintf(
-            '%s/%s-%s.pdf',
-            $pdfLocation,
-            $chapterId,
-            $now->format('Y-m-d\TH-i-s')
-        );
+        //todo add markers to the nodejs command
         $command = sprintf(
-            '%s %s/#/preview/%s/%s %s \'%s\' %s',
-            $config->getNodeJsCommand(),
+            '%s %s/#/preview/%s \'%s\' \'%s\' %s',
+            $this->pdfNodeJsCommand,
             $this->urlBase,
             $cid,
-            $chapterId,
             $pdfPath,
             $headers,
-            $config->getDelay()
+            $this->pdfDelay
         );
         $process = new Process($command);
         $process->mustRun();
@@ -174,63 +106,26 @@ class GenerateEvaluationPdf
     }
 
     /**
-     * @return string
+     * @param mixed $pdfDelay
      */
-    protected function getHeader()
+    public function setPdfDelay($pdfDelay)
     {
-        $loginRequest = sprintf(
-            'curl \'%s/user/login\' -s --compressed -H \'DNT: 1\' -D header.txt | grep _csrf_token',
-            $this->urlBase
-        );
-
-        $process = new Process($loginRequest);
-        $process->mustRun();
-
-        $result = $process->getOutput();
-
-        $initialCookie = $this->getCookieFromResponseHeaderFile('header.txt');
-
-        $start = strpos($result, 'value="') + strlen('value="');
-        $end = strpos($result, '"', $start);
-        $csrfToken = substr($result, $start, $end - $start);
-
-        $process = new Process(
-            sprintf(
-                'curl \'%s/user/login-check\' -s --compressed -H \'DNT: 1\' -H \'Cookie: %s\' \
-                 --data \'_username=%s&_password=%s&_target_path=&_csrf_token=%s\' \
-                 -D header2.txt',
-                $this->urlBase,
-                $initialCookie,
-                $this->masterUser,
-                $this->masterToken,
-                $csrfToken
-            )
-        );
-        $process->mustRun();
-
-        $cookie = $this->getCookieFromResponseHeaderFile('header2.txt');
-
-        return sprintf(
-            'Cookie~ %s`DNT~ 1`x-csrf-token~1',
-            $cookie
-        );
+        $this->pdfDelay = $pdfDelay;
     }
 
     /**
-     * @param string $filename
-     *
-     * @return string
+     * @param mixed $pdfNodeJsCommand
      */
-    protected function getCookieFromResponseHeaderFile($filename)
+    public function setPdfNodeJsCommand($pdfNodeJsCommand)
     {
-        $process = new Process(sprintf('cat %s | grep \'Set-Cookie: BAPID=\'', $filename));
-        $process->mustRun();
-        $cookieString = $process->getOutput();
+        $this->pdfNodeJsCommand = $pdfNodeJsCommand;
+    }
 
-        $start = strpos($cookieString, 'BAPID=');
-        $end = strpos($cookieString, ';', $start);
-        $cookie = substr($cookieString, $start, $end - $start);
-
-        return $cookie;
+    /**
+     * @param mixed $pdfOutputFolder
+     */
+    public function setPdfOutputFolder($pdfOutputFolder)
+    {
+        $this->pdfOutputFolder = $pdfOutputFolder;
     }
 }

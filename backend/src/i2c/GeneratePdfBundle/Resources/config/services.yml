@@ -1,14 +1,8 @@
 services:
-    i2c_generate_pdf.evaluation_pdf_command:
-        class: i2c\GeneratePdfBundle\Command\GeneratePDF
-        arguments: [@monolog.logger]
-        tags:
-            - { name: console.command }
-
-    i2c_generate_pdf.evaluation_queue_service:
-        class: i2c\GeneratePdfBundle\Services\EvaluationQueue
-        arguments: [@doctrine.dbal.default_connection]
-
     i2c_generate_pdf.generate_evaluation_pdf_service:
         class: i2c\GeneratePdfBundle\Services\GenerateEvaluationPdf
         arguments: [@doctrine.orm.default_entity_manager, %url_base%, %master_user%, %master_pass%]
+        calls:
+          - [setPdfDelay, [%pdf_delay%]]
+          - [setPdfNodeJsCommand, [%pdf_node_js_command%]]
+          - [setPdfOutputFolder, [%pdf_output_folder%]]
