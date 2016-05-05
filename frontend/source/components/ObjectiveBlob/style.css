@@ -48,7 +48,7 @@ and open the template in the editor.
 .blob {}
 
 
-.i2c_objective_blob {
+b.i2c_objective_blob {
     display: table;
     border-radius: 50%;
     width: 150px;
@@ -59,27 +59,27 @@ and open the template in the editor.
     font-family: 'Archer Bold', serif;
 }
 
-.i2c_objective_blob:nth-child(1) {
+b.i2c_objective_blob:nth-child(1) {
     background: #4E90CD;
     color: #fff;
 }
 
-.i2c_objective_blob:nth-child(2) {
+b.i2c_objective_blob:nth-child(2) {
     background: #EA7518;
     color: #fff;
 }
 
-.i2c_objective_blob:nth-child(3) {
+b.i2c_objective_blob:nth-child(3) {
     background: #914B97;
     color: #fff;
 }
 
-.i2c_objective_blob:nth-child(4) {
+b.i2c_objective_blob:nth-child(4) {
     background: #5FC4E1;
     color: #fff;
 }
 
-.i2c_objective_blob:last-child {
+b.i2c_objective_blob:last-child {
     margin-right: 0px;
 }
 b.i2c_objectives_list {
