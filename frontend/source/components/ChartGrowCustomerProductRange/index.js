@@ -88,17 +88,12 @@ export default Component({
   },
   render () {
     const { data } = this.state
-    console.log(data)
+    
     if ('charts' in data) {
-        return Grid({
-          blocks: 1,
-          items: [
-              B({ className: 'i2c-single-chart-middle' },
+        return B({ className: 'i2c-single-chart-middle' },
                 H3({ className: 'i2c-chart-title' }, 'Offer'),
                 B({ className: style.chart }, ChartGrowCustomerProductRange(data))
-              )
-          ]
-      })
+                )
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')
