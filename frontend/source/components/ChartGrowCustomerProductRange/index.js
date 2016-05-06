@@ -88,6 +88,7 @@ export default Component({
   },
   render () {
     const { data } = this.state
+    console.log(data)
     if ('charts' in data) {
         return Grid({
           blocks: 1,
