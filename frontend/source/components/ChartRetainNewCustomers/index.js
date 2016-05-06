@@ -129,7 +129,7 @@ export default Component({
                 B({ className: style.chart }, ChartRetainNewCustomers(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'Brand'),
+                H3({ className: 'i2c-chart-title' }, 'During campaign uplift in new customers (trialists) returning, split by media channel combination'),
                 B({ className: 'i2c-mc-table' }, TableMediaCombos(data))
               )
           ]
