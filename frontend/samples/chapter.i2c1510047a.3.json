@@ -21,25 +21,5 @@
       "type": "chart_non_purchase",
       "source": "/api/evaluations/i2c1510047a/dataset/4"
     }]
-  }, {
-    "type": "section",
-    "title": "Gallery",
-    "page_break": true,
-    "content": [{
-      "type": "gallery",
-      "content": [{
-        "width": "",
-        "height": "",
-        "url": "/images/gallery_sample_1.jpg"
-      }, {
-        "width": "",
-        "height": "",
-        "url": "/images/gallery_sample_2.jpg"
-      }, {
-        "width": "",
-        "height": "",
-        "url": "/images/gallery_sample_3.jpg"
-      }]
-    }]
   }]
 }
