@@ -33,7 +33,7 @@ const Item = ({ data }) => {
 
   const date = B(
     { className: style.item_date },
-    `${fmtDate(data.start_date)} - ${fmtDate(data.end_date)}`
+    `${fmtDate(data.date_start)} - ${fmtDate(data.date_end)}`
   )
 
   const view = Link({

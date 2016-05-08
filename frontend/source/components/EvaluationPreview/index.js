@@ -79,9 +79,9 @@ const Intro = ({ evaluation }) => {
   const titleWrap = B({ className: style.splash_intro_title_wrap }, title, subtitle)
   const titleBox = B({ className: style.splash_intro_title_box }, titleWrap)
   const dates = B({ className: style.splash_intro_date },
-    fmtDate(evaluation.start_date),
+    fmtDate(evaluation.date_start),
     ' - ',
-    fmtDate(evaluation.end_date)
+    fmtDate(evaluation.date_end)
   )
 
   return B({ className: style.splash_intro, key: 'intro' }, titleBox, dates)

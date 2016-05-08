@@ -7,7 +7,7 @@ import style from './style.css'
 
 
 const ChartSales = ({ data }) => {
-  const dates = data.map(i => i.start_date)
+  const dates = data.map(i => i.date_start)
   const exposed = data.map(i => parseFloat(i.exposed))
   const control = data.map(i => parseFloat(i.control))
 

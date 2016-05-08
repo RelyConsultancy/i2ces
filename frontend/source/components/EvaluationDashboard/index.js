@@ -74,8 +74,8 @@ const Links = ({ evaluation }) => {
 
 const Date = ({ evaluation }) => B(
   { className: style.date },
-  B({ className: style.date_value }, `Start: ${fmtDate(evaluation.start_date)}`),
-  B({ className: style.date_value }, `End: ${fmtDate(evaluation.end_date)}`)
+  B({ className: style.date_value }, `Start: ${fmtDate(evaluation.date_start)}`),
+  B({ className: style.date_value }, `End: ${fmtDate(evaluation.date_end)}`)
 )
 
 
