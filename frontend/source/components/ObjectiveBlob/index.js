@@ -5,7 +5,7 @@ import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
 
 const MapText = (label, unit) => {
     
-    const output = '';
+    let output = '';
     
     switch (label.toLowerCase()) {
         
