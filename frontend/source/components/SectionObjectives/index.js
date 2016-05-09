@@ -5,6 +5,8 @@ import ObjectiveBlob from '/components/ObjectiveBlob'
 
 const Objectives2 = ({ items }) => {
   
+  console.log(items)
+  
   const count = items.length
   const rows = []  
   
