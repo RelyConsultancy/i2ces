@@ -84,11 +84,11 @@ b.i2c_objectives_list {
 }
 
 b.i2c_objective_title {
-    font-size: 1.2em;
+    font-size: 1.2rem;
 }
 
 b.i2c_objective_value {
-    font-size: 1.6em;
+    font-size: 1.6rem;
 }
 
 b.i2c_objective_blob_inner {
