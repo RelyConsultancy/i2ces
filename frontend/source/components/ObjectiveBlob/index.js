@@ -24,6 +24,30 @@ const MapText = (label, unit) => {
         case 'grow share of category':
             output = 'Uplift in share of category';
             break;
+        case 'grow customer product range (cross sell)':
+            output = 'Uplift in cross sell';
+            break;
+        case 'retain existing customer':
+            output = 'Customers retained';
+            break;
+        case 'grow spend per existing customer':
+            output = 'Existing customer spend uplift';
+            break;
+        case 'grow frequency of shop per customer':
+            output = 'Uplift in purchase frequency';
+            break;    
+        case 'grow total category':
+            output = 'Category sales uplift';
+            break;    
+        case 'retain new customers (trialists)':
+            output = 'Uplift in trialists';
+            break;   
+        case 'retain lapsing customers':
+            output = 'Uplift in lapsed customers';
+            break; 
+        case 'grow units per existing customer':
+            output = 'Existing customer unit uplift';
+            break;   
         default:
             output = label;
             break;
