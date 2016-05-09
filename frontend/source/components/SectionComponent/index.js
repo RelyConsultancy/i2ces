@@ -192,6 +192,16 @@ export default Component({
             })
       break
       
+      case 'chart_grow_awareness':
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ObjectiveGrowAwareness({ component }),
+            })
+      break
+      
       case 'table_performance_samples':
         return TablePerformanceSamples({ component })
       break

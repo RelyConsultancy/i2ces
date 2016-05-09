@@ -38,10 +38,7 @@ and open the template in the editor.
   color: #45678E;
 }
 .result_value {
-  position: absolute;
-  right: 1rem;
-  bottom: .25rem;
-  font-size: 1.4em;
+    font-size: 1.4em;
   font-family: 'Archer Bold', serif;
 }
 
