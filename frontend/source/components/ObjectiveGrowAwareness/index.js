@@ -22,12 +22,10 @@ export default Component({
   },
   render () {
     const { data } = this.state
-
+    console.log(data);
+    
     if (!data) return null
 
-    const samples = TableSamples({ data: data.sku_details })
-    const uplift = TableUplift({ data: data.incremental_uplift })
-
-    return B({ className: style.component }, samples, uplift)
+    return B({ className: style.component })
   }
 })
