@@ -39,6 +39,6 @@ export default Component({
       return B({ className: style.list_item }, item.label, listValue)
     })
     */
-    return B({ className: style.list }, header, Objectives2(component.items))
+    return B({ className: style.list }, header, Objectives2(component))
   }
 })
