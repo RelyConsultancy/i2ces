@@ -5,7 +5,6 @@ import ObjectiveBlob from '/components/ObjectiveBlob'
 
 const Objectives2 = ({ items }) => {
   
-  const title = B({ className: style.list_title}, 'Campaign Highlights')
   const count = items.length
   const rows = []  
   
@@ -21,7 +20,7 @@ const Objectives2 = ({ items }) => {
       rows.push(B({className: 'i2c_objective_list_row_wrapper'}, B({className: 'i2c_objective_list_row' }, items.splice(0,splice))))
   }
   
-  return B({ className: style.list }, title, B({ className: 'i2c_objectives_list' }, rows))
+  return B({ className: style.list }, B({ className: 'i2c_objectives_list' }, rows))
   
 }
 
