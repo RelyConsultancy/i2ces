@@ -3,10 +3,41 @@ import style from './style.css'
 import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
 
 
+const MapText = (label, unit) => {
+    
+    const output = '';
+    
+    switch (label.toLowerCase()) {
+        
+        case 'overview':
+            if (unit.toLowerCase() == 'units') {
+                output = 'Unit uplift';
+            }
+            if (unit.toLowerCase() == 'gbp') {
+                output = 'Sales uplift';
+            }
+            break;
+        case 'acquire new customers':
+        case 'launch new product':
+            output = 'New customers';
+            break;
+        case 'grow share of category':
+            output = 'Uplift in share of category';
+            break;
+        default:
+            output = label;
+            break;
+         
+    }
+    
+    return output;
+    
+}
+
 const ObjectiveBlob = ({ label, value, unit }) => {
-    console.log()
+    
     value = B({ className: style.result_value }, fmtUnit(value, unit))
-    return B({ className: 'i2c_objective_blob' }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, label), B({ className: 'i2c_objective_value' }, value)));
+    return B({ className: 'i2c_objective_blob' }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, MapText(label, unit)  ), B({ className: 'i2c_objective_value' }, value)));
     //return B({ className: style.result_label, key: index }, label, value)
     
 }
