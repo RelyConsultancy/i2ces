@@ -11,6 +11,7 @@ import ChartLaunchNewProduct from '/components/ChartLaunchNewProduct'
 import ChartRetainNewCustomers from '/components/ChartRetainNewCustomers'
 import ChartGrowSpendPerExistingCustomer from '/components/ChartGrowSpendPerExistingCustomer'
 import ChartGrowFrequencyOfSharePerCustomer from '/components/ChartGrowFrequencyOfSharePerCustomer'
+import ObjectiveGrowAwareness from '/components/ObjectiveGrowAwareness'
 
 import ChartNonPurchase from '/components/ChartNonPurchase'
 import ChartOfferSales from '/components/ChartOfferSales'
