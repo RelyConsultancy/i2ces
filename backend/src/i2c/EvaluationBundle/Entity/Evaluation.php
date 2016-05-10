@@ -158,7 +158,7 @@ class Evaluation
      * @ORM\Column(type="datetime", name="start_date")
      *
      * @JMS\Groups({"list"})
-     * @JMS\SerializedName("start_date")
+     * @JMS\SerializedName("date_start")
      * @JMS\Type("DateTime<'Y-m-d'>")
      */
     protected $startDate;
@@ -169,7 +169,7 @@ class Evaluation
      * @ORM\Column(type="datetime", name="end_date")
      *
      * @JMS\Groups({"list"})
-     * @JMS\SerializedName("end_date")
+     * @JMS\SerializedName("date_end")
      * @JMS\Type("DateTime<'Y-m-d'>")
      */
     protected $endDate;
