@@ -5,9 +5,10 @@
   "title": "Summary",
   "content": [{
     "type": "section",
+    "access": "readonly",
     "title": "Performance",
     "content": [{
-      "type": "list_value",
+      "type": "objectives",
       "label": "Campaign Objectives",
       "items": [{
         "label": "Total Sales Uplift",
@@ -24,22 +25,14 @@
     }]
   }, {
     "type": "section",
-    "title": "Objectives",
-    "content": [{
-      "type": "summary_objectives",
-      "content": [{
-        "objective": "Launch new product",
-        "summary": "<p> html here </p>",
-        "recommendation": "<p> html here </p>"
-      }]
-    }]
-  }, {
-    "type": "section",
+    "access": "editable",
     "title": "Insight",
     "content": [{
-      "type": "info",
-      "info": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>",
-      "comment": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      "type": "html",
+      "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>"
+    }, {
+      "type": "comment",
+      "content": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
     }]
   }]
 }

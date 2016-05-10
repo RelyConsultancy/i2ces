@@ -3,5 +3,13 @@
   "order": 6,
   "state": "visible",
   "title": "Appendix",
-  "content": []
+  "content": [{
+    "type": "section",
+    "access": "editable",
+    "title": "Appendix",
+    "content": [{
+      "type": "html",
+      "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
+    }]
+  }]
 }

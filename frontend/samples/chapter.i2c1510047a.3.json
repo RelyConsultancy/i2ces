@@ -5,6 +5,7 @@
   "title": "Sampling Performance",
   "content": [{
     "type": "section",
+    "access": "editable",
     "title": "Booking",
     "content": [{
       "type": "html",
@@ -12,8 +13,8 @@
     }]
   }, {
     "type": "section",
-    "page_break": true,
     "title": "Performance",
+    "access": "editable",
     "content": [{
       "type": "table_performance_samples",
       "source": "/api/evaluations/i2c1510047a/dataset/3"

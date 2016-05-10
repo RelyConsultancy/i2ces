@@ -1,26 +1,30 @@
 {
+  "id": 2 ,
+  "order": 2,
+  "state": "visible",
+  "title": "Campaign Background",
   "content": [{
     "type": "section",
-    "title": "Background",
     "access": "editable",
+    "title": "Background",
     "content": [{
       "type": "html",
       "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
     }]
   }, {
     "type": "section",
+    "access": "readonly",
     "title": "Campaign Objectives",
-    "access": "editable",
     "content": [{
       "type": "list",
       "items": ["Grow total units", "Acquire new customers"]
     }]
   }, {
     "type": "section",
-    "title": "Timings",
     "access": "readonly",
+    "title": "Timings",
     "content": [{
-      "type": "list_timings",
+      "type": "timings",
       "items": [{
         "label": "pre",
         "date_start": "2015-08-04",
@@ -37,10 +41,10 @@
     }]
   }, {
     "type": "section",
-    "title": "Evaluated Channels",
     "access": "readonly",
+    "title": "Evaluated Channels",
     "content": [{
-      "type": "list_channels",
+      "type": "channels",
       "items": [{
         "label": "Instore Sampling",
         "type": "sampling"
@@ -54,14 +58,15 @@
     }]
   }, {
     "type": "section",
-    "title": "Evaluated Cost",
     "access": "readonly",
+    "title": "Evaluated Cost",
     "content": [{
       "type": "list",
       "items": ["GBP 37600"]
     }]
   }, {
     "type": "section",
+    "access": "readonly",
     "title": "Offer SKUs",
     "content": [{
       "type": "list",
@@ -69,8 +74,8 @@
     }]
   }, {
     "type": "section",
-    "title": "Media Laydown",
     "access": "readonly",
+    "title": "Media Laydown",
     "content": [{
       "type": "chart_media_laydown",
       "items": [{
@@ -124,9 +129,5 @@
         "label": "Evaluated media"
       }]
     }]
-  }],
-  "id": 2 ,
-  "title": "Campaign Background",
-  "state": "visible",
-  "order": 2
+  }]
 }

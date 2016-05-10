@@ -5,23 +5,28 @@
   "title": "Category Context",
   "content": [{
     "type": "section",
-    "page_break": true,
     "title": "Period on period sales performance",
+    "access": "editable",
     "content": [{
+      "type": "info",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }, {
       "type": "chart_sales_performance",
-      "source": "/api/evaluations/i2c1510047a/dataset/1",
-      "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "source": "/api/evaluations/i2c1510047a/dataset/1"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     }]
   }, {
     "type": "section",
-    "page_break": true,
+    "access": "editable",
     "title": "Promotional activity during campaign",
     "content": [{
+      "type": "info",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }, {
       "type": "chart_promotional_activity",
       "source": "/api/evaluations/i2c1510047a/dataset/2",
-      "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      "info": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       "timings": [{
         "label": "pre",
         "date_start": "2015-07-13",
@@ -35,9 +40,13 @@
         "date_start": "2015-09-21",
         "date_end": "2015-12-17"
       }]
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     }]
   }, {
     "type": "section",
+    "access": "editable",
     "title": "Product definitions",
     "content": [{
       "type": "html",
