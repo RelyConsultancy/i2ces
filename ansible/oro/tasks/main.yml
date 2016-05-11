@@ -1,3 +1,6 @@
+- name: Make sure there is no wrong php binary
+  file: path=/usr/bin/php state=absent
+
 - name: Create php link
   file: src=/usr/bin/php56 dest=/usr/bin/php state=link
 
