@@ -57,3 +57,8 @@ phantomjs_version: "phantomjs-2.1.1"
 # Poppler/pdfunite variables
 
 poppler_version: "poppler-0.42.0"
+
+# RH epel config
+
+epel_repo_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+epel_repo_gpg_key_url: "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
