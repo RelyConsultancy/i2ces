@@ -1,4 +1,4 @@
-import { Component, B } from '/components/component.js'
+import { Component, B, Table, TR, TD } from '/components/component.js'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
