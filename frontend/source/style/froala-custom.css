@@ -11,3 +11,8 @@ table.tbl-insight-recommendation tr td:first-child {
 table.tbl-insight-recommendation tr td:last-child {
     background: rgba(63, 124, 192, 0.75);
 }
+
+table.tbl-insight-recommendation tr:first-child td {
+    font-size: 20px;
+    text-align: center;
+}
