@@ -1,11 +1,11 @@
-table.insight-recommendation td {
+table.tbl-insight-recommendation td {
     border: 3px solid #ffffff;
     padding: 3px 10px;
 }
 
-table.insight-recommendation tr td:first-child {
+table.tbl-insight-recommendation tr td:first-child {
     background: rgb(63, 124, 192);
 }
-table.insight-recommendation tr td:last-child {
+table.tbl-insight-recommendation tr td:last-child {
     background: rgba(63, 124, 192, 0.75);
 }
