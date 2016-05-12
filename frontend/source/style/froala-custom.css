@@ -1,6 +1,8 @@
 table.tbl-insight-recommendation td {
-    border: 3px solid #ffffff;
+    border: 3px solid #ffffff!important;
     padding: 3px 10px;
+    color: #FFFFFF;
+    font-family: 'Archer Medium', serif;
 }
 
 table.tbl-insight-recommendation tr td:first-child {
