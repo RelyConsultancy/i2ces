@@ -3,7 +3,7 @@ import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import d3 from 'd3'
 import style from './style.css'
-
+import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
 
 // a factory function for the chart
 const ChartGrowTotalUnits = (data) => {
