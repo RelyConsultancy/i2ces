@@ -59,8 +59,8 @@ class PromotionalActivity implements ExtractInterface
     public function getTableData($cid)
     {
         return sprintf(
-            'SELECT week_commencing as start_date, product as product, pr_results as results from
-             ie_promo_data where master_campaign_id = \'%s\'
+            'SELECT week_commencing AS start_date, product AS product, pr_results AS results from
+             ie_promo_data WHERE master_campaign_id = \'%s\'
             ',
             $cid
         );

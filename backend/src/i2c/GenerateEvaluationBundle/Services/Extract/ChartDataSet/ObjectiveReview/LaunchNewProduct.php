@@ -36,7 +36,7 @@ class LaunchNewProduct implements ExtractInterface
     {
         $result = [];
         $methods = get_class_methods($this);
-        foreach ($methods as $method) {
+        foreach ($methods as$method) {
             if ('get' !== substr($method, 0, 3)) {
                 continue;
             }

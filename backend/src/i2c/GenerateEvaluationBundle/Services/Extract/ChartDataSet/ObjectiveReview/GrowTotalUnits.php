@@ -36,7 +36,7 @@ class GrowTotalUnits implements ExtractInterface
     {
         $result = [];
         $methods = get_class_methods($this);
-        foreach ($methods as $method) {
+        foreach ($methods as$method) {
             if ('get' !== substr($method, 0, 3)) {
                 continue;
             }
@@ -126,7 +126,7 @@ class GrowTotalUnits implements ExtractInterface
     public function getTotal($cid)
     {
         return sprintf(
-            'SELECT SUM(uplift) AS uplift, SUM(pct_uplift) AS percentage_uplift
+            'SELECT SUM(uplift) AS uplift, SUM(uplift) / SUM(control) AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
              AND objective=\'Grow total units\'
@@ -137,6 +137,8 @@ class GrowTotalUnits implements ExtractInterface
             $cid
         );
     }
+    
+    
 
     /**
      * Returns an array with start and end dates for pre timings.

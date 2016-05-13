@@ -36,7 +36,7 @@ class GrowShareOfCategory implements ExtractInterface
     {
         $result = [];
         $methods = get_class_methods($this);
-        foreach ($methods as $method) {
+        foreach ($methods as$method) {
             if ('get' !== substr($method, 0, 3)) {
                 continue;
             }
@@ -104,7 +104,7 @@ class GrowShareOfCategory implements ExtractInterface
     public function getDuringCombinations($cid)
     {
         return sprintf(
-            'SELECT r.media_type AS media_type, r.uplift AS uplift, r.pct_uplift AS percentage_uplift, r.control as control, e.exposed AS exposed
+            'SELECT r.media_type AS media_type, r.uplift AS uplift, r.pct_uplift AS percentage_uplift, r.control AS control, e.exposed AS exposed
              FROM ie_results_data AS r
              JOIN ie_exposed_data AS e ON e.media_type=r.media_type
              AND e.master_campaign_id=r.master_campaign_id
