@@ -28,10 +28,30 @@ i2c_evaluation.get_evaluation_chapter_by_id:
     methods: [GET]
     defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:getChapterById }
 
-i2c_evaluation.get_evaluation_pdf:
+i2c_evaluation.get_permanent_evaluation_pdf:
     path: /api/evaluations/{evaluationCid}/pdf
     methods: [GET]
     defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:getPdf }
+
+i2c_evaluation.get_temporary_evaluation_pdf:
+    path: /api/evaluations/{evaluationCid}/pdf/temporary
+    methods: [GET]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:getTemporaryPdf }
+
+i2c_evaluation.generate_evaluation_pdf:
+    path: /api/pdf/temporary/{evaluationCid}
+    methods: [GET]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:generateTemporaryPdf }
+
+i2c_evaluation.mark_pdf_as_permanent:
+    path: /api/pdf/permanent/{evaluationCid}
+    methods: [POST]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:markPdfAsPermanent }
+
+i2c_evaluation.mark_pdf_as_permanent_with_publish:
+    path: /api/pdf/permanent/{evaluationCid}/publish
+    methods: [POST]
+    defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:markPdfAsPermanentWithPublish }
 
 i2c_evaluation.update_evaluation_chapter:
     path: /api/evaluations/{evaluationCid}/chapters/{chapterId}

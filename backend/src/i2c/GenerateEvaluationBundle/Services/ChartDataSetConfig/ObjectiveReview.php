@@ -115,6 +115,10 @@ class ObjectiveReview implements ChartDataSetConfigInterface
                 "twig_name"    => "weekly-units-sold-exposed-and-control.json.twig",
                 "data_service" => "extract_chart_data_set_weekly_units_sold_exposed_and_control",
             ],
+            "weekly_units_sold_exposed_and_control_table" => [
+                "twig_name"    => "weekly-units-sold-exposed-and-control-table.json.twig",
+                "data_service" => "extract_chart_data_set_weekly_units_sold_exposed_and_control",
+            ],
         ];
     }
 
@@ -182,6 +186,10 @@ class ObjectiveReview implements ChartDataSetConfigInterface
         return [
             "grow_total_category" => [
                 "twig_name"    => "grow-total-category.json.twig",
+                "data_service" => "extract_chart_data_set_grow_total_category",
+            ],
+            "grow_total_category_table" => [
+                "twig_name"    => "grow-total-category-table.json.twig",
                 "data_service" => "extract_chart_data_set_grow_total_category",
             ],
         ];

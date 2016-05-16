@@ -8,11 +8,12 @@ use i2c\EvaluationBundle\Services\Chapter as ChapterService;
 use i2c\EvaluationBundle\Services\ChartDataSetDatabaseManager;
 use i2c\EvaluationBundle\Services\Evaluation as EvaluationService;
 use i2c\EvaluationBundle\Services\EvaluationDataBaseManager;
-use i2c\GeneratePdfBundle\Services\EvaluationQueue;
+use i2c\GeneratePdfBundle\Services\GenerateEvaluationPdf;
 use i2c\ImageUploadBundle\Services\UploadedImageQueue;
 use Monolog\Logger;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\UserBundle\Entity\User;
+use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -162,8 +163,6 @@ class EvaluationController extends RestApiController
 
         $evaluation = $this->getEvaluationService()->updateEvaluation($evaluation);
 
-        $this->getEvaluationPdfQueueService()->insertToQueue($evaluation->getCid());
-
         return $this->success($evaluation, Response::HTTP_OK, ['list']);
     }
 
@@ -218,6 +217,124 @@ class EvaluationController extends RestApiController
      * @param string $evaluationCid
      *
      * @return Response
+     *
+     * @Acl(
+     *     id="evaluation_pdf_temporary",
+     *     type="entity",
+     *     class="i2cEvaluationBundle:Evaluation",
+     *     permission="EDIT"
+     * )
+     */
+    public function generateTemporaryPdfAction($evaluationCid)
+    {
+        /** @var Evaluation $evaluation */
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+
+        if (is_null($evaluation)) {
+            return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+        }
+
+        $generatePdfService = $this->getGeneratePdfService();
+
+        $markers = $this->getRequest()->get('markers');
+
+        $evaluation->setPdfMarkers($markers);
+        $this->getEvaluationService()->updateEvaluation($evaluation);
+
+        $cookie = $this->getRequest()->headers->get('cookie', null);
+
+        if (is_null($cookie)) {
+            return $this->clientFailure('No cookie set', []);
+        }
+
+        $evaluation = $generatePdfService->generatePdf($evaluation, $cookie, $markers);
+
+        return $this->getPdfFileResponse($evaluation->getTemporaryPdfPath(), $evaluation);
+    }
+
+    /**
+     * @param string $evaluationCid
+     *
+     * @return Response
+     */
+    public function markPdfAsPermanentAction($evaluationCid)
+    {
+        try {
+            /** @var Evaluation $evaluation */
+            $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+
+            if (is_null($evaluation)) {
+                return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+            }
+
+            if (is_null($evaluation->getTemporaryPdfPath())) {
+                return $this->notFound(sprintf('Temporary PDF was not found for the evaluation %s', $evaluationCid));
+            }
+
+            $newPdfPath = sprintf(
+                '%s/%s.pdf',
+                $this->getParameter('pdf_output_folder'),
+                $evaluation->getCid()
+            );
+
+            $fileSystem = new Filesystem();
+            $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath);
+
+            $evaluation->setLatestPdfPath($newPdfPath);
+            $evaluation->setTemporaryPdfPath(null);
+
+            $this->getEvaluationService()->updateEvaluation($evaluation);
+
+            return $this->success($evaluation);
+        } catch (IOException $ex) {
+            return $this->serverFailure("An error occurred, please try again later");
+        }
+    }
+
+    /**
+     * @param string $evaluationCid
+     *
+     * @return Response
+     */
+    public function markPdfAsPermanentWithPublishAction($evaluationCid)
+    {
+        try {
+            /** @var Evaluation $evaluation */
+            $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+
+            if (is_null($evaluation)) {
+                return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+            }
+
+            if (is_null($evaluation->getTemporaryPdfPath())) {
+                return $this->notFound(sprintf('Temporary PDF was not found for the evaluation %s', $evaluationCid));
+            }
+
+            $newPdfPath = sprintf(
+                '%s/%s.pdf',
+                $this->getParameter('pdf_output_folder'),
+                $evaluation->getCid()
+            );
+
+            $fileSystem = new Filesystem();
+            $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath);
+
+            $evaluation->setLatestPdfPath($newPdfPath);
+            $evaluation->setTemporaryPdfPath(null);
+            $evaluation->publish();
+
+            $this->getEvaluationService()->updateEvaluation($evaluation);
+
+            return $this->success($evaluation);
+        } catch (IOException $ex) {
+            return $this->serverFailure("An error occurred, please try again later");
+        }
+    }
+
+    /**
+     * @param string $evaluationCid
+     *
+     * @return Response
      */
     public function getPdfAction($evaluationCid)
     {
@@ -228,43 +345,24 @@ class EvaluationController extends RestApiController
             return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
         }
 
-        $filesystem = new Filesystem();
-        if (!$filesystem->exists($evaluation->getLatestPdfPath())) {
-            return $this->notFound('PDF was not found');
+        return $this->getPdfFileResponse($evaluation->getLatestPdfPath(), $evaluation);
+    }
+
+    /**
+     * @param string $evaluationCid
+     *
+     * @return Response
+     */
+    public function getTemporaryPdfAction($evaluationCid)
+    {
+        /** @var Evaluation $evaluation */
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+
+        if (is_null($evaluation)) {
+            return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
         }
 
-        $pdf = file_get_contents($evaluation->getLatestPdfPath(), FILE_BINARY);
-
-        $response = new Response();
-
-        $response->headers->set('Content-Type', 'mime/type');
-        $response->headers->set(
-            'Content-Disposition',
-            sprintf(
-                'attachment;filename="%s - version %s.pdf"',
-                $evaluation->getDisplayName(),
-                $evaluation->getVersionNumber()
-            )
-        );
-
-        $response->setContent($pdf);
-
-        /** @var Logger $logger */
-        $logger = $this->get('logger');
-
-        /** @var User $loggedInUser */
-        $loggedInUser = $this->getUser();
-
-        $logger->addInfo(
-            sprintf(
-                '[PDF Download]User with id %s and username %s downloaded the pdf %s',
-                $loggedInUser->getId(),
-                $loggedInUser->getUsername(),
-                $evaluation->getLatestPdfPath()
-            )
-        );
-
-        return $response;
+        return $this->getPdfFileResponse($evaluation->getTemporaryPdfPath(), $evaluation);
     }
 
     /**
@@ -308,10 +406,57 @@ class EvaluationController extends RestApiController
     }
 
     /**
-     * @return EvaluationQueue
+     * @return GenerateEvaluationPdf
      */
-    public function getEvaluationPdfQueueService()
+    public function getGeneratePdfService()
     {
-        return $this->get('i2c_generate_pdf.evaluation_queue_service');
+        return $this->get('i2c_generate_pdf.generate_evaluation_pdf_service');
+    }
+
+    /**
+     * @param string     $pdfPath
+     * @param Evaluation $evaluation
+     *
+     * @return Response
+     */
+    protected function getPdfFileResponse($pdfPath, Evaluation $evaluation)
+    {
+        $filesystem = new Filesystem();
+        if (!$filesystem->exists($pdfPath)) {
+            return $this->notFound('PDF was not found');
+        }
+
+        $pdf = file_get_contents($pdfPath, FILE_BINARY);
+
+        $response = new Response();
+
+        $response->headers->set('Content-Type', 'mime/type');
+        $response->headers->set(
+            'Content-Disposition',
+            sprintf(
+                'attachment;filename="%s - version %s.pdf"',
+                $evaluation->getDisplayName(),
+                $evaluation->getVersionNumber()
+            )
+        );
+
+        $response->setContent($pdf);
+
+        /** @var Logger $logger */
+        $logger = $this->get('logger');
+
+        /** @var User $loggedInUser */
+        $loggedInUser = $this->getUser();
+
+        $logger->addInfo(
+            sprintf(
+                '[PDF Download]User with id %s and username %s downloaded the pdf %s',
+                $loggedInUser->getId(),
+                $loggedInUser->getUsername(),
+                $evaluation->getLatestPdfPath()
+            )
+        );
+
+        return $response;
     }
 }

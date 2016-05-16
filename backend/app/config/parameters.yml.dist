@@ -30,6 +30,10 @@ parameters:
     websocket_backend_host:  "*"        # Websocket host the application server will connect to
     websocket_backend_port:  8080       # Websocket port the application server will connect to
 
+    pdf_delay: 2000
+    pdf_output_folder: /var/www/html/pdfs
+    pdf_node_js_command: phantomjs /var/www/html/frontend/pdf_phantom.js
+
     session_handler:        session.handler.native_file
 
     locale:                 en
@@ -40,8 +44,3 @@ parameters:
      # null        - the assets version stays unchanged
      # time_hash   - a hash of the current time
      # incremental - the next assets version is the previous version is incremented by one (e.g. 'ver1' -> 'ver2' or '1' -> '2')
-    
-
-    # User Params
-    master_user:    user
-    master_pass:    pass

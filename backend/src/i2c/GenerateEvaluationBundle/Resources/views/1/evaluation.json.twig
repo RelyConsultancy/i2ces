@@ -3,8 +3,8 @@
     "title": "{{ general_data[0]['title'] }}",
     "category": "{{ general_data[0]['category'] }}",
     "brand": "{{ general_data[0]['brand'] }}",
-    "start_date": "{{ date(start_date[0]['date'])|date("Y-m-d") }}",
-    "end_date": "{{ date(end_date[0]['date'])|date("Y-m-d") }}",
+    "date_start": "{{ date(start_date[0]['date'])|date("Y-m-d") }}",
+    "date_end": "{{ date(end_date[0]['date'])|date("Y-m-d") }}",
     "generated_at": "{{ date('now')|date("Y-m-d H:i:s") }}",
     "chapters": []
 }

@@ -1,48 +1,11 @@
 {% autoescape false %}
-{
-    "table": {
-        "during": {
-            "uplift": "{{ during[0].uplift }}",
-            "percentage_uplift": "{{ during[0].percentage_uplift * 100 }}"
-        },
-        "post": {
-            "uplift": {% if post[0] is defined %}"{{ post[0].uplift }}",{% else %}null,{% endif %}
-            "percentage_uplift": {% if post[0] is defined %}"{{ post[0].percentage_uplift * 100 }}"{% else %}null{% endif %}
-        },
-        "total": {
-            "uplift": "{{ total[0].uplift }}",
-            "percentage_uplift": "{{ total[0].percentage_uplift * 100 }}"
-        }
-    },
-    "chart": [
-        {% for item in data %}
-        {
-            "start_date": "{{ item.start_date }}",
-            "exposed": "{{ item.exposed }}",
-            "control": "{{ item.control }}"
-        }
-        {{ not loop.last ? ',' }}
-        {% endfor %}
-    ],
-    "timings": [
-        {
-            "label": "pre",
-            "date_start": "{{ timing_pre[0].start_date }}",
-            "date_end": "{{ timing_pre[0].end_date }}"
-        },
-        {
-            "label": "during",
-            "date_start": "{{ timing_during[0].start_date }}",
-            "date_end": "{{ timing_during[0].end_date }}"
-        }
-        {% if timing_post[0] is defined %}
-        ,
-        {
-            "label": "post",
-            "date_start": "{{ timing_post[0].start_date }}",
-            "date_end": "{{ timing_post[0].end_date }}"
-        }
-        {% endif %}
-    ]
-}
+[
+    {% for item in data %}
+    {
+        "date_start": "{{ item.start_date }}",
+        "exposed": "{{ item.exposed }}",
+        "control": "{{ item.control }}"
+    }{{ not loop.last ? ',' }}
+    {% endfor %}
+]
 {% endautoescape %}
