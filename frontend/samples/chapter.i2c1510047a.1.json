@@ -12,7 +12,7 @@
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     }, {
       "type": "chart_sales_performance",
-      "source": "/api/evaluations/i2c1510047a/dataset/1"
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_sales_performance"
     }, {
       "type": "comment",
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -26,7 +26,7 @@
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     }, {
       "type": "chart_promotional_activity",
-      "source": "/api/evaluations/i2c1510047a/dataset/2",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_promotional_activity",
       "timings": [{
         "label": "pre",
         "date_start": "2015-07-13",

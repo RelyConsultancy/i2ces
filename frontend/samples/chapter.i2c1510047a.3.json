@@ -17,10 +17,10 @@
     "access": "editable",
     "content": [{
       "type": "table_performance_samples",
-      "source": "/api/evaluations/i2c1510047a/dataset/3"
+      "source": "/api/evaluations/i2c1510047a/dataset/table_performance_samples"
     }, {
       "type": "chart_non_purchase",
-      "source": "/api/evaluations/i2c1510047a/dataset/4"
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_non_purchase"
     }]
   }]
 }

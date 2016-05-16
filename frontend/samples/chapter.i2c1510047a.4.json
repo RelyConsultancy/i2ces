@@ -12,7 +12,10 @@
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     }, {
       "type": "chart_offer_sales",
-      "source": "/api/evaluations/i2c1510047a/dataset/5"
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_offer_sales"
+    }, {
+      "type": "table_offer_sales",
+      "source": "/api/evaluations/i2c1510047a/dataset/table_offer_sales"
     }, {
       "type": "comment",
       "content": ""
@@ -26,7 +29,7 @@
       "content": ""
     }, {
       "type": "chart_units_uplift",
-      "source": "/api/evaluations/i2c1510047a/dataset/6"
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_units_uplift"
     }, {
       "type": "comment",
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."

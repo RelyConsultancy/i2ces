@@ -1,0 +1,14 @@
+{
+  "during": {
+    "uplift": "4873.303910",
+    "percentage_uplift": "0.505005"
+  },
+  "post": {
+    "uplift": "4000.062567",
+    "percentage_uplift": "0.062567"
+  },
+  "total": {
+    "uplift": "52734.711768",
+    "percentage_uplift": "0.567572"
+  }
+}
