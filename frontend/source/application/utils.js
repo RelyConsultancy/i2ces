@@ -1,4 +1,5 @@
 import moment from 'moment'
+import qs from 'qs'
 import { B } from '/components/component.js'
 
 
@@ -23,6 +24,12 @@ export const getUnique = (array) => (
     array.indexOf(value) === index
   ))
 )
+
+export const forEach = (list, handler) => {
+  for (let i = 0; i < list.length; ++i) {
+    handler(list[i], i)
+  }
+}
 
 
 export const getInitials = (string) => (
@@ -80,6 +87,13 @@ export const fmtUnit = (value, unit = "") => {
   }
 
   return value
+}
+
+
+export const getURLQuery = (hash) => {
+  const query = location.hash.split('?')[1]
+
+  return query ? qs.parse(query) : {}
 }
 
 

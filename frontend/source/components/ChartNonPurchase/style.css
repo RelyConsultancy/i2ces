@@ -1,7 +1,5 @@
 .chart {
-  display: inline-block;
-  width: 50%;
-  vertical-align: top;
+  position: relative;
 }
 
 .header {

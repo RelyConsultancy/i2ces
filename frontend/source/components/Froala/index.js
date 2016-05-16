@@ -58,12 +58,10 @@ export default Component({
     this.editor.froalaEditor('destroy')
   },
   render () {
-    const attrs = {
-      className: 'froala-editor',
+    return B({
+      className: this.props.className || 'froala-editor',
       style: this.props.style,
       ref: 'container',
-    }
-
-    return B(attrs)
+    })
   }
 })

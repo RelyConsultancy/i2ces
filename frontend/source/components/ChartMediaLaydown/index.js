@@ -14,37 +14,34 @@ const colors = [
 ]
 
 
-export default Component({
-  render () {
-    const { component } = this.props
-    const { items } = component
-    const types = getUnique(items.map(i => i.type)).sort()
-    const labels = getUnique(items.map(i => i.label))
-    const palette = {}
+export default ({ component }) => {
+  const { items } = component
+  const types = getUnique(items.map(i => i.type)).sort()
+  const labels = getUnique(items.map(i => i.label))
+  const palette = {}
 
-    types.forEach((type, index) => {
-      palette[type] = colors[index]
-    })
+  types.forEach((type, index) => {
+    palette[type] = colors[index]
+  })
 
-    const chart = Chart({
-      palette,
-      type: 'gantt',
-      data: items,
-      tickFormat: '%d %b',
-      style: { height: (labels.length * 2 + 4) + 'em' },
-      className: style.chart,
-    })
+  const chart = Chart({
+    palette,
+    type: 'gantt',
+    data: items,
+    tickFormat: '%d %b',
+    style: { height: (labels.length * 2 + 4) + 'em' },
+    className: style.chart,
+  })
 
-    const legend = B({ className: style.legend }, types.map((type, key) => {
-      const color = B({ className: style.legend_color, style: {
-        backgroundColor: colors[key]
-      }})
+  const legend = B({ className: style.legend }, types.map((type, key) => {
+    const color = B({ className: style.legend_color, style: {
+      backgroundColor: colors[key]
+    }})
 
-      const label = component.legend.filter(i => i.type == type).shift().label
+    const label = component.legend.filter(i => i.type == type).shift().label
 
-      return B({ key, className: style.legend_label }, color, label)
-    }))
+    return B({ key, className: style.legend_label }, color, label)
+  }))
 
-    return B({ className: style.component }, chart, legend)
-  }
-})
+  return B({ className: style.component }, chart, legend)
+}

@@ -1,5 +1,6 @@
 .component {
   position: relative;
+  font-size: .875rem;
 }
 
 .loading {
@@ -20,7 +21,6 @@
   top: 50%;
   left: 0;
   transform: translate(-40%, -180%) rotate(-90deg);
-  font-size: .875rem;
   font-family: 'Archer Bold', serif;
   color: #6D6D6D;
 }
@@ -39,11 +39,10 @@
 
 .table {
   position: relative;
-  margin-bottom: 1rem;
   padding-left: 4rem;
 }
 .table td {
-  padding: .5rem 0;
+  padding: .25em 0;
   font-size: .875em;
   font-family: 'Avenir LT Std 95 Black Oblique';
   text-align: center;
@@ -55,9 +54,10 @@
   top: 0;
   bottom: 0;
   width: 4rem;
+  line-height: 1rem;
+  font-size: .675rem;
 }
 .table_labels > b {
-  padding: .75em 0;
   height: 2.5rem;
   font-size: .75em;
   overflow: hidden;

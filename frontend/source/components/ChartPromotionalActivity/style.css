@@ -38,13 +38,17 @@
 
 
 .stages {
-  margin-top: 2rem;
+  padding-top: 1rem;
   font-size: .75rem;
   color: #575757;
 }
 .stage {
   text-align: right;
-  margin: .5rem;
+  padding-top: .5rem;
+  padding-right: .5rem;
+}
+.stage:first-child {
+  padding-top: 0;
 }
 .stage_period {
   display: inline-block;

@@ -1,14 +1,4 @@
-.component {
+.html {
   position: relative;
-}
-
-.toggle {
-  position: absolute;
-  right: 0;
-  top: -5em;
-  padding: .5em 1em;
-  color: #FFF;
-  font-size: .75rem;
-  background-color: #5FC3E1;
-  cursor: pointer;
+  font-size: .875rem;
 }

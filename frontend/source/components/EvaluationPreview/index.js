@@ -1,182 +1,181 @@
-import SectionComponent from '/components/SectionComponent'
-import { Component, B, A, Link } from '/components/component.js'
+import { Component, B } from '/components/component.js'
+import PDFViewer from '/components/PDFViewer'
+import setComponent from '/components/EvaluationSection/setComponent.js'
 import * as action from '/application/actions.js'
-import { download } from '/application/http.js'
-import { fmtDate } from '/application/utils.js'
+import { getURLQuery } from '/application/utils.js'
+import store from '/application/store.js'
+import Links from './links.js'
+import PDFIntro from './pdfIntro.js'
+import PDFOutro from './pdfOutro.js'
+import handleMarkers from './handleMarkers.js'
 import style from './style.css'
 
 
-const Links = ({ evaluation }) => {
-  let links = [
-    Link({
-      className: style.link,
-      to: `/evaluations/${evaluation.cid}`,
-    }, 'Back to Evaluation'),
-  ]
+const parseMarkers = (string) => {
+  const markers = {}
 
-  if (evaluation.has_pdf) {
-    const url = `/api/evaluations/${evaluation.cid}/pdf`
+  if (!string) return markers
 
-    links.push(
-      A({
-        className: style.link,
-        href: url,
-        onClick: (event) => {
-          event.preventDefault()
-          download(url, `${evaluation.cid}.pdf`)
-        },
-      }, 'PDF')
-    )
-  }
+  string.split('|').forEach((chapter) => {
+    chapter = chapter.split(':')
 
-  return B({ className: style.links }, ...links)
-}
-
-
-const Chapter = ({ evaluation, chapter, isSplashPage }) => {
-  const byType = (i => i.type == 'section')
-  const isEditable = false
-
-  const sections = chapter.content.filter(byType).map((section) => {
-    const title = B({ className: style.section_title }, section.title)
-    const pageBreak = section.page_break ? style.page_break : ''
-
-    const components = section.content.map((component) => (
-      SectionComponent({ component, isEditable })
-    ))
-
-    const className = `${style.section} ${pageBreak}`
-
-    return B({ className }, title, ...components)
+    markers[chapter[0]] = chapter[1].split(',').map(i => parseInt(i.trim()))
   })
 
-  if (isSplashPage) {
-    sections.unshift(B(
-      { className: style.splash },
-      B({ className: style.splash_title }, chapter.title)
-    ))
+  return markers
+}
+
+
+const stringifyMarkers = (markers) => {
+  let chapters = []
+
+  Object.keys(markers).forEach((chapter) => {
+    chapters.push(`${ chapter }:${ markers[chapter].join(',') }`)
+  })
+
+  return chapters.join('|')
+}
+
+
+const fmtDocument = ({ markers }) => {
+  // wait for all network requests to finish and format pdf
+  setTimeout(function onReady () {
+    const { network } = store.getState().dashboard.flag
+
+    network ? setTimeout(onReady, 500) : handleMarkers({ markers })
+  }, 500)
+}
+
+
+const loadData = ({ cid }, handler) => {
+  let chapters = []
+
+  action.fetchEvaluation({ cid }, (evaluation) => {
+    evaluation.chapters.forEach(({ id }) => {
+      action.fetchChapter({ cid, id }, (chapter) => {
+        chapters.push(chapter)
+
+        // check if all chapters are loaded
+        if (chapters.length == evaluation.chapters.length) {
+          chapters = chapters.sort((a, b) => (a.order > b.order ? 1 : -1))
+
+          handler({ evaluation, chapters })
+        }
+      })
+    })
+  })
+}
+
+
+const Chapter = (chapter) => {
+  const bySection = (i => i.type == 'section')
+  const content = []
+
+  chapter.content.filter(bySection).forEach((section) => {
+    content.push(
+      B({ className: style.section_title }, section.title)
+    )
+
+    section.content.forEach((component) => {
+      content.push(setComponent({ component }))
+    })
+  })
+
+  const chapterTitle = B({ className: style.cover_title }, chapter.title)
+  const chapterCover = B({ className: style.cover }, chapterTitle)
+  const components = B({ className: 'components' }, ...content)
+  const attrs = { className: 'chapter', id: chapter.id }
+
+  return B(attrs, chapterCover, components)
+}
+
+
+const PDF = ({ evaluation, chapters, debug }) => {
+  const intro = PDFIntro({ evaluation })
+  const outro = PDFOutro({ evaluation })
+  const content = B({ className: 'chapters' }, ...chapters.map(Chapter))
+  const attrs = {
+    className: style.pdf + (debug ? ' debug' : ''),
   }
 
-  return B({ className: style.chapter, key: chapter.id }, ...sections)
+  return B(attrs, intro, content, outro)
 }
 
 
-const Intro = ({ evaluation }) => {
-  const channels = evaluation.channels.map(i => i.label).join(', ')
-  const titleSize = evaluation.display_title.length > 40 ? '1.5em' : null
-  const subtitleSize = channels.length > 60 ? '0.875em' : titleSize ? '1em' : null
+const Preview = ({ context }) => {
 
-  const title = B({
-    className: style.splash_intro_title,
-    style: { fontSize: titleSize },
-  }, evaluation.display_title)
-
-  const subtitle = B({
-    className: style.splash_intro_subtitle,
-    style: { fontSize: subtitleSize },
-  }, channels)
-
-  const titleWrap = B({ className: style.splash_intro_title_wrap }, title, subtitle)
-  const titleBox = B({ className: style.splash_intro_title_box }, titleWrap)
-  const dates = B({ className: style.splash_intro_date },
-    fmtDate(evaluation.date_start),
-    ' - ',
-    fmtDate(evaluation.date_end)
-  )
-
-  return B({ className: style.splash_intro, key: 'intro' }, titleBox, dates)
 }
-
-
-
-const Outro = ({ evaluation }) => B(
-  { className: style.splash_outro, key: 'outro' },
-  B({ className: style.splash_title }, 'Thank you')
-)
-
-
-const isIntro = (id) => (id == 'intro')
-const isOutro = (id) => (id == 'outro')
 
 
 export default Component({
-  load () {
-    const { cid, id } =  this.props.params
-    const chapters = []
-
-    // load just the evaluation
-    if (isIntro(id) || isOutro(id)) {
-      action.fetchEvaluation({ cid }, (evaluation) => {
-        this.setState({ evaluation })
-      })
-    }
-    // load just a chapter
-    else if (id) {
-      action.fetchEvaluation({ cid }, (evaluation) => {
-        for (let chapter of evaluation.chapters) {
-          if (chapter.id == id) {
-            action.fetchChapter({ cid, id: chapter.id }, (chapter) => {
-              this.setState({ evaluation, chapters: [chapter] })
-            })
-          }
-        }
-      })
-    }
-    // load all chapters
-    else {
-      action.fetchEvaluation({ cid }, (evaluation) => {
-        for (let chapter of evaluation.chapters) {
-          action.fetchChapter({ cid, id: chapter.id }, (chapter) => {
-            chapters.push(chapter)
-
-            if (chapters.length == evaluation.chapters.length) {
-              this.setState({ evaluation, chapters })
-            }
-          })
-        }
-      })
+  getInitialState () {
+    return {
+      evaluation: null,
+      chapters: null,
+      markers: null,
+      debug: false,
+      isPreview: false,
     }
   },
-  getInitialState () {
-    return { evaluation: null, chapters: null }
+  save (event) {
+    console.log('saving...')
+  },
+  togglePreview () {
+    this.setState({ isPreview: !this.state.isPreview })
   },
   componentDidMount () {
-    this.load()
-  },
-  componentDidUpdate ({ params }) {
-    const { cid, id } =  this.props.params
+    const { cid } =  this.props.params
+    const query = getURLQuery()
+    const debug = query.debug
 
-    if (params.cid != cid || params.id != id) {
-      this.load()
+    loadData({ cid }, ({ evaluation, chapters }) => {
+      const markers = parseMarkers(query.markers || evaluation.pdf_markers)
+
+      this.setState({ evaluation, chapters, markers, debug })
+    })
+  },
+  componentDidUpdate () {
+    const { markers } = this.state
+
+    // initiate PDF spacing format
+    if (markers) {
+      fmtDocument({ markers })
     }
   },
   render () {
-    const { cid, id } = this.props.params
-    const { evaluation, chapters } = this.state
-    const byOrder = (a, b) => (a.order > b.order)
-    const isSplashPage = Boolean(id)
+    const { evaluation, chapters, markers, debug, isPreview } = this.state
 
     let content = B({ className: style.no_data }, 'Loading evaluation ...')
 
-    if (!evaluation) return content
+    if (isPreview) {
+      const preview = PDFViewer({
+        url: `/api/evaluations/${evaluation.cid}/pdf`,
+        className: style.pdf_preview,
+        headers: {
+          // ORO header required
+          'X-CSRF-Header': 1,
+        }
+      })
 
-    if (isIntro(id)) {
-      content = Intro({ evaluation })
-    }
-    else if (isOutro(id)) {
-      content = Outro({ evaluation })
+      const actions = B(
+        { className: style.actions },
+        B({ className: style.action, onClick: this.togglePreview }, 'Close')
+      )
+
+      content = B(preview, actions)
     }
     else if (evaluation && chapters) {
-      content = chapters.sort(byOrder).map((chapter) => (
-        Chapter({ evaluation, chapter, isSplashPage })
-      ))
+      const pdf = PDF({ evaluation, chapters, debug })
 
-      if (chapters.length > 1) {
-        content.unshift(Intro({ evaluation }))
-        content.push(Outro({ evaluation }))
-      }
+      const actions = B(
+        { className: style.actions },
+        B({ className: style.action, onClick: this.togglePreview }, 'Preview'),
+        B({ className: style.action, onClick: this.save }, 'Save')
+      )
+
+      content = B(Links({ evaluation }), pdf, actions)
     }
 
-    return B({ className: style.preview }, Links({ evaluation }), content)
+    return B({ className: style.layout }, content)
   }
 })

@@ -1,5 +1,5 @@
 import scrollIntoView from 'scroll-into-view'
-import SectionComponent from '/components/SectionComponent'
+import Section from '/components/EvaluationSection'
 import { Component, B, Link } from '/components/component.js'
 import { getInitials, slugify } from '/application/utils.js'
 import store from '/application/store.js'
@@ -43,7 +43,8 @@ const Chapters = ({ store, chapter }) => {
 }
 
 
-const Headings = ({ store, chapter, focusedSection, focusSection }) => {
+// Links to chapter sections
+const Headings = ({ store, chapter, focusedSection, setSection }) => {
   const { evaluation, chapter_palette } = store
   const color = chapter_palette[chapter.order - 1]
   const sections = chapter.content.filter(item => item.type == 'section')
@@ -60,7 +61,7 @@ const Headings = ({ store, chapter, focusedSection, focusSection }) => {
         align:{ top: 0, left: 0 }
       })
 
-      focusSection(section)
+      setSection(section)
     },
   }, section.title))
 
@@ -68,7 +69,7 @@ const Headings = ({ store, chapter, focusedSection, focusSection }) => {
 }
 
 
-const Sections = ({ store, chapter, focusedSection, focusSection }) => {
+const Sections = ({ store, chapter, focusedSection, setSection }) => {
   const { evaluation } = store
   const { cid } = evaluation
   const byType = (i => i.type == 'section')
@@ -81,16 +82,9 @@ const Sections = ({ store, chapter, focusedSection, focusSection }) => {
     })
   }
 
-  const sections = chapter.content.filter(byType).map((section) => {
-    const id = slugify(section.title)
-    const title = B({ className: style.section_title }, section.title)
-
-    const components = section.content.map((component) => (
-      SectionComponent({ component, isEditable, uploadPath, onSave })
-    ))
-
-    return B({ id, className: style.section }, title, ...components)
-  })
+  const sections = chapter.content.filter(byType).map((section) => (
+    Section({ section, isEditable, onSave, uploadPath })
+  ))
 
   return B({ className: style.headings_content }, ...sections)
 }
@@ -98,6 +92,7 @@ const Sections = ({ store, chapter, focusedSection, focusSection }) => {
 
 const EvaluationChapter = Component({
   class: true,
+  displayName: 'EvaluationChapter',
   load () {
     const { store, params } = this.props
     const { cid, id } = params
@@ -137,13 +132,13 @@ const EvaluationChapter = Component({
     let content = B({ className: style.no_data }, store.chapter_empty)
 
     if (store.evaluation && chapter) {
-      const focusSection = (section) => { this.setState({ section }) }
+      const setSection = (section) => { this.setState({ section }) }
       const focusedSection = this.state.section
 
       content = B(
         Navigation({ store, params }),
         Chapters({ store, chapter }),
-        Headings({ store, chapter, focusedSection, focusSection }),
+        Headings({ store, chapter, focusedSection, setSection }),
         Sections({ store, chapter, focusedSection })
       )
     }

@@ -115,14 +115,14 @@ export default Component({
   render () {
     const { data } = this.state
 
-    if (data.length) {
-      return B(
-        SalesChart({ data: data.filter(bySales) }),
-        TableSales({ data })
-      )
-    }
-    else {
+    if (!data.length) {
       return B({ className: style.loading }, 'Loading data ...')
     }
+
+    return B(
+      { className: style.component },
+      SalesChart({ data: data.filter(bySales) }),
+      TableSales({ data })
+    )
   }
 })

@@ -31,7 +31,7 @@ export const Component = (source) => {
 
 
 // DOM react elements
-export const B = Element('b')
+export const B = Element('div')
 export const A = Element('a')
 export const Button = Element('button')
 export const Input = Element('input')

@@ -1,0 +1,15 @@
+.list {
+  position: relative;
+  font-size: .875rem;
+}
+.list_item {
+  position: relative;
+  line-height: 1.4rem;
+}
+.list_item::before {
+  content: '●';
+  position: relative;
+  top: -1px;
+  margin-right: .5em;
+  color: #D0D0D0;
+}

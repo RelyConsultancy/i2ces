@@ -37,5 +37,5 @@ export default {
       during: 'Campaign period',
       post: 'Post-period',
     },
-  }
+  },
 }

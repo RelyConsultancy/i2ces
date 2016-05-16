@@ -39,12 +39,12 @@
 }
 .table_data {
   position: relative;
-  margin-left: 4rem;
+  margin-left: 4.5rem;
   margin-right: 4rem;
   border-radius: .25em;
   background-color: #E3F2FD;
 }
-.table_data > b {
+.table_data > * {
   display: inline-block;
   padding: .5rem 0;
   font-size: .75em;
