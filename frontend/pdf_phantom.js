@@ -4,7 +4,6 @@ var Page = require('webpage')
 var url = system.args[1]
 var filepath = system.args[2]
 var headers = system.args[3]
-var delay = system.args[4] || 0
 
 
 var A4 = {
@@ -21,13 +20,15 @@ console.log('Page size:', pageWidth + 'x' + pageHeight)
 
 
 // set request headers
-var customHeaders = {}
+if (headers) {
+  var customHeaders = {}
 
-headers.split('`').forEach(function (string) {
-  var kv = string.trim().split('~')
-  customHeaders[kv[0]] = kv[1]
-  console.log('Header: ' + kv[0] + '=' + kv[1])
-})
+  headers.split('`').forEach(function (string) {
+    var kv = string.trim().split('~')
+    customHeaders[kv[0]] = kv[1]
+    console.log('Header: ' + kv[0] + '=' + kv[1])
+  })
+}
 
 
 var page = Page.create()
@@ -57,15 +58,21 @@ page.open(url, function (status) {
     return
   }
 
-  setTimeout(function () {
-    page.render(filepath, { format: 'pdf', quality: '100' })
-
-    console.log('Rendered PDF to:', filepath)
-
-    phantom.exit()
-  }, delay)
-
-  if (delay) {
-    console.log('Renderer delayed by ' + delay + 'ms')
+  function isLoaded () {
+    return page.evaluate(function () {
+      return window.READY_TO_PRINT
+    })
   }
+
+  function checkIfDone () {
+    if (!isLoaded()) {
+      return setTimeout(checkIfDone, 500)
+    }
+
+    page.render(filepath, { format: 'pdf', quality: '100' })
+    console.log('Rendered PDF to:', filepath)
+    phantom.exit()
+  }
+
+  checkIfDone()
 })

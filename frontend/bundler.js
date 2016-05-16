@@ -4,7 +4,7 @@ import browserify from 'browserify'
 import watchify from 'watchify'
 import babelify from  'babelify'
 import uglify from 'uglify-js'
-import { watch } from 'chokidar'
+import gaze from 'gaze'
 import CSSModules from '@carrd/css-modules'
 import cssify from '@carrd/cssify'
 import LiveReload from 'tiny-lr'
@@ -12,6 +12,7 @@ import autoprefixer from 'autoprefixer'
 import postcss from 'postcss'
 
 
+const getFile = (path) => (path.replace(root, ''))
 const livereload = LiveReload()
 
 livereload.listen(35729, () => {
@@ -71,7 +72,9 @@ const bundleJS = (options) => {
     browserReload(output.replace(__dirname, ''))
   }
 
-  const bundler = watchify(browserify(watchify.args))
+  const bundler = watchify(browserify({ cache: {}, packageCache: {} }), {
+    ignoreWatch: ['**/*.css'],
+  })
 
   bundler.transform(cssify(options.css))
   bundler.transform(babelify.configure({
@@ -108,9 +111,8 @@ const bundleCSS = (options) => {
   const debug = options.debug === false ? false : true
   const { input, output } = options
   const css = CSSModules()
-  const watcher = watch(`${root}/**/*.css`)
 
-  const save = () => {
+  const bundle = () => {
     try {
       css.load(input)
 
@@ -140,23 +142,34 @@ const bundleCSS = (options) => {
     }
   }
 
-  watcher.on('add', (file) => {
-    console.log(`CSS watch: ${file.replace(root, '')}`)
+  gaze(`${root}/**/*.css`, (error, watcher) => {
+    if (error) return console.error(error)
+
+    // initial build
+    bundle()
+
+    watcher.on('added', (path) => {
+      console.log(`CSS watch: ${getFile(path)}`)
+      bundle()
+    })
+
+    watcher.on('changed', (path) => {
+      console.log(`CSS changed: ${getFile(path)}`)
+      bundle()
+    })
   })
-  watcher.on('change', save)
-  watcher.on('ready', save)
 }
 
 
 
 // Bundle assets:
 
-bundleJS({
-  input: `${__dirname}/source/index.js`,
-  output: `${__dirname}/public/assets/bundle.js`,
-})
-
 bundleCSS({
   input: `${__dirname}/source/index.css`,
   output: `${__dirname}/public/assets/bundle.css`,
+})
+
+bundleJS({
+  input: `${__dirname}/source/index.js`,
+  output: `${__dirname}/public/assets/bundle.js`,
 })

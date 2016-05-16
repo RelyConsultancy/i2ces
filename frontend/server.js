@@ -95,7 +95,7 @@ $('post', '/api/evaluations/:cid/chapters/:id', function * (cid, id) {
 
 // get dataset
 $('get', '/api/evaluations/:cid/dataset/:id', function * (cid, id) {
-  const file = `${__dirname}/samples/dataset.${cid}.${id}.json`
+  const file = `${__dirname}/samples/dataset.${id}.json`
 
   this.body = yield loadJSON(file)
 })
