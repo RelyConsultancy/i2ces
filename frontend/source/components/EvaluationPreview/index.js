@@ -149,7 +149,7 @@ export default Component({
 
     if (isPreview) {
       const preview = PDFViewer({
-        url: `/api/evaluations/${evaluation.cid}/pdf`,
+        url: `/api/evaluations/${evaluation.cid}/pdf/temporary`,
         className: style.pdf_preview,
         headers: {
           // ORO header required
