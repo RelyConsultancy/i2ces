@@ -5,41 +5,22 @@
   "title": "Sampling Performance",
   "content": [{
     "type": "section",
+    "access": "editable",
     "title": "Booking",
     "content": [{
       "type": "html",
-      "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+      "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>"
     }]
   }, {
     "type": "section",
-    "page_break": true,
     "title": "Performance",
+    "access": "editable",
     "content": [{
       "type": "table_performance_samples",
-      "source": "/api/evaluations/i2c1510047a/dataset/3"
+      "source": "/api/evaluations/i2c1510047a/dataset/table_performance_samples"
     }, {
       "type": "chart_non_purchase",
-      "source": "/api/evaluations/i2c1510047a/dataset/4"
-    }]
-  }, {
-    "type": "section",
-    "title": "Gallery",
-    "page_break": true,
-    "content": [{
-      "type": "gallery",
-      "content": [{
-        "width": "",
-        "height": "",
-        "url": "/images/gallery_sample_1.jpg"
-      }, {
-        "width": "",
-        "height": "",
-        "url": "/images/gallery_sample_2.jpg"
-      }, {
-        "width": "",
-        "height": "",
-        "url": "/images/gallery_sample_3.jpg"
-      }]
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_non_purchase"
     }]
   }]
 }
