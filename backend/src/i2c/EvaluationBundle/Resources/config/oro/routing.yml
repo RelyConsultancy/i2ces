@@ -40,7 +40,7 @@ i2c_evaluation.get_temporary_evaluation_pdf:
 
 i2c_evaluation.generate_evaluation_pdf:
     path: /api/pdf/temporary/{evaluationCid}
-    methods: [POST]
+    methods: [GET]
     defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:generateTemporaryPdf }
 
 i2c_evaluation.mark_pdf_as_permanent:

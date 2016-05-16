@@ -237,6 +237,9 @@ class EvaluationController extends RestApiController
 
         $markers = $this->getRequest()->get('markers');
 
+        $evaluation->setPdfMarkers($markers);
+        $this->getEvaluationService()->updateEvaluation($evaluation);
+
         $cookie = $this->getRequest()->headers->get('cookie', null);
 
         if (is_null($cookie)) {
