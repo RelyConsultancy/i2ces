@@ -117,7 +117,7 @@ class ObjectiveReview implements ChartDataSetConfigInterface
             ],
             "weekly_units_sold_exposed_and_control_table" => [
                 "twig_name"    => "weekly-units-sold-exposed-and-control-table.json.twig",
-                "data_service" => "extract_chart_data_set_weekly_units_sold_exposed_and-control",
+                "data_service" => "extract_chart_data_set_weekly_units_sold_exposed_and_control",
             ],
         ];
     }
