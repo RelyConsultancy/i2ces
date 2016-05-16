@@ -4,11 +4,11 @@ import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
 
 
 const MapText = (label, unit) => {
-    
+
     let output = '';
-    
+
     switch (label.toLowerCase()) {
-        
+
         case 'overview':
             if (unit.toLowerCase() == 'units') {
                 output = 'Unit uplift';
@@ -35,35 +35,39 @@ const MapText = (label, unit) => {
             break;
         case 'grow frequency of shop per customer':
             output = 'Uplift in purchase frequency';
-            break;    
+            break;
         case 'grow total category':
             output = 'Category sales uplift';
-            break;    
+            break;
         case 'retain new customers (trialists)':
             output = 'Uplift in trialists';
-            break;   
+            break;
         case 'retain lapsing customers':
             output = 'Uplift in lapsed customers';
-            break; 
+            break;
         case 'grow units per existing customer':
             output = 'Existing customer unit uplift';
-            break;   
+            break;
         default:
             output = label;
             break;
-         
     }
-    
+
     return output;
-    
+
 }
 
 const ObjectiveBlob = ({ label, value, unit }) => {
-    
+
     value = B({ className: style.result_value }, fmtUnit(value, unit))
-    return B({ className: 'i2c_objective_blob' }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, MapText(label, unit)  ), B({ className: 'i2c_objective_value' }, value)));
+
+    return B({ className: 'i2c_objective_blob' },
+        B({ className: 'i2c_objective_blob_inner'},
+            B({ className: 'i2c_objective_title' }, MapText(label, unit)),
+            B({ className: 'i2c_objective_value' }, value)
+        )
+    );
     //return B({ className: style.result_label, key: index }, label, value)
-    
 }
 
 export default Component({
@@ -72,7 +76,7 @@ export default Component({
   },
   render () {
     const data = this.props
-    console.log(data)
+
     if (data) {
         return ObjectiveBlob(data)
     } else {

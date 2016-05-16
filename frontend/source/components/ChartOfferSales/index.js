@@ -1,19 +1,15 @@
 import d3 from 'd3'
-import { Component, B, Table, TR, TD, Element } from '/components/component.js'
+import { Component, B } from '/components/component.js'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
-import { fmtUnit, fmtDate } from '/application/utils.js'
 import style from './style.css'
 
-const IMG = Element('img');
 
 const ChartSales = ({ data, timings }) => {
-  const dates = data.map(i => i.start_date)
+  const dates = data.map(i => i.date_start)
   const exposed = data.map(i => parseFloat(i.exposed))
   const control = data.map(i => parseFloat(i.control))
-  
-  
-  
+
   const chart = Chart({
     type: 'line',
     tooltip: { show: false },
@@ -48,51 +44,18 @@ const ChartSales = ({ data, timings }) => {
         },
       }
     },
-    regions: [
-        {axis: 'x', start: timings[1].date_start, end: timings[1].date_end, class: 'campaign-period'},
-    ]
-        
-    
+    regions: [{
+      axis: 'x',
+      start: timings[1].date_start,
+      end: timings[1].date_end,
+      class: 'campaign-period'
+    }]
   })
 
   const label = B({ className: style.chart_label }, 'Offer Sales')
   const overlay = B({ className: style.overlay});
+
   return B({ className: style.chart }, label, chart , overlay)
-}
-
-
-const TableSales = ({ data }) => {
-  const header = TR(
-    { className: style.table_sales_header },
-    TD('Offer Sales'),
-    TD('Uplift'),
-    TD('Percentage uplift')
-  )
-
-  const rows = [TR(
-    TD('During'),
-    TD(fmtUnit(data.during.uplift, 'currency')),
-    TD(fmtUnit(data.during.percentage_uplift, 'percentage'))
-  )]
-
-  if (data.post.uplift) {
-    rows.push(TR(
-      TD('Post'),
-      TD(fmtUnit(data.post.uplift, 'currency')),
-      TD(fmtUnit(data.post.percentage_uplift, 'percentage'))
-    ))
-  }
-
-  const footer = TR(
-    { className: style.table_sales_footer },
-    TD('Total'),
-    TD(fmtUnit(data.total.uplift, 'currency')),
-    TD(fmtUnit(data.total.percentage_uplift, 'percentage'))
-  )
-
-  const table = Table(header, ...rows, footer)
-
-  return B({ className: style.table_sales }, table)
 }
 
 
@@ -115,17 +78,16 @@ export default Component({
   render () {
     const { component } = this.props
     const { data } = this.state
-    
-    console.log(data);
-    
-    if (data) {
-      return B(
-        ChartSales({ data: data.chart, timings: data.timings }),
-        TableSales({ data: data.table })
-      )
-    }
-    else {
+
+    if (!data) {
       return B({ className: style.loading }, 'Loading data ...')
     }
+
+    const chart = ChartSales({
+      data: data.chart,
+      timings: data.timings,
+    })
+
+    return B({ className: style.component }, chart)
   }
 })

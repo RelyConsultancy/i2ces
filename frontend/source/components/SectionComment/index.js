@@ -22,9 +22,9 @@ export default ({ component, uploadPath, editMode }) => {
     return null
   }
   else {
-    const className = `${style.info} fr-view`
-    const info = B({ className }, HTML(component.content))
+    const className = `${style.comment} fr-view`
+    const comment = B({ className }, HTML(component.content))
 
-    return B({ className: style.component }, info)
+    return B({ className: style.component }, comment)
   }
 }

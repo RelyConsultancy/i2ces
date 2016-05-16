@@ -76,8 +76,8 @@ const Links = ({ evaluation }) => {
 
 const Date = ({ evaluation }) => B(
   { className: style.date },
-  B({ className: style.date_value }, `Start: ${fmtDate(evaluation.start_date)}`),
-  B({ className: style.date_value }, `End: ${fmtDate(evaluation.end_date)}`)
+  B({ className: style.date_value }, `Start: ${fmtDate(evaluation.date_start)}`),
+  B({ className: style.date_value }, `End: ${fmtDate(evaluation.date_end)}`)
 )
 
 
@@ -99,7 +99,6 @@ const Channels = ({ items }) => {
 const byOrder = (a, b) => (
   a.order > b.order ? 1 : -1
 )
-
 
 const Chapters = ({ evaluation, colors }) => (
   B({ className: style.chapters }, Grid({
@@ -131,36 +130,36 @@ const Chapters = ({ evaluation, colors }) => (
 
 const Objectives = ({ items }) => {
   const title = B({ className: style.list_title}, 'Campaign Highlights')
-  
-  items = items.map((data, index) => {
+
+  items = items.map(({ label, value, unit }, index) => {
     value = B({ className: style.result_value }, fmtUnit(value, unit))
 
     return B({ className: style.result_label, key: index }, label, value)
   })
-  
+
   return B({ className: style.list }, title, items)
 }
 
+
 const Objectives2 = ({ items }) => {
-  
   const title = B({ className: style.list_title}, 'Campaign Highlights')
   const count = items.length
-  const rows = []  
-  
+  const rows = []
+
   items = items.map((data, index) => {
        return ObjectiveBlob(data)
        //return B({ className: style.i2c_objective_blob }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, label), B({ className: 'i2c_objective_value' }, fmtUnit(value, unit))));
-      
   })
-  
+
   const splice = items.lenght % 2 == 0 ? 4 : 3
-  
+
   while(items.length) {
-      rows.push(B({className: 'i2c_objective_list_row_wrapper'}, B({className: 'i2c_objective_list_row' }, items.splice(0,splice))))
+      rows.push(B({ className: 'i2c_objective_list_row_wrapper' }, B({ className: 'i2c_objective_list_row' }, ...items.splice(0, splice))))
   }
-  
-  return B({ className: style.list }, title, B({ className: 'i2c_objectives_list' }, rows))
-  
+
+  const list = B({ className: 'i2c_objectives_list' }, ...rows)
+
+  return B({ className: style.list }, title, list)
 }
 
 const Evaluation = Component({

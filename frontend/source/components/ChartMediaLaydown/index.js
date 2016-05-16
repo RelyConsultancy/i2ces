@@ -14,9 +14,7 @@ const colors = [
 ]
 
 
-export default Component({
-  render () {
-    const { component } = this.props
+export default ({ component }) => {
     const { items } = component
     const types = getUnique(items.map(i => i.type)).sort()
     const labels = getUnique(items.map(i => i.label))
@@ -25,10 +23,6 @@ export default Component({
     types.forEach((type, index) => {
       palette[type] = colors[index]
     })
-
-    console.log('GANTT DATA');
-    console.log(items);
-    
 
     const chart = Chart({
       palette,
@@ -51,4 +45,3 @@ export default Component({
 
     return B({ className: style.component }, chart, legend)
   }
-})

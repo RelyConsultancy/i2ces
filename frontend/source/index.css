@@ -12,6 +12,7 @@
 @import raw './components/Chart/c3.css';
 @import from './components/Chart/style.css';
 @import from './components/Toggle/style.css';
+@import from './components/PDFViewer/style.css';
 
 @import from './components/Loader/style.css';
 @import from './components/FAQ/style.css';
@@ -20,16 +21,16 @@
 @import from './components/EvaluationList/style.css';
 @import from './components/EvaluationDashboard/style.css';
 @import from './components/EvaluationChapter/style.css';
+@import from './components/EvaluationSection/style.css';
 @import from './components/EvaluationPreview/style.css';
 
-@import from './components/SectionComponent/style.css';
-@import from './components/SectionGallery/style.css';
-@import from './components/SectionHTML/style.css';
+@import from './components/SectionList/style.css';
 @import from './components/SectionInfo/style.css';
+@import from './components/SectionComment/style.css';
+@import from './components/SectionHTML/style.css';
 @import from './components/SectionTimings/style.css';
 @import from './components/SectionChannels/style.css';
 @import from './components/SectionObjectives/style.css';
-@import from './components/SectionEditableComments/style.css';
 
 @import from './components/ChartMediaLaydown/style.css';
 @import from './components/ChartSalesPerformance/style.css';
@@ -49,4 +50,5 @@
 @import from './components/ChartGrowFrequencyOfSharePerCustomer/style.css';
 
 @import from './components/TablePerformanceSamples/style.css';
+@import from './components/TableOfferSales/style.css';
 @import from './components/ObjectiveBlob/style.css';

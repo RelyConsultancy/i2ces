@@ -1,0 +1,28 @@
+.toggle {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  padding: .5em 1em .35em;
+  color: #FFF;
+  font-size: .75rem;
+  background-color: #5FC3E1;
+  cursor: pointer;
+}
+
+.section {
+  position: relative;
+  padding: 2rem;
+  max-width: 940px;
+  border: 1px solid #E6E6E6;
+  border-top-width: 0;
+  font-size: .875em;
+}
+.section:first-child {
+  border-top-width: 1px;
+}
+.section_title {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  font-family: 'Archer Bold', serif;
+  color: #6D6D6D;
+}
