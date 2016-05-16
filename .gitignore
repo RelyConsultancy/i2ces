@@ -49,3 +49,4 @@ backend/app/check.php
 /frontend/node_modules
 
 /.idea
+/nbproject

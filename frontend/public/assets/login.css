@@ -11,6 +11,8 @@
   src: local('Archer Bold'), url('/fonts/Archer/Archer-Bold-Pro.woff') format('woff');
 }
 
+/* OLD STYLE */
+/*
 #login-form .title-box {
   position: absolute;
   top: 6rem;
@@ -22,6 +24,16 @@
   border-bottom: 1px solid #E6E6E6;
   overflow: visible;
 }
+*/
+
+
+#login-form .title-box {
+  padding: 9rem 0;
+  background: transparent;
+  overflow: visible;
+  margin: 0 -100px;
+}
+
 #login-form .title {
   position: relative;
   max-width: 800px;
@@ -33,12 +45,12 @@
 }
 #login-form .title::before {
   content: '';
-  position: absolute;
+  position: absolute;   
   top: -95px;
   left: -5px;
-  width: 90px;
+  width: 250px;
   height: 70px;
-  background-image: url(/images/logo.png);
+  background-image: url(/images/report_hub_logo.png);
   background-size: cover;
 }
 
@@ -122,4 +134,11 @@
   bottom: -3em;
   color: #43B5DB;
   font-size: 12px;
+}
+.title-box {
+    
+}
+
+.login-logo {
+    
 }

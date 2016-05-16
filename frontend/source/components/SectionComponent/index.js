@@ -1,6 +1,18 @@
 import ChartMediaLaydown from '/components/ChartMediaLaydown'
 import ChartSalesPerformance from '/components/ChartSalesPerformance'
 import ChartPromotionalActivity from '/components/ChartPromotionalActivity'
+import ChartAcquireNewCustomers from '/components/ChartAcquireNewCustomers'
+import ChartGrowCustomerProductRange from '/components/ChartGrowCustomerProductRange'
+import ChartGrowTotalUnits from '/components/ChartGrowTotalUnits'
+import ChartGrowShareOfCategory from '/components/ChartGrowShareOfCategory'
+import ChartRetainExistingCustomers from '/components/ChartRetainExistingCustomers'
+import ChartRetainLapsingCustomers from '/components/ChartRetainLapsingCustomers'
+import ChartLaunchNewProduct from '/components/ChartLaunchNewProduct'
+import ChartRetainNewCustomers from '/components/ChartRetainNewCustomers'
+import ChartGrowSpendPerExistingCustomer from '/components/ChartGrowSpendPerExistingCustomer'
+import ChartGrowFrequencyOfSharePerCustomer from '/components/ChartGrowFrequencyOfSharePerCustomer'
+import ObjectiveGrowAwareness from '/components/ObjectiveGrowAwareness'
+
 import ChartNonPurchase from '/components/ChartNonPurchase'
 import ChartOfferSales from '/components/ChartOfferSales'
 import ChartUnitsUplift from '/components/ChartUnitsUplift'
@@ -80,7 +92,117 @@ export default Component({
       case 'chart_non_purchase':
         return ChartNonPurchase({ component })
       break
-
+      
+      case 'chart_acquire_new_customers':
+          return SectionEditableComments({
+            component,
+            isEditable,
+            uploadPath,
+            onSave,
+            content: ChartAcquireNewCustomers({ component }),
+          })
+      break
+      
+      case 'chart_grow_customer_product_range':
+        return SectionEditableComments({
+          component,
+          isEditable,
+          uploadPath,
+          onSave,
+          content: ChartGrowCustomerProductRange({ component }),
+        })
+      break
+      
+      case 'chart_grow_share_of_category':
+        return SectionEditableComments({
+          component,
+          isEditable,
+          uploadPath,
+          onSave,
+          content: ChartGrowShareOfCategory({ component }),
+        })
+      break
+      
+      case 'chart_retain_existing_customers':
+        return SectionEditableComments({
+          component,
+          isEditable,
+          uploadPath,
+          onSave,
+          content: ChartRetainExistingCustomers({ component }),
+        })
+      break
+      
+      case 'chart_grow_total_units':
+        return SectionEditableComments({
+          component,
+          isEditable,
+          uploadPath,
+          onSave,
+          content: ChartGrowTotalUnits({ component }),
+        })
+      break
+      
+      case 'chart_retain_lapsing_customers':
+        return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartRetainLapsingCustomers({ component }),
+            })
+      break
+      
+      case 'chart_launch_new_product':
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartLaunchNewProduct({ component }),
+            })
+      break
+      
+      case 'chart_retain_new_customers_trialists':
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartRetainNewCustomers({ component }),
+            })
+          break
+      
+      case 'chart_grow_spend_per_existing_customer':
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartGrowSpendPerExistingCustomer({ component }),
+            })
+      break
+      
+      case 'chart_grow_frequency_of_share_per_customer':
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ChartGrowFrequencyOfSharePerCustomer({ component }),
+            })
+      break
+      
+      case 'chart_grow_awareness':
+          return SectionEditableComments({
+            component,
+              isEditable,
+              uploadPath,
+              onSave,
+              content: ObjectiveGrowAwareness({ component }),
+            })
+      break
+      
       case 'table_performance_samples':
         return TablePerformanceSamples({ component })
       break

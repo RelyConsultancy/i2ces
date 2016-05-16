@@ -58,10 +58,12 @@ const ChartUplift = ({ data }) => {
       },
       y: {
         tick: {
-          format: (value) => ((value / 1000).toFixed(1) + 'k'),
+          format: (value) => { 
+            if (value > 999) { return (value / 1000).toFixed(1) + 'k' } else { return value } 
+          }
         },
         label: {
-          text: 'Period on period sales growth',
+          text: 'Offer Units Uplift',
           position: 'outer-middle',
         },
       },
@@ -90,7 +92,7 @@ const TableExposed = ({ data }) => {
     B({ key, style: { width } }, parseInt(item).toLocaleString())
   )))
 
-  const label = B({ className: style.table_label }, 'Exposed')
+  const label = B({ className: style.table_label }, 'Households Exposed')
 
   return B({ className: style.table }, label, info)
 }

@@ -37,9 +37,9 @@
 }
 .toggle_on {
   compose: toggle;
-  background-color: #81CDE7;
+  background-color: #E24A4A;
 }
 .toggle_on::after {
   left: calc(60% - 4px);
-  background-color: #81CDE7;
+  background-color: #E24A4A;
 }

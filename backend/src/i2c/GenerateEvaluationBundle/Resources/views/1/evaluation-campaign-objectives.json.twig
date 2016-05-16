@@ -6,6 +6,8 @@
             {
                 "label": "{{ objective.label }}",
                 "value": "{{ objective.value }}",
+                "control": "{{ objective.control }}",
+                "exposed": "{{ objective.exposed }}",
                 "unit": "{{ objective.unit }}"
             }{{ not loop.last ? ',' }}
         {% endfor %}

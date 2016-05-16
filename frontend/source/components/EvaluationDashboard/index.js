@@ -6,6 +6,8 @@ import { download } from '/application/http.js'
 import * as $ from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
+import numeral from 'numeral'
+import ObjectiveBlob from '/components/ObjectiveBlob'
 
 
 const ToggleState = ({ evaluation }) => {
@@ -129,16 +131,37 @@ const Chapters = ({ evaluation, colors }) => (
 
 const Objectives = ({ items }) => {
   const title = B({ className: style.list_title}, 'Campaign Highlights')
-
-  items = items.map(({ label, value, unit }, index) => {
+  
+  items = items.map((data, index) => {
     value = B({ className: style.result_value }, fmtUnit(value, unit))
 
     return B({ className: style.result_label, key: index }, label, value)
   })
-
+  
   return B({ className: style.list }, title, items)
 }
 
+const Objectives2 = ({ items }) => {
+  
+  const title = B({ className: style.list_title}, 'Campaign Highlights')
+  const count = items.length
+  const rows = []  
+  
+  items = items.map((data, index) => {
+       return ObjectiveBlob(data)
+       //return B({ className: style.i2c_objective_blob }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, label), B({ className: 'i2c_objective_value' }, fmtUnit(value, unit))));
+      
+  })
+  
+  const splice = items.lenght % 2 == 0 ? 4 : 3
+  
+  while(items.length) {
+      rows.push(B({className: 'i2c_objective_list_row_wrapper'}, B({className: 'i2c_objective_list_row' }, items.splice(0,splice))))
+  }
+  
+  return B({ className: style.list }, title, B({ className: 'i2c_objectives_list' }, rows))
+  
+}
 
 const Evaluation = Component({
   class: true,
@@ -164,9 +187,9 @@ const Evaluation = Component({
         Header({ evaluation }),
         Content(
           Date({ evaluation }),
+          Objectives2({ items: evaluation.campaign_objectives }),
           Channels({ items: evaluation.channels }),
-          Chapters({ evaluation, colors: chapter_palette }),
-          Objectives({ items: evaluation.campaign_objectives })
+          Chapters({ evaluation, colors: chapter_palette })
         )
       )
     }
