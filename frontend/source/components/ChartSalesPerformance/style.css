@@ -35,7 +35,12 @@
   font-family: 'Archer Bold', serif;
   fill: #6D6D6D;
 }
-
+.chart .c3-axis-x path, .chart .c3-axis-x .tick line {
+    stroke: transparent!important;
+}
+.chart .c3-ygrid-line line {
+    stroke: #000;
+}
 
 .table {
   position: relative;
@@ -62,4 +67,42 @@
   font-size: .75em;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.chart .region-offer-brand {
+    fill: rgba(192, 206, 10, 0.7);
+}
+
+.chart .region-competitors {
+    fill: rgba(125, 52, 133, 0.75);
+}
+.chart .c3-region > rect {
+    fill-opacity: 0.5!important;
+}
+
+.chart .c3-region > text {
+    fill-opacity: 1!important;
+    fill: rgba(88, 88, 88, 0.7);
+    stroke: rgba(162, 162, 162, 0);
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Archer Bold', serif;
+}
+
+.stages {
+  margin-top: 2rem;
+  font-size: .75rem;
+  color: #575757;
+}
+.stage {
+  text-align: right;
+  margin: .5rem;
+}
+.stage_period {
+  display: inline-block;
+  width: 10rem;
+}
+.stage_label {
+  display: inline-block;
 }

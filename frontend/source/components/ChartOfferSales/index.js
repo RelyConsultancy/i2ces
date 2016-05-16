@@ -1,16 +1,19 @@
 import d3 from 'd3'
-import { Component, B, Table, TR, TD } from '/components/component.js'
+import { Component, B, Table, TR, TD, Element } from '/components/component.js'
 import Chart from '/components/Chart'
 import { fetchDataset } from '/application/actions.js'
 import { fmtUnit, fmtDate } from '/application/utils.js'
 import style from './style.css'
 
+const IMG = Element('img');
 
-const ChartSales = ({ data }) => {
+const ChartSales = ({ data, timings }) => {
   const dates = data.map(i => i.start_date)
   const exposed = data.map(i => parseFloat(i.exposed))
   const control = data.map(i => parseFloat(i.control))
-
+  
+  
+  
   const chart = Chart({
     type: 'line',
     tooltip: { show: false },
@@ -26,6 +29,10 @@ const ChartSales = ({ data }) => {
         ['Exposed'].concat(exposed),
         ['Control'].concat(control),
       ],
+      colors: {
+          Exposed: '#3F7CC0',
+          Control: '#A6A6A6'
+      },
     },
     axis: {
       x: {
@@ -41,11 +48,16 @@ const ChartSales = ({ data }) => {
         },
       }
     },
+    regions: [
+        {axis: 'x', start: timings[1].date_start, end: timings[1].date_end, class: 'campaign-period'},
+    ]
+        
+    
   })
 
   const label = B({ className: style.chart_label }, 'Offer Sales')
-
-  return B({ className: style.chart }, label, chart)
+  const overlay = B({ className: style.overlay});
+  return B({ className: style.chart }, label, chart , overlay)
 }
 
 
@@ -60,14 +72,14 @@ const TableSales = ({ data }) => {
   const rows = [TR(
     TD('During'),
     TD(fmtUnit(data.during.uplift, 'currency')),
-    TD(fmtUnit(data.during.percentage_uplift, 'percent'))
+    TD(fmtUnit(data.during.percentage_uplift, 'percentage'))
   )]
 
   if (data.post.uplift) {
     rows.push(TR(
       TD('Post'),
       TD(fmtUnit(data.post.uplift, 'currency')),
-      TD(fmtUnit(data.post.percentage_uplift, 'percent'))
+      TD(fmtUnit(data.post.percentage_uplift, 'percentage'))
     ))
   }
 
@@ -75,7 +87,7 @@ const TableSales = ({ data }) => {
     { className: style.table_sales_footer },
     TD('Total'),
     TD(fmtUnit(data.total.uplift, 'currency')),
-    TD(fmtUnit(data.total.percentage_uplift, 'percent'))
+    TD(fmtUnit(data.total.percentage_uplift, 'percentage'))
   )
 
   const table = Table(header, ...rows, footer)
@@ -103,10 +115,12 @@ export default Component({
   render () {
     const { component } = this.props
     const { data } = this.state
-
+    
+    console.log(data);
+    
     if (data) {
       return B(
-        ChartSales({ data: data.chart }),
+        ChartSales({ data: data.chart, timings: data.timings }),
         TableSales({ data: data.table })
       )
     }

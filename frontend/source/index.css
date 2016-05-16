@@ -2,6 +2,7 @@
 @import raw './style/avenir.css';
 @import raw './style/archer.css';
 @import raw './style/loader.css';
+@import raw './style/froala-custom.css';
 @import raw './style/icons.css';
 
 @import raw './components/Select/style.css';
@@ -36,5 +37,16 @@
 @import from './components/ChartNonPurchase/style.css';
 @import from './components/ChartOfferSales/style.css';
 @import from './components/ChartUnitsUplift/style.css';
+@import from './components/ChartAcquireNewCustomers/style.css';
+@import from './components/ChartGrowCustomerProductRange/style.css';
+@import from './components/ChartGrowShareOfCategory/style.css';
+@import from './components/ChartRetainExistingCustomers/style.css';
+@import from './components/ChartGrowTotalUnits/style.css';
+@import from './components/ChartRetainLapsingCustomers/style.css';
+@import from './components/ChartLaunchNewProduct/style.css';
+@import from './components/ChartRetainNewCustomers/style.css';
+@import from './components/ChartGrowSpendPerExistingCustomer/style.css';
+@import from './components/ChartGrowFrequencyOfSharePerCustomer/style.css';
 
 @import from './components/TablePerformanceSamples/style.css';
+@import from './components/ObjectiveBlob/style.css';

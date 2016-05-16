@@ -1,11 +1,14 @@
 {% autoescape false %}
-[
-    {% for data in table_data %}
-        {
-            "type": "{{ data.metric }}",
-            "label": "{{ data.product }}",
-            "value": "{{ data.results }}"
-        }{{ not loop.last ? ',' }}
-    {% endfor %}
-]
+{
+    "table_data": [
+        {% for data in table_data %}
+            {
+                "type": "{{ data.metric }}",
+                "label": "{{ data.product }}",
+                "value": "{{ data.results }}"
+            }{{ not loop.last ? ',' }}
+        {% endfor %}
+    ],
+    "start_date": "{{ start_date[0].start_date }}"
+}
 {% endautoescape %}

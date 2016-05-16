@@ -1,7 +1,7 @@
 import { B } from '/components/component.js'
 import Grid from '/components/Grid'
 import Select from '/components/Select'
-import { getUnique } from '/application/utils.js'
+import { getUnique, sortAlpha } from '/application/utils.js'
 import { setFilter, isI2C } from '/application/actions.js'
 import style from './style.css'
 
@@ -22,7 +22,7 @@ const Categories = ({ store }) => {
   const options = {
     placeholder: 'Category',
     value: store.filter.category,
-    options: fmtOptions(getUnique(items.map(i => i.category))),
+    options: sortAlpha(fmtOptions(getUnique(items.map(i => i.category))), 'value'),
     searchable: false,
     onChange: (option) => {
       setFilter('category', option ? option.value : null)
@@ -44,7 +44,7 @@ const Brands = ({ store }) => {
   const options = {
     placeholder: 'Brand',
     value: store.filter.brand,
-    options: fmtOptions(getUnique(items.map(i => i.brand))),
+    options: sortAlpha(fmtOptions(getUnique(items.map(i => i.brand))), 'value'),
     searchable: false,
     onChange: (option) => {
       setFilter('brand', option ? option.value : null)
@@ -63,11 +63,11 @@ const Suppliers = ({ store }) => {
     if (brand && brand != item.brand) return false
   })
 
-
+  
   const options = {
     placeholder: 'Supplier',
     value: store.filter.supplier,
-    options: fmtOptions(getUnique(items.map(i => i.supplier.name))),
+    options: sortAlpha(fmtOptions(getUnique(items.map(i => i.supplier.name))), 'value'),
     searchable: false,
     onChange: (option) => {
       setFilter('supplier', option ? option.value : null)

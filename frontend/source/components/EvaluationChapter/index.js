@@ -16,6 +16,10 @@ const Navigation = ({ store, params }) => {
   return B({ className: style.navigation }, back)
 }
 
+const Header = ({ evaluation }) => B(
+  { className: style.header },
+  evaluation.display_title
+)
 
 const Chapters = ({ store, chapter }) => {
   const { evaluation, chapter_palette } = store
@@ -141,6 +145,7 @@ const EvaluationChapter = Component({
       const focusedSection = this.state.section
 
       content = B(
+        Header({ evaluation }),
         Navigation({ store, params }),
         Chapters({ store, chapter }),
         Headings({ store, chapter, focusedSection, focusSection }),

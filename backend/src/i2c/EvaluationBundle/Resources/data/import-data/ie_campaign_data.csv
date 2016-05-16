@@ -1,4 +1,203 @@
 MASTER_CAMPAIGN_ID,CAMPAIGN_NAME,SUPPLIER,BRAND,CATEGORY,NPD,MEDIA_COST
-i2c1510047a,Lindt - Christmas 2015,Lindt & Sprungli (UK) Ltd,Lindor,IMPULSE FOOD,0,37600
-i2c1509134a,SCA Plenty Genius Award,SCA Hygiene Products UK Ltd,Plenty,HOUSEHOLD & PETCARE,0,42050
-i2c1507187a,Colgate Palmolive - CSPR,Colgate Palmolive Uk Ltd,Colgate,BABY & BEAUTY,0,73250
+"ALAN_TEST","Pernod Ricard (Comms) - Jacobs Creek ryvita","Pernod Ricard UK Ltd","Jacobs Creek","BEERS, WINES & SPIRITS",0,0
+"i2c1509070a","Mizkan Haywards relaunch cycle 12/13","Mizkan Europe Ltd","Haywards","CANNED & PACKAGED",0,0
+"i2c1509111a","Kleenex YTG Promo Support Plan","Kimberly Clark Ltd","Kleenex","HOUSEHOLD & PETCARE",0,0
+"i2cLYNX111","Lynx Weekly report","Unilever UK Ltd","Lynx","BABY & BEAUTY",1,0
+"i2cLYNX222","Lynx Weekly report","Unilever UK Ltd","Lynx","BABY & BEAUTY",1,0
+"i2cLYNX333","Lynx Weekly report","Unilever UK Ltd","Lynx","BABY & BEAUTY",1,0
+"i2cLYNX444","Lynx Weekly report","Unilever UK Ltd","Lynx","BABY & BEAUTY",1,0
+"i2cLYNX555","Lynx Weekly report","Unilever UK Ltd","Lynx","BABY & BEAUTY",1,0
+"i2cLYNX666","Lynx Weekly report","Unilever UK Ltd","Lynx","BABY & BEAUTY",1,0
+"i2cLYNX777","Lynx Weekly report","Unilever UK Ltd","Lynx","BABY & BEAUTY",1,0
+"i2cLYNX888","Lynx Weekly report","Unilever UK Ltd","Lynx","BABY & BEAUTY",1,0
+"i2c1510062a","Courvoissior Xmas Campaign","Maxxium","Courvoisier","BEERS, WINES & SPIRITS",0,1150
+"i2c1507074aM","Laughing Dog launch","FOLD HILL ","FOLD HILL ","HOUSEHOLD & PETCARE",0,4208
+"i2c1504091aM","Sheba Display Pg","Mars Petcare UK","Sheba","HOUSEHOLD & PETCARE",0,4250
+"i2c1505029aM","Bonne Maman cakes","Eurobrand Partners","Bonne Maman","BAKERY & CAFES",0,5500
+"i2c1506063aM","Kellys Composite","R&R ","Kellys","FROZEN FOOD",0,5500
+"i2c1504050aM","Thai Taste 1/2 page","Bespoke Foods","Thai Taste","CANNED & PACKAGED",0,6000
+"i2c1505074aM","Heinz Cup Soup ","Heinz Food Ltd","Heinz","CANNED & PACKAGED",0,6000
+"i2c1506014aM","KC -Pull Ups","Kimberly Clark","Huggies","BABY & BEAUTY",0,6000
+"i2c1516KC0M","Huggies wipes","Kimberly Clark","Huggies","BABY & BEAUTY",0,6000
+"i2c1516KC0M1","KC - DryNites","Kimberly Clark","Huggies","BABY & BEAUTY",0,6000
+"i2c1537AH0a","Campofrio pate sampling Sep","Campofrio","Campofrio","FRESH FOOD COUNTERS",1,7230
+"i2c1537AH0a","Campofrio pate sampling Sep","Campofrio","Campofrio","MEAL SOLUTIONS",1,7230
+"i2c1508254a","Superheroes pouches & bars launch","Ellas Kitchen (Brands) Ltd","Ellas Kitchen (Brands) Ltd Brand(s)","CANNED & PACKAGED",1,7760
+"i2c1504021aM","Adults go free","Kelloggs","Kelloggs","CANNED & PACKAGED",0,8200
+"i2c1504021aM","Adults go free","Kelloggs","Kelloggs","IMPULSE FOOD",0,8200
+"i2c1504065aM","Coke Icon","Coca Cola Enterprises Ltd","Coca Cola","IMPULSE FOOD",0,8200
+"i2c1506058aM","Poligrip magazine","GSK","Poligrip","BABY & BEAUTY",0,8200
+"i2c1511069a","Philly in the New Year","Mondelez UK Limited","Philadelphia","DAIRY",0,8200
+"i2c1505012aM","PF Pouch NPD","Yoplait ","Petit Filous","DAIRY",1,8200
+"i2c1504064aM","The Health Lottery","Health Lottery","health lottery","EXCLUDED SALES",0,10000
+"i2c1506032M1","Lotus Biscuits","Lotus","Lotus","IMPULSE FOOD",0,10000
+"i2c1506032M2","Lotus Biscuits","Lotus ","Lotus","CANNED & PACKAGED",0,10000
+"i2c1510136a","Cafedirect pods and roast & ground support","Cafe Direct plc","Cafe Direct Coffee","CANNED & PACKAGED",1,10000
+"i2c1509142a","Delegat  Wines sampling Dec 15","Delegats Wine Estate","Delegat Wines","BEERS, WINES & SPIRITS",0,11125
+"i2c15FAIFE","link up with TU","Procter & Gamble UK","Procter & Gamble UK Brand(s)","HOUSEHOLD & PETCARE",0,11845
+"i2c15FAINB","link up with TU","Procter & Gamble UK","Procter & Gamble UK Brand(s)","HOUSEHOLD & PETCARE",0,11845
+"i2c1509067a","Jacobs Cracker Crisps Sampling ","United Biscuits","United Biscuits Brand(s)","IMPULSE FOOD",0,12200
+"i2c1509029a","Britvic Halloween Sampling 29th October","Britvic Soft Drinks Ltd","J2O","IMPULSE FOOD",0,12625
+"i2c1509131a","J20 Christmas Dec 19th Sampling","Britvic Soft Drinks Ltd","J2O","IMPULSE FOOD",0,12625
+"i2c1508042a","Magners - Magners Summer Support","Magners GB","Magners","BEERS, WINES & SPIRITS",0,13000
+"i2c1509004a","Philly Cheesecake","Mondelez UK Limited","Cadbury","DAIRY",0,14760
+"i2c1509004a2","Philly Cheesecake","Mondelez UK Limited","Cadbury","DAIRY",0,14760
+"i2c1511028a","own label cheese and meat consortium Jan","JS","JS","DAIRY",0,15050
+"i2c1511028a","own label cheese and meat consortium Jan","JS","JS","MEAT, FISH & POULTRY",0,15050
+"i2c1509101a","Mountain Dew Sampling","Britvic Soft Drinks Ltd","Mountain Dew","IMPULSE FOOD",0,15700
+"i2c1509124a","Cow & Gate Jars Support","Nutricia Ltd","Cow & Gate","BABY & BEAUTY",0,16000
+"i2c1508206a","Nestle - Nesquik Milk Media 2015","Nestle Finance Services Centre","Nestle Nesquik","CANNED & PACKAGED",0,16500
+"i2c1507204a","O/L Meat and Cheese Consortium - sampling","JS","JS","DAIRY",0,16870
+"i2c1507204a","O/L Meat and Cheese Consortium - sampling","JS","JS","MEAT, FISH & POULTRY",0,16870
+"i2c1507210a","Italia Formaggi - o/l parmesan shavings sampling","Italia Formaggi Ltd","JS Parmesan","DAIRY",0,16870
+"i2c1504028aM","Tena Lady Competition","SCA","Tena","BABY & BEAUTY",0,17000
+"i2c1509106a","Pampers & Now TV link up","Procter & Gamble UK","Pampers","BABY & BEAUTY",0,17500
+"i2c1509106a2","Pampers & Now TV link up","Procter & Gamble UK","Pampers","BABY & BEAUTY",0,17500
+"i2c1508179a","Codorniu Cuvee Win a trip to Barcelona","Codorniu Winery","Codorniu","BEERS, WINES & SPIRITS",0,17575
+"i2c1508179a","Codorniu Cuvee Win a trip to Barcelona","Codorniu Winery","Codorniu","SEASONAL & OUTDOOR",0,17575
+"i2c1510145a","Ryvita Crispbread Trolleys","The Jordans & Ryvita Company Ltd","The Jordans & Ryvita Company Ltd Brand(s)","CANNED & PACKAGED",0,18450
+"i2c1510145a","Ryvita Crispbread Trolleys","The Jordans & Ryvita Company Ltd","The Jordans & Ryvita Company Ltd Brand(s)","IMPULSE FOOD",0,18450
+"i2c1508252a","Co-Sampling Kettle Chips","Kettle Foods Ltd","Kettle Chips","IMPULSE FOOD",0,18799
+"i2c1508124a","C11_Unilever_PotNoodle_Sampling","Unilever UK Ltd","Pot Noodle","CANNED & PACKAGED",0,19055
+"i2c1508137a","Accolade Wines - Echo Falls Fruit Fusions Sampling","Accolade Wines Ltd","Echo","BEERS, WINES & SPIRITS",0,19064
+"i2c1510051a","Unilever Stork Sampling","Unilever UK Ltd","Stork","DAIRY",0,19190
+"i2c1507212a","Famous Grouse Xmas Sampling","Maxxium","Famous Grouse","BEERS, WINES & SPIRITS",0,19515
+"i2c1510061a","Chambord Christmas Support","Bacardi Brown Forman Brands","Chambord","BEERS, WINES & SPIRITS",0,20000
+"i2c1509048a","Benecol - Lowering Cholesterol Month","Benecol Limited","Benecol","DAIRY",0,20200
+"i2c1507192a","Bel - LC - Dip & Crunch","Bel UK","Bel UK Brand(s)","DAIRY",0,20262
+"i2c1509144a","Scan meatballs cycle 13 sampling","HKScan UK Ltd","HKScan UK Ltd Brand(s)","MEAT, FISH & POULTRY",0,20750
+"i2c1508127a","Daniels Chilled Foods Ltd","Daniels Chilled Foods Ltd","New Covent Garden Soup","MEAL SOLUTIONS",0,23000
+"i2c1512022P","Pampers link up with TU","Procter & Gamble UK","Procter & Gamble UK Brand(s)","BABY & BEAUTY",0,23230
+"i2c1509046a","Philadelphia Whipped sampling","Mondelez UK Limited","Philadelphia","DAIRY",0,24200
+"i2c1601020a","Mondelez Milk Tray sampling feb","Mondelez UK Limited","Milk Tray","IMPULSE FOOD",0,24240
+"i2c1510108a","Grants Xmas Promo Activation","William Grant & Sons","First Drinks Brands Brand(s)","BEERS, WINES & SPIRITS",0,24947
+"i2c1507176a","Inbev - Stella Cidre C10","InBev UK Ltd","Stella Artois Cidre","BEERS, WINES & SPIRITS",0,25250
+"i2c1509010a","Natures Path Gluten Free Cereal","Eurobrand Partners","Natures Path","CANNED & PACKAGED",0,25250
+"i2c1509069a","Colmans Seasoning Mix Sampling","Unilever UK Ltd","Colmans","CANNED & PACKAGED",0,25250
+"i2c1507173a","Knorr cubes sampling ","Unilever","Knorr","CANNED & PACKAGED",1,25250
+"i2c1510041a","Grey Goose Xmas Mag Special Feature","Bacardi Brown Forman Brands","Grey Goose","BEERS, WINES & SPIRITS",0,25660
+"i2c1508223a","Knorr Stock Pots Sampling","Unilever UK Ltd","Knorr","CANNED & PACKAGED",0,25750
+"i2c1508204a","Capri-Sun BTS 6 sheets","Coca Cola Enterprises Ltd","Coca Cola Enterprises Ltd Brand(s)","IMPULSE FOOD",0,26000
+"i2c1508107a","Princes - Branston Beans Love or Money Back","Princes Ltd","Branston","CANNED & PACKAGED",0,27383
+"i2c1510074a","WGS Xmas Activation","William Grant & Sons","Sailor Jerry","BEERS, WINES & SPIRITS",0,28280
+"i2c1510116a","Kelloggs Coco and Rice mini biscuits sampling","Kellogg Marketing & Sales Co UK Ltd","Kelloggs Coco Pops","IMPULSE FOOD",0,29038
+"i2c1509022a","Milicano Dark campaign - Nov 2015","D. E. Master Blenders 1753 N.V.","Douwe Egberts","CANNED & PACKAGED",0,29200
+"i2c1508281a","Mr Kipling Deluxe Whirls sampling","Premier Foods Group Ltd","Mr Kipling","BAKERY & CAFES",0,29250
+"i2c1535KE0","Back to School","Kelloggs","KELLOGGS","CANNED & PACKAGED",1,29869
+"i2c1510003a3","P&G Beauty Xmas","Procter & Gamble UK","Braun","ELECTRICAL & LEISURE",0,29900
+"i2cBRAUNV2","P&G Beauty Xmas","Procter & Gamble UK","Braun","ELECTRICAL & LEISURE",0,29900
+"i2cBRAUNV4","P&G Beauty Xmas","Procter & Gamble UK","Braun","ELECTRICAL & LEISURE",0,29900
+"i2c1507181a","BTS","Yoplait","FRUBES","DAIRY",0,30000
+"i2c1508186a","General Mills - Old El Paso S&S Promo Support","General Mills Sarl","Old El Paso","CANNED & PACKAGED",0,30000
+"i2c1508186a2","General Mills - Old El Paso S&S Promo Support","General Mills Sarl","Old El Paso","CANNED & PACKAGED",0,30000
+"i2c1510008a","Mikado 6 sheets Oct 2015","Mondelez UK Limited","Mikado","CANNED & PACKAGED",0,30000
+"i2c1510008a","Mikado 6 sheets Oct 2015","Mondelez UK Limited","Mikado","IMPULSE FOOD",0,30000
+"i2c1510013a","Wrigley - Wrigley Halloween 2015","The Wrigley Company Ltd","Wrigleys","IMPULSE FOOD",0,30000
+"i2c1510054a","Ferrero Sampling","Ferrero UK Ltd","Ferrero Rocher","IMPULSE FOOD",0,30300
+"i2c1510054a2","Ferrero Sampling","Ferrero UK Ltd","Ferrero Rocher","IMPULSE FOOD",0,30300
+"i2c1509107a2","P&G Christmas Household","Procter & Gamble UK","Fairy","HOUSEHOLD & PETCARE",0,30383
+"i2c1509107a6","P&G Christmas Household","Procter & Gamble UK","Fairy","HOUSEHOLD & PETCARE",0,30383
+"i2c1509107a7","P&G Christmas Household","Procter & Gamble UK","Fairy","HOUSEHOLD & PETCARE",0,30383
+"i2cFAIFEV2","P&G Christmas Household","Procter & Gamble UK","Fairy","HOUSEHOLD & PETCARE",0,30383
+"i2cFAIFEV4","P&G Christmas Household","Procter & Gamble UK","Fairy","HOUSEHOLD & PETCARE",0,30383
+"i2cFAINBV2","P&G Christmas Household","Procter & Gamble UK","Fairy","HOUSEHOLD & PETCARE",0,30383
+"i2cFAINBV4","P&G Christmas Household","Procter & Gamble UK","Fairy","HOUSEHOLD & PETCARE",0,30383
+"i2c1512046a","Mars Choc M&Ms Christmas Box ","Mars Chocolate UK Ltd","M&Ms","IMPULSE FOOD",0,30500
+"i2c1510007a","Jamie Oliver RTE Pulses","Fiddes Payne","Jamie Oliver","CANNED & PACKAGED",0,31030
+"i2c1511003a","Kingsmill Soft and Thick white C14 Xmas comp","Allied Bakeries","Kingsmill","BAKERY & CAFES",0,31444
+"i2c1511103a","C15_Pepsico_Naked_6 sheets","PepsiCo","Naked","DAIRY",0,32250
+"i2c1511103a","C15_Pepsico_Naked_6 sheets","PepsiCo","Naked","WORLD FOODS",0,32250
+"i2c1507141a","Danone - Activia Q3 Support","Danone Ltd","Activia","DAIRY",0,32750
+"i2c1509030a","Lindt MCC Six Sheets + Evaluation ","Lindt & Sprungli (UK) Ltd","Lindt Master Chocolatier Collection","IMPULSE FOOD",0,34250
+"i2c1510006a","General Mills - Parampara Wave 2","General Mills Sarl","Parampara","CANNED & PACKAGED",0,34454
+"i2c1508061a","Mini Cravings launch","Bel UK","THE LAUGHING COW","DAIRY",1,34460
+"i2c1510046a","Lindor Christmas Sampling ","Lindt & Sprungli (UK) Ltd","Lindt","IMPULSE FOOD",0,35888
+"i2c1510047a","Lindt - Christmas 2015","Lindt & Sprungli (UK) Ltd","Lindor","IMPULSE FOOD",0,37600
+"i2c1509018a","Cadbury Hot Cakes NPD","Premier Foods Group Ltd","Cadbury","BAKERY & CAFES",0,38050
+"i2c1507151a","PepsiCo - Walkers Bring It Back","PepsiCo","Walkers","IMPULSE FOOD",0,38450
+"i2c1508203a","Unilever - Snog larger format NPD","Unilever UK Ltd","Snog","FROZEN FOOD",0,38633
+"i2c1510052a","FloraProActiv_Relaunch Wave 2","Unilever UK Ltd","Flora Pro.activ","DAIRY",0,38964
+"i2c1510020a","Napolina50thAnniversaryCosyNightsIn","PrincesLtd","Napolina","CANNED & PACKAGED",0,39900
+"i2c1510020a2","Napolina50thAnniversaryCosyNightsIn","PrincesLtd","Napolina","CANNED & PACKAGED",0,39900
+"i2c1507095a","Colgate Palmolive - Palmolive","Colgate Palmolive Uk Ltd","Palmolive","BABY & BEAUTY",0,40040
+"i2c1507209a","Milk Tray 30th Anniversary","Mondelez UK Limited","Cadbury","IMPULSE FOOD",0,40357
+"i2c1510003a1","P&G Beauty Xmas","Procter & Gamble UK","Olay","BABY & BEAUTY",0,40600
+"i2cOLAYV2","P&G Beauty Xmas","Procter & Gamble UK","Olay","BABY & BEAUTY",0,40600
+"i2cOLAYV4","P&G Beauty Xmas","Procter & Gamble UK","Olay","BABY & BEAUTY",0,40600
+"i2c1508098a","Caffe Latte sampling","Emmi UK Ltd","Caffe Latte","DAIRY",0,41158
+"i2c1508257a","Jack Daniels Christmas Magazine Feature","Bacardi Brown Forman","Jack Daniels","BEERS, WINES & SPIRITS",0,41217
+"i2c1508257aS","Southern Comfort Christmas Magazine Feature","Bacardi Brown Forman","Southern Comfort","BEERS, WINES & SPIRITS",0,41217
+"i2c1509134a","SCA Plenty Genius Award","SCA Hygiene Products UK Ltd","Plenty","HOUSEHOLD & PETCARE",0,42050
+"i2c1512024a","RSS Heinz Ketchup Gates C15","HJ Heinz Food Ltd","Heinz Sauces","CANNED & PACKAGED",0,45000
+"i2c1509002a","Back to School - Italian","Oscar Mayer","JS","MEAL SOLUTIONS",1,45000
+"i2c1509016a","Im a Celebrity ATL Sponsorship","Aunt Bessies Limited","Aunt Bessies Limited Brand(s)","FROZEN FOOD",0,45260
+"i2c1509016a2","Im a Celebrity ATL Sponsorship","Aunt Bessies Limited","Aunt Bessies Limited Brand(s)","FROZEN FOOD",0,45260
+"i2c1508013a","Quaker Granola NPD","PepsiCo","QUAKER","CANNED & PACKAGED",1,46217
+"i2c1508013a","Quaker Granola NPD","PepsiCo","QUAKER","IMPULSE FOOD",1,46217
+"i2c1509116a","Knorr Gravy Pots","Unilever UK Ltd","Knorr","CANNED & PACKAGED",0,46700
+"i2c1508146a","Glade candles sampling","SC Johnson Ltd","Glade","HOUSEHOLD & PETCARE",0,47678
+"i2c1511135a","Cycle 16, Mondelez, Belvita Soft Bakes NPD","Mondelez UK Limited","belVita","IMPULSE FOOD",0,47948
+"i2c1507076a","Badoit Green & Rouge Campaign","Danone Waters UK & Ireland","Badoit","IMPULSE FOOD",0,48100
+"i2c1508265a","P&G - Oral-B Back to School","Procter & Gamble UK","Oral-B","BABY & BEAUTY",0,49225
+"i2c1507203a","Suntory - Orangina C11 activity","Lucozade Ribena Suntory Ltd","Lucozade Ribena Suntory","IMPULSE FOOD",0,50000
+"i2c1507156a","Kimberly Clark - Andrex Global Sanitation","Kimberly Clark Ltd","Andrex","HOUSEHOLD & PETCARE",0,52200
+"i2c1508250a","Naked Coconut Water 6 sheets ","PepsiCo","Naked","DAIRY",1,53450
+"i2c1508250a","Naked Coconut Water 6 sheets ","PepsiCo","Naked","WORLD FOODS",1,53450
+"i2c1507030a","Sharwoods Stir-fry melts","Premier","SHARWOODS","CANNED & PACKAGED",1,53600
+"i2c1508040a","P&G - Always - Like a girl","Procter & Gamble UK","Always","BABY & BEAUTY",0,54510
+"i2c1508118a","Aquafresh Disney Follow Up","GlaxoSmithKline Services Unlimited","Aquafresh","BABY & BEAUTY",0,58000
+"i2c1509107a3","P&G Christmas Household","Procter & Gamble UK","Fairy HDW","HOUSEHOLD & PETCARE",0,59860
+"i2c1509107a4","P&G Christmas - Household","Procter & Gamble UK","Fairy ADW","HOUSEHOLD & PETCARE",0,59860
+"i2cFAIDADWV2","P&G Christmas - Household","Procter & Gamble UK","Fairy ADW","HOUSEHOLD & PETCARE",0,59860
+"i2cFAIDADWV4","P&G Christmas - Household","Procter & Gamble UK","Fairy ADW","HOUSEHOLD & PETCARE",0,59860
+"i2cFAIDHDWV2","P&G Christmas Household","Procter & Gamble UK","Fairy HDW","HOUSEHOLD & PETCARE",0,59860
+"i2cFAIDHDWV3","P&G Christmas Household","Procter & Gamble UK","Fairy HDW","HOUSEHOLD & PETCARE",0,59860
+"i2cFAIDHDWV4","P&G Christmas Household","Procter & Gamble UK","Fairy HDW","HOUSEHOLD & PETCARE",0,59860
+"i2c1512047a","Mars Choc Celebrations Christmas 2016 ","Mars Chocolate UK Ltd","Celebrations","IMPULSE FOOD",0,60000
+"i2c1509014a","Ribena Winter Spice Sampling","Lucozade Ribena Suntory Ltd","Lucozade Ribena Suntory","IMPULSE FOOD",0,61210
+"i2c1509125a","Tassimo Christmas 2015","D. E. Master Blenders 1753 N.V.","Douwe Egberts","CANNED & PACKAGED",0,65168
+"i2c1509125a","Tassimo Christmas 2015","D. E. Master Blenders 1753 N.V.","Douwe Egberts","ELECTRICAL & LEISURE",0,65168
+"i2c1509125a2","Tassimo Christmas 2015","D. E. Master Blenders","Douwe Egberts","CANNED & PACKAGED",0,65168
+"i2c1509125a2","Tassimo Christmas 2015","D. E. Master Blenders","Douwe Egberts","ELECTRICAL & LEISURE",0,65168
+"i2c1509061a","Coors Carling Christmas","Coors Brewers Ltd","Carling","BEERS, WINES & SPIRITS",0,65500
+"i2cNEW-TOOL","Coors Carling Christmas","Coors Brewers Ltd","Carling","BEERS, WINES & SPIRITS",0,65500
+"i2c1509103a","FloraProActiv","Unilever UK Ltd","Flora Pro.activ","DAIRY",0,68783
+"i2c1509042a","Old Mout C12","Heineken UK Ltd","Old Mout","BEERS, WINES & SPIRITS",0,73000
+"i2c1507187a","Colgate Palmolive - CSPR","Colgate Palmolive Uk Ltd","Colgate","BABY & BEAUTY",0,73250
+"i2c1508169a2","Goody Good Stuff ","SHS Sales","Goody Goody Stuff","CANNED & PACKAGED",0,73983
+"i2c1509107a1","P&G Christmas Household","Procter & Gamble UK","Lenor","HOUSEHOLD & PETCARE",0,73983
+"i2c1509107a5","P&G Christmas Household","Procter & Gamble UK","Febreeze","HOUSEHOLD & PETCARE",0,73983
+"i2c1509107aA","P&G Christmas Household","Procter & Gamble UK","Ariel","HOUSEHOLD & PETCARE",0,73983
+"i2c1509107aF","P&G Christmas Household","Procter & Gamble UK","Flash","HOUSEHOLD & PETCARE",0,73983
+"i2c1509107aL","P&G Christmas Household","Procter & Gamble UK","Lenor","HOUSEHOLD & PETCARE",0,73983
+"i2c1510003aG","P&G Beauty Xmas","Procter & Gamble UK","Gillette","BABY & BEAUTY",0,73983
+"i2c1510003aH","P&G Beauty Xmas","Procter & Gamble UK","Head and Shoulders","BABY & BEAUTY",0,73983
+"i2c1510003aV","P&G Beauty Xmas","Procter & Gamble UK","Venus","BABY & BEAUTY",0,73983
+"i2cARIALV2","P&G Christmas Household","Procter & Gamble UK","Ariel","HOUSEHOLD & PETCARE",0,73983
+"i2cARIALV4","P&G Christmas Household","Procter & Gamble UK","Ariel","HOUSEHOLD & PETCARE",0,73983
+"i2cFABREV2","P&G Christmas Household","Procter & Gamble UK","Febreeze","HOUSEHOLD & PETCARE",0,73983
+"i2cFABREV4","P&G Christmas Household","Procter & Gamble UK","Febreeze","HOUSEHOLD & PETCARE",0,73983
+"i2cFLASHV2","P&G Christmas Household","Procter & Gamble UK","Flash","HOUSEHOLD & PETCARE",0,73983
+"i2cFLASHV4","P&G Christmas Household","Procter & Gamble UK","Flash","HOUSEHOLD & PETCARE",0,73983
+"i2cGILLEV2","P&G Beauty Xmas","Procter & Gamble UK","Gillette","BABY & BEAUTY",0,73983
+"i2cGILLEV4","P&G Beauty Xmas","Procter & Gamble UK","Gillette","BABY & BEAUTY",0,73983
+"i2cHSV2","P&G Beauty Xmas","Procter & Gamble UK","Head and Shoulders","BABY & BEAUTY",0,73983
+"i2cHSV4","P&G Beauty Xmas","Procter & Gamble UK","Head and Shoulders","BABY & BEAUTY",0,73983
+"i2cLENORV2","P&G Christmas Household","Procter & Gamble UK","Lenor","HOUSEHOLD & PETCARE",0,73983
+"i2cLENORV4","P&G Christmas Household","Procter & Gamble UK","Lenor","HOUSEHOLD & PETCARE",0,73983
+"i2cLENUNV2","P&G Christmas Household","Procter & Gamble UK","Lenor","HOUSEHOLD & PETCARE",0,73983
+"i2cLENUNV4","P&G Christmas Household","Procter & Gamble UK","Lenor","HOUSEHOLD & PETCARE",0,73983
+"i2cVENUSV2","P&G Beauty Xmas","Procter & Gamble UK","Venus","BABY & BEAUTY",0,73983
+"i2cVENUSV4","P&G Beauty Xmas","Procter & Gamble UK","Venus","BABY & BEAUTY",0,73983
+"i2c1511005a","Market Deli Christmas","PepsiCo","Market Deli","IMPULSE FOOD",0,75725
+"i2c1508034a","Horlicks Special Packs","GlaxoSmithKline Services Unlimited","Horlicks","CANNED & PACKAGED",0,78900
+"i2c1507161a","Lindt - Lindor Six Sheets","Lindt & Sprungli (UK) Ltd","Lindor","IMPULSE FOOD",0,92500
+"i2c1510003a2","P&G Beauty Xmas","Procter & Gamble UK","Oral-B","BABY & BEAUTY",0,95710
+"i2cORALBV2","P&G Beauty Xmas","Procter & Gamble UK","Oral-B","BABY & BEAUTY",0,95710
+"i2cORALBV4","P&G Beauty Xmas","Procter & Gamble UK","Oral-B","BABY & BEAUTY",0,95710
+"TEST_JD","Birds Eye - Back to School","Birds Eye","BIRDSEYE","FROZEN FOOD",0,96708
+"TEST_JD2","Birds Eye - Back to School","Birds Eye","BIRDSEYE","FROZEN FOOD",0,96708
+"i2c1509111a2","Kleenex YTG Promo Support Plan","Kimberly Clark Ltd","Kleenex","HOUSEHOLD & PETCARE",0,96732
+"i2c1510033a","Andrex Christmas","Kimberly Clark Ltd","Andrex","HOUSEHOLD & PETCARE",0,96732
+"i2c1511015a","Premier Foods - Christmas 2015","Premier Foods Group Ltd","Premier Foods","BAKERY & CAFES",0,105500
+"i2c1511015a","Premier Foods - Christmas 2015","Premier Foods Group Ltd","Premier Foods","CANNED & PACKAGED",0,105500

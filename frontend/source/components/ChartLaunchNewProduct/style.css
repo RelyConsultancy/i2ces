@@ -1,0 +1,68 @@
+.loading {
+  position: relative;
+  padding: 1rem;
+  text-align: center;
+  font-size: .75em;
+  color: #5FC3E1;
+}
+
+
+.chart {
+  position: relative;
+  padding-left: .5rem;
+}
+.chart_label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-40%, -120%) rotate(-90deg);
+  font-size: .875rem;
+  font-family: 'Archer Bold', serif;
+  color: #6D6D6D;
+}
+.chart .c3-target path {
+  stroke-width: 2px;
+}
+.chart .c3-target-Control path {
+  stroke-width: 1px;
+  stroke-dasharray: 5,5;
+}
+.chart .c3-axis-x .tick > text {
+  transform: rotate(-45deg) translate(-1.75rem, 0);
+}
+.chart .c3-legend-item {
+  transform: translateY(-18rem);
+}
+.chart .c3-region {
+  fill: none;
+}
+
+
+.table_sales {
+  margin-top:  2rem;
+  font-size: .875rem;
+}
+.table_sales_header {
+  background-color: #ECF6F9;
+  font-family: 'Avenir LT Std 85 Heavy';
+}
+.table_sales_footer {
+  font-family: 'Avenir LT Std 85 Heavy';
+  background-color: #D8E481;
+  border-bottom: 1px solid #A09F9C;
+}
+.table_sales td {
+  padding-top: .25em;
+  line-height: 1.5rem;
+  width: 33.333333333333%;
+  font-size: .75rem;
+  text-align: center;
+}
+.table_sales_footer td {
+  border-top: 0;
+}
+
+.c3-region.campaign-period rect {
+    fill-opacity: 1!important;
+    fill: #b7dee8;
+}

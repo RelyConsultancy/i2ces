@@ -1,6 +1,7 @@
 import moment from 'moment'
+import _ from 'underscore'
 import { B } from '/components/component.js'
-
+import numeral from 'numeral'
 
 export const isElement = (value) => (
   typeof value === 'object' && value !== null && value.$$typeof
@@ -58,6 +59,10 @@ export const fmtNumber = (value) => (
   parseInt(value).toLocaleString()
 )
 
+export const sortAlpha = (collection, key) => {
+    return _.sortBy(collection, key);
+}
+
 
 export const fmtUnit = (value, unit = "") => {
   switch (unit.toLowerCase()) {
@@ -71,12 +76,12 @@ export const fmtUnit = (value, unit = "") => {
       value += 'ppts'
     break
 
-    case 'percent':
+    case 'percentage':
       value = parseFloat(value).toFixed(2) + '%'
     break
 
     default:
-      value = parseInt(value)
+      value = numeral(parseInt(value)).format('0,0')
   }
 
   return value

@@ -26,6 +26,10 @@ export default Component({
       palette[type] = colors[index]
     })
 
+    console.log('GANTT DATA');
+    console.log(items);
+    
+
     const chart = Chart({
       palette,
       type: 'gantt',

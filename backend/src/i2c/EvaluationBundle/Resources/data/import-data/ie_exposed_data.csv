@@ -1,28 +1,717 @@
 MASTER_CAMPAIGN_ID,MEDIA_TYPE,EXPOSED
-i2c1507187a,"Entrance Gates1, Six Sheets1, TV Wall1",165625
-i2c1507187a,"Entrance Gates1, Six Sheets1",190537
-i2c1507187a,"Six Sheets1, TV Wall1",290512
-i2c1507187a,Entrance Gates1,337250
-i2c1507187a,Six Sheets1,466779
-i2c1507187a,"Entrance Gates1, TV Wall1",870664
-i2c1507187a,TV Wall1,2904972
-i2c1509134a,Other,27659
-i2c1509134a,JS Magazine1,76070
-i2c1509134a,"JS Magazine1, TV Wall1",116302
-i2c1509134a,Six Sheets1,264647
-i2c1509134a,"Six Sheets1, TV Wall1",528380
-i2c1509134a,TV Wall1,3640153
-i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling2",12015
-i2c1510047a,"JS Magazine1, Six Sheets1, JS Magazine2",12449
-i2c1510047a,"Instore Sampling1, Six Sheets1, Instore Sampling3",16050
-i2c1510047a,Instore Sampling3,16853
-i2c1510047a,"JS Magazine1, Six Sheets1",17309
-i2c1510047a,Instore Sampling1,27515
-i2c1510047a,JS Magazine2,41791
-i2c1510047a,Other,57384
-i2c1510047a,"JS Magazine1, JS Magazine2",59632
-i2c1510047a,"Six Sheets1, Instore Sampling2",88318
-i2c1510047a,"Six Sheets1, Instore Sampling3",99174
-i2c1510047a,JS Magazine1,111689
-i2c1510047a,"Instore Sampling1, Six Sheets1",179508
-i2c1510047a,Six Sheets1,906831
+"i2cFAIDHDWV4","Total",2443916
+"i2c1508061a","Other",152437
+"i2c1509125a","JS Magazine1, TV Wall1",102760
+"i2cHSV4","Six Sheets1",1740166
+"i2c1510020a2","JS Magazine2",40422
+"i2cFAIDADWV2","Six Sheets1, Six Sheets2",944989
+"i2cLENUNV2","Six Sheets1",308929
+"i2cFAIDHDWV4","Six Sheets2",1498926
+"i2cFABREV4","Six Sheets1, Six Sheets2",149802
+"i2c1510051a","Other",234471
+"i2c1507156a","JS Magazine1",56250
+"i2c1511015a","Six Sheets1",597875
+"TEST_JD2","Milk Media1, Six Sheets1",30868
+"TEST_JD2","Mobile1",57218
+"i2c1509125a","Six Sheets1",427968
+"i2c1509069a","Instore Sampling1, Instore Sampling2",25038
+"i2c1509107aA","Six Sheets1, Six Sheets2",334631
+"i2c1510020a","Entrance Gates1, Trolleys1, Trolleys2",76549
+"TEST_JD","JS Magazine1, Milk Media1",11783
+"i2c1510020a","Total",3280292
+"i2c1510013a","Total",1536318
+"i2cLYNX666","Total",2923867
+"i2c1505029aM","Total",209641
+"i2c1535KE0","Total",423949
+"i2c1507030a","Six Sheets1, Instore Sampling2",86685
+"i2cOLAYV2","Entrance Gates1, Six Sheets1",131900
+"i2c1509125a2","JS Magazine1",72721
+"i2c1508223a","Instore Sampling4",132436
+"i2c1510046a","Other",21338
+"i2c1510006a","Instore Sampling1",372670
+"i2cHSV2","Total",1740188
+"i2c1512022P","Total",2610173
+"i2c1509107a7","Total",1101469
+"i2c1508254a","Instore Sampling1",60612
+"i2c1509107a5","Six Sheets1",738258
+"i2c1509107aL","Six Sheets3",154356
+"i2cLENORV4","Six Sheets1",308931
+"i2c1509125a2","Instore Sampling4",13137
+"i2c1509070a","Other",15998
+"i2c1601020a","Other",64132
+"TEST_JD2","Six Sheets1",561316
+"i2c1510003aG","Six Sheets1",1459932
+"i2c1506014aM","JS Magazine",115425
+"i2c1504091aM","JS Magazine",129019
+"i2c1507030a","Six Sheets1",1565938
+"i2cORALBV4","Six Sheets2",37222
+"i2c1511005a","Entrance Gates1, Six Sheets1",228241
+"i2c1507192a","Instore Sampling1",243671
+"i2c1510047a","JS Magazine1, JS Magazine2",59632
+"i2c1509125a","TV Wall1",3333787
+"i2c1510003a2","Entrance Gates1",1584275
+"i2c1510020a2","Entrance Gates1, Trolleys2",69092
+"i2c1509016a2","Six Sheets1",1793669
+"i2c1510003a1","Total",2084339
+"i2c1507212a","Total",243780
+"i2c1507209a","Total",530046
+"i2c1507030a","Instore Sampling1",71530
+"i2cFABREV2","Six Sheets1, Six Sheets2",149805
+"i2cOLAYV2","Six Sheets1",590166
+"i2cLENORV4","Six Sheets1, Six Sheets2",281332
+"i2c1507161a","Six Sheets1",725971
+"i2c1509106a2","Entrance Gates1, Six Sheets1",1060959
+"i2c1508265a","Six Sheets1, Six Sheets2",870686
+"i2cFAIDHDWV3","Six Sheets2",1498923
+"i2cLYNX333","TV Wall1",2261358
+"i2c1510020a","JS Magazine2, JS Magazine3",40421
+"i2c1508206a","Total",220744
+"i2cLYNX888","Total",3251099
+"TEST_JD2","Total",2462763
+"i2cOLAYV4","Total",1839364
+"i2c1506032M1","Total",139439
+"i2c1508118a","Total",2362752
+"i2cLENORV2","Total",817942
+"i2c1509046a","Other",131525
+"i2c1508281a","Instore Sampling2",264650
+"i2c1510033a","Six Sheets1",946582
+"i2c1510020a2","JS Magazine1",94292
+"i2c1509144a","Instore Sampling1",124666
+"i2c1509111a2","Six Sheets2",2374776
+"i2c1510047a","Instore Sampling1, Six Sheets1",179508
+"i2c1511015a","Six Sheets1, Six Sheets2",37030
+"i2c1507187a","Six Sheets1, TV Wall1",290512
+"i2c1509016a","JS Magazine1, Six Sheets1",14190
+"i2cNEW-TOOL","Entrance Gates1, JS Magazine1, TV Wall1",59823
+"ALAN_TEST","Total",1469060
+"i2c1509106a2","Total",4804650
+"i2cORALBV2","Six Sheets1",869827
+"i2c1506063aM","JS Magazine",139439
+"i2c1504064aM","JS Magazine",129019
+"i2c1537AH0a","Instore Sampling",100029
+"i2c1507156a","JS Magazine1, Six Sheets1",11962
+"i2c1507095a","Trolleys1, TV Wall1",1223164
+"i2c1507187a","Entrance Gates1, Six Sheets1",190537
+"i2c1509111a","Six Sheets2",676648
+"ALAN_TEST","JS Magazine1",172291
+"i2c1507210a","Instore Sampling2",114692
+"i2cFAIDHDWV2","Six Sheets1, Six Sheets2",944989
+"i2cORALBV4","Entrance Gates1, Six Sheets1, Six Sheets2",180514
+"i2c1507161a","JS Magazine1",145338
+"i2c1507141a","Six Sheets1, Trolleys1",708625
+"i2c1511135a","Instore Sampling1, Six Sheets1",105974
+"i2c1510108a","TV Wall1, Instore Sampling3",19695
+"i2c1509010a","Instore Sampling1",252290
+"i2cLYNX555","TV Wall1",2713060
+"i2c1508203a","Total",616447
+"i2c1509107aA","Total",1391503
+"i2c1510003a3","Total",2156779
+"i2c1510003a2","Total",3194047
+"i2c1509042a","Total",519872
+"i2cFAIDHDWV2","Total",944989
+"i2c1508252a","Total",1698477
+"i2c1509004a","Total",220029
+"i2c1508137a","Total",1670199
+"i2c1537AH0a","Total",100029
+"i2cLENORV4","Six Sheets2",227682
+"i2c1505012aM","JS Magazine",209641
+"i2cLYNX666","TV Wall1",2923867
+"i2c1508265a","Six Sheets2, Six Sheets3",108633
+"i2c1510062a","Other",36761
+"i2c1511015a","TV Wall1, Six Sheets2",263438
+"i2c1511015a","Six Sheets1, Trolleys1, TV Wall1, Six Sheets2",745872
+"TEST_JD2","Six Sheets1, Six Sheets2",42970
+"i2c1510061a","Total",1082040
+"i2c1505012aM","Total",209641
+"i2cFABREV4","Six Sheets1",520160
+"i2c1510041a","JS Magazine1",135192
+"i2c1511015a","Entrance Gates1, Six Sheets1, Trolleys1, TV Wall1",41985
+"i2c1511015a","Six Sheets1, Trolleys1",25836
+"i2c1510047a","JS Magazine1",111689
+"i2c1510047a","Six Sheets1, Instore Sampling3",99174
+"i2c1507156a","JS Magazine1, TV Wall1",71671
+"i2c1510054a","Other",305801
+"i2c1509144a","Instore Sampling1, Instore Sampling2, Instore Sampling2, Instore Sampling2",26340
+"i2c1509107a5","Total",1289796
+"i2c1508257aS","Total",220031
+"i2c1509022a","Instore Sampling1",135341
+"i2c1511005a","Other",38863
+"i2c1509134a","JS Magazine1, TV Wall1",116302
+"i2c1507209a","Other",18132
+"i2c1509070a","Instore Sampling1, Instore Sampling2",29234
+"i2c1511015a","Trolleys1, Six Sheets2",96403
+"i2cGILLEV4","Six Sheets1",1459919
+"TEST_JD","Total",2462763
+"i2c1512046a","Total",1818961
+"i2cGILLEV4","Total",1459919
+"i2c1509107a1","Six Sheets3",154356
+"i2cFAIFEV2","Six Sheets1",685768
+"i2c1509022a","Other",140078
+"i2cNEW-TOOL","Entrance Gates1",907701
+"i2c1507161a","JS Magazine1, Six Sheets1, Car Park Posters1",43647
+"i2c1509116a","Other",21070
+"i2c1511015a","Trolleys1, TV Wall1",70943
+"i2c1512047a","Six Sheets1, Trolleys1",209986
+"i2c1506014aM","Total",115425
+"i2c1509016a","Total",5038785
+"i2c1510008a","Total",1937143
+"i2c1509101a","Total",112157
+"i2c1509018a","JS Magazine1, Six Sheets1",37937
+"i2c1509061a","Entrance Gates1, JS Magazine1",19502
+"i2c1510033a","TV Wall2",905856
+"i2c1508186a","Entrance Gates1",1091063
+"i2c15FAIFE","Six Sheets1, TV Wall1",331060
+"i2c1511015a","Entrance Gates1",427393
+"i2c1507187a","Entrance Gates1, TV Wall1",870664
+"i2c1512047a","Trolleys1",1849174
+"i2c1509004a","JS Magazine1",220029
+"i2c1510020a2","Entrance Gates1, Trolleys1",139627
+"i2c1508250a","Total",1204884
+"i2c1509107a3","Six Sheets1",13143
+"i2c1509107a6","Six Sheets1",1101469
+"i2c1509125a2","Instore Sampling1, TV Wall1",18662
+"i2c1510047a","JS Magazine1, Six Sheets1, JS Magazine2",12449
+"i2cFAIDHDWV3","Six Sheets1, Six Sheets2",944989
+"i2c1509125a","JS Magazine1, Six Sheets1, TV Wall1",24835
+"i2c1507095a","JS Magazine1, TV Wall1",58007
+"i2c1509101a","Instore Sampling1",112157
+"i2c1509111a2","Total",2374776
+"i2c1509131a","Instore Sampling1, Instore Sampling1",237449
+"i2c1511005a","Six Sheets1",720796
+"i2c1509125a2","JS Magazine1, Six Sheets1, TV Wall1",24833
+"i2c1505074aM","JS Magazine",209641
+"i2c1509125a","Six Sheets1, TV Wall1",610648
+"i2c1509107a2","Six Sheets2",1001763
+"i2c1510020a","Other",76912
+"i2cBRAUNV4","Total",2116642
+"i2cORALBV2","Total",2037229
+"i2c1504050aM","Total",129019
+"i2c1508042a","JS Magazine1, TV Wall1",128033
+"i2c1509061a","Entrance Gates1, JS Magazine1, TV Wall1",59376
+"i2c1510116a","Instore Sampling1",83397
+"i2cFAIFEV4","Six Sheets1",685771
+"i2c1510033a","TV Wall1, TV Wall2",2054771
+"TEST_JD","Mobile1",57218
+"i2c1511015a","Six Sheets1, Trolleys1, Six Sheets2",162557
+"i2c1507151a","Total",668679
+"i2cLYNX777","Total",3122494
+"i2c1509107a1","Total",582970
+"i2c1508186a2","Total",2711596
+"i2c1509046a","Instore Sampling2",136056
+"i2c1509134a","Six Sheets1, TV Wall1",528380
+"i2c1509134a","JS Magazine1",76070
+"i2cORALBV4","Entrance Gates1, Six Sheets1",230979
+"TEST_JD2","JS Magazine1, Six Sheets1",20057
+"i2c1510003a2","Other",23636
+"i2c1510003a2","Entrance Gates1, Six Sheets1",443856
+"i2c1510046a","Instore Sampling2, Instore Sampling3",12121
+"i2c1509144a","Instore Sampling2, Instore Sampling2, Instore Sampling2",279983
+"i2cGILLEV2","Total",1459949
+"i2c1510003aV","Total",1276307
+"i2c1504064aM","Total",129019
+"i2c1509107a1","Six Sheets1, Six Sheets2",334657
+"i2c1509061a","Entrance Gates1",892270
+"i2cLENUNV4","Six Sheets2",227682
+"i2c1511135a","Six Sheets1",978076
+"i2c1510047a","Six Sheets1",906831
+"i2c1508206a","Milk Media1",220744
+"i2c1508186a","Total",2711527
+"i2cARIALV2","Six Sheets1, Six Sheets2",281329
+"i2c1507203a","Trolleys1",1405253
+"i2c1509107aL","Six Sheets1, Six Sheets2",334657
+"i2c1510033a","TV Wall1",1000207
+"i2c1508124a","Instore Sampling1",191387
+"i2c1509070a","Instore Sampling2",407716
+"i2c1509014a","Entrance Gates1, Instore Sampling1",50375
+"i2c1509116a","Instore Sampling2",106475
+"i2c1509106a","Six Sheets1",4772869
+"i2c1511015a","Six Sheets1, Trolleys1, TV Wall1",156995
+"i2c1508265a","Six Sheets1",711528
+"i2c1535KE0","Other",170776
+"i2c1511015a","Six Sheets2",32530
+"i2c1509016a","JS Magazine1, TV Wall1",85864
+"i2c1509142a","Other",71147
+"i2c1509069a","Instore Sampling2",134615
+"i2c1510007a","Instore Sampling2",33958
+"i2c1509142a","Instore Sampling2",70990
+"i2c1507030a","Instore Sampling1, Six Sheets1",69114
+"i2c1509018a","Instore Sampling1",81648
+"i2c1509107a7","Six Sheets1",1101469
+"i2cORALBV4","Six Sheets1, Six Sheets2",315431
+"i2c1509111a","TV Wall1, Six Sheets2",569966
+"i2c1507181a","Six Sheets",1758504
+"i2cLENORV2","Six Sheets2",227684
+"i2c1509107a2","Six Sheets1",328883
+"i2c1507151a","Six Sheets1",668679
+"i2cGILLEV2","Six Sheets1",1459949
+"i2cFABREV4","Six Sheets2",366524
+"i2c1509004a2","JS Magazine1",220029
+"i2cLYNX777","TV Wall1",3122494
+"i2c1508186a2","Entrance Gates1, Trolleys1",385681
+"i2c1511015a","Entrance Gates1, Six Sheets1, TV Wall1, Six Sheets2",136735
+"i2c1508034a","Six Sheets1",492621
+"i2c1508107a","Total",1787509
+"i2c1507030a","Total",2099359
+"i2c1507076a","Instore Sampling1",108827
+"i2c1508107a","Six Sheets1",1626158
+"i2c1509030a","Six Sheets1",1307361
+"i2c1516KC0M1","JS Magazine",115425
+"i2c1509125a","JS Magazine1, Six Sheets1",11879
+"i2c1509042a","Six Sheets1",519872
+"i2c1507095a","TV Wall1",2813565
+"i2c1510020a","Entrance Gates1, JS Magazine1",16205
+"TEST_JD","JS Magazine1, Six Sheets1",20057
+"i2c1510136a","Total",135192
+"i2c1509002a","Total",460338
+"i2c1509107a4","Six Sheets2",1446996
+"i2c1509061a","TV Wall1",2395737
+"i2cFLASHV2","Six Sheets1",1057372
+"i2cARIALV2","Six Sheets1",308929
+"i2c1510033a","Six Sheets1, TV Wall2",497990
+"i2c1509014a","Instore Sampling1",244907
+"i2cVENUSV4","Six Sheets1",1336724
+"i2c1508034a","JS Magazine1, Six Sheets2",20339
+"i2c1510052a","Instore Sampling1, Instore Sampling2",42240
+"i2c1510020a2","Other",76913
+"i2c1509134a","TV Wall1",3640153
+"i2cFAIDADWV4","Six Sheets2",1498926
+"i2cARIALV4","Six Sheets2",227682
+"i2cNEW-TOOL","Other",19407
+"TEST_JD","Six Sheets1, Six Sheets2",42970
+"i2c1508013a","Milk Media",344566
+"i2c15FAIFE","TV Wall1",1366160
+"i2c1510046a","Instore Sampling5",13684
+"i2c1511015a","Other",22687
+"i2c1507030a","Other",61026
+"i2c1508040a","Six Sheets1",3017379
+"i2cFAINBV2","Six Sheets1",685770
+"i2c1510116a","Instore Sampling3",73167
+"i2cBRAUNV4","Six Sheets1",2116642
+"i2c1504050aM","JS Magazine",129019
+"i2c1510003a1","Six Sheets1",835159
+"i2c1509125a2","TV Wall1, Instore Sampling5",20627
+"i2c1510047a","Six Sheets1, Instore Sampling2",88318
+"i2c1510047a","Other",57384
+"i2c1509125a","TV Wall1, Instore Sampling3",22722
+"i2c1511015a","Trolleys1, TV Wall1, Six Sheets2",374640
+"TEST_JD2","Other",37191
+"ALAN_TEST","JS Magazine1, Trolleys1",47739
+"i2cNEW-TOOL","Total",5393397
+"i2c1507187a","Total",5226339
+"i2cFAIDADWV2","Total",2443912
+"i2c1508118a","Six Sheets1",2362752
+"i2cOLAYV2","Entrance Gates1",1117301
+"i2cFAIDADWV4","Six Sheets1, Six Sheets2",944990
+"i2c1511003a","Trolleys1",1628116
+"i2c1511015a","Entrance Gates1, Six Sheets2",35290
+"i2c1509125a","Instore Sampling1, TV Wall1",18663
+"i2c1507095a","JS Magazine1",72615
+"i2c1510020a","Entrance Gates1",862795
+"i2c1510020a2","Entrance Gates1",862746
+"i2cFAIDADWV2","Six Sheets2",1498923
+"i2cOLAYV4","Entrance Gates1",1117303
+"i2c1512046a","Entrance Gates1",1818961
+"i2c1510108a","Other",45059
+"i2c1510003aH","Six Sheets1",1740195
+"i2c1508179a","Total",309258
+"i2c15FAIFE","Total",2759706
+"i2c1509070a","Total",742141
+"i2c1507204a","Other",35836
+"i2c1510003a3","Six Sheets1",2156779
+"i2c1509061a","Entrance Gates1, TV Wall1",1711125
+"i2cORALBV4","Entrance Gates1",370014
+"i2c1511028a","Six Sheets1",499601
+"i2c1510033a","Six Sheets1, TV Wall1, TV Wall2",1256459
+"i2c1510074a","Instore Sampling1",384105
+"i2c1508179a","JS Magazine1",215762
+"i2c1511135a","Instore Sampling1",127902
+"i2c1508265a","Six Sheets1, Six Sheets3",20252
+"i2c1509106a2","Entrance Gates1",3711910
+"i2c1509016a","JS Magazine1, Six Sheets1, TV Wall1",48788
+"i2c1510003aV","Six Sheets1",1276307
+"i2c1508034a","Six Sheets1, Six Sheets2",86261
+"i2c1510007a","Other",29720
+"i2c1512047a","Total",2720596
+"i2c1509046a","Total",267581
+"i2c1509061a","Total",5219163
+"i2c1504028aM","Total",129019
+"i2c1508281a","Total",264650
+"i2cORALBV2","Entrance Gates1, Six Sheets1",230978
+"i2cLENUNV4","Six Sheets1, Six Sheets2",281332
+"i2cARIALV4","Six Sheets1, Six Sheets2",281332
+"i2cLENUNV4","Six Sheets1",308931
+"i2cFAIDHDWV4","Six Sheets1, Six Sheets2",944990
+"TEST_JD","Six Sheets1",561316
+"TEST_JD","Other",37191
+"i2c1504065aM","JS Magazine",129019
+"i2c1508179a","Other",93496
+"i2c1510108a","Instore Sampling2",47633
+"i2c1511015a","Entrance Gates1, Six Sheets1, Trolleys1, TV Wall1, Six Sheets2",278647
+"i2c1510020a","JS Magazine1",94295
+"i2c1511135a","Total",1211952
+"i2c1504021aM","Total",129019
+"i2c1509134a","Total",4653211
+"i2c1509142a","Total",142137
+"i2c1601020a","Total",272038
+"i2c1510046a","Total",382166
+"i2c1508265a","Total",2213533
+"i2c1506058aM","Total",115425
+"i2c1510054a2","Total",306811
+"i2c1509107a2","Total",1430370
+"i2c1509103a","Total",697884
+"i2cLYNX111","Total",1375780
+"i2c1507141a","Total",908923
+"i2c1509107a4","Six Sheets1",13143
+"i2c1509107a3","Six Sheets1, Six Sheets2",965194
+"i2c1510116a","Other",24294
+"i2c1510116a","Instore Sampling2",92877
+"i2c1509103a","Instore Sampling3",226390
+"i2c1511005a","Entrance Gates1, Instore Sampling1",50921
+"i2c1511005a","Instore Sampling1",123019
+"i2c1506032M1","JS Magazine",139439
+"i2c1509116a","Instore Sampling1, Instore Sampling3",15948
+"i2cLYNX111","TV Wall1",1375780
+"i2c1508265a","Six Sheets2",197423
+"i2c1507156a","Six Sheets1",548475
+"i2c1511015a","Six Sheets1, TV Wall1, Six Sheets2",417573
+"TEST_JD2","Milk Media1",290497
+"TEST_JD2","Milk Media1, Six Sheets2",71449
+"i2c1509016a2","JS Magazine1, Six Sheets1",62511
+"i2c1511069a","Total",138225
+"i2c1507210a","Total",226154
+"i2c1509107aF","Six Sheets1",1072663
+"i2cHSV2","Six Sheets1",1740188
+"i2c1507212a","Other",243780
+"i2c1511015a","Entrance Gates1, Six Sheets1",94213
+"i2c1511015a","Entrance Gates1, Trolleys1, TV Wall1, Six Sheets2",111308
+"i2c1510052a","Instore Sampling2",312417
+"i2c1510020a2","JS Magazine1, JS Magazine2",44176
+"i2c1516KC0M1","Total",115425
+"i2c1509004a2","Total",220029
+"i2c1516KC0M","Total",139439
+"i2c1509030a","Total",1527392
+"i2cFLASHV4","Total",1057364
+"i2c1509107aA","Six Sheets1, Six Sheets2, Six Sheets3",93984
+"i2c1509107a5","Six Sheets2",303208
+"TEST_JD","JS Magazine1, Six Sheets2",28664
+"i2c1508223a","Instore Sampling3",86385
+"i2c1507141a","Trolleys1",130696
+"i2c1511015a","Six Sheets1, TV Wall1",290539
+"i2c1508204a","Six Sheets1",1623266
+"i2c1509048a","Instore Sampling1",250924
+"i2c1507181a","Total",1758504
+"i2c1509125a2","Six Sheets1, TV Wall1, Instore Sampling4",11555
+"i2c1509125a2","Other",94479
+"i2c1508223a","Other",65136
+"i2c1511015a","Entrance Gates1, Six Sheets1, Six Sheets2",38134
+"TEST_JD2","JS Magazine1",189687
+"i2c1507156a","TV Wall1",3300872
+"i2c1507156a","Total",4762420
+"i2c1511028a","Total",499601
+"i2c1509018a","Total",1701100
+"i2c1510003aH","Total",1740195
+"i2c1509111a","Total",4981920
+"i2c1508127a","Total",331934
+"i2c1510020a2","Total",3280105
+"i2c1508013a","Total",344566
+"i2cARIALV4","Total",817945
+"i2cBRAUNV2","Total",2116660
+"i2c1509014a","Total",1944515
+"i2c1508061a","Total",405661
+"i2c1508107a","JS Magazine1",113827
+"i2c1509134a","Six Sheets1",264647
+"i2c1507173a","Instore Sampling",967600
+"i2cFABREV2","Six Sheets1",520160
+"i2cLYNX222","TV Wall1",1928647
+"i2c1507187a","Entrance Gates1",337250
+"i2c1508257a","Total",220031
+"i2c1508169a2","Total",444077
+"i2c1509124a","Total",561206
+"i2c1509048a","Total",250924
+"i2c1508146a","Total",515694
+"i2c1507076a","Other",71688
+"i2c1507204a","Instore Sampling1",271502
+"i2cORALBV2","Entrance Gates1",370029
+"i2c1509125a2","TV Wall1, Instore Sampling4",39862
+"i2c1509070a","Instore Sampling1",169999
+"TEST_JD2","JS Magazine1, Six Sheets2",28664
+"i2c1510047a","Instore Sampling3",16853
+"i2c1508127a","JS Magazine2",71896
+"i2c1510052a","Instore Sampling1",240718
+"i2c1509069a","Instore Sampling1",113480
+"i2c1510007a","Total",818833
+"i2c1510051a","Total",234471
+"i2cORALBV4","Total",2037199
+"i2c1509029a","Total",285874
+"i2c1507210a","Other",111462
+"i2c1509018a","Six Sheets1",1430268
+"i2cVENUSV2","Six Sheets1",1336735
+"i2cLENORV2","Six Sheets1",308929
+"i2cORALBV4","Six Sheets1",869822
+"i2c1509125a2","Six Sheets1",427967
+"i2c15FAINB","Six Sheets1",1062486
+"i2c1509070a","JS Magazine1",119194
+"i2c1507187a","Entrance Gates1, Six Sheets1, TV Wall1",165625
+"i2c1510052a","Other",42817
+"i2c1509016a","Six Sheets1",502710
+"i2c1509107aF","Total",1072663
+"i2c1509107aA","Six Sheets2",794728
+"i2cORALBV2","Entrance Gates1, Six Sheets2",33217
+"i2c1510003a1","Entrance Gates1",914242
+"i2c1510003a2","Six Sheets1, Six Sheets2",303681
+"i2c1510020a2","Entrance Gates1, JS Magazine1",16204
+"i2c1510003aG","Total",1459932
+"i2c1509125a2","Total",4805659
+"i2c1509067a","Total",105468
+"i2cLYNX222","Total",1928647
+"i2c1510108a","Total",4515459
+"i2c1507074aM","Total",115425
+"i2c1509107aL","Six Sheets1, Six Sheets2, Six Sheets3",93957
+"i2c1509103a","Instore Sampling1, Instore Sampling3",47186
+"i2c1504021aM","JS Magazine",129019
+"i2c1509067a","Other",105468
+"i2c1510007a","Six Sheets1",636217
+"i2c1510020a","Trolleys2",631248
+"i2c1510020a","JS Magazine1, JS Magazine2, JS Magazine3",44175
+"i2c1510020a","Trolleys1, Trolleys2",534413
+"i2cFAINBV2","Total",685770
+"i2c1511005a","Total",2597262
+"TEST_JD2","JS Magazine1, Milk Media1",11783
+"i2c1510047a","Instore Sampling1, Six Sheets1, Instore Sampling2",12015
+"i2c1510007a","Instore Sampling1",118938
+"i2c1510020a","JS Magazine1, Trolleys1",12032
+"i2c1510020a2","JS Magazine1, Trolleys1",12033
+"i2cLENUNV2","Total",817942
+"i2c1507076a","JS Magazine1",118796
+"i2c1511005a","Entrance Gates1",1362382
+"i2c1509125a2","TV Wall1, Instore Sampling3",22722
+"i2c1505029aM","JS Magazine",209641
+"i2c15FAINB","Six Sheets1, TV Wall1",331060
+"i2c1508265a","Six Sheets3",220591
+"i2c1510047a","Instore Sampling1, Six Sheets1, Instore Sampling3",16050
+"i2c1507156a","Six Sheets1, TV Wall1",751720
+"i2c1508257a","JS Magazine1",220031
+"i2c1509124a","Six Sheets1",561206
+"i2c1507173a","Total",967600
+"i2c1509018a","JS Magazine1",119756
+"i2c1509103a","Other",42304
+"i2c1509014a","JS Magazine1",164222
+"i2c1507156a","JS Magazine1, Six Sheets1, TV Wall1",21470
+"i2c1510062a","Instore Sampling2",48426
+"i2c1510046a","Instore Sampling1",42817
+"i2c1511015a","Entrance Gates1, Six Sheets1, TV Wall1",139149
+"i2c1511015a","Entrance Gates1, Six Sheets1, Trolleys1, Six Sheets2",36283
+"i2c1509016a","TV Wall1",3043305
+"i2c1512024a","Total",2114124
+"i2c1507076a","Instore Sampling3",85380
+"i2c1509107a1","Six Sheets1, Six Sheets2, Six Sheets3",93957
+"i2cORALBV2","Six Sheets2",37219
+"i2c1510054a2","Other",306811
+"i2c1511015a","TV Wall1",1206267
+"i2c1510046a","Instore Sampling2",136257
+"i2c1508034a","JS Magazine1",218103
+"i2c1510116a","Total",273735
+"i2c1509016a2","Total",2013807
+"i2cFLASHV2","Total",1057372
+"i2c1508034a","Total",1389929
+"i2cLYNX444","Total",2522950
+"i2c1510145a","Total",1123761
+"i2cOLAYV2","Total",1839367
+"i2c1507192a","Total",243671
+"i2c1509022a","Total",275419
+"i2c1508042a","JS Magazine1",131999
+"i2c1507030a","JS Magazine1",177451
+"i2c1509107aA","Six Sheets2, Six Sheets3",51759
+"i2c1509061a","JS Magazine1",66025
+"i2cFAINBV4","Six Sheets1",685771
+"i2c1509103a","Instore Sampling4",18358
+"i2cLENUNV2","Six Sheets1, Six Sheets2",281329
+"i2c1508186a","Entrance Gates1, Trolleys1",385679
+"i2c1508186a2","Entrance Gates1",1091059
+"i2c1510047a","JS Magazine1, Six Sheets1",17309
+"i2c1510108a","TV Wall1, Instore Sampling2",107662
+"i2c1512022P","TV Wall1",1277546
+"TEST_JD","Milk Media1, Six Sheets1",30868
+"i2c1509107aL","Total",582970
+"i2cFLASHV4","Six Sheets1",1057364
+"ALAN_TEST","Trolleys1",1249030
+"i2c1509103a","Instore Sampling1",320000
+"i2c1511005a","Instore Sampling1, Six Sheets1",73040
+"i2c1511015a","Entrance Gates1, Trolleys1, Six Sheets2",18644
+"i2c1507095a","JS Magazine1, Trolleys1, TV Wall1",30730
+"i2c1510003a2","Six Sheets1",559295
+"i2cLENORV4","Total",817945
+"i2c1509107a4","Six Sheets1, Six Sheets2",965194
+"i2c1509018a","Other",31491
+"i2c1509030a","JS Magazine1",171886
+"i2cLENUNV2","Six Sheets2",227684
+"i2c1511003a","JS Magazine1, Trolleys1",31295
+"i2c1509014a","Entrance Gates1",1425299
+"i2c1535KE0","JS Magazine1",253173
+"i2c1508127a","JS Magazine1, JS Magazine2",89457
+"i2c1505074aM","Total",209641
+"i2c1509107a6","Total",1101469
+"i2cLYNX555","Total",2713060
+"i2c1509125a","Total",4678266
+"i2c1508040a","Total",3017379
+"i2c1511103a","Total",1139722
+"i2cARIALV2","Six Sheets2",227684
+"i2cORALBV2","Six Sheets1, Six Sheets2",315440
+"i2c1511103a","Six Sheets1",1139722
+"i2c1512024a","Entrance Gates1",2114124
+"i2c1504028aM","JS Magazine",129019
+"i2c1507161a","Car Park Posters1",1243188
+"i2c1507187a","TV Wall1",2904972
+"i2c1508254a","Total",60612
+"i2c1507176a","Instore Sampling1",244368
+"i2c1508107a","JS Magazine1, Six Sheets1",47524
+"i2c1510061a","Six Sheets1",1082040
+"i2c1509002a","Instore Sampling",460338
+"i2c1508250a","Six Sheets1",1204884
+"i2c1508186a","Trolleys1",1234785
+"i2c15FAIFE","Six Sheets1",1062486
+"i2c1512047a","Six Sheets1",661436
+"i2cLENUNV4","Total",817945
+"i2cFAIDADWV4","Total",2443916
+"i2c1504065aM","Total",129019
+"i2c1507095a","Total",4198081
+"i2c1507030a","JS Magazine1, Six Sheets1",67615
+"i2c1507203a","Instore Sampling1, Trolleys1",42592
+"i2cNEW-TOOL","JS Magazine1, TV Wall1",75657
+"TEST_JD","Milk Media1, Six Sheets2",71449
+"i2c1507074aM","JS Magazine",115425
+"i2c1509116a","Instore Sampling1",191682
+"i2c1510003a2","Entrance Gates1, Six Sheets1, Six Sheets2",279304
+"i2c1508098a","Instore Sampling1",443421
+"i2c1509103a","Instore Sampling5",43646
+"i2c1507187a","Six Sheets1",466779
+"i2c1509016a2","JS Magazine1",157627
+"i2c1509107a4","Total",2425333
+"i2c15FAINB","Total",2759706
+"i2c1509107a5","Six Sheets1, Six Sheets2",248330
+"i2c1509107aA","Six Sheets3",116401
+"i2c1509107a3","Six Sheets2",1446996
+"i2c1506032M2","JS Magazine",139439
+"i2c1509014a","Other",18420
+"i2c1509125a2","JS Magazine1, TV Wall1",102765
+"i2c1509125a","JS Magazine1",72727
+"i2cFAIFEV4","Total",685771
+"i2c1509131a","Total",237449
+"i2cOLAYV4","Six Sheets1",590158
+"i2c1510020a2","Trolleys1",682466
+"i2c1507161a","JS Magazine1, Car Park Posters1",41800
+"i2c1507161a","Six Sheets1, Car Park Posters1",1072350
+"i2c1509014a","Entrance Gates1, JS Magazine1",41292
+"i2c1508146a","Other",515694
+"i2c1510020a","Trolleys1",682507
+"i2c1509106a","Total",4772869
+"i2c1510033a","Total",6801129
+"i2c1509030a","JS Magazine1, Six Sheets1",48145
+"i2cBRAUNV2","Six Sheets1",2116660
+"i2c1508042a","TV Wall1",3417054
+"i2cFABREV2","Six Sheets2",366524
+"i2c1506058aM","JS Magazine",115425
+"i2c1507161a","JS Magazine1, Six Sheets1",29248
+"i2c15FAINB","TV Wall1",1366160
+"i2c1508169a2","Instore Sampling1",444077
+"i2c1511015a","Entrance Gates1, Trolleys1, TV Wall1",15039
+"i2c1508034a","Six Sheets2",551008
+"i2c1509116a","Total",497720
+"i2c1508203a","Instore Sampling1",616447
+"i2cLYNX444","TV Wall1",2522950
+"i2c1509111a","TV Wall1",3735306
+"i2c1510013a","Entrance Gates1",1536318
+"i2c1509029a","Instore Sampling1",285874
+"i2c1511015a","Entrance Gates1, TV Wall1",416103
+"TEST_JD2","Six Sheets2",1121063
+"i2c1510046a","Instore Sampling3",155949
+"i2c1510020a2","Entrance Gates1, Trolleys1, Trolleys2",76550
+"i2c1510054a","Total",305801
+"i2c1509134a","Other",27659
+"i2c1510033a","Six Sheets1, TV Wall1",139264
+"i2c1509125a2","Six Sheets1, TV Wall1",610626
+"i2c1601020a","Instore Sampling1",207906
+"i2c1510047a","JS Magazine2",41791
+"i2c1508034a","Other",21597
+"i2c1509016a","Six Sheets1, TV Wall1",1272741
+"i2c1511069a","JS Magazine1",138225
+"i2c1504091aM","Total",129019
+"i2c1507204a","Total",307338
+"i2cFAINBV4","Total",685771
+"i2c1511015a","Total",6400657
+"i2c1508252a","Instore Sampling1",1698477
+"i2c1508061a","JS Magazine1",253224
+"i2cLENORV2","Six Sheets1, Six Sheets2",281329
+"i2cORALBV4","Entrance Gates1, Six Sheets2",33217
+"i2cNEW-TOOL","TV Wall1",2486818
+"i2c1510020a2","Trolleys2",631190
+"i2c1510020a2","Trolleys1, Trolleys2",534394
+"TEST_JD","Milk Media1",290497
+"i2c1516KC0M","JS Magazine",139439
+"i2c1507141a","Six Sheets1",69602
+"i2c1509016a","JS Magazine1",71187
+"i2c1509010a","Total",252290
+"i2cFABREV2","Total",1036489
+"i2c1509144a","Total",430989
+"i2c1510008a","Six Sheets1",1937143
+"i2c1509061a","JS Magazine1, TV Wall1",75128
+"i2cOLAYV4","Entrance Gates1, Six Sheets1",131903
+"i2c1511003a","JS Magazine1",103897
+"i2c1509125a2","JS Magazine1, Six Sheets1",11881
+"i2c1508186a2","Trolleys1",1234856
+"i2c1511015a","Entrance Gates1, TV Wall1, Six Sheets2",110549
+"TEST_JD","JS Magazine1",189687
+"i2c1507203a","Total",1517760
+"i2c1507176a","Total",244368
+"i2c1507076a","Total",384691
+"i2cLYNX333","Total",2261358
+"i2c1506063aM","Total",139439
+"i2c1510041a","Total",135192
+"i2cHSV4","Total",1740166
+"i2c1508098a","Total",443421
+"i2c1510062a","Total",85187
+"i2c1510047a","Total",1646518
+"i2cFAIDHDWV3","Total",2443912
+"i2c1507161a","Total",3301542
+"i2c1509069a","Total",273133
+"i2cORALBV2","Entrance Gates1, Six Sheets1, Six Sheets2",180519
+"i2c1510108a","TV Wall1",4295410
+"i2c1510136a","JS Magazine1",135192
+"i2c1512022P","Six Sheets1",912956
+"i2cNEW-TOOL","TV Wall1, Entrance Gates1",1781597
+"TEST_JD","Six Sheets2",1121063
+"i2c1508223a","Total",283957
+"i2cVENUSV2","Total",1336735
+"i2cFAIFEV2","Total",685768
+"i2c1508204a","Total",1623266
+"i2c1508265a","Six Sheets1, Six Sheets2, Six Sheets3",84420
+"i2c1510047a","Instore Sampling1",27515
+"i2c1509125a","Other",52277
+"i2c1510020a","Entrance Gates1, Trolleys2",69094
+"i2cNEW-TOOL","JS Magazine1",62394
+"i2cLYNX888","TV Wall1",3251099
+"i2c1510006a","Total",372670
+"i2c1508042a","Total",3677086
+"i2cARIALV2","Total",817942
+"i2c1510074a","Total",384105
+"i2c1510052a","Total",638192
+"i2c1506032M2","Total",139439
+"i2c1510003a1","Entrance Gates1, Six Sheets1",334938
+"i2c1509116a","Instore Sampling3",162545
+"i2c1508257aS","JS Magazine1",220031
+"i2c1511003a","Total",1763308
+"i2cVENUSV4","Total",1336724
+"i2c1508124a","Total",191387
+"i2c1509107a3","Total",2425333
+"i2c1508137a","Instore Sampling1",1670199
+"i2c1507203a","Instore Sampling1",69915
+"i2cARIALV4","Six Sheets1",308931
+"i2c1509125a2","TV Wall1",3333822
+"i2c1509106a2","Six Sheets1",31781
+"i2c1507209a","Instore Sampling1",511914
+"i2c1508127a","JS Magazine1",170581
+"i2c1509107a2","Six Sheets1, Six Sheets2",99724
+"i2c1512022P","Six Sheets1, TV Wall1",419671
+"i2c1510145a","Trolleys1",1123761
+"i2c1510020a","Entrance Gates1, Trolleys1",139646
+"i2cFABREV4","Total",1036486

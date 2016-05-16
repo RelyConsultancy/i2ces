@@ -61,3 +61,18 @@
 .table_sales_footer td {
   border-top: 0;
 }
+
+.overlay {
+    background: url(/images/overlays/weekly-units.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+.c3-region.campaign-period rect {
+    fill-opacity: 1!important;
+    fill: #b7dee8;
+}

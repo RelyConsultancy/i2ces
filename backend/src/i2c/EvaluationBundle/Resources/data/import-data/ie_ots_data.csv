@@ -1,13 +1,295 @@
 MASTER_CAMPAIGN_ID,MEDIA_TYPE,OBJ_PRIORITY,OBJECTIVE,METRIC,PRODUCT,TIMEPERIOD,EXPOSED
-i2c1510047a,Instore Sampling1,2,Grow awareness,OTS - unique,Offer,2,283840
-i2c1510047a,Instore Sampling3,2,Grow awareness,OTS - unique,Offer,2,173052
-i2c1510047a,Instore Sampling2,2,Grow awareness,OTS - unique,Offer,2,147816
-i2c1510047a,Instore Sampling3,2,Grow awareness,OTS,Offer,2,286690
-i2c1510047a,Six Sheets1,2,Grow awareness,OTS,Offer,2,5326235
-i2c1510047a,Instore Sampling1,2,Grow awareness,OTS,Offer,2,504115
-i2c1510047a,Instore Sampling2,2,Grow awareness,OTS,Offer,2,252050
-i2c1510047a,JS Magazine2,2,Grow awareness,OTS,Offer,2,159847
-i2c1510047a,Six Sheets1,2,Grow awareness,OTS - unique,Offer,2,1627826
-i2c1510047a,JS Magazine2,2,Grow awareness,OTS - unique,Offer,2,135346
-i2c1510047a,JS Magazine1,2,Grow awareness,OTS - unique,Offer,2,220443
-i2c1510047a,JS Magazine1,2,Grow awareness,OTS,Offer,2,264830
+"i2c1508169a2","Total",3,"Grow awareness","OTS - unique","Offer",2,490570.000000
+"i2c1509029a","Total",3,"Grow awareness","OTS         ","Offer",2,595668.000000
+"i2c1508169a2","Total",3,"Grow awareness","OTS         ","Offer",2,893160.000000
+"i2c1508179a","Total",1,"Grow awareness","OTS         ","Offer",2,447395.000000
+"i2c1509101a","Instore Sampling1",3,"Grow awareness","OTS         ","Offer",2,206581.000000
+"i2c1510020a2","JS Magazine1",1,"Grow awareness","OTS         ","Offer",2,264830.000000
+"i2c1510020a2","JS Magazine1",1,"Grow awareness","OTS - unique","Offer",2,220443.000000
+"i2c1511005a","Instore Sampling3",1,"Grow awareness","OTS         ","Offer",2,8048.000000
+"i2c1511135a","Instore Sampling1",2,"Grow awareness","OTS         ","Offer",2,465493.000000
+"i2c1510047a","JS Magazine2",2,"Grow awareness","OTS         ","Offer",2,159847.000000
+"i2c1507203a","Trolleys1",3,"Grow awareness","OTS         ","Offer",2,7986617.000000
+"i2c1510020a2","Total",1,"Grow awareness","OTS - unique","Offer",2,5039340.000000
+"i2c1511005a","Total",1,"Grow awareness","OTS - unique","Offer",2,3427237.000000
+"i2cLYNX111","Total",3,"Grow awareness","OTS         ","Offer",2,3853403.000000
+"i2cLYNX222","Total",3,"Grow awareness","OTS - unique","Offer",2,2295745.000000
+"i2cLYNX666","Total",3,"Grow awareness","OTS - unique","Offer",2,3535619.000000
+"i2c1507076a","Take Home Barker1",3,"Grow awareness","OTS         ","Offer",2,1862359.000000
+"i2c1507076a","Instore Sampling2",3,"Grow awareness","OTS - unique","Offer",2,71311.000000
+"i2c1509067a","Instore Sampling3",1,"Grow awareness","OTS - unique","Offer",2,7161.000000
+"i2c1509067a","Instore Sampling4",1,"Grow awareness","OTS - unique","Offer",2,2925.000000
+"i2c1510116a","Instore Sampling1",2,"Grow awareness","OTS         ","Offer",2,200354.000000
+"i2c1510116a","Instore Sampling3",2,"Grow awareness","OTS         ","Offer",2,136168.000000
+"i2c1510116a","Instore Sampling4",2,"Grow awareness","OTS - unique","Offer",2,9359.000000
+"i2c1511103a","Six Sheets1",3,"Grow awareness","OTS         ","Offer",2,4820190.000000
+"i2c1511005a","Six Sheets1",1,"Grow awareness","OTS         ","Offer",2,4138443.000000
+"i2cLYNX333","TV Wall1",3,"Grow awareness","OTS         ","Offer",2,11335716.000000
+"i2c1508179a","JS Magazine1",1,"Grow awareness","OTS - unique","Offer",2,220443.000000
+"i2c1601020a","Instore Sampling2",1,"Grow awareness","OTS         ","Offer",2,116940.000000
+"i2c1510020a","JS Magazine2",1,"Grow awareness","OTS         ","Offer",2,164338.000000
+"i2c1507156a","Six Sheets1",2,"Grow awareness","OTS - unique","Offer",2,1511248.000000
+"i2c1535KE0","Milk Media1",5,"Grow awareness","OTS         ","Offer",2,360325.000000
+"i2c1509030a","Six Sheets1",1,"Grow awareness","OTS         ","Offer",2,5652511.000000
+"i2c1510006a","Instore Sampling1",3,"Grow awareness","OTS         ","Offer",2,745560.000000
+"i2c1510006a","Instore Sampling1",3,"Grow awareness","OTS - unique","Offer",2,413754.000000
+"i2c1508107a","Six Sheets1",2,"Grow awareness","OTS         ","Offer",2,6749570.000000
+"i2c1508107a","Six Sheets1",2,"Grow awareness","OTS - unique","Offer",2,1989346.000000
+"i2c1510020a2","Trolleys2",1,"Grow awareness","OTS         ","Offer",2,7567122.000000
+"i2c1510020a2","Entrance Gates1",1,"Grow awareness","OTS - unique","Offer",2,1359940.000000
+"i2c1509131a","Instore Sampling1",3,"Grow awareness","OTS - unique","Offer",2,282498.000000
+"i2c1508186a2","Entrance Gates1",1,"Grow awareness","OTS - unique","Offer",2,1678073.000000
+"i2c1509106a2","Entrance Gates1",3,"Grow awareness","OTS         ","Offer",2,60665724.000000
+"i2c1510020a","JS Magazine3",1,"Grow awareness","OTS - unique","Offer",2,138336.000000
+"i2c1507161a","Car Park Posters1",1,"Grow awareness","OTS - unique","Offer",2,2777611.000000
+"i2c1509029a","Instore Sampling1",3,"Grow awareness","OTS - unique","Offer",2,319284.000000
+"i2c1510108a","Instore Sampling3",1,"Grow awareness","OTS         ","Offer",2,62309.000000
+"i2c1510108a","Instore Sampling2",1,"Grow awareness","OTS         ","Offer",2,339329.000000
+"i2c1510046a","Instore Sampling5",1,"Grow awareness","OTS         ","Offer",2,28284.000000
+"i2c1510046a","Instore Sampling3",1,"Grow awareness","OTS         ","Offer",2,337699.000000
+"i2c1510046a","Instore Sampling1",1,"Grow awareness","OTS - unique","Offer",2,53121.000000
+"i2c1510046a","Instore Sampling3",1,"Grow awareness","OTS - unique","Offer",2,184810.000000
+"i2c1510108a","Instore Sampling1",1,"Grow awareness","OTS - unique","Offer",2,22837.000000
+"i2c1510108a","Instore Sampling3",1,"Grow awareness","OTS - unique","Offer",2,34605.000000
+"i2c1510108a","Instore Sampling5",1,"Grow awareness","OTS - unique","Offer",2,3516.000000
+"i2cLYNX111","TV Wall1",3,"Grow awareness","OTS - unique","Offer",2,1602676.000000
+"i2c1510047a","Instore Sampling3",2,"Grow awareness","OTS         ","Offer",2,286690.000000
+"i2c1510047a","Instore Sampling2",2,"Grow awareness","OTS - unique","Offer",2,147816.000000
+"i2c1510047a","Instore Sampling3",2,"Grow awareness","OTS - unique","Offer",2,173052.000000
+"i2c1507156a","TV Wall1",2,"Grow awareness","OTS - unique","Offer",2,4922121.000000
+"i2c1508013a","Aisle Fins1",3,"Grow awareness","OTS         ","Offer",2,1851378.000000
+"i2cLYNX444","TV Wall1",3,"Grow awareness","OTS         ","Offer",2,15273888.000000
+"i2c1509014a","Total",3,"Grow awareness","OTS         ","Offer",2,18735273.000000
+"i2c1509131a","Total",3,"Grow awareness","OTS - unique","Offer",2,282498.000000
+"i2c1508040a","Total",2,"Grow awareness","OTS - unique","Offer",2,3411432.000000
+"i2c1507141a","Total",2,"Grow awareness","OTS         ","Offer",2,7627292.000000
+"i2c1511005a","Instore Sampling2",1,"Grow awareness","OTS - unique","Offer",2,14776.000000
+"i2c1510020a2","JS Magazine2",1,"Grow awareness","OTS         ","Offer",2,164338.000000
+"i2c1510020a2","JS Magazine2",1,"Grow awareness","OTS - unique","Offer",2,138336.000000
+"i2c1509106a2","Six Sheets1",3,"Grow awareness","OTS         ","Offer",2,5350593.000000
+"i2c1509014a","JS Magazine1",3,"Grow awareness","OTS         ","Offer",2,264830.000000
+"i2c1508013a","Milk Media1",3,"Grow awareness","OTS - unique","Offer",2,356252.000000
+"i2c1510108a","TV Wall1",1,"Grow awareness","OTS - unique","Offer",2,5325638.000000
+"i2c1507156a","JS Magazine1",2,"Grow awareness","OTS         ","Offer",2,192513.000000
+"i2c1510047a","JS Magazine2",2,"Grow awareness","OTS - unique","Offer",2,135346.000000
+"i2c1507156a","JS Magazine1",2,"Grow awareness","OTS - unique","Offer",2,161532.000000
+"i2cLYNX555","TV Wall1",3,"Grow awareness","OTS         ","Offer",2,18942391.000000
+"i2c1511005a","Entrance Gates1",1,"Grow awareness","OTS         ","Offer",2,18413482.000000
+"i2c1511005a","Instore Sampling1",1,"Grow awareness","OTS         ","Offer",2,540218.000000
+"i2c1511005a","Instore Sampling1",1,"Grow awareness","OTS - unique","Offer",2,295264.000000
+"i2c1511005a","Instore Sampling3",1,"Grow awareness","OTS - unique","Offer",2,4652.000000
+"i2c1509106a","Six Sheets1",3,"Grow awareness","OTS         ","Offer",2,30332862.000000
+"i2c1507141a","Six Sheets1",2,"Grow awareness","OTS - unique","Offer",2,901901.000000
+"i2c1508250a","Six Sheets1",3,"Grow awareness","OTS - unique","Offer",2,1377181.000000
+"i2c1511135a","Instore Sampling1",2,"Grow awareness","OTS - unique","Offer",2,254886.000000
+"i2c1508186a","Trolleys1",1,"Grow awareness","OTS         ","Offer",2,8140560.000000
+"i2c1508013a","Milk Media1",3,"Grow awareness","OTS         ","Offer",2,993343.000000
+"i2c1508250a","Total",3,"Grow awareness","OTS - unique","Offer",2,1377181.000000
+"i2c1510006a","Total",3,"Grow awareness","OTS - unique","Offer",2,413754.000000
+"i2c1511135a","Total",2,"Grow awareness","OTS - unique","Offer",2,1505939.000000
+"i2cLYNX777","Total",3,"Grow awareness","OTS - unique","Offer",2,3788465.000000
+"i2c1510047a","Total",2,"Grow awareness","OTS         ","Offer",2,6793767.000000
+"i2c1509101a","Total",3,"Grow awareness","OTS         ","Offer",2,206581.000000
+"i2c1507076a","Total",3,"Grow awareness","OTS         ","Offer",2,2532236.000000
+"i2c1509048a","Instore Sampling1",1,"Grow awareness","OTS         ","Offer",2,484261.000000
+"i2c1509067a","Instore Sampling2",1,"Grow awareness","OTS         ","Offer",2,12231.000000
+"i2c1509067a","Instore Sampling4",1,"Grow awareness","OTS         ","Offer",2,4885.000000
+"i2c1509067a","Instore Sampling2",1,"Grow awareness","OTS - unique","Offer",2,6791.000000
+"i2c1509131a","Instore Sampling1",3,"Grow awareness","OTS         ","Offer",2,550764.000000
+"i2c1510116a","Instore Sampling4",2,"Grow awareness","OTS         ","Offer",2,17667.000000
+"i2c1510116a","Instore Sampling5",2,"Grow awareness","OTS - unique","Offer",2,2238.000000
+"i2cLYNX333","TV Wall1",3,"Grow awareness","OTS - unique","Offer",2,2723836.000000
+"i2c1508179a","JS Magazine1",1,"Grow awareness","OTS         ","Offer",2,264830.000000
+"i2c1507161a","Six Sheets1",1,"Grow awareness","OTS         ","Offer",2,8185805.000000
+"i2c1510020a","JS Magazine3",1,"Grow awareness","OTS         ","Offer",2,164338.000000
+"i2c1510020a","JS Magazine1",1,"Grow awareness","OTS - unique","Offer",2,220443.000000
+"i2cLYNX111","TV Wall1",3,"Grow awareness","OTS         ","Offer",2,3853403.000000
+"i2c1510047a","Instore Sampling2",2,"Grow awareness","OTS         ","Offer",2,252050.000000
+"i2c1510047a","Instore Sampling1",2,"Grow awareness","OTS         ","Offer",2,504115.000000
+"i2c1510047a","Six Sheets1",2,"Grow awareness","OTS         ","Offer",2,5326235.000000
+"i2c1509106a","Total",3,"Grow awareness","OTS - unique","Offer",2,5552047.000000
+"i2cLYNX444","Total",3,"Grow awareness","OTS - unique","Offer",2,3065851.000000
+"i2c1509029a","Total",3,"Grow awareness","OTS - unique","Offer",2,319284.000000
+"i2c1510046a","Total",1,"Grow awareness","OTS         ","Offer",2,790860.000000
+"i2c1508040a","Total",2,"Grow awareness","OTS         ","Offer",2,13685998.000000
+"i2c1509106a","Total",3,"Grow awareness","OTS         ","Offer",2,30332862.000000
+"i2c1509048a","Total",1,"Grow awareness","OTS - unique","Offer",2,272926.000000
+"i2c1507161a","Total",1,"Grow awareness","OTS         ","Offer",2,19711626.000000
+"i2c1508186a","Total",1,"Grow awareness","OTS - unique","Offer",2,3628842.000000
+"i2c1509030a","Total",1,"Grow awareness","OTS         ","Offer",2,5917341.000000
+"i2c1508186a","Total",1,"Grow awareness","OTS         ","Offer",2,25196228.000000
+"i2c1509067a","Instore Sampling3",1,"Grow awareness","OTS         ","Offer",2,12670.000000
+"i2c1509067a","Instore Sampling1",1,"Grow awareness","OTS - unique","Offer",2,101246.000000
+"i2c1510020a2","Entrance Gates1",1,"Grow awareness","OTS         ","Offer",2,10484120.000000
+"i2c1508186a2","Trolleys1",1,"Grow awareness","OTS         ","Offer",2,8140560.000000
+"i2c1510020a","JS Magazine1",1,"Grow awareness","OTS         ","Offer",2,264830.000000
+"i2c1510020a","JS Magazine2",1,"Grow awareness","OTS - unique","Offer",2,138336.000000
+"i2c1509029a","Instore Sampling1",3,"Grow awareness","OTS         ","Offer",2,595668.000000
+"i2cLYNX222","TV Wall1",3,"Grow awareness","OTS - unique","Offer",2,2295745.000000
+"i2c1510047a","Instore Sampling1",2,"Grow awareness","OTS - unique","Offer",2,283840.000000
+"i2c1508013a","Aisle Fins1",3,"Grow awareness","OTS - unique","Offer",2,1327636.000000
+"i2cLYNX444","TV Wall1",3,"Grow awareness","OTS - unique","Offer",2,3065851.000000
+"i2c1507203a","Instore Sampling1",3,"Grow awareness","OTS         ","Offer",2,215945.000000
+"i2c1509067a","Total",1,"Grow awareness","OTS - unique","Offer",2,118123.000000
+"i2cLYNX555","TV Wall1",3,"Grow awareness","OTS - unique","Offer",2,3313445.000000
+"i2c1508250a","Six Sheets1",3,"Grow awareness","OTS         ","Offer",2,6040734.000000
+"i2c1509106a","Six Sheets1",3,"Grow awareness","OTS - unique","Offer",2,5552047.000000
+"i2c1508169a2","Instore Sampling1",3,"Grow awareness","OTS         ","Offer",2,893160.000000
+"i2c1509014a","Instore Sampling2",3,"Grow awareness","OTS - unique","Offer",2,4232.000000
+"i2c1508169a2","Instore Sampling1",3,"Grow awareness","OTS - unique","Offer",2,490570.000000
+"i2c1508186a","Trolleys1",1,"Grow awareness","OTS - unique","Offer",2,1950769.000000
+"i2c1508179a","Instore Sampling1",1,"Grow awareness","OTS - unique","Offer",2,103479.000000
+"i2c1601020a","Instore Sampling1",1,"Grow awareness","OTS         ","Offer",2,412369.000000
+"i2cLYNX777","TV Wall1",3,"Grow awareness","OTS         ","Offer",2,26905677.000000
+"i2c1511028a","Six Sheets1",2,"Grow awareness","OTS - unique","Offer",2,560807.000000
+"i2c1508204a","Six Sheets1",2,"Grow awareness","OTS         ","Offer",2,6677093.000000
+"i2c1535KE0","JS Magazine1",5,"Grow awareness","OTS - unique","Offer",2,260729.000000
+"i2c1509030a","JS Magazine1",1,"Grow awareness","OTS         ","Offer",2,264830.000000
+"i2c1508040a","Six Sheets1",2,"Grow awareness","OTS - unique","Offer",2,3411432.000000
+"i2c1507076a","Instore Sampling2",3,"Grow awareness","OTS         ","Offer",2,124650.000000
+"i2c1507076a","Instore Sampling1",3,"Grow awareness","OTS - unique","Offer",2,123361.000000
+"i2c1509030a","Total",1,"Grow awareness","OTS - unique","Offer",2,1801384.000000
+"i2c1510020a2","Trolleys1",1,"Grow awareness","OTS         ","Offer",2,7968824.000000
+"i2c1510020a2","Trolleys2",1,"Grow awareness","OTS - unique","Offer",2,1565531.000000
+"i2c1507141a","Trolleys1",2,"Grow awareness","OTS         ","Offer",2,4388135.000000
+"i2c1509014a","Entrance Gates1",3,"Grow awareness","OTS - unique","Offer",2,1733677.000000
+"i2c1508186a2","Trolleys1",1,"Grow awareness","OTS - unique","Offer",2,1950769.000000
+"i2c1510020a","Entrance Gates1",1,"Grow awareness","OTS         ","Offer",2,10484120.000000
+"i2c1507161a","Car Park Posters1",1,"Grow awareness","OTS         ","Offer",2,11194834.000000
+"i2c1510108a","Instore Sampling2",1,"Grow awareness","OTS - unique","Offer",2,175985.000000
+"i2c1510046a","Instore Sampling2",1,"Grow awareness","OTS - unique","Offer",2,168803.000000
+"i2c1510046a","Instore Sampling4",1,"Grow awareness","OTS - unique","Offer",2,14732.000000
+"i2cLYNX222","TV Wall1",3,"Grow awareness","OTS         ","Offer",2,7621859.000000
+"i2c1507156a","TV Wall1",2,"Grow awareness","OTS         ","Offer",2,22688467.000000
+"i2c1507203a","Instore Sampling1",3,"Grow awareness","OTS - unique","Offer",2,124033.000000
+"i2c1508107a","JS Magazine1",2,"Grow awareness","OTS         ","Offer",2,192513.000000
+"i2c1507076a","JS Magazine1",3,"Grow awareness","OTS         ","Offer",2,146975.000000
+"i2c1509101a","Instore Sampling1",3,"Grow awareness","OTS - unique","Offer",2,121081.000000
+"i2c1510108a","TV Wall1",1,"Grow awareness","OTS         ","Offer",2,25077863.000000
+"i2c1510047a","JS Magazine1",2,"Grow awareness","OTS         ","Offer",2,264830.000000
+"i2c1510047a","JS Magazine1",2,"Grow awareness","OTS - unique","Offer",2,220443.000000
+"i2c1507203a","Trolleys1",3,"Grow awareness","OTS - unique","Offer",2,1696684.000000
+"i2c1509131a","Total",3,"Grow awareness","OTS         ","Offer",2,550764.000000
+"i2c1601020a","Total",1,"Grow awareness","OTS - unique","Offer",2,293528.000000
+"i2c1535KE0","Total",5,"Grow awareness","OTS         ","Offer",2,691312.000000
+"i2c1601020a","Total",1,"Grow awareness","OTS         ","Offer",2,529309.000000
+"i2cLYNX777","Total",3,"Grow awareness","OTS         ","Offer",2,26905677.000000
+"i2c1511135a","Total",2,"Grow awareness","OTS         ","Offer",2,4972442.000000
+"i2c1508250a","Total",3,"Grow awareness","OTS         ","Offer",2,6040734.000000
+"i2c1511028a","Total",2,"Grow awareness","OTS         ","Offer",2,2019506.000000
+"i2cLYNX444","Total",3,"Grow awareness","OTS         ","Offer",2,15273888.000000
+"i2c1509101a","Total",3,"Grow awareness","OTS - unique","Offer",2,121081.000000
+"i2c1510047a","Total",2,"Grow awareness","OTS - unique","Offer",2,2588323.000000
+"i2c1510006a","Total",3,"Grow awareness","OTS         ","Offer",2,745560.000000
+"i2c1510116a","Total",2,"Grow awareness","OTS         ","Offer",2,576040.000000
+"i2cLYNX333","Total",3,"Grow awareness","OTS - unique","Offer",2,2723836.000000
+"i2c1508107a","Total",2,"Grow awareness","OTS - unique","Offer",2,2150878.000000
+"i2c1508179a","Total",1,"Grow awareness","OTS - unique","Offer",2,323922.000000
+"i2c1511005a","Total",1,"Grow awareness","OTS         ","Offer",2,23127502.000000
+"i2c1508013a","Total",3,"Grow awareness","OTS - unique","Offer",2,1683888.000000
+"i2cLYNX888","Total",3,"Grow awareness","OTS - unique","Offer",2,3957204.000000
+"i2c1507156a","Total",2,"Grow awareness","OTS         ","Offer",2,28563316.000000
+"i2c1507076a","Total",3,"Grow awareness","OTS - unique","Offer",2,1392618.000000
+"i2c1509048a","Total",1,"Grow awareness","OTS         ","Offer",2,484261.000000
+"i2cLYNX555","Total",3,"Grow awareness","OTS - unique","Offer",2,3313445.000000
+"i2c1509014a","Total",3,"Grow awareness","OTS - unique","Offer",2,2302285.000000
+"i2c1508186a2","Total",1,"Grow awareness","OTS - unique","Offer",2,3628842.000000
+"i2c1507156a","Total",2,"Grow awareness","OTS - unique","Offer",2,6594901.000000
+"i2c1510116a","Total",2,"Grow awareness","OTS - unique","Offer",2,314125.000000
+"i2cLYNX666","Total",3,"Grow awareness","OTS         ","Offer",2,22662184.000000
+"i2c1507203a","Total",3,"Grow awareness","OTS - unique","Offer",2,1820717.000000
+"i2c1509067a","Instore Sampling1",1,"Grow awareness","OTS         ","Offer",2,179555.000000
+"i2c1510116a","Instore Sampling2",2,"Grow awareness","OTS         ","Offer",2,217420.000000
+"i2c1510116a","Instore Sampling1",2,"Grow awareness","OTS - unique","Offer",2,106178.000000
+"i2c1510116a","Instore Sampling3",2,"Grow awareness","OTS - unique","Offer",2,81092.000000
+"i2c1511103a","Six Sheets1",3,"Grow awareness","OTS - unique","Offer",2,1308820.000000
+"i2c1509014a","Instore Sampling2",3,"Grow awareness","OTS         ","Offer",2,8721.000000
+"i2c1509014a","Instore Sampling1",3,"Grow awareness","OTS - unique","Offer",2,343933.000000
+"i2c1601020a","Instore Sampling1",1,"Grow awareness","OTS - unique","Offer",2,223931.000000
+"i2c1507161a","Six Sheets1",1,"Grow awareness","OTS - unique","Offer",2,2144191.000000
+"i2c1510047a","Six Sheets1",2,"Grow awareness","OTS - unique","Offer",2,1627826.000000
+"i2c1535KE0","Milk Media1",5,"Grow awareness","OTS - unique","Offer",2,173596.000000
+"i2c1509030a","JS Magazine1",1,"Grow awareness","OTS - unique","Offer",2,220443.000000
+"i2c1509048a","Instore Sampling1",1,"Grow awareness","OTS - unique","Offer",2,272926.000000
+"i2c1507076a","Take Home Barker1",3,"Grow awareness","OTS - unique","Offer",2,977590.000000
+"i2c1507076a","Instore Sampling3",3,"Grow awareness","OTS         ","Offer",2,169726.000000
+"i2c1508204a","Total",2,"Grow awareness","OTS         ","Offer",2,6677093.000000
+"i2c1511005a","Entrance Gates1",1,"Grow awareness","OTS - unique","Offer",2,1898918.000000
+"i2c1511005a","Instore Sampling2",1,"Grow awareness","OTS         ","Offer",2,27311.000000
+"i2c1507141a","Six Sheets1",2,"Grow awareness","OTS         ","Offer",2,3239157.000000
+"i2c1509106a2","Six Sheets1",3,"Grow awareness","OTS - unique","Offer",2,1206498.000000
+"i2c1509014a","JS Magazine1",3,"Grow awareness","OTS - unique","Offer",2,220443.000000
+"i2c1508186a","Entrance Gates1",1,"Grow awareness","OTS - unique","Offer",2,1678073.000000
+"i2c1508204a","Six Sheets1",2,"Grow awareness","OTS - unique","Offer",2,1894911.000000
+"i2c1510020a2","Trolleys1",1,"Grow awareness","OTS - unique","Offer",2,1755090.000000
+"i2c1509014a","Entrance Gates1",3,"Grow awareness","OTS         ","Offer",2,17838814.000000
+"i2c1509106a2","Entrance Gates1",3,"Grow awareness","OTS - unique","Offer",2,5552047.000000
+"i2c1508186a2","Entrance Gates1",1,"Grow awareness","OTS         ","Offer",2,17055668.000000
+"i2c1511135a","Six Sheets1",2,"Grow awareness","OTS - unique","Offer",2,1251053.000000
+"i2cLYNX666","TV Wall1",3,"Grow awareness","OTS - unique","Offer",2,3535619.000000
+"i2c1510020a","Trolleys2",1,"Grow awareness","OTS         ","Offer",2,7567122.000000
+"i2c1510020a","Entrance Gates1",1,"Grow awareness","OTS - unique","Offer",2,1359940.000000
+"i2c1510108a","Instore Sampling4",1,"Grow awareness","OTS         ","Offer",2,18757.000000
+"i2c1510046a","Instore Sampling4",1,"Grow awareness","OTS         ","Offer",2,25816.000000
+"i2c1510046a","Instore Sampling1",1,"Grow awareness","OTS         ","Offer",2,106317.000000
+"i2c1510046a","Instore Sampling2",1,"Grow awareness","OTS         ","Offer",2,292744.000000
+"i2c1510108a","Instore Sampling1",1,"Grow awareness","OTS         ","Offer",2,42560.000000
+"i2c1510046a","Instore Sampling5",1,"Grow awareness","OTS - unique","Offer",2,17605.000000
+"i2c1508107a","JS Magazine1",2,"Grow awareness","OTS - unique","Offer",2,161532.000000
+"i2cLYNX888","TV Wall1",3,"Grow awareness","OTS         ","Offer",2,30309163.000000
+"i2c1507161a","JS Magazine1",1,"Grow awareness","OTS - unique","Offer",2,260729.000000
+"i2c1510020a","Trolleys2",1,"Grow awareness","OTS - unique","Offer",2,1565531.000000
+"i2c1507076a","JS Magazine1",3,"Grow awareness","OTS - unique","Offer",2,125323.000000
+"i2c1509106a2","Total",3,"Grow awareness","OTS - unique","Offer",2,6758545.000000
+"i2c1509010a","Total",3,"Grow awareness","OTS         ","Offer",2,520358.000000
+"i2c1510108a","Total",1,"Grow awareness","OTS         ","Offer",2,25546602.000000
+"i2c1508204a","Total",2,"Grow awareness","OTS - unique","Offer",2,1894911.000000
+"i2cLYNX111","Total",3,"Grow awareness","OTS - unique","Offer",2,1602676.000000
+"i2cLYNX333","Total",3,"Grow awareness","OTS         ","Offer",2,11335716.000000
+"i2c1510020a2","Total",1,"Grow awareness","OTS         ","Offer",2,26449234.000000
+"i2c1535KE0","Total",5,"Grow awareness","OTS - unique","Offer",2,434325.000000
+"i2c1507203a","Total",3,"Grow awareness","OTS         ","Offer",2,8202562.000000
+"i2cLYNX888","TV Wall1",3,"Grow awareness","OTS - unique","Offer",2,3957204.000000
+"i2c1507141a","Trolleys1",2,"Grow awareness","OTS - unique","Offer",2,980411.000000
+"i2c1511135a","Six Sheets1",2,"Grow awareness","OTS         ","Offer",2,4506949.000000
+"i2cLYNX666","TV Wall1",3,"Grow awareness","OTS         ","Offer",2,22662184.000000
+"i2c1510020a","Trolleys1",1,"Grow awareness","OTS         ","Offer",2,7968824.000000
+"i2c1510020a","Trolleys1",1,"Grow awareness","OTS - unique","Offer",2,1755090.000000
+"i2c1510108a","Instore Sampling5",1,"Grow awareness","OTS         ","Offer",2,5784.000000
+"i2c1510108a","Instore Sampling4",1,"Grow awareness","OTS - unique","Offer",2,9512.000000
+"i2c1507161a","JS Magazine1",1,"Grow awareness","OTS         ","Offer",2,330987.000000
+"i2cLYNX222","Total",3,"Grow awareness","OTS         ","Offer",2,7621859.000000
+"i2c1511028a","Total",2,"Grow awareness","OTS - unique","Offer",2,560807.000000
+"i2c1509067a","Total",1,"Grow awareness","OTS         ","Offer",2,209341.000000
+"i2c1511103a","Total",3,"Grow awareness","OTS - unique","Offer",2,1308820.000000
+"i2c1509106a2","Total",3,"Grow awareness","OTS         ","Offer",2,66016317.000000
+"i2c1511103a","Total",3,"Grow awareness","OTS         ","Offer",2,4820190.000000
+"i2cLYNX555","Total",3,"Grow awareness","OTS         ","Offer",2,18942391.000000
+"i2c1509010a","Total",3,"Grow awareness","OTS - unique","Offer",2,277208.000000
+"i2c1510046a","Total",1,"Grow awareness","OTS - unique","Offer",2,439071.000000
+"i2c1507161a","Total",1,"Grow awareness","OTS - unique","Offer",2,5182531.000000
+"i2c1510020a","Total",1,"Grow awareness","OTS - unique","Offer",2,5177676.000000
+"i2c1510108a","Total",1,"Grow awareness","OTS - unique","Offer",2,5572093.000000
+"i2c1508013a","Total",3,"Grow awareness","OTS         ","Offer",2,2844721.000000
+"i2c1507141a","Total",2,"Grow awareness","OTS - unique","Offer",2,1882312.000000
+"i2c1508107a","Total",2,"Grow awareness","OTS         ","Offer",2,6942083.000000
+"i2c1510020a","Total",1,"Grow awareness","OTS         ","Offer",2,26613572.000000
+"i2cLYNX888","Total",3,"Grow awareness","OTS         ","Offer",2,30309163.000000
+"i2c1508186a2","Total",1,"Grow awareness","OTS         ","Offer",2,25196228.000000
+"i2c1509010a","Instore Sampling1",3,"Grow awareness","OTS         ","Offer",2,520358.000000
+"i2c1509010a","Instore Sampling1",3,"Grow awareness","OTS - unique","Offer",2,277208.000000
+"i2c1511005a","Six Sheets1",1,"Grow awareness","OTS - unique","Offer",2,1213627.000000
+"i2c1510116a","Instore Sampling5",2,"Grow awareness","OTS         ","Offer",2,4431.000000
+"i2c1510116a","Instore Sampling2",2,"Grow awareness","OTS - unique","Offer",2,115258.000000
+"i2c1509014a","Instore Sampling1",3,"Grow awareness","OTS         ","Offer",2,622908.000000
+"i2c1508186a","Entrance Gates1",1,"Grow awareness","OTS         ","Offer",2,17055668.000000
+"i2c1508179a","Instore Sampling1",1,"Grow awareness","OTS         ","Offer",2,182565.000000
+"i2c1601020a","Instore Sampling2",1,"Grow awareness","OTS - unique","Offer",2,69597.000000
+"i2c1507156a","Six Sheets1",2,"Grow awareness","OTS         ","Offer",2,5682336.000000
+"i2c1535KE0","JS Magazine1",5,"Grow awareness","OTS         ","Offer",2,330987.000000
+"i2cLYNX777","TV Wall1",3,"Grow awareness","OTS - unique","Offer",2,3788465.000000
+"i2c1511028a","Six Sheets1",2,"Grow awareness","OTS         ","Offer",2,2019506.000000
+"i2c1508040a","Six Sheets1",2,"Grow awareness","OTS         ","Offer",2,13685998.000000
+"i2c1509030a","Six Sheets1",1,"Grow awareness","OTS - unique","Offer",2,1580941.000000
+"i2c1507076a","Instore Sampling1",3,"Grow awareness","OTS         ","Offer",2,228526.000000
+"i2c1507076a","Instore Sampling3",3,"Grow awareness","OTS - unique","Offer",2,95033.000000

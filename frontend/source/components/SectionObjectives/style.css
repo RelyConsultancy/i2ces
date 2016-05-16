@@ -12,8 +12,67 @@
   compose: list_item;
   background-color: #FCFDFC;
   border: 1px solid #E6E6E6;
+  margin-bottom: 20px;
 }
 .list_value {
   font-family: 'Avenir LT Std 65 Medium';
   float: right;
+}
+
+.i2c_objective_blob {
+    display: table;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    background: #0099ff;
+    margin-right: 20px;
+    float: left;
+    font-family: 'Archer Bold', serif;
+}
+
+.i2c_objective_blob:nth-child(1) {
+    background: #4E90CD;
+    color: #fff;
+}
+
+.i2c_objective_blob:nth-child(2) {
+    background: #EA7518;
+    color: #fff;
+}
+
+.i2c_objective_blob:nth-child(3) {
+    background: #914B97;
+    color: #fff;
+}
+
+.i2c_objective_blob:nth-child(4) {
+    background: #5FC4E1;
+    color: #fff;
+}
+
+.i2c_objective_blob:last-child {
+    margin-right: 0px;
+}
+b.i2c_objectives_list {
+    text-align: center;
+}
+
+b.i2c_objective_title {
+    font-size: 1.2rem;
+}
+
+b.i2c_objective_value {
+    font-size: 1.6rem;
+}
+
+b.i2c_objective_blob_inner {
+    display: table-cell;
+    vertical-align: middle;
+    height: 150px;
+    padding: 0 20px;
+    text-align: center;
+}
+b.i2c_objective_list_row {
+    display: inline-block;
+    margin: 0 auto 20px;
 }
