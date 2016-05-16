@@ -13,6 +13,7 @@ use i2c\ImageUploadBundle\Services\UploadedImageQueue;
 use Monolog\Logger;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\UserBundle\Entity\User;
+use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -258,32 +259,36 @@ class EvaluationController extends RestApiController
      */
     public function markPdfAsPermanentAction($evaluationCid)
     {
-        /** @var Evaluation $evaluation */
-        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+        try {
+            /** @var Evaluation $evaluation */
+            $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
 
-        if (is_null($evaluation)) {
-            return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+            if (is_null($evaluation)) {
+                return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+            }
+
+            if (is_null($evaluation->getTemporaryPdfPath())) {
+                return $this->notFound(sprintf('Temporary PDF was not found for the evaluation %s', $evaluationCid));
+            }
+
+            $newPdfPath = sprintf(
+                '%s/%s.pdf',
+                $this->getParameter('pdf_output_folder'),
+                $evaluation->getCid()
+            );
+
+            $fileSystem = new Filesystem();
+            $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath);
+
+            $evaluation->setLatestPdfPath($newPdfPath);
+            $evaluation->setTemporaryPdfPath(null);
+
+            $this->getEvaluationService()->updateEvaluation($evaluation);
+
+            return $this->success($evaluation);
+        } catch (IOException $ex) {
+            return $this->serverFailure("An error occurred, please try again later");
         }
-
-        if (is_null($evaluation->getTemporaryPdfPath())) {
-            return $this->notFound(sprintf('Temporary PDF was not found for the evaluaiton %s', $evaluationCid));
-        }
-
-        $newPdfPath = sprintf(
-            '%s/%s.pdf',
-            $this->getParameter('pdf_output_folder'),
-            $evaluation->getCid()
-        );
-
-        $fileSystem = new Filesystem();
-        $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath);
-
-        $evaluation->setLatestPdfPath($newPdfPath);
-        $evaluation->setTemporaryPdfPath(null);
-
-        $this->getEvaluationService()->updateEvaluation($evaluation);
-
-        return $this->success($evaluation);
     }
 
     /**
@@ -293,33 +298,37 @@ class EvaluationController extends RestApiController
      */
     public function markPdfAsPermanentWithPublishAction($evaluationCid)
     {
-        /** @var Evaluation $evaluation */
-        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+        try {
+            /** @var Evaluation $evaluation */
+            $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
 
-        if (is_null($evaluation)) {
-            return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+            if (is_null($evaluation)) {
+                return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+            }
+
+            if (is_null($evaluation->getTemporaryPdfPath())) {
+                return $this->notFound(sprintf('Temporary PDF was not found for the evaluation %s', $evaluationCid));
+            }
+
+            $newPdfPath = sprintf(
+                '%s/%s.pdf',
+                $this->getParameter('pdf_output_folder'),
+                $evaluation->getCid()
+            );
+
+            $fileSystem = new Filesystem();
+            $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath);
+
+            $evaluation->setLatestPdfPath($newPdfPath);
+            $evaluation->setTemporaryPdfPath(null);
+            $evaluation->publish();
+
+            $this->getEvaluationService()->updateEvaluation($evaluation);
+
+            return $this->success($evaluation);
+        } catch (IOException $ex) {
+            return $this->serverFailure("An error occurred, please try again later");
         }
-
-        if (is_null($evaluation->getTemporaryPdfPath())) {
-            return $this->notFound(sprintf('Temporary PDF was not found for the evaluaiton %s', $evaluationCid));
-        }
-
-        $newPdfPath = sprintf(
-            '%s/%s.pdf',
-            $this->getParameter('pdf_output_folder'),
-            $evaluation->getCid()
-        );
-
-        $fileSystem = new Filesystem();
-        $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath);
-
-        $evaluation->setLatestPdfPath($newPdfPath);
-        $evaluation->setTemporaryPdfPath(null);
-        $evaluation->publish();
-
-        $this->getEvaluationService()->updateEvaluation($evaluation);
-
-        return $this->success($evaluation);
     }
 
     /**
