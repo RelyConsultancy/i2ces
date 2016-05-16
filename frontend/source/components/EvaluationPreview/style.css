@@ -2,11 +2,10 @@
   text-align: center;
   padding: 1em;
 }
-.preview {
-  position: relative;
-  width: 842px;
-  margin: 0 auto;
+.layout {
   padding: 2rem 0;
+  position: relative;
+  background-color: #F9F9F9;
 }
 
 
@@ -34,51 +33,109 @@
 }
 
 
-.chapter {
-  position: relative;
-  margin-top: 2rem;
+.actions {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
 }
-.chapter::before {
+.action {
+  display: inline-block;
+  margin-left: 1rem;
+  font-size: .875rem;
+  padding: .5em 1em .35em;
+  color: #FFF;
+  background-color: #5FC3E1;
+  cursor: pointer;
+}
+
+
+.pdf {
+  position: relative;
+  margin: 0 auto;
+  width: 842px;
+  box-shadow: 0px 0px 4px 0px #BDB6A0;
+}
+
+.pdf .page_break {
+  position: relative;
+  padding-top: 2rem !important;
+}
+.pdf .page_break::before {
   content: '';
   position: absolute;
-  top: calc(-1rem - 2px);
-  left: 0;
-  right: 0;
-  border-top: 1px dashed #E6E6E6;
-}
-.chapter:first-child::before {
-  display: none;
+  top: -.25rem;
+  height: .5rem;
+  left: calc(-2rem - 2px);
+  width: calc(100% + 4rem + 4px);
+  background-color: #F9F9F9;
+  box-shadow: inset 0px 4px 6px -5px #BDB6A0;
+  border-bottom: 1px solid #EDEBE7;
 }
 
+.pdf .components {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background-color: #FFFFFF;
+}
 
-.section {
+.pdf.debug .components > * {
+  outline: #00A4EA;
+  outline-style: dashed;
+  outline-width: 1px;
+}
+.pdf.debug .is_modified {
+  background-color: #FFDC00;
+}
+.pdf.debug .page_break {
+  background-color: #EF3C1E;
+}
+
+.pdf .components > *:hover {
+  outline: #3D3D3D;
+  outline-style: dashed;
+  outline-offset: 0;
+  outline-width: 4px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.pdf_preview {
   position: relative;
-  padding: 2rem;
-  border: 1px solid #E6E6E6;
-  border-top-width: 0;
-  font-size: .875em;
+  margin: 0 auto;
+  width: 842px;
 }
-.section:first-child {
-  border-top-width: 1px;
-}
-.section_title {
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-  font-family: 'Archer Bold', serif;
-  color: #6D6D6D;
+
+.pdf_preview canvas {
+  box-shadow: 0px 0px 4px 0px #BDB6A0;
+  margin: .5rem 0;
 }
 
 
-.splash {
+.cover {
   position: relative;
   height: 595px;
-  border: 1px solid #E6E6E6;
   z-index: 1;
   background-image: url(/images/pdf_splash_bg.png);
   background-repeat: no-repeat;
   background-size: cover;
 }
-.splash_title {
+.cover::before,
+.cover::after {
+  content: '';
+  position: absolute;
+  top: -.25rem;
+  height: .5rem;
+  left: -2px;
+  right: -2px;
+  background-color: #F9F9F9;
+  box-shadow: inset 0px 4px 6px -5px #BDB6A0;
+  border-bottom: 1px solid #EDEBE7;
+}
+.cover::after {
+  top: auto;
+  bottom: -.25rem
+}
+.cover_title {
   position: absolute;
   font-size: 3rem;
   top: 50%;
@@ -89,15 +146,15 @@
   text-align: center;
   color: #FFF;
 }
-.splash_outro {
-  compose: splash;
-  background-image: url(/images/pdf_outro_bg.png);
-}
-.splash_intro {
-  compose: splash;
+
+.cover_intro {
+  compose: cover;
   background-image: url(/images/pdf_intro_bg.png);
 }
-.splash_intro_title_box {
+.cover_intro::before {
+  content: none;
+}
+.cover_intro_title_box {
   position: absolute;
   bottom: 145px;
   right: 1rem;
@@ -105,21 +162,21 @@
   height: 8.5rem;
   color: #FFFFFF;
 }
-.splash_intro_title_wrap {
+.cover_intro_title_wrap {
   position: relative;
   transform: translateY(-50%);
   top: 50%;
 }
-.splash_intro_title {
+.cover_intro_title {
   font-size: 1.8rem;
   font-family: 'Archer Bold', serif;
   margin-bottom: .5rem;
 }
-.splash_intro_subtitle {
+.cover_intro_subtitle {
   font-size: 1.2rem;
   font-family: 'Archer Medium', serif;
 }
-.splash_intro_date {
+.cover_intro_date {
   position: absolute;
   bottom: 2rem;
   left: 2rem;
@@ -127,30 +184,55 @@
   font-family: 'Archer Medium', serif;
 }
 
+.cover_outro {
+  compose: cover;
+  background-image: url(/images/pdf_outro_bg.png);
+}
+.cover_outro::after {
+  content: none;
+}
+
+.section_title {
+  padding-top: 1.75rem;
+  padding-bottom: 1.5rem;
+  font-size: 1.1rem;
+  font-family: 'Archer Bold', serif;
+  color: #6D6D6D;
+}
+
 
 @media print {
-  .preview {
-    padding: 0;
-  }
-  .splash {
-    border: 0 !important;
-    page-break-inside: avoid;
-  }
-  .chapter {
-    margin: 0;
-    padding: 0;
-    border: 0 !important;
-  }
-  .chapter::before {
+  .actions,
+  .links {
     display: none;
   }
-  .chapter:not(:first-child) {
-    page-break-before: always;
+  .layout {
+    position: relative;
+    padding: 0;
+    background-color: #FFFFFF;
   }
-  .section {
-    padding: 2rem;
-    padding-bottom: 0;
-    border: 0 !important;
+  .pdf {
+    position: relative;
+    margin: 0;
+  }
+  .pdf .components {
+    position: relative;
+  }
+  .pdf .page_break {
+    page-break-before: always;
     page-break-inside: avoid;
+  }
+  .cover::before,
+  .cover::after,
+  .pdf .page_break::before {
+    display: none !important;
+  }
+  .cover {
+    border: 0;
+    margin: 0;
+    page-break-inside: avoid;
+  }
+  .cover_intro {
+    page-break-inside: initial;
   }
 }
