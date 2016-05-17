@@ -4,6 +4,7 @@ namespace i2c\GeneratePdfBundle\Services;
 
 use Doctrine\ORM\EntityManager;
 use i2c\EvaluationBundle\Entity\Evaluation;
+use Monolog\Logger;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
@@ -21,6 +22,7 @@ class GenerateEvaluationPdf
     protected $pdfDelay;
     protected $pdfNodeJsCommand;
     protected $pdfOutputFolder;
+    protected $logger;
 
     /**
      * GenerateEvaluationPdf constructor.
@@ -30,12 +32,13 @@ class GenerateEvaluationPdf
      * @param string        $user
      * @param string        $token
      */
-    public function __construct(EntityManager $entityManager, $urlBase, $user, $token)
+    public function __construct(EntityManager $entityManager, $urlBase, $user, $token, Logger $logger)
     {
         $this->entityManager = $entityManager;
         $this->urlBase = $urlBase;
         $this->masterUser = $user;
         $this->masterToken = $token;
+        $this->logger = $logger;
     }
 
     /**
@@ -55,7 +58,7 @@ class GenerateEvaluationPdf
             $evaluation->getCid()
         );
 
-        $headers = sprintf('Cookie~ %s`DNT~ 1`x-csrf-token~1', $cookie);
+        $headers = sprintf('Cookie~%s`DNT~1`x-csrf-token~1', $cookie);
 
         if (!$filesystem->exists($this->pdfOutputFolder)) {
             $filesystem->mkdir($this->pdfOutputFolder, 0755);
@@ -70,6 +73,8 @@ class GenerateEvaluationPdf
 
         $process = new Process(sprintf('chmod 755 %s', $pdfPath));
         $process->mustRun();
+        $this->logger->addDebug($process->getOutput());
+
 
         $evaluation->setTemporaryPdfPath($pdfPath);
 
@@ -99,6 +104,7 @@ class GenerateEvaluationPdf
             $headers,
             $this->pdfDelay
         );
+        $this->logger->addDebug(sprintf('Running the pdf generation command %s', $command));
         $process = new Process($command);
         $process->start();
 
