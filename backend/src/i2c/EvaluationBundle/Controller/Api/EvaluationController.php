@@ -247,9 +247,9 @@ class EvaluationController extends RestApiController
             return $this->clientFailure('No cookie set', []);
         }
 
-        $evaluation = $generatePdfService->generatePdf($evaluation, $cookie, $markers);
+        $generatePdfService->generatePdf($evaluation, $cookie);
 
-        return $this->getPdfFileResponse($evaluation->getTemporaryPdfPath(), $evaluation);
+        return $this->success(null);
     }
 
     /**
@@ -360,6 +360,12 @@ class EvaluationController extends RestApiController
 
         if (is_null($evaluation)) {
             return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+        }
+
+        $filesystem = new Filesystem();
+
+        if (!$filesystem->exists($evaluation->getTemporaryPdfPath())) {
+            return $this->serverFailure("PDF for this evaluation is not ready yet", Response::HTTP_PROCESSING);
         }
 
         return $this->getPdfFileResponse($evaluation->getTemporaryPdfPath(), $evaluation);
