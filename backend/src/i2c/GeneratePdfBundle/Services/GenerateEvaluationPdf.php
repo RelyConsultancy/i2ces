@@ -100,7 +100,7 @@ class GenerateEvaluationPdf
             $this->pdfDelay
         );
         $process = new Process($command);
-        $process->mustRun();
+        $process->start();
 
         return $pdfPath;
     }
