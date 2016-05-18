@@ -1,0 +1,6 @@
+- .git
+- vendor 
+- app/config/parameters.yml
+- app/bootstrap.php.cache
+- app/cache/sessions 
+- composer.lock

@@ -1,0 +1,73 @@
+  - name: Disable yum fastestmirror
+    command: " {{item}} "
+    with_items:
+      - yum --disableplugin=fastestmirror version
+
+  - name: Ensure NTP is installed
+    yum: name=ntp state=installed
+  - name: Ensure NTP is running
+    service: name=ntpd state=started enabled=yes
+
+  # basics
+  - name: Install basic tools
+    yum: pkg={{ item }} state=present
+    with_items:
+      - nano
+      - vim
+      - man
+      - tree
+      - curl
+      - wget
+      - unzip
+      - mlocate
+      - gcc
+      - git
+      - bind-utils
+      - traceroute
+      - links
+      - libselinux-python
+
+  - name: Check php version
+    shell: php -v|grep --only-matching --perl-regexp "5\.\\d+\.\\d+"
+    register: php_version
+
+  - name: Install basic tools
+    yum: pkg={{ item }} state=absent
+    with_items:
+      - "php*"
+    when: php_version.stdout != "5.6.*"
+
+  - name: Install EPEL repo.
+    yum:
+      name: "{{ epel_repo_url }}"
+      state: present
+    register: result
+    until: '"failed" not in result'
+    retries: 5
+    delay: 10
+#    when: ansible_os_family == "RedHat" 
+
+  - name: Import EPEL GPG key.
+    rpm_key:
+      key: "{{ epel_repo_gpg_key_url }}"
+      state: present
+#    when: ansible_os_family == "RedHat" 
+ 
+  - name: Updatedb
+    shell: updatedb
+    when: mlocate_updatedb
+
+  - name: Check if phpunit is installed.
+    stat: "path=/usr/local/bin/phpunit"
+    register: phpunit_present
+
+  - name: Install phpunit 4.8.0 globally
+    command: " {{ item }} "
+    with_items:
+      - wget https://phar.phpunit.de/phpunit-4.8.0.phar
+      - chmod +x phpunit-4.8.0.phar
+      - mv phpunit-4.8.0.phar /usr/local/bin/phpunit
+    when: not phpunit_present.stat.exists
+
+  - name: Add repo file
+    template: src=mariadb_centos.repo.j2 dest=/etc/yum.repos.d/mariadb.repo owner=root group=root mode=0644

@@ -1,0 +1,15 @@
+---
+- name: Sync the backend folder
+  synchronize: src=../backend/ dest=/var/www/html/ recursive=yes mode=push
+
+- name: Sync the frontend folder
+  synchronize: src=../frontend/ dest=/var/www/html/frontend recursive=yes mode=push
+
+- name: Make sure the files have the correct owner
+  file: path=/var/www/html state=directory owner=apache group=apache recurse=yes
+
+- name: Make sure all files have correct permissions
+  shell: find /var/www/html/ -type f -exec chmod 0664 {} \;
+
+- name: Make sure all folders have correct permissions
+  shell: find /var/www/html/ -type d -exec chmod 0775 {} \;

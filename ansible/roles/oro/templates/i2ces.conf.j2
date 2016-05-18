@@ -1,0 +1,26 @@
+<VirtualHost *:80>
+    ServerName {{ url_base }}
+
+#    DocumentRoot /home/vagrant/sync/backend/web/
+     DocumentRoot /var/www/html/web/
+#    <Directory /home/vagrant/sync/backend/web/>
+     <Directory /var/www/html/web/>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        {% if ansible_distribution_version == "7.*" %}
+    Require all granted
+        {% endif %}
+
+        <IfModule mod_rewrite.c>
+            Options -MultiViews
+            RewriteEngine On
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteRule ^(.*)$ app.php [QSA,L]
+        </IfModule>
+
+    </Directory>
+    ErrorLog /var/log/httpd/{{ url_base }}_error.log
+
+    LogLevel warn
+    CustomLog /var/log/httpd/{{ url_base }}_access.log combined
+</VirtualHost>

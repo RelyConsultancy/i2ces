@@ -3,16 +3,17 @@
   remote_user: root
   vars_files:
     - vars/main.yml
-    - vars/server_parameters_qa.yml # Replace with your own
+    - vars/server_parameters_dev.yml # Replace with your own
 
   roles:
-    - init
-    - jailed-users
+    - { role: init, tags: init}
+    - { role: jailed-users, tags: jailed-users}
     - { role: phantomjs, sudo: yes, tags: phantomjs}
     - { role: pdfunite, sudo: yes, tags: pdfunite}
-    - geerlingguy.repo-remi
-    - geerlingguy.mysql
-    - geerlingguy.apache
-    - geerlingguy.php
-    - geerlingguy.composer
-    - oro
+    - { role: repo-remi, tags: remi}
+    - { role: mysql, tags: mysql}
+    - { role: apache, tags: apache}
+    - { role: php, tags: php}
+    - { role: sync, tags: sync}
+    - { role: composer, tags: composer}
+    - { role: oro, tags: oro}
