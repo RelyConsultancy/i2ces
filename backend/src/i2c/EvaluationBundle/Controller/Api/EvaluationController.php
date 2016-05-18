@@ -365,7 +365,7 @@ class EvaluationController extends RestApiController
         $filesystem = new Filesystem();
 
         if (!$filesystem->exists($evaluation->getTemporaryPdfPath())) {
-            return $this->serverFailure("PDF for this evaluation is not ready yet", Response::HTTP_PROCESSING);
+            return $this->serverFailure("PDF for this evaluation is not ready yet", Response::HTTP_ACCEPTED);
         }
 
         return $this->getPdfFileResponse($evaluation->getTemporaryPdfPath(), $evaluation);
