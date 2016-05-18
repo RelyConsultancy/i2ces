@@ -1,51 +1,14 @@
 import { Component, B } from '/components/component.js'
-import PDFViewer from '/components/PDFViewer'
 import setComponent from '/components/EvaluationSection/setComponent.js'
 import * as action from '/application/actions.js'
 import http from '/application/http.js'
 import { getURLQuery } from '/application/utils.js'
-import store from '/application/store.js'
 import Links from './links.js'
 import PDFIntro from './pdfIntro.js'
 import PDFOutro from './pdfOutro.js'
-import handleMarkers from './handleMarkers.js'
+import PDF from './pdf.js'
+import { setMarkers, stringifyMarkers, parseMarkers } from './markers.js'
 import style from './style.css'
-
-
-const parseMarkers = (string) => {
-  const markers = {}
-
-  if (!string) return markers
-
-  string.split('|').forEach((chapter) => {
-    chapter = chapter.split(':')
-
-    markers[chapter[0]] = chapter[1].split(',').map(i => parseInt(i.trim()))
-  })
-
-  return markers
-}
-
-
-const stringifyMarkers = (markers) => {
-  let chapters = []
-
-  Object.keys(markers).forEach((chapter) => {
-    chapters.push(`${ chapter }:${ markers[chapter].join(',') }`)
-  })
-
-  return chapters.join('|')
-}
-
-
-const fmtDocument = ({ markers }) => {
-  // wait for all network requests to finish and format pdf
-  setTimeout(function onReady () {
-    const { network } = store.getState().dashboard.flag
-
-    network ? setTimeout(onReady, 500) : handleMarkers({ markers })
-  }, 500)
-}
 
 
 const loadData = ({ cid }, handler) => {
@@ -91,7 +54,7 @@ const Chapter = (chapter) => {
 }
 
 
-const PDF = ({ evaluation, chapters, debug }) => {
+const Template = ({ evaluation, chapters, debug }) => {
   const intro = PDFIntro({ evaluation })
   const outro = PDFOutro({ evaluation })
   const content = B({ className: 'chapters' }, ...chapters.map(Chapter))
@@ -115,16 +78,14 @@ export default Component({
   },
   save () {
     const { evaluation, markers } = this.state
+    const url = `/api/pdf/permanent/${evaluation.cid}`
     const options = { data: evaluation }
 
     evaluation.pdf_markers = stringifyMarkers(markers)
 
-    http('post', `/api/pdf/permanent/${cid}`, options, (data) => {
-      console.log('Save PDF markers reply:', data)
+    http('post', url, options, (data) => {
+      window.location.hash = `/evaluations/${evaluation.cid}`
     })
-  },
-  togglePreview () {
-    this.setState({ isPreview: !this.state.isPreview })
   },
   componentDidMount () {
     const { cid } =  this.props.params
@@ -142,46 +103,35 @@ export default Component({
 
     // initiate PDF spacing format
     if (markers) {
-      fmtDocument({ markers })
+      setMarkers({ markers })
     }
   },
   render () {
     const { evaluation, chapters, markers, debug, isPreview } = this.state
 
-    let content = B({ className: style.no_data }, 'Loading evaluation ...')
-
-    if (isPreview) {
-      const { cid } = evaluation
-      const value = encodeURIComponent(stringifyMarkers(markers))
-
-      const preview = PDFViewer({
-        url: `/api/evaluations/${cid}/pdf/temporary?markers=${value}`,
-        className: style.pdf_preview,
-        headers: {
-          // ORO header required
-          'X-CSRF-Header': 1,
-        }
-      })
-
-      const actions = B(
-        { className: style.actions },
-        B({ className: style.action, onClick: this.togglePreview }, 'Close')
-      )
-
-      content = B(preview, actions)
-    }
-    else if (evaluation && chapters) {
-      const pdf = PDF({ evaluation, chapters, debug })
-
-      const actions = B(
-        { className: style.actions },
-        B({ className: style.action, onClick: this.togglePreview }, 'Preview'),
-        B({ className: style.action, onClick: this.save }, 'Save')
-      )
-
-      content = B(Links({ evaluation }), pdf, actions)
+    if (!evaluation && !chapters) {
+      return B({ className: style.no_data }, 'Loading evaluation ...')
     }
 
-    return B({ className: style.layout }, content)
+    const preview = B({
+      className: style.action,
+      onClick: (event) => {
+        this.setState({ isPreview: !this.state.isPreview })
+      },
+    }, isPreview ? 'Close' : 'Preview')
+
+    const save = isPreview ? null : B({
+      className: style.action,
+      onClick: this.save,
+    }, 'Save')
+
+    const actions = B({ className: style.actions }, preview, save)
+    const links = Links({ evaluation })
+
+    const content = isPreview
+                  ? PDF({ evaluation, markers })
+                  : Template({ evaluation, chapters, debug })
+
+    return B({ className: style.layout }, links, content, actions)
   }
 })

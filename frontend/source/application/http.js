@@ -80,21 +80,26 @@ export default (method, url, options, handler) => {
 
   showLoader()
 
-  fetch(url, config)
-    .then(toJSON)
-    .then((reply) => {
-      hideLoader()
+  let request = fetch(url, config)
 
-      if (reply.error) {
-        console.warn('HTTP: response error')
-        console.error(reply.error)
-      }
-      else if (handler) {
-        handler(reply)
-      }
-    })
-    .catch((error) => {
-      console.warn(`HTTP: ${error.toString()}`)
-      console.error(error.stack)
-    })
+  if (!options.raw) {
+    request = request.then(toJSON)
+  }
+
+  request.then((reply) => {
+    hideLoader()
+
+    if (reply.error) {
+      console.warn('HTTP: response error')
+      console.error(reply.error)
+    }
+    else if (handler) {
+      handler(reply)
+    }
+  })
+
+  request.catch((error) => {
+    console.warn(`HTTP: ${error.toString()}`)
+    console.error(error.stack)
+  })
 }

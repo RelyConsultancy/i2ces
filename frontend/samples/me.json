@@ -1,7 +1,7 @@
 {
   "id": 1,
   "username": "user",
-  "type": "supplier",
+  "type": "i2c_employee",
   "view": [
     "i2c1507187a",
     "i2c1509134a",
