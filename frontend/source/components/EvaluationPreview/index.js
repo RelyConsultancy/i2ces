@@ -95,8 +95,6 @@ export default Component({
     loadData({ cid }, ({ evaluation, chapters }) => {
       const markers = parseMarkers(query.markers || evaluation.pdf_markers)
 
-      console.log(markers)
-
       this.setState({ evaluation, chapters, markers, debug })
     })
   },

@@ -32,10 +32,16 @@ export default Component({
     const url = `/api/pdf/${evaluation.cid}/temporary?markers=${strMarkers}`
 
     // start PDF generation
-    http('post', url, (reply) => {
-      onPDFReady({ cid: evaluation.cid }, () => {
-        this.setState({ isGenerating: false })
-      })
+    http('post', url, { raw: true }, (reply) => {
+      if (reply.status == 200) {
+        onPDFReady({ cid: evaluation.cid }, () => {
+          this.setState({ isGenerating: false })
+        })
+      }
+      else {
+        console.error('Initiate PDF generation failed')
+        console.info(reply)
+      }
     })
   },
   render () {

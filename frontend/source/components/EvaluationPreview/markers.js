@@ -56,25 +56,26 @@ export const setMarkers = ({ markers }) => {
     // ignore external clicks
     if (!$component) return
 
-    const chapterID = $node.parent().attr('id')
+    const id = $node.parent().attr('id')
+    const index = $component.index()
 
     // remove marker
     if ($component.hasClass('page_break')) {
-      const pageBreaks = markers[chapterID]
+      const pageBreaks = markers[id]
 
       if (pageBreaks) {
-        pageBreaks.splice(pageBreaks.indexOf(indexOf), 1)
+        pageBreaks.splice(pageBreaks.indexOf(index), 1)
       }
     }
     // add marker
     else {
-      let pageBreaks = markers[chapterID]
+      let pageBreaks = markers[id]
 
       if (!pageBreaks) {
-        pageBreaks = markers[chapterID] = []
+        pageBreaks = markers[id] = []
       }
 
-      pageBreaks.push($component.index())
+      pageBreaks.push(index)
     }
 
     // update markers
