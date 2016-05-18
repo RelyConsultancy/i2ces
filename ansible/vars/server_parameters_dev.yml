@@ -20,6 +20,10 @@ websocket_frontend_port: 8080       # Websocket port the browser will connect to
 websocket_backend_host:  "*"        # Websocket host the application server will connect to
 websocket_backend_port:  8080       # Websocket port the application server will connect to
 
+pdf_delay: "2000"
+pdf_output_folder: "/var/www/html/pdfs"
+pdf_node_js_command: "phantomjs /var/www/html/frontend/pdf_phantom.js"
+
 session_handler:        session.handler.native_file
 
 locale:                 en

@@ -6,3 +6,10 @@
     enablerepo: "{{ php_enablerepo }}"
   with_items: "{{ php_packages }}"
   notify: restart webserver
+
+- name: Remove php.conf 
+  file: path=/etc/httpd/conf.d/php.conf state=absent
+
+- name: Make sure apache uses php 5.6
+  file: src=/etc/httpd/conf.d/php56-php.conf dest=/etc/httpd/conf.d/php.conf state=link force=yes
+  notify: restart webserver

@@ -74,11 +74,11 @@
     - mysql -uroot -proot -e "create database IF NOT EXISTS i2c"
 - set_fact: colon=":"
 
-- name: Update ORO db pass
-  lineinfile: dest=/var/www/html/app/config/parameters.yml regexp='(database_password:\ null)' line="    database_password{{colon}} root"
-
 - name: New Parameters.yml
   template: src=parameters.yml dest=/var/www/html/app/config/parameters.yml force=yes
+
+- name: Update ORO db pass
+  lineinfile: dest=/var/www/html/app/config/parameters.yml regexp='(database_password:\ null)' line="    database_password{{colon}} root"
 
 - name: Install Oro Platform
   command: chdir=/var/www/html php ./app/console oro:install --application-url {{url_base}} --organization-name {{database_name}} --user-name {{master_user}} --user-email {{master_email}} --user-firstname {{master_first_name}} --user-lastname {{master_last_name}} --user-password {{master_pass}} --drop-database --sample-data no --force -n

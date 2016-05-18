@@ -21,6 +21,10 @@ parameters:
     websocket_backend_host:  "{{ websocket_backend_host }}"
     websocket_backend_port:  {{ websocket_backend_port }}
 
+    pdf_delay: "{{ pdf_delay }}"
+    pdf_output_folder: "{{ pdf_output_folder }}"
+    pdf_node_js_command: "{{ pdf_node_js_command }}"
+
     session_handler:        {{ session_handler }}
 
     locale:                 {{ locale }}
