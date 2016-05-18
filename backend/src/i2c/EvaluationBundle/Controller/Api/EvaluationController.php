@@ -249,7 +249,7 @@ class EvaluationController extends RestApiController
 
         $generatePdfService->generatePdf($evaluation, $cookie);
 
-        return $this->success(null);
+        return $this->success("PDF generation started");
     }
 
     /**
