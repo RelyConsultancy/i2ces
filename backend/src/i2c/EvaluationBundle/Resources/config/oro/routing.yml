@@ -35,7 +35,7 @@ i2c_evaluation.get_permanent_evaluation_pdf:
 
 i2c_evaluation.get_temporary_evaluation_pdf:
     path: /api/evaluations/{evaluationCid}/pdf/temporary
-    methods: [GET]
+    methods: [GET, HEAD]
     defaults: { _controller: i2cEvaluationBundle:Api/Evaluation:getTemporaryPdf }
 
 i2c_evaluation.generate_evaluation_pdf:
