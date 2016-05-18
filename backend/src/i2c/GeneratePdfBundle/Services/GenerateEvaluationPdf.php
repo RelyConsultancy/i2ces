@@ -44,11 +44,10 @@ class GenerateEvaluationPdf
     /**
      * @param Evaluation $evaluation
      * @param string     $cookie
-     * @param string     $markers
      *
      * @return Evaluation
      */
-    public function generatePdf(Evaluation $evaluation, $cookie, $markers)
+    public function generatePdf(Evaluation $evaluation, $cookie)
     {
         $filesystem = new Filesystem();
 
@@ -64,17 +63,11 @@ class GenerateEvaluationPdf
             $filesystem->mkdir($this->pdfOutputFolder, 0755);
         }
 
-        $this->generateChapterPdf(
+        $this->generatePdfForEvaluation(
             $pdfPath,
             $evaluation->getCid(),
-            $headers,
-            $markers
+            $headers
         );
-
-        $process = new Process(sprintf('chmod 755 %s', $pdfPath));
-        $process->mustRun();
-        $this->logger->addDebug($process->getOutput());
-
 
         $evaluation->setTemporaryPdfPath($pdfPath);
 
@@ -88,15 +81,14 @@ class GenerateEvaluationPdf
      * @param string              $pdfPath
      * @param string              $cid
      * @param string              $headers
-     * @param string              $markers
      *
      * @return string
      */
-    protected function generateChapterPdf($pdfPath, $cid, $headers, $markers)
+    protected function generatePdfForEvaluation($pdfPath, $cid, $headers)
     {
-        //todo add markers to the nodejs command
+        $filesystem = new Filesystem();
         $command = sprintf(
-            '%s %s/#/preview/%s \'%s\' \'%s\' %s',
+            'exec %s %s/#/preview/%s \'%s\' \'%s\' %s &',
             $this->pdfNodeJsCommand,
             $this->urlBase,
             $cid,
@@ -104,8 +96,16 @@ class GenerateEvaluationPdf
             $headers,
             $this->pdfDelay
         );
+        if ($filesystem->exists($pdfPath)) {
+            $filesystem->remove($pdfPath);
+        }
+
         $this->logger->addDebug(sprintf('Running the pdf generation command %s', $command));
+
+        $theTimeout = 60;
         $process = new Process($command);
+        $process->setTimeout($theTimeout);
+        $process->setIdleTimeout($theTimeout);
         $process->start();
 
         return $pdfPath;
