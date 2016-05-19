@@ -66,12 +66,15 @@ page.open(url, function (status) {
 
   function checkIfDone () {
     if (!isLoaded()) {
-      return setTimeout(checkIfDone, 500)
+      console.log('Checking if PDF done rendering...')
+      return setTimeout(checkIfDone, 1000)
     }
 
-    page.render(filepath, { format: 'pdf', quality: '100' })
-    console.log('Rendered PDF to:', filepath)
-    phantom.exit()
+    setTimeout(function () {
+      page.render(filepath, { format: 'pdf', quality: '100' })
+      console.log('Rendered PDF to:', filepath)
+      phantom.exit()
+    }, 1000)
   }
 
   checkIfDone()
