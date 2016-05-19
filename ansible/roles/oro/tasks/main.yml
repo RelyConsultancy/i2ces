@@ -174,7 +174,7 @@
   become_user: root
 
 - name: Make sure installed is set to true
-  lineinfile: dest=/var/www/html/app/config/parameters.yml regexp="^installed: " line="    installed: true"
+  lineinfile: "dest=/var/www/html/app/config/parameters.yml regexp='^installed: ' line='    installed: true'"
   become_user: root
 
 - name: Create production cache
