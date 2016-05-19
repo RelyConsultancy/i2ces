@@ -141,11 +141,10 @@ export const setMarkers = ({ markers }) => {
     })
   })
 
-
-  // // set phantomjs flag
-  // setTimeout(() => {
-  //   window.READY_TO_PRINT = true
-  // }, 200)
+  // set phantomjs flag
+  setTimeout(() => {
+    window.READY_TO_PRINT = true
+  }, 250)
 }
 
 
