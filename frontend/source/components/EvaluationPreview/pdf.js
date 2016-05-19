@@ -13,8 +13,6 @@ const loadPDF = ({ cid }, handler) => {
       setTimeout(loadPDF, 1000, { cid }, handler)
     }
     else if (reply.status == 200) {
-      const url = `/api/evaluations/${evaluation.cid}/pdf/temporary`
-
       http('get', url, { blob: true }, (blob) => {
         console.info('Temporary PDF loaded', blob)
         handler(blob)
