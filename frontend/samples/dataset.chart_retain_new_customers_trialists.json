@@ -1,0 +1,54 @@
+{
+  "charts": {
+    "offer": [{
+      "timeperiod": 3,
+      "exposed": 2564,
+      "control": 2411.90936
+    }, {
+      "timeperiod": 2,
+      "exposed": 2764,
+      "control": 2624.421622
+    }],
+    "brand": [{
+      "timeperiod": 2,
+      "exposed": 9557,
+      "control": 9335.725916
+    }, {
+      "timeperiod": 3,
+      "exposed": 10079,
+      "control": 9892.446975
+    }]
+  },
+  "table": [{
+    "media_type": "Six Sheets1",
+    "uplift": 11.864698,
+    "percentage_uplift": 0.060186,
+    "exposed": 69602,
+    "control": 197.135302
+  }, {
+    "media_type": "Six Sheets1, Trolleys1",
+    "uplift": 112.93191,
+    "percentage_uplift": 0.052721,
+    "exposed": 708625,
+    "control": 2142.06809
+  }, {
+    "media_type": "Trolleys1",
+    "uplift": 14.781769,
+    "percentage_uplift": 0.051826,
+    "exposed": 130696,
+    "control": 285.218231
+  }],
+  "timings": [{
+    "label": "pre",
+    "date_start": "2015-06-24",
+    "date_end": "2015-09-15"
+  }, {
+    "label": "during",
+    "date_start": "2015-09-16",
+    "date_end": "2015-10-06"
+  }, {
+    "label": "post",
+    "date_start": "2015-10-07",
+    "date_end": "2015-11-17"
+  }]
+}

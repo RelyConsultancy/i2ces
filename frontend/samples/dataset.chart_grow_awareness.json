@@ -1,0 +1,70 @@
+{
+  "chart": [{
+    "media_type": "Total",
+    "exposed": 7627292
+  }, {
+    "media_type": "Six Sheets1",
+    "exposed": 901901
+  }, {
+    "media_type": "Trolleys1",
+    "exposed": 4388135
+  }, {
+    "media_type": "Six Sheets1",
+    "exposed": 3239157
+  }, {
+    "media_type": "Trolleys1",
+    "exposed": 980411
+  }, {
+    "media_type": "Total",
+    "exposed": 1882312
+  }, {
+    "media_type": "Total",
+    "exposed": 7627292
+  }, {
+    "media_type": "Six Sheets1",
+    "exposed": 901901
+  }, {
+    "media_type": "Trolleys1",
+    "exposed": 4388135
+  }, {
+    "media_type": "Six Sheets1",
+    "exposed": 3239157
+  }, {
+    "media_type": "Trolleys1",
+    "exposed": 980411
+  }, {
+    "media_type": "Total",
+    "exposed": 1882312
+  }, {
+    "media_type": "Total",
+    "exposed": 7627292
+  }, {
+    "media_type": "Six Sheets1",
+    "exposed": 901901
+  }, {
+    "media_type": "Trolleys1",
+    "exposed": 4388135
+  }, {
+    "media_type": "Six Sheets1",
+    "exposed": 3239157
+  }, {
+    "media_type": "Trolleys1",
+    "exposed": 980411
+  }, {
+    "media_type": "Total",
+    "exposed": 1882312
+  }],
+  "timings": [{
+    "label": "pre",
+    "date_start": "2015-06-24",
+    "date_end": "2015-09-15"
+  }, {
+    "label": "during",
+    "date_start": "2015-09-16",
+    "date_end": "2015-10-06"
+  }, {
+    "label": "post",
+    "date_start": "2015-10-07",
+    "date_end": "2015-11-17"
+  }]
+}

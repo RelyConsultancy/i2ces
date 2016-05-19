@@ -1,36 +1,16 @@
 [{
-  "channels": "Entrance Gates1",
-  "uplift": "982.612844",
-  "percentage_uplift": "0.351512",
-  "exposed": "337250"
-}, {
-  "channels": "Entrance Gates1, Six Sheets1",
-  "uplift": "1070.738772",
-  "percentage_uplift": "0.524034",
-  "exposed": "190537"
-}, {
-  "channels": "Entrance Gates1, Six Sheets1, TV Wall1",
-  "uplift": "1334.248613",
-  "percentage_uplift": "0.577659",
-  "exposed": "165625"
-}, {
-  "channels": "Entrance Gates1, TV Wall1",
-  "uplift": "5638.320006",
-  "percentage_uplift": "0.535114",
-  "exposed": "870664"
-}, {
   "channels": "Six Sheets1",
-  "uplift": "349.978780",
-  "percentage_uplift": "0.113850",
-  "exposed": "466779"
+  "uplift": "192.502800",
+  "percentage_uplift": "0.075833",
+  "exposed": "1740166"
 }, {
-  "channels": "Six Sheets1, TV Wall1",
-  "uplift": "1469.183852",
-  "percentage_uplift": "0.386850",
-  "exposed": "290512"
+  "channels": "Six Sheets1, Trolleys1",
+  "uplift": "1279.560165",
+  "percentage_uplift": "0.045753",
+  "exposed": "708625"
 }, {
-  "channels": "TV Wall1",
-  "uplift": "11001.256140",
-  "percentage_uplift": "0.350395",
-  "exposed": "2904972"
+  "channels": "Trolleys1",
+  "uplift": "-174.318867",
+  "percentage_uplift": "-0.052031",
+  "exposed": "1849174"
 }]

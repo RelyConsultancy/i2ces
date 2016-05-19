@@ -1,0 +1,70 @@
+{
+  "charts": {
+    "offer": [{
+      "timeperiod": 3,
+      "exposed": 47367,
+      "control": 44634.98124
+    }, {
+      "timeperiod": 2,
+      "exposed": 46856,
+      "control": 38481.369553
+    }],
+    "brand": []
+  },
+  "table": [{
+    "media_type": "JS Magazine1",
+    "uplift": 100.940342,
+    "percentage_uplift": 0.330887,
+    "exposed": 56250,
+    "control": 305.059658
+  }, {
+    "media_type": "JS Magazine1, Six Sheets1",
+    "uplift": 56,
+    "percentage_uplift": 0.41791,
+    "exposed": 11962,
+    "control": 134
+  }, {
+    "media_type": "JS Magazine1, Six Sheets1, TV Wall1",
+    "uplift": 200,
+    "percentage_uplift": 0.803213,
+    "exposed": 21470,
+    "control": 249
+  }, {
+    "media_type": "JS Magazine1, TV Wall1",
+    "uplift": 518.912617,
+    "percentage_uplift": 0.66265,
+    "exposed": 71671,
+    "control": 783.087383
+  }, {
+    "media_type": "Six Sheets1",
+    "uplift": 854.964062,
+    "percentage_uplift": 0.189611,
+    "exposed": 548475,
+    "control": 4509.035938
+  }, {
+    "media_type": "Six Sheets1, TV Wall1",
+    "uplift": 1990.373252,
+    "percentage_uplift": 0.287268,
+    "exposed": 751720,
+    "control": 6928.626748
+  }, {
+    "media_type": "TV Wall1",
+    "uplift": 4653.440174,
+    "percentage_uplift": 0.18197,
+    "exposed": 3300872,
+    "control": 25572.559826
+  }],
+  "timings": [{
+    "label": "pre",
+    "date_start": "2015-06-24",
+    "date_end": "2015-09-15"
+  }, {
+    "label": "during",
+    "date_start": "2015-09-16",
+    "date_end": "2015-10-27"
+  }, {
+    "label": "post",
+    "date_start": "2015-10-28",
+    "date_end": "2015-12-08"
+  }]
+}

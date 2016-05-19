@@ -1,104 +1,100 @@
 {
   "chart": [{
-    "date_start": "2015-07-13",
-    "exposed": "12878.00",
-    "control": "12898.476820"
+    "date_start": "2015-06-24",
+    "exposed": "14368.00",
+    "control": "14334.893275"
   }, {
-    "date_start": "2015-07-20",
-    "exposed": "22511.00",
-    "control": "22326.376800"
+    "date_start": "2015-07-01",
+    "exposed": "6060.00",
+    "control": "5894.845629"
   }, {
-    "date_start": "2015-07-27",
-    "exposed": "23003.00",
-    "control": "23406.470030"
+    "date_start": "2015-07-08",
+    "exposed": "5801.00",
+    "control": "5876.137331"
   }, {
-    "date_start": "2015-08-03",
-    "exposed": "21308.00",
-    "control": "20952.745540"
+    "date_start": "2015-07-15",
+    "exposed": "5560.00",
+    "control": "5794.959711"
   }, {
-    "date_start": "2015-08-10",
-    "exposed": "8558.00",
-    "control": "8498.274405"
+    "date_start": "2015-07-22",
+    "exposed": "6033.00",
+    "control": "6273.538442"
   }, {
-    "date_start": "2015-08-17",
-    "exposed": "4457.00",
-    "control": "4484.085482"
+    "date_start": "2015-07-29",
+    "exposed": "5857.00",
+    "control": "5982.742349"
   }, {
-    "date_start": "2015-08-24",
-    "exposed": "10718.00",
-    "control": "10559.165300"
+    "date_start": "2015-08-05",
+    "exposed": "6179.00",
+    "control": "6255.508763"
   }, {
-    "date_start": "2015-08-31",
-    "exposed": "13004.00",
-    "control": "13444.437750"
+    "date_start": "2015-08-12",
+    "exposed": "5115.00",
+    "control": "4902.347629"
   }, {
-    "date_start": "2015-09-07",
-    "exposed": "12287.00",
-    "control": "12078.265530"
+    "date_start": "2015-08-19",
+    "exposed": "4837.00",
+    "control": "4752.097479"
   }, {
-    "date_start": "2015-09-14",
-    "exposed": "5655.00",
-    "control": "5959.467696"
+    "date_start": "2015-08-26",
+    "exposed": "5716.00",
+    "control": "5560.576114"
   }, {
-    "date_start": "2015-09-21",
-    "exposed": "4239.00",
-    "control": "4278.047119"
+    "date_start": "2015-09-02",
+    "exposed": "5944.00",
+    "control": "5966.121424"
   }, {
-    "date_start": "2015-09-28",
-    "exposed": "4363.00",
-    "control": "4095.187536"
+    "date_start": "2015-09-09",
+    "exposed": "6202.00",
+    "control": "6078.231858"
   }, {
-    "date_start": "2015-10-05",
-    "exposed": "20483.00",
-    "control": "14500.300550"
+    "date_start": "2015-09-16",
+    "exposed": "12034.00",
+    "control": "11624.337708"
   }, {
-    "date_start": "2015-10-12",
-    "exposed": "25468.00",
-    "control": "17503.595810"
+    "date_start": "2015-09-23",
+    "exposed": "11653.00",
+    "control": "11014.184726"
   }, {
-    "date_start": "2015-10-19",
-    "exposed": "25183.00",
-    "control": "18135.292020"
+    "date_start": "2015-09-30",
+    "exposed": "11466.00",
+    "control": "11216.733468"
   }, {
-    "date_start": "2015-10-26",
-    "exposed": "8784.00",
-    "control": "7784.969522"
+    "date_start": "2015-10-07",
+    "exposed": "4557.00",
+    "control": "4476.902036"
   }, {
-    "date_start": "2015-11-02",
-    "exposed": "4357.00",
-    "control": "3746.717559"
+    "date_start": "2015-10-14",
+    "exposed": "4512.00",
+    "control": "4376.748583"
   }, {
-    "date_start": "2015-11-09",
-    "exposed": "4454.00",
-    "control": "4156.190868"
+    "date_start": "2015-10-21",
+    "exposed": "4362.00",
+    "control": "4312.916346"
   }, {
-    "date_start": "2015-11-16",
-    "exposed": "19989.00",
-    "control": "17597.117900"
+    "date_start": "2015-10-28",
+    "exposed": "9519.00",
+    "control": "9293.781041"
   }, {
-    "date_start": "2015-11-23",
-    "exposed": "23994.00",
-    "control": "20763.965910"
+    "date_start": "2015-11-04",
+    "exposed": "9913.00",
+    "control": "9697.947571"
   }, {
-    "date_start": "2015-11-30",
-    "exposed": "20299.00",
-    "control": "17466.463520"
-  }, {
-    "date_start": "2015-12-07",
-    "exposed": "7446.00",
-    "control": "6666.097986"
+    "date_start": "2015-11-11",
+    "exposed": "9632.00",
+    "control": "9450.011661"
   }],
   "timings": [{
     "label": "pre",
-    "date_start": "2015-07-13",
-    "date_end": "2015-08-14"
+    "date_start": "2015-06-24",
+    "date_end": "2015-09-15"
   }, {
     "label": "during",
-    "date_start": "2015-08-14",
-    "date_end": "2015-09-21"
+    "date_start": "2015-09-16",
+    "date_end": "2015-10-06"
   }, {
     "label": "post",
-    "date_start": "2015-09-21",
-    "date_end": "2015-12-17"
+    "date_start": "2015-10-07",
+    "date_end": "2015-11-17"
   }]
 }

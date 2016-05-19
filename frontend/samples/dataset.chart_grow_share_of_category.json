@@ -1,0 +1,42 @@
+{
+  "charts": {
+    "offer": [{
+      "timeperiod": 2,
+      "exposed": 0,
+      "control": 26.4571
+    }, {
+      "timeperiod": 3,
+      "exposed": 0,
+      "control": 24.4938
+    }],
+    "brand": [{
+      "timeperiod": 2,
+      "exposed": 0,
+      "control": 25.3437
+    }, {
+      "timeperiod": 3,
+      "exposed": 0,
+      "control": 26.4232
+    }]
+  },
+  "table": [{
+    "media_type": "Six Sheets1",
+    "uplift": -0.007308,
+    "percentage_uplift": -0.027622,
+    "exposed": 2362752,
+    "control": 0.264571
+  }],
+  "timings": [{
+    "label": "pre",
+    "date_start": "2015-08-24",
+    "date_end": "2015-11-15"
+  }, {
+    "label": "during",
+    "date_start": "2015-11-16",
+    "date_end": "2015-11-29"
+  }, {
+    "label": "post",
+    "date_start": "2015-11-30",
+    "date_end": "2016-01-10"
+  }]
+}

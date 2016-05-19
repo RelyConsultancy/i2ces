@@ -1,0 +1,102 @@
+{
+  "charts": {
+    "offer": [{
+      "timeperiod": 3,
+      "exposed": 1,
+      "control": 1.223009
+    }, {
+      "timeperiod": 2,
+      "exposed": 1,
+      "control": 1.143715
+    }],
+    "brand": [{
+      "timeperiod": 3,
+      "exposed": 1,
+      "control": 1.403181
+    }, {
+      "timeperiod": 2,
+      "exposed": 1,
+      "control": 1.256569
+    }]
+  },
+  "table": [{
+    "media_type": "JS Magazine1 ",
+    "uplift": -0.01172,
+    "percentage_uplift": -0.009902,
+    "exposed": 189687,
+    "control": 1.183602
+  }, {
+    "media_type": "JS Magazine1, Milk Media1",
+    "uplift": -0.012254,
+    "percentage_uplift": -0.010251,
+    "exposed": 11783,
+    "control": 1.195352
+  }, {
+    "media_type": "JS Magazine1, Six Sheets1",
+    "uplift": -0.015976,
+    "percentage_uplift": -0.013605,
+    "exposed": 20057,
+    "control": 1.174316
+  }, {
+    "media_type": "JS Magazine1, Six Sheets2",
+    "uplift": -0.012185,
+    "percentage_uplift": -0.010145,
+    "exposed": 28664,
+    "control": 1.201105
+  }, {
+    "media_type": "Milk Media1  ",
+    "uplift": 0.005917,
+    "percentage_uplift": 0.005178,
+    "exposed": 290497,
+    "control": 1.142815
+  }, {
+    "media_type": "Milk Media1, Six Sheets1",
+    "uplift": -0.000308,
+    "percentage_uplift": -0.000268,
+    "exposed": 30868,
+    "control": 1.151646
+  }, {
+    "media_type": "Milk Media1, Six Sheets2 ",
+    "uplift": -0.008438,
+    "percentage_uplift": -0.007138,
+    "exposed": 71449,
+    "control": 1.182233
+  }, {
+    "media_type": "Mobile1  ",
+    "uplift": 0.007206,
+    "percentage_uplift": 0.00625,
+    "exposed": 57218,
+    "control": 1.152878
+  }, {
+    "media_type": "Six Sheets1",
+    "uplift": 0.000306,
+    "percentage_uplift": 0.000272,
+    "exposed": 561316,
+    "control": 1.12582
+  }, {
+    "media_type": "Six Sheets1, Six Sheets2 ",
+    "uplift": -0.013405,
+    "percentage_uplift": -0.011763,
+    "exposed": 42970,
+    "control": 1.139576
+  }, {
+    "media_type": "Six Sheets2",
+    "uplift": 0.009667,
+    "percentage_uplift": 0.008614,
+    "exposed": 1121063,
+    "control": 1.122215
+  }],
+  "timings": [{
+    "label": "pre",
+    "date_start": "2015-05-27",
+    "date_end": "2015-08-18"
+  }, {
+    "label": "during",
+    "date_start": "2015-08-19",
+    "date_end": "2015-09-30"
+  }, {
+    "label": "post",
+    "date_start": "2015-10-01",
+    "date_end": "2015-11-11"
+  }]
+}

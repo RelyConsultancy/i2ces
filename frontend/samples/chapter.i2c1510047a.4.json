@@ -6,10 +6,10 @@
   "content": [{
     "type": "section",
     "access": "editable",
-    "title": "Objective priority 1",
+    "title": "chart_offer_sales",
     "content": [{
       "type": "info",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "content": "table_offer_sales."
     }, {
       "type": "chart_offer_sales",
       "source": "/api/evaluations/i2c1510047a/dataset/chart_offer_sales"
@@ -23,13 +23,153 @@
   }, {
     "type": "section",
     "access": "editable",
-    "title": "Objective priority 2",
+    "title": "chart_units_uplift",
     "content": [{
       "type": "info",
       "content": ""
     }, {
       "type": "chart_units_uplift",
       "source": "/api/evaluations/i2c1510047a/dataset/chart_units_uplift"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_grow_customer_product_range",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_grow_customer_product_range",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_grow_customer_product_range"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_grow_awareness",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_grow_awareness",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_grow_awareness"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_retain_existing_customers",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_retain_existing_customers",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_retain_existing_customers"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_retain_lapsing_customers",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_retain_lapsing_customers",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_retain_lapsing_customers"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_acquire_new_customers",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_acquire_new_customers",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_acquire_new_customers"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_grow_share_of_category",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_grow_share_of_category",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_grow_share_of_category"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_launch_new_product",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_launch_new_product",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_launch_new_product"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_grow_frequency_of_share_per_customer",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_grow_frequency_of_share_per_customer",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_grow_frequency_of_share_per_customer"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_grow_total_units",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_grow_total_units",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_grow_total_units"
+    }, {
+      "type": "comment",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    }]
+  }, {
+    "type": "section",
+    "access": "editable",
+    "title": "chart_retain_new_customers_trialists",
+    "content": [{
+      "type": "info",
+      "content": ""
+    }, {
+      "type": "chart_retain_new_customers_trialists",
+      "source": "/api/evaluations/i2c1510047a/dataset/chart_retain_new_customers_trialists"
     }, {
       "type": "comment",
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."

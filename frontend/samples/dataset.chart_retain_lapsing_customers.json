@@ -1,0 +1,78 @@
+{
+  "charts": {
+    "offer": [{
+      "timeperiod": 2,
+      "exposed": 29313,
+      "control": 27124.003757
+    }, {
+      "timeperiod": 3,
+      "exposed": 6851,
+      "control": 6322.847685
+    }],
+    "brand": [{
+      "timeperiod": 3,
+      "exposed": 27686,
+      "control": 26066.664378
+    }, {
+      "timeperiod": 2,
+      "exposed": 84070,
+      "control": 76535.606119
+    }]
+  },
+  "table": [{
+    "media_type": "Six Sheets1",
+    "uplift": 82.081776,
+    "percentage_uplift": 0.01285,
+    "exposed": 946582,
+    "control": 6387.918224
+  }, {
+    "media_type": "Six Sheets1, TV Wall1",
+    "uplift": -23.439401,
+    "percentage_uplift": -0.04712,
+    "exposed": 139264,
+    "control": 497.439401
+  }, {
+    "media_type": "Six Sheets1, TV Wall1, TV Wall2",
+    "uplift": 1226.203174,
+    "percentage_uplift": 0.200793,
+    "exposed": 1256459,
+    "control": 6106.796826
+  }, {
+    "media_type": "Six Sheets1, TV Wall2",
+    "uplift": 105.683129,
+    "percentage_uplift": 0.04024,
+    "exposed": 497990,
+    "control": 2626.316871
+  }, {
+    "media_type": "TV Wall1",
+    "uplift": 58.213345,
+    "percentage_uplift": 0.115781,
+    "exposed": 1000207,
+    "control": 502.786655
+  }, {
+    "media_type": "TV Wall1, TV Wall2",
+    "uplift": 944.048409,
+    "percentage_uplift": 0.11941,
+    "exposed": 2054771,
+    "control": 7905.951591
+  }, {
+    "media_type": "TV Wall2",
+    "uplift": -203.794191,
+    "percentage_uplift": -0.065808,
+    "exposed": 905856,
+    "control": 3096.794191
+  }],
+  "timings": [{
+    "label": "pre",
+    "date_start": "2015-08-26",
+    "date_end": "2015-11-17"
+  }, {
+    "label": "during",
+    "date_start": "2015-11-18",
+    "date_end": "2016-01-04"
+  }, {
+    "label": "post",
+    "date_start": "2016-01-05",
+    "date_end": "2016-02-15"
+  }]
+}

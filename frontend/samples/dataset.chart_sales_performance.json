@@ -1,97 +1,76 @@
-[{
-  "label": "Corsodyl",
-  "type": "average_spend",
-  "value": "6347.36"
-}, {
-  "label": "Own Label",
-  "type": "average_spend",
-  "value": "3552.04"
-}, {
-  "label": "JS",
-  "type": "average_spend",
-  "value": "62641.74"
-}, {
-  "label": "Sensodyne",
-  "type": "average_spend",
-  "value": "235489.92"
-}, {
-  "label": "Aisle",
-  "type": "average_spend",
-  "value": "2080932.29"
-}, {
-  "label": "Brand",
-  "type": "average_spend",
-  "value": "420235.35"
-}, {
-  "label": "Offer",
-  "type": "average_spend",
-  "value": "37448.34"
-}, {
-  "label": "Rest of Cat",
-  "type": "average_spend",
-  "value": "1356217.92"
-}, {
-  "label": "Corsodyl",
-  "type": "category_share",
-  "value": "0.003"
-}, {
-  "label": "Own Label",
-  "type": "category_share",
-  "value": "0.002"
-}, {
-  "label": "JS",
-  "type": "category_share",
-  "value": "0.03"
-}, {
-  "label": "Brand",
-  "type": "category_share",
-  "value": "0.202"
-}, {
-  "label": "Sensodyne",
-  "type": "category_share",
-  "value": "0.113"
-}, {
-  "label": "Aisle",
-  "type": "category_share",
-  "value": "1"
-}, {
-  "label": "Offer",
-  "type": "category_share",
-  "value": "0.018"
-}, {
-  "label": "Rest of Cat",
-  "type": "category_share",
-  "value": "0.652"
-}, {
-  "label": "JS",
-  "type": "sales_growth",
-  "value": "0.004"
-}, {
-  "label": "Rest of Cat",
-  "type": "sales_growth",
-  "value": "0.025"
-}, {
-  "label": "Corsodyl",
-  "type": "sales_growth",
-  "value": "0.213"
-}, {
-  "label": "Own Label",
-  "type": "sales_growth",
-  "value": "0.096"
-}, {
-  "label": "Sensodyne",
-  "type": "sales_growth",
-  "value": "0.171"
-}, {
-  "label": "Aisle",
-  "type": "sales_growth",
-  "value": "0.02"
-}, {
-  "label": "Brand",
-  "type": "sales_growth",
-  "value": "-0.061"
-}, {
-  "label": "Offer",
-  "type": "sales_growth",
-  "value": "0.263"
-}]
+{
+  "table_data": [{
+    "type": "average_spend",
+    "label": "Aisle",
+    "value": "5399038.680000"
+  }, {
+    "type": "category_share",
+    "label": "Aisle",
+    "value": "1.000000"
+  }, {
+    "type": "sales_growth",
+    "label": "Aisle",
+    "value": "-0.043000"
+  }, {
+    "type": "category_share",
+    "label": "Brand",
+    "value": "0.136000"
+  }, {
+    "type": "average_spend",
+    "label": "Brand",
+    "value": "732025.310000"
+  }, {
+    "type": "sales_growth",
+    "label": "Brand",
+    "value": "-0.079000"
+  }, {
+    "type": "average_spend",
+    "label": "McCains",
+    "value": "738440.800000"
+  }, {
+    "type": "category_share",
+    "label": "McCains",
+    "value": "0.137000"
+  }, {
+    "type": "sales_growth",
+    "label": "McCains",
+    "value": "-0.090000"
+  }, {
+    "type": "average_spend",
+    "label": "Offer",
+    "value": "229216.490000"
+  }, {
+    "type": "category_share",
+    "label": "Offer",
+    "value": "0.042000"
+  }, {
+    "type": "sales_growth",
+    "label": "Offer",
+    "value": "0.087000"
+  }, {
+    "type": "category_share",
+    "label": "OL",
+    "value": "0.164000"
+  }, {
+    "type": "sales_growth",
+    "label": "OL",
+    "value": "-0.014000"
+  }, {
+    "type": "average_spend",
+    "label": "OL",
+    "value": "887955.000000"
+  }, {
+    "type": "average_spend",
+    "label": "Youngs",
+    "value": "294741.400000"
+  }, {
+    "type": "category_share",
+    "label": "Youngs",
+    "value": "0.055000"
+  }, {
+    "type": "sales_growth",
+    "label": "Youngs",
+    "value": "-0.126000"
+  }],
+  "start_date": "2015-08-19"
+}
