@@ -268,7 +268,16 @@ class EvaluationController extends RestApiController
                 return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
             }
 
-            if (is_null($evaluation->getTemporaryPdfPath())) {
+            $process = new Process(sprintf('ps aux | grep phantomjs | grep %s', $evaluation->getTemporaryPdfPath()));
+            $process->run();
+            $output = $process->getOutput();
+
+            $filesystem = new Filesystem();
+
+            if (is_null($evaluation->getTemporaryPdfPath())
+                || !$filesystem->exists($evaluation->getTemporaryPdfPath())
+                || strpos($output, 'Cookie~') !== false
+            ) {
                 return $this->notFound(sprintf('Temporary PDF was not found for the evaluation %s', $evaluationCid));
             }
 
@@ -307,7 +316,16 @@ class EvaluationController extends RestApiController
                 return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
             }
 
-            if (is_null($evaluation->getTemporaryPdfPath())) {
+            $process = new Process(sprintf('ps aux | grep phantomjs | grep %s', $evaluation->getTemporaryPdfPath()));
+            $process->run();
+            $output = $process->getOutput();
+
+            $filesystem = new Filesystem();
+
+            if (is_null($evaluation->getTemporaryPdfPath())
+                || !$filesystem->exists($evaluation->getTemporaryPdfPath())
+                || strpos($output, 'Cookie~') !== false
+            ) {
                 return $this->notFound(sprintf('Temporary PDF was not found for the evaluation %s', $evaluationCid));
             }
 
