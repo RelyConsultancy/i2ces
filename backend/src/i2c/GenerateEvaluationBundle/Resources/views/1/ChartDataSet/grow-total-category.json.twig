@@ -1,11 +1,32 @@
 {% autoescape false %}
-[
-    {% for item in data %}
-    {
-        "date_start": "{{ item.start_date }}",
-        "exposed": "{{ item.exposed }}",
-        "control": "{{ item.control }}"
-    }{{ not loop.last ? ',' }}
-    {% endfor %}
-]
+{
+    "chart": [
+        {% for item in data %}
+        {
+            "date_start": "{{ item.start_date }}",
+            "exposed": "{{ item.exposed }}",
+            "control": "{{ item.control }}"
+        }{{ not loop.last ? ',' }}
+        {% endfor %}
+    ],
+    "timings": [
+        {
+            "label": "pre",
+            "date_start": "{{ timing_pre[0].start_date }}",
+            "date_end": "{{ timing_pre[0].end_date }}"
+        },
+        {
+            "label": "during",
+            "date_start": "{{ timing_during[0].start_date }}",
+            "date_end": "{{ timing_during[0].end_date }}"
+        }
+        {% if timing_post[0] is defined %}
+    ,{
+            "label": "post",
+            "date_start": "{{ timing_post[0].start_date }}",
+            "date_end": "{{ timing_post[0].end_date }}"
+        }
+        {% endif %}
+    ]
+}
 {% endautoescape %}
