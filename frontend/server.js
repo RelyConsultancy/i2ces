@@ -179,6 +179,9 @@ $('post', '/api/pdf/:cid/temporary', function * () {
   this.body = { ok: 1 }
 })
 
+$('get', '/api/evaluations/:cid/pdf/temporary', function * () {
+  yield send(this, 'phantomjs_export.pdf', { root: `${__dirname}/samples` })
+})
 $('head', '/api/evaluations/:cid/pdf/temporary', function * () {
   // simulate workload for pulling
   this.status = Math.random() >= 0.5 ? 202 : 200
