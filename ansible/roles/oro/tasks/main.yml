@@ -180,5 +180,5 @@
 - name: Create production cache
   command: chdir=/var/www/html php app/console cache:clear --env=prod --no-debug
   become_user: root
-
+  tags: clear-cache
 
