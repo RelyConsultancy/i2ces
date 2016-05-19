@@ -17,6 +17,7 @@ use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Process\Process;
 
 /**
  * Class EvaluationController
@@ -362,9 +363,13 @@ class EvaluationController extends RestApiController
             return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
         }
 
+        $process = new Process(sprintf('ps aux | grep phantomjs | grep %s', $evaluation->getTemporaryPdfPath()));
+        $process->run();
+        $output = $process->getOutput();
+
         $filesystem = new Filesystem();
 
-        if (!$filesystem->exists($evaluation->getTemporaryPdfPath())) {
+        if (!$filesystem->exists($evaluation->getTemporaryPdfPath()) || strpos($output, 'Cookie~') !== false) {
             return $this->serverFailure("PDF for this evaluation is not ready yet", Response::HTTP_ACCEPTED);
         }
 
