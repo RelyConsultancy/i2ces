@@ -288,7 +288,9 @@ class EvaluationController extends RestApiController
             );
 
             $fileSystem = new Filesystem();
-            $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath);
+            $fileSystem->copy($evaluation->getTemporaryPdfPath(), $newPdfPath, true);
+
+            $fileSystem->remove($evaluation->getTemporaryPdfPath());
 
             $evaluation->setLatestPdfPath($newPdfPath);
             $evaluation->setTemporaryPdfPath(null);
