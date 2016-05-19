@@ -59,12 +59,10 @@
   top: 0;
   bottom: 0;
   width: 4rem;
-  line-height: 1rem;
-  font-size: .675rem;
 }
 .table_labels > div {
-  height: 2.5rem;
-  font-size: .75em;
+  height: 2.25rem;
+  font-size: .675rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }

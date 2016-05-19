@@ -4,6 +4,12 @@ import { forEach } from '/application/utils.js'
 import style from './style.css'
 
 
+// A4 page height (landscape)
+const pageHeight = 590
+// page_break added padding
+const pageBreakPadding = 32
+
+
 export const parseMarkers = (string) => {
   const markers = {}
 
@@ -83,11 +89,6 @@ export const setMarkers = ({ markers }) => {
   }
 
 
-  // A4 page height (landscape)
-  const pageHeight = 590
-  // page_break added padding
-  const pageBreakPadding = 32
-
   // attach handler for toggling page breaks on click
   $('.chapter').off('click').on('click', handlePageBreaks)
 
@@ -141,10 +142,10 @@ export const setMarkers = ({ markers }) => {
   })
 
 
-  // set phantomjs flag
-  setTimeout(() => {
-    window.READY_TO_PRINT = true
-  }, 200)
+  // // set phantomjs flag
+  // setTimeout(() => {
+  //   window.READY_TO_PRINT = true
+  // }, 200)
 }
 
 
@@ -153,6 +154,6 @@ export const fmtDocument = ({ markers }) => {
   const { network } = store.getState().dashboard.flag
 
   if (network) {
-    return setTimeout(markers, 500, { markers })
+    return setTimeout(setMarkers, 500, { markers })
   }
 }

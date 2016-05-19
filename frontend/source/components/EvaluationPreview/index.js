@@ -7,7 +7,7 @@ import Links from './links.js'
 import PDFIntro from './pdfIntro.js'
 import PDFOutro from './pdfOutro.js'
 import PDF from './pdf.js'
-import { setMarkers, stringifyMarkers, parseMarkers } from './markers.js'
+import { fmtDocument, stringifyMarkers, parseMarkers } from './markers.js'
 import style from './style.css'
 
 
@@ -103,7 +103,7 @@ export default Component({
 
     // initiate PDF spacing format
     if (markers) {
-      setMarkers({ markers })
+      fmtDocument({ markers })
     }
   },
   render () {

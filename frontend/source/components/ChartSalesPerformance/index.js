@@ -20,17 +20,15 @@ const sortData = (data) => {
   items.push(data.filter(byOffer).pop())
   items.push(data.filter(byBrand).pop())
 
-  const rest_of_cat = data.filter(byCategory).pop()
-
-  data.filter(byCategory).pop()
+  const rest_of_cat = data.filter(byCategory)
 
   let competition = data
     .filter(i => items.indexOf(i) == -1)
     .sort((a, b) => (a.label > b.label))
 
-  competition = _.reject(competition, (i) => {
-      return i.label.toLowerCase() == 'rest of cat'
-  })
+  competition = _.reject(competition, (i) => (
+    i.label.toLowerCase() == 'rest of cat'
+  ))
 
   return items.concat(competition, rest_of_cat);
 }
@@ -123,16 +121,13 @@ const TableSales = ({ data }) => {
 }
 
 const Timings = ({ data }) => {
+  const start_date = moment(data)
+  const stages = [
+    B({ className:style.stage }, 'Previous Period:',  B({ className: style.stage_period }, start_date.clone().subtract(364, 'days').format('DD/MM/YYYY') + ' - ' + start_date.clone().subtract(183, 'days').format('DD/MM/YYYY'))),
+    B({ className:style.stage }, 'Current Period:',  B({ className: style.stage_period }, start_date.clone().subtract(182, 'days').format('DD/MM/YYYY') + ' - ' + start_date.clone().subtract(1, 'days').format('DD/MM/YYYY')))
+  ]
 
-    const start_date = moment(data)
-    console.log(start_date.format('DD/MM/YYYY'))
-    const stages = [
-        B({ className:style.stage }, 'Previous Period:',  B({ className: style.stage_period }, start_date.clone().subtract(364, 'days').format('DD/MM/YYYY') + ' - ' + start_date.clone().subtract(183, 'days').format('DD/MM/YYYY'))),
-        B({ className:style.stage }, 'Current Period:',  B({ className: style.stage_period }, start_date.clone().subtract(182, 'days').format('DD/MM/YYYY') + ' - ' + start_date.clone().subtract(1, 'days').format('DD/MM/YYYY')))
-    ]
-
-    return B({ className: style.stages }, stages);
-
+  return B({ className: style.stages }, ...stages);
 }
 
 

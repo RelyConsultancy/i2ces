@@ -5996,13 +5996,11 @@ b.i2c_objective_list_row {
   top: 0;
   bottom: 0;
   width: 4rem;
-  line-height: 1rem;
-  font-size: .675rem;
 }
 
 ._ChartSalesPerformance_style_table_labels > div {
-  height: 2.5rem;
-  font-size: .75em;
+  height: 2.25rem;
+  font-size: .675rem;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -6748,7 +6746,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 
-/* 
+/*
     Created on : 04-May-2016, 17:26:04
     Author     : jfairbrother
 */
@@ -6793,7 +6791,7 @@ and open the template in the editor.
 
 
 
-b.i2c_objective_blob {
+div.i2c_objective_blob {
   display: table;
   border-radius: 50%;
   width: 150px;
@@ -6804,43 +6802,43 @@ b.i2c_objective_blob {
   font-family: 'Archer Bold', serif;
 }
 
-b.i2c_objective_blob:nth-child(1) {
+div.i2c_objective_blob:nth-child(1) {
   background: #4E90CD;
   color: #fff;
 }
 
-b.i2c_objective_blob:nth-child(2) {
+div.i2c_objective_blob:nth-child(2) {
   background: #EA7518;
   color: #fff;
 }
 
-b.i2c_objective_blob:nth-child(3) {
+div.i2c_objective_blob:nth-child(3) {
   background: #914B97;
   color: #fff;
 }
 
-b.i2c_objective_blob:nth-child(4) {
+div.i2c_objective_blob:nth-child(4) {
   background: #5FC4E1;
   color: #fff;
 }
 
-b.i2c_objective_blob:last-child {
+div.i2c_objective_blob:last-child {
   margin-right: 0px;
 }
 
-b.i2c_objectives_list {
+div.i2c_objectives_list {
   text-align: center;
 }
 
-b.i2c_objective_title {
+div.i2c_objective_title {
   font-size: 1.2rem;
 }
 
-b.i2c_objective_value {
+div.i2c_objective_value {
   font-size: 1.6rem;
 }
 
-b.i2c_objective_blob_inner {
+div.i2c_objective_blob_inner {
   display: table-cell;
   vertical-align: middle;
   height: 150px;
@@ -6848,7 +6846,7 @@ b.i2c_objective_blob_inner {
   text-align: center;
 }
 
-b.i2c_objective_list_row {
+div.i2c_objective_list_row {
   display: inline-block;
   margin: 0 auto 20px;
 }
