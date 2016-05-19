@@ -436,11 +436,11 @@ class EvaluationController extends RestApiController
 
         $response = new Response();
 
-        $response->headers->set('Content-Type', 'mime/type');
+        $response->headers->set('Content-Type', 'application/pdf');
         $response->headers->set(
             'Content-Disposition',
             sprintf(
-                'attachment;filename="%s - version %s.pdf"',
+                'inline;filename="%s - version %s.pdf"',
                 $evaluation->getDisplayName(),
                 $evaluation->getVersionNumber()
             )
