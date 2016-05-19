@@ -288,16 +288,18 @@ class EvaluationController extends RestApiController
             );
 
             $fileSystem = new Filesystem();
-            $fileSystem->copy($evaluation->getTemporaryPdfPath(), $newPdfPath, true);
 
-            $fileSystem->remove($evaluation->getTemporaryPdfPath());
+            $process = new Process(sprintf('chmod 755 %s', $evaluation->getTemporaryPdfPath()));
+            $process->mustRun();
+
+            $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath, true);
 
             $evaluation->setLatestPdfPath($newPdfPath);
             $evaluation->setTemporaryPdfPath(null);
 
             $this->getEvaluationService()->updateEvaluation($evaluation);
 
-            return $this->success($evaluation);
+            return $this->success($evaluation, Response::HTTP_OK, ['list']);
         } catch (IOException $ex) {
             return $this->serverFailure("An error occurred, please try again later");
         }
@@ -338,7 +340,11 @@ class EvaluationController extends RestApiController
             );
 
             $fileSystem = new Filesystem();
-            $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath);
+
+            $process = new Process(sprintf('chmod 755 %s', $evaluation->getTemporaryPdfPath()));
+            $process->mustRun();
+
+            $fileSystem->rename($evaluation->getTemporaryPdfPath(), $newPdfPath, true);
 
             $evaluation->setLatestPdfPath($newPdfPath);
             $evaluation->setTemporaryPdfPath(null);
@@ -346,7 +352,7 @@ class EvaluationController extends RestApiController
 
             $this->getEvaluationService()->updateEvaluation($evaluation);
 
-            return $this->success($evaluation);
+            return $this->success($evaluation, Response::HTTP_OK, ['list']);
         } catch (IOException $ex) {
             return $this->serverFailure("An error occurred, please try again later");
         }
