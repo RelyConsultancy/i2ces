@@ -57,7 +57,7 @@ parameters:
             file_name: 'ie_offer_data.csv'
             additional_setters: []
         ie_ots_data:
-            table_name: 'ie_results_data'
+            table_name: 'ie_ots_data'
             columns:
                 master_campaign_id: 'VARCHAR(255) NOT NULL'
                 media_type: 'VARCHAR(255)'

@@ -51,7 +51,7 @@ class ImportData
         $this->removeExistingCampaignsThatAreImported($inputOptions, $rawTablesConfig);
 
         foreach ($rawTablesConfig as $key => $value) {
-            if ($this->createTable($key, $value) === false) {
+            if ($this->createTable($value['table_name'], $value) === false) {
                 throw new \PDOException('Unable to create table: '.$key);
             }
 
