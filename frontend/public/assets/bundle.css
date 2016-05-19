@@ -6240,7 +6240,8 @@ b.i2c_objective_list_row {
   position: absolute;
   left: 0;
   top: 0;
-  padding: .5rem 0;
+  width: 4rem;
+  line-height: 1rem;
   font-size: .875em;
   font-family: 'Archer Bold', serif;
 }

@@ -118,7 +118,7 @@ export const setMarkers = ({ markers }) => {
       const paddingTop = parseInt($component.css('padding-top'))
       const paddingBottom = parseInt($component.css('padding-bottom'))
 
-      if (spaceOnPage < componentHeight || ~pageBreaks.indexOf(index)) {
+      const addPageBreak = () => {
         $component.addClass('page_break')
 
         // add padding to previous element to mark
@@ -129,9 +129,28 @@ export const setMarkers = ({ markers }) => {
         // set spacing for new page and subtracting component
         spaceOnPage = pageHeight - (componentHeight - paddingTop) - pageBreakPadding
       }
-      else {
-        spaceOnPage -= componentHeight
+
+
+      if (~pageBreaks.indexOf(index)) {
+        addPageBreak()
       }
+      else {
+        if (componentHeight > spaceOnPage) {
+          if (componentHeight > pageHeight) {
+            const height = componentHeight - spaceOnPage
+            const scale = componentHeight / pageHeight % 1
+
+            spaceOnPage = pageHeight - (scale * pageHeight / 1)
+          }
+          else {
+            addPageBreak()
+          }
+        }
+        else {
+          spaceOnPage -= componentHeight
+        }
+      }
+
 
       if ($component.is(':last-child')) {
         setPadding($component, spaceOnPage)
@@ -153,6 +172,6 @@ export const fmtDocument = ({ markers }) => {
   const { network } = store.getState().dashboard.flag
 
   if (network) {
-    return setTimeout(setMarkers, 500, { markers })
+    return setTimeout(setMarkers, 1250, { markers })
   }
 }
