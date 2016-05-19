@@ -5,15 +5,21 @@ import style from './style.css'
 import http from '/application/http.js'
 
 
-const onPDFReady = ({ cid }, handler) => {
+const loadPDF = ({ cid }, handler) => {
   const url = `/api/evaluations/${cid}/pdf/temporary`
 
   http('head', url, { raw: true }, (reply) => {
     if (reply.status == 202) {
-      setTimeout(onPDFReady, 1000, { cid }, handler)
+      setTimeout(loadPDF, 1000, { cid }, handler)
     }
     else if (reply.status == 200) {
-      handler(reply)
+      // const url = `/api/evaluations/${evaluation.cid}/pdf/temporary`,
+      const url = '/api/evaluations/x/pdf'
+
+      http('get', url, { blob: true }, (blob) => {
+        console.info('Temporary PDF loaded', blob)
+        handler(blob)
+      })
     }
     else {
       console.error('PDF generation pulling failed')
@@ -34,8 +40,11 @@ export default Component({
     // start PDF generation
     http('post', url, { raw: true }, (reply) => {
       if (reply.status == 200) {
-        onPDFReady({ cid: evaluation.cid }, () => {
-          this.setState({ isGenerating: false })
+        loadPDF({ cid: evaluation.cid }, (blob) => {
+          this.setState({
+            isGenerating: false,
+            url: URL.createObjectURL(blob),
+          })
         })
       }
       else {
@@ -46,7 +55,7 @@ export default Component({
   },
   render () {
     const { evaluation, markers } = this.props
-    const { isGenerating } = this.state
+    const { isGenerating, url } = this.state
 
     if (isGenerating) {
       const msg = 'Generating the PDF, please wait...'
@@ -55,7 +64,7 @@ export default Component({
     }
 
     return PDFViewer({
-      url: `/api/evaluations/${evaluation.cid}/pdf/temporary`,
+      url: url,
       className: style.pdf_preview,
       headers: {
         // ORO header required

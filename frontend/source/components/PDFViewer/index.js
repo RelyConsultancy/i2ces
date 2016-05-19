@@ -9,7 +9,7 @@ export default Component({
     return { isLoading: true }
   },
   loadPDF () {
-    const { url, headers } = this.props
+    const { url, headers, onError } = this.props
     const container = document.getElementById('pdf_preview')
 
     const options = {
@@ -44,6 +44,9 @@ export default Component({
           page.render({ viewport, canvasContext: canvas.getContext('2d') })
         })
       }
+    }).catch((error) => {
+      if (onError) onError(error)
+      else console.warn('PDFViewer', error)
     })
   },
   componentDidMount () {

@@ -82,7 +82,10 @@ export default (method, url, options, handler) => {
 
   let request = fetch(url, config)
 
-  if (!options.raw) {
+  if (options.blob) {
+    request = request.then(reply => reply.blob())
+  }
+  else if (!options.raw) {
     request = request.then(toJSON)
   }
 
