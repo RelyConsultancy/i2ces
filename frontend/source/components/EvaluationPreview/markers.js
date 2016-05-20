@@ -75,13 +75,12 @@ export const setMarkers = ({ markers }) => {
     }
     // add marker
     else {
-      let pageBreaks = markers[id]
-
-      if (!pageBreaks) {
-        pageBreaks = markers[id] = []
+      if (markers[id]) {
+        markers[id].push(index)
       }
-
-      pageBreaks.push(index)
+      else {
+        markers[id] = [index]
+      }
     }
 
     // update markers

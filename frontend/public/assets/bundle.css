@@ -6028,14 +6028,14 @@ b.i2c_objective_list_row {
 }
 
 ._ChartSalesPerformance_style_stages {
-  margin-top: 2rem;
+  padding-top: 1rem;
   font-size: .75rem;
   color: #575757;
 }
 
 ._ChartSalesPerformance_style_stage {
   text-align: right;
-  margin: .5rem;
+  line-height: 1.4rem;
 }
 
 ._ChartSalesPerformance_style_stage_period {
@@ -6100,13 +6100,9 @@ b.i2c_objective_list_row {
 }
 
 ._ChartPromotionalActivity_style_stage {
-  text-align: right;
-  padding-top: .5rem;
   padding-right: .5rem;
-}
-
-._ChartPromotionalActivity_style_stage:first-child {
-  padding-top: 0;
+  line-height: 1.4rem;
+  text-align: right;
 }
 
 ._ChartPromotionalActivity_style_stage_period {

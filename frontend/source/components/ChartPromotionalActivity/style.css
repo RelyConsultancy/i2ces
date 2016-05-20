@@ -43,12 +43,9 @@
   color: #575757;
 }
 .stage {
-  text-align: right;
-  padding-top: .5rem;
   padding-right: .5rem;
-}
-.stage:first-child {
-  padding-top: 0;
+  line-height: 1.4rem;
+  text-align: right;
 }
 .stage_period {
   display: inline-block;
