@@ -17,3 +17,4 @@
     - { role: sync, tags: sync}
     - { role: composer, tags: composer}
     - { role: oro, tags: oro}
+    - { role: cron, tags: cron}
