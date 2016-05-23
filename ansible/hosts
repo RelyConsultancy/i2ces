@@ -10,6 +10,9 @@
 [staging_internal]
 192.168.254.25
 
+[production]
+192.168.254.17
+
 [i2c_devel]
 dev.i2creporting.co.uk
 
