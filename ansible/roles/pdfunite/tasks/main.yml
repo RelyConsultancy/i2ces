@@ -11,8 +11,11 @@
   stat: path=/usr/bin/pdfunite
   register: pdfunite
 
+- name: Download Poppler
+  get_url: url=http://poppler.freedesktop.org/{{ poppler_version }}.tar.xz dest=~/ validate_certs=no
+
 - name: Download and Unpack poppler
-  unarchive: src="http://poppler.freedesktop.org/{{ poppler_version }}.tar.xz" dest="~" copy=no
+  unarchive: src="~/{{ poppler_version }}.tar.xz" dest="~" copy=no
   when: pdfunite.stat.exists == False
   register: copy_poppler
 
