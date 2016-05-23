@@ -1,0 +1,3 @@
+---
+- name: Add cron to to bulk import every 24 hours
+  cron: name="Bulk Import data" minute="0" hour="23" weekday="1-5" job="php /var/www/html/app/console i2c:data:bulk"
