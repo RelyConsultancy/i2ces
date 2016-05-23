@@ -7,6 +7,9 @@
 [staging]
 188.166.150.253
 
+[stagin_internal]
+192.168.254.25
+
 [i2c_devel]
 dev.i2creporting.co.uk
 
