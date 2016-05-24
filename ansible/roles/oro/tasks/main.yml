@@ -154,8 +154,16 @@
 - name: Dump assets
   command: chdir=/var/www/html php app/console assetic:dump --env=prod
 
-- name: Update the database
+- name: Update the database (Migration 1)
   command: chdir=/var/www/html php app/console i2c:schema:update --version-number=1
+  become_user: root
+
+- name: Update the database (Migration 2)
+  command: chdir=/var/www/html php app/console i2c:schema:update --version-number=2
+  become_user: root
+  
+- name: Update the database (Migration 3)
+  command: chdir=/var/www/html php app/console i2c:schema:update --version-number=3
   become_user: root
 
 - name: Load custom entities into oro-crm
