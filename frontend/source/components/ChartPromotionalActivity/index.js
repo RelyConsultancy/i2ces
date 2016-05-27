@@ -31,13 +31,14 @@ const setRegion = (stage) => {
 }
 
 
-const ActivityChart = ({ data, timings }) => {
+const ActivityChart = ({ data, timings, isPDF }) => {
   const dates = data.filter(byOffer).sort(byDate).map(i => i.date)
   const offer = data.filter(byOffer).sort(byDate).map(fmtChart)
   const brand = data.filter(byBrand).sort(byDate).map(fmtChart)
   const competitor = data.filter(byCompetitor).sort(byDate).map(fmtChart)
 
   const chart = Chart({
+    className: isPDF && style.chart_pdf,
     type: 'bar',
     data: {
       type: 'bar',
@@ -115,12 +116,12 @@ export default Component({
     this.loadData()
   },
   render () {
-    const { component } = this.props
+    const { component, isPDF } = this.props
     const { isEditable, data } = this.state
     const { timings } = component
 
     if (data.length) {
-      const chart = ActivityChart({ data, timings })
+      const chart = ActivityChart({ data, timings, isPDF })
       const stages = Stages({ timings })
 
       return B(chart, stages)
