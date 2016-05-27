@@ -41,7 +41,7 @@ const Chapter = (chapter) => {
     )
 
     section.content.forEach((component) => {
-      content.push(setComponent({ component }))
+      content.push(setComponent({ component, isPDF: true }))
     })
   })
 

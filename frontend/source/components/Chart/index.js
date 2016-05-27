@@ -46,11 +46,10 @@ export default Component({
   render () {
     const { className } = this.props
 
-    const attrs = {
+    return B({
       style: this.props.style,
       className: className || style.chart,
       ref: 'container',
-    }
-    return B(attrs)
+    })
   }
 })

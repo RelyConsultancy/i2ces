@@ -79,7 +79,6 @@ const SalesChart = ({ data }) => {
         { axis: 'x', start: 0.5 , end: 2.5, class: 'region-offer-brand', label: 'Offer and Brand', vertical: false, padding: 5 },
         { axis: 'x', start: 2.5 , end: 3.5 + data.length - 5, class: 'region-competitors', label: 'Competitor brands', vertical: false, padding: 5 }
     ]
-
   })
 
   const label = B(
