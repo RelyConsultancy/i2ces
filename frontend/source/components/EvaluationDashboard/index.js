@@ -46,7 +46,6 @@ const Content = (...data) => B(
 const Links = ({ evaluation }) => {
   let links = [
     Link({
-      className: style.link,
       to: `/evaluations`,
     }, 'Back to Evaluations'),
     Link({
@@ -55,7 +54,7 @@ const Links = ({ evaluation }) => {
     }, 'Preview'),
   ]
 
-  if (evaluation.has_pdf) {
+  //if (evaluation.has_pdf) {
     const url = `/api/evaluations/${evaluation.cid}/pdf`
 
     links.push(
@@ -68,7 +67,7 @@ const Links = ({ evaluation }) => {
         },
       }, 'PDF')
     )
-  }
+  //}
 
   return B({ className: style.links }, ...links)
 }
