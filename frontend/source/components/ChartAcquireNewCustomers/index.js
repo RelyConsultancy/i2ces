@@ -84,11 +84,14 @@ export default Component({
   },
   componentDidMount () {
     const { source } = this.props.component
+    
+    if (this.isMoutned()) {
+        fetchDataset(source, (data) => {
 
-    fetchDataset(source, (data) => {
-        
-      this.setState({ data })
-    })
+          this.setState({ data })
+        })
+    }
+    
   },
   render () {
     const { data } = this.state
