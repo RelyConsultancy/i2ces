@@ -58,7 +58,7 @@ const Links = ({ evaluation }) => {
     const url = `/api/evaluations/${evaluation.cid}/pdf`
 
     links.push(
-      A({
+      A({ 
         className: style.link,
         href: url,
         onClick: (event) => {
