@@ -46,6 +46,7 @@ const Content = (...data) => B(
 const Links = ({ evaluation }) => {
   let links = [
     Link({
+      className: style.link,
       to: `/evaluations`,
     }, 'Back to Evaluations'),
     Link({
@@ -58,7 +59,7 @@ const Links = ({ evaluation }) => {
     const url = `/api/evaluations/${evaluation.cid}/pdf`
 
     links.push(
-      A({ 
+      A({
         className: style.link,
         href: url,
         onClick: (event) => {
