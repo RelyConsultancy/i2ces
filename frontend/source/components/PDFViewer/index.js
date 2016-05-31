@@ -18,6 +18,8 @@ export default Component({
     }
 
     PDF.getDocument(options).then((data) => {
+        
+      console.log(data);
       this.setState({ isLoading: false })
 
       // no scrollbar if pdf has only one page
