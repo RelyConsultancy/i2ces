@@ -382,6 +382,10 @@ class EvaluationController extends RestApiController
      */
     public function getTemporaryPdfAction($evaluationCid)
     {
+        
+        $logger = $this->get('logger');
+        
+        $logger->addInfo('TESTING');
         /** @var Evaluation $evaluation */
         $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
 
