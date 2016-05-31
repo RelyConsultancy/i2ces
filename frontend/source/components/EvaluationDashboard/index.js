@@ -54,7 +54,7 @@ const Links = ({ evaluation }) => {
     }, 'Preview'),
   ]
 
-  //if (evaluation.has_pdf) {
+  if (evaluation.has_pdf) {
     const url = `/api/evaluations/${evaluation.cid}/pdf`
 
     links.push(
@@ -67,7 +67,7 @@ const Links = ({ evaluation }) => {
         },
       }, 'PDF')
     )
-  //}
+  }
 
   return B({ className: style.links }, ...links)
 }
