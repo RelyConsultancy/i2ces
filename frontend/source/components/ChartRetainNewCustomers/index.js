@@ -16,13 +16,13 @@ const ChartRetainNewCustomers = (data, type) => {
   const charts = {}
   
   charts.offer = {
-      exposed: data.charts.offer.map(i => i.exposed),
-      control: data.charts.offer.map(i => i.control)
+      exposed: _.sortBy(data.charts.offer, 'timeperiod').map(i => i.exposed),
+      control: _.sortBy(data.charts.offer, 'timeperiod').map(i => i.control)
   }
   
   charts.brand = {
-      exposed: data.charts.brand.map(i => i.exposed),
-      control: data.charts.brand.map(i => i.control)
+      exposed: _.sortBy(data.charts.brand, 'timeperiod').map(i => i.exposed),
+      control: _.sortBy(data.charts.brand, 'timeperiod').map(i => i.control)
   }
   
   // below is a C3 chart
