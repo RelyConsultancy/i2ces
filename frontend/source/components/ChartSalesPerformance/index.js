@@ -133,11 +133,11 @@ const Timings = ({ data }) => {
 export default Component({
   loadData () {
     const { source } = this.props.component
-
+    
     fetchDataset(source, (data) => {
-
-      this.setState({ data })
+        this.setState({ data })
     })
+    
   },
   getInitialState () {
     return {
@@ -145,7 +145,12 @@ export default Component({
     }
   },
   componentDidMount () {
-    this.loadData()
+    if(!this.isUnmounted) {
+        this.loadData()
+    }
+  },
+  componentWillUnmount () {
+    this.isUnmounted = true
   },
   render () {
     const { data } = this.state

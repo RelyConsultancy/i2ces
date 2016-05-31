@@ -43,9 +43,11 @@ export default Component({
   loadData () {
     const { source } = this.props.component
 
-    fetchDataset(source, (data) => {
-      this.setState({ data })
-    })
+    if(!this.isUnmounted) {
+        fetchDataset(source, (data) => {
+          this.setState({ data })
+        })
+    }
   },
   getInitialState () {
     return {
@@ -54,6 +56,9 @@ export default Component({
   },
   componentDidMount () {
     this.loadData()
+  },
+  componentWillUnmount () {
+    this.isUnmounted = true
   },
   render () {
     const { data } = this.state

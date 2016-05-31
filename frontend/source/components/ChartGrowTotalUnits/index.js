@@ -97,10 +97,15 @@ export default Component({
   },
   componentDidMount () {
     const { source } = this.props.component
-
-    fetchDataset(source, (data) => {
-      this.setState({ data })
-    })
+    if(!this.isUnmounted) {
+        fetchDataset(source, (data) => {
+          this.setState({ data })
+        })
+    }
+    
+  },
+  componentWillUnmount () {
+    this.isUnmounted = true
   },
   render () {
     const { data } = this.state
