@@ -81,7 +81,6 @@ export default Component({
   componentDidMount () {
     const { source } = this.props.component
     
-    
     fetchDataset(source, (data) => {
       this.setState({ data })
     })
@@ -89,7 +88,10 @@ export default Component({
     
   },
   render () {
+    
     const { data } = this.state
+    const { isPDF } = this.props;
+    
     if ('charts' in data) {
         return Grid({
           blocks: 2,

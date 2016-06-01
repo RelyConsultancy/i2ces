@@ -7,10 +7,24 @@
 }
 
 
-.chart_pdf {
-  height: 240px;
+.chartPdf {
+  height: 200px;
 }
-
+.chartPdf .c3-axis-x .tick > text {
+  transform: rotate(-45deg) translate(-1.75rem, 0);
+}
+.chartPdf .c3-legend-item {
+  transform: translateY(-17.5rem);
+}
+.chartPdf .c3-region {
+  fill: none;
+}
+.chartPdf .stage_during {
+  fill: #b7dee8;
+}
+.chartPdf .stage_during > rect {
+  fill-opacity: 1 !important;
+}
 
 .chart {
   position: relative;

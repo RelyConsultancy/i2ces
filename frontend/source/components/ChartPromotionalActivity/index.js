@@ -81,8 +81,10 @@ const ActivityChart = ({ data, timings, isPDF }) => {
     { className: style.chart_label },
     '% Products on promotion'
   )
-
-  return B({ className: style.chart }, label, chart)
+    if (isPDF) {
+        return B({ className: style.pdfChart }, label, chart)
+    }
+    return B({ className: style.chart }, label, chart)    
 }
 
 
