@@ -49,10 +49,10 @@ const Links = ({ evaluation }) => {
       className: style.link,
       to: `/evaluations`,
     }, 'Back to Evaluations'),
-    Link({
+    $.isI2C() ? Link({
       className: style.link,
       to: `/preview/${evaluation.cid}`,
-    }, 'Preview'),
+    }, 'Preview') : null,
   ]
 
   if (evaluation.has_pdf) {
