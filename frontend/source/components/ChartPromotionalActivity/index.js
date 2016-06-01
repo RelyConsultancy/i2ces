@@ -38,7 +38,7 @@ const ActivityChart = ({ data, timings, isPDF }) => {
   const competitor = data.filter(byCompetitor).sort(byDate).map(fmtChart)
 
   const chart = Chart({
-    className: isPDF && style.chart_pdf,
+    className: isPDF && style.chartPDF,
     type: 'bar',
     data: {
       type: 'bar',
