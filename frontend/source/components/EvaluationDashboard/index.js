@@ -11,7 +11,7 @@ import ObjectiveBlob from '/components/ObjectiveBlob'
 
 
 const ToggleState = ({ evaluation }) => {
-  const toggle = isI2C() ? null : Toggle({
+  const toggle = !isI2C() ? null : Toggle({
     isOn: evaluation.state != 'draft',
     label: {
       on: 'published',
