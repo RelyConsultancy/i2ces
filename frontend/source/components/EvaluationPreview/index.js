@@ -3,6 +3,7 @@ import setComponent from '/components/EvaluationSection/setComponent.js'
 import * as action from '/application/actions.js'
 import http from '/application/http.js'
 import { getURLQuery } from '/application/utils.js'
+import { savePDFMarkers } from '/application/actions.js'
 import Links from './links.js'
 import PDFIntro from './pdfIntro.js'
 import PDFOutro from './pdfOutro.js'
@@ -78,12 +79,9 @@ export default Component({
   },
   save () {
     const { evaluation, markers } = this.state
-    const url = `/api/pdf/permanent/${evaluation.cid}`
-    const options = { data: evaluation }
+    const pdf_markers = stringifyMarkers(markers)
 
-    evaluation.pdf_markers = stringifyMarkers(markers)
-
-    http('post', url, options, (data) => {
+    savePDFMarkers(pdf_markers, (data) => {
       window.location.hash = `/evaluations/${evaluation.cid}`
     })
   },

@@ -166,7 +166,22 @@ export const mutateEvaluation = ({ cid, data }, handler = noop) => {
     }
 
     http('post', `/api/evaluations/${cid}/${action}`, (data) => {
+      setEvaluation(data)
       handler(data)
     })
   }
+}
+
+
+export const savePDFMarkers = (pdf_markers, handler = noop) => {
+  const { evaluation } = store.getState().evaluation
+  const url = `/api/pdf/permanent/${evaluation.cid}`
+
+  evaluation.pdf_markers = pdf_markers
+  evaluation.has_pdf = true
+
+  http('post', url, { data: evaluation }, (data) => {
+    setEvaluation(evaluation)
+    handler(data)
+  })
 }

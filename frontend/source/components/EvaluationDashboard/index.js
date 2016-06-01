@@ -3,7 +3,7 @@ import Grid from '/components/Grid'
 import Toggle from '/components/Toggle'
 import { fmtDate, fmtUnit, getInitials } from '/application/utils.js'
 import { download } from '/application/http.js'
-import * as $ from '/application/actions.js'
+import { isI2C, mutateEvaluation, fetchEvaluation } from '/application/actions.js'
 import store from '/application/store.js'
 import style from './style.css'
 import numeral from 'numeral'
@@ -11,7 +11,7 @@ import ObjectiveBlob from '/components/ObjectiveBlob'
 
 
 const ToggleState = ({ evaluation }) => {
-  const toggle = !$.isI2C() ? null : Toggle({
+  const toggle = isI2C() ? null : Toggle({
     isOn: evaluation.state != 'draft',
     label: {
       on: 'published',
@@ -19,7 +19,7 @@ const ToggleState = ({ evaluation }) => {
       position: 'left',
     },
     onChange (isOn) {
-      $.mutateEvaluation({
+      mutateEvaluation({
         cid: evaluation.cid,
         data: { state: isOn ? 'published' : 'draft' }
       })
@@ -168,7 +168,7 @@ const Evaluation = Component({
     const { store, params } = this.props
 
     if (!store.evaluation) {
-      $.fetchEvaluation({ cid: params.cid })
+      fetchEvaluation({ cid: params.cid })
     }
   },
   componentDidMount () {
