@@ -8,7 +8,7 @@
 
 
 .chartPDF {
-  height: 200px;
+  height: 250px;
 }
 .chartPDF .c3-axis-x .tick > text {
   transform: rotate(-45deg) translate(-1.75rem, 0);
