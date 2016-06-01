@@ -101,12 +101,12 @@ const TableExposed = ({ data }) => {
 export default Component({
   loadData () {
     const { source } = this.props.component
-    
-    if (this.isMounted()) {
-        fetchDataset(source, (data) => {
-          this.setState({ data })
-        })
-    }
+        
+        
+    fetchDataset(source, (data) => {
+        this.setState({ data })
+    })
+
   },
   getInitialState () {
     return {
