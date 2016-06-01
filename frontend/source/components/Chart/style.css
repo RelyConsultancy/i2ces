@@ -1,3 +1,7 @@
 .chart {
   min-height: 300px;
 }
+
+.chartPDF {
+    min-height: 200px;
+}
