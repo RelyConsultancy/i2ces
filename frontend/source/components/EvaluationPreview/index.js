@@ -47,7 +47,7 @@ const Chapter = (chapter) => {
 
   const chapterTitle = B({ className: style.cover_title }, chapter.title)
   const chapterCover = B({ className: style.cover }, chapterTitle)
-  const components = B({ className: 'components' }, ...content)
+  const components = B({ className: 'components_pdf' }, ...content)
   const attrs = { className: 'chapter', id: chapter.id }
 
   return B(attrs, chapterCover, components)
