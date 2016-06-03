@@ -6,7 +6,7 @@
   position: relative;
   font-size: .875rem;
   width: 50%;
-  float: left;
+  display:inline-block;
 }
 .list_item {
   position: relative;
