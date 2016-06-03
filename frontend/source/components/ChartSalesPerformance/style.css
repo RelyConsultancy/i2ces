@@ -15,6 +15,7 @@
     position: relative;
     max-height: 250px;
     margin-bottom: 6px;
+    padding-left: 25px;
 }
 
 .chart_pdf .c3-chart-texts .c3-text {
