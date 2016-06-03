@@ -11,6 +11,27 @@
   color: #5FC3E1;
 }
 
+.chart_pdf {
+    max-height: 250px;
+}
+
+.chart_pdf .c3-chart-texts .c3-text {
+  font-size: .875rem;
+  font-family: 'Archer Bold', serif;
+  fill: #252525 !important;
+}
+.chart_pdf .c3-axis-x text {
+  transform: translateY(.625rem);
+  font-size: .875rem;
+  font-family: 'Archer Bold', serif;
+  fill: #6D6D6D;
+}
+.chart_pdf .c3-axis-x path, .chart .c3-axis-x .tick line {
+    stroke: transparent!important;
+}
+.chart_pdf .c3-ygrid-line line {
+    stroke: #000;
+}
 
 .chart {
   position: relative;

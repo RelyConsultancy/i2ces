@@ -34,7 +34,7 @@ const sortData = (data) => {
 }
 
 
-const SalesChart = ({ data }) => {
+const SalesChart = ({ data, isPDF }) => {
   data = sortData(data)
 
   const max = () => {
@@ -86,7 +86,7 @@ const SalesChart = ({ data }) => {
     'Period on period sales growth'
   )
 
-  return B({ className: style.chart }, label, chart)
+  return B({ className: isPDF ? style.chart_pdf : style.chart }, label, chart)
 }
 
 
@@ -95,7 +95,7 @@ const bySales = (i => i.type == 'sales_growth')
 const byShare = (i => i.type == 'category_share')
 const bySpend = (i => i.type == 'average_spend')
 
-const TableSales = ({ data }) => {
+const TableSales = ({ data, isPDF }) => {
   const shares = sortData(data.filter(byShare))
   const spendings = sortData(data.filter(bySpend))
   const width = 100 / shares.length + '%'
@@ -145,20 +145,21 @@ export default Component({
     }
   },
   componentDidMount () {
-    if(!this.isUnmounted) {
-        this.loadData()
-    }
+    
+    this.loadData()
+    
   },
   componentWillUnmount () {
     this.isUnmounted = true
   },
   render () {
     const { data } = this.state
-
+    const { isPDF } = this.props
+    
     if ('table_data' in data) {
       return B(
-        SalesChart({ data: data.table_data.filter(bySales) }),
-        TableSales({ data: data.table_data }),
+        SalesChart({ data: data.table_data.filter(bySales), isPDF }),
+        TableSales({ data: data.table_data, isPDF }),
         Timings({ data: data.start_date })
       )
     }
