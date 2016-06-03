@@ -26,6 +26,7 @@ const ChartGrowShareOfCategory = (data, type) => {
   
     // below is a C3 chart
   const chart = Chart({
+    className: isPDF && style.chartPDF,
     type: 'bar',
     data: {
       type: 'bar',
