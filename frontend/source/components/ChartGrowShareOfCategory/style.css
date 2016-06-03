@@ -19,7 +19,7 @@
 
 .chart_pdf {
   position: relative;
-  max-height: 250px;
+  max-height: 250px!important;
 }
 
 /* style text */
