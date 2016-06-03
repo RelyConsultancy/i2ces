@@ -84,18 +84,18 @@ export default Component({
     })
   },
   render () {
-    const { data } = this.state
+    const { data, isPDF } = this.state
     if ('charts' in data) {
         return Grid({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, 'Offer'),
-                B({ className: style.chart }, ChartGrowShareOfCategory(data))
+                H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Offer'),
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartGrowShareOfCategory(data))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'Brand'),
-                B({ className: style.chart }, ChartGrowShareOfCategory(data, 'brand'))
+                H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Brand'),
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartGrowShareOfCategory(data, 'brand'))
               )
           ]
       })

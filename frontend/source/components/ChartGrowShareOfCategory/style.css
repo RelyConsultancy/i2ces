@@ -17,9 +17,37 @@
   fill: #6D6D6D;
 }
 
+.chart_pdf {
+  position: relative;
+  max-height: 250px;
+}
+
+/* style text */
+.chart_pdf .c3-chart-texts .c3-text {
+  font-size: .75rem;
+  font-family: 'Archer Bold', serif;
+  fill: #252525 !important;
+}
+
+/* style labels */
+.chart_pdf .c3-axis-y2-label,
+.chart_pdf .c3-axis-y-label {
+  font-size: .75rem;
+  font-family: 'Archer Bold', serif;
+  fill: #6D6D6D;
+}
+
+
 h3.i2c-chart-title {
     font-size: 0.9em;
     text-align: center;
     font-family: 'Avenir LT Std 45 Book', Helvetica, sans-serif;
     min-height: 34px;
+}
+
+h3.i2c-chart-title-pdf {
+    font-size: 0.9em;
+    text-align: center;
+    font-family: 'Avenir LT Std 45 Book', Helvetica, sans-serif;
+    min-height: 20px;
 }
