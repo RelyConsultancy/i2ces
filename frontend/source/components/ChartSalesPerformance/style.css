@@ -13,6 +13,7 @@
 
 .chart_pdf {
     max-height: 250px;
+    margin-bottom: 6px;
 }
 
 .chart_pdf .c3-chart-texts .c3-text {
