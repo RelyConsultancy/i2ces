@@ -31,7 +31,7 @@ const ChartGrowShareOfCategory = (data, type, isPDF) => {
         size: {
             height: isPDF ? 250 : 300
         },
-    }
+    },
     type: 'bar',
     data: {
       type: 'bar',
