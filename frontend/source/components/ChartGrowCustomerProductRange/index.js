@@ -8,7 +8,7 @@ import _ from 'underscore'
 
 const H3 = Element('h3')
 // a factory function for the chart
-const ChartGrowCustomerProductRange = (data, type) => {
+const ChartGrowCustomerProductRange = (data, type, isPDF) => {
   
   type = type || 'offer'
   
@@ -28,6 +28,7 @@ const ChartGrowCustomerProductRange = (data, type) => {
 
   // below is a C3 chart
   const chart = Chart({
+    className: isPDF ? style.chart_pdf : style.chart, 
     type: 'bar',
     data: {
       type: 'bar',
@@ -89,11 +90,12 @@ export default Component({
   },
   render () {
     const { data } = this.state
+    const { isPDF } = this.props
     
     if ('charts' in data) {
         return B({ className: 'i2c-single-chart-middle' },
-                H3({ className: 'i2c-chart-title' }, 'Offer'),
-                B({ className: style.chart }, ChartGrowCustomerProductRange(data))
+                H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Offer'),
+                B({ className: style.chart }, ChartGrowCustomerProductRange(data, 'offer', isPDF))
                 )
     }
     else {
