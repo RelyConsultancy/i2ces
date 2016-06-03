@@ -5,6 +5,7 @@ import EditableHTML from '/components/SectionHTML'
 import Timings from '/components/SectionTimings'
 import Channels from '/components/SectionChannels'
 import Objectives from '/components/SectionObjectives'
+import SKUList from '/components/SKUList'
 
 import ChartMediaLaydown from '/components/ChartMediaLaydown'
 import ChartSalesPerformance from '/components/ChartSalesPerformance'
@@ -32,6 +33,10 @@ export default ({ component, editMode, uploadPath, isPDF }) => {
   switch (component.type) {
     case 'list':
       return List({ component })
+    break
+
+    case 'sku_list':
+      return SKUList({ component })
     break
 
     case 'info':
