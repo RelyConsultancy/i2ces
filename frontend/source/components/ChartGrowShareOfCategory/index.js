@@ -8,7 +8,7 @@ import _ from 'underscore'
 
 const H3 = Element('h3')
 // a factory function for the chart
-const ChartGrowShareOfCategory = (data, type) => {
+const ChartGrowShareOfCategory = (data, type, isPDF) => {
   
   type = type || 'offer'
   
@@ -94,11 +94,11 @@ export default Component({
           items: [
               B(
                 H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Offer'),
-                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartGrowShareOfCategory(data))
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartGrowShareOfCategory(data, 'offer', isPDF))
               ),
               B(
                 H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Brand'),
-                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartGrowShareOfCategory(data, 'brand'))
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartGrowShareOfCategory(data, 'brand', isPDF))
               )
           ]
       })
