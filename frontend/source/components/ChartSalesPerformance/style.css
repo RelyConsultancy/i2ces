@@ -12,6 +12,7 @@
 }
 
 .chart_pdf {
+    position: relative;
     max-height: 250px;
     margin-bottom: 6px;
 }

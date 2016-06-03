@@ -8,6 +8,7 @@
 
 
 .chartPDF {
+  position: relative;
   height: 250px;
 }
 .chartPDF .c3-axis-x .tick > text {
