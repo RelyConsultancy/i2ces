@@ -1,6 +1,12 @@
+.list_columns {
+ overflow: hidden;   
+}
+
 .list {
   position: relative;
   font-size: .875rem;
+  width: 50%;
+  float: left;
 }
 .list_item {
   position: relative;

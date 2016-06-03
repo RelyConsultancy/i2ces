@@ -7,11 +7,11 @@ export default Component({
   render () {
     const { component } = this.props
     
-    const items1 = component.items.slice(0, parseInt(component.items.length)).map((item, key) => (
+    const items1 = component.items.slice(0, parseInt(component.items.length / 2)).map((item, key) => (
       B({ className: style.list_item, key }, item)
     ))
     
-    const items2 = component.items.slice(parseInt(component.items.length) + 1, component.items.length + 1).map((item, key) => (
+    const items2 = component.items.slice(parseInt(component.items.length / 2), component.items.length).map((item, key) => (
       B({ className: style.list_item, key }, item)
     ))
     
