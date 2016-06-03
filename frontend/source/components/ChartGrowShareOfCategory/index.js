@@ -11,7 +11,7 @@ const H3 = Element('h3')
 const ChartGrowShareOfCategory = (data, type, isPDF) => {
   
   type = type || 'offer'
-  console.log(isPDF);
+  
   const charts = {}
   
   charts.offer = {
@@ -26,7 +26,7 @@ const ChartGrowShareOfCategory = (data, type, isPDF) => {
   
     // below is a C3 chart
   const chart = Chart({
-    className: isPDF ? style.chartPDF : style.chart, 
+    className: isPDF ? style.chart_pdf : style.chart, 
     type: 'bar',
     data: {
       type: 'bar',
