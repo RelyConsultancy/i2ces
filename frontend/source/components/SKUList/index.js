@@ -15,6 +15,8 @@ export default Component({
       B({ className: style.list_item, key }, item)
     ))
     
+    console.log(items1);
+    console.log(items2);
     return B({ className: style.list_columns }, B({ className: style.list }, items1), B({ className: style.list }, items2))
   }
 })
