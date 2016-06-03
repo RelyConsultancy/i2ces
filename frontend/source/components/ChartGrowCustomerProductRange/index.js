@@ -95,7 +95,7 @@ export default Component({
     if ('charts' in data) {
         return B({ className: 'i2c-single-chart-middle' },
                 H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Offer'),
-                B({ className: style.chart }, ChartGrowCustomerProductRange(data, 'offer', isPDF))
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartGrowCustomerProductRange(data, 'offer', isPDF))
                 )
     }
     else {

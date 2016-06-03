@@ -102,11 +102,11 @@ export default Component({
           items: [
               B(
                 H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Offer'),
-                B({ className: style.chart }, ChartAcquireNewCustomers(data, 'offer', isPDF))
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartAcquireNewCustomers(data, 'offer', isPDF))
               ),
               B(
                 H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Brand'),
-                B({ className: style.chart }, ChartAcquireNewCustomers(data, 'brand', isPDF))
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartAcquireNewCustomers(data, 'brand', isPDF))
               )
           ]
       })

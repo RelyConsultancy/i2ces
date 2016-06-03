@@ -9,7 +9,7 @@ import _ from 'underscore'
 
 const H3 = Element('h3')
 // a factory function for the chart
-const ChartRetainExistingCustomers = (data, type) => {
+const ChartRetainExistingCustomers = (data, type, isPDF) => {
   
   type = type || 'offer'
   
@@ -27,6 +27,7 @@ const ChartRetainExistingCustomers = (data, type) => {
   
   // below is a C3 chart
   const chart = Chart({
+    className: isPDF ? style.chart_pdf : style.chart, 
     type: 'bar',
     data: {
       type: 'bar',
@@ -97,12 +98,12 @@ export default Component({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, 'Offer'),
-                B({ className: style.chart }, ChartRetainExistingCustomers(data))
+                H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Offer'),
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartRetainExistingCustomers(data, 'offer', isPDF))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'Brand'),
-                B({ className: style.chart }, ChartRetainExistingCustomers(data, 'brand'))
+                H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Brand'),
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartRetainExistingCustomers(data, 'brand', isPDF))
               )
           ]
       })

@@ -9,7 +9,7 @@ import _ from 'underscore'
 
 const H3 = Element('h3')
 // a factory function for the chart
-const ChartRetainLapsingCustomers = (data, type) => {
+const ChartRetainLapsingCustomers = (data, type, isPDF) => {
   
   type = type || 'offer'
   
@@ -29,6 +29,7 @@ const ChartRetainLapsingCustomers = (data, type) => {
 
   // below is a C3 chart
   const chart = Chart({
+    className: isPDF ? style.chart_pdf : style.chart, 
     type: 'bar',
     data: {
       type: 'bar',
@@ -90,18 +91,20 @@ export default Component({
   },
   render () {
     const { data } = this.state
+    const { isPDF } = this.props
+    
     if ('charts' in data) {
         
         return Grid({
           blocks: 2,
           items: [
               B(
-                H3({ className: 'i2c-chart-title' }, 'Offer'),
-                B({ className: style.chart }, ChartRetainLapsingCustomers(data))
+                H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Offer'),
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartRetainLapsingCustomers(data, 'offer', isPDF))
               ),
               B(
-                H3({ className: 'i2c-chart-title' }, 'Brand'),
-                B({ className: style.chart }, ChartRetainLapsingCustomers(data, 'brand'))
+                H3({ className: isPDF ? 'i2c-chart-title-pdf' : 'i2c-chart-title' }, 'Brand'),
+                B({ className: isPDF ? style.chart_pdf : style.chart }, ChartRetainLapsingCustomers(data, 'brand', isPDF))
               )
           ]
       })
