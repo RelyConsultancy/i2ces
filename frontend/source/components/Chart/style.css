@@ -3,5 +3,6 @@
 }
 
 .chartPDF {
+    position: relative;
     min-height: 250px;
 }
