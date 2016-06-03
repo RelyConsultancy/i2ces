@@ -87,7 +87,7 @@ export default Component({
     const { data } = this.state
     const { isPDF } = this.props
     
-    if ('charts' in data) {
+    if ('charts' in data) { 
         return Grid({
           blocks: 2,
           items: [
