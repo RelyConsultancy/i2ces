@@ -14,6 +14,7 @@ const ChartLaunchNewProduct = (data, timings) => {
   console.log(data);
   
   const chart = Chart({
+    className: isPDF ? style.chart_pdf : style.chart, 
     type: 'line',
     tooltip: { show: false },
     className: style.chart,

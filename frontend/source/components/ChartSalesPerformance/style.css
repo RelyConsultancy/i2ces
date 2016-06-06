@@ -112,6 +112,27 @@
     font-family: 'Archer Bold', serif;
 }
 
+.chart_pdf .region-offer-brand {
+    fill: rgba(192, 206, 10, 0.7);
+}
+
+.chart_pdf .region-competitors {
+    fill: rgba(125, 52, 133, 0.75);
+}
+.chart_pdf .c3-region > rect {
+    fill-opacity: 0.5!important;
+}
+
+.chart_pdf .c3-region > text {
+    fill-opacity: 1!important;
+    fill: rgba(88, 88, 88, 0.7);
+    stroke: rgba(162, 162, 162, 0);
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Archer Bold', serif;
+}
+
 .stages {
   padding-top: 1rem;
   font-size: .75rem;
