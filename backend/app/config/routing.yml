@@ -24,7 +24,7 @@ oro_default:
 oro_auto_routing:
     resource: .
     type:     oro_auto
-    schemes:  [https]
+
 
 oro_expose:
     resource: .
