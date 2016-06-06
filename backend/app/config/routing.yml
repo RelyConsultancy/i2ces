@@ -4,9 +4,11 @@
 nelmio_api_doc:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
+    schemes:  [https]
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    schemes:  [https]
 
 _imagine:
     resource: .
@@ -19,11 +21,14 @@ oro_default:
     pattern:  /
     defaults:
         _controller: OroDashboardBundle:Dashboard:view
+    schemes:  [https]
 
 oro_auto_routing:
     resource: .
     type:     oro_auto
+    schemes:  [https]
 
 oro_expose:
     resource: .
     type:     oro_expose
+    schemes:  [https]
