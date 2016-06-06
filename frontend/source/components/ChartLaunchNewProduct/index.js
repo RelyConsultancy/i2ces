@@ -64,7 +64,7 @@ export default Component({
   },
   componentDidMount () {
     const { source } = this.props.component
-    const { isPDF } = this.props
+    
     
 
     fetchDataset(source, (data) => {
@@ -73,8 +73,7 @@ export default Component({
   },
   render () {
       
-    console.log(this.state);
-    
+    const { isPDF } = this.props
     const { data } = this.state
     
     if (data.chart) {
