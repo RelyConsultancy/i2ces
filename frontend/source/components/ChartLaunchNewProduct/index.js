@@ -53,7 +53,7 @@ const ChartLaunchNewProduct = (data, timings, isPDF) => {
 
   const label = B({ className: style.chart_label }, 'Offer Sales')
 
-  return B({ className: style.chart }, label, chart)
+  return B({ className: isPDF ? style.chart_pdf : style.chart }, label, chart)
 }
 
 
