@@ -6,12 +6,10 @@ import style from './style.css'
 
 
 // a factory function for the chart
-const ChartLaunchNewProduct = (data, timings) => {
+const ChartLaunchNewProduct = (data, timings, isPDF) => {
   const dates = data.map(i => i.start_date)
   const exposed = data.map(i => parseFloat(i.exposed))
   const control = data.map(i => parseFloat(i.control))
-  
-  console.log(data);
   
   const chart = Chart({
     className: isPDF ? style.chart_pdf : style.chart, 
@@ -66,6 +64,8 @@ export default Component({
   },
   componentDidMount () {
     const { source } = this.props.component
+    const { isPDF } = this.props
+    
 
     fetchDataset(source, (data) => {
       this.setState({ data })
@@ -78,7 +78,7 @@ export default Component({
     const { data } = this.state
     
     if (data.chart) {
-      return B({ className: isPDF ? style.chart_pdf : style.chart }, ChartLaunchNewProduct(data.chart, data.timings))
+      return B({ className: isPDF ? style.chart_pdf : style.chart }, ChartLaunchNewProduct(data.chart, data.timings, isPDF))
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')
