@@ -20,6 +20,7 @@ oro_default:
     pattern:  /
     defaults:
         _controller: OroDashboardBundle:Dashboard:view
+    schemes:  [https]
 
 oro_auto_routing:
     resource: .
