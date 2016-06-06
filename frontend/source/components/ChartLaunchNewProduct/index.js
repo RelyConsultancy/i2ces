@@ -78,7 +78,7 @@ export default Component({
     const { data } = this.state
     
     if (data.chart) {
-      return B({ className: style.chart }, ChartLaunchNewProduct(data.chart, data.timings))
+      return B({ className: isPDF ? style.chart_pdf : style.chart }, ChartLaunchNewProduct(data.chart, data.timings))
     }
     else {
       return B({ className: style.loading }, 'Loading data ...')

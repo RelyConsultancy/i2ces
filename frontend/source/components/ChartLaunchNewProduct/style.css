@@ -69,20 +69,20 @@
 
 .chart_pdf {
   position: relative;
+  padding-left: .5rem;
   max-height: 250px!important;
 }
 
-/* style text */
-.chart_pdf .c3-chart-texts .c3-text {
-  font-size: .75rem;
-  font-family: 'Archer Bold', serif;
-  fill: #252525 !important;
+.chart_pdf .c3-target-Control path {
+  stroke-width: 1px;
+  stroke-dasharray: 5,5;
 }
-
-/* style labels */
-.chart_pdf .c3-axis-y2-label,
-.chart_pdf .c3-axis-y-label {
-  font-size: .75rem;
-  font-family: 'Archer Bold', serif;
-  fill: #6D6D6D;
+.chart_pdf .c3-axis-x .tick > text {
+  transform: rotate(-45deg) translate(-1.75rem, 0);
+}
+.chart_pdf .c3-legend-item {
+  transform: translateY(-18rem);
+}
+.chart_pdf .c3-region {
+  fill: none;
 }
