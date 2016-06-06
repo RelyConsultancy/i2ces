@@ -44,7 +44,7 @@ const SalesChart = ({ data, isPDF }) => {
   }
 
   const chart = Chart({
-    className: isPDF && style.chartPDF,
+    className: isPDF ? style.chart_pdf : style.chart, 
     type: 'bar',
     tooltip: { show: false },
     legend: { hide: true },
