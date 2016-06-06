@@ -65,8 +65,6 @@ export default Component({
   componentDidMount () {
     const { source } = this.props.component
     
-    
-
     fetchDataset(source, (data) => {
       this.setState({ data })
     })
