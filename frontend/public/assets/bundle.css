@@ -6232,7 +6232,7 @@ b.i2c_objective_list_row {
 
 ._ChartUnitsUplift_style_table {
   position: relative;
-  margin-top: 1rem;
+  padding-top: 1rem;
   color: #4D4D4D;
 }
 
@@ -6415,7 +6415,7 @@ h3.i2c-chart-title {
 }
 
 ._ChartGrowTotalUnits_style_table_sales {
-  margin-top: 2rem;
+  padding-top: 2rem;
   font-size: .875rem;
 }
 
@@ -6511,7 +6511,7 @@ h3.i2c-chart-title {
 }
 
 ._ChartLaunchNewProduct_style_table_sales {
-  margin-top: 2rem;
+  padding-top: 2rem;
   font-size: .875rem;
 }
 
@@ -6643,7 +6643,7 @@ h3.i2c-chart-title {
 }
 
 ._TablePerformanceSamples_style_table_samples {
-  margin-bottom: 1em;
+  padding-bottom: 1em;
   position: relative;
 }
 
