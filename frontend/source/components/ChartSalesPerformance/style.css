@@ -13,7 +13,7 @@
 
 .chart_pdf {
     position: relative;
-    max-height: 250px!important;
+    height: 250px!important;
     padding-bottom: 6px;
     padding-left: 25px;
 }
