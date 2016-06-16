@@ -68,8 +68,26 @@ class EvaluationController extends RestApiController
     public function getEvaluationByCidAction($evaluationCid)
     {
         $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
-
+        
+        
+        
         if (is_null($evaluation)) {
+            return $this->notFound('Evaluation was not found');
+        }
+        
+        $userRoles = $this->getUser()->getRoles();
+        
+        $logger = $this->get('logger');
+        
+        $logger->addInfo('UserRoles: ');
+        
+        foreach ($userRoles as $role) 
+        {
+            $logger->addInfo($role);
+        }
+        
+        if ($evaluation->getState() == 'draft' && !in_array('admin', $userRoles))
+        {
             return $this->notFound('Evaluation was not found');
         }
 
@@ -103,6 +121,8 @@ class EvaluationController extends RestApiController
         if (is_null($chapter)) {
             return $this->notFound('Chapter was not found');
         }
+        
+        
 
         return $this->success($chapter, Response::HTTP_OK, ['full']);
     }
