@@ -34,3 +34,4 @@ oro_menu_config:
                 dashboard_view: ~
                 user_list: ~
                 oro_business_unit_list: ~
+                system_tab: ~
