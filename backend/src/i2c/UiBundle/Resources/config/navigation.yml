@@ -18,8 +18,8 @@ oro_menu_config:
             extras:
                 description: 'oro.business_unit.menu.list.description'
         system_tab:
-            display: false
-            displayChildren: false
+            display: true
+            displayChildren: true
         dashboard_view:
             label: 'oro.dashboard.menu.dashboards_tab.label'
             uri: '/'
