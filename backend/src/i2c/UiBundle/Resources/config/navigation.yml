@@ -18,8 +18,8 @@ oro_menu_config:
             extras:
                 description: 'oro.business_unit.menu.list.description'
         system_tab:
-            display: true
-            displayChildren: true
+            display: false
+            displayChildren: false
         dashboard_view:
             label: 'oro.dashboard.menu.dashboards_tab.label'
             uri: '/'
@@ -34,4 +34,3 @@ oro_menu_config:
                 dashboard_view: ~
                 user_list: ~
                 oro_business_unit_list: ~
-                system_tab: ~
