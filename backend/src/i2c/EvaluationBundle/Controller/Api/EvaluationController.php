@@ -77,8 +77,6 @@ class EvaluationController extends RestApiController
         
         $userRoles = $this->getUser()->getRoles();
         
-        return $this->notFound(implode(' - ', $userRoles));
-        
         if ($evaluation->getState() == 'draft' && in_array('Supplier', $userRoles))
         {
             return $this->notFound('Evaluation was not found');
