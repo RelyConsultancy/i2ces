@@ -77,15 +77,7 @@ class EvaluationController extends RestApiController
         
         $userRoles = $this->getUser()->getRoles();
         
-        $logger = $this->get('logger');
-        
-        $logger->addInfo('UserRoles: ');
-        
-        foreach ($userRoles as $role) 
-        {
-            $logger->addInfo($role);
-            echo $role;
-        }
+        return $this->notFound(implode(' - ', $userRoles));
         
         if ($evaluation->getState() == 'draft' && !in_array('admin', $userRoles))
         {
