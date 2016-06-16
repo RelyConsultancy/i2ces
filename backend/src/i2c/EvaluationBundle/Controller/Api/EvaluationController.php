@@ -84,6 +84,7 @@ class EvaluationController extends RestApiController
         foreach ($userRoles as $role) 
         {
             $logger->addInfo($role);
+            echo $role;
         }
         
         if ($evaluation->getState() == 'draft' && !in_array('admin', $userRoles))
