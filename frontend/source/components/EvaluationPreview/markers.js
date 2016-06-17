@@ -5,7 +5,7 @@ import style from './style.css'
 
 const orientation = 'portrait';
 
-const pageHeight = 590
+let pageHeight = 590
 
 if (orientation === 'portrait') {
     pageHeight = 842
