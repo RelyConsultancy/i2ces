@@ -106,7 +106,7 @@ export default Component({
     }
   },
   render () {
-    const { evaluation, chapters, markers, debug, isPreview } = this.state
+    const { evaluation, chapters, markers, debug, isPreview, orientation } = this.state
 
     if (!evaluation && !chapters) {
       return B({ className: style.no_data }, 'Loading evaluation ...')
@@ -129,7 +129,7 @@ export default Component({
 
     const content = isPreview
                   ? PDF({ evaluation, markers })
-                  : Template({ evaluation, chapters, debug })
+                  : Template({ evaluation, chapters, debug, orientation })
 
     return B({ className: style.layout }, links, content, actions)
   }
