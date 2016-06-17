@@ -18,7 +18,7 @@ var portrait = {
 }
 
 var dpi = 72.0
-var dpcm = dpi / 2.54
+var dpcm = dpi / 2.54 
 // pixel = (cm * dpi) / 2.54
 
 if (orientation === 'landscape') {
