@@ -3,11 +3,11 @@ import store from '/application/store.js'
 import { forEach } from '/application/utils.js'
 import style from './style.css'
 
-const orietation = 'portrait';
+const orientation = 'portrait';
 
-if (orentation === 'landscape') {
+if (orientation === 'landscape') {
     const pageHeight = 590
-} else if (orentation === 'portrait') {
+} else if (orientation === 'portrait') {
     const pageHeight = 842
 }
 // A4 page height (landscape)
