@@ -74,7 +74,7 @@ export default Component({
       chapters: null,
       markers: null,
       debug: false,
-      orentation: 'landscape',
+      orientation: 'landscape',
       isPreview: false,
     }
   },
