@@ -5,10 +5,10 @@ import style from './style.css'
 
 const orientation = 'portrait';
 
-if (orientation === 'landscape') {
-    const pageHeight = 590
-} else if (orientation === 'portrait') {
-    const pageHeight = 842
+const pageHeight = 590
+
+if (orientation === 'portrait') {
+    pageHeight = 842
 }
 // A4 page height (landscape)
 
