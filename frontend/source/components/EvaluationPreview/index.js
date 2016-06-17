@@ -60,7 +60,7 @@ const Template = ({ evaluation, chapters, debug, orientation }) => {
   const outro = PDFOutro({ evaluation })
   const content = B({ className: 'chapters' }, ...chapters.map(Chapter))
   const attrs = {
-    className: style.pdf + (debug ? ' debug' : '') + (orientation === 'landscape' ? ' landscape' : ''),
+    className: style.pdf + (debug ? ' debug' : '') + (orientation === 'portrait' ? ' portrait' : ''),
   }
 
   return B(attrs, intro, content, outro)
@@ -74,7 +74,7 @@ export default Component({
       chapters: null,
       markers: null,
       debug: false,
-      orientation: 'landscape',
+      orientation: 'portrait',
       isPreview: false,
     }
   },
