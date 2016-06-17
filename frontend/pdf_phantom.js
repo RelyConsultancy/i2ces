@@ -5,16 +5,30 @@ var url = system.args[1]
 var filepath = system.args[2]
 var headers = system.args[3]
 
+var orietation = 'portrait';
 
 var A4 = {
   width: 29.7,
   height: 21.0
 }
+
+var portrait = {
+  height: 29.7,
+  width: 21.0  
+}
+
 var dpi = 72.0
 var dpcm = dpi / 2.54
 // pixel = (cm * dpi) / 2.54
-var pageWidth = Math.round(A4.width * dpcm)
-var pageHeight = Math.round(A4.height * dpcm)
+
+if (orentation === 'landscape') {
+    var pageWidth = Math.round(A4.width * dpcm)
+    var pageHeight = Math.round(A4.height * dpcm)
+} else if (orientation === 'portrait') {
+    var pageWidth = Math.round(portrait.width * dpcm)
+    var pageHeight = Math.round(portrait.height * dpcm)
+}
+
 
 console.log('Page size:', pageWidth + 'x' + pageHeight)
 

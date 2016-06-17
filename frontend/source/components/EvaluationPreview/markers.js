@@ -3,9 +3,16 @@ import store from '/application/store.js'
 import { forEach } from '/application/utils.js'
 import style from './style.css'
 
+const orietation = 'portrait';
 
+if (orentation === 'landscape') {
+    const pageHeight = 590
+} else if (orentation === 'portrait') {
+    const pageHeight = 842
+}
 // A4 page height (landscape)
-const pageHeight = 590
+
+
 // page_break added padding
 const pageBreakPadding = 32
 

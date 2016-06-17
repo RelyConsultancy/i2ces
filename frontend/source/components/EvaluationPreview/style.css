@@ -56,6 +56,11 @@
   box-shadow: 0px 0px 4px 0px #BDB6A0;
 }
 
+.pdf.landscape {
+    width: 595px!important;
+    height: 842px!important;
+}
+
 .pdf .page_break {
   position: relative;
   padding-top: 2rem !important;
