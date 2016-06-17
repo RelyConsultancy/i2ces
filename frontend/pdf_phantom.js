@@ -88,7 +88,7 @@ page.open(url, function (status) {
       page.render(filepath, { format: 'pdf', quality: '100' })
       console.log('Rendered PDF to:', filepath)
       phantom.exit()
-    }, 1000)
+    }, 2500)
   }
 
   checkIfDone()

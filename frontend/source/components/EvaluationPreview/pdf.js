@@ -53,7 +53,9 @@ export default Component({
   render () {
     const { evaluation, markers } = this.props
     const { isGenerating, url } = this.state
-
+    
+    const orientation = 'portrait'
+    
     if (isGenerating) {
       const msg = 'Generating the PDF, please wait...'
 
@@ -62,7 +64,7 @@ export default Component({
 
     return PDFViewer({
       url: url,
-      className: style.pdf_preview,
+      className: style.pdf_preview + " " + orientation,
       headers: {
         // ORO header required
         'X-CSRF-Header': 1,

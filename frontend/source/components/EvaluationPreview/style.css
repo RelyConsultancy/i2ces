@@ -104,10 +104,16 @@
   z-index: 9999;
 }
 
+
+
 .pdf_preview {
   position: relative;
   margin: 0 auto;
   width: 842px;
+}
+
+.pdf_preview.portrait {
+    width: 590px;
 }
 
 .pdf_preview canvas {
