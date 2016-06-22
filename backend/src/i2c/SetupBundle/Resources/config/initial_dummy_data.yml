@@ -21,6 +21,100 @@ parameters:
                     groups:
                         oid: 'Entity:OroUserBundle:Group'
                         permissions: [0] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+            supplier_extended:
+                name: Supplier
+                new_name: Supplier
+                access:
+                    evaluation:
+                        oid: 'Entity:i2cEvaluationBundle:Evaluation'
+                        permissions: [64] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+                    page:
+                        oid: 'Entity:i2cPageBundle:Page'
+                        permissions: [16777216] # EntityMaskBuilder::MASK_VIEW_LOCAL, EntityMaskBuilder::MASK_EDIT_LOCAL
+                    root:
+                        oid: 'entity:(root)'
+                        permissions: [0]
+                    activity:
+                        oid: 'Entity:OroActivityListBundle:ActivityList'
+                        permissions: [0]
+                    attachment:
+                        oid: 'Entity:OroAttachmentBundle:Attachment'
+                        permissions: [0]
+                    calendar:
+                        oid: 'Entity:OroCalendarBundle:Calendar'
+                        permissions: [0]
+                    calendar_event:
+                        oid: 'Entity:OroCalendarBundle:CalendarEvent'
+                        permissions: [0]
+                    comment:
+                        oid: 'Entity:OroCommentBundle:Comment'
+                        permissions: [0]
+                    dashboard:
+                        oid: 'Entity:OroDashboardBundle:Dashboard'
+                        permissions: [0]
+                    email:
+                        oid: 'Entity:OroEmailBundle:Email'
+                        permissions: [0]
+                    email_user:
+                        oid: 'Entity:OroEmailBundle:EmailUser'
+                        permissions: [0]
+                    enbedded_form:
+                        oid: 'Entity:OroEmbeddedFormBundle:EmbeddedForm'
+                        permissions: [0]
+                    grid_view:
+                        oid: 'Entity:OroDataGridBundle:GridView'
+                        permissions: [0]
+                    group:
+                        oid: 'Entity:OroUserBundle:Group'
+                        permissions: [0]
+                    integration:
+                        oid: 'Entity:OroIntegrationBundle:Channel'
+                        permissions: [0]
+                    note:
+                        oid: 'Entity:OroNoteBundle:Note'
+                        permissions: [0]
+                    notification_rule:
+                        oid: 'Entity:OroNotificationBundle:EmailNotification'
+                        permissions: [0]
+                    organization:
+                        oid: 'Entity:OroOrganizationBundle:Organization'
+                        permissions: [0]
+                    process:
+                        oid: 'Entity:OroWorkflowBundle:ProcessDefinition'
+                        permissions: [0]
+                    report:
+                        oid: 'Entity:OroReportBundle:Report'
+                        permissions: [0]
+                    role:
+                        oid: 'Entity:OroUserBundle:Role'
+                        permissions: [0]
+                    schedule:
+                        oid: 'Entity:OroCronBundle:Schedule'
+                        permissions: [0]
+                    segment:
+                        oid: 'Entity:OroSegmentBundle:Segment'
+                        permissions: [0]
+                    business_unit:
+                        oid: 'Entity:OroOrganizationBundle:BusinessUnit'
+                        permissions: [0]
+                    organization_calendar:
+                        oid: 'Entity:OroCalendarBundle:SystemCalendar'
+                        permissions: [0]
+                    tag:
+                        oid: 'Entity:OroTagBundle:Tag'
+                        permissions: [0]
+                    template:
+                        oid: 'Entity:OroEmailBundle:EmailTemplate'
+                        permissions: [0]
+                    tracking_website:
+                        oid: 'Entity:OroTrackingBundle:TrackingWebsite'
+                        permissions: [0]
+                    user:
+                        oid: 'Entity:OroUserBundle:User'
+                        permissions: [0]
+                    workflow:
+                        oid: 'Entity:OroWorkflowBundle:WorkflowDefinition'
+                        permissions: [0]
             account_manager:
                 name: Manager
                 new_name: Account Manager

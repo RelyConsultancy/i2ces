@@ -43,7 +43,7 @@ class EvaluationController extends RestApiController
         // todo refactor into a form or something
         $cids = json_decode($request->getContent(), true)['cids'];
 
-        $evaluations = $this->getEvaluationDatabaseManagerService()->getByCids($cids);
+        $evaluations = $this->getEvaluationDatabaseManagerService()->getByCids($cids, $this->checkPublished());
 
         $data = [
             'count' => count($evaluations),
@@ -67,7 +67,7 @@ class EvaluationController extends RestApiController
      */
     public function getEvaluationByCidAction($evaluationCid)
     {
-        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid, $this->checkPublished());
 
         if (is_null($evaluation)) {
             return $this->notFound('Evaluation was not found');
@@ -92,7 +92,7 @@ class EvaluationController extends RestApiController
     public function getChapterByIdAction($evaluationCid, $chapterId)
     {
         /** @var Evaluation $evaluation */
-        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid, $this->checkPublished());
 
         if (is_null($evaluation)) {
             return $this->notFound('Evaluation was not found');
@@ -150,6 +150,13 @@ class EvaluationController extends RestApiController
      * @param string $evaluationCid
      *
      * @return Response
+     *
+     * @Acl(
+     *     id="evaluation_mark_published",
+     *     type="entity",
+     *     class="i2cEvaluationBundle:Evaluation",
+     *     permission="EDIT"
+     * )
      */
     public function markEvaluationAsPublishedAction($evaluationCid)
     {
@@ -171,6 +178,13 @@ class EvaluationController extends RestApiController
      * @param string $evaluationCid
      *
      * @return Response
+     *
+     * @Acl(
+     *     id="evaluation_mark_draft",
+     *     type="entity",
+     *     class="i2cEvaluationBundle:Evaluation",
+     *     permission="EDIT"
+     * )
      */
     public function markEvaluationAsDraftAction($evaluationCid)
     {
@@ -193,11 +207,18 @@ class EvaluationController extends RestApiController
      * @param string $tableDataId
      *
      * @return Response
+     *
+     * @Acl(
+     *     id="evaluation_get_table_data",
+     *     type="entity",
+     *     class="i2cEvaluationBundle:Evaluation",
+     *     permission="VIEW"
+     * )
      */
     public function getTableDataAction($evaluationCid, $tableDataId)
     {
         /** @var Evaluation $evaluation */
-        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid, $this->checkPublished());
 
         if (is_null($evaluation)) {
             return $this->notFound('Evaluation was not found');
@@ -257,6 +278,13 @@ class EvaluationController extends RestApiController
      * @param string $evaluationCid
      *
      * @return Response
+     *
+     * @Acl(
+     *     id="evaluation_mark_permanent",
+     *     type="entity",
+     *     class="i2cEvaluationBundle:Evaluation",
+     *     permission="EDIT"
+     * )
      */
     public function markPdfAsPermanentAction($evaluationCid)
     {
@@ -266,6 +294,13 @@ class EvaluationController extends RestApiController
 
             if (is_null($evaluation)) {
                 return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+            }
+
+            if (!$evaluation->isPublished()) {
+                return $this->clientFailure(
+                    sprintf('Evaluation %s needs to be published first', $evaluationCid),
+                    null
+                );
             }
 
             $process = new Process(sprintf('ps aux | grep phantomjs | grep %s', $evaluation->getTemporaryPdfPath()));
@@ -309,6 +344,13 @@ class EvaluationController extends RestApiController
      * @param string $evaluationCid
      *
      * @return Response
+     *
+     * @Acl(
+     *     id="evaluation_mark_permanent_with_publish",
+     *     type="entity",
+     *     class="i2cEvaluationBundle:Evaluation",
+     *     permission="EDIT"
+     * )
      */
     public function markPdfAsPermanentWithPublishAction($evaluationCid)
     {
@@ -318,6 +360,13 @@ class EvaluationController extends RestApiController
 
             if (is_null($evaluation)) {
                 return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
+            }
+
+            if (!$evaluation->isPublished()) {
+                return $this->clientFailure(
+                    sprintf('Evaluation %s needs to be published first', $evaluationCid),
+                    null
+                );
             }
 
             $process = new Process(sprintf('ps aux | grep phantomjs | grep %s', $evaluation->getTemporaryPdfPath()));
@@ -362,11 +411,18 @@ class EvaluationController extends RestApiController
      * @param string $evaluationCid
      *
      * @return Response
+     *
+     * @Acl(
+     *     id="evaluation_get_permanent_pdf",
+     *     type="entity",
+     *     class="i2cEvaluationBundle:Evaluation",
+     *     permission="VIEW"
+     * )
      */
     public function getPdfAction($evaluationCid)
     {
         /** @var Evaluation $evaluation */
-        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid);
+        $evaluation = $this->getEvaluationDatabaseManagerService()->getByCid($evaluationCid, $this->checkPublished());
 
         if (is_null($evaluation)) {
             return $this->notFound(sprintf('Evaluation %s was not found for serving its PDF', $evaluationCid));
@@ -379,6 +435,13 @@ class EvaluationController extends RestApiController
      * @param string $evaluationCid
      *
      * @return Response
+     *
+     * @Acl(
+     *     id="evaluation_chapter_edit",
+     *     type="entity",
+     *     class="i2cEvaluationBundle:Evaluation",
+     *     permission="EDIT"
+     * )
      */
     public function getTemporaryPdfAction($evaluationCid)
     {
@@ -495,5 +558,17 @@ class EvaluationController extends RestApiController
         );
 
         return $response;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function checkPublished()
+    {
+        if (!$this->isLoggedInUserEmployee()) {
+            return true;
+        }
+
+        return false;
     }
 }

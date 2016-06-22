@@ -161,3 +161,6 @@ oro_help:
 
 oro_theme:
     active_theme: oro
+
+oro_calendar:
+    enabled_system_calendar: false
