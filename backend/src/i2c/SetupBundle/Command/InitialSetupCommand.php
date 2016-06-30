@@ -90,7 +90,7 @@ It will only update the initial roles in the application once.'
                 ]
             );
 
-            if (!is_null($existingRole)) {
+            if (!is_null($existingRole) && $roleConfig['name'] != $roleConfig['new_name']) {
                 continue;
             }
 

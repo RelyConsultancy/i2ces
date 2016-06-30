@@ -111,4 +111,16 @@ class RestApiController extends BaseController
             $statusCode
         );
     }
+
+    /**
+     * Checks the role of the logged in user and returns false if the user has a read only role on evaluations or true
+     * otherwise
+     *
+     * @return bool
+     */
+    protected function isLoggedInUserEmployee()
+    {
+        return $this->get('oro_security.security_facade')
+                    ->isGranted('EDIT', 'Entity:i2cEvaluationBundle:Evaluation');
+    }
 }

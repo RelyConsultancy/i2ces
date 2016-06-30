@@ -91,16 +91,22 @@ class EvaluationDataBaseManager
 
     /**
      * @param array $uids
+     * @param bool  $checkPublished
      *
      * @return mixed
      */
-    public function getByCids($uids)
+    public function getByCids($uids, $checkPublished = false)
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
                      ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where($queryBuilder->expr()->in('e.cid', '?1'))
                      ->setParameter(1, $uids);
+
+        if ($checkPublished) {
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('e.state', '?2'))
+                ->setParameter(2, Evaluation::STATE_PUBLISHED);
+        }
 
         $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
 
@@ -111,16 +117,22 @@ class EvaluationDataBaseManager
 
     /**
      * @param array $uid
+     * @param bool  $checkPublished
      *
      * @return mixed
      */
-    public function getByCid($uid)
+    public function getByCid($uid, $checkPublished = false)
     {
         $queryBuilder = $this->entityManager->createQueryBuilder();
         $queryBuilder->select('e')
                      ->from('i2cEvaluationBundle:Evaluation', 'e')
                      ->where($queryBuilder->expr()->eq('e.cid', '?1'))
                      ->setParameter(1, $uid);
+
+        if ($checkPublished) {
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('e.state', '?2'))
+                         ->setParameter(2, Evaluation::STATE_PUBLISHED);
+        }
 
         $query = $this->aclHelper->apply($queryBuilder, 'VIEW');
 
