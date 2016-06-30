@@ -4,6 +4,7 @@ var Page = require('webpage')
 var url = system.args[1]
 var filepath = system.args[2]
 var headers = system.args[3]
+var delay = system.args[4]
 
 
 var A4 = {
@@ -67,14 +68,14 @@ page.open(url, function (status) {
   function checkIfDone () {
     if (!isLoaded()) {
       console.log('Checking if PDF done rendering...')
-      return setTimeout(checkIfDone, 1000)
+      return setTimeout(checkIfDone, delay)
     }
 
     setTimeout(function () {
       page.render(filepath, { format: 'pdf', quality: '100' })
       console.log('Rendered PDF to:', filepath)
       phantom.exit()
-    }, 1000)
+    }, delay)
   }
 
   checkIfDone()
