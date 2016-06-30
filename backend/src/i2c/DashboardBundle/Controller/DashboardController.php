@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 class DashboardController extends \Oro\Bundle\DashboardBundle\Controller\DashboardController
 {
     /**
+     * Redirects the user to our react application instead of the oro dashboard on the root route /
+     *
      * @param Dashboard $dashboard
      *
      * @Route(
@@ -32,6 +34,8 @@ class DashboardController extends \Oro\Bundle\DashboardBundle\Controller\Dashboa
     }
 
     /**
+     * Checks the user permissions and denies access to the custom and system oro dashboard pages for 'supplier' users
+     *
      * @Route(
      *      ".{_format}",
      *      name="oro_dashboard_index",

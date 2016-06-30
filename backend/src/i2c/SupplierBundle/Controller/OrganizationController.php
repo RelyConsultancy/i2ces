@@ -15,6 +15,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class OrganizationController extends \Oro\Bundle\OrganizationBundle\Controller\OrganizationController
 {
     /**
+     * Checks the user permissions and denies access to the organization edit page for 'supplier' users
+     *
      * Edit organization form
      *
      * @Route("/update_current", name="oro_organization_update_current")
