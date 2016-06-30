@@ -11,7 +11,7 @@ uname -a
 echo '
 
 ### PDF symfony parameters'
-php app/console debug:parameters | grep pdf
+php app/console debug:parameters | grep 'pdf\|url_base'
 
 echo '
 
