@@ -68,7 +68,7 @@ page.open(url, function (status) {
   function checkIfDone () {
     if (!isLoaded()) {
       console.log('Checking if PDF done rendering...')
-      return setTimeout(checkIfDone, delay)
+      return setTimeout(checkIfDone, 1000)
     }
 
     setTimeout(function () {

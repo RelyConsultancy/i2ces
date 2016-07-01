@@ -14,3 +14,28 @@
 @import raw './css/plugins/quick_insert.min.css';
 @import raw './css/plugins/table.min.css';
 @import raw './css/plugins/video.min.css';
+
+
+.tbl-insight-recommendation td {
+    border: 3px solid #ffffff!important;
+    padding: 3px 10px;
+    color: #FFFFFF;
+    font-family: 'Archer Medium', serif;
+}
+
+.tbl-insight-recommendation tr td:first-child {
+    background: rgb(63, 124, 192);
+}
+.tbl-insight-recommendation tr td:last-child {
+    background: rgba(63, 124, 192, 0.75);
+}
+
+.tbl-insight-recommendation tr:first-child td {
+    font-size: 20px;
+    text-align: center;
+}
+
+.fr-view hr {
+  page-break-before: initial !important;
+  page-break-after: initial !important;
+}
