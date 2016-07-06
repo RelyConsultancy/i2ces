@@ -95,7 +95,7 @@ class GenerateEvaluationPdf
             $this->pdfNodeJsCommand,
             $this->urlBase,
             $cid,
-            $debug === true ? '?debug=true' : '',
+            $debug === true || $debug == 'true' ? '?debug=true' : '',
             $pdfPath,
             $headers,
             $this->pdfDelay
