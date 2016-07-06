@@ -259,6 +259,7 @@ class EvaluationController extends RestApiController
         $generatePdfService = $this->getGeneratePdfService();
 
         $markers = $this->getRequest()->get('markers');
+        $debug = $this->getRequest()->get('debug', false);
 
         $evaluation->setPdfMarkers($markers);
         $this->getEvaluationService()->updateEvaluation($evaluation);
@@ -269,7 +270,7 @@ class EvaluationController extends RestApiController
             return $this->clientFailure('No cookie set', []);
         }
 
-        $generatePdfService->generatePdf($evaluation, $cookie);
+        $generatePdfService->generatePdf($evaluation, $cookie, $debug);
 
         return $this->success("PDF generation started");
     }
