@@ -44,10 +44,11 @@ class GenerateEvaluationPdf
     /**
      * @param Evaluation $evaluation
      * @param string     $cookie
+     * @param boolean    $debug
      *
      * @return Evaluation
      */
-    public function generatePdf(Evaluation $evaluation, $cookie)
+    public function generatePdf(Evaluation $evaluation, $cookie, $debug = false)
     {
         $filesystem = new Filesystem();
 
@@ -66,7 +67,8 @@ class GenerateEvaluationPdf
         $this->generatePdfForEvaluation(
             $pdfPath,
             $evaluation->getCid(),
-            $headers
+            $headers,
+            $debug
         );
 
         $evaluation->setTemporaryPdfPath($pdfPath);
@@ -81,17 +83,19 @@ class GenerateEvaluationPdf
      * @param string              $pdfPath
      * @param string              $cid
      * @param string              $headers
+     * @param boolean             $debug
      *
      * @return string
      */
-    protected function generatePdfForEvaluation($pdfPath, $cid, $headers)
+    protected function generatePdfForEvaluation($pdfPath, $cid, $headers, $debug = false)
     {
         $filesystem = new Filesystem();
         $command = sprintf(
-            'exec %s %s/#/preview/%s \'%s\' \'%s\' %s &',
+            'exec %s %s/#/preview/%s%s \'%s\' \'%s\' %s &',
             $this->pdfNodeJsCommand,
             $this->urlBase,
             $cid,
+            $debug === true || $debug == 'true' ? '?debug=true' : '',
             $pdfPath,
             $headers,
             $this->pdfDelay
