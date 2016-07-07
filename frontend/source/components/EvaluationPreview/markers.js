@@ -176,7 +176,7 @@ export const setMarkers = ({ markers }) => {
   // set phantomjs flag
   setTimeout(() => {
     window.READY_TO_PRINT = true
-  }, 500)
+  }, 1000)
 }
 
 
@@ -185,6 +185,9 @@ export const fmtDocument = ({ markers }) => {
   const { network } = store.getState().dashboard.flag
 
   if (network) {
-    return setTimeout(setMarkers, 1250, { markers })
+    setTimeout(fmtDocument, 1000, { markers })
+  }
+  else {
+    setTimeout(setMarkers, 1000, { markers })
   }
 }
