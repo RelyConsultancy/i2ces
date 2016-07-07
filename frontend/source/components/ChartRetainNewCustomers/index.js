@@ -10,21 +10,21 @@ import _ from 'underscore'
 const H3 = Element('h3')
 // a factory function for the chart
 const ChartRetainNewCustomers = (data, type) => {
-  
+
   type = type || 'offer'
-  
+
   const charts = {}
-  
+
   charts.offer = {
       exposed: _.sortBy(data.charts.offer, 'timeperiod').map(i => i.exposed),
       control: _.sortBy(data.charts.offer, 'timeperiod').map(i => i.control)
   }
-  
+
   charts.brand = {
       exposed: _.sortBy(data.charts.brand, 'timeperiod').map(i => i.exposed),
       control: _.sortBy(data.charts.brand, 'timeperiod').map(i => i.control)
   }
-  
+
   // below is a C3 chart
   const chart = Chart({
     type: 'bar',
@@ -63,7 +63,7 @@ const ChartRetainNewCustomers = (data, type) => {
             format: (value) => {
                 return numeral(value).format('0,0')
             }
-            
+
         }
       },
     },
@@ -75,33 +75,28 @@ const ChartRetainNewCustomers = (data, type) => {
 const TH = Element('th')
 
 const TableMediaCombos = (data) => {
-    
-    console.log(data);
-    
     const sumTotal = (metric) => {
-        
+
         return _.reduce(_.pluck(data.table, metric), (memo, num) => { return memo + num }, 0)
-        
+
     }
     const avgTotal = (metric) => {
-        console.log(data.table.length)
-        console.log((_.reduce(_.pluck(data.table, metric), (memo, num) => { return memo + num }, 0)))
         return (_.reduce(_.pluck(data.table, metric), (memo, num) => { return memo + num }, 0)) / data.table.length
     }
-    
+
     const rows = [];
-    
+
     rows.push(TR(TH('Channels and combinations'), TH('Number of households exposed'), TH({ className: 'highlighted' }, 'During campaign uplift'), TH('% uplift vs control')));
-    
+
     _.each(data.table, (combo) => {
         rows.push(TR(TD(combo.media_type), TD(numeral(combo.exposed).format('0,0')), TD({ className: 'highlighted' }, numeral(combo.uplift).format('0,0')), TD(numeral(combo.percentage_uplift).format('0,0%'))))
     });
-    
+
     rows.push(TR({ className: 'tr-totals'}, TD('Totals'), TD(numeral(sumTotal('exposed')).format('0,0')), TD({ className: 'highlighted' }, numeral(sumTotal('uplift')).format('0,0')), TD(numeral(avgTotal('percentage_uplift')).format('0,0%'))))
-    
+
     return Table.apply(null, rows);
-              
-    
+
+
 }
 
 // boilerplate for React component and dataset fetching
@@ -113,14 +108,14 @@ export default Component({
     const { source } = this.props.component
 
     fetchDataset(source, (data) => {
-        
+
       this.setState({ data })
     })
   },
   render () {
     const { data } = this.state
     if ('charts' in data) {
-        
+
         return Grid({
           blocks: 2,
           items: [

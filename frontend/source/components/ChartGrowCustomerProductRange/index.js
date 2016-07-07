@@ -9,22 +9,20 @@ import _ from 'underscore'
 const H3 = Element('h3')
 // a factory function for the chart
 const ChartGrowCustomerProductRange = (data, type) => {
-  
+
   type = type || 'offer'
-  
+
   const charts = {}
-  
+
   charts.offer = {
       exposed: _.sortBy(data.charts.offer, 'timeperiod').map(i => i.exposed),
       control: _.sortBy(data.charts.offer, 'timeperiod').map(i => i.control)
   }
-  
+
   charts.brand = {
       exposed: _.sortBy(data.charts.brand, 'timeperiod').map(i => i.exposed),
       control: _.sortBy(data.charts.brand, 'timeperiod').map(i => i.control)
   }
-  
-  console.log(charts);
 
   // below is a C3 chart
   const chart = Chart({
@@ -64,7 +62,7 @@ const ChartGrowCustomerProductRange = (data, type) => {
             format: (value) => {
                 return value.toFixed(0)
             }
-            
+
         }
       },
     },
@@ -83,13 +81,13 @@ export default Component({
     const { source } = this.props.component
 
     fetchDataset(source, (data) => {
-        
+
       this.setState({ data })
     })
   },
   render () {
     const { data } = this.state
-    
+
     if ('charts' in data) {
         return B({ className: 'i2c-single-chart-middle' },
                 H3({ className: 'i2c-chart-title' }, 'Offer'),

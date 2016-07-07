@@ -20,9 +20,11 @@ livereload.listen(35729, () => {
 })
 
 const browserReload = (path) => {
-  livereload.changed({
-    body: { files: [path] }
-  })
+  setTimeout(() => {
+    livereload.changed({
+      body: { files: [path] }
+    })
+  }, 500)
   console.log(`Reload: ${path}`)
 }
 

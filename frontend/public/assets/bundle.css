@@ -5475,6 +5475,7 @@ b.i2c_objective_list_row {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
+  z-index: 9999;
 }
 
 ._EvaluationPreview_style_action {

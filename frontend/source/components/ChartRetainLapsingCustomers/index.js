@@ -10,22 +10,20 @@ import _ from 'underscore'
 const H3 = Element('h3')
 // a factory function for the chart
 const ChartRetainLapsingCustomers = (data, type) => {
-  
+
   type = type || 'offer'
-  
+
   const charts = {}
-  
+
   charts.offer = {
       exposed: _.sortBy(data.charts.offer, 'timeperiod').map(i => i.exposed),
       control: _.sortBy(data.charts.offer, 'timeperiod').map(i => i.control)
   }
-  
+
   charts.brand = {
       exposed: _.sortBy(data.charts.brand, 'timeperiod').map(i => i.exposed),
       control: _.sortBy(data.charts.brand, 'timeperiod').map(i => i.control)
   }
-  
-  console.log(charts);
 
   // below is a C3 chart
   const chart = Chart({
@@ -65,7 +63,7 @@ const ChartRetainLapsingCustomers = (data, type) => {
             format: (value) => {
                 return numeral(value).format('0,0')
             }
-            
+
         }
       },
     },
@@ -84,14 +82,14 @@ export default Component({
     const { source } = this.props.component
 
     fetchDataset(source, (data) => {
-        
+
       this.setState({ data })
     })
   },
   render () {
     const { data } = this.state
     if ('charts' in data) {
-        
+
         return Grid({
           blocks: 2,
           items: [

@@ -18,12 +18,11 @@ export default Component({
     }
   },
   componentDidMount () {
-    this.loadData() 
+    this.loadData()
   },
   render () {
     const { data } = this.state
-    console.log(data);
-    
+
     if (!data) return null
 
     return B({ className: style.component })

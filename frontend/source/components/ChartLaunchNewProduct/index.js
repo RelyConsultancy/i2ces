@@ -10,9 +10,7 @@ const ChartLaunchNewProduct = (data, timings) => {
   const dates = data.map(i => i.start_date)
   const exposed = data.map(i => parseFloat(i.exposed))
   const control = data.map(i => parseFloat(i.control))
-  
-  console.log(data);
-  
+
   const chart = Chart({
     type: 'line',
     tooltip: { show: false },
@@ -71,11 +69,8 @@ export default Component({
     })
   },
   render () {
-      
-    console.log(this.state);
-    
     const { data } = this.state
-    
+
     if (data.chart) {
       return B({ className: style.chart }, ChartLaunchNewProduct(data.chart, data.timings))
     }

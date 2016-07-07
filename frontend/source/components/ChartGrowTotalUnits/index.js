@@ -102,18 +102,16 @@ export default Component({
           this.setState({ data })
         })
     }
-    
+
   },
   componentWillUnmount () {
     this.isUnmounted = true
   },
   render () {
     const { data } = this.state
-    
-    console.log(data);
-    
+
     if ('chart' in data) {
-      return B({ className: style.chart }, 
+      return B({ className: style.chart },
                     ChartGrowTotalUnits(data),
                     TableSales({ data: data.table })
                 );
