@@ -36,13 +36,23 @@ export const stringifyMarkers = (markers) => {
 }
 
 
-const setPadding = (component, value) => {
-  const oldValue = parseInt($(component).css('padding-bottom'))
+const setPadding = ($component, value) => {
+  const oldValue = parseInt($component.css('padding-bottom'))
 
-  $(component)
+  $component
     .addClass('is_modified')
     .css('padding-bottom', oldValue + value)
     .data('padding-bottom', oldValue)
+}
+
+
+const setPageBreak = ($component, padding) => {
+  $component.addClass('page_break')
+
+  // add padding to previous element to occupy the space left on page
+  if ($component.prev()) {
+    setPadding($component.prev(), padding)
+  }
 }
 
 
@@ -98,6 +108,7 @@ export const setMarkers = ({ markers }) => {
   $('.chapter').find('.is_modified').each((i, component) => {
     $(component)
       .removeClass('is_modified')
+      // set initial padding value
       .css('padding-bottom', $(component).data('padding-bottom'))
       .data('padding-bottom', 0)
   })
@@ -109,60 +120,63 @@ export const setMarkers = ({ markers }) => {
     const pageBreaks = markers[chapterID] || []
 
     let spaceOnPage = pageHeight
-    let previous = null
 
     $chapter.find('.components > *').each((index, component) => {
+      let componentHeight = component.offsetHeight
       const $component = $(component)
-      const componentHeight = component.offsetHeight
       const paddingTop = parseInt($component.css('padding-top'))
-      const paddingBottom = parseInt($component.css('padding-bottom'))
+      const hasMarker = pageBreaks.indexOf(index) != -1
+      const fitsOnSpaceLeft = componentHeight < spaceOnPage
 
-      const addPageBreak = () => {
-        $component.addClass('page_break')
+      if (fitsOnSpaceLeft) {
+        if (hasMarker) {
+          setPageBreak($component, spaceOnPage)
+          componentHeight = componentHeight - paddingTop + pageBreakPadding
 
-        // add padding to previous element to mark
-        if (previous) {
-          setPadding(previous, spaceOnPage)
-        }
-
-        // set spacing for new page and subtracting component
-        spaceOnPage = pageHeight - (componentHeight - paddingTop) - pageBreakPadding
-      }
-
-
-      if (~pageBreaks.indexOf(index)) {
-        addPageBreak()
-      }
-      else {
-        if (componentHeight > spaceOnPage) {
-          if (componentHeight > pageHeight) {
-            const height = componentHeight - spaceOnPage
-            const scale = componentHeight / pageHeight % 1
-
-            spaceOnPage = pageHeight - (scale * pageHeight / 1)
-          }
-          else {
-            addPageBreak()
-          }
+          spaceOnPage = pageHeight - componentHeight
         }
         else {
-          spaceOnPage -= componentHeight
+          spaceOnPage = spaceOnPage - componentHeight
+        }
+      }
+      else {
+        // no space left on page, add it to the next one
+        if (componentHeight < pageHeight) {
+          setPageBreak($component, spaceOnPage)
+          componentHeight = componentHeight - paddingTop + pageBreakPadding
+
+          spaceOnPage = pageHeight - componentHeight
+        }
+        // no space left on page, add it to the next one and spread it across multiple pages
+        else if (hasMarker) {
+          setPageBreak($component, spaceOnPage)
+          componentHeight = componentHeight - paddingTop + pageBreakPadding
+
+          const scale = componentHeight / pageHeight % 1
+          const spaceAfterScale = scale * pageHeight / 1
+
+          spaceOnPage = pageHeight - spaceAfterScale
+        }
+        // component spreads across multiple pages
+        else {
+          const scale = (componentHeight - spaceOnPage) / pageHeight % 1
+          const spaceAfterScale = scale * pageHeight / 1
+
+          spaceOnPage = pageHeight - spaceAfterScale
         }
       }
 
-
+      // add padding if its last component to fit a full page
       if ($component.is(':last-child')) {
         setPadding($component, spaceOnPage)
       }
-
-      previous = component
     })
   })
 
   // set phantomjs flag
   setTimeout(() => {
     window.READY_TO_PRINT = true
-  }, 250)
+  }, 500)
 }
 
 
