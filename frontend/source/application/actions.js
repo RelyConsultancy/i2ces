@@ -180,8 +180,18 @@ export const savePDFMarkers = (pdf_markers, handler = noop) => {
   evaluation.pdf_markers = pdf_markers
   evaluation.has_pdf = true
 
-  http('post', url, { data: evaluation }, (data) => {
-    setEvaluation(evaluation)
-    handler(data)
+  http('post', url, { data: evaluation, raw: true }, (data) => {
+    if (data.status >= 400) {
+      console.warn(`HTTP: ${data.status} ${data.statusText}`)
+      console.log(data)
+
+      data.json().then((data) => {
+        alert(`Service error: ${data.message}`)
+      })
+    }
+    else {
+      setEvaluation(evaluation)
+      handler(data)
+    }
   })
 }
