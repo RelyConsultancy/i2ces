@@ -123,7 +123,7 @@ export default ({ component, editMode, uploadPath, isPDF }) => {
     break
 
     case 'chart_grow_awareness':
-      return ObjectiveGrowAwareness({ component })
+      return ObjectiveGrowAwareness({ component, uploadPath, editMode })
     break
 
     case 'table_performance_samples':

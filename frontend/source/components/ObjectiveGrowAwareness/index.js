@@ -1,30 +1,30 @@
-import { Component, B, Element, Table, TR, TD } from '/components/component.js'
-import { fetchDataset } from '/application/actions.js'
+import { Component, B, HTML } from '/components/component.js'
+import Froala from '/components/Froala'
 import style from './style.css'
-import numeral from 'numeral'
-import _ from 'underscore'
 
-export default Component({
-  loadData () {
-    const { source } = this.props.component
 
-    fetchDataset(source, (data) => {
-      this.setState({ data })
+export default ({ component, uploadPath, editMode }) => {
+  if (editMode) {
+    return Froala({
+      content: component.content,
+      className: style.editor,
+      options: {
+        imageUploadParam: 'image',
+        imageUploadURL: uploadPath,
+      },
+      onChange: (e, editor) => {
+        component.content = editor.html.get()
+      },
     })
-  },
-  getInitialState () {
-    return {
-      data: null,
-    }
-  },
-  componentDidMount () {
-    this.loadData()
-  },
-  render () {
-    const { data } = this.state
-
-    if (!data) return null
-
-    return B({ className: style.component })
   }
-})
+  // ignore empty strings
+  else if (!component.content) {
+    return null
+  }
+  else {
+    const className = `${style.comment} fr-view`
+    const comment = B({ className }, HTML(component.content))
+
+    return B({ className: style.component }, comment)
+  }
+}
