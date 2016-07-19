@@ -53,7 +53,7 @@ const ChartUplift = ({ data }) => {
                     else {
                       return (value / 1000).toFixed(1) + 'k'
                     }
-                },
+            },
             percent: (value) => {
                     if (value < 1000) {
                       return value.toFixed(1)
@@ -61,8 +61,7 @@ const ChartUplift = ({ data }) => {
                     else {
                       return (value / 1000).toFixed(1) + 'k'
                     }
-                },    
-            }
+            },    
         },
       },
     },
