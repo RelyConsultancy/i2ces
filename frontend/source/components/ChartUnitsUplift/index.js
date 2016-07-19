@@ -42,7 +42,7 @@ const ChartUplift = ({ data }) => {
       },
       names: {
         uplift: 'Units uplift',
-        percent: 'Weekly unit uplift/ 1000 HH',
+        percent: 'Unit uplift per 1000 HH',
       },
       labels: {
         format: {
@@ -83,10 +83,10 @@ const ChartUplift = ({ data }) => {
       y2: {
         show: true,
         tick: {
-          format: (value) => (value * 10).toFixed(1),
+          format: (value) => value.toFixed(1),
         },
         label: {
-          text: 'Units uplift per HH vs Average Uplift',
+          text: 'Unit uplift per 1000 HH',
           position: 'outer-middle',
         },
       },
