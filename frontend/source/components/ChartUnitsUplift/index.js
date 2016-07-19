@@ -10,7 +10,7 @@ const ChartUplift = ({ data }) => {
   const labels = data.map(i => i.channels)
   const uplift = data.map(i => i.uplift)
   const percent = data.map(i => i.percentage_uplift)
-  const exposed = data.map(i => i.uplift / i.exposed)
+  const exposed = data.map(i => (i.uplift / i.exposed) * 1000)
   
   console.log(exposed)
   
