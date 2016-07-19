@@ -151,7 +151,7 @@ const Objectives2 = ({ items }) => {
       console.log(item.label.toLowerCase())
       return item.label.toLowerCase() == 'acquire new customers' }) !== undefined 
         && _.find(items, (item) => { return item.label.toLowerCase() == 'launch new product' }) !== undefined) {
-      items = _.reject(items, (item) => { return item.label.toLowerCase == 'acquire new customers' })
+      items = _.reject(items, (item) => { return item.label.toLowerCase() == 'acquire new customers' })
   }
   console.log(items);
   
