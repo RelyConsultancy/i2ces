@@ -7,7 +7,7 @@ import { isI2C, mutateEvaluation, fetchEvaluation } from '/application/actions.j
 import store from '/application/store.js'
 import style from './style.css'
 import numeral from 'numeral'
-import underscore from 'underscore'
+import _ from 'underscore'
 import ObjectiveBlob from '/components/ObjectiveBlob'
 
 
