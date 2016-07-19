@@ -10,7 +10,10 @@ const ChartUplift = ({ data }) => {
   const labels = data.map(i => i.channels)
   const uplift = data.map(i => i.uplift)
   const percent = data.map(i => i.percentage_uplift)
-
+  const exposed = data.map(i => i.uplift / i.exposed)
+  
+  console.log(exposed)
+  
   const chart = Chart({
     type: 'bar',
     tooltip: {
