@@ -5,7 +5,7 @@ import { fetchDataset } from '/application/actions.js'
 import style from './style.css'
 
 
-const ChartSales = ({ data, timings }) => {
+const ChartSales = ({ data, timings, title }) => {
   const dates = data.map(i => i.date_start)
   const exposed = data.map(i => parseFloat(i.exposed))
   const control = data.map(i => parseFloat(i.control))
@@ -52,7 +52,7 @@ const ChartSales = ({ data, timings }) => {
     }]
   })
 
-  const label = B({ className: style.chart_label }, 'Category Sales')
+  const label = B({ className: style.chart_label }, title)
   const overlay = B({ className: style.overlay});
 
   return B({ className: style.chart }, label, chart , overlay)
@@ -86,6 +86,7 @@ export default Component({
     const chart = ChartSales({
       data: data.chart,
       timings: data.timings,
+      title: data.title,
     })
 
     return B({ className: style.component }, chart)
