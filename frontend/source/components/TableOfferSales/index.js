@@ -7,7 +7,7 @@ import style from './style.css'
 const TableSales = ({ data }) => {
   const header = TR(
     { className: style.table_sales_header },
-    TD('Offer Sales'),
+    TD('Category Sales'),
     TD('Uplift'),
     TD('Percentage uplift')
   )
