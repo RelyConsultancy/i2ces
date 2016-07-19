@@ -2,11 +2,19 @@ import { Component, B } from '/components/component.js'
 import { fmtUnit } from '/application/utils.js'
 import style from './style.css'
 import ObjectiveBlob from '/components/ObjectiveBlob'
+import _ from 'underscore'
 
 const Objectives2 = ({ items }) => {
   const count = items.length
   const rows = []
-
+  
+  
+  if (_.find(items, (item) => { 
+      return item.label.toLowerCase() == 'acquire new customers' }) !== undefined 
+        && _.find(items, (item) => { return item.label.toLowerCase() == 'launch new product' }) !== undefined) {
+      items = _.reject(items, (item) => { return item.label.toLowerCase() == 'acquire new customers' })
+  }
+  
   items = items.map((data, index) => ObjectiveBlob(data))
 
   const splice = items.lenght % 2 == 0 ? 4 : 3

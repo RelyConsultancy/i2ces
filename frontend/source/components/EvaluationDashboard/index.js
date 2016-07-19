@@ -148,12 +148,10 @@ const Objectives2 = ({ items }) => {
   const rows = []
   
   if (_.find(items, (item) => { 
-      console.log(item.label.toLowerCase())
       return item.label.toLowerCase() == 'acquire new customers' }) !== undefined 
         && _.find(items, (item) => { return item.label.toLowerCase() == 'launch new product' }) !== undefined) {
       items = _.reject(items, (item) => { return item.label.toLowerCase() == 'acquire new customers' })
   }
-  console.log(items);
   
   items = items.map((data, index) => {
        return ObjectiveBlob(data)
