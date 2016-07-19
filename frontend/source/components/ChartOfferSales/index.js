@@ -52,7 +52,7 @@ const ChartSales = ({ data, timings }) => {
     }]
   })
 
-  const label = B({ className: style.chart_label }, 'Offer Sales')
+  const label = B({ className: style.chart_label }, 'Category Sales')
   const overlay = B({ className: style.overlay});
 
   return B({ className: style.chart }, label, chart , overlay)

@@ -5,7 +5,8 @@
         {
             "date_start": "{{ item.start_date }}",
             "exposed": "{{ item.exposed }}",
-            "control": "{{ item.control }}"
+            "control": "{{ item.control }}",
+            "title": "Category sales"
         }{{ not loop.last ? ',' }}
         {% endfor %}
     ],
