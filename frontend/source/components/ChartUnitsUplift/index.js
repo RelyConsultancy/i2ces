@@ -35,23 +35,34 @@ const ChartUplift = ({ data }) => {
       columns: [
         ['labels'].concat(labels),
         ['uplift'].concat(uplift),
-        ['percent'].concat(percent),
+        ['percent'].concat(exposed),
       ],
       axes: {
         percent: 'y2',
       },
       names: {
         uplift: 'Units uplift',
-        percent: 'Weekly unit uplift/HH vs average',
+        percent: 'Weekly unit uplift/ 1000 HH',
       },
       labels: {
-        format: (value) => {
-          if (value < 1) {
-            return value.toFixed(1)
-          }
-          else {
-            return (value / 1000).toFixed(1) + 'k'
-          }
+        format: {
+            uplift: (value) => {
+                    if (value < 1) {
+                      return value.toFixed(1)
+                    }
+                    else {
+                      return (value / 1000).toFixed(1) + 'k'
+                    }
+                },
+            percent: (value) => {
+                    if (value < 1000) {
+                      return value.toFixed(1)
+                    }
+                    else {
+                      return (value / 1000).toFixed(1) + 'k'
+                    }
+                },    
+            }
         },
       },
     },
