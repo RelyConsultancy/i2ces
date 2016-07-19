@@ -7,6 +7,7 @@ import { isI2C, mutateEvaluation, fetchEvaluation } from '/application/actions.j
 import store from '/application/store.js'
 import style from './style.css'
 import numeral from 'numeral'
+import underscore from 'underscore'
 import ObjectiveBlob from '/components/ObjectiveBlob'
 
 
@@ -145,7 +146,12 @@ const Objectives2 = ({ items }) => {
   const title = B({ className: style.list_title}, 'Campaign Highlights')
   const count = items.length
   const rows = []
-
+  
+  if (_.find(items, (item) => { return item.label.toLowerCase() == 'acquire new customers' }) !== undefined 
+        && _.find(items, (item) => { return item.label.toLowerCase() == 'launch new product' }) !== undefined) {
+      items = _.reject(items, (item) => { return item.label.toLowerCase == 'acquire new customers' })
+  }
+  
   items = items.map((data, index) => {
        return ObjectiveBlob(data)
        //return B({ className: style.i2c_objective_blob }, B({ className: 'i2c_objective_blob_inner'}, B({ className: 'i2c_objective_title' }, label), B({ className: 'i2c_objective_value' }, fmtUnit(value, unit))));
