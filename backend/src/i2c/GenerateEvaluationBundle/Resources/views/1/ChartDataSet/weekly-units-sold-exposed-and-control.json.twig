@@ -5,11 +5,11 @@
         {
             "date_start": "{{ item.start_date }}",
             "exposed": "{{ item.exposed }}",
-            "control": "{{ item.control }}",
-            "title": "Offer sales"
+            "control": "{{ item.control }}"
         }{{ not loop.last ? ',' }}
         {% endfor %}
     ],
+    "title": "Offer sales",
     "timings": [
         {
             "label": "pre",
