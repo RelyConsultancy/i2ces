@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `i2c_chapter` (
   title              VARCHAR(255),
   state              VARCHAR(255),
   location           VARCHAR(255),
-  content            BLOB,
+  content            MEDIUMBLOB,
   created_at         DATETIME,
   last_modified_at   DATETIME,
   chapter_order      INT,
