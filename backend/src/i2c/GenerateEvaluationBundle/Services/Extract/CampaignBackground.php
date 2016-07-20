@@ -63,7 +63,7 @@ class CampaignBackground implements ExtractInterface
         return sprintf(
             'SELECT objective as label
              FROM ie_results_data
-             WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND product = \'Offer\' AND obj_priority <> 0
+             WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND obj_priority <> 0
              AND timeperiod = 2
             ',
             $cid
