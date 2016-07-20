@@ -65,6 +65,8 @@ class CampaignBackground implements ExtractInterface
              FROM ie_results_data
              WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND obj_priority <> 0
              AND timeperiod = 2
+             GROUP BY 1
+             ORDER BY obj_priority
             ',
             $cid
         );
