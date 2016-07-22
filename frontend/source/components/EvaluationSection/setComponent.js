@@ -135,7 +135,7 @@ export default ({ component, editMode, uploadPath, isPDF }) => {
       return TableOfferSales({ component, isPDF })
     break
     
-    case 'chart_launch_new_product_table':
+    case 'table_offer_units':
       return TableNewCusts({ component, isPDF })
     break
     
