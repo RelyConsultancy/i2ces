@@ -41,7 +41,13 @@ const ChartLaunchNewProduct = (data, timings) => {
       },
       y: {
         tick: {
-          format: (value) => ('£' + (value.toFixed(0) / 1000) + 'k')
+          format: (value) => {
+              if (value > 1000) {
+                  return (value.toFixed(0) / 1000) + 'k'
+              } else {
+                  return value.toFixed(0)
+              }
+          }
         },
       }
     },
@@ -50,7 +56,7 @@ const ChartLaunchNewProduct = (data, timings) => {
     ]
   })
 
-  const label = B({ className: style.chart_label }, 'Offer Sales')
+  const label = B({ className: style.chart_label }, 'Offer Units')
 
   return B({ className: style.chart }, label, chart)
 }
