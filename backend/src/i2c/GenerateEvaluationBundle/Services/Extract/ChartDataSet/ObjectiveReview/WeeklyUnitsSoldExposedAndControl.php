@@ -64,7 +64,7 @@ class WeeklyUnitsSoldExposedAndControl implements ExtractInterface
              FROM ie_weekly_results_data
              WHERE master_campaign_id = \'%s\'
              AND product=\'Offer\'
-             AND metric=\'Units\'
+             AND metric=\'Known_spend\'
             ',
             $cid
         );
