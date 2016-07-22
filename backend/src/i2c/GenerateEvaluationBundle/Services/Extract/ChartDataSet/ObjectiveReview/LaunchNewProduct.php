@@ -85,7 +85,7 @@ class LaunchNewProduct implements ExtractInterface
              FROM ie_results_data
              WHERE media_type=\'Total\'
              AND objective=\'Overview\'
-             AND metric=\'Known_spend\'
+             AND metric=\'New_custs\'
              AND product=\'Offer\'
              AND timeperiod=2
              AND master_campaign_id=\'%s\'
@@ -108,7 +108,7 @@ class LaunchNewProduct implements ExtractInterface
              FROM ie_results_data
              WHERE media_type=\'Total\'
              AND objective=\'Overview\'
-             AND metric=\'Known_spend\'
+             AND metric=\'New_custs\'
              AND product=\'Offer\'
              AND timeperiod=3
              AND master_campaign_id=\'%s\'
@@ -131,7 +131,7 @@ class LaunchNewProduct implements ExtractInterface
              FROM ie_results_data
              WHERE media_type=\'Total\'
              AND objective=\'Overview\'
-             AND metric=\'Known_spend\'
+             AND metric=\'New_custs\'
              AND product=\'Offer\'
              AND master_campaign_id=\'%s\'
             ',
