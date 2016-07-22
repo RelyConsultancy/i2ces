@@ -287,6 +287,10 @@ class ObjectiveReview implements ChartDataSetConfigInterface
                 "twig_name"    => "launch-new-product.json.twig",
                 "data_service" => "extract_chart_data_set_launch_new_product",
             ],
+            "launch_new_product_table" => [
+                "twig_name"    => "launch-new-product-table.json.twig",
+                "data_service" => "extract_chart_data_set_launch_new_product",
+            ],
         ];
     }
     

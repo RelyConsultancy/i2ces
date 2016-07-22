@@ -26,6 +26,7 @@ import ObjectiveGrowAwareness from '/components/ObjectiveGrowAwareness'
 
 import TablePerformanceSamples from '/components/TablePerformanceSamples'
 import TableOfferSales from '/components/TableOfferSales'
+import TableNewCusts from '/components/TableNewCusts'
 
 
 export default ({ component, editMode, uploadPath, isPDF }) => {
@@ -133,6 +134,12 @@ export default ({ component, editMode, uploadPath, isPDF }) => {
     case 'table_offer_sales':
       return TableOfferSales({ component, isPDF })
     break
+    
+    case 'chart_launch_new_product_table':
+      return TableNewCusts({ component, isPDF })
+    break
+    
+    
 
     default:
       return `${component.type} - not implemented`

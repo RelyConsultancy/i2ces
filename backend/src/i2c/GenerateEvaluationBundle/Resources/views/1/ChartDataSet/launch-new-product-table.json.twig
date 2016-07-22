@@ -1,0 +1,17 @@
+{% autoescape false %}
+{
+    "during": {
+        "uplift": "{{ during[0].uplift }}",
+        "percentage_uplift": "{{ during[0].percentage_uplift * 100 }}"
+    },
+    "post": {
+        "uplift": {% if post[0] is defined %}"{{ post[0].uplift }}",{% else %}null,{% endif %}
+        "percentage_uplift": {% if post[0] is defined %}"{{ post[0].percentage_uplift * 100 }}"{% else %}null{% endif %}
+    },
+    "total": {
+        "uplift": "{{ total[0].uplift }}",
+        "percentage_uplift": "{{ total[0].percentage_uplift * 100 }}"
+    },
+    "title": "New Customers"
+}
+{% endautoescape %}

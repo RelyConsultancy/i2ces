@@ -89,7 +89,7 @@ export const fmtUnit = (value, unit = "") => {
     break
 
     default:
-      value = numeral(parseInt(value)).format('0,0')
+      value = numeral(parseFloat(value)).format('0,0')
   }
 
   return value
