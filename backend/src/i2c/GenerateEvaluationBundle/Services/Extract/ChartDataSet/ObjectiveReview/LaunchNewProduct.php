@@ -84,7 +84,7 @@ class LaunchNewProduct implements ExtractInterface
             'SELECT uplift AS uplift, pct_uplift AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Overview\'
+             AND objective=\'Launch new product\'
              AND metric=\'New_custs\'
              AND product=\'Offer\'
              AND timeperiod=2
@@ -107,7 +107,7 @@ class LaunchNewProduct implements ExtractInterface
             'SELECT uplift AS uplift, pct_uplift AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Overview\'
+             AND objective=\'Launch new product\'
              AND metric=\'New_custs\'
              AND product=\'Offer\'
              AND timeperiod=3
@@ -130,7 +130,7 @@ class LaunchNewProduct implements ExtractInterface
             'SELECT SUM(uplift) AS uplift, SUM(uplift) / SUM(control) AS percentage_uplift
              FROM ie_results_data
              WHERE media_type=\'Total\'
-             AND objective=\'Overview\'
+             AND objective=\'Launch new product\'
              AND metric=\'New_custs\'
              AND product=\'Offer\'
              AND master_campaign_id=\'%s\'
