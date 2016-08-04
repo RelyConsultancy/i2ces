@@ -43,7 +43,7 @@ const ChartGrowTotalUnits = (data) => {
       },
       y: {
         tick: {
-          format: (value) => ('£' + (value.toFixed(0) / 1000) + 'k')
+          format: (value) => ((value.toFixed(0) / 1000) + 'k')
         },
       }
     },
@@ -59,21 +59,21 @@ const ChartGrowTotalUnits = (data) => {
 const TableSales = ({ data }) => {
   const header = TR(
     { className: style.table_sales_header },
-    TD('Offer Sales'),
+    TD('Offer Units'),
     TD('Uplift'),
     TD('Percentage uplift')
   )
 
   const rows = [TR(
     TD('During'),
-    TD(fmtUnit(data.during.uplift, 'currency')),
+    TD(fmtUnit(data.during.uplift)),
     TD(fmtUnit(data.during.percentage_uplift, 'percentage'))
   )]
 
   if (data.post.uplift) {
     rows.push(TR(
       TD('Post'),
-      TD(fmtUnit(data.post.uplift, 'currency')),
+      TD(fmtUnit(data.post.uplift)),
       TD(fmtUnit(data.post.percentage_uplift, 'percentage'))
     ))
   }
@@ -81,7 +81,7 @@ const TableSales = ({ data }) => {
   const footer = TR(
     { className: style.table_sales_footer },
     TD('Total'),
-    TD(fmtUnit(data.total.uplift, 'currency')),
+    TD(fmtUnit(data.total.uplift)),
     TD(fmtUnit(data.total.percentage_uplift, 'percentage'))
   )
 
