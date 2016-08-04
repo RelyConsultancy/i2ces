@@ -59,8 +59,12 @@ const MapText = (label, unit) => {
 
 const ObjectiveBlob = ({ label, value, unit }) => {
 
-    value = B({ className: style.result_value }, fmtUnit(value, unit))
+    if (label.toLowerCase() == 'grow share of category') {
+        value = value * 100;
+    }
 
+    value = B({ className: style.result_value }, fmtUnit(value, unit))
+    
     return B({ className: 'i2c_objective_blob' },
         B({ className: 'i2c_objective_blob_inner'},
             B({ className: 'i2c_objective_title' }, MapText(label, unit)),
