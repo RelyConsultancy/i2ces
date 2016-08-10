@@ -57,10 +57,14 @@ const MapText = (label, unit) => {
 
 }
 
-const ObjectiveBlob = ({ label, value, unit }) => {
+const ObjectiveBlob = ({ label, value, unit, control, exposed }) => {
 
     if (label.toLowerCase() == 'grow share of category') {
         value = value * 100;
+    }
+    
+    if (label.toLowerCase() == 'grow units per existing customer') {
+        value = (value / control) * 100;
     }
 
     value = B({ className: style.result_value }, fmtUnit(value, unit))
