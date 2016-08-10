@@ -115,11 +115,11 @@ export default ({ component, editMode, uploadPath, isPDF }) => {
       return ChartRetainNewCustomers({ component, isPDF })
     break
 
-    case 'grow_spend_per_existing_customer':
+    case 'chart_grow_spend_per_existing_customer':
       return ChartGrowSpendPerExistingCustomer({ component, isPDF })
     break
 
-    case 'chart_grow_units_per_existing_customer':
+    case 'grow_units_per_existing_customer':
       return ChartGrowUnitsExistingCustomer({ component, isPDF })
     break
 
