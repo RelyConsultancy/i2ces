@@ -352,7 +352,7 @@
         {% endif %}
         {% if chart_data_set.weekly_units_sold_exposed_and_control is defined 
             and not (chart_data_set.launch_new_product is not defined 
-                       and chart_data_set.acquire_new_customers is not defined)  %}
+                       or chart_data_set.acquire_new_customers is not defined)  %}
             {% if priority_number > 1 %},{% endif %}
             {
                 "type": "section",
