@@ -65,6 +65,7 @@ const ObjectiveBlob = ({ label, value, unit, control, exposed }) => {
     
     if (label.toLowerCase() == 'grow units per existing customer') {
         value = (value / control) * 100;
+        unit = 'percentage';
     }
 
     value = B({ className: style.result_value }, fmtUnit(value, unit))
