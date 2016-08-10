@@ -121,7 +121,7 @@ export default ({ component, editMode, uploadPath, isPDF }) => {
     break
 
     case 'grow_units_per_existing_customer':
-      return ChartGrowUnitsExistingCustomer({ component, isPDF })
+      return ChartGrowUnitsPerExistingCustomer({ component, isPDF })
     break
 
     case 'chart_grow_frequency_of_share_per_customer':
