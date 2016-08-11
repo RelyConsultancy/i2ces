@@ -15,8 +15,12 @@ const Objectives2 = ({ items }) => {
       items = _.reject(items, (item) => { return item.label.toLowerCase() == 'acquire new customers' })
   }
   
+  console.log(items);
+  
   items = items.map((data, index) => ObjectiveBlob(data))
-
+  
+  
+  
   const splice = items.lenght % 2 == 0 ? 4 : 3
 
   while(items.length) {
