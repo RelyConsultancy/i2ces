@@ -44,7 +44,11 @@ const ChartAcquireNewCustomers = (data, type) => {
       ],
       labels: {
           format: (value) => {
-              return numeral(value).format('0,0a')
+              if (value > 999) {
+                    return numeral(value).format('0,0.0a')
+                } else {
+                    return numeral(value).format('0,0');
+                }
           }
       }
     },
@@ -63,7 +67,12 @@ const ChartAcquireNewCustomers = (data, type) => {
         },
         tick: {
             format: (value) => {
-                return numeral(value).format('0,0a')
+                if (value > 999) {
+                    return numeral(value).format('0,0.0a')
+                } else {
+                    return numeral(value).format('0,0');
+                }
+                
             }
 
         }
