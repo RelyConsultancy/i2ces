@@ -1,6 +1,6 @@
 {% autoescape false %}
 {
-    "priority": {{ objective_priority[0] }},
+    "priority": "{{ objective_priority[0].obj_priority }}",
     "chart": [
         {% for item in data %}
         {
