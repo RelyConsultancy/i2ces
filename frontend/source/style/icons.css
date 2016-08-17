@@ -42,3 +42,9 @@
 .icon_channel_mobile {
   background-image: url(/images/icons/icon_mobile.png);
 }
+.icon_channel_email {
+  background-image: url(/images/icons/icon_email.png);
+}
+.icon_channel_programmatic {
+  background-image: url(/images/icons/icon_programmatic.png);
+}
