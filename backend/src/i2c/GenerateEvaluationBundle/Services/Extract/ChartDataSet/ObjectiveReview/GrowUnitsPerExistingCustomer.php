@@ -177,4 +177,13 @@ class GrowUnitsPerExistingCustomer implements ExtractInterface
             $cid
         );
     }
+    
+    public function getObjectivePriority ($cid)
+    {
+        return sprintf(
+                'SELECT DISTINCT obj_priority from ie_results_data
+                 WHERE objective=\'Grow units per existing customer\'
+                 AND master_campaign_id=\'%s\'
+                ', $cid); 
+    }
 }

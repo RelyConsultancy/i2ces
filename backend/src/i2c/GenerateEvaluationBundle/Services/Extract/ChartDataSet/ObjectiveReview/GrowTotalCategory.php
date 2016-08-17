@@ -194,4 +194,13 @@ class GrowTotalCategory implements ExtractInterface
             $cid
         );
     }
+    
+    public function getObjectivePriority ($cid)
+    {
+        return sprintf(
+                'SELECT DISTINCT obj_priority from ie_results_data
+                 WHERE objective=\'Grow total category\'
+                 AND master_campaign_id=\'%s\'
+                ', $cid); 
+    }
 }

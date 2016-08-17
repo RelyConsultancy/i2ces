@@ -61,14 +61,23 @@ class CampaignBackground implements ExtractInterface
     public function getObjectives($cid)
     {
         return sprintf(
-            'SELECT objective as label
-             FROM ie_results_data
-             WHERE master_campaign_id = \'%s\' AND media_type=\'Total\' AND obj_priority <> 0
-             AND timeperiod = 2
-             GROUP BY 1
+            'SELECT label
+             FROM   (
+                    SELECT objective as label, obj_priority
+                    FROM ie_results_data
+                    WHERE master_campaign_id = \'%s\' AND obj_priority <> 0
+                    AND timeperiod = 2
+                    GROUP BY 1,2
+                    UNION ALL
+                    SELECT objective as label, obj_priority
+                    FROM ie_ots_data
+                    WHERE master_campaign_id = \'%s\' AND obj_priority <> 0
+                    AND timeperiod = 2
+                    GROUP BY 1,2
+                    ) x
              ORDER BY obj_priority
             ',
-            $cid
+            $cid, $cid
         );
     }
 

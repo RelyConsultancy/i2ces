@@ -192,4 +192,12 @@ class GrowAwareness implements ExtractInterface
             $cid
         );
     }
+    
+    public function getObjectivePriority ($cid)
+    {
+        return sprintf(
+                'SELECT DISTINCT obj_priority FROM ie_ots_data
+                 WHERE master_campaign_id=\'%s\'
+                ', $cid);
+    }
 }

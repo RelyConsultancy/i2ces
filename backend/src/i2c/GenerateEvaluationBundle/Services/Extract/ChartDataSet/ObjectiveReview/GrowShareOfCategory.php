@@ -177,4 +177,13 @@ class GrowShareOfCategory implements ExtractInterface
             $cid
         );
     }
+    
+    public function getObjectivePriority ($cid)
+    {
+        return sprintf(
+                'SELECT DISTINCT obj_priority from ie_results_data
+                 WHERE objective=\'Grow share of category\'
+                 AND master_campaign_id=\'%s\'
+                ', $cid);
+    }
 }
