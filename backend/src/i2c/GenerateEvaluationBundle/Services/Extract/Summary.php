@@ -68,7 +68,7 @@ class Summary implements ExtractInterface
                   AND r.objective = \'Grow total category\') x 
               ORDER BY obj_priority ASC;
             ',
-            $cid
+            $cid, $cid
         );
     }
 }
