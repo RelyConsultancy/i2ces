@@ -62,7 +62,7 @@ class MediaTypeCombinations implements ExtractInterface
         return sprintf(
             'SELECT r.media_type AS media_type, r.uplift AS uplift, r.pct_uplift AS percentage_uplift, e.exposed AS exposed
              FROM ie_results_data AS r
-             JOIN ie_exposed_data AS e ON (e.media_type=r.media_type)
+             JOIN ie_exposed_data AS e ON (e.media_type=r.media_type AND e.master_campaign_id=r.master_campaign_id)
              WHERE r.media_type <> \'Total\'
              AND r.media_type <> \'Other\'
              AND r.timeperiod=2
