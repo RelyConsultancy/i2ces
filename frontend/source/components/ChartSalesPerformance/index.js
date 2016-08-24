@@ -42,7 +42,21 @@ const SalesChart = ({ data }) => {
 
     return val <= 0 ? 0.1 : parseFloat(val) + 0.05
   }
-
+  
+  const brandRegionLength = () => {
+      
+      const restOfCatExists = _.find(data, (item) => {
+            return item.lable.toLowerCase() == 'rest of cat'
+      });
+      
+      if (restOfCatExists) {
+          return 3.5 + data.length - 5
+      } else {
+          return 3.5 + data.length
+      }
+      
+  }
+  
   const chart = Chart({
     type: 'bar',
     tooltip: { show: false },
@@ -77,7 +91,7 @@ const SalesChart = ({ data }) => {
     },
     regions: [
         { axis: 'x', start: 0.5 , end: 2.5, class: 'region-offer-brand', label: 'Offer and Brand', vertical: false, padding: 5 },
-        { axis: 'x', start: 2.5 , end: 3.5 + data.length - 5, class: 'region-competitors', label: 'Competitor brands', vertical: false, padding: 5 }
+        { axis: 'x', start: 2.5 , end: brandRegionLength(), class: 'region-competitors', label: 'Competitor brands', vertical: false, padding: 5 }
     ]
   })
 
