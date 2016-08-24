@@ -46,7 +46,7 @@ const SalesChart = ({ data }) => {
   const brandRegionLength = () => {
       
       const restOfCatExists = _.find(data, (item) => {
-            return item.lable.toLowerCase() == 'rest of cat'
+            return item.label.toLowerCase() == 'rest of cat'
       });
       
       if (restOfCatExists) {
