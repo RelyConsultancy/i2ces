@@ -47,7 +47,7 @@ const ChartUplift = ({ data }) => {
       labels: {
         format: {
             uplift: (value) => {
-                    if (value < 1) {
+                    if (value < 1000) {
                       return value.toFixed(1)
                     }
                     else {
