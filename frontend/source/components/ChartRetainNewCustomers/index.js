@@ -56,7 +56,7 @@ const ChartRetainNewCustomers = (data, type) => {
       },
       y: {
         label: {
-          text: 'Number of lapsed customers',
+          text: 'Number of new trialist customers',
           position: 'outer-middle'
         },
         tick: {
