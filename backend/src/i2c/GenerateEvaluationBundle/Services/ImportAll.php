@@ -102,7 +102,9 @@ class ImportAll
     public function getLastImportDate()
     {
         $sql = 'SELECT last_import_folder
-                FROM i2c_import_version where last_import_folder IS NOT NULL
+                FROM i2c_import_version 
+                WHERE last_import_folder IS NOT NULL
+                AND last_import_folder <> ""
                 ORDER BY id DESC
                 LIMIT 1';
 
