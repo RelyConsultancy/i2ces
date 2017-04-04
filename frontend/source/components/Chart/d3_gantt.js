@@ -18,7 +18,7 @@ d3.gantt = function (container, { data, palette, tickFormat }) {
       date_start: fmtTime.parse(item.date_start),
       date_end: fmtTime.parse(item.date_end),
     })
-  ))
+  )) 
 
   const margin = { top: 30, right: 20, bottom: 0, left: 130 }
 
