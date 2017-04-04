@@ -34,9 +34,9 @@ d3.gantt = function (container, { data, palette, tickFormat }) {
   
   const from = getDayOfYear(timeDomainStart)
   const to = getDayOfYear(timeDomainEnd)
-  const days = to - from
+  //const days = to - from
   
-  const test = moment(timeDomainEnd).diff(moment(timeDomainStart), 'days')
+  const days = moment(timeDomainEnd).diff(moment(timeDomainStart), 'days')
   
   console.log("TIME TEST", test)
   
