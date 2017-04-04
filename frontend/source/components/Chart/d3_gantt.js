@@ -19,7 +19,9 @@ d3.gantt = function (container, { data, palette, tickFormat }) {
       date_end: fmtTime.parse(item.date_end),
     })
   )) 
-
+    
+  console.log("DATA", data)
+    
   const margin = { top: 30, right: 20, bottom: 0, left: 130 }
 
   const timeDomainStart = data
