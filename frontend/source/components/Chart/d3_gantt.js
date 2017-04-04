@@ -1,4 +1,5 @@
 import d3 from 'd3'
+import moment from 'moment'
 
 const fmtTime = d3.time.format('%Y-%m-%dT%H:%M:%S')
 
@@ -30,11 +31,15 @@ d3.gantt = function (container, { data, palette, tickFormat }) {
     .map(i => i.date_end)
     .sort((a, b) => (a - b))
     .pop()
-
+  
   const from = getDayOfYear(timeDomainStart)
   const to = getDayOfYear(timeDomainEnd)
   const days = to - from
-
+  
+  const test = moment(data.date_end).diff(moment(data.date_start), 'days')
+  
+  console.log("TIME TEST", test)
+  
   const draw = () => {
     const height = container.offsetHeight - margin.top - margin.bottom
     const width = container.offsetWidth - margin.right - margin.left
