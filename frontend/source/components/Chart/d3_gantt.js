@@ -38,8 +38,6 @@ d3.gantt = function (container, { data, palette, tickFormat }) {
   
   const days = moment(timeDomainEnd).diff(moment(timeDomainStart), 'days')
   
-  console.log("TIME TEST", test)
-  
   const draw = () => {
     const height = container.offsetHeight - margin.top - margin.bottom
     const width = container.offsetWidth - margin.right - margin.left
