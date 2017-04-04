@@ -24,7 +24,7 @@ d3.gantt = function (container, { data, palette, tickFormat }) {
 
   const timeDomainStart = data
     .map(i => i.date_start)
-    .sort((a, b) => (a - b))
+    .sort((a, b) => (a - b)) 
     .shift()
 
   const timeDomainEnd = data
