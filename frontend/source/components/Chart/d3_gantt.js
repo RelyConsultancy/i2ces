@@ -15,7 +15,7 @@ const getDayOfYear = (date) => {
 d3.gantt = function (container, { data, palette, tickFormat }) {
   data = data.map((item) => (
     Object.assign({}, item, {
-      date_start: fmtTime.parse(item.date_start),
+      date_start: fmtTime.parse(item.date_start), 
       date_end: fmtTime.parse(item.date_end),
     })
   )) 
